@@ -1,0 +1,134 @@
+"use client";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import WhatsAppCTA from "@/components/WhatsAppCTA";
+import MobileNav from "@/components/MobileNav";
+
+export default function HPBrandPage() {
+  const products = [
+    { name: "LaserJet Enterprise", specs: ["55 PPM", "1200 DPI"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAl0HeaYTgPWp8BHHjkVn_bgpq4C3T8UyisNdrWv6GwUBnV5nQcHPgH-5ZPannjczIBf2ISDeuWlb34tpC_chs-7hAF1WpQNhFvxpWdVbe-DDU5iSl279EaarLOfFf4-aYna8Wmpzejnnvd4rmv8VWeOfugBkrs6Z4vp4RdFbiqEgimB27WnRUwU2qC7R7sxC_hulkiR_F-8-rWaxGCPETYSS24TBPqLBXdXUAXHquIRIt1vfHdr13IftQYA1dqDmg8T0aYI92h6Mze" },
+    { name: "DesignJet Z-Series", specs: ["9-Color Ink", "44-Inch Max"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCy2kF6oyv-1YEqg-QhHgAHnF-oToFJdQdZ3mYOM6uQNZQycVbH-64xTIwL12lPlfAvdHKYot--6d9cGZ7faTrzsFo7rU2fDnrvh43AgpyVO4mbLz7_9dd-TFQjEqhslXYXEL0-uQxPS22jqWcYbz9tNZKUj8UiuYzPW_1j5vupYWlxE-jjQYGhDn3_38b3EYKTg7XzgjSFMKXT8BxiSKURLamYss3B1xQYYb8TxYAPdbL9A3trLs-nvm6gYb4EYBmRc2OdLYF_Kqfs" },
+    { name: "Elite Dragonfly", specs: ["20h Battery", "0.99 KG"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAM-CU0uElekPCvQK0uZDkoWTk-bSheCsoCa7bzKDJyKMt-KKnC3emtpRuk_yzjh136FH1DDIEj87Ovl8oWOrJHRyklEZsE5GSdbMEK6_oJWDfokBWD4nmTeHRklS9Mu5P9XM6eoXflfxm9YbYKOcIqKdkIWVIaZ6DLwJUoC-Rj8ceUYOqfsaMJXMeoXRjSKBFnVs-7XRM-NYNUDarRdAzfwPKrLtpUPFSLkUcmR440OKJFDk7axle-XMg5MJkGBD9KGzbOf8G0rzO5" },
+  ];
+
+  const features = [
+    { icon: "shield_with_heart", title: "Wolf Security", desc: "Industry-leading hardware-enforced protection from BIOS to browser." },
+    { icon: "eco", title: "Eco Innovation", desc: "Closed-loop manufacturing and sustainable printing for modern ESG goals." },
+    { icon: "cloud_done", title: "Cloud Manageability", desc: "Seamless fleet management with HP Smart Admin and centralized control." },
+    { icon: "workspace_premium", title: "Premium Heritage", desc: "Decades of engineering excellence translated into executive tools." },
+  ];
+
+  return (
+    <main className="min-h-screen bg-[#071325]">
+      <Header />
+      
+      {/* Hero */}
+      <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]"></div>
+        <div className="absolute -top-20 -right-20 w-96 h-96 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#142032]/60 border border-[#f5be53]/20 mb-6">
+                <span className="w-2 h-2 rounded-full bg-[#f5be53] animate-pulse"></span>
+                <span className="text-xs uppercase tracking-widest text-[#f5be53] font-medium">Certified HP Technology Partner</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                HP Authorized <span className="text-[#f5be53]">Partner</span>
+              </h1>
+              <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
+                Experience the pinnacle of corporate printing. As authorized Sahara partners, we deliver HP's Enterprise-grade solutions tailored for the most demanding executive environments.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a href="/get-quote?brand=hp" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
+                  Enquire for HP Models
+                </a>
+                <a href="#products" className="glass-card text-white px-8 py-4 rounded-full font-bold hover:bg-[#2a3548] transition-all border border-[#f5be53]/20 inline-block">
+                  View Products
+                </a>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
+                <img 
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqrseApeW8QY3gbRhJwF9xpn85cWiBjrr8yniA2yXfFZ0DoCmwY1gGsbXtIpFThDG9GhvxzWm0pbYjrNyYopByoMt6trc_IuZYlhRs8HmS8fWYeVgQBxdJyWB6hEM--a-0vb1DpKSQ5UfwWe9nWX2yJ3lVM3E9v21vNJpHUTlXhmGGl4A3yI4BcwAkeDzXHleGuabJfUvLBr3ynzIyOw4s_2Xxs3I_WV28EsTZdqGtwDzfadA2U9NypHHpcCZW6AbIuHJXdIgcO2QW"
+                  alt="HP High-End Printer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why HP */}
+      <section className="py-24 px-8 bg-[#101c2e]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-white mb-4">Why Choose HP Excellence</h2>
+            <p className="text-[#d3c5b0] max-w-2xl mx-auto">Standard-setting technology for businesses that demand the absolute best in security, reliability, and innovation.</p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8">
+            {features.map((f, i) => (
+              <div key={i} className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-[#142032]/60 flex items-center justify-center border border-[#f5be53]/20 mb-4">
+                  <span className="material-symbols-outlined text-3xl text-[#f5be53]">{f.icon}</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{f.title}</h3>
+                <p className="text-sm text-[#d3c5b0]">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Products */}
+      <section id="products" className="py-24 px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">Precision Engineering</h2>
+            <div className="h-1 w-20 bg-[#f5be53] rounded-full"></div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {products.map((p, i) => (
+              <div key={i} className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500">
+                <div className="aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
+                  <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
+                <p className="text-[#d3c5b0] text-sm mb-6">Unrivaled security and performance for high-volume corporate fleets.</p>
+                <div className="flex justify-between items-center py-4 border-t border-white/5">
+                  {p.specs.map((s, j) => (
+                    <div key={j} className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-[#f5be53] text-sm">speed</span>
+                      <span className="text-xs text-[#d3c5b0]">{s}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 px-8">
+        <div className="max-w-5xl mx-auto glass-card rounded-[48px] p-12 md:p-20 text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#f5be53]/5 -z-10"></div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Upgrade Your <span className="text-[#f5be53]">Infrastructure?</span></h2>
+          <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">Schedule a private consultation with our HP product specialists to tailor the perfect solution for your corporate environment.</p>
+          <a href="/get-quote?brand=hp" className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
+            Enquire for HP Models
+          </a>
+        </div>
+      </section>
+
+      <Footer />
+      <WhatsAppCTA />
+      <MobileNav />
+    </main>
+  );
+}

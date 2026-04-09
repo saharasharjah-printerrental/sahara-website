@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #071325;
+  --surface-container-low: #101c2e;
+  --surface-container: #142032;
+  --surface-container-high: #1f2a3d;
+  --surface-container-highest: #2a3548;
+  --primary: #f5be53;
+  --primary-container: #c8962e;
+  --on-primary: #412d00;
+  --on-surface: #d7e3fc;
+  --on-surface-variant: #d3c5b0;
+  --outline: #9c8f7c;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.glass-card {
+  background: rgba(42, 53, 72, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(156, 143, 124, 0.15);
+}
+
+.light-leak {
+  background: linear-gradient(135deg, rgba(245, 190, 83, 0.1) 0%, rgba(245, 190, 83, 0) 50%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #f5be53 0%, #c8962e 100%);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f5be53 0%, #c8962e 100%);
+  @apply text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform;
+}
+
+.btn-secondary {
+  @apply glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - 1.5rem)); }
+}
+
+@keyframes carousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.animate-carousel {
+  animation: carousel 25s linear infinite;
+}
+
+.animate-carousel:hover {
+  animation-play-state: paused;
+}
+
+body {
+  background-color: #071325;
+  color: #d7e3fc;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', sans-serif;
+}
