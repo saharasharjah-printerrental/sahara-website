@@ -1,0 +1,8 @@
+.next/cache
+.next/cache/*
+.git
+.gitignore
+node_modules
+*.lock
+*.log
+.DS_Store
