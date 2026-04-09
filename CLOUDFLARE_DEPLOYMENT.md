@@ -12,50 +12,85 @@ This guide covers connecting your existing Cloudflare D1 database and R2 storage
 
 ---
 
-## Step 1: Update wrangler.toml
+## Choose Your Deployment Method
 
-Create/update `wrangler.toml` in project root:
+### Option A: Manual Deployment (Recommended for Simplicity)
+- Upload code to GitHub manually
+- Upload build files to Cloudflare manually
+- No API keys or automation needed
 
-```toml
-name = "sahara-printer"
-compatibility_date = "2024-01-01"
-pages_build_output_dir = ".output"
-
-# D1 Database - Your existing database
-[[d1_databases]]
-binding = "DB"
-database_name = "sahara-printer-db"
-database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
-
-# R2 Storage - Your existing bucket
-[[r2_buckets]]
-binding = "ASSETS"
-bucket_name = "sahara-printer-files"
-
-[vars]
-NEXT_PUBLIC_API_URL = "/api"
-```
+### Option B: Automated CI/CD (GitHub Actions)
+- Automatically deploys on every push
+- Requires API token configuration
+- See Section 4 below
 
 ---
 
-## Step 2: Set Up GitHub Repository
+## Option A: Manual Step-by-Step Deployment
 
-### Push Code to GitHub
+### Step 1: Upload Code to GitHub
+
+1. **Create GitHub Repository**
+   - Go to https://github.com/new
+   - Repository name: `sahara-website`
+   - Choose "Public" or "Private"
+   - Click "Create repository"
+
+2. **Push Your Code**
+   ```bash
+   # In your project folder
+   git init
+   git add .
+   git commit -m "Initial commit"
+   
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/sahara-website.git
+   git push -u origin main
+   ```
+   Replace `YOUR_USERNAME` with your GitHub username.
+
+### Step 2: Build the Project Locally
+
 ```bash
-# Initialize git (if not already done)
-git init
-git add .
-git commit -m "Initial commit"
-
-# Create GitHub repo and push
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/sahara-website.git
-git push -u origin main
+npm install
+npm run build
 ```
+
+This creates the `.next` (or `.output`) folder with your production files.
+
+### Step 3: Upload to Cloudflare Pages
+
+**Option 1: Via Cloudflare Dashboard**
+
+1. Go to **Cloudflare Dashboard → Workers & Pages**
+2. Click **Create application** → **Pages** → **Direct upload**
+3. Drag and drop your `.next` folder (or upload the entire build output)
+4. Set your project name: `sahara-website`
+5. Click **Deploy**
+
+**Option 2: Via Wrangler CLI**
+
+```bash
+# Install wrangler
+npm install -g wrangler
+
+# Login to Cloudflare
+wrangler login
+
+# Deploy your build folder
+npx wrangler pages deploy .next --project-name=sahara-website
+```
+
+### Step 4: Connect Your Domain (Optional)
+
+1. In Cloudflare Dashboard → Pages → your project → **Custom domains**
+2. Add your domain (e.g., `saharaprinter.ae`)
 
 ---
 
-## Step 3: Configure GitHub Secrets
+## Option B: Automated CI/CD (GitHub Actions)
+
+### Step 1: Configure GitHub Secrets
 
 1. Go to your GitHub repository
 2. Navigate to **Settings → Secrets and variables → Actions**
@@ -66,9 +101,7 @@ git push -u origin main
 | `CLOUDFLARE_API_TOKEN` | `cfat_YBYoMpnR13z5sJvlbQVxnFdtOWG9lcvz6rlpfllGbb139e6f` |
 | `CLOUDFLARE_ACCOUNT_ID` | `034ddee1699595a19ee79f688de3b421` |
 
----
-
-## Step 4: Create GitHub Actions Workflow
+### Step 2: Update GitHub Workflow
 
 Create `.github/workflows/deploy.yml`:
 
@@ -83,7 +116,6 @@ on:
 
 permissions:
   contents: read
-  deployments: write
 
 jobs:
   deploy:
@@ -109,214 +141,24 @@ jobs:
         with:
           api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          project-name: sahara-printer
-          directory: .output
+          project-name: sahara-website
+          directory: .next
           branch: main
 ```
 
----
+### Step 3: Deploy
 
-## Step 5: Update Next.js Config for Cloudflare
-
-Update `next.config.mjs`:
-
-```javascript
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',
-  images: {
-    unoptimized: true,
-  },
-  trailingSlash: true,
-};
-
-export default nextConfig;
-```
-
----
-
-## Step 6: Create Cloudflare Pages Project
-
-### Option A: Via Dashboard
-1. Go to **Cloudflare Dashboard → Workers & Pages**
-2. Click **Create application** → **Pages** → **Connect to Git**
-3. Select your GitHub repo
-4. Configure:
-   - **Project name**: `sahara-printer`
-   - **Production branch**: `main`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `.output`
-5. Click **Save and Deploy**
-
-### Option B: Via CLI
-```bash
-npx wrangler pages project create sahara-printer
-npx wrangler pages deploy .output --project-name=sahara-printer
-```
-
----
-
-## Step 7: Environment Variables in Cloudflare
-
-In Cloudflare Pages dashboard (Settings → Environment variables):
-
-| Variable | Value |
-|----------|-------|
-| `NEXT_PUBLIC_API_URL` | `/api` |
-
----
-
-## Step 8: Database Schema Setup
-
-Apply the schema to your D1 database:
-
-```bash
-# Install wrangler if not already
-npm install -g wrangler
-
-# Login to Cloudflare
-wrangler login
-
-# Execute schema on your D1 database
-wrangler d1 execute sahara-printer-db --remote --command="
-CREATE TABLE IF NOT EXISTS products (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  brand TEXT,
-  category TEXT,
-  condition TEXT,
-  priceSale TEXT,
-  priceRental TEXT,
-  specs TEXT,
-  image TEXT,
-  isActive INTEGER DEFAULT 1,
-  isFeatured INTEGER DEFAULT 0,
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS supplies (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  brand TEXT,
-  category TEXT,
-  compatibleModels TEXT,
-  color TEXT,
-  yield TEXT,
-  price TEXT,
-  stock INTEGER DEFAULT 0,
-  image TEXT,
-  isActive INTEGER DEFAULT 1,
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS brands (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  logoUrl TEXT,
-  isActive INTEGER DEFAULT 1,
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS faqs (
-  id TEXT PRIMARY KEY,
-  pageSlug TEXT NOT NULL,
-  question TEXT NOT NULL,
-  answer TEXT NOT NULL,
-  sortOrder INTEGER DEFAULT 0,
-  isActive INTEGER DEFAULT 1,
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS inquiries (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  email TEXT,
-  phone TEXT,
-  company TEXT,
-  service TEXT,
-  message TEXT,
-  status TEXT DEFAULT 'new',
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS blogs (
-  id TEXT PRIMARY KEY,
-  title TEXT NOT NULL,
-  slug TEXT UNIQUE NOT NULL,
-  excerpt TEXT,
-  content TEXT,
-  image TEXT,
-  author TEXT,
-  isActive INTEGER DEFAULT 1,
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS settings (
-  key TEXT PRIMARY KEY,
-  value TEXT
-);
-"
-```
-
----
-
-## Step 9: Connect Your Domain (Optional)
-
-1. In Cloudflare Dashboard → Pages → your project → **Custom domains**
-2. Add your domain (e.g., `saharaprinter.ae`)
-3. Cloudflare will automatically set up SSL
-
----
-
-## Step 10: Deploy
-
-### Trigger Deploy
-Push to main branch OR manually trigger from GitHub:
+Push to main to trigger automatic deployment:
 ```bash
 git push origin main
 ```
-
-### Check Deployment
-- Go to **Cloudflare Dashboard → Workers & Pages**
-- Find `sahara-printer` project
-- Check deployment status
-
----
-
-## Your Live URL
-
-After deployment, your site will be available at:
-- **Primary**: `https://sahara-printer.pages.dev`
-- **Custom**: `https://your-domain.com` (if configured)
-
----
-
-## Troubleshooting
-
-### Build Fails
-- Verify Node.js version is 20 in GitHub workflow
-- Ensure `output: 'export'` in next.config.mjs
-
-### 404 Errors on Pages
-- Add `_redirects` file in `public/` folder:
-  ```
-  /*    /index.html   200
-  ```
-
-### Database Connection Issues
-- Verify D1 database ID in wrangler.toml
-- Run `wrangler d1 execute sahara-printer-db --remote --command="SELECT 1"` to test
-
-### Images Not Loading
-- Verify R2 bucket binding in wrangler.toml
-- Check CORS settings on R2 bucket
 
 ---
 
 ## Quick Reference
 
-| Command | Description |
-|---------|-------------|
-| `wrangler d1 execute sahara-printer-db --remote --command="SQL"` | Run SQL on D1 |
-| `wrangler pages deploy .output --project-name=sahara-printer` | Manual deploy |
-| `wrangler logout && wrangler login` | Re-authenticate |
+| Task | Command |
+|------|---------|
+| Manual deploy | `npx wrangler pages deploy .next --project-name=sahara-website` |
+| Test locally | `npm run dev` |
+| Build locally | `npm run build` |

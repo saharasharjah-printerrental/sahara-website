@@ -30,11 +30,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload to Cloudflare Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .next
-          name: pages-artifact
-
       - name: Deploy to Cloudflare Pages
-        uses: actions/deploy-pages@v4
+        uses: cloudflare/pages-action@v1
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          project-name: sahara-website
+          directory: .next
+          gitHub-token: ${{ secrets.GITHUB_TOKEN }}

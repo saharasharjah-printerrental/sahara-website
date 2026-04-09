@@ -23,37 +23,92 @@ const initialBrands: Brand[] = [
   { id: "8", name: "Epson", slug: "epson", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Epson_logo.svg/512px-Epson_logo.svg.png", description: "Epson business printers", isActive: true, sortOrder: 8 },
 ];
 
+const API_BASE = '/api';
+
 export default function AdminBrands() {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [editingBrand, setEditingBrand] = useState<Brand | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_brands");
-    if (stored) {
-      setBrands(JSON.parse(stored));
-    } else {
-      setBrands(initialBrands);
-      localStorage.setItem("sahara_brands", JSON.stringify(initialBrands));
-    }
+    fetchBrands();
   }, []);
+
+  const fetchBrands = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/brands`);
+      const data = await res.json();
+      
+      if (data.brands && data.brands.length > 0) {
+        const mapped = data.brands.map((b: any) => ({
+          id: b.id,
+          name: b.name,
+          slug: b.slug,
+          logoUrl: b.logoUrl,
+          description: b.description || '',
+          isActive: b.isActive === 1,
+          sortOrder: b.sortOrder || 0,
+        }));
+        setBrands(mapped);
+      } else {
+        setBrands(initialBrands);
+        localStorage.setItem("sahara_brands", JSON.stringify(initialBrands));
+      }
+    } catch (error) {
+      console.error('Failed to fetch brands from API:', error);
+      const stored = localStorage.getItem("sahara_brands");
+      if (stored) {
+        setBrands(JSON.parse(stored));
+      } else {
+        setBrands(initialBrands);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const saveBrands = (newBrands: Brand[]) => {
     setBrands(newBrands);
     localStorage.setItem("sahara_brands", JSON.stringify(newBrands));
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm("Delete this brand?")) {
       saveBrands(brands.filter(b => b.id !== id));
     }
   };
 
-  const handleToggle = (id: string) => {
+  const handleToggle = async (id: string) => {
+    const brand = brands.find(b => b.id === id);
+    if (brand) {
+      try {
+        await fetch(`${API_BASE}/brands`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...brand, isActive: brand.isActive ? 0 : 1 })
+        });
+      } catch (e) {
+        console.log('API not available');
+      }
+    }
     saveBrands(brands.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b));
   };
 
-  const handleSave = (brand: Brand) => {
+  const handleSave = async (brand: Brand) => {
+    try {
+      await fetch(`${API_BASE}/brands`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...brand,
+          isActive: brand.isActive ? 1 : 0
+        })
+      });
+    } catch (e) {
+      console.log('API not available');
+    }
+    
     if (editingBrand) {
       saveBrands(brands.map(b => b.id === brand.id ? brand : b));
     } else {

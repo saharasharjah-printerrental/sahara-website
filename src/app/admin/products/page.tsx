@@ -25,42 +25,110 @@ const initialProducts: Product[] = [
   { id: "6", name: "LaserJet Managed E82560", brand: "HP", category: "A3 Printers", condition: "New", priceSale: "Contact for Pricing", priceRental: "AED 750/mo", specs: ["Wolf Security", "Energy Star"], image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX", isActive: true, isFeatured: true },
 ];
 
+const API_BASE = '/api';
+
 export default function AdminProducts() {
   const [products, setProducts] = useState<Product[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_products");
-    if (stored) {
-      setProducts(JSON.parse(stored));
-    } else {
-      setProducts(initialProducts);
-      localStorage.setItem("sahara_products", JSON.stringify(initialProducts));
-    }
+    fetchProducts();
   }, []);
 
-  const saveProducts = (newProducts: Product[]) => {
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/products`);
+      const data = await res.json();
+      
+      if (data.products && data.products.length > 0) {
+        const mapped = data.products.map((p: any) => ({
+          id: p.id,
+          name: p.name,
+          brand: p.brand,
+          category: p.category,
+          condition: p.condition,
+          priceSale: p.priceSale,
+          priceRental: p.priceRental,
+          specs: p.specs ? p.specs.split('|') : [],
+          image: p.image,
+          isActive: p.isActive === 1,
+          isFeatured: p.isFeatured === 1,
+        }));
+        setProducts(mapped);
+      } else {
+        setProducts(initialProducts);
+        localStorage.setItem("sahara_products", JSON.stringify(initialProducts));
+      }
+    } catch (error) {
+      console.error('Failed to fetch products from API, falling back to localStorage:', error);
+      const stored = localStorage.getItem("sahara_products");
+      if (stored) {
+        setProducts(JSON.parse(stored));
+      } else {
+        setProducts(initialProducts);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveProducts = async (newProducts: Product[]) => {
     setProducts(newProducts);
     localStorage.setItem("sahara_products", JSON.stringify(newProducts));
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this product?")) {
+      try {
+        await fetch(`${API_BASE}/products?id=${id}`, { method: 'DELETE' });
+      } catch (e) {
+        console.log('API not available, local delete only');
+      }
       saveProducts(products.filter(p => p.id !== id));
     }
   };
 
-  const handleToggleActive = (id: string) => {
-    saveProducts(products.map(p => p.id === id ? { ...p, isActive: !p.isActive } : p));
+  const handleToggleActive = async (id: string) => {
+    const updated = products.map(p => p.id === id ? { ...p, isActive: !p.isActive } : p);
+    const product = products.find(p => p.id === id);
+    if (product) {
+      try {
+        await fetch(`${API_BASE}/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...product, isActive: product.isActive ? 0 : 1, isActiveNumber: product.isActive ? 0 : 1 })
+        });
+      } catch (e) {
+        console.log('API not available, local only');
+      }
+    }
+    saveProducts(updated);
   };
 
-  const handleToggleFeatured = (id: string) => {
-    saveProducts(products.map(p => p.id === id ? { ...p, isFeatured: !p.isFeatured } : p));
+  const handleToggleFeatured = async (id: string) => {
+    const updated = products.map(p => p.id === id ? { ...p, isFeatured: !p.isFeatured } : p);
+    saveProducts(updated);
   };
 
-  const handleSave = (product: Product) => {
+  const handleSave = async (product: Product) => {
+    try {
+      await fetch(`${API_BASE}/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...product,
+          specs: product.specs.join('|'),
+          isActive: product.isActive ? 1 : 0,
+          isFeatured: product.isFeatured ? 1 : 0
+        })
+      });
+    } catch (e) {
+      console.log('API not available, local only');
+    }
+    
     if (editingProduct) {
       saveProducts(products.map(p => p.id === product.id ? product : p));
     } else {
