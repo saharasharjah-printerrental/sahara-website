@@ -32,7 +32,7 @@ jobs:
       - name: Upload to Cloudflare Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .output
+          path: .next
 
       - name: Deploy to Cloudflare Pages
         uses: actions/deploy-pages@v4
