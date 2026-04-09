@@ -264,23 +264,27 @@ function BrandCarousel() {
   const [brands, setBrands] = useState<any[]>([]);
 
   const defaultBrands = [
-    { name: "HP", logoUrl: "/brands/hp.png" },
-    { name: "Canon", logoUrl: "/brands/canon.png" },
-    { name: "Xerox", logoUrl: "/brands/xerox.png" },
-    { name: "Kyocera", logoUrl: "/brands/kyocera.png" },
-    { name: "Ricoh", logoUrl: "/brands/ricoh.png" },
-    { name: "Sharp", logoUrl: "/brands/sharp.png" },
-    { name: "Brother", logoUrl: "/brands/brother.png" },
-    { name: "Epson", logoUrl: "/brands/epson.png" },
+    { name: "HP", slug: "hp", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/HP_logo.svg/512px-HP_logo.svg.png" },
+    { name: "Canon", slug: "canon", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Canon_logo.svg/512px-Canon_logo.svg.png" },
+    { name: "Xerox", slug: "xerox", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Xerox_logo.svg/512px-Xerox_logo.svg.png" },
+    { name: "Kyocera", slug: "kyocera", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kyocera_logo.svg/512px-Kyocera_logo.svg.png" },
+    { name: "Ricoh", slug: "ricoh", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ricoh_logo.svg/512px-Ricoh_logo.svg.png" },
+    { name: "Sharp", slug: "sharp", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Sharp_logo.svg/512px-Sharp_logo.svg.png" },
+    { name: "Brother", slug: "brother", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brother_Logo.svg/512px-Brother_Logo.svg.png" },
+    { name: "Epson", slug: "epson", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Epson_logo.svg/512px-Epson_logo.svg.png" },
   ];
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_brands");
     if (stored) {
-      setBrands(JSON.parse(stored).filter((b: any) => b.isActive));
-    } else {
-      setBrands(defaultBrands);
+      const parsed = JSON.parse(stored);
+      const activeBrands = parsed.filter((b: any) => b.isActive);
+      if (activeBrands.length > 0) {
+        setBrands(activeBrands);
+        return;
+      }
     }
+    setBrands(defaultBrands);
   }, []);
 
   if (brands.length === 0) return null;
@@ -301,7 +305,11 @@ function BrandCarousel() {
                   <img 
                     src={brand.logoUrl} 
                     alt={brand.name} 
-                    className="max-h-full max-w-full object-contain filter brightness-0 invert-[.1] opacity-90"
+                    className="max-h-full max-w-full object-contain"
+                    loading="lazy"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
                   />
                 </div>
               </div>

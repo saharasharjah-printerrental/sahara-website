@@ -34,8 +34,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: .next
+          name: pages-artifact
 
       - name: Deploy to Cloudflare Pages
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: pages-artifact

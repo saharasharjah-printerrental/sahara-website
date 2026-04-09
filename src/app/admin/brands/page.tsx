@@ -13,14 +13,14 @@ interface Brand {
 }
 
 const initialBrands: Brand[] = [
-  { id: "1", name: "HP", slug: "hp", logoUrl: "/brands/hp.png", description: "HP printers and MFPs", isActive: true, sortOrder: 1 },
-  { id: "2", name: "Canon", slug: "canon", logoUrl: "/brands/canon.png", description: "Canon imageRUNNER series", isActive: true, sortOrder: 2 },
-  { id: "3", name: "Xerox", slug: "xerox", logoUrl: "/brands/xerox.png", description: "Xerox AltaLink and VersaLink", isActive: true, sortOrder: 3 },
-  { id: "4", name: "Ricoh", slug: "ricoh", logoUrl: "/brands/ricoh.png", description: "Ricoh IM and MP series", isActive: true, sortOrder: 4 },
-  { id: "5", name: "Kyocera", slug: "kyocera", logoUrl: "/brands/kyocera.png", description: "Kyocera TASKalfa series", isActive: true, sortOrder: 5 },
-  { id: "6", name: "Brother", slug: "brother", logoUrl: "/brands/brother.png", description: "Brother laser and inkjet", isActive: true, sortOrder: 6 },
-  { id: "7", name: "Sharp", slug: "sharp", logoUrl: "/brands/sharp.png", description: "Sharp BP series", isActive: true, sortOrder: 7 },
-  { id: "8", name: "Epson", slug: "epson", logoUrl: "/brands/epson.png", description: "Epson business printers", isActive: true, sortOrder: 8 },
+  { id: "1", name: "HP", slug: "hp", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/HP_logo.svg/512px-HP_logo.svg.png", description: "HP printers and MFPs", isActive: true, sortOrder: 1 },
+  { id: "2", name: "Canon", slug: "canon", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Canon_logo.svg/512px-Canon_logo.svg.png", description: "Canon imageRUNNER series", isActive: true, sortOrder: 2 },
+  { id: "3", name: "Xerox", slug: "xerox", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Xerox_logo.svg/512px-Xerox_logo.svg.png", description: "Xerox AltaLink and VersaLink", isActive: true, sortOrder: 3 },
+  { id: "4", name: "Ricoh", slug: "ricoh", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ricoh_logo.svg/512px-Ricoh_logo.svg.png", description: "Ricoh IM and MP series", isActive: true, sortOrder: 4 },
+  { id: "5", name: "Kyocera", slug: "kyocera", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kyocera_logo.svg/512px-Kyocera_logo.svg.png", description: "Kyocera TASKalfa series", isActive: true, sortOrder: 5 },
+  { id: "6", name: "Brother", slug: "brother", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brother_Logo.svg/512px-Brother_Logo.svg.png", description: "Brother laser and inkjet", isActive: true, sortOrder: 6 },
+  { id: "7", name: "Sharp", slug: "sharp", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Sharp_logo.svg/512px-Sharp_logo.svg.png", description: "Sharp BP series", isActive: true, sortOrder: 7 },
+  { id: "8", name: "Epson", slug: "epson", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Epson_logo.svg/512px-Epson_logo.svg.png", description: "Epson business printers", isActive: true, sortOrder: 8 },
 ];
 
 export default function AdminBrands() {
