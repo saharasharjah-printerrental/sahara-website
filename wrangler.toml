@@ -4,6 +4,7 @@ pages_build_output_dir = ".next"
 
 [assets]
 directory = ".next"
+ignore = [".next/cache/**"]
 
 # D1 Database - Your existing database
 [[d1_databases]]
