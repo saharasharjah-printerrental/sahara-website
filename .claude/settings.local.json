@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(cmd.exe:*)",
+      "Bash(powershell.exe:*)"
+    ]
+  }
+}
