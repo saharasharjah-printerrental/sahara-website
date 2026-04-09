@@ -1,17 +1,7 @@
-name = "sahara-website"
-compatibility_date = "2024-01-01"
-pages_build_output_dir = ".next"
+# For Cloudflare Pages Git integration:
+# - Build command: npm run build
+# - Output directory: .next
+# - Deploy command: (use any non-empty value to satisfy Cloudflare)
 
-# D1 Database - Your existing database
-[[d1_databases]]
-binding = "DB"
-database_name = "sahara-printer-db"
-database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
-
-# R2 Storage - Your existing bucket
-[[r2_buckets]]
-binding = "SAHARA_ASSETS"
-bucket_name = "sahara-printer-files"
-
-[vars]
-NEXT_PUBLIC_API_URL = "/api"
+# Note: D1 and R2 bindings are configured in the project's code
+# They will work when deployed via Cloudflare Dashboard settings
