@@ -3,6 +3,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import JumpToTop from "@/components/JumpToTop";
 
 export default function BestPrinterBrandsUAE() {
   const brands = [
@@ -145,6 +146,7 @@ export default function BestPrinterBrandsUAE() {
 
       <Footer />
       <WhatsAppCTA />
+      <JumpToTop />
     </main>
   );
 }

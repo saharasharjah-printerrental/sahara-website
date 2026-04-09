@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import JumpToTop from "@/components/JumpToTop";
 
 export default function PrinterRepairDubai() {
   const [settings, setSettings] = useState<any>(null);
@@ -206,6 +207,7 @@ export default function PrinterRepairDubai() {
 
       <Footer />
       <WhatsAppCTA />
+      <JumpToTop />
     </main>
   );
 }

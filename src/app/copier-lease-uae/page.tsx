@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import JumpToTop from "@/components/JumpToTop";
 
 export default function CopierLeaseUAE() {
   const [settings, setSettings] = useState<any>(null);
@@ -229,6 +230,7 @@ export default function CopierLeaseUAE() {
 
       <Footer />
       <WhatsAppCTA />
+      <JumpToTop />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

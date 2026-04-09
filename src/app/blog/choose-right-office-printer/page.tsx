@@ -3,6 +3,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import JumpToTop from "@/components/JumpToTop";
 
 export default function ChooseRightOfficePrinter() {
   return (
@@ -155,6 +156,7 @@ export default function ChooseRightOfficePrinter() {
 
       <Footer />
       <WhatsAppCTA />
+      <JumpToTop />
     </main>
   );
 }

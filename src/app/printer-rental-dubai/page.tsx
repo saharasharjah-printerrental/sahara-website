@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import JumpToTop from "@/components/JumpToTop";
 import { MagneticHover } from "@/components/MagneticHover";
 
 export default function PrinterRentalDubai() {
@@ -281,6 +282,7 @@ export default function PrinterRentalDubai() {
 
       <Footer />
       <WhatsAppCTA />
+      <JumpToTop />
     </main>
   );
 }

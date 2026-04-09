@@ -3,6 +3,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 
 export default function RicohBrandPage() {
@@ -114,6 +115,7 @@ export default function RicohBrandPage() {
 
       <Footer />
       <WhatsAppCTA />
+      <JumpToTop />
       <MobileNav />
     </main>
   );

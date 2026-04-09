@@ -4,6 +4,7 @@ import React, { useRef, useCallback, useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import JumpToTop from "@/components/JumpToTop";
 import { MagneticHover } from "@/components/MagneticHover";
 import StatsClay from "@/components/StatsClay";
 import { Layers, Users, Heart, Monitor } from "lucide-react";
@@ -45,6 +46,7 @@ export default function Home() {
       <FAQSection faqs={faqs} />
       <Footer />
       <WhatsAppCTA />
+      <JumpToTop />
       <FAQSchema faqs={faqs} />
     </main>
   );
