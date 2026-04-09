@@ -1,7 +1,0 @@
-# For Cloudflare Pages Git integration:
-# - Build command: npm run build
-# - Output directory: .next
-# - Deploy command: (use any non-empty value to satisfy Cloudflare)
-
-# Note: D1 and R2 bindings are configured in the project's code
-# They will work when deployed via Cloudflare Dashboard settings

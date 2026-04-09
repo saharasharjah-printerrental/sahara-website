@@ -1,8 +1,0 @@
-# Note: This project uses Cloudflare Pages Git integration instead of Actions
-# To deploy: Connect your GitHub repo in Cloudflare Dashboard → Workers & Pages → Connect to Git
-# 
-# Configuration:
-# - Project name: sahara-website
-# - Production branch: main
-# - Build command: npm run build
-# - Build output directory: .next
