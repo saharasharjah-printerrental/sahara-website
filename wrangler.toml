@@ -7,8 +7,9 @@ pages_build_output_dir = ".vercel/output/static"
 [[d1_databases]]
 binding = "DB"
 database_name = "sahara-db"
-database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE"
+database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
 
-[[r2_buckets]]
-binding = "SAHARA_ASSETS"
-bucket_name = "sahara-printer-files"
+# R2 bucket — uncomment once created in Cloudflare dashboard
+# [[r2_buckets]]
+# binding = "SAHARA_ASSETS"
+# bucket_name = "sahara-printer-files"
