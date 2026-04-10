@@ -174,6 +174,9 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
     id: "", name: "", slug: "", logoUrl: "", description: "", isActive: true, sortOrder: 0
   });
   const [uploading, setUploading] = useState(false);
+  const [converting, setConverting] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [convertToWebp, setConvertToWebp] = useState(true);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -181,16 +184,58 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
 
     setUploading(true);
     try {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64 = reader.result as string;
-        setForm(prev => ({ ...prev, logoUrl: base64 }));
-        setUploading(false);
-      };
-      reader.readAsDataURL(file);
+      if (convertToWebp) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+        const data = await res.json();
+        if (data.url) {
+          setForm(prev => ({ ...prev, logoUrl: data.url }));
+        } else {
+          const reader = new FileReader();
+          reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
+          reader.readAsDataURL(file);
+        }
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
+        reader.readAsDataURL(file);
+      }
     } catch (error) {
       console.error("Upload failed:", error);
+      const reader = new FileReader();
+      reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
+      reader.readAsDataURL(file);
+    } finally {
       setUploading(false);
+    }
+  };
+
+  const handleUrlFetch = async () => {
+    if (!imageUrl) return;
+    setConverting(true);
+    try {
+      const res = await fetch("/api/convert-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: imageUrl })
+      });
+      const data = await res.json();
+      
+      if (data.url && data.format !== 'original') {
+        setForm(prev => ({ ...prev, logoUrl: data.url }));
+      } else if (data.url && data.note) {
+        setForm(prev => ({ ...prev, logoUrl: data.url }));
+      } else {
+        setForm(prev => ({ ...prev, logoUrl: imageUrl }));
+      }
+      setImageUrl("");
+    } catch (error) {
+      console.error("Fetch failed:", error);
+      setForm(prev => ({ ...prev, logoUrl: imageUrl }));
+      setImageUrl("");
+    } finally {
+      setConverting(false);
     }
   };
 
@@ -208,24 +253,49 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Logo</label>
-            <div className="flex gap-3 items-center">
+            <div className="flex items-center gap-3 mb-3">
               <label className="flex-1 cursor-pointer">
                 <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                 <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
                   {uploading ? "Uploading..." : form.logoUrl ? "Change Image" : "Upload Image"}
                 </div>
               </label>
-              {form.logoUrl && (
-                <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
-                  <img src={form.logoUrl} alt="Preview" className="w-full h-full object-contain" />
-                </div>
-              )}
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked={convertToWebp} onChange={(e) => setConvertToWebp(e.target.checked)} className="w-4 h-4 rounded" />
+                <span className="text-sm text-slate-400">Convert to WebP</span>
+              </label>
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Or paste Logo URL</label>
-            <input type="text" value={form.logoUrl} onChange={(e) => setForm({ ...form, logoUrl: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" placeholder="https://..." />
+            <label className="block text-sm font-medium text-slate-300 mb-2">Or fetch from URL</label>
+            <div className="flex gap-2">
+              <input 
+                type="text" 
+                value={imageUrl} 
+                onChange={(e) => setImageUrl(e.target.value)} 
+                className="flex-1 bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
+                placeholder="https://example.com/logo.png" 
+              />
+              <button 
+                onClick={handleUrlFetch} 
+                disabled={converting || !imageUrl}
+                className="px-4 py-2 rounded-xl bg-[#f5be53] text-[#412d00] font-medium hover:bg-[#c8962e] disabled:opacity-50"
+              >
+                {converting ? "..." : "Fetch"}
+              </button>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">Fetches image and automatically converts to WebP</p>
           </div>
+          {form.logoUrl && (
+            <div className="flex items-center gap-3">
+              <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
+                <img src={form.logoUrl} alt="Preview" className="w-full h-full object-contain" />
+              </div>
+              <button onClick={() => setForm(prev => ({ ...prev, logoUrl: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
+                Remove
+              </button>
+            </div>
+          )}
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Description</label>
             <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white h-20" />

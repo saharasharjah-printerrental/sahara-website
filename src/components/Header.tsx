@@ -27,10 +27,18 @@ const locations = [
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services/printer-rental" },
   { name: "Products", href: "/products" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
+];
+
+const services = [
+  { name: "Printer Rental", href: "/services/printer-rental", icon: "print" },
+  { name: "Photocopier Rental", href: "/services/printer-rental", icon: "copy_all" },
+  { name: "Annual Maintenance (AMC)", href: "/services/amc", icon: "handyman" },
+  { name: "Printer Repair", href: "/services/repair", icon: "build" },
+  { name: "Toner & Spare Parts", href: "/services/printer-spare-parts", icon: "inventory" },
+  { name: "Corporate Sales", href: "/services/sales", icon: "shopping_cart" },
 ];
 
 // Mobile bottom nav - direct link items
@@ -44,17 +52,20 @@ const bottomNavItems = [
 // Mobile "More" dropdown items
 const moreNavItems = [
   { name: "Brands", href: "/brands/hp", icon: "branding_watermark" },
-  { name: "Locations", href: "/locations/dubai", icon: "location_on" },
+  { name: "Locations", href: "/printer-rental-dubai", icon: "location_on" },
+  { name: "Blog", href: "/blog", icon: "article" },
   { name: "Contact", href: "/contact", icon: "call" },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isBrandsOpen, setIsBrandsOpen] = useState(false);
   const [isLocationsOpen, setIsLocationsOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [brands, setBrands] = useState(defaultBrands);
   const [settings, setSettings] = useState<any>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
   const brandsRef = useRef<HTMLDivElement>(null);
   const locationsRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
@@ -84,6 +95,9 @@ export default function Header() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+        setIsServicesOpen(false);
+      }
       if (brandsRef.current && !brandsRef.current.contains(event.target as Node)) {
         setIsBrandsOpen(false);
       }
@@ -126,13 +140,14 @@ export default function Header() {
               }}
               className="relative flex items-center gap-1 p-1 bg-[#1f2a3d]/60 backdrop-blur-xl border border-white/10 rounded-full shadow-lg ring-1 ring-black/10"
             >
-              {navItems.map((item) => {
+                {navItems.map((item) => {
                 const isCurrentActive = isActive(item.href);
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
                     onMouseEnter={() => {
+                      setIsServicesOpen(false);
                       setIsBrandsOpen(false);
                       setIsLocationsOpen(false);
                     }}
@@ -146,6 +161,54 @@ export default function Header() {
                   </Link>
                 );
               })}
+
+              {/* Services Dropdown */}
+              <div className="relative" ref={servicesRef} onMouseEnter={() => setIsServicesOpen(true)}>
+                <button
+                  type="button"
+                  aria-expanded={isServicesOpen}
+                  onClick={() => {
+                    setIsServicesOpen(!isServicesOpen);
+                    setIsBrandsOpen(false);
+                    setIsLocationsOpen(false);
+                  }}
+                  onMouseEnter={() => {
+                    setIsServicesOpen(true);
+                    setIsBrandsOpen(false);
+                    setIsLocationsOpen(false);
+                  }}
+                  className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-1 ${
+                    isActive("/services")
+                      ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md"
+                      : "text-slate-300 hover:text-white"
+                  }`}
+                >
+                  Services
+                  <span className="material-symbols-outlined text-xs">{isServicesOpen ? "expand_less" : "expand_more"}</span>
+                </button>
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50"
+                    >
+                      {services.map((service) => (
+                        <Link
+                          key={service.name}
+                          href={service.href}
+                          className="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-[#1f2a3d] hover:text-[#f5be53] transition-colors"
+                          onClick={() => setIsServicesOpen(false)}
+                        >
+                          <span className="material-symbols-outlined text-lg text-slate-400">{service.icon}</span>
+                          <span>{service.name}</span>
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               {/* Brands Dropdown */}
               <div className="relative" ref={brandsRef} onMouseEnter={() => setIsBrandsOpen(true)}>

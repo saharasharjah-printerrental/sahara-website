@@ -417,24 +417,77 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
     isActive: true,
   });
   const [uploading, setUploading] = useState(false);
+  const [converting, setConverting] = useState(false);
+  const [convertToWebp, setConvertToWebp] = useState(true);
+  const [imageUrl, setImageUrl] = useState("");
 
   const colors = ["Black", "Cyan", "Yellow", "Magenta", "N/A"];
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setUploading(true);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setForm({ ...form, image: reader.result as string });
+    const processImage = (base64: string) => {
+      setForm({ ...form, image: base64 });
       setUploading(false);
     };
-    reader.onerror = () => {
-      setUploading(false);
-      alert("Failed to read file");
-    };
-    reader.readAsDataURL(file);
+
+    if (convertToWebp) {
+      const formData = new FormData();
+      formData.append("file", file);
+      try {
+        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+        const data = await res.json();
+        if (data.url) {
+          setForm({ ...form, image: data.url });
+        } else {
+          const reader = new FileReader();
+          reader.onloadend = () => processImage(reader.result as string);
+          reader.readAsDataURL(file);
+        }
+      } catch (error) {
+        console.error("WebP conversion failed:", error);
+        const reader = new FileReader();
+        reader.onloadend = () => processImage(reader.result as string);
+        reader.readAsDataURL(file);
+      } finally {
+        setUploading(false);
+      }
+    } else {
+      const reader = new FileReader();
+      reader.onloadend = () => processImage(reader.result as string);
+      reader.onerror = () => {
+        setUploading(false);
+        alert("Failed to read file");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUrlFetch = async () => {
+    if (!imageUrl) return;
+    setConverting(true);
+    try {
+      const res = await fetch("/api/convert-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: imageUrl })
+      });
+      const data = await res.json();
+      if (data.url) {
+        setForm(prev => ({ ...prev, image: data.url }));
+      } else {
+        setForm(prev => ({ ...prev, image: imageUrl }));
+      }
+      setImageUrl("");
+    } catch (error) {
+      console.error("Fetch failed:", error);
+      setForm(prev => ({ ...prev, image: imageUrl }));
+      setImageUrl("");
+    } finally {
+      setConverting(false);
+    }
   };
 
   const clearImage = () => {
@@ -544,44 +597,55 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
 
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Product Image</label>
-            <div className="border-2 border-dashed border-white/20 rounded-xl p-4">
-              {form.image ? (
-                <div className="relative">
-                  <img src={form.image} alt="Preview" className="w-full h-48 object-contain rounded-lg" />
-                  <button
-                    type="button"
-                    onClick={clearImage}
-                    className="absolute top-2 right-2 bg-red-500/80 text-white p-1 rounded-full hover:bg-red-600"
-                  >
-                    <span className="material-symbols-outlined text-sm">close</span>
-                  </button>
+            <div className="flex items-center gap-3 mb-3">
+              <label className="flex-1 cursor-pointer">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                  disabled={uploading}
+                />
+                <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
+                  {uploading ? "Uploading..." : form.image ? "Change Image" : "Upload Image"}
                 </div>
-              ) : (
-                <div className="text-center py-6">
-                  <span className="material-symbols-outlined text-4xl text-slate-500 mb-2">cloud_upload</span>
-                  <p className="text-slate-400 text-sm mb-3">Click or drag to upload image</p>
-                  <label className="cursor-pointer bg-[#101c2e] text-white px-4 py-2 rounded-lg hover:bg-[#1a2d45] transition-colors inline-flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm">upload</span>
-                    {uploading ? "Uploading..." : "Choose File"}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                      disabled={uploading}
-                    />
-                  </label>
-                </div>
-              )}
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={convertToWebp}
+                  onChange={(e) => setConvertToWebp(e.target.checked)}
+                  className="w-4 h-4 rounded"
+                />
+                <span className="text-sm text-slate-400">Convert to WebP</span>
+              </label>
             </div>
-            {form.image && (
-              <input
-                type="text"
-                value={form.image}
-                onChange={(e) => setForm({ ...form, image: e.target.value })}
-                className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-4 text-white text-sm mt-2"
-                placeholder="Or paste image URL"
+            <div className="flex gap-2 mb-3">
+              <input 
+                type="text" 
+                value={imageUrl} 
+                onChange={(e) => setImageUrl(e.target.value)} 
+                className="flex-1 bg-[#101c2e] border border-white/10 rounded-xl py-2 px-4 text-white text-sm" 
+                placeholder="Or paste image URL" 
               />
+              <button 
+                onClick={handleUrlFetch} 
+                disabled={converting || !imageUrl}
+                className="px-4 py-2 rounded-xl bg-[#f5be53] text-[#412d00] font-medium hover:bg-[#c8962e] disabled:opacity-50 text-sm"
+              >
+                {converting ? "..." : "Fetch"}
+              </button>
+            </div>
+            
+            {form.image && (
+              <div className="flex items-center gap-3">
+                <div className="w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
+                  <img src={form.image} alt="Preview" className="w-full h-full object-contain" />
+                </div>
+                <button onClick={clearImage} className="text-slate-400 hover:text-red-400 text-sm">
+                  Remove
+                </button>
+              </div>
             )}
           </div>
 

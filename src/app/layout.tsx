@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SEOInjector from "@/components/SEOInjector";
 
 export const runtime = 'edge';
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       </head>
       <body className="bg-[#071325] text-[#d7e3fc]">
+        <SEOInjector />
         {children}
       </body>
     </html>

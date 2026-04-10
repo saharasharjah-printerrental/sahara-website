@@ -131,12 +131,77 @@ function BannerModal({ banner, onSave, onClose }: { banner: Banner | null; onSav
   const [form, setForm] = useState<Banner>(banner || {
     id: "", title: "", subtitle: "", ctaText: "Get Quote", ctaLink: "/get-quote", imageUrl: "", position: "hero", isActive: true, sortOrder: 0
   });
+  const [uploading, setUploading] = useState(false);
+  const [converting, setConverting] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [convertToWebp, setConvertToWebp] = useState(true);
 
   const positions = [
     { value: "hero", label: "Hero (Homepage Banner)" },
     { value: "mid_page", label: "Mid Page" },
     { value: "footer_cta", label: "Footer CTA" },
   ];
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      if (convertToWebp) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+        const data = await res.json();
+        if (data.url) {
+          setForm(prev => ({ ...prev, imageUrl: data.url }));
+        } else {
+          const reader = new FileReader();
+          reader.onloadend = () => setForm(prev => ({ ...prev, imageUrl: reader.result as string }));
+          reader.readAsDataURL(file);
+        }
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => setForm(prev => ({ ...prev, imageUrl: reader.result as string }));
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      console.error("Upload failed:", error);
+      const reader = new FileReader();
+      reader.onloadend = () => setForm(prev => ({ ...prev, imageUrl: reader.result as string }));
+      reader.readAsDataURL(file);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleUrlFetch = async () => {
+    if (!imageUrl) return;
+    setConverting(true);
+    try {
+      const res = await fetch("/api/convert-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: imageUrl })
+      });
+      const data = await res.json();
+      
+      if (data.url && data.format !== 'original') {
+        setForm(prev => ({ ...prev, imageUrl: data.url }));
+      } else if (data.url && data.note) {
+        setForm(prev => ({ ...prev, imageUrl: data.url }));
+      } else {
+        setForm(prev => ({ ...prev, imageUrl: imageUrl }));
+      }
+      setImageUrl("");
+    } catch (error) {
+      console.error("Fetch failed:", error);
+      setForm(prev => ({ ...prev, imageUrl: imageUrl }));
+      setImageUrl("");
+    } finally {
+      setConverting(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-6">
@@ -176,6 +241,55 @@ function BannerModal({ banner, onSave, onClose }: { banner: Banner | null; onSav
               <input type="number" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: parseInt(e.target.value) })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
             </div>
           </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Banner Image</label>
+            <div className="flex items-center gap-3 mb-3">
+              <label className="flex-1 cursor-pointer">
+                <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+                <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
+                  {uploading ? "Uploading..." : form.imageUrl ? "Change Image" : "Upload Image"}
+                </div>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked={convertToWebp} onChange={(e) => setConvertToWebp(e.target.checked)} className="w-4 h-4 rounded" />
+                <span className="text-sm text-slate-400">Convert to WebP</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Or fetch from URL</label>
+            <div className="flex gap-2">
+              <input 
+                type="text" 
+                value={imageUrl} 
+                onChange={(e) => setImageUrl(e.target.value)} 
+                className="flex-1 bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
+                placeholder="https://example.com/banner.jpg" 
+              />
+              <button 
+                onClick={handleUrlFetch} 
+                disabled={converting || !imageUrl}
+                className="px-4 py-2 rounded-xl bg-[#f5be53] text-[#412d00] font-medium hover:bg-[#c8962e] disabled:opacity-50"
+              >
+                {converting ? "..." : "Fetch"}
+              </button>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">Fetches image and automatically converts to WebP</p>
+          </div>
+
+          {form.imageUrl && (
+            <div className="flex items-center gap-3">
+              <div className="w-32 h-20 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
+                <img src={form.imageUrl} alt="Preview" className="w-full h-full object-cover" />
+              </div>
+              <button onClick={() => setForm(prev => ({ ...prev, imageUrl: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
+                Remove
+              </button>
+            </div>
+          )}
+
           <div className="flex gap-4 pt-4">
             <button onClick={onClose} className="flex-1 py-3 rounded-xl bg-[#101c2e] text-slate-300 hover:text-white">Cancel</button>
             <button onClick={() => onSave(form)} className="flex-1 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-3 rounded-xl font-bold hover:scale-[1.02]">Save Banner</button>

@@ -36,12 +36,12 @@ export default function Home() {
     <main className="min-h-screen bg-[#071325]">
       <Header />
       <HeroSection />
+      <BrandCarousel />
       <DefinitionBlock />
       <ServicesSection />
       <StatsSection />
       <FeaturedProducts />
       <ReviewsSection />
-      <BrandCarousel />
       <CTASection />
       <FAQSection faqs={faqs} />
       <Footer />
@@ -264,14 +264,14 @@ function BrandCarousel() {
   const [brands, setBrands] = useState<any[]>([]);
 
   const defaultBrands = [
-    { name: "HP", slug: "hp", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/HP_logo.svg/512px-HP_logo.svg.png" },
-    { name: "Canon", slug: "canon", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Canon_logo.svg/512px-Canon_logo.svg.png" },
-    { name: "Xerox", slug: "xerox", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Xerox_logo.svg/512px-Xerox_logo.svg.png" },
-    { name: "Kyocera", slug: "kyocera", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kyocera_logo.svg/512px-Kyocera_logo.svg.png" },
-    { name: "Ricoh", slug: "ricoh", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ricoh_logo.svg/512px-Ricoh_logo.svg.png" },
-    { name: "Sharp", slug: "sharp", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Sharp_logo.svg/512px-Sharp_logo.svg.png" },
-    { name: "Brother", slug: "brother", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brother_Logo.svg/512px-Brother_Logo.svg.png" },
-    { name: "Epson", slug: "epson", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Epson_logo.svg/512px-Epson_logo.svg.png" },
+    { name: "HP", slug: "hp", logoUrl: "" },
+    { name: "Canon", slug: "canon", logoUrl: "" },
+    { name: "Xerox", slug: "xerox", logoUrl: "" },
+    { name: "Kyocera", slug: "kyocera", logoUrl: "" },
+    { name: "Ricoh", slug: "ricoh", logoUrl: "" },
+    { name: "Sharp", slug: "sharp", logoUrl: "" },
+    { name: "Brother", slug: "brother", logoUrl: "" },
+    { name: "Epson", slug: "epson", logoUrl: "" },
   ];
 
   useEffect(() => {
@@ -289,6 +289,10 @@ function BrandCarousel() {
 
   if (brands.length === 0) return null;
 
+  const getInitials = (name: string) => {
+    return name.split(' ').map(word => word[0]).join('').slice(0, 2).toUpperCase();
+  };
+
   return (
     <section className="py-12 bg-[#101c2e] overflow-hidden">
       <div className="text-center mb-8">
@@ -302,15 +306,21 @@ function BrandCarousel() {
             {[...brands, ...brands, ...brands].map((brand, i) => (
               <div key={i} className="flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                 <div className="h-16 w-32 flex items-center justify-center rounded-xl bg-white/5 p-3">
-                  <img 
-                    src={brand.logoUrl} 
-                    alt={brand.name} 
-                    className="max-h-full max-w-full object-contain"
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
+                  {brand.logoUrl ? (
+                    <img 
+                      src={brand.logoUrl} 
+                      alt={brand.name} 
+                      className="max-h-full max-w-full object-contain"
+                      loading="lazy"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                        (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                  ) : null}
+                  <div className={`text-slate-500 font-bold text-lg ${brand.logoUrl ? 'hidden' : ''}`}>
+                    {getInitials(brand.name)}
+                  </div>
                 </div>
               </div>
             ))}

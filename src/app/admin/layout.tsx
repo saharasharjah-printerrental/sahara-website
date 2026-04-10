@@ -13,6 +13,7 @@ const menuItems = [
   { icon: "image", label: "Banners", href: "/admin/banners" },
   { icon: "quiz", label: "FAQs", href: "/admin/faqs" },
   { icon: "business", label: "Brands", href: "/admin/brands" },
+  { icon: "seo", label: "SEO & Analytics", href: "/admin/seo" },
   { icon: "settings", label: "Settings", href: "/admin/settings" },
 ];
 
