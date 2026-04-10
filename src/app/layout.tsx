@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: "Printer Rental Dubai | Photocopier Lease UAE | Sahara Office Equipments",
   description: "Best printer rental in Dubai, Sharjah, Abu Dhabi. Zero deposit, free toner, 4hr response. Canon, Kyocera, HP. Call +971503823969 for quote.",
