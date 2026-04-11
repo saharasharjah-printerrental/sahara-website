@@ -4,8 +4,18 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { Print, CopyAll, Handyman, Build, Inventory, ShoppingCart, Home, SettingsSuggest, Inventory2, RequestQuote, LocationOn, Article, Call, ExpandMore, ExpandLess, MoreHoriz, InfoOutlined, Close, Groups } from "@mui/icons-material";
 
-const defaultBrands = [
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Clients", href: "/our-clients" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Products", href: "/products" },
+  { name: "Contact", href: "/contact" },
+];
+
+const brands = [
   { name: "HP", href: "/brands/hp" },
   { name: "Canon", href: "/brands/canon" },
   { name: "Ricoh", href: "/brands/ricoh" },
@@ -16,58 +26,49 @@ const defaultBrands = [
   { name: "Lexmark", href: "/brands/lexmark" },
 ];
 
-const locations = [
-  { name: "Dubai", href: "/printer-rental-dubai" },
-  { name: "Abu Dhabi", href: "/printer-rental-abu-dhabi" },
-  { name: "Sharjah", href: "/photocopier-rental-sharjah" },
-  { name: "RAK", href: "/printer-rental-rak" },
-  { name: "Fujairah", href: "/printer-rental-fujairah" },
-  { name: "Al Ain", href: "/printer-rental-al-ain" },
-];
-
-const navItems = [
-  { name: "Home", href: "/" },
-  { name: "Products", href: "/products" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-];
-
 const services = [
-  { name: "Printer Rental", href: "/services/printer-rental", icon: "print" },
-  { name: "Photocopier Rental", href: "/services/printer-rental", icon: "copy_all" },
-  { name: "Annual Maintenance (AMC)", href: "/services/amc", icon: "handyman" },
-  { name: "Printer Repair", href: "/services/repair", icon: "build" },
-  { name: "Toner & Spare Parts", href: "/services/printer-spare-parts", icon: "inventory" },
-  { name: "Corporate Sales", href: "/services/sales", icon: "shopping_cart" },
+  { name: "Printer Rental", href: "/services/printer-rental", icon: Print },
+  { name: "Photocopier Rental", href: "/services/printer-rental", icon: CopyAll },
+  { name: "Annual Maintenance (AMC)", href: "/services/amc", icon: Handyman },
+  { name: "Printer Repair", href: "/services/repair", icon: Build },
+  { name: "Toner & Spare Parts", href: "/services/printer-spare-parts", icon: Inventory },
+  { name: "Corporate Sales", href: "/services/sales", icon: ShoppingCart },
 ];
 
 // Mobile bottom nav - direct link items
 const bottomNavItems = [
-  { name: "Home", href: "/", icon: "home" },
-  { name: "Services", href: "/services/printer-rental", icon: "settings_suggest" },
-  { name: "Products", href: "/products", icon: "inventory_2" },
-  { name: "Get Quote", href: "/get-quote", icon: "request_quote" },
+  { name: "Home", href: "/", icon: Home },
+  { name: "Services", href: "/services/printer-rental", icon: SettingsSuggest },
+  { name: "Products", href: "/products", icon: Inventory2 },
+  { name: "Get Quote", href: "/get-quote", icon: RequestQuote },
 ];
 
 // Mobile "More" dropdown items
 const moreNavItems = [
-  { name: "Brands", href: "/brands/hp", icon: "branding_watermark" },
-  { name: "Locations", href: "/printer-rental-dubai", icon: "location_on" },
-  { name: "Blog", href: "/blog", icon: "article" },
-  { name: "Contact", href: "/contact", icon: "call" },
+  { name: "Clients", href: "/our-clients", icon: Groups },
+  { name: "Locations", href: "/printer-rental-dubai", icon: LocationOn },
+  { name: "Blog", href: "/blogs", icon: Article },
+  { name: "Contact", href: "/contact", icon: Call },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isBrandsOpen, setIsBrandsOpen] = useState(false);
-  const [isLocationsOpen, setIsLocationsOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
-  const [brands, setBrands] = useState(defaultBrands);
+  const [brands, setBrands] = useState<{ name: string; href: string }[]>([
+  { name: "HP", href: "/brands/hp" },
+  { name: "Canon", href: "/brands/canon" },
+  { name: "Ricoh", href: "/brands/ricoh" },
+  { name: "Xerox", href: "/brands/xerox" },
+  { name: "Kyocera", href: "/brands/kyocera" },
+  { name: "Brother", href: "/brands/brother" },
+  { name: "Samsung", href: "/brands/samsung" },
+  { name: "Lexmark", href: "/brands/lexmark" },
+]);
   const [settings, setSettings] = useState<any>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const brandsRef = useRef<HTMLDivElement>(null);
-  const locationsRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const desktopNavRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -101,9 +102,6 @@ export default function Header() {
       if (brandsRef.current && !brandsRef.current.contains(event.target as Node)) {
         setIsBrandsOpen(false);
       }
-      if (locationsRef.current && !locationsRef.current.contains(event.target as Node)) {
-        setIsLocationsOpen(false);
-      }
       if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
         setIsMoreOpen(false);
       }
@@ -135,73 +133,56 @@ export default function Header() {
             <div
               ref={desktopNavRef}
               onMouseLeave={() => {
+                setIsServicesOpen(false);
                 setIsBrandsOpen(false);
-                setIsLocationsOpen(false);
               }}
               className="relative flex items-center gap-1 p-1 bg-[#1f2a3d]/60 backdrop-blur-xl border border-white/10 rounded-full shadow-lg ring-1 ring-black/10"
             >
-                {navItems.map((item) => {
-                const isCurrentActive = isActive(item.href);
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onMouseEnter={() => {
-                      setIsServicesOpen(false);
-                      setIsBrandsOpen(false);
-                      setIsLocationsOpen(false);
-                    }}
-                    className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${
-                      isCurrentActive
-                        ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md"
-                        : "text-slate-300 hover:text-white"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
+                {/* Home Link */}
+              <Link
+                href="/"
+                onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
+                className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
+              >
+                Home
+              </Link>
+
+              {/* About Link */}
+              <Link
+                href="/about"
+                onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
+                className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/about") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
+              >
+                About
+              </Link>
+
+              {/* Clients Link */}
+              <Link
+                href="/our-clients"
+                onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
+                className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/our-clients") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
+              >
+                Clients
+              </Link>
 
               {/* Services Dropdown */}
               <div className="relative" ref={servicesRef} onMouseEnter={() => setIsServicesOpen(true)}>
                 <button
                   type="button"
                   aria-expanded={isServicesOpen}
-                  onClick={() => {
-                    setIsServicesOpen(!isServicesOpen);
-                    setIsBrandsOpen(false);
-                    setIsLocationsOpen(false);
-                  }}
-                  onMouseEnter={() => {
-                    setIsServicesOpen(true);
-                    setIsBrandsOpen(false);
-                    setIsLocationsOpen(false);
-                  }}
-                  className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-1 ${
-                    isActive("/services")
-                      ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md"
-                      : "text-slate-300 hover:text-white"
-                  }`}
+                  onClick={() => { setIsServicesOpen(!isServicesOpen); setIsBrandsOpen(false); }}
+                  onMouseEnter={() => { setIsServicesOpen(true); setIsBrandsOpen(false); }}
+                  className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-1 ${isActive("/services") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
                 >
                   Services
-                  <span className="material-symbols-outlined text-xs">{isServicesOpen ? "expand_less" : "expand_more"}</span>
+                  {isServicesOpen ? <ExpandLess className="text-xs" /> : <ExpandMore className="text-xs" />}
                 </button>
                 <AnimatePresence>
                   {isServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50"
-                    >
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
                       {services.map((service) => (
-                        <Link
-                          key={service.name}
-                          href={service.href}
-                          className="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-[#1f2a3d] hover:text-[#f5be53] transition-colors"
-                          onClick={() => setIsServicesOpen(false)}
-                        >
-                          <span className="material-symbols-outlined text-lg text-slate-400">{service.icon}</span>
+                        <Link key={service.name} href={service.href} className="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-[#1f2a3d] hover:text-[#f5be53] transition-colors" onClick={() => setIsServicesOpen(false)}>
+                          <service.icon className="text-lg text-slate-400" />
                           <span>{service.name}</span>
                         </Link>
                       ))}
@@ -210,43 +191,41 @@ export default function Header() {
                 </AnimatePresence>
               </div>
 
+              {/* Blogs Link */}
+              <Link
+                href="/blogs"
+                onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
+                className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/blogs") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
+              >
+                Blogs
+              </Link>
+
+              {/* Products Link */}
+              <Link
+                href="/products"
+                onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
+                className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/products") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
+              >
+                Products
+              </Link>
+
               {/* Brands Dropdown */}
               <div className="relative" ref={brandsRef} onMouseEnter={() => setIsBrandsOpen(true)}>
                 <button
                   type="button"
                   aria-expanded={isBrandsOpen}
-                  onClick={() => {
-                    setIsBrandsOpen(!isBrandsOpen);
-                    setIsLocationsOpen(false);
-                  }}
-                  onMouseEnter={() => {
-                    setIsBrandsOpen(true);
-                    setIsLocationsOpen(false);
-                  }}
-                  className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-1 ${
-                    isActive("/brands")
-                      ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md"
-                      : "text-slate-300 hover:text-white"
-                  }`}
+                  onClick={() => { setIsBrandsOpen(!isBrandsOpen); }}
+                  onMouseEnter={() => { setIsBrandsOpen(true); }}
+                  className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-1 ${isActive("/brands") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
                 >
                   Brands
-                  <span className="material-symbols-outlined text-xs">{isBrandsOpen ? "expand_less" : "expand_more"}</span>
+                  {isBrandsOpen ? <ExpandLess className="text-xs" /> : <ExpandMore className="text-xs" />}
                 </button>
                 <AnimatePresence>
                   {isBrandsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50"
-                    >
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
                       {brands.map((brand) => (
-                        <Link
-                          key={brand.name}
-                          href={brand.href}
-                          className="block px-4 py-3 text-slate-300 hover:bg-[#1f2a3d] hover:text-[#f5be53] transition-colors"
-                          onClick={() => setIsBrandsOpen(false)}
-                        >
+                        <Link key={brand.name} href={brand.href} className="block px-4 py-3 text-slate-300 hover:bg-[#1f2a3d] hover:text-[#f5be53] transition-colors" onClick={() => setIsBrandsOpen(false)}>
                           {brand.name}
                         </Link>
                       ))}
@@ -255,50 +234,14 @@ export default function Header() {
                 </AnimatePresence>
               </div>
 
-              {/* Locations Dropdown */}
-              <div className="relative" ref={locationsRef} onMouseEnter={() => setIsLocationsOpen(true)}>
-                <button
-                  type="button"
-                  aria-expanded={isLocationsOpen}
-                  onClick={() => {
-                    setIsLocationsOpen(!isLocationsOpen);
-                    setIsBrandsOpen(false);
-                  }}
-                  onMouseEnter={() => {
-                    setIsLocationsOpen(true);
-                    setIsBrandsOpen(false);
-                  }}
-                  className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-1 ${
-                    isActive("/locations")
-                      ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md"
-                      : "text-slate-300 hover:text-white"
-                  }`}
-                >
-                  Locations
-                  <span className="material-symbols-outlined text-xs">{isLocationsOpen ? "expand_less" : "expand_more"}</span>
-                </button>
-                <AnimatePresence>
-                  {isLocationsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50"
-                    >
-                      {locations.map((loc) => (
-                        <Link
-                          key={loc.name}
-                          href={loc.href}
-                          className="block px-4 py-3 text-slate-300 hover:bg-[#1f2a3d] hover:text-[#f5be53] transition-colors"
-                          onClick={() => setIsLocationsOpen(false)}
-                        >
-                          {loc.name}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              {/* Contact Link */}
+              <Link
+                href="/contact"
+                onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
+                className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/contact") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
+              >
+                Contact
+              </Link>
             </div>
           </div>
 
@@ -312,8 +255,8 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] z-50 flex justify-around items-center px-2 py-1 bg-[#071325]/60 backdrop-blur-lg rounded-full outline outline-slate-700/15 shadow-[0_20px_40px_rgba(3,14,32,0.4)]">
+      {/* Mobile Bottom Navigation - with safe area padding */}
+      <nav className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] z-50 flex justify-around items-center px-2 py-1 bg-[#071325]/60 backdrop-blur-lg rounded-full outline outline-slate-700/15 shadow-[0_20px_40px_rgba(3,14,32,0.4)] pb-safe">
         {/* Direct Link Items */}
         {bottomNavItems.map((link) => {
           const isCurrentActive = isActive(link.href);
@@ -325,14 +268,14 @@ export default function Header() {
                 isCurrentActive ? "bg-[#f5be53] text-[#412d00]" : "text-slate-400 hover:bg-slate-800/50"
               }`}
             >
-              <span className="material-symbols-outlined">{link.icon}</span>
-              <span className="text-[10px] font-medium uppercase tracking-widest mt-0.5">{link.name}</span>
+                            <link.icon className="text-xl" />
+              <span className="text-[10px] font-medium uppercase tracking-widest mt-0.5 whitespace-nowrap">{link.name}</span>
             </Link>
           );
         })}
 
-        {/* More Button - Opens dropdown with Brands, Locations, Contact */}
-        <div className="relative" ref={moreRef}>
+        {/* More Button */}
+        <div ref={moreRef}>
           <button
             type="button"
             onClick={() => setIsMoreOpen(!isMoreOpen)}
@@ -340,39 +283,124 @@ export default function Header() {
               isMoreOpen ? "bg-[#f5be53] text-[#412d00]" : "text-slate-400 hover:bg-slate-800/50"
             }`}
           >
-            <span className="material-symbols-outlined">more_horiz</span>
-            <span className="text-[10px] font-medium uppercase tracking-widest mt-0.5">More</span>
+            <MoreHoriz className="text-xl" />
+            <span className="text-[10px] font-medium uppercase tracking-widest mt-0.5 whitespace-nowrap">More</span>
           </button>
-
-          {/* More Dropdown - Shows above bottom nav */}
-          <AnimatePresence>
-            {isMoreOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50"
-              >
-                {moreNavItems.map((item) => {
-                  const isItemActive = isActive(item.href);
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setIsMoreOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 transition-colors ${
-                        isItemActive ? "bg-[#f5be53]/20 text-[#f5be53]" : "text-slate-300 hover:bg-[#1f2a3d] hover:text-white"
-                      }`}
-                    >
-                      <span className="material-symbols-outlined text-lg">{item.icon}</span>
-                      <span className="font-medium">{item.name}</span>
-                    </Link>
-                  );
-                })}
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
+
+        {/* Bottom sheet — slides up above the nav bar */}
+        <AnimatePresence>
+          {isMoreOpen && (
+            <>
+              {/* Tap-outside backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+                onClick={() => setIsMoreOpen(false)}
+              />
+
+              {/* Sheet panel - with safe area constraints */}
+              <motion.div
+                initial={{ opacity: 0, y: 32 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 32 }}
+                transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                className="fixed bottom-[72px] left-2 right-2 z-50 rounded-2xl overflow-hidden max-h-[calc(100vh-180px)] overflow-y-auto"
+                style={{
+                  background: "linear-gradient(145deg, #0f1e30 0%, #091524 100%)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  boxShadow: "0 -4px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,190,83,0.06)",
+                }}
+              >
+                {/* Sheet header */}
+                <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#f5be53]" />
+                    <span className="text-xs font-bold text-white uppercase tracking-[0.18em]">Menu</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsMoreOpen(false)}
+                    className="w-6 h-6 rounded-full bg-white/8 flex items-center justify-center text-slate-500 hover:text-white active:scale-90 transition-all"
+                  >
+                    <Close style={{ fontSize: 13 }} />
+                  </button>
+                </div>
+
+                <div className="px-3 py-3 space-y-1">
+                  {/* ── Services ── */}
+                  <p className="text-[9px] font-bold text-slate-600 uppercase tracking-[0.2em] px-2 pb-1">Services</p>
+                  {services.map((service) => {
+                    const active = isActive(service.href);
+                    return (
+                      <Link
+                        key={service.name}
+                        href={service.href}
+                        onClick={() => setIsMoreOpen(false)}
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all active:scale-[0.98] ${
+                          active
+                            ? "bg-[#f5be53]/12 text-[#f5be53]"
+                            : "text-slate-300 hover:bg-white/5 hover:text-white"
+                        }`}
+                      >
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${active ? "bg-[#f5be53]/20" : "bg-white/5"}`}>
+                          <service.icon style={{ fontSize: 15 }} />
+                        </span>
+                        <span className="text-[13px] font-medium">{service.name}</span>
+                        {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#f5be53] shrink-0" />}
+                      </Link>
+                    );
+                  })}
+
+                  {/* ── Divider ── */}
+                  <div className="h-px bg-white/5 mx-1 my-1" />
+
+                  {/* ── Pages ── */}
+                  <p className="text-[9px] font-bold text-slate-600 uppercase tracking-[0.2em] px-2 pb-1">Pages</p>
+                  {[
+                    { name: "About Us",  href: "/about",                icon: InfoOutlined },
+                    { name: "Blogs",     href: "/blogs",                icon: Article      },
+                    { name: "Locations", href: "/printer-rental-dubai", icon: LocationOn   },
+                    { name: "Contact",   href: "/contact",              icon: Call         },
+                  ].map((item) => {
+                    const active = isActive(item.href);
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsMoreOpen(false)}
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all active:scale-[0.98] ${
+                          active
+                            ? "bg-[#f5be53]/12 text-[#f5be53]"
+                            : "text-slate-300 hover:bg-white/5 hover:text-white"
+                        }`}
+                      >
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${active ? "bg-[#f5be53]/20" : "bg-white/5"}`}>
+                          <item.icon style={{ fontSize: 15 }} />
+                        </span>
+                        <span className="text-[13px] font-medium">{item.name}</span>
+                        {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#f5be53] shrink-0" />}
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                {/* ── CTA footer ── */}
+                <div className="px-3 pb-3">
+                  <Link
+                    href="/get-quote"
+                    onClick={() => setIsMoreOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] font-bold text-sm active:scale-[0.98] transition-transform"
+                  >
+                    Get a Free Quote
+                  </Link>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </nav>
     </>
   );

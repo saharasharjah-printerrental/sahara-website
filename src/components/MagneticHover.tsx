@@ -91,12 +91,21 @@ export function MagneticHover({
   }, [mouseX, mouseY]);
 
   return (
-    <div
-      className={`relative ${className}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="flex flex-wrap">
+    <div className={`relative ${className}`}>
+      {/* ── Mobile: plain text — no mouse on touch, no character splitting ── */}
+      <div
+        className={`md:hidden ${textSize} font-bold leading-tight`}
+        style={{ color: inactiveColor }}
+      >
+        {text}
+      </div>
+
+      {/* ── Desktop: character-level magnetic weight effect ── */}
+      <div
+        className="hidden md:flex flex-wrap"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
         {text.split("").map((char, i) => (
           <MagneticChar
             key={i}

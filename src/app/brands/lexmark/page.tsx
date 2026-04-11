@@ -5,12 +5,13 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import Image from "next/image";
 
 export default function LexmarkBrandPage() {
   const products = [
-    { name: "Lexmark MS821dn", specs: ["55 PPM", "1200 DPI"], img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&h=400&fit=crop" },
-    { name: "Lexmark CX825dte", specs: ["55 PPM", "Color"], img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&h=400&fit=crop" },
-    { name: "Lexmark B3442dw", specs: ["42 PPM", "Wireless"], img: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=400&fit=crop" },
+    { name: "Lexmark MS821dn", specs: ["55 PPM", "1200 DPI"], img: "https://media.lexmark.com/www/product/standard/12/12440.png" },
+    { name: "Lexmark CX825dte", specs: ["55 PPM", "Color"], img: "https://media.lexmark.com/www/product/standard/10/10285.png" },
+    { name: "Lexmark B3442dw", specs: ["42 PPM", "Wireless"], img: "https://media.lexmark.com/www/product/standard/15/15573.png" },
   ];
 
   const features = [
@@ -54,10 +55,13 @@ export default function LexmarkBrandPage() {
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
-                <img 
-                  src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&h=600&fit=crop"
-                  alt="Lexmark Printer"
-                  className="w-full h-full object-cover"
+                <Image
+                  src="https://media.lexmark.com/www/product/standard/10/10285.png"
+                  alt="Lexmark CX825dte Printer"
+                  width={600}
+                  height={600}
+                  className="w-full h-auto"
+                  priority
                 />
               </div>
             </div>

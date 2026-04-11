@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -35,51 +36,135 @@ export default function BlogPage() {
       setPosts([
         {
           id: "1",
-          title: "Top 5 Printer Brands for UAE Businesses in 2026",
-          slug: "top-5-printer-brands-2026",
-          excerpt: "Discover the best printer brands trusted by UAE businesses for reliability, performance, and cost-efficiency.",
+          title: "How to Choose the Best Printer Rental Dubai Service?",
+          slug: "how-to-choose-the-best-printer-rental-dubai-service",
+          excerpt: "Start your search for printer rental Dubai with a quick audit you can finish this afternoon",
           content: "Full content here...",
-          category: "Buying Guide",
+          category: "Guide",
           status: "published",
-          coverImage: "",
-          publishedAt: "2026-03-15",
-          createdAt: "2026-03-10"
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp",
+          publishedAt: "2/16/2026",
+          createdAt: "2026-02-16"
         },
         {
           id: "2",
-          title: "Printer Rental vs Buying: What's Best for Your Office?",
-          slug: "printer-rental-vs-buying",
-          excerpt: "Compare the costs and benefits of renting vs buying printers to make the right financial decision.",
+          title: "The Problem We Solve",
+          slug: "the-problem-we-solve",
+          excerpt: "In any office, the sudden breakdown of a document printer or copier creates a cascade of problems. It's more than a minor inconvenience; it's a productivity killer.",
           content: "Full content here...",
-          category: "Guide",
+          category: "Insights",
           status: "published",
-          coverImage: "",
-          publishedAt: "2026-03-20",
-          createdAt: "2026-03-18"
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758721285/blogs/iblcpt0jm18wwey7nm41.jpg",
+          publishedAt: "9/24/2025",
+          createdAt: "2025-09-24"
         },
         {
           id: "3",
-          title: "How to Choose the Right Printer for Your Office",
-          slug: "choose-right-printer-office",
-          excerpt: "A comprehensive guide to selecting the perfect printer based on your business needs and volume.",
-          content: "Full content here...",
-          category: "Tips",
-          status: "published",
-          coverImage: "",
-          publishedAt: "2026-04-01",
-          createdAt: "2026-03-25"
-        },
-        {
-          id: "4",
-          title: "Managed Print Services: Save Big on Printing Costs",
-          slug: "managed-print-services",
-          excerpt: "Learn how managed print services can reduce your printing costs by up to 30%.",
+          title: "What a Copier Rental Service Must Deliver to a Client",
+          slug: "what-a-copier-rental-service-must-deliver-to-a-client",
+          excerpt: "A successful copier rental service is defined not just by the equipment it provides, but by the quality of the service, it delivers.",
           content: "Full content here...",
           category: "Guide",
           status: "published",
-          coverImage: "",
-          publishedAt: "2026-04-05",
-          createdAt: "2026-04-01"
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758723167/blogs/gifymghto0ykchvzrjyt.jpg",
+          publishedAt: "9/24/2025",
+          createdAt: "2025-09-24"
+        },
+        {
+          id: "4",
+          title: "Why a Company Chooses Copier Rental Service Over Buying a Copier",
+          slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
+          excerpt: "A company's decision to rent a copier instead of buying one is about far more than just the initial investment.",
+          content: "Full content here...",
+          category: "Guide",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg",
+          publishedAt: "8/23/2025",
+          createdAt: "2025-08-23"
+        },
+        {
+          id: "5",
+          title: "Total Cost of Printer Ownership",
+          slug: "total-cost-of-printer-ownership",
+          excerpt: "While the initial purchase price of a copier may seem affordable, the true cost of owning and operating the device is often much higher than a rental agreement.",
+          content: "Full content here...",
+          category: "Finance",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
+          publishedAt: "8/23/2025",
+          createdAt: "2025-08-23"
+        },
+        {
+          id: "6",
+          title: "Video Walkthrough: Solving Canon Printer Problems",
+          slug: "video-walkthrough-solving-canon-printer-problems",
+          excerpt: "This video tutorial guides you through practical steps to troubleshoot common Canon printer issues, such as paper jams, connection errors, and ink problems.",
+          content: "Full content here...",
+          category: "Troubleshooting",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1754304132/blogs/mmmyp3kxrfsp1aryzule.png",
+          publishedAt: "8/4/2025",
+          createdAt: "2025-08-04"
+        },
+        {
+          id: "7",
+          title: "The Hidden Cost of Your Office Copier",
+          slug: "the-hidden-cost-of-your-office-copier",
+          excerpt: "Our competitors may offer a cheaper initial price, but this often comes at the expense of hidden costs, unreliable service, and a significant burden on your team.",
+          content: "Full content here...",
+          category: "Finance",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758285328/blogs/mukam5nzst3o6lvhac5m.jpg",
+          publishedAt: "8/4/2025",
+          createdAt: "2025-08-04"
+        },
+        {
+          id: "8",
+          title: "How Dubai Companies Save Budget by Choosing Value-Driven Printer Rental",
+          slug: "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
+          excerpt: "Dubai's dynamic business environment demands efficiency and cost-effectiveness. Companies are constantly seeking ways to optimize their operations.",
+          content: "Full content here...",
+          category: "Finance",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1752651510/blogs/l3byyc7o8a8f1lddujis.jpg",
+          publishedAt: "7/16/2025",
+          createdAt: "2025-07-16"
+        },
+        {
+          id: "9",
+          title: "Real Estate to Clinics: Why Every UAE Business is Renting Printers in 2025",
+          slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+          excerpt: "Picture this: It's 2025, and even the most glamorous Dubai real estate offices and high-tech clinics have one thing in common—no one actually owns their printers anymore.",
+          content: "Full content here...",
+          category: "Trends",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
+          publishedAt: "6/28/2025",
+          createdAt: "2025-06-28"
+        },
+        {
+          id: "10",
+          title: "Rent or Buy Your Office Printer? Let's Talk Smart Choices for Your Business",
+          slug: "rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business",
+          excerpt: "Every business owner knows that big decisions, and even the seemingly small ones, can really impact your wallet and your team.",
+          content: "Full content here...",
+          category: "Guide",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1749630742/blogs/ue4jwdxdlp655oeoylsq.png",
+          publishedAt: "6/11/2025",
+          createdAt: "2025-06-11"
+        },
+        {
+          id: "11",
+          title: "Stop Wasting Money on Printing: Your Guide to Smarter Office Habits",
+          slug: "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits",
+          excerpt: "Does your business constantly track every penny, yet somehow printing costs just fly under the radar? You're not alone.",
+          content: "Full content here...",
+          category: "Tips",
+          status: "published",
+          coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1749638040/blogs/ldevdfienoa4ibffpix0.png",
+          publishedAt: "6/11/2025",
+          createdAt: "2025-06-11"
         },
       ]);
     }
@@ -171,9 +256,9 @@ export default function BlogPage() {
           {filteredPosts.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post) => (
+                <Link href={`/blogs/${post.slug}`} key={post.id}>
                 <article
-                  key={post.id}
-                  className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500 cursor-pointer"
+                  className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500 cursor-pointer h-full"
                 >
                   {/* Category Badge */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#142032] border border-[#f5be53]/20 mb-4">
@@ -198,6 +283,7 @@ export default function BlogPage() {
                     </span>
                   </div>
                 </article>
+                </Link>
               ))}
             </div>
           ) : (

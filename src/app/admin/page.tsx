@@ -31,29 +31,40 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedInquiries = localStorage.getItem("sahara_inquiries");
-    if (storedInquiries) {
-      const inquiries = JSON.parse(storedInquiries);
-      setStats((prev) => ({
-        ...prev,
-        totalInquiries: inquiries.length,
-        pendingInquiries: inquiries.filter((i: any) => i.status === "pending").length,
-      }));
-      setRecentInquiries(inquiries.slice(0, 5));
-    }
+    try {
+      const storedInquiries = localStorage.getItem("sahara_inquiries");
+      if (storedInquiries) {
+        const inquiries = JSON.parse(storedInquiries);
+        if (Array.isArray(inquiries)) {
+          setStats((prev) => ({
+            ...prev,
+            totalInquiries: inquiries.length,
+            pendingInquiries: inquiries.filter((i: any) => i.status === "pending").length,
+          }));
+          setRecentInquiries(inquiries.slice(0, 5));
+        }
+      }
 
-    const storedProducts = localStorage.getItem("sahara_products");
-    if (storedProducts) {
-      setStats((prev) => ({ ...prev, totalProducts: JSON.parse(storedProducts).length }));
-    }
+      const storedProducts = localStorage.getItem("sahara_products");
+      if (storedProducts) {
+        const products = JSON.parse(storedProducts);
+        if (Array.isArray(products)) {
+          setStats((prev) => ({ ...prev, totalProducts: products.length }));
+        }
+      }
 
-    const storedBlogs = localStorage.getItem("sahara_blogs");
-    if (storedBlogs) {
-      const blogs = JSON.parse(storedBlogs);
-      setStats((prev) => ({
-        ...prev,
-        publishedBlogs: blogs.filter((b: any) => b.status === "published").length,
-      }));
+      const storedBlogs = localStorage.getItem("sahara_blogs");
+      if (storedBlogs) {
+        const blogs = JSON.parse(storedBlogs);
+        if (Array.isArray(blogs)) {
+          setStats((prev) => ({
+            ...prev,
+            publishedBlogs: blogs.filter((b: any) => b.status === "published").length,
+          }));
+        }
+      }
+    } catch (e) {
+      console.error("Error loading dashboard data:", e);
     }
 
     setLoading(false);

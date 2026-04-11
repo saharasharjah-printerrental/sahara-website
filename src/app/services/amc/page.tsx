@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import { Savings, Speed, Engineering, Inventory, CheckCircle } from "@mui/icons-material";
 
 export default function AMCPage() {
   const plans = [
@@ -14,10 +15,10 @@ export default function AMCPage() {
   ];
 
   const benefits = [
-    { icon: "savings", title: "Cost Predictability", desc: "Fixed monthly costs with no surprise repair bills" },
-    { icon: "speed", title: "Priority Service", desc: "AMC clients get priority scheduling and faster response" },
-    { icon: "preventive", title: "Prevention Focus", desc: "Regular maintenance prevents costly downtime" },
-    { icon: "inventory", title: "Parts Coverage", desc: "All replacement parts included in Professional plan" },
+    { icon: Savings, title: "Cost Predictability", desc: "Fixed monthly costs with no surprise repair bills" },
+    { icon: Speed, title: "Priority Service", desc: "AMC clients get priority scheduling and faster response" },
+    { icon: Engineering, title: "Prevention Focus", desc: "Regular maintenance prevents costly downtime" },
+    { icon: Inventory, title: "Parts Coverage", desc: "All replacement parts included in Professional plan" },
   ];
 
   return (
@@ -46,7 +47,7 @@ export default function AMCPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((b, i) => (
               <div key={i} className="glass-card p-8 rounded-3xl">
-                <span className="material-symbols-outlined text-4xl text-[#f5be53] mb-4">{b.icon}</span>
+                <b.icon className="text-4xl text-[#f5be53] mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">{b.title}</h3>
                 <p className="text-[#d3c5b0]">{b.desc}</p>
               </div>
@@ -71,7 +72,7 @@ export default function AMCPage() {
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((f, j) => (
                     <li key={j} className="flex items-center gap-3 text-[#d3c5b0]">
-                      <span className="material-symbols-outlined text-[#f5be53] text-sm">check_circle</span>
+                      <CheckCircle className="text-[#f5be53] text-sm" />
                       {f}
                     </li>
                   ))}

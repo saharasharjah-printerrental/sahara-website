@@ -5,7 +5,12 @@
       "Bash(npm run:*)",
       "Bash(echo \"Exit code: $?\")",
       "Bash(cmd.exe:*)",
-      "Bash(powershell.exe:*)"
+      "Bash(powershell.exe:*)",
+      "Bash(node -e ':*)",
+      "Bash(powershell:*)",
+      "Bash(node:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)"
     ]
   }
 }

@@ -1,37 +1,89 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 
+interface CalculatorSettings {
+  a4BasePrice: number;
+  a3BasePrice: number;
+  plotterBasePrice: number;
+  colorMultiplier: number;
+  volumeThreshold1: number;
+  volumeThreshold2: number;
+  volumeMultiplier1: number;
+  volumeMultiplier2: number;
+  volumeMultiplier3: number;
+  discount36Months: number;
+  discount24Months: number;
+  discount12Months: number;
+}
+
+const defaultCalcSettings: CalculatorSettings = {
+  a4BasePrice: 600,
+  a3BasePrice: 1200,
+  plotterBasePrice: 2500,
+  colorMultiplier: 1.4,
+  volumeThreshold1: 5000,
+  volumeThreshold2: 10000,
+  volumeMultiplier1: 1,
+  volumeMultiplier2: 1.1,
+  volumeMultiplier3: 1.25,
+  discount36Months: 0.8,
+  discount24Months: 0.85,
+  discount12Months: 0.9,
+};
+
 export default function RentalCalculatorPage() {
   const [printerType, setPrinterType] = useState("a4");
   const [colorOutput, setColorOutput] = useState("mono");
   const [monthlyVolume, setMonthlyVolume] = useState(5000);
   const [duration, setDuration] = useState(12);
+  const [calcSettings, setCalcSettings] = useState<CalculatorSettings>(defaultCalcSettings);
 
-  const getBasePrice = () => {
-    if (printerType === "plotter") return 2500;
-    if (printerType === "a3") return 1200;
-    return 600;
+  const loadSettings = () => {
+    try {
+      const stored = localStorage.getItem("sahara_settings");
+      if (stored) {
+        const settings = JSON.parse(stored);
+        if (settings && settings.calculatorPrices) {
+          setCalcSettings(settings.calculatorPrices);
+        }
+      }
+    } catch (e) {
+      console.error("Error loading calculator settings:", e);
+    }
   };
 
-  const getColorMultiplier = () => colorOutput === "color" ? 1.4 : 1;
+  useEffect(() => {
+    loadSettings();
+    const handleSettingsUpdate = () => loadSettings();
+    window.addEventListener("sahara-settings-updated", handleSettingsUpdate);
+    return () => window.removeEventListener("sahara-settings-updated", handleSettingsUpdate);
+  }, []);
+
+  const getBasePrice = () => {
+    if (printerType === "plotter") return calcSettings.plotterBasePrice;
+    if (printerType === "a3") return calcSettings.a3BasePrice;
+    return calcSettings.a4BasePrice;
+  };
+
+  const getColorMultiplier = () => colorOutput === "color" ? calcSettings.colorMultiplier : 1;
 
   const getVolumeMultiplier = () => {
-    if (monthlyVolume > 20000) return 1.5;
-    if (monthlyVolume > 10000) return 1.25;
-    if (monthlyVolume > 5000) return 1.1;
-    return 1;
+    if (monthlyVolume > 20000) return calcSettings.volumeMultiplier3;
+    if (monthlyVolume > calcSettings.volumeThreshold2) return calcSettings.volumeMultiplier3;
+    if (monthlyVolume > calcSettings.volumeThreshold1) return calcSettings.volumeMultiplier2;
+    return calcSettings.volumeMultiplier1;
   };
 
   const getDurationDiscount = () => {
-    if (duration >= 36) return 0.8;
-    if (duration >= 24) return 0.85;
-    if (duration >= 12) return 0.9;
+    if (duration >= 36) return calcSettings.discount36Months;
+    if (duration >= 24) return calcSettings.discount24Months;
+    if (duration >= 12) return calcSettings.discount12Months;
     return 1;
   };
 

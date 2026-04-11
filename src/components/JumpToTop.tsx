@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { KeyboardArrowUp } from "@mui/icons-material";
 
 export default function JumpToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,7 +43,7 @@ export default function JumpToTop() {
           }}
           aria-label="Jump to top"
         >
-          <ArrowUp className="w-5 h-5" />
+          <KeyboardArrowUp className="w-5 h-5" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -13,6 +13,9 @@ interface Supply {
   price: string;
   stock: number;
   image: string;
+  altText: string;
+  imageWidth: number;
+  imageHeight: number;
   isActive: boolean;
 }
 
@@ -28,6 +31,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 50,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -41,6 +47,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 50,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -54,6 +63,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 50,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -67,6 +79,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 50,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -80,6 +95,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 30,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -93,6 +111,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 30,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -106,6 +127,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 30,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -119,6 +143,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 30,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -132,6 +159,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 25,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -144,6 +174,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 15,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -156,6 +189,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 15,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -168,6 +204,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 20,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
   {
@@ -180,6 +219,9 @@ const initialSupplies: Supply[] = [
     price: "Contact for Pricing",
     stock: 10,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   },
 ];
@@ -414,6 +456,9 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
     price: "Contact for Pricing",
     stock: 0,
     image: "",
+    altText: "",
+    imageWidth: 800,
+    imageHeight: 800,
     isActive: true,
   });
   const [uploading, setUploading] = useState(false);
@@ -423,13 +468,23 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
 
   const colors = ["Black", "Cyan", "Yellow", "Magenta", "N/A"];
 
+  const getImageDimensions = (src: string): Promise<{ width: number; height: number }> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve({ width: img.width, height: img.height });
+      img.onerror = () => resolve({ width: 800, height: 800 });
+      img.src = src;
+    });
+  };
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setUploading(true);
-    const processImage = (base64: string) => {
-      setForm({ ...form, image: base64 });
+    const processImage = async (base64: string) => {
+      const dims = await getImageDimensions(base64);
+      setForm({ ...form, image: base64, imageWidth: dims.width, imageHeight: dims.height, altText: form.altText || `${form.brand} ${form.name} image` });
       setUploading(false);
     };
 
@@ -440,23 +495,24 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
         const res = await fetch("/api/convert-image", { method: "POST", body: formData });
         const data = await res.json();
         if (data.url) {
-          setForm({ ...form, image: data.url });
+          const dims = await getImageDimensions(data.url);
+          setForm({ ...form, image: data.url, imageWidth: dims.width, imageHeight: dims.height, altText: form.altText || `${form.brand} ${form.name} image` });
         } else {
           const reader = new FileReader();
-          reader.onloadend = () => processImage(reader.result as string);
+          reader.onloadend = async () => await processImage(reader.result as string);
           reader.readAsDataURL(file);
         }
       } catch (error) {
         console.error("WebP conversion failed:", error);
         const reader = new FileReader();
-        reader.onloadend = () => processImage(reader.result as string);
+        reader.onloadend = async () => await processImage(reader.result as string);
         reader.readAsDataURL(file);
       } finally {
         setUploading(false);
       }
     } else {
       const reader = new FileReader();
-      reader.onloadend = () => processImage(reader.result as string);
+      reader.onloadend = async () => await processImage(reader.result as string);
       reader.onerror = () => {
         setUploading(false);
         alert("Failed to read file");
@@ -476,14 +532,14 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
       });
       const data = await res.json();
       if (data.url) {
-        setForm(prev => ({ ...prev, image: data.url }));
+        const dims = await getImageDimensions(data.url);
+        setForm(prev => ({ ...prev, image: data.url, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.brand} ${prev.name} image` }));
       } else {
         setForm(prev => ({ ...prev, image: imageUrl }));
       }
       setImageUrl("");
     } catch (error) {
       console.error("Fetch failed:", error);
-      setForm(prev => ({ ...prev, image: imageUrl }));
       setImageUrl("");
     } finally {
       setConverting(false);
@@ -491,7 +547,7 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
   };
 
   const clearImage = () => {
-    setForm({ ...form, image: "" });
+    setForm({ ...form, image: "", imageWidth: 800, imageHeight: 800 });
   };
 
   return (
@@ -640,11 +696,43 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
             {form.image && (
               <div className="flex items-center gap-3">
                 <div className="w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
-                  <img src={form.image} alt="Preview" className="w-full h-full object-contain" />
+                  <img src={form.image} alt={form.altText || "Preview"} className="w-full h-full object-contain" />
                 </div>
                 <button onClick={clearImage} className="text-slate-400 hover:text-red-400 text-sm">
                   Remove
                 </button>
+              </div>
+            )}
+            {form.image && (
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Alt Text (SEO)</label>
+                  <input 
+                    type="text" 
+                    value={form.altText} 
+                    onChange={(e) => setForm({ ...form, altText: e.target.value })} 
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" 
+                    placeholder="Product image for SEO"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Width</label>
+                  <input 
+                    type="number" 
+                    value={form.imageWidth} 
+                    onChange={(e) => setForm({ ...form, imageWidth: parseInt(e.target.value) || 800 })} 
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Height</label>
+                  <input 
+                    type="number" 
+                    value={form.imageHeight} 
+                    onChange={(e) => setForm({ ...form, imageHeight: parseInt(e.target.value) || 800 })} 
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" 
+                  />
+                </div>
               </div>
             )}
           </div>

@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import { ExpandMore } from "@mui/icons-material";
 
 export default function PrinterRentalAlAin() {
   const [settings, setSettings] = useState<any>(null);
@@ -195,7 +196,7 @@ export default function PrinterRentalAlAin() {
             >
               <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
                 {f.q}
-                <span className="material-symbols-outlined text-[#f5be53] group-open:rotate-180 transition-transform">expand_more</span>
+                <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
               </summary>
               <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
             </details>

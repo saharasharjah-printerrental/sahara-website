@@ -8,6 +8,7 @@ import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { CheckCircle, Smartphone, Phone, Headphones, Email, LocationOn, AccessTime } from "@mui/icons-material";
 
 function FacebookIcon() {
   return (
@@ -62,25 +63,69 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [settings, setSettings] = useState<any>(null);
+  const [socialLinks, setSocialLinks] = useState<{ name: string; url: string; icon: string }[]>([]);
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_settings");
     if (stored) {
       setSettings(JSON.parse(stored));
     }
+
+    const loadSocialLinks = () => {
+      try {
+        const stored = localStorage.getItem("sahara_seo_config");
+        if (stored) {
+          const config = JSON.parse(stored);
+          const sm = config.socialMedia || {};
+          const links: { name: string; url: string; icon: string }[] = [];
+          if (sm.facebook) links.push({ name: "Facebook", url: sm.facebook, icon: "facebook" });
+          if (sm.instagram) links.push({ name: "Instagram", url: sm.instagram, icon: "instagram" });
+          if (sm.linkedin) links.push({ name: "LinkedIn", url: sm.linkedin, icon: "linkedin" });
+          if (sm.twitter) links.push({ name: "Twitter", url: sm.twitter, icon: "twitter" });
+          if (sm.youtube) links.push({ name: "YouTube", url: sm.youtube, icon: "youtube" });
+          if (links.length > 0) {
+            setSocialLinks(links);
+          } else {
+            setSocialLinks([
+              { name: "Facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
+              { name: "Instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
+              { name: "LinkedIn", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
+              { name: "YouTube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
+            ]);
+          }
+        } else {
+          setSocialLinks([
+            { name: "Facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
+            { name: "Instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
+            { name: "LinkedIn", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
+            { name: "YouTube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
+          ]);
+        }
+      } catch (e) {
+        console.error("Failed to load social links:", e);
+        setSocialLinks([
+          { name: "Facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
+          { name: "Instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
+          { name: "LinkedIn", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
+          { name: "YouTube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
+        ]);
+      }
+    };
+
+    loadSocialLinks();
+
+    const handleUpdate = () => loadSocialLinks();
+    window.addEventListener("seo-config-updated", handleUpdate);
+
+    return () => {
+      window.removeEventListener("seo-config-updated", handleUpdate);
+    };
   }, []);
 
-  const socialLinks = [
-    { name: "Facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
-    { name: "Instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
-    { name: "YouTube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
-  ];
-
   const contactNumbers = [
-    { label: "Mobile (Sales & Support)", phone: "+971 50 382 3969", icon: "smartphone" },
-    { label: "Landline (Sharjah)", phone: "+971 6 542 6169", icon: "phone" },
-    { label: "Customer Service", phone: "+971 6 527 6444", icon: "headset" },
+    { label: "Mobile (Sales & Support)", phone: "+971 50 382 3969", icon: Smartphone },
+    { label: "Landline (Sharjah)", phone: "+971 6 542 6169", icon: Phone },
+    { label: "Customer Service", phone: "+971 6 527 6444", icon: Headphones },
   ];
 
   const locations = [
@@ -127,7 +172,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
               {submitted ? (
                 <div className="text-center py-8">
-                  <span className="material-symbols-outlined text-5xl text-green-400 mb-4">check_circle</span>
+                  <CheckCircle className="text-5xl text-green-400 mb-4" sx={{ fontSize: 60 }} />
                   <h3 className="text-xl font-bold text-white mb-2">Thank You!</h3>
                   <p className="text-slate-400">Your inquiry has been submitted. We'll get back to you within 30 minutes.</p>
                 </div>
@@ -203,7 +248,7 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   {contactNumbers.map((contact, i) => (
                     <div key={i} className="flex items-start gap-4">
-                      <span className="material-symbols-outlined text-3xl text-[#f5be53]">{contact.icon}</span>
+                      <contact.icon className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                       <div>
                         <h3 className="font-bold text-white">{contact.label}</h3>
                         <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
@@ -213,7 +258,7 @@ export default function ContactPage() {
                     </div>
                   ))}
                   <div className="flex items-start gap-4">
-                    <span className="material-symbols-outlined text-3xl text-[#f5be53]">email</span>
+                    <Email className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Email</h3>
                       <a href="mailto:info@saharaedoc.com" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
@@ -222,7 +267,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <span className="material-symbols-outlined text-3xl text-[#f5be53]">location_on</span>
+                    <LocationOn className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Headquarters</h3>
                       <p className="text-[#d3c5b0]">Al Arabi Building, Industrial Area 11</p>
@@ -231,7 +276,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <span className="material-symbols-outlined text-3xl text-[#f5be53]">schedule</span>
+                    <AccessTime className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Business Hours</h3>
                       <p className="text-[#d3c5b0]">Sat - Thu: 8:00 AM - 8:00 PM</p>

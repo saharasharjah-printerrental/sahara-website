@@ -16,6 +16,14 @@ interface SEOConfig {
   customBodyScripts: string;
   schemaMarkup: string;
   enableDevMode: boolean;
+  socialMedia: {
+    facebook: string;
+    instagram: string;
+    linkedin: string;
+    twitter: string;
+    youtube: string;
+    whatsapp: string;
+  };
 }
 
 const defaultConfig: SEOConfig = {
@@ -32,6 +40,14 @@ const defaultConfig: SEOConfig = {
   customBodyScripts: "",
   schemaMarkup: "",
   enableDevMode: false,
+  socialMedia: {
+    facebook: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/sahara_office_equipments",
+    linkedin: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/",
+    twitter: "",
+    youtube: "https://www.youtube.com/@saharaprinter",
+    whatsapp: "https://wa.me/971503823969",
+  },
 };
 
 export default function AdminSEO() {
@@ -40,14 +56,22 @@ export default function AdminSEO() {
   const [activeTab, setActiveTab] = useState("google");
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_seo_config");
-    if (stored) {
-      setConfig(JSON.parse(stored));
+    try {
+      const stored = localStorage.getItem("sahara_seo_config");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && typeof parsed === "object") {
+          setConfig(parsed);
+        }
+      }
+    } catch (e) {
+      console.error("Error loading SEO config:", e);
     }
   }, []);
 
   const handleSave = () => {
     localStorage.setItem("sahara_seo_config", JSON.stringify(config));
+    window.dispatchEvent(new Event("seo-config-updated"));
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -56,6 +80,7 @@ export default function AdminSEO() {
     { id: "google", label: "Google", icon: "Google" },
     { id: "meta", label: "Meta (Facebook)", icon: "Meta" },
     { id: "microsoft", label: "Microsoft", icon: "Microsoft" },
+    { id: "social", label: "Social Media", icon: "Share" },
     { id: "other", label: "Other Tools", icon: "More" },
     { id: "custom", label: "Custom Scripts", icon: "Code" },
     { id: "schema", label: "Schema Markup", icon: "Data" },
@@ -257,6 +282,109 @@ export default function AdminSEO() {
                           <li>• Free heatmaps and session recordings</li>
                           <li>• User behavior analytics</li>
                           <li>• Integrates with Azure AD</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === "social" && (
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-bold text-white mb-1">Social Media Links</h3>
+                    <p className="text-sm text-slate-400 mb-4">Configure your social media profile URLs</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          <span className="material-symbols-outlined text-sm align-middle mr-1">facebook</span>
+                          Facebook
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://facebook.com/yourpage"
+                          value={config.socialMedia.facebook}
+                          onChange={(e) => setConfig({ ...config, socialMedia: { ...config.socialMedia, facebook: e.target.value } })}
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          <span className="material-symbols-outlined text-sm align-middle mr-1">photo_camera</span>
+                          Instagram
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://instagram.com/yourprofile"
+                          value={config.socialMedia.instagram}
+                          onChange={(e) => setConfig({ ...config, socialMedia: { ...config.socialMedia, instagram: e.target.value } })}
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          <span className="material-symbols-outlined text-sm align-middle mr-1">work</span>
+                          LinkedIn
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://linkedin.com/company/yourcompany"
+                          value={config.socialMedia.linkedin}
+                          onChange={(e) => setConfig({ ...config, socialMedia: { ...config.socialMedia, linkedin: e.target.value } })}
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          <span className="material-symbols-outlined text-sm align-middle mr-1">tag</span>
+                          Twitter/X
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://x.com/yourhandle"
+                          value={config.socialMedia.twitter}
+                          onChange={(e) => setConfig({ ...config, socialMedia: { ...config.socialMedia, twitter: e.target.value } })}
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          <span className="material-symbols-outlined text-sm align-middle mr-1">play_circle</span>
+                          YouTube
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://youtube.com/@yourchannel"
+                          value={config.socialMedia.youtube}
+                          onChange={(e) => setConfig({ ...config, socialMedia: { ...config.socialMedia, youtube: e.target.value } })}
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          <span className="material-symbols-outlined text-sm align-middle mr-1">call</span>
+                          WhatsApp
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://wa.me/971500000000"
+                          value={config.socialMedia.whatsapp}
+                          onChange={(e) => setConfig({ ...config, socialMedia: { ...config.socialMedia, whatsapp: e.target.value } })}
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+                    <div className="flex items-start gap-3">
+                      <span className="material-symbols-outlined text-blue-400">info</span>
+                      <div>
+                        <h4 className="font-medium text-white">Where These Links Are Used</h4>
+                        <ul className="text-sm text-slate-400 mt-2 space-y-1">
+                          <li>• Footer of the website</li>
+                          <li>• Social media meta tags (Open Graph)</li>
+                          <li>• Schema markup for Organization</li>
                         </ul>
                       </div>
                     </div>

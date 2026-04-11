@@ -5,13 +5,15 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import CountUp from "@/components/CountUp";
+import { Hardware, SettingsSuggest, CleaningServices, Emergency } from "@mui/icons-material";
 
 export default function RepairPage() {
   const services = [
-    { icon: "hardware", title: "Hardware Repair", desc: "Mechanical and electrical component replacement, board-level diagnostics" },
-    { icon: "settings_suggest", title: "Firmware Updates", desc: "Latest firmware installation and security patches for all major brands" },
-    { icon: "cleaning_services", title: "Deep Cleaning", desc: "Internal cleaning, roller replacement, and calibration services" },
-    { icon: "emergency", title: "Emergency Service", desc: "4-hour response time for critical failures, 24/7 availability" },
+    { icon: Hardware, title: "Hardware Repair", desc: "Mechanical and electrical component replacement, board-level diagnostics" },
+    { icon: SettingsSuggest, title: "Firmware Updates", desc: "Latest firmware installation and security patches for all major brands" },
+    { icon: CleaningServices, title: "Deep Cleaning", desc: "Internal cleaning, roller replacement, and calibration services" },
+    { icon: Emergency, title: "Emergency Service", desc: "4-hour response time for critical failures, 24/7 availability" },
   ];
 
   const brands = ["HP", "Canon", "Brother", "Ricoh", "Xerox", "Sharp", "Kyocera", "Epson"];
@@ -62,7 +64,7 @@ export default function RepairPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((s, i) => (
               <div key={i} className="glass-card p-8 rounded-3xl">
-                <span className="material-symbols-outlined text-4xl text-[#f5be53] mb-4">{s.icon}</span>
+                <s.icon className="text-4xl text-[#f5be53] mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
                 <p className="text-[#d3c5b0]">{s.desc}</p>
               </div>
@@ -86,13 +88,16 @@ export default function RepairPage() {
         <div className="max-w-4xl mx-auto">
           <div className="glass-card rounded-[2rem] p-10 flex flex-wrap justify-center gap-12 md:gap-20">
             {[
-              { value: "50k+", label: "Repairs Completed" },
-              { value: "4hr", label: "Response Time" },
-              { value: "98%", label: "First Visit Fix" },
-              { value: "24/7", label: "Emergency" },
+              { number: 50000, suffix: "+", label: "Repairs Completed" },
+              { number: 4, suffix: "hr", label: "Response Time" },
+              { number: 98, suffix: "%", label: "First Visit Fix" },
+              { number: 24, suffix: "/7", label: "Emergency" },
             ].map((s, i) => (
               <div key={i} className="text-center">
-                <p className="text-3xl font-bold text-[#f5be53]">{s.value}</p>
+                <p className="text-3xl font-bold text-[#f5be53]">
+                  <CountUp to={s.number} duration={2} separator="," />
+                  {s.suffix}
+                </p>
                 <p className="text-xs uppercase tracking-widest text-slate-400 mt-2">{s.label}</p>
               </div>
             ))}

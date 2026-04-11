@@ -22,15 +22,44 @@ export default function SEOInjector() {
   const [config, setConfig] = useState<SEOConfig | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_seo_config");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setConfig(parsed);
+    const loadConfig = () => {
+      const stored = localStorage.getItem("sahara_seo_config");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setConfig(parsed);
 
-      if (parsed.enableDevMode) {
-        console.log("[SEO Config] Loaded:", parsed);
+        if (parsed.enableDevMode) {
+          console.log("[SEO Config] Loaded:", parsed);
+        }
       }
-    }
+    };
+
+    loadConfig();
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "sahara_seo_config" && e.newValue) {
+        const parsed = JSON.parse(e.newValue);
+        setConfig(parsed);
+        if (parsed.enableDevMode) {
+          console.log("[SEO Config] Updated:", parsed);
+        }
+      }
+    };
+
+    const handleCustomEvent = () => {
+      loadConfig();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("seo-config-updated", handleCustomEvent);
+
+    const interval = setInterval(loadConfig, 2000);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("seo-config-updated", handleCustomEvent);
+      clearInterval(interval);
+    };
   }, []);
 
   if (!config) return null;

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useMotionValue } from "framer-motion";
 import { useRef } from "react";
+import { Smartphone, Phone, Headphones, Email } from "@mui/icons-material";
 
 function FacebookIcon() {
   return (
@@ -37,7 +38,7 @@ function YoutubeIcon() {
   );
 }
 
-const socialLinks = [
+const defaultSocialLinks = [
   { name: "facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
   { name: "instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
   { name: "linkedin", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
@@ -92,16 +93,55 @@ const SocialIcon = ({ icon }: { icon: string }) => {
 
 export default function Footer() {
   const [settings, setSettings] = useState<any>(null);
+  const [socialLinks, setSocialLinks] = useState(defaultSocialLinks);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_settings");
-    if (stored) {
-      setSettings(JSON.parse(stored));
+    try {
+      const stored = localStorage.getItem("sahara_settings");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && typeof parsed === "object") {
+          setSettings(parsed);
+        }
+      }
+    } catch (e) {
+      console.error("Error loading settings:", e);
     }
+
+    const loadSocialLinks = () => {
+      try {
+        const stored = localStorage.getItem("sahara_seo_config");
+        if (stored) {
+          const config = JSON.parse(stored);
+          if (config && typeof config === "object") {
+            const sm = config.socialMedia || {};
+            const links = [];
+            if (sm.facebook) links.push({ name: "facebook", url: sm.facebook, icon: "facebook" });
+            if (sm.instagram) links.push({ name: "instagram", url: sm.instagram, icon: "instagram" });
+            if (sm.linkedin) links.push({ name: "linkedin", url: sm.linkedin, icon: "linkedin" });
+            if (sm.twitter) links.push({ name: "twitter", url: sm.twitter, icon: "twitter" });
+            if (sm.youtube) links.push({ name: "youtube", url: sm.youtube, icon: "youtube" });
+            if (sm.whatsapp) links.push({ name: "whatsapp", url: sm.whatsapp, icon: "whatsapp" });
+            if (links.length > 0) setSocialLinks(links);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to load social links:", e);
+      }
+    };
+
+    loadSocialLinks();
+
+    const handleUpdate = () => loadSocialLinks();
+    window.addEventListener("seo-config-updated", handleUpdate);
+
+    return () => {
+      window.removeEventListener("seo-config-updated", handleUpdate);
+    };
   }, []);
 
   return (
-    <footer className="bg-[#030e20] py-12 px-4 relative overflow-hidden">
+    <footer className="bg-[#030e20] pt-12 pb-0 px-4 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#f5be53]/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -144,19 +184,19 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-6">Contact</h4>
             <ul className="space-y-4 text-sm text-slate-400">
               <li className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#f5be53] text-lg">smartphone</span>
+                <Smartphone className="text-[#f5be53] text-lg" />
                 <a href="tel:+971503823969" className="hover:text-[#f5be53] transition-colors">+971 50 382 3969</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#f5be53] text-lg">phone</span>
+                <Phone className="text-[#f5be53] text-lg" />
                 <a href="tel:+97165426169" className="hover:text-[#f5be53] transition-colors">+971 6 542 6169</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#f5be53] text-lg">headset</span>
+                <Headphones className="text-[#f5be53] text-lg" />
                 <a href="tel:+97165276444" className="hover:text-[#f5be53] transition-colors">+971 6 527 6444</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#f5be53] text-lg">email</span>
+                <Email className="text-[#f5be53] text-lg" />
                 <a href="mailto:info@saharaedoc.com" className="hover:text-[#f5be53] transition-colors">info@saharaedoc.com</a>
               </li>
             </ul>

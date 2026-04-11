@@ -6,12 +6,13 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import Image from "next/image";
 
 export default function KyoceraBrandPage() {
   const products = [
-    { name: "ECOSYS P6230cdn", specs: ["30 PPM", "1200 DPI"], img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&h=400&fit=crop" },
-    { name: "ECOSYS M6235cidn", specs: ["35 PPM", "1200 DPI"], img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&h=400&fit=crop" },
-    { name: "ECOSYS PA4500x", specs: ["45 PPM", "1200 DPI"], img: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=400&fit=crop" },
+    { name: "TASKalfa 2554ci", specs: ["25 PPM", "Color A3"], img: "https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA2554CI/540x540-TASKalfa_2554ci_Comb02_F.png" },
+    { name: "TASKalfa 4054ci", specs: ["40 PPM", "Color A3"], img: "https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA4054CI/540x540-TASKalfa_4054ci_Comb02_F.png" },
+    { name: "TASKalfa 5054ci", specs: ["50 PPM", "Color A3"], img: "https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA5054CI/540x540-TASKalfa_5054ci_Comb02_F.png" },
   ];
 
   const features = [
@@ -55,10 +56,13 @@ export default function KyoceraBrandPage() {
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
-                <img 
-                  src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&h=600&fit=crop"
-                  alt="Kyocera ECOSYS Printer"
-                  className="w-full h-full object-cover"
+                <Image
+                  src="https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA2554CI/540x540-TASKalfa_2554ci_Comb02_F.png"
+                  alt="Kyocera TASKalfa Printer"
+                  width={540}
+                  height={540}
+                  className="w-full h-auto"
+                  priority
                 />
               </div>
             </div>
@@ -91,14 +95,14 @@ export default function KyoceraBrandPage() {
       <section id="products" className="py-24 px-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">ECOSYS Series</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">TASKalfa Series</h2>
             <div className="h-1 w-20 bg-[#f5be53] rounded-full"></div>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {products.map((p, i) => (
               <div key={i} className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500">
-                <div className="aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
-                  <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="relative aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
+                  <Image src={p.img} alt={p.name} fill className="object-contain p-4 group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
                 <p className="text-[#d3c5b0] text-sm mb-6">Lowest cost per page in its class with legendary Kyocera reliability.</p>

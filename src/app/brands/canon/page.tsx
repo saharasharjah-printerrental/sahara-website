@@ -1,12 +1,26 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import Image from "next/image";
+import { Hub, DeveloperBoard, Nature, Palette, Print, Security } from "@mui/icons-material";
 
 export default function CanonBrandPage() {
+  const [brandImage, setBrandImage] = useState("https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80");
+
+  useEffect(() => {
+    const storedBrands = localStorage.getItem("sahara_brands");
+    if (storedBrands) {
+      const brands = JSON.parse(storedBrands);
+      const canon = brands.find((b: any) => b.slug === "canon");
+      if (canon?.heroImage) setBrandImage(canon.heroImage);
+    }
+  }, []);
+
   const products = [
     { name: "imageRUNNER ADVANCE DX", type: "Cloud-connected A3 Color MFP", speed: "High-speed scanning", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAAERWQK3qqk13Z7BoPNtyd_ahfswNo3cAHfP8il3OnqNIb-H8xbY5wpLN73pZv1w7I-LUqgbSwU8pAdWtG0-U83-NA3lFUz4CR-JKj7OKbtGhqlBpw--P2zyDDtyOxUCIiFUoEch3GjRdAmb29wh-PAKsRTplPdT_InvjdUFTgZMD0Sjq4nhfHwwapSvedZp6Vr2A5B7MvVA5AXgNwff2zgGdCrBQbKxcL4wWnNGmPfICBq6St7tcvtFPButWk7Ah7dOicVLcHDEsx" },
     { name: "C3800 Series", type: "Compact powerhouses", speed: "Medium workgroups", img: "" },
@@ -14,10 +28,10 @@ export default function CanonBrandPage() {
   ];
 
   const features = [
-    { icon: "hub", title: "uniFLOW Online", desc: "Single cloud solution to manage all printing and scanning workflows. Increase security by requiring user authentication." },
-    { icon: "developer_board", title: "MEAP Integration", desc: "Custom-built software to run directly on the device, bridging physical documents and digital systems." },
-    { icon: "eco", title: "Sustainable Precision", desc: "Low-energy consumption modes and long-life components reduce waste without sacrificing performance." },
-    { icon: "palette", title: "V² Color Technology", desc: "Exceptional color accuracy and consistency for professional results." },
+    { icon: Hub, title: "uniFLOW Online", desc: "Single cloud solution to manage all printing and scanning workflows. Increase security by requiring user authentication." },
+    { icon: DeveloperBoard, title: "MEAP Integration", desc: "Custom-built software to run directly on the device, bridging physical documents and digital systems." },
+    { icon: Nature, title: "Sustainable Precision", desc: "Low-energy consumption modes and long-life components reduce waste without sacrificing performance." },
+    { icon: Palette, title: "V² Color Technology", desc: "Exceptional color accuracy and consistency for professional results." },
   ];
 
   return (
@@ -28,7 +42,7 @@ export default function CanonBrandPage() {
       <section className="relative min-h-[600px] flex items-center px-8 lg:px-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWvXIh2VyIbrIMD9ldlDfwWj4lgAJpV92LY_-99IcoebURGeizggpsiOt0l8pGjCKYzLbvWKZiVc39gzU2oHqoMIspEMQN9gawfwf_iijc7vF95MWetWncVBw0FUSCm8McSllCj_q8oytlxfC81O04SVJj0io6PXtOpBjIjU2QsJaLAdZTWIrDV95fob9JTBIrhPyA3nDcSno9jhnr7bZkVpL-swqIYBABCMM-PkiZ4_IW1xE7QiT-tuu0Nl1oFGll8NrPNaSS_OR_"
+            src={brandImage}
             alt="Canon Office"
             className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
           />
@@ -69,10 +83,13 @@ export default function CanonBrandPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2 group relative h-[500px] rounded-lg overflow-hidden glass-card">
-              <img 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAERWQK3qqk13Z7BoPNtyd_ahfswNo3cAHfP8il3OnqNIb-H8xbY5wpLN73pZv1w7I-LUqgbSwU8pAdWtG0-U83-NA3lFUz4CR-JKj7OKbtGhqlBpw--P2zyDDtyOxUCIiFUoEch3GjRdAmb29wh-PAKsRTplPdT_InvjdUFTgZMD0Sjq4nhfHwwapSvedZp6Vr2A5B7MvVA5AXgNwff2zgGdCrBQbKxcL4wWnNGmPfICBq6St7tcvtFPButWk7Ah7dOicVLcHDEsx" 
+              <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Canon_i-Sensys_MF237w.jpg/500px-Canon_i-Sensys_MF237w.jpg"
                 alt="Canon imageRUNNER"
-                className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-700 opacity-80"
+                fill
+                className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-700 opacity-80"
+                sizes="(max-width: 768px) 100vw, 66vw"
+                priority
               />
               <div className="absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-[#071325] to-transparent">
                 <h3 className="text-3xl font-bold text-white mb-2">imageRUNNER ADVANCE DX</h3>
@@ -82,14 +99,14 @@ export default function CanonBrandPage() {
             <div className="grid grid-rows-2 gap-8">
               <div className="glass-card rounded-lg p-8 flex flex-col justify-between border-l-4 border-l-[#f5be53] group">
                 <div>
-                  <span className="material-symbols-outlined text-[#f5be53] text-4xl mb-4 group-hover:rotate-12 transition-transform">print</span>
+                  <Print className="text-[#f5be53] text-4xl mb-4 group-hover:rotate-12 transition-transform" />
                   <h4 className="text-xl font-bold text-white mb-2">C3800 Series</h4>
                   <p className="text-[#d3c5b0] text-sm">Compact powerhouses for medium workgroups with intelligent scanning.</p>
                 </div>
               </div>
               <div className="glass-card rounded-lg p-8 flex flex-col justify-between border-l-4 border-l-[#f5be53] group">
                 <div>
-                  <span className="material-symbols-outlined text-[#f5be53] text-4xl mb-4 group-hover:rotate-12 transition-transform">security</span>
+                  <Security className="text-[#f5be53] text-4xl mb-4 group-hover:rotate-12 transition-transform" />
                   <h4 className="text-xl font-bold text-white mb-2">C5800 Series</h4>
                   <p className="text-[#d3c5b0] text-sm">Enterprise-grade security with 360-degree document protection.</p>
                 </div>
@@ -108,23 +125,28 @@ export default function CanonBrandPage() {
         </div>
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-12">
-            {features.map((f, i) => (
-              <div key={i} className="flex gap-8 group">
-                <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#142032]/60 border border-[#f5be53]/30 flex items-center justify-center text-[#f5be53] group-hover:bg-[#f5be53] group-hover:text-[#071325] transition-all duration-500">
-                  <span className="material-symbols-outlined text-3xl">{f.icon}</span>
+            {features.map((f, i) => {
+              const IconComponent = f.icon;
+              return (
+                <div key={i} className="flex gap-8 group">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#142032]/60 border border-[#f5be53]/30 flex items-center justify-center text-[#f5be53] group-hover:bg-[#f5be53] group-hover:text-[#071325] transition-all duration-500">
+                    <IconComponent className="text-3xl" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-[#f5be53] mb-3">{f.title}</h3>
+                    <p className="text-[#d3c5b0] leading-relaxed">{f.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-[#f5be53] mb-3">{f.title}</h3>
-                  <p className="text-[#d3c5b0] leading-relaxed">{f.desc}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-2xl">
-            <img 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxo3PQ8cfvBblhLYAZ0KNdemzd9BEx3tyZ9fJyr7x-wvwlAGHOzaPr85-CtcKyog1tdeSfDUDrVGmDXNtgHvD0eIH-Viliz_HvnaULD3X2--pyqZYMbZoHSBHHbLJoyk1oNmYWHms-zMvQeLZQy947Y_WzbjW4XsoU5EqpXfJzdp0Lg-f-O68CjkTYM6hCltzcLOt0XXnpQdNc5j779phyarGqSkJYmi12Zv66NLLAUnkP6OanE68Rl5n6Y41qHas0tXIVZaiVJJ0d"
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Drupa_2012_Canon_by-RaBoe_06.jpg/500px-Drupa_2012_Canon_by-RaBoe_06.jpg"
               alt="Canon Technology"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-[#f5be53]/10 mix-blend-overlay"></div>
           </div>

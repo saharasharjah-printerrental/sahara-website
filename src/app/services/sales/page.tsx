@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import { Inventory2, Verified, SupportAgent, Calculate, Print } from "@mui/icons-material";
 
 export default function SalesPage() {
   const products = [
@@ -17,10 +18,10 @@ export default function SalesPage() {
   ];
 
   const features = [
-    { icon: "inventory_2", title: "In Stock", desc: "Ready-to-ship inventory with next-day delivery across UAE" },
-    { icon: "verified", title: "Warranty", desc: "Comprehensive manufacturer warranty on all equipment" },
-    { icon: "support_agent", title: "Installation", desc: "Professional on-site setup and network configuration" },
-    { icon: "calculate", title: "Trade-In", desc: "Old device trade-in program with competitive valuations" },
+    { icon: Inventory2, title: "In Stock", desc: "Ready-to-ship inventory with next-day delivery across UAE" },
+    { icon: Verified, title: "Warranty", desc: "Comprehensive manufacturer warranty on all equipment" },
+    { icon: SupportAgent, title: "Installation", desc: "Professional on-site setup and network configuration" },
+    { icon: Calculate, title: "Trade-In", desc: "Old device trade-in program with competitive valuations" },
   ];
 
   return (
@@ -68,7 +69,7 @@ export default function SalesPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
               <div key={i} className="glass-card p-8 rounded-3xl">
-                <span className="material-symbols-outlined text-4xl text-[#f5be53] mb-4">{f.icon}</span>
+                <f.icon className="text-4xl text-[#f5be53] mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">{f.title}</h3>
                 <p className="text-[#d3c5b0]">{f.desc}</p>
               </div>
@@ -84,7 +85,7 @@ export default function SalesPage() {
             {products.map((p, i) => (
               <div key={i} className="glass-card rounded-3xl overflow-hidden group">
                 <div className="h-48 bg-[#142032] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[60px] text-slate-500">print</span>
+                  <Print className="text-[60px] text-slate-500" />
                 </div>
                 <div className="p-6">
                   <div className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">{p.brand}</div>

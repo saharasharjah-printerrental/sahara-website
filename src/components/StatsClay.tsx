@@ -1,34 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Layers, Users, Heart, Monitor, LucideIcon } from "lucide-react";
+import { Layers, People, Favorite, Computer, SvgIconComponent } from "@mui/icons-material";
+import CountUp from "./CountUp";
 
 const parseNumericValue = (value: string) => {
   const match = value.match(/^(\d+)(.*)/);
   if (match) {
-    return { number: parseInt(match[1], 10), suffix: match[2] };
+    return { number: parseInt(match[1]), suffix: match[2] };
   }
   return { number: 0, suffix: value };
 };
 
-function Counter({ to, suffix }: { to: number; suffix: string }) {
-  return (
-    <motion.span
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.5 }}
-    >
-      {to}
-      {suffix}
-    </motion.span>
-  );
-}
-
 interface Stat {
   value: string;
   label: string;
-  icon?: LucideIcon;
+  icon?: SvgIconComponent;
 }
 
 interface StatsClayProps {
@@ -40,9 +27,9 @@ interface StatsClayProps {
 const StatsClay = ({
   stats = [
     { value: "13+", label: "Years Active", icon: Layers },
-    { value: "1500+", label: "Happy Clients", icon: Users },
-    { value: "50k+", label: "Parts Fixed", icon: Heart },
-    { value: "24/7", label: "Support", icon: Monitor },
+    { value: "1500+", label: "Happy Clients", icon: People },
+    { value: "50k+", label: "Parts Fixed", icon: Favorite },
+    { value: "24/7", label: "Support", icon: Computer },
   ],
   title = "Built for Scale, Designed for Craft",
   subtitle = "The numbers behind Sahara's growing ecosystem of premium office equipment solutions.",
@@ -155,9 +142,8 @@ const StatsClay = ({
                     }}
                   >
                     <Icon
-                      size={24}
+                      sx={{ fontSize: 24 }}
                       style={{ color: accentColor }}
-                      strokeWidth={2}
                     />
                   </motion.div>
                 )}
@@ -166,7 +152,8 @@ const StatsClay = ({
                   className="text-4xl md:text-5xl font-bold mb-2"
                   style={{ color: accentColor }}
                 >
-                  <Counter to={number} suffix={suffix} />
+                  <CountUp to={number} duration={2} separator="," />
+                  {suffix}
                 </div>
 
                 <div className="text-sm font-medium text-[#8a8a8a]">

@@ -85,3 +85,28 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Sora', sans-serif;
 }
+
+/* Safe area for mobile devices */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  }
+  
+  .fixed.bottom-6 {
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+  
+  .fixed.bottom-\[72px\] {
+    bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .pt-safe {
+    padding-top: calc(0rem + env(safe-area-inset-top));
+  }
+  
+  .fixed.top-0 {
+    top: calc(0rem + env(safe-area-inset-top));
+  }
+}

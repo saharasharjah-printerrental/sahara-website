@@ -9,8 +9,12 @@
     "deploy": "npx wrangler pages deploy .vercel/output/static --project-name=sahara-website"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^9.0.0",
+    "@mui/material": "^9.0.0",
     "framer-motion": "^11.18.2",
-    "lucide-react": "^1.8.0",
+    "motion": "^12.38.0",
     "next": "^15",
     "react": "^18",
     "react-dom": "^18"

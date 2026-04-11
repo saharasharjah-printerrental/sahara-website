@@ -5,11 +5,12 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import Image from "next/image";
 
 export default function XeroxBrandPage() {
   const products = [
-    { name: "VersaLink C405", type: "Color Multifunction", speed: "45 ppm", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAl0HeaYTgPWp8BHHjkVn_bgpq4C3T8UyisNdrWv6GwUBnV5nQcHPgH-5ZPannjczIBf2ISDeuWlb34tpC_chs-7hAF1WpQNhFvxpWdVbe-DDU5iSl279EaarLOfFf4-aYna8Wmpzejnnvd4rmv8VWeOfugBkrs6Z4vp4RdFbiqEgimB27WnRUwU2qC7R7sxC_hulkiR_F-8-rWaxGCPETYSS24TBPqLBXdXUAXHquIRIt1vfHdr13IftQYA1dqDmg8T0aYI92h6Mze" },
-    { name: "Iridesse Production Press", type: "Digital Press", speed: "120 ppm", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCy2kF6oyv-1YEqg-QhHgAHnF-oToFJdQdZ3mYOM6uQNZQycVbH-64xTIwL12lPlfAvdHKYot--6d9cGZ7faTrzsFo7rU2fDnrvh43AgpyVO4mbLz7_9dd-TFQjEqhslXYXEL0-uQxPS22jqWcYbz9tNZKUj8UiuYzPW_1j5vupYWlxE-jjQYGhDn3_38b3EYKTg7XzgjSFMKXT8BxiSKURLamYss3B1xQYYb8TxYAPdbL9A3trLs-nvm6gYb4EYBmRc2OdLYF_Kqfs" },
+    { name: "VersaLink C235", type: "Color Multifunction", speed: "33 ppm", img: "https://www.xerox.com/assets/images/1200_layout/products/hardware/C235/thumbnail1-300x300.png" },
+    { name: "VersaLink C405", type: "Color Multifunction", speed: "45 ppm", img: "https://www.xerox.com/assets/images/1200_layout/products/hardware/C235/thumbnail1-300x300.png" },
   ];
 
   const features = [
@@ -47,10 +48,13 @@ export default function XeroxBrandPage() {
             </div>
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
-              <img 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAERWQK3qqk13Z7BoPNtyd_ahfswNo3cAHfP8il3OnqNIb-H8xbY5wpLN73pZv1w7I-LUqgbSwU8pAdWtG0-U83-NA3lFUz4CR-JKj7OKbtGhqlBpw--P2zyDDtyOxUCIiFUoEch3GjRdAmb29wh-PAKsRTplPdT_InvjdUFTgZMD0Sjq4nhfHwwapSvedZp6Vr2A5B7MvVA5AXgNwff2zgGdCrBQbKxcL4wWnNGmPfICBq6St7tcvtFPButWk7Ah7dOicVLcHDEsx"
-                alt="Xerox Printer"
-                className="relative w-full h-full object-cover rounded-3xl shadow-2xl"
+              <Image
+                src="https://www.xerox.com/assets/images/1200_layout/products/hardware/C235/thumbnail1-300x300.png"
+                alt="Xerox VersaLink Printer"
+                width={600}
+                height={600}
+                className="w-full h-auto rounded-3xl shadow-2xl"
+                priority
               />
             </div>
           </div>
@@ -86,8 +90,8 @@ export default function XeroxBrandPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {products.map((p, i) => (
               <div key={i} className="glass-card rounded-[32px] overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
-                <div className="aspect-video bg-[#101c2e] overflow-hidden">
-                  <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="relative aspect-video bg-[#101c2e] overflow-hidden">
+                  <Image src={p.img} alt={p.name} fill className="object-contain p-4 group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-white mb-3">{p.name}</h3>

@@ -91,3 +91,29 @@ export interface Setting {
   key: string;
   value: string;
 }
+
+export interface SocialMedia {
+  facebook: string;
+  instagram: string;
+  linkedin: string;
+  twitter: string;
+  youtube: string;
+  whatsapp: string;
+}
+
+export interface SEOConfig {
+  googleAnalyticsId: string;
+  googleAnalytics4Id: string;
+  googleTagManagerId: string;
+  microsoftClarityId: string;
+  metaPixelId: string;
+  metaPixelAdvancedMatching: boolean;
+  hotjarId: string;
+  semrushDomainId: string;
+  ahrefsDomainId: string;
+  customHeadScripts: string;
+  customBodyScripts: string;
+  schemaMarkup: string;
+  enableDevMode: boolean;
+  socialMedia: SocialMedia;
+}

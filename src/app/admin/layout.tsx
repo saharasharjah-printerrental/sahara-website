@@ -3,18 +3,19 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Dashboard, Print, ShoppingCart, RequestQuote, Article, Groups, Quiz, Business, Storage, Settings, Public, Logout } from "@mui/icons-material";
 
 const menuItems = [
-  { icon: "dashboard", label: "Dashboard", href: "/admin" },
-  { icon: "inventory_2", label: "Products", href: "/admin/products" },
-  { icon: "inventory", label: "Supplies & Parts", href: "/admin/supplies" },
-  { icon: "request_quote", label: "Inquiries", href: "/admin/inquiries" },
-  { icon: "article", label: "Blog Posts", href: "/admin/blog" },
-  { icon: "image", label: "Banners", href: "/admin/banners" },
-  { icon: "quiz", label: "FAQs", href: "/admin/faqs" },
-  { icon: "business", label: "Brands", href: "/admin/brands" },
-  { icon: "seo", label: "SEO & Analytics", href: "/admin/seo" },
-  { icon: "settings", label: "Settings", href: "/admin/settings" },
+  { icon: Dashboard, label: "Dashboard", href: "/admin" },
+  { icon: Print, label: "Products", href: "/admin/products" },
+  { icon: ShoppingCart, label: "Supplies & Parts", href: "/admin/supplies" },
+  { icon: RequestQuote, label: "Inquiries", href: "/admin/inquiries" },
+  { icon: Article, label: "Blog Posts", href: "/admin/blog" },
+  { icon: Groups, label: "Clients", href: "/admin/clients" },
+  { icon: Quiz, label: "FAQs", href: "/admin/faqs" },
+  { icon: Business, label: "Brands", href: "/admin/brands" },
+  { icon: Storage, label: "SEO & Analytics", href: "/admin/seo" },
+  { icon: Settings, label: "Settings", href: "/admin/settings" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -70,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   : "text-slate-400 hover:bg-white/5 hover:text-white"
               }`}
             >
-              <span className="material-symbols-outlined">{item.icon}</span>
+              <item.icon />
               <span className="font-medium">{item.label}</span>
             </Link>
           ))}
@@ -81,14 +82,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             href="/"
             className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-all"
           >
-            <span className="material-symbols-outlined">public</span>
+            <Public />
             <span className="font-medium">View Site</span>
           </Link>
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-red-400 transition-all w-full"
           >
-            <span className="material-symbols-outlined">logout</span>
+            <Logout />
             <span className="font-medium">Logout</span>
           </button>
         </div>

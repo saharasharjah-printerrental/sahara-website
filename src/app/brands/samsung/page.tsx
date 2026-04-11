@@ -5,12 +5,13 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import Image from "next/image";
 
 export default function SamsungBrandPage() {
   const products = [
-    { name: "ProXpress SL-M3820ND", specs: ["38 PPM", "1200 DPI"], img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&h=400&fit=crop" },
-    { name: "MultiXpress SL-X7500", specs: ["50 PPM", "Color"], img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&h=400&fit=crop" },
-    { name: "Smart UX SDK", specs: ["Android Based", "Cloud Ready"], img: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=400&fit=crop" },
+    { name: "ProXpress SL-M3820ND", specs: ["38 PPM", "1200 DPI"], img: "https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg" },
+    { name: "MultiXpress SL-X7500", specs: ["50 PPM", "Color"], img: "https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg" },
+    { name: "Smart UX Panel", specs: ["Android Based", "Cloud Ready"], img: "https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg" },
   ];
 
   const features = [
@@ -54,10 +55,13 @@ export default function SamsungBrandPage() {
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
-                <img 
-                  src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&h=600&fit=crop"
-                  alt="Samsung Printer"
-                  className="w-full h-full object-cover"
+                <Image
+                  src="https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg"
+                  alt="Samsung ProXpress Printer"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto"
+                  priority
                 />
               </div>
             </div>
@@ -96,8 +100,8 @@ export default function SamsungBrandPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {products.map((p, i) => (
               <div key={i} className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500">
-                <div className="aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
-                  <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="relative aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
+                  <Image src={p.img} alt={p.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
                 <p className="text-[#d3c5b0] text-sm mb-6">Smart printing with enterprise features.</p>

@@ -5,12 +5,13 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import Image from "next/image";
 
 export default function BrotherBrandPage() {
   const products = [
-    { name: "HL-L2350DW", specs: ["32 PPM", "Auto Duplex"], img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&h=400&fit=crop" },
-    { name: "MFC-L8900CDW", specs: ["32 PPM", "Color"], img: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=400&fit=crop" },
-    { name: "DCP-L3550CDW", specs: ["28 PPM", "3-in-1"], img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&h=400&fit=crop" },
+    { name: "HL-L2350DW", specs: ["32 PPM", "Auto Duplex"], img: "https://www.brother-usa.com/-/media/brother/product-catalog-media/images/hll2350dw_left.png" },
+    { name: "MFC-L8900CDW", specs: ["32 PPM", "Color"], img: "https://www.brother-usa.com/-/media/brother/product-catalog-media/images/2022/07/18/10/58/mfcl8900cdw_front.png" },
+    { name: "HL-L6400DW", specs: ["50 PPM", "Enterprise"], img: "https://www.brother-usa.com/-/media/brother/product-catalog-media/images/2023/04/26/08/38/hll6400dw_front.png" },
   ];
 
   const features = [
@@ -54,10 +55,13 @@ export default function BrotherBrandPage() {
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
-                <img 
-                  src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&h=600&fit=crop"
-                  alt="Brother Printer"
-                  className="w-full h-full object-cover"
+                <Image
+                  src="https://www.brother-usa.com/-/media/brother/product-catalog-media/images/2022/07/18/10/58/mfcl8900cdw_front.png"
+                  alt="Brother MFC-L8900CDW"
+                  width={600}
+                  height={600}
+                  className="w-full h-auto"
+                  priority
                 />
               </div>
             </div>
@@ -96,8 +100,8 @@ export default function BrotherBrandPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {products.map((p, i) => (
               <div key={i} className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500">
-                <div className="aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
-                  <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="relative aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
+                  <Image src={p.img} alt={p.name} fill className="object-contain p-4 group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
                 <p className="text-[#d3c5b0] text-sm mb-6">Reliable performance for home office and small business.</p>

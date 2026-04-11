@@ -1,12 +1,25 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import { Shield, Nature, Cloud, WorkspacePremium, Speed } from "@mui/icons-material";
 
 export default function HPBrandPage() {
+  const [brandImage, setBrandImage] = useState("https://images.unsplash.com/photo-1612815154858-60aa4c84e6ac?w=800&q=80");
+
+  useEffect(() => {
+    const storedBrands = localStorage.getItem("sahara_brands");
+    if (storedBrands) {
+      const brands = JSON.parse(storedBrands);
+      const hp = brands.find((b: any) => b.slug === "hp");
+      if (hp?.heroImage) setBrandImage(hp.heroImage);
+    }
+  }, []);
+
   const products = [
     { name: "LaserJet Enterprise", specs: ["55 PPM", "1200 DPI"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAl0HeaYTgPWp8BHHjkVn_bgpq4C3T8UyisNdrWv6GwUBnV5nQcHPgH-5ZPannjczIBf2ISDeuWlb34tpC_chs-7hAF1WpQNhFvxpWdVbe-DDU5iSl279EaarLOfFf4-aYna8Wmpzejnnvd4rmv8VWeOfugBkrs6Z4vp4RdFbiqEgimB27WnRUwU2qC7R7sxC_hulkiR_F-8-rWaxGCPETYSS24TBPqLBXdXUAXHquIRIt1vfHdr13IftQYA1dqDmg8T0aYI92h6Mze" },
     { name: "DesignJet Z-Series", specs: ["9-Color Ink", "44-Inch Max"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCy2kF6oyv-1YEqg-QhHgAHnF-oToFJdQdZ3mYOM6uQNZQycVbH-64xTIwL12lPlfAvdHKYot--6d9cGZ7faTrzsFo7rU2fDnrvh43AgpyVO4mbLz7_9dd-TFQjEqhslXYXEL0-uQxPS22jqWcYbz9tNZKUj8UiuYzPW_1j5vupYWlxE-jjQYGhDn3_38b3EYKTg7XzgjSFMKXT8BxiSKURLamYss3B1xQYYb8TxYAPdbL9A3trLs-nvm6gYb4EYBmRc2OdLYF_Kqfs" },
@@ -14,10 +27,10 @@ export default function HPBrandPage() {
   ];
 
   const features = [
-    { icon: "shield_with_heart", title: "Wolf Security", desc: "Industry-leading hardware-enforced protection from BIOS to browser." },
-    { icon: "eco", title: "Eco Innovation", desc: "Closed-loop manufacturing and sustainable printing for modern ESG goals." },
-    { icon: "cloud_done", title: "Cloud Manageability", desc: "Seamless fleet management with HP Smart Admin and centralized control." },
-    { icon: "workspace_premium", title: "Premium Heritage", desc: "Decades of engineering excellence translated into executive tools." },
+    { icon: Shield, title: "Wolf Security", desc: "Industry-leading hardware-enforced protection from BIOS to browser." },
+    { icon: Nature, title: "Eco Innovation", desc: "Closed-loop manufacturing and sustainable printing for modern ESG goals." },
+    { icon: Cloud, title: "Cloud Manageability", desc: "Seamless fleet management with HP Smart Admin and centralized control." },
+    { icon: WorkspacePremium, title: "Premium Heritage", desc: "Decades of engineering excellence translated into executive tools." },
   ];
 
   return (
@@ -55,8 +68,8 @@ export default function HPBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <img 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqrseApeW8QY3gbRhJwF9xpn85cWiBjrr8yniA2yXfFZ0DoCmwY1gGsbXtIpFThDG9GhvxzWm0pbYjrNyYopByoMt6trc_IuZYlhRs8HmS8fWYeVgQBxdJyWB6hEM--a-0vb1DpKSQ5UfwWe9nWX2yJ3lVM3E9v21vNJpHUTlXhmGGl4A3yI4BcwAkeDzXHleGuabJfUvLBr3ynzIyOw4s_2Xxs3I_WV28EsTZdqGtwDzfadA2U9NypHHpcCZW6AbIuHJXdIgcO2QW"
-                  alt="HP High-End Printer"
+                  src={brandImage}
+                  alt="HP Printer"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -73,15 +86,18 @@ export default function HPBrandPage() {
             <p className="text-[#d3c5b0] max-w-2xl mx-auto">Standard-setting technology for businesses that demand the absolute best in security, reliability, and innovation.</p>
           </div>
           <div className="grid md:grid-cols-4 gap-8">
-            {features.map((f, i) => (
-              <div key={i} className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-[#142032]/60 flex items-center justify-center border border-[#f5be53]/20 mb-4">
-                  <span className="material-symbols-outlined text-3xl text-[#f5be53]">{f.icon}</span>
+            {features.map((f, i) => {
+              const IconComponent = f.icon;
+              return (
+                <div key={i} className="p-8 text-center">
+                  <div className="w-16 h-16 mx-auto rounded-2xl bg-[#142032]/60 flex items-center justify-center border border-[#f5be53]/20 mb-4">
+                    <IconComponent className="text-3xl text-[#f5be53]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{f.title}</h3>
+                  <p className="text-sm text-[#d3c5b0]">{f.desc}</p>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{f.title}</h3>
-                <p className="text-sm text-[#d3c5b0]">{f.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -104,7 +120,7 @@ export default function HPBrandPage() {
                 <div className="flex justify-between items-center py-4 border-t border-white/5">
                   {p.specs.map((s, j) => (
                     <div key={j} className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[#f5be53] text-sm">speed</span>
+                      <Speed className="text-[#f5be53] text-sm" />
                       <span className="text-xs text-[#d3c5b0]">{s}</span>
                     </div>
                   ))}

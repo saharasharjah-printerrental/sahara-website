@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import CountUp from "@/components/CountUp";
+import { Print, CopyAll, Build, Description, CheckCircle, ExpandMore } from "@mui/icons-material";
 
 export default function PrinterRentalAbuDhabi() {
   const [settings, setSettings] = useState<any>(null);
@@ -151,13 +153,13 @@ export default function PrinterRentalAbuDhabi() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: "print", title: "Printer Rental", desc: "Flexible leasing for all business sizes" },
-              { icon: "copy", title: "Copier Lease", desc: "A3 & A4 copiers with full service" },
-              { icon: "build", title: "Repair Services", desc: "On-site repair with weekly visits" },
-              { icon: "description", title: "AMC Plans", desc: "Annual maintenance contracts" },
+              { icon: Print, title: "Printer Rental", desc: "Flexible leasing for all business sizes" },
+              { icon: CopyAll, title: "Copier Lease", desc: "A3 & A4 copiers with full service" },
+              { icon: Build, title: "Repair Services", desc: "On-site repair with weekly visits" },
+              { icon: Description, title: "AMC Plans", desc: "Annual maintenance contracts" },
             ].map((s, i) => (
               <a key={i} href={s.title.toLowerCase().includes("rental") ? "/services/printer-rental" : s.title.toLowerCase().includes("lease") ? "/services" : s.title.toLowerCase().includes("repair") ? "/services/repair" : "/services/amc"} className="glass-card p-8 rounded-3xl block hover:scale-[1.02] transition-all">
-                <span className="material-symbols-outlined text-4xl text-[#f5be53] mb-4">{s.icon}</span>
+                <s.icon className="text-4xl text-[#f5be53] mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
                 <p className="text-[#d3c5b0] text-sm">{s.desc}</p>
               </a>
@@ -195,7 +197,7 @@ export default function PrinterRentalAbuDhabi() {
             ].map((b, i) => (
               <div key={i} className="glass-card p-6 rounded-2xl">
                 <div className="w-12 h-12 rounded-xl bg-[#f5be53]/20 flex items-center justify-center mb-4">
-                  <span className="material-symbols-outlined text-[#f5be53]">check_circle</span>
+                  <CheckCircle className="text-[#f5be53]" />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{b.title}</h3>
                 <p className="text-[#d3c5b0] text-sm">{b.desc}</p>
@@ -210,13 +212,20 @@ export default function PrinterRentalAbuDhabi() {
         <div className="max-w-screen-xl mx-auto">
           <div className="glass-card rounded-[2rem] py-12 px-8 flex flex-wrap justify-center gap-12 md:gap-20">
             {[
-              { value: "1500+", label: "Happy Clients" },
-              { value: "13+", label: "Years Experience" },
-              { value: "2500+", label: "Machines Deployed" },
+              { number: 1500, suffix: "+", label: "Happy Clients" },
+              { number: 13, suffix: "+", label: "Years Experience" },
+              { number: 2500, suffix: "+", label: "Machines Deployed" },
               { value: "Weekly", label: "Service Visits" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <p className="text-4xl font-bold text-[#f5be53]">{stat.value}</p>
+                <p className="text-4xl font-bold text-[#f5be53]">
+                  {stat.number !== undefined ? (
+                    <>
+                      <CountUp to={stat.number as number} duration={2} separator="," />
+                      {stat.suffix}
+                    </>
+                  ) : stat.value}
+                </p>
                 <p className="text-sm uppercase tracking-widest text-slate-400 mt-2">{stat.label}</p>
               </div>
             ))}
@@ -261,7 +270,7 @@ export default function PrinterRentalAbuDhabi() {
             >
               <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
                 {f.q}
-                <span className="material-symbols-outlined text-[#f5be53] group-open:rotate-180 transition-transform">expand_more</span>
+                <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
               </summary>
               <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
             </details>

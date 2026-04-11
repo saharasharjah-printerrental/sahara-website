@@ -5,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import { MagneticHover } from "@/components/MagneticHover";
+import { CipherText } from "@/components/CipherText";
 import StatsClay from "@/components/StatsClay";
-import { Layers, Users, Heart, Monitor } from "lucide-react";
+import { Layers, People, Favorite, Computer, Print, ShoppingCart, Build, Opacity, ArrowBack, ArrowForward, East, Star, Person, ExpandMore, Savings, Verified, LocationOn } from "@mui/icons-material";
 
 export default function Home() {
   const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
@@ -54,52 +54,179 @@ export default function Home() {
 
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 px-8 lg:px-24 overflow-hidden">
-      <div className="grid lg:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto relative z-10">
-        <div className="space-y-8">
-          <MagneticHover text="Rent, Buy, or Repair" textSize="text-5xl md:text-6xl" className="mb-4" />
-          <MagneticHover text="All Under One Roof" textSize="text-4xl md:text-5xl" activeColor="#f5be53" inactiveColor="#525252" className="mb-4" />
-          <p className="text-lg md:text-xl text-[#d3c5b0] max-w-lg">
-            Premium office equipment solutions for the modern executive. From high-speed printing to expert technical support, we power your productivity with celestial precision.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
-              Get a Quote
-            </a>
-            <a href="/services" className="glass-card px-8 py-4 rounded-full font-bold text-lg text-white hover:bg-[#2a3548] transition-colors">
-              Explore Services
-            </a>
-          </div>
-        </div>
-        <div className="relative hidden lg:block">
-          <div className="absolute inset-0 bg-[#f5be53]/20 blur-[120px] rounded-full"></div>
-          <div className="relative z-20 glass-card p-8 rounded-3xl overflow-hidden">
-            <img 
-              src="/images/printer-hero.webp"
-              alt="Canon Kyocera photocopier rental Dubai UAE office"
-              className="w-full h-full object-cover rounded-2xl mix-blend-screen opacity-90"
-            />
-          </div>
+    <section
+      className="relative min-h-screen flex items-center pt-20 px-8 lg:px-24 overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/hero-bg.webp.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center right",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Dark overlay — fades left-to-right so text stays legible against the neon scene */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#071325]/95 via-[#071325]/75 to-[#071325]/30 z-0" />
+      {/* Bottom vignette to blend into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#071325] to-transparent z-0" />
+
+      <div className="w-full max-w-3xl relative z-10 space-y-8">
+        <h1 className="sr-only">Printer Rental Dubai & UAE | Photocopier Leasing Services</h1>
+        <CipherText
+          text="Rent, Buy, or Repair"
+          textSize="text-2xl sm:text-3xl md:text-7xl"
+          className="mb-2 drop-shadow-[0_2px_24px_rgba(0,0,0,0.8)]"
+          textColor="#ffffff"
+          delay={500}
+        />
+        <CipherText
+          text="All Under One Roof"
+          textSize="text-xl sm:text-2xl md:text-6xl"
+          className="mb-4 drop-shadow-[0_2px_24px_rgba(0,0,0,0.8)]"
+          delay={1500}
+        />
+        <p className="text-lg md:text-xl text-white/90 max-w-xl leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
+          Premium office equipment solutions for the modern executive. From high-speed printing to expert technical support, we power your productivity with precision.
+        </p>
+        <div className="flex flex-wrap gap-4 pt-2">
+          <a
+            href="/get-quote"
+            className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.4)]"
+          >
+            Get a Quote
+          </a>
+          <a
+            href="/services"
+            className="px-8 py-4 rounded-full font-bold text-lg text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors"
+          >
+            Explore Services
+          </a>
         </div>
       </div>
-      <div className="absolute -bottom-48 -left-48 w-96 h-96 bg-[#f5be53]/10 rounded-full blur-[160px]"></div>
     </section>
   );
 }
 
 function DefinitionBlock() {
   return (
-    <section className="py-16 px-8 bg-[#101c2e]">
-      <div className="max-w-4xl mx-auto">
-        <div className="glass-card rounded-3xl p-8 md:p-12 border-l-4 border-[#f5be53]">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">What is Printer Rental in UAE?</h2>
-          <p className="text-lg text-[#d3c5b0] leading-relaxed mb-4">
-            Printer rental (also known as printer leasing or copier leasing) is a service where businesses lease multifunction printers (MFPs) and photocopiers instead of purchasing them outright. The rental agreement typically includes the machine, unlimited toner, maintenance, repairs, and technical support for a fixed monthly fee.
-          </p>
-          <p className="text-lg text-[#d3c5b0] leading-relaxed">
-            In the UAE, printer rental is particularly popular among companies in Dubai, Sharjah, and Abu Dhabi because it eliminates the massive upfront capital expenditure of purchasing equipment while providing access to industry-leading Canon and Kyocera devices with zero deposit and no exit fees.
+    <section className="relative py-28 px-8 lg:px-24 overflow-hidden" style={{ background: '#050d1a' }}>
+
+      {/* Circuit board grid texture */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: `linear-gradient(rgba(245,190,83,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,190,83,0.04) 1px, transparent 1px)`,
+        backgroundSize: '40px 40px',
+      }} />
+
+      {/* Dot intersections overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: `radial-gradient(circle, rgba(245,190,83,0.12) 1px, transparent 1px)`,
+        backgroundSize: '40px 40px',
+      }} />
+
+      {/* Center ambient depth */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 75% 60% at 50% 50%, rgba(7,19,37,0.7) 0%, transparent 75%)' }} />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+
+        {/* ── Centered heading ── */}
+        <div className="text-center mb-14">
+          <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.1] tracking-tight mb-4">
+            What is <span className="text-[#f5be53]">Printer Rental</span> in the UAE?
+          </h2>
+          <p className="text-[#7a94ad] text-base max-w-lg mx-auto leading-relaxed">
+            Flexible leasing options to access top-tier multifunction printers (MFPs) and
+            photocopiers with low monthly operational costs.
           </p>
         </div>
+
+        {/* ── 4-card grid — outer cards normal, inner two elevated ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:items-end">
+          {([
+            {
+              Icon: Build,
+              title: 'All-Inclusive Leasing',
+              body: 'A simple monthly fee that covers your machine, unlimited toner, maintenance, repairs, and full technical support.',
+              elevated: false,
+            },
+            {
+              Icon: Savings,
+              title: 'Smart Financials',
+              body: 'Healthy cash flow with zero upfront capital investment, zero deposit, and absolutely no exit fees.',
+              elevated: true,
+            },
+            {
+              Icon: Verified,
+              title: 'Premium Equipment',
+              body: 'Enjoy access to high-performance, industry-leading devices from trusted brands like Canon and Kyocera.',
+              elevated: true,
+            },
+            {
+              Icon: LocationOn,
+              title: 'Seamless UAE Coverage',
+              body: 'Popular and fully supported across major business centers: Dubai, Sharjah, and Abu Dhabi.',
+              elevated: false,
+            },
+          ] as const).map(({ Icon, title, body, elevated }, i) => (
+            <div key={i}
+              className={`group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ${elevated ? 'lg:-translate-y-5' : ''}`}
+              style={{
+                background: 'linear-gradient(170deg, rgba(8,18,36,0.97) 0%, rgba(5,11,22,0.99) 100%)',
+                border: '1px solid rgba(245,190,83,0.22)',
+                boxShadow: elevated
+                  ? '0 0 0 1px rgba(245,190,83,0.15), 0 0 40px rgba(245,190,83,0.12), 0 20px 60px rgba(0,0,0,0.5)'
+                  : '0 0 0 1px rgba(245,190,83,0.08), 0 0 20px rgba(245,190,83,0.06), 0 8px 32px rgba(0,0,0,0.4)',
+              }}>
+
+              {/* Corner circuit node — top-left */}
+              <div className="absolute top-0 left-0 w-4 h-4 pointer-events-none">
+                <div className="absolute top-2 left-0 w-3 h-px" style={{ background: 'rgba(245,190,83,0.35)' }} />
+                <div className="absolute top-0 left-2 w-px h-3" style={{ background: 'rgba(245,190,83,0.35)' }} />
+              </div>
+              {/* Corner circuit node — bottom-right */}
+              <div className="absolute bottom-0 right-0 w-4 h-4 pointer-events-none">
+                <div className="absolute bottom-2 right-0 w-3 h-px" style={{ background: 'rgba(245,190,83,0.35)' }} />
+                <div className="absolute bottom-0 right-2 w-px h-3" style={{ background: 'rgba(245,190,83,0.35)' }} />
+              </div>
+
+              {/* Glow intensifies on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                style={{ boxShadow: 'inset 0 0 30px rgba(245,190,83,0.06)' }} />
+
+              {/* ── Icon illustration area ── */}
+              <div className="relative flex items-center justify-center pt-8 pb-6 px-6">
+                {/* Radial backdrop behind icon */}
+                <div className="absolute inset-0"
+                  style={{ background: 'radial-gradient(ellipse 70% 80% at 50% 60%, rgba(245,190,83,0.07) 0%, transparent 70%)' }} />
+                <div className="relative w-20 h-20 rounded-[1.25rem] flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(245,190,83,0.16) 0%, rgba(245,190,83,0.04) 100%)',
+                    border: '1px solid rgba(245,190,83,0.32)',
+                    boxShadow: '0 0 0 6px rgba(245,190,83,0.05), 0 0 30px rgba(245,190,83,0.14)',
+                  }}>
+                  <Icon style={{ fontSize: 38, color: '#f5be53' }} />
+                </div>
+              </div>
+
+              {/* ── Text area ── */}
+              <div className="px-6 pb-7 flex flex-col flex-1"
+                style={{ borderTop: '1px solid rgba(245,190,83,0.08)' }}>
+                <h3 className="text-white font-bold text-[0.95rem] mt-5 mb-2 leading-snug">{title}</h3>
+                <p className="text-[#6a87a4] text-[0.8rem] leading-relaxed">{body}</p>
+              </div>
+
+              {/* Bottom glow bar — appears on hover */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: 'linear-gradient(90deg, transparent, #f5be53, transparent)' }} />
+            </div>
+          ))}
+        </div>
+
+        {/* Sparkle decoration — bottom right */}
+        <div className="flex justify-end mt-8 pr-2">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M11 0L12.5 9.5L22 11L12.5 12.5L11 22L9.5 12.5L0 11L9.5 9.5L11 0Z" fill="#f5be53" fillOpacity="0.5" />
+          </svg>
+        </div>
+
       </div>
     </section>
   );
@@ -107,10 +234,10 @@ function DefinitionBlock() {
 
 function ServicesSection() {
   const services = [
-    { icon: "print", title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental" },
-    { icon: "shopping_cart", title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/services/sales" },
-    { icon: "build", title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair" },
-    { icon: "opacity", title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/toner" },
+    { icon: Print, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental" },
+    { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/services/sales" },
+    { icon: Build, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair" },
+    { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/toner" },
   ];
 
   return (
@@ -124,9 +251,9 @@ function ServicesSection() {
           {services.map((s, i) => (
             <a key={i} href={s.href} className="glass-card p-8 rounded-3xl light-leak group hover:scale-[1.02] transition-all duration-500 block">
               <div className="w-14 h-14 rounded-2xl bg-[#2a3548] flex items-center justify-center mb-6 text-[#f5be53] group-hover:bg-[#f5be53] group-hover:text-[#412d00] transition-colors">
-                <span className="material-symbols-outlined text-3xl">{s.icon}</span>
+                <s.icon className="text-3xl" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">{s.title}</h3>
+              <h3 className="text-xl font-bold text-white mb-3 whitespace-nowrap">{s.title}</h3>
               <p className="text-[#d3c5b0] text-sm leading-relaxed">{s.desc}</p>
             </a>
           ))}
@@ -141,9 +268,9 @@ function StatsSection() {
     <StatsClay
       stats={[
         { value: "13+", label: "Years Active", icon: Layers },
-        { value: "1500+", label: "Happy Clients", icon: Users },
-        { value: "50k+", label: "Parts Fixed", icon: Heart },
-        { value: "24/7", label: "Support", icon: Monitor },
+        { value: "1500+", label: "Happy Clients", icon: People },
+        { value: "50k+", label: "Parts Fixed", icon: Favorite },
+        { value: "24/7", label: "Support", icon: Computer },
       ]}
       title="Numbers That Speak"
       subtitle="Proven track record of delivering premium office equipment solutions across the UAE since 2012."
@@ -191,10 +318,10 @@ function FeaturedProducts() {
         </div>
         <div className="flex gap-4">
           <button type="button" onClick={scrollLeft} className="w-12 h-12 rounded-full border border-[#9c8f7c]/20 flex items-center justify-center hover:border-[#f5be53] text-[#d3c5b0] hover:text-[#f5be53] transition-all cursor-pointer">
-            <span className="material-symbols-outlined">arrow_back</span>
+            <ArrowBack className="text-xl" />
           </button>
           <button type="button" onClick={scrollRight} className="w-12 h-12 rounded-full bg-[#f5be53] text-[#412d00] flex items-center justify-center hover:scale-110 transition-all cursor-pointer">
-            <span className="material-symbols-outlined">arrow_forward</span>
+            <ArrowForward className="text-xl" />
           </button>
         </div>
       </div>
@@ -211,7 +338,7 @@ function FeaturedProducts() {
               <div className="flex justify-between items-center">
                 <span className="text-[#f5be53] font-bold text-lg">{p.priceRental || "Contact for Pricing"}</span>
                 <a href="/products" className="text-white hover:text-[#f5be53] transition-colors flex items-center gap-2">
-                  Details <span className="material-symbols-outlined text-sm">east</span>
+                  Details <East className="text-sm" />
                 </a>
               </div>
             </div>
@@ -240,12 +367,12 @@ function ReviewsSection() {
           {[...reviews, ...reviews].map((r, i) => (
             <div key={i} className="glass-card min-w-[350px] p-8 rounded-2xl flex flex-col justify-between h-64">
               <div className="flex text-[#f5be53] gap-1 mb-4">
-                {[1,2,3,4,5].map(s => <span key={s} className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>star</span>)}
+                {[1,2,3,4,5].map(s => <Star key={s} className="text-xl" style={{fontSize: '1.25rem'}} />)}
               </div>
               <p className="text-[#d7e3fc] italic text-sm">&quot;{r.text}&quot;</p>
               <div className="mt-6 flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-[#2a3548] flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[#f5be53]">person</span>
+                  <Person className="text-[#f5be53]" />
                 </div>
                 <div>
                   <p className="text-white font-bold text-sm">{r.name}</p>
@@ -376,7 +503,7 @@ function FAQSection({ faqs }: { faqs: { q: string; a: string }[] }) {
           >
             <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
               {f.q}
-              <span className="material-symbols-outlined text-[#f5be53] group-open:rotate-180 transition-transform">expand_more</span>
+              <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
             </summary>
             <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
           </details>

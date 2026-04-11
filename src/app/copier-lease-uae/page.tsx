@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import { AccountBalance, Schedule, Upgrade, Build, Inventory2, Cancel, ExpandMore } from "@mui/icons-material";
 
 export default function CopierLeaseUAE() {
   const [settings, setSettings] = useState<any>(null);
@@ -128,15 +129,15 @@ export default function CopierLeaseUAE() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: "account_balance", title: "Tax Advantages", desc: "Lease payments are operating expenses, offering tax benefits over capital purchase." },
-              { icon: "schedule", title: "Flexible Terms", desc: "Choose lease terms from 2-5 years with customizable payment structures." },
-              { icon: "upgrade", title: "Upgrade Included", desc: "Stay current with technology through easy upgrades during the lease." },
-              { icon: "build", title: "Zero Maintenance Costs", desc: "All repairs, parts, and servicing included throughout the lease period." },
-              { icon: "inventory_2", title: "Free Toner", desc: "Unlimited genuine toner included for the entire lease duration." },
-              { icon: "cancel", title: "No Exit Fees", desc: "Flexible return or upgrade options at the end of your lease term." },
+              { icon: AccountBalance, title: "Tax Advantages", desc: "Lease payments are operating expenses, offering tax benefits over capital purchase." },
+              { icon: Schedule, title: "Flexible Terms", desc: "Choose lease terms from 2-5 years with customizable payment structures." },
+              { icon: Upgrade, title: "Upgrade Included", desc: "Stay current with technology through easy upgrades during the lease." },
+              { icon: Build, title: "Zero Maintenance Costs", desc: "All repairs, parts, and servicing included throughout the lease period." },
+              { icon: Inventory2, title: "Free Toner", desc: "Unlimited genuine toner included for the entire lease duration." },
+              { icon: Cancel, title: "No Exit Fees", desc: "Flexible return or upgrade options at the end of your lease term." },
             ].map((b, i) => (
               <div key={i} className="glass-card p-8 rounded-3xl">
-                <span className="material-symbols-outlined text-4xl text-[#f5be53] mb-4">{b.icon}</span>
+                <b.icon className="text-4xl text-[#f5be53] mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">{b.title}</h3>
                 <p className="text-[#d3c5b0]">{b.desc}</p>
               </div>
@@ -220,7 +221,7 @@ export default function CopierLeaseUAE() {
             >
               <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
                 {f.q}
-                <span className="material-symbols-outlined text-[#f5be53] group-open:rotate-180 transition-transform">expand_more</span>
+                <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
               </summary>
               <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
             </details>

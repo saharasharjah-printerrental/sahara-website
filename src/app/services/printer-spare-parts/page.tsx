@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
+import { Close, ShoppingCart, Inventory, LocalShipping, Build, Speed, CheckCircle, Delete, Settings, VerifiedUser, Replay, SearchOff } from "@mui/icons-material";
 
 interface Supply {
   id: string;
@@ -44,6 +45,15 @@ export default function PrinterSparePartsPage() {
   const [brandFilter, setBrandFilter] = useState("all");
   const [cart, setCart] = useState<{ supply: Supply; quantity: number }[]>([]);
   const [showCart, setShowCart] = useState(false);
+  const [paymentSettings, setPaymentSettings] = useState<{
+    paymentGatewayEnabled: boolean;
+    paymentGatewayUrl: string;
+    paymentGatewayLabel: string;
+  }>({
+    paymentGatewayEnabled: false,
+    paymentGatewayUrl: "",
+    paymentGatewayLabel: "Buy Now",
+  });
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_supplies");
@@ -57,6 +67,29 @@ export default function PrinterSparePartsPage() {
     if (storedCart) {
       setCart(JSON.parse(storedCart));
     }
+    const storedSettings = localStorage.getItem("sahara_settings");
+    if (storedSettings) {
+      const parsed = JSON.parse(storedSettings);
+      setPaymentSettings({
+        paymentGatewayEnabled: parsed.paymentGatewayEnabled || false,
+        paymentGatewayUrl: parsed.paymentGatewayUrl || "",
+        paymentGatewayLabel: parsed.paymentGatewayLabel || "Buy Now",
+      });
+    }
+
+    const handleSettingsChange = () => {
+      const updated = localStorage.getItem("sahara_settings");
+      if (updated) {
+        const parsed = JSON.parse(updated);
+        setPaymentSettings({
+          paymentGatewayEnabled: parsed.paymentGatewayEnabled || false,
+          paymentGatewayUrl: parsed.paymentGatewayUrl || "",
+          paymentGatewayLabel: parsed.paymentGatewayLabel || "Buy Now",
+        });
+      }
+    };
+    window.addEventListener("sahara-settings-updated", handleSettingsChange);
+    return () => window.removeEventListener("sahara-settings-updated", handleSettingsChange);
   }, []);
 
   const addToCart = (supply: Supply) => {
@@ -150,7 +183,7 @@ export default function PrinterSparePartsPage() {
               onClick={() => setShowCart(false)}
               className="text-slate-400 hover:text-white"
             >
-              <span className="material-symbols-outlined">close</span>
+              <Close />
             </button>
           </div>
 
@@ -177,9 +210,7 @@ export default function PrinterSparePartsPage() {
                         onClick={() => removeFromCart(item.supply.id)}
                         className="text-slate-400 hover:text-red-400"
                       >
-                        <span className="material-symbols-outlined text-sm">
-                          delete
-                        </span>
+                        <Delete className="text-sm" />
                       </button>
                     </div>
                     <div className="flex items-center justify-between">
@@ -256,9 +287,7 @@ export default function PrinterSparePartsPage() {
               onClick={() => setShowCart(true)}
               className="hidden lg:flex items-center gap-3 glass-card px-6 py-3 rounded-full"
             >
-              <span className="material-symbols-outlined text-[#f5be53]">
-                shopping_cart
-              </span>
+              <ShoppingCart className="text-[#f5be53]" />
               <span className="text-white font-medium">
                 Cart ({cart.reduce((acc, item) => acc + item.quantity, 0)})
               </span>
@@ -357,15 +386,11 @@ export default function PrinterSparePartsPage() {
                         </div>
                       ) : supply.category === "Drum" ? (
                         <div className="flex flex-col items-center gap-4">
-                          <span className="material-symbols-outlined text-6xl text-slate-600">
-                            settings
-                          </span>
+                          <Settings className="text-6xl text-slate-600" sx={{ fontSize: 60 }} />
                           <span className="text-slate-500 text-sm">OPC Drum</span>
                         </div>
                       ) : (
-                        <span className="material-symbols-outlined text-6xl text-slate-600">
-                          build
-                        </span>
+                        <Build className="text-6xl text-slate-600" sx={{ fontSize: 60 }} />
                       )}
                     </div>
                   )}
@@ -413,17 +438,28 @@ export default function PrinterSparePartsPage() {
                     <span className="text-[#f5be53] font-bold text-lg">
                       {supply.price}
                     </span>
-                    <button
-                      onClick={() => addToCart(supply)}
-                      disabled={supply.stock === 0}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                        supply.stock > 0
-                          ? "bg-[#f5be53] text-[#412d00] hover:scale-105"
-                          : "bg-slate-600 text-slate-400 cursor-not-allowed"
-                      }`}
-                    >
-                      Add to Cart
-                    </button>
+                    {paymentSettings.paymentGatewayEnabled && paymentSettings.paymentGatewayUrl ? (
+                      <a
+                        href={paymentSettings.paymentGatewayUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 rounded-lg font-medium transition-all bg-[#f5be53] text-[#412d00] hover:scale-105"
+                      >
+                        {paymentSettings.paymentGatewayLabel}
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => addToCart(supply)}
+                        disabled={supply.stock === 0}
+                        className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                          supply.stock > 0
+                            ? "bg-[#f5be53] text-[#412d00] hover:scale-105"
+                            : "bg-slate-600 text-slate-400 cursor-not-allowed"
+                        }`}
+                      >
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -432,9 +468,7 @@ export default function PrinterSparePartsPage() {
 
           {filteredSupplies.length === 0 && (
             <div className="text-center py-16">
-              <span className="material-symbols-outlined text-6xl text-slate-600 mb-4">
-                search_off
-              </span>
+              <SearchOff className="text-6xl text-slate-600 mb-4" sx={{ fontSize: 60 }} />
               <p className="text-slate-400 text-lg">
                 No products found matching your criteria
               </p>
@@ -449,22 +483,22 @@ export default function PrinterSparePartsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: "verified_user",
+                icon: VerifiedUser,
                 title: "Genuine OEM",
                 desc: "Only original manufacturer supplies for optimal performance",
               },
               {
-                icon: "local_shipping",
+                icon: LocalShipping,
                 title: "Same-Day Delivery",
                 desc: "Express delivery across Dubai, Abu Dhabi, and Sharjah",
               },
               {
-                icon: "inventory",
+                icon: Inventory,
                 title: "Bulk Pricing",
                 desc: "Volume discounts for businesses with multiple devices",
               },
               {
-                icon: "replay",
+                icon: Replay,
                 title: "Auto-Replenishment",
                 desc: "Automatic toner delivery based on usage tracking",
               },
@@ -473,9 +507,7 @@ export default function PrinterSparePartsPage() {
                 key={i}
                 className="glass-card p-6 rounded-2xl text-center"
               >
-                <span className="material-symbols-outlined text-3xl text-[#f5be53] mb-3">
-                  {b.icon}
-                </span>
+                <b.icon className="text-3xl text-[#f5be53] mb-3" />
                 <h3 className="text-lg font-bold text-white mb-2">{b.title}</h3>
                 <p className="text-slate-400 text-sm">{b.desc}</p>
               </div>
@@ -520,7 +552,7 @@ export default function PrinterSparePartsPage() {
         onClick={() => setShowCart(true)}
         className="lg:hidden fixed bottom-24 right-6 z-40 bg-[#f5be53] text-[#412d00] px-6 py-3 rounded-full shadow-lg flex items-center gap-2"
       >
-        <span className="material-symbols-outlined">shopping_cart</span>
+        <ShoppingCart />
         <span className="font-bold">{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
       </button>
     </main>
