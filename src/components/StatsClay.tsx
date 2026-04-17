@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Layers, People, Favorite, Computer, SvgIconComponent } from "@mui/icons-material";
+import { Layers, People, Favorite, Computer } from "@mui/icons-material";
+import type { SvgIconComponent } from "@mui/icons-material";
 import CountUp from "./CountUp";
 
 const parseNumericValue = (value: string) => {

@@ -1,180 +1,560 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import CountUp from "@/components/CountUp";
-import { Print, CopyAll, Build, Description, CheckCircle, ExpandMore } from "@mui/icons-material";
+
+export const metadata: Metadata = {
+  title: "Printer Rental Abu Dhabi | Photocopier Lease UAE – AED 250/mo | Sahara",
+  description:
+    "Printer rental in Abu Dhabi from AED 250/month. Zero deposit, free toner, weekly service visits. Serving Mussafah, Al Reem Island, Khalifa City, Masdar City. Canon & Kyocera. Call now.",
+  keywords: [
+    "printer rental abu dhabi",
+    "photocopier rental abu dhabi",
+    "copier lease abu dhabi",
+    "mussafah printer rental",
+    "al reem island copier rental",
+    "zero deposit printer abu dhabi",
+    "canon kyocera rental abu dhabi",
+    "office equipment rental abu dhabi",
+    "printer lease uae",
+    "masdar city printer rental",
+  ],
+  alternates: { canonical: "https://saharaprinter.com/printer-rental-abu-dhabi" },
+  openGraph: {
+    title: "Printer Rental Abu Dhabi | AED 250/mo – Sahara Office Equipments",
+    description:
+      "Rent Canon or Kyocera printers and copiers in Abu Dhabi from AED 250/month. Zero deposit, free toner, weekly maintenance. Mussafah, Khalifa City, Al Reem Island.",
+    url: "https://saharaprinter.com/printer-rental-abu-dhabi",
+    siteName: "Sahara Office Equipments",
+    locale: "en_AE",
+    type: "website",
+  },
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  name: "Sahara Office Equipments – Abu Dhabi Printer Rental",
+  legalName: "Sahara Office Equipment Trading LLC",
+  description:
+    "Printer and photocopier rental in Abu Dhabi from AED 250/month. Zero deposit, free OEM toner, weekly preventive maintenance, and emergency response.",
+  url: "https://saharaprinter.com/printer-rental-abu-dhabi",
+  telephone: "+971503823969",
+  email: "info@saharaprinter.com",
+  foundingDate: "2012",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Industrial Area 11",
+    addressLocality: "Sharjah",
+    addressRegion: "Sharjah",
+    addressCountry: "AE",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 24.4539,
+    longitude: 54.3773,
+  },
+  areaServed: [
+    { "@type": "City", name: "Abu Dhabi" },
+    { "@type": "Place", name: "Mussafah Industrial Area" },
+    { "@type": "Place", name: "Al Reem Island" },
+    { "@type": "Place", name: "Masdar City" },
+    { "@type": "Place", name: "Khalifa City" },
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "08:00",
+      closes: "20:00",
+    },
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Abu Dhabi Printer Rental Plans",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        name: "A4 Desktop Printer Rental Abu Dhabi",
+        price: "250",
+        priceCurrency: "AED",
+        description: "Canon/Kyocera A4 printer — includes toner, delivery, weekly maintenance",
+      },
+      {
+        "@type": "Offer",
+        name: "A3 Mid-Range Copier Rental Abu Dhabi",
+        price: "500",
+        priceCurrency: "AED",
+        description: "A3 multifunction — print, copy, scan — for shared Abu Dhabi offices",
+      },
+      {
+        "@type": "Offer",
+        name: "A3 Enterprise Copier Rental Abu Dhabi",
+        price: "1000",
+        priceCurrency: "AED",
+        description: "High-volume enterprise copier for large Abu Dhabi organisations",
+      },
+    ],
+  },
+  priceRange: "AED 250-2000",
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Printer Rental Abu Dhabi",
+  provider: { "@type": "LocalBusiness", name: "Sahara Office Equipment Trading LLC" },
+  areaServed: { "@type": "City", name: "Abu Dhabi" },
+  description:
+    "Canon and Kyocera printer and photocopier rental in Abu Dhabi with zero deposit, unlimited toner, and weekly preventive maintenance.",
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: "250",
+    highPrice: "2000",
+    priceCurrency: "AED",
+    offerCount: "12",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Printer Rental Abu Dhabi",
+      item: "https://saharaprinter.com/printer-rental-abu-dhabi",
+    },
+  ],
+};
+
+const faqs = [
+  {
+    q: "How much does printer rental cost in Abu Dhabi?",
+    a: "Printer rental in Abu Dhabi starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers for shared offices range from AED 500–900/month. High-volume enterprise devices start at AED 1,000/month. All plans include zero deposit, free OEM toner, free delivery, and weekly preventive maintenance.",
+  },
+  {
+    q: "What is the response time for Abu Dhabi printer repair?",
+    a: "We schedule weekly preventive maintenance visits for all Abu Dhabi rental units. For emergency breakdowns, we dispatch a technician within 4–6 hours to anywhere in Abu Dhabi — including Mussafah, Khalifa City, Al Reem Island, and Yas Island. Same-day replacement units are available if the repair takes longer.",
+  },
+  {
+    q: "Do I need a deposit for printer rental in Abu Dhabi?",
+    a: "No deposit required. Sahara's Abu Dhabi printer rental plans are all zero-deposit. You only pay your first month to start. This is particularly valuable for businesses in Abu Dhabi's ADGM and free zones where capital preservation is a priority.",
+  },
+  {
+    q: "Which printer brands do you rent in Abu Dhabi?",
+    a: "We rent Canon imageRUNNER ADVANCE, Kyocera TASKalfa, HP LaserJet Enterprise, Xerox WorkCentre, and Ricoh MP series in Abu Dhabi. Canon and Kyocera are most popular among Mussafah industrial clients and Al Reem Island offices.",
+  },
+  {
+    q: "Is toner included in the Abu Dhabi rental plan?",
+    a: "Yes. All Abu Dhabi printer rental plans include genuine Canon or Kyocera OEM toner at no extra cost. We proactively monitor toner levels remotely and deliver replacements before you run out — typically within 24 hours of detection.",
+  },
+  {
+    q: "Do you serve Mussafah Industrial Area and free zones?",
+    a: "Yes. Mussafah is one of our primary Abu Dhabi service zones. We also serve KEZAD (Khalifa Economic Zones), Abu Dhabi Global Market (ADGM), twofour54, and all Abu Dhabi free zones. Free zone billing and documentation are handled by our team.",
+  },
+  {
+    q: "How long are your Abu Dhabi printer rental contracts?",
+    a: "Contracts are offered for 12, 24, or 36 months. Shorter rentals from 1–6 months are available for project offices, exhibitions at ADNEC, and seasonal setups. Longer contracts have lower monthly rates. All contracts include upgrade rights.",
+  },
+  {
+    q: "What happens if my printer breaks down in Abu Dhabi?",
+    a: "Call +971 50 382 3969 and we dispatch a technician within 4–6 hours. If we cannot repair it same day, we deliver a replacement unit at no extra charge. You are never left without a working printer under our Abu Dhabi rental agreement.",
+  },
+  {
+    q: "Do you provide network setup for rented printers in Abu Dhabi?",
+    a: "Yes. Free network configuration is part of every Abu Dhabi installation. We connect the printer to your office LAN or Wi-Fi, set up scan-to-email, configure mobile printing (AirPrint/Mopria), and handle secure print release if needed — all included.",
+  },
+  {
+    q: "Can I upgrade my printer during the Abu Dhabi rental contract?",
+    a: "Yes. Upgrade to a higher-speed or colour model at any point during your Abu Dhabi contract without penalty. This is useful for Abu Dhabi businesses that grow quickly — especially in sectors like real estate, construction, and government contracting.",
+  },
+  {
+    q: "Do you serve Saadiyat Island and Yas Island?",
+    a: "Yes. Our Abu Dhabi coverage includes Saadiyat Island (particularly Louvre Abu Dhabi area and cultural district offices), Yas Island (gaming, entertainment, and hospitality businesses), Al Maryah Island/ADGM, and all other Abu Dhabi islands and districts.",
+  },
+  {
+    q: "What is cost-per-page (CPP) for rented printers in Abu Dhabi?",
+    a: "Black-and-white A4 printing on our rented Kyocera and Canon devices costs approximately 1–2 fils per page in Abu Dhabi — vs 8–15 fils for desktop inkjet or consumer laser printers. For an office printing 5,000 pages/month, that is a saving of AED 300–650/month in consumables alone.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const pricingTiers = [
+  {
+    name: "A4 Desktop",
+    price: "AED 250–450",
+    tag: null,
+    ideal: "Small offices, reception desks, individual use",
+    features: [
+      "Canon LBP / Kyocera ECOSYS",
+      "Up to 45 ppm A4 mono",
+      "Print, copy, scan",
+      "Free genuine OEM toner",
+      "Weekly preventive maintenance",
+      "Emergency 4–6hr response",
+    ],
+    cta: "Get Quote",
+  },
+  {
+    name: "A3 Mid-Range",
+    price: "AED 500–900",
+    tag: "Most Popular",
+    ideal: "Shared offices, Mussafah businesses",
+    features: [
+      "Canon iR ADVANCE / Kyocera TASKalfa",
+      "35–55 ppm A3 & A4 mono",
+      "Print, copy, scan, fax",
+      "Colour option available",
+      "Scan to email / folder / cloud",
+      "Free network & Wi-Fi setup",
+      "Same-day replacement guarantee",
+    ],
+    cta: "Get Quote",
+  },
+  {
+    name: "A3 Enterprise",
+    price: "AED 1,000–2,000",
+    tag: null,
+    ideal: "Large organisations, government, ADGM",
+    features: [
+      "Canon imageRUNNER C5560i / Kyocera 5053ci",
+      "60–100 ppm A3 colour",
+      "Staple, booklet, hole-punch finishing",
+      "Secure print, user authentication",
+      "50,000+ page monthly capacity",
+      "Dedicated account manager",
+      "Multi-site billing available",
+    ],
+    cta: "Get Quote",
+  },
+];
+
+const industryInsights = [
+  {
+    sector: "Oil & Gas / Government",
+    zone: "ADNOC / ADGM",
+    icon: "🛢️",
+    challenge:
+      "Large government and energy sector offices need high-volume, secure document handling with audit trails",
+    solution:
+      "Enterprise Canon copiers with secure print release, user authentication, and document tracking — compliant with government data policies.",
+    stat: "50,000+ pages/month capacity",
+  },
+  {
+    sector: "Real Estate & Construction",
+    zone: "Yas Island / Al Reem",
+    icon: "🏗️",
+    challenge: "Real estate offices produce large volumes of A3 blueprints, contracts, and marketing material",
+    solution:
+      "A3 colour copiers with 55 ppm output handle design documents, contracts, and brochure printing with same-day setup.",
+    stat: "A3 colour from AED 900/mo",
+  },
+  {
+    sector: "Manufacturing & Logistics",
+    zone: "Mussafah Industrial",
+    icon: "🏭",
+    challenge:
+      "Industrial businesses in Mussafah need reliable documentation equipment with quick breakdown recovery",
+    solution:
+      "Weekly preventive maintenance with 4–6hr emergency response ensures production documentation never stops.",
+    stat: "4–6hr emergency response",
+  },
+  {
+    sector: "Hospitality & Tourism",
+    zone: "Saadiyat / Yas Island",
+    icon: "🏨",
+    challenge:
+      "Hotels and resorts need multi-point printing across front desk, F&B, and events with mobile print capability",
+    solution:
+      "Network-connected copiers with AirPrint/Mopria mobile printing, scan-to-email for guest services, and event printing packages.",
+    stat: "AirPrint & Mopria enabled",
+  },
+];
+
+const abuDhabiAreas = [
+  "Mussafah", "Al Reem Island", "Khalifa City", "Masdar City",
+  "Yas Island", "Saadiyat Island", "Corniche", "Al Markaz",
+  "Madinat Zayed", "Al Shamkha", "Al Wathba", "Khalifa Port Area",
+  "ADGM / Al Maryah", "Mohammed Bin Zayed City",
+];
 
 export default function PrinterRentalAbuDhabi() {
-  const [settings, setSettings] = useState<any>(null);
-  const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("sahara_settings");
-    if (stored) {
-      setSettings(JSON.parse(stored));
-    }
-    
-    const faqStored = localStorage.getItem("sahara_faqs");
-    if (faqStored) {
-      const allFaqs = JSON.parse(faqStored);
-      const pageFaqs = allFaqs.filter((f: any) => f.pageSlug === "printer-rental-abu-dhabi" && f.isActive)
-        .sort((a: any, b: any) => a.sortOrder - b.sortOrder)
-        .map((f: any) => ({ q: f.question, a: f.answer }));
-      setFaqs(pageFaqs.length > 0 ? pageFaqs : defaultFaqs);
-    } else {
-      setFaqs(defaultFaqs);
-    }
-  }, []);
-
-  const defaultFaqs = [
-    { q: "How much does printer rental cost in Abu Dhabi?", a: "Our printer rental in Abu Dhabi starts from AED 250/month for basic printers, with enterprise copiers from AED 500-2000/month. All plans include free toner and maintenance." },
-    { q: "Do you offer photocopier rental in Abu Dhabi?", a: "Yes! We provide comprehensive photocopier rental services across Abu Dhabi including Mussafah, Al Reem Island, Khalifa City, and all other areas." },
-    { q: "What is your response time in Abu Dhabi?", a: "We provide weekly service visits and emergency response for Abu Dhabi clients. Our team is based in the region for quick support." },
-    { q: "Do you offer zero deposit printer rental in Abu Dhabi?", a: "Yes! We offer zero deposit rental options for all Abu Dhabi clients. Pay only your monthly rental with no upfront security deposit." },
-    { q: "Which brands do you service in Abu Dhabi?", a: "We service Canon, Kyocera, HP, Xerox, Ricoh, Sharp, Brother, and Konica Minolta in Abu Dhabi." },
-    { q: "Can I get free toner with my Abu Dhabi rental?", a: "Yes, all our Abu Dhabi printer rental plans include unlimited free genuine toner." },
-    { q: "How long are your Abu Dhabi rental contracts?", a: "We offer flexible terms from 12-36 months. Short-term rentals available for events and temporary needs." },
-    { q: "Do you provide AMC services in Abu Dhabi?", a: "Yes, we offer Annual Maintenance Contracts covering toner, parts, labor, and preventive maintenance for Abu Dhabi clients." },
-  ];
-
-  const abuDhabiAreas = [
-    "Mussafah", "Al Reem Island", "Khalifa City", "Masdar City",
-    "Yas Island", "Saadiyat Island", "Corniche", "Al Markaz",
-    "Madinat Zayed", "Al Shamkha", "Al Wathba"
-  ];
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments - Abu Dhabi Branch",
-    "description": "Printer rental and copier lease services in Abu Dhabi. Zero deposit, free toner, weekly service visits.",
-    "url": "https://saharaprinter.com/printer-rental-abu-dhabi",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Mussafah",
-      "addressLocality": "Abu Dhabi",
-      "addressCountry": "AE"
-    },
-    "areaServed": {
-      "@type": "State",
-      "name": "Abu Dhabi"
-    },
-    "priceRange": "AED 250-2000",
-    "openingHours": "24/7"
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  };
-
   return (
     <main className="min-h-screen bg-[#071325]">
       <Header />
-      
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
+      {/* Breadcrumb */}
+      <nav className="pt-28 pb-2 px-8 lg:px-24 max-w-7xl mx-auto" aria-label="Breadcrumb">
+        <ol className="flex items-center gap-2 text-sm text-[#d3c5b0]">
+          <li><a href="/" className="hover:text-[#f5be53] transition-colors">Home</a></li>
+          <li className="text-[#f5be53]">/</li>
+          <li className="text-white font-medium">Printer Rental Abu Dhabi</li>
+        </ol>
+      </nav>
+
+      {/* Hero */}
+      <section className="relative pt-8 pb-24 px-8 lg:px-24 overflow-hidden">
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1514323165146-3c8a2d6f3952?w=1920&q=80"
-            alt="Abu Dhabi Skyline"
-            className="w-full h-full object-cover opacity-30"
+          <img
+            src="/images/location-abu-dhabi.webp"
+            alt="Abu Dhabi corporate office"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325]/90 to-[#101c2e]"></div>
+          <div className="absolute inset-0 bg-[#071325]/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#071325]/80 via-[#071325]/60 to-[#101c2e]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-1 gap-12 items-center">
             <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">Printer Rental Abu Dhabi</span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
-                Copier Lease <span className="text-[#f5be53]">UAE</span>
+              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">
+                Abu Dhabi — Weekly Maintenance
+              </span>
+              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
+                Printer Rental{" "}
+                <span className="text-[#f5be53]">Abu Dhabi</span>
               </h1>
-              <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl">
-                Premium printer rental in Abu Dhabi with zero deposit, free toner, and weekly service visits. Serving Mussafah, Al Reem Island, Khalifa City & more.
+              <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
+                Canon &amp; Kyocera printer and photocopier rental from AED 250/month. Zero deposit, free OEM
+                toner, and weekly preventive maintenance across all Abu Dhabi areas.
               </p>
+              <div className="flex flex-wrap gap-2 mb-8">
+                {["Zero Deposit", "Free OEM Toner", "Weekly Service", "4–6hr Emergency", "Free Network Setup"].map(
+                  (p) => (
+                    <span
+                      key={p}
+                      className="text-xs font-semibold px-3 py-1 rounded-full border border-[#f5be53]/40 text-[#f5be53] bg-[#f5be53]/10"
+                    >
+                      {p}
+                    </span>
+                  )
+                )}
+              </div>
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+                <a
+                  href="/get-quote"
+                  className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform"
+                >
                   Get Free Quote
                 </a>
-                <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
-                  Call: +971503823969
+                <a
+                  href="tel:+971503823969"
+                  className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors"
+                >
+                  Call: +971 50 382 3969
                 </a>
               </div>
             </div>
-            <div className="relative hidden lg:block">
-              <div className="absolute inset-0 bg-[#f5be53]/20 blur-[120px] rounded-full"></div>
-              <div className="relative z-20 glass-card p-8 rounded-3xl overflow-hidden">
-                <img 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYsYbeoBdwCMdfKukPftrIWkhBOQx1lndcCm5Qs8XRbWgH1sOw1h5-rvEaCAGB9aa_KytGw2-L_GbchDCAtNQ01XejFtpAqqAaWfxe0ydzDFEJgryCFFz_fV-H4F2FbvE6_A__nILe03afsoax65a_fHoLk1DU85YBHeJkzEpvMNgDYMI4PPBFUIMwWUzHl91aJjxul2EvAcBTmx-5O-9pF72SloVRcbbfYNUufng5c6rUo1z2dKU-niv05rw8byh2L9HREmwtvC6b"
-                  alt="Canon Kyocera photocopier rental Abu Dhabi UAE"
-                  className="w-full h-full object-cover rounded-2xl mix-blend-screen opacity-90"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Definition Block */}
-      <section className="py-16 px-8 bg-[#101c2e]">
+      {/* AEO Block */}
+      <section className="py-10 px-8 bg-[#101c2e]">
         <div className="max-w-4xl mx-auto">
-          <div className="glass-card rounded-3xl p-8 md:p-12 border-l-4 border-[#f5be53]">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">What is Printer Rental in Abu Dhabi?</h2>
-            <p className="text-lg text-[#d3c5b0] leading-relaxed mb-4">
-              Printer rental in Abu Dhabi allows businesses to access high-quality printing equipment without significant capital investment. The rental agreement includes the machine, unlimited toner, maintenance, repairs, and technical support.
+          <div
+            className="rounded-3xl p-8 md:p-10"
+            style={{
+              background: "linear-gradient(135deg, #0f1e33 0%, #0a1420 100%)",
+              border: "1px solid rgba(245, 190, 83, 0.35)",
+              boxShadow: "0 0 40px rgba(245, 190, 83, 0.08)",
+            }}
+          >
+            <p className="text-[#f5be53] text-xs font-bold tracking-[0.25em] uppercase mb-3">
+              AI Answer — What is Printer Rental in Abu Dhabi?
             </p>
-            <p className="text-lg text-[#d3c5b0] leading-relaxed">
-              In Abu Dhabi, particularly in Mussafah industrial area and business districts, printer rental is ideal for companies seeking to minimize upfront costs while maintaining access to professional Canon and Kyocera equipment with full service support.
+            <p className="text-white text-lg leading-relaxed">
+              Printer rental in Abu Dhabi is a monthly subscription from{" "}
+              <strong className="text-[#f5be53]">AED 250/month</strong> where businesses use Canon or Kyocera
+              printers and photocopiers — with toner, maintenance, and repairs included. Sahara Office Equipment
+              Trading LLC, founded in 2012, serves Abu Dhabi businesses with{" "}
+              <strong className="text-[#f5be53]">weekly preventive maintenance</strong>, 4–6hr emergency response,
+              and zero deposit plans across Mussafah, Al Reem Island, Khalifa City, and ADGM.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white">Our Abu Dhabi Services</h2>
-            <p className="text-[#d3c5b0] mt-4">Complete office equipment solutions</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Stats */}
+      <section className="py-12 px-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="glass-card rounded-2xl py-8 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { icon: Print, title: "Printer Rental", desc: "Flexible leasing for all business sizes" },
-              { icon: CopyAll, title: "Copier Lease", desc: "A3 & A4 copiers with full service" },
-              { icon: Build, title: "Repair Services", desc: "On-site repair with weekly visits" },
-              { icon: Description, title: "AMC Plans", desc: "Annual maintenance contracts" },
+              { number: "4–6", suffix: " hrs", label: "Emergency Response" },
+              { number: "1,500", suffix: "+", label: "UAE Clients Served" },
+              { number: "13", suffix: "+", label: "Years in UAE" },
+              { number: "AED 250", suffix: "/mo", label: "Starting Price" },
             ].map((s, i) => (
-              <a key={i} href={s.title.toLowerCase().includes("rental") ? "/services/printer-rental" : s.title.toLowerCase().includes("lease") ? "/services" : s.title.toLowerCase().includes("repair") ? "/services/repair" : "/services/amc"} className="glass-card p-8 rounded-3xl block hover:scale-[1.02] transition-all">
-                <s.icon className="text-4xl text-[#f5be53] mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
-                <p className="text-[#d3c5b0] text-sm">{s.desc}</p>
-              </a>
+              <div key={i}>
+                <p className="text-3xl font-bold text-[#f5be53]">
+                  {s.number}
+                  <span className="text-xl">{s.suffix}</span>
+                </p>
+                <p className="text-xs uppercase tracking-widest text-slate-400 mt-1">{s.label}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Areas We Serve */}
+      {/* Long-form Content */}
       <section className="py-16 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white text-center mb-8">Areas We Serve in Abu Dhabi</h2>
+        <div className="max-w-4xl mx-auto space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Printer Rental in Abu Dhabi — Why Businesses Choose Leasing Over Buying
+          </h2>
+          <p className="text-[#d3c5b0] text-lg leading-relaxed">
+            Abu Dhabi's business environment — spanning government entities, oil and gas firms, real estate
+            developers, and a growing SME sector — demands reliable document infrastructure. Purchasing a commercial
+            printer or photocopier outright costs AED 8,000 to AED 45,000, and that's before toner, maintenance
+            parts, and the cost of downtime when equipment fails.
+          </p>
+          <p className="text-[#d3c5b0] text-lg leading-relaxed">
+            Sahara's printer rental in Abu Dhabi converts those unpredictable capital and operating expenses into a
+            single fixed monthly payment. Our plans cover the machine, all genuine Canon or Kyocera toner, weekly
+            preventive maintenance, unlimited repairs, and emergency support within 4–6 hours. For Abu Dhabi
+            businesses in ADGM (Al Maryah Island), this means predictable IT spend that aligns with free zone
+            financial reporting requirements.
+          </p>
+          <p className="text-[#d3c5b0] text-lg leading-relaxed">
+            Mussafah Industrial Area clients benefit from our on-site technical knowledge of industrial
+            environments — dusty conditions, extended operating hours, and multi-shift demands. We configure
+            enterprise-grade Canon and Kyocera devices to handle 50,000+ pages/month without degradation, backed
+            by weekly preventive maintenance that catches issues before they cause downtime.
+          </p>
+          <p className="text-[#d3c5b0] text-lg leading-relaxed">
+            For Abu Dhabi businesses printing more than 2,000 pages per month, our rental copiers deliver
+            black-and-white output at approximately{" "}
+            <strong className="text-white">1–2 fils per A4 page</strong> — compared to 8–15 fils for consumer
+            cartridge printers. At 5,000 pages/month, that difference saves AED 300–650/month in consumables alone,
+            making the rental effectively self-funding.
+          </p>
+        </div>
+      </section>
+
+      {/* Pricing Tiers */}
+      <section className="py-24 px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-white">Abu Dhabi Rental Plans</h2>
+            <p className="text-[#d3c5b0] mt-3 text-lg">
+              All plans: zero deposit · free toner · free delivery · weekly maintenance
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {pricingTiers.map((tier, i) => (
+              <div
+                key={i}
+                className="glass-card rounded-3xl p-8 flex flex-col relative overflow-hidden"
+                style={
+                  tier.tag
+                    ? { border: "1px solid rgba(245,190,83,0.6)", boxShadow: "0 0 40px rgba(245,190,83,0.12)" }
+                    : {}
+                }
+              >
+                {tier.tag && (
+                  <div className="absolute top-0 right-0 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] text-xs font-bold px-4 py-1 rounded-bl-2xl">
+                    {tier.tag}
+                  </div>
+                )}
+                <h3 className="text-xl font-bold text-white mb-1">{tier.name}</h3>
+                <p className="text-[#f5be53] text-2xl font-bold mb-1">
+                  {tier.price}
+                  <span className="text-sm font-normal text-[#d3c5b0]">/month</span>
+                </p>
+                <p className="text-[#d3c5b0] text-sm mb-6 italic">{tier.ideal}</p>
+                <ul className="space-y-2 flex-1">
+                  {tier.features.map((f, fi) => (
+                    <li key={fi} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
+                      <span className="text-[#f5be53] mt-0.5 shrink-0">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="/get-quote"
+                  className="mt-8 block text-center py-3 rounded-full font-bold text-sm transition-all"
+                  style={
+                    tier.tag
+                      ? { background: "linear-gradient(to right, #f5be53, #c8962e)", color: "#412d00" }
+                      : {
+                          background: "rgba(245,190,83,0.1)",
+                          border: "1px solid rgba(245,190,83,0.3)",
+                          color: "#f5be53",
+                        }
+                  }
+                >
+                  {tier.cta}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Insights */}
+      <section className="py-24 px-8 bg-[#101c2e]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-white">Abu Dhabi Industry Use Cases</h2>
+            <p className="text-[#d3c5b0] mt-3">How different Abu Dhabi sectors use printer rental</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {industryInsights.map((ins, i) => (
+              <div key={i} className="glass-card rounded-3xl p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{ins.icon}</span>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">{ins.sector}</h3>
+                    <p className="text-[#f5be53] text-sm">{ins.zone}</p>
+                  </div>
+                </div>
+                <p className="text-[#d3c5b0] text-sm mb-3">
+                  <strong className="text-white">Challenge:</strong> {ins.challenge}
+                </p>
+                <p className="text-[#d3c5b0] text-sm mb-4">
+                  <strong className="text-white">Solution:</strong> {ins.solution}
+                </p>
+                <div className="bg-[#f5be53]/10 rounded-xl px-4 py-2 inline-block">
+                  <span className="text-[#f5be53] text-sm font-bold">{ins.stat}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Areas */}
+      <section className="py-16 px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">Areas We Serve in Abu Dhabi</h2>
+          <p className="text-[#d3c5b0] mb-8">
+            Weekly scheduled maintenance visits. Emergency response within 4–6 hours.
+          </p>
           <div className="flex flex-wrap justify-center gap-3">
             {abuDhabiAreas.map((area, i) => (
-              <span key={i} className="bg-[#2a3548] px-4 py-2 rounded-full text-[#d3c5b0] text-sm">
+              <span
+                key={i}
+                className="bg-[#2a3548] border border-[#f5be53]/20 px-4 py-2 rounded-full text-[#d3c5b0] text-sm hover:border-[#f5be53]/50 transition-colors"
+              >
                 {area}
               </span>
             ))}
@@ -182,70 +562,27 @@ export default function PrinterRentalAbuDhabi() {
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-white text-center mb-12">Why Choose Our Abu Dhabi Service</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Zero Deposit", desc: "No upfront security deposit required" },
-              { title: "Free Toner", desc: "Unlimited genuine toner included" },
-              { title: "Weekly Visits", desc: "Regular maintenance across Abu Dhabi" },
-              { title: "24/7 Support", desc: "Round-the-clock technical assistance" },
-              { title: "No Exit Fees", desc: "Flexible contract terms" },
-              { title: "Free Upgrades", desc: "Upgrade anytime during contract" },
-            ].map((b, i) => (
-              <div key={i} className="glass-card p-6 rounded-2xl">
-                <div className="w-12 h-12 rounded-xl bg-[#f5be53]/20 flex items-center justify-center mb-4">
-                  <CheckCircle className="text-[#f5be53]" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">{b.title}</h3>
-                <p className="text-[#d3c5b0] text-sm">{b.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-16 px-8">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="glass-card rounded-[2rem] py-12 px-8 flex flex-wrap justify-center gap-12 md:gap-20">
-            {[
-              { number: 1500, suffix: "+", label: "Happy Clients" },
-              { number: 13, suffix: "+", label: "Years Experience" },
-              { number: 2500, suffix: "+", label: "Machines Deployed" },
-              { value: "Weekly", label: "Service Visits" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <p className="text-4xl font-bold text-[#f5be53]">
-                  {stat.number !== undefined ? (
-                    <>
-                      <CountUp to={stat.number as number} duration={2} separator="," />
-                      {stat.suffix}
-                    </>
-                  ) : stat.value}
-                </p>
-                <p className="text-sm uppercase tracking-widest text-slate-400 mt-2">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="py-24 px-8">
+      <section className="py-20 px-8">
         <div className="max-w-4xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 relative overflow-hidden text-center">
-          <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
           <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#412d00] mb-6">Need Printer Rental in Abu Dhabi?</h2>
-            <p className="text-[#483200] text-lg mb-8">Get a customized quote within 2 hours. Free consultation and site visit.</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#412d00] mb-4">Need a Printer in Abu Dhabi?</h2>
+            <p className="text-[#483200] text-lg mb-8">
+              Quote within 2 hours. Free site visit. Same-week delivery across Abu Dhabi.
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/get-quote" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+              <a
+                href="/get-quote"
+                className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform"
+              >
                 Get Free Quote
               </a>
-              <a href="tel:+971503823969" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm">
-                Call Now
+              <a
+                href="tel:+971503823969"
+                className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm"
+              >
+                Call +971 50 382 3969
               </a>
             </div>
           </div>
@@ -253,40 +590,35 @@ export default function PrinterRentalAbuDhabi() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-8 max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white">Frequently Asked Questions</h2>
-        </div>
-        <div className="space-y-4">
-          {faqs.map((f, i) => (
-            <details 
-              key={i} 
-              className="rounded-2xl p-6 group cursor-pointer"
-              style={{
-                background: 'linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)',
-                boxShadow: '6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)',
-              }}
-              open={i === 0}
-            >
-              <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
-                {f.q}
-                <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
-              </summary>
-              <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
-            </details>
-          ))}
+      <section className="py-24 px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-white">Printer Rental Abu Dhabi — FAQ</h2>
+            <p className="text-[#d3c5b0] mt-3">12 questions answered by our team</p>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((f, i) => (
+              <details
+                key={i}
+                className="rounded-2xl p-6 group cursor-pointer"
+                style={{
+                  background: "linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)",
+                  boxShadow: "6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)",
+                }}
+                open={i === 0}
+              >
+                <summary className="flex justify-between items-start gap-4 list-none font-bold text-base text-white">
+                  <span>{f.q}</span>
+                  <span className="text-[#f5be53] shrink-0 mt-1 group-open:rotate-180 transition-transform text-lg leading-none">
+                    ▾
+                  </span>
+                </summary>
+                <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{f.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
-
-      {/* Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
 
       <Footer />
       <WhatsAppCTA />

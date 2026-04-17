@@ -1,22 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { z } from 'zod';
 
 export const runtime = 'edge';
 
-interface Product {
-  id: string;
-  name: string;
-  brand: string;
-  category: string;
-  condition: string;
-  priceSale: string;
-  priceRental: string;
-  specs: string;
-  image: string;
-  isActive: number;
-  isFeatured: number;
-  createdAt: string;
-}
+const productSchema = z.object({
+  id: z.string().max(100).optional(),
+  name: z.string().min(1).max(255),
+  brand: z.string().max(100).optional(),
+  category: z.string().max(100).optional(),
+  condition: z.string().max(50).optional(),
+  priceSale: z.string().max(50).optional(),
+  priceRental: z.string().max(50).optional(),
+  specs: z.string().max(5000).optional(),
+  image: z.string().url().max(500).optional().or(z.literal('')),
+  isActive: z.number().int().min(0).max(1).optional(),
+  isFeatured: z.number().int().min(0).max(1).optional(),
+});
+
+type Product = z.infer<typeof productSchema>;
 
 function getDB() {
   try {
@@ -29,6 +31,7 @@ function getDB() {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const featured = searchParams.get('featured');
+  const id = searchParams.get('id');
 
   const db = getDB();
 
@@ -40,6 +43,11 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    if (id) {
+      const result = await db.prepare('SELECT * FROM products WHERE id = ? AND isActive = 1').get(id);
+      return NextResponse.json({ products: result ? [result] : [] });
+    }
+
     let sql = 'SELECT * FROM products WHERE isActive = 1';
     if (featured === 'true') {
       sql += ' AND isFeatured = 1';
@@ -65,8 +73,18 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body: Product = await request.json();
-    const id = body.id || Date.now().toString();
+    const body = await request.json();
+    const parsed = productSchema.safeParse(body);
+    
+    if (!parsed.success) {
+      return NextResponse.json({
+        error: 'Validation failed',
+        details: parsed.error.flatten().fieldErrors
+      }, { status: 400 });
+    }
+    
+    const data = parsed.data;
+    const id = data.id || Date.now().toString();
     const now = new Date().toISOString();
 
     await db.prepare(`
@@ -74,16 +92,16 @@ export async function POST(request: NextRequest) {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
-      body.name,
-      body.brand || '',
-      body.category || '',
-      body.condition || 'New',
-      body.priceSale || '',
-      body.priceRental || '',
-      body.specs || '',
-      body.image || '',
-      body.isActive ?? 1,
-      body.isFeatured ?? 0,
+      data.name,
+      data.brand || '',
+      data.category || '',
+      data.condition || 'New',
+      data.priceSale || '',
+      data.priceRental || '',
+      data.specs || '',
+      data.image || '',
+      data.isActive ?? 1,
+      data.isFeatured ?? 0,
       now
     );
 

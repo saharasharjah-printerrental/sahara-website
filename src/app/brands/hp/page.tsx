@@ -9,7 +9,7 @@ import MobileNav from "@/components/MobileNav";
 import { Shield, Nature, Cloud, WorkspacePremium, Speed } from "@mui/icons-material";
 
 export default function HPBrandPage() {
-  const [brandImage, setBrandImage] = useState("https://images.unsplash.com/photo-1612815154858-60aa4c84e6ac?w=800&q=80");
+  const [brandImage, setBrandImage] = useState("/images/printer-hp.svg");
 
   useEffect(() => {
     const storedBrands = localStorage.getItem("sahara_brands");
@@ -21,9 +21,9 @@ export default function HPBrandPage() {
   }, []);
 
   const products = [
-    { name: "LaserJet Enterprise", specs: ["55 PPM", "1200 DPI"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAl0HeaYTgPWp8BHHjkVn_bgpq4C3T8UyisNdrWv6GwUBnV5nQcHPgH-5ZPannjczIBf2ISDeuWlb34tpC_chs-7hAF1WpQNhFvxpWdVbe-DDU5iSl279EaarLOfFf4-aYna8Wmpzejnnvd4rmv8VWeOfugBkrs6Z4vp4RdFbiqEgimB27WnRUwU2qC7R7sxC_hulkiR_F-8-rWaxGCPETYSS24TBPqLBXdXUAXHquIRIt1vfHdr13IftQYA1dqDmg8T0aYI92h6Mze" },
-    { name: "DesignJet Z-Series", specs: ["9-Color Ink", "44-Inch Max"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCy2kF6oyv-1YEqg-QhHgAHnF-oToFJdQdZ3mYOM6uQNZQycVbH-64xTIwL12lPlfAvdHKYot--6d9cGZ7faTrzsFo7rU2fDnrvh43AgpyVO4mbLz7_9dd-TFQjEqhslXYXEL0-uQxPS22jqWcYbz9tNZKUj8UiuYzPW_1j5vupYWlxE-jjQYGhDn3_38b3EYKTg7XzgjSFMKXT8BxiSKURLamYss3B1xQYYb8TxYAPdbL9A3trLs-nvm6gYb4EYBmRc2OdLYF_Kqfs" },
-    { name: "Elite Dragonfly", specs: ["20h Battery", "0.99 KG"], img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAM-CU0uElekPCvQK0uZDkoWTk-bSheCsoCa7bzKDJyKMt-KKnC3emtpRuk_yzjh136FH1DDIEj87Ovl8oWOrJHRyklEZsE5GSdbMEK6_oJWDfokBWD4nmTeHRklS9Mu5P9XM6eoXflfxm9YbYKOcIqKdkIWVIaZ6DLwJUoC-Rj8ceUYOqfsaMJXMeoXRjSKBFnVs-7XRM-NYNUDarRdAzfwPKrLtpUPFSLkUcmR440OKJFDk7axle-XMg5MJkGBD9KGzbOf8G0rzO5" },
+    { name: "LaserJet Enterprise", specs: ["55 PPM", "1200 DPI"], img: "/images/printer-hp.svg" },
+    { name: "DesignJet Z-Series", specs: ["9-Color Ink", "44-Inch Max"], img: "/images/printer-hp.svg" },
+    { name: "OfficeJet Pro Wide-Format", specs: ["High-Volume", "Network Ready"], img: "/images/unsplash-office.webp" },
   ];
 
   const features = [

@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { z } from 'zod';
 
 export const runtime = 'edge';
 
-interface Inquiry {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  service: string;
-  message: string;
-  status: string;
-}
+const inquirySchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email().max(255),
+  phone: z.string().max(30).optional().or(z.literal('')),
+  company: z.string().max(200).optional().or(z.literal('')),
+  service: z.string().max(100).optional().or(z.literal('')),
+  message: z.string().min(1).max(5000),
+});
 
 function getDB() {
   try {
@@ -52,7 +51,17 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body: Inquiry = await request.json();
+    const body = await request.json();
+    const parsed = inquirySchema.safeParse(body);
+    
+    if (!parsed.success) {
+      return NextResponse.json({
+        error: 'Validation failed',
+        details: parsed.error.flatten().fieldErrors
+      }, { status: 400 });
+    }
+    
+    const data = parsed.data;
     const id = Date.now().toString();
     const now = new Date().toISOString();
 
@@ -61,12 +70,12 @@ export async function POST(request: NextRequest) {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
-      body.name,
-      body.email || '',
-      body.phone || '',
-      body.company || '',
-      body.service || '',
-      body.message || '',
+      data.name,
+      data.email,
+      data.phone || '',
+      data.company || '',
+      data.service || '',
+      data.message,
       'new',
       now
     );

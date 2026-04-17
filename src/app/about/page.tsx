@@ -7,18 +7,52 @@ import MobileNav from "@/components/MobileNav";
 import CountUp from "@/components/CountUp";
 
 export const metadata: Metadata = {
-  title: "About Us | Sahara Office Equipments - Printer Rental & Service Experts UAE",
-  description: "Since 2012, Sahara Office Equipments has been the UAE's trusted partner for printer rental, photocopier lease, repair services, and managed print solutions. Learn about our journey.",
-  keywords: "printer rental company uae, photocopier rental sharjah, printer service dubai, about sahara office equipments, printer amc dubai",
+  title: "About Sahara | UAE Printer Rental Experts Since 2012",
+  description: "Sahara Office Equipment Trading LLC — 13 years in UAE. 1,500+ clients, 4.9★ Google rating. Printer & photocopier rental from AED 250/mo. Sharjah HQ, all-UAE coverage.",
+  keywords: "sahara office equipments, printer rental company uae, photocopier rental sharjah, printer service dubai, about sahara printer, printer amc dubai, UAE printer rental since 2012",
   openGraph: {
-    title: "About Us | Sahara Office Equipments",
-    description: "Since 2012, Sahara Office Equipments has been the UAE's trusted partner for printer rental and services.",
+    title: "About Sahara | UAE Printer Rental Experts Since 2012",
+    description: "13 years serving UAE businesses. 1,500+ clients, 4.9★ Google rating. Printer rental from AED 250/mo. Zero deposit, free toner & maintenance.",
+    url: "https://www.saharaprinter.com/about",
+    siteName: "Sahara Office Equipments",
+    locale: "en_AE",
+    type: "website",
+    images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "About Sahara Office Equipments UAE" }],
   },
+  alternates: { canonical: "https://www.saharaprinter.com/about" },
+};
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Sahara Office Equipments",
+  "description": "Sahara Office Equipment Trading LLC — UAE's leading printer rental and photocopier leasing company since 2012. Headquartered in Sharjah, serving Dubai, Abu Dhabi, and all UAE emirates.",
+  "url": "https://saharaprinter.com/about",
+  "dateModified": "2026-04-15",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Sahara Office Equipments",
+    "legalName": "Sahara Office Equipment Trading LLC",
+    "foundingDate": "2012",
+    "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 15, "maxValue": 50 },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Al Arabi Building, Industrial Area 11",
+      "addressLocality": "Sharjah",
+      "addressCountry": "AE",
+      "postalCode": "47373"
+    },
+    "telephone": "+971503823969",
+    "email": "info@saharaedoc.com",
+    "url": "https://saharaprinter.com",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
+  }
 };
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#071325]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
       <Header />
       
       {/* Hero Section */}
@@ -34,8 +68,21 @@ export default function AboutPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
               Pioneers in <span className="text-[#f5be53]">Office Printing</span> Solutions
             </h1>
+
+            {/* AEO Quick Answer Block */}
+            <div className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-6 max-w-3xl mx-auto text-left">
+              <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">About Sahara Office Equipments — Quick Answer</p>
+              <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                Sahara Office Equipment Trading LLC is a UAE-based printer rental and photocopier leasing company
+                founded in <strong className="text-white">2012</strong>, headquartered in Sharjah (Industrial Area 11).
+                With <strong className="text-white">1,500+ clients</strong> and <strong className="text-white">50,000+ repairs</strong> completed,
+                Sahara serves Dubai, Abu Dhabi, Sharjah, RAK, Fujairah, and Al Ain — offering Canon, Kyocera, HP,
+                and Ricoh solutions from AED 250/month with a 4-hour emergency response guarantee.
+              </p>
+            </div>
+
             <p className="text-lg text-[#d3c5b0] max-w-3xl mx-auto">
-              Since 2012, we have been the UAE's trusted partner for printer rental, 
+              Since 2012, we have been the UAE&apos;s trusted partner for printer rental,
               photocopier leasing, repair services, and managed print solutions.
             </p>
           </div>
@@ -48,7 +95,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { number: 13, suffix: "+", label: "Years Experience" },
-              { number: 500, suffix: "+", label: "Happy Clients" },
+              { number: 1500, suffix: "+", label: "Happy Clients" },
               { number: 2000, suffix: "+", label: "Devices Deployed" },
               { number: 24, suffix: "/7", label: "Support Available" },
             ].map((stat, i) => (

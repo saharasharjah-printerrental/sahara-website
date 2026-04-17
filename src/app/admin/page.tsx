@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 interface Stats {
   totalProducts: number;
   totalInquiries: number;
   pendingInquiries: number;
   publishedBlogs: number;
+  liveUsers: number;
 }
 
 interface RecentInquiry {
@@ -26,11 +25,14 @@ export default function AdminDashboard() {
     totalInquiries: 0,
     pendingInquiries: 0,
     publishedBlogs: 0,
+    liveUsers: 0,
   });
   const [recentInquiries, setRecentInquiries] = useState<RecentInquiry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     try {
       const storedInquiries = localStorage.getItem("sahara_inquiries");
       if (storedInquiries) {
@@ -68,6 +70,16 @@ export default function AdminDashboard() {
     }
 
     setLoading(false);
+
+    // Live user tracking — poll every 30s
+    const fetchLive = () =>
+      fetch("/api/analytics/stats")
+        .then((r) => r.json())
+        .then((d) => setStats((prev) => ({ ...prev, liveUsers: d.online ?? 0 })))
+        .catch(() => {});
+    fetchLive();
+    const liveInterval = setInterval(fetchLive, 30_000);
+    return () => clearInterval(liveInterval);
   }, []);
 
   const statCards = [
@@ -76,120 +88,129 @@ export default function AdminDashboard() {
     { label: "Pending Inquiries", value: stats.pendingInquiries, icon: "pending", color: "text-yellow-400" },
     { label: "Published Blogs", value: stats.publishedBlogs, icon: "article", color: "text-purple-400" },
   ];
+  const isLive = stats.liveUsers > 0;
 
-  if (loading) {
+  if (!mounted || loading) {
     return (
-      <div className="min-h-screen bg-[#071325] flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-2 border-[#f5be53] border-t-transparent rounded-full"></div>
+      <div className="flex items-center justify-center h-full">
+        <div className="w-8 h-8 border-2 border-[#f5be53] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#071325]">
-      <Header />
-      <main className="pt-24 pb-16 px-8 ml-64">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-            <p className="text-slate-400 mt-1">Welcome to Sahara Admin Dashboard</p>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {statCards.map((stat, index) => (
-              <div key={index} className="glass-card rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`material-symbols-outlined text-3xl ${stat.color}`}>
-                    {stat.icon}
-                  </span>
-                </div>
-                <p className="text-3xl font-bold text-white">{stat.value}</p>
-                <p className="text-sm text-slate-400 mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <a href="/admin/products" className="glass-card rounded-2xl p-6 hover:border-[#f5be53]/30 transition-all group">
-              <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined text-3xl text-blue-400 group-hover:text-[#f5be53] transition-colors">inventory_2</span>
-                <div>
-                  <h3 className="font-bold text-white">Manage Products</h3>
-                  <p className="text-sm text-slate-400">Add, edit, or remove products</p>
-                </div>
-              </div>
-            </a>
-            <a href="/admin/inquiries" className="glass-card rounded-2xl p-6 hover:border-[#f5be53]/30 transition-all group">
-              <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined text-3xl text-green-400 group-hover:text-[#f5be53] transition-colors">request_quote</span>
-                <div>
-                  <h3 className="font-bold text-white">View Inquiries</h3>
-                  <p className="text-sm text-slate-400">Review and manage leads</p>
-                </div>
-              </div>
-            </a>
-            <a href="/admin/blog" className="glass-card rounded-2xl p-6 hover:border-[#f5be53]/30 transition-all group">
-              <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined text-3xl text-purple-400 group-hover:text-[#f5be53] transition-colors">article</span>
-                <div>
-                  <h3 className="font-bold text-white">Write Blog Post</h3>
-                  <p className="text-sm text-slate-400">Create new content</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          {/* Recent Inquiries */}
-          <div className="glass-card rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-white">Recent Inquiries</h2>
-              <a href="/admin/inquiries" className="text-[#f5be53] hover:underline text-sm">
-                View All
-              </a>
-            </div>
-            {recentInquiries.length > 0 ? (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-white/10">
-                      <th className="text-left text-sm font-medium text-slate-400 pb-4">Name</th>
-                      <th className="text-left text-sm font-medium text-slate-400 pb-4">Email</th>
-                      <th className="text-left text-sm font-medium text-slate-400 pb-4">Service</th>
-                      <th className="text-left text-sm font-medium text-slate-400 pb-4">Status</th>
-                      <th className="text-left text-sm font-medium text-slate-400 pb-4">Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentInquiries.map((inquiry) => (
-                      <tr key={inquiry.id} className="border-b border-white/5">
-                        <td className="py-4 text-white">{inquiry.name}</td>
-                        <td className="py-4 text-slate-400">{inquiry.email}</td>
-                        <td className="py-4 text-slate-400">{inquiry.service}</td>
-                        <td className="py-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            inquiry.status === "pending" ? "bg-yellow-500/20 text-yellow-400" :
-                            inquiry.status === "completed" ? "bg-green-500/20 text-green-400" :
-                            "bg-slate-500/20 text-slate-400"
-                          }`}>
-                            {inquiry.status}
-                          </span>
-                        </td>
-                        <td className="py-4 text-slate-400 text-sm">{inquiry.createdAt}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div className="text-center py-8 text-slate-500">
-                No inquiries yet. Inquiries will appear here when customers submit the contact form.
-              </div>
-            )}
+    <div className="min-h-full">
+      <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+          <p className="text-slate-400 mt-1">Welcome to Sahara Admin Dashboard</p>
+        </div>
+        {/* Live Users Badge */}
+        <div className={`flex items-center gap-3 px-5 py-3 rounded-2xl border transition-all ${isLive ? "bg-green-500/10 border-green-500/30" : "bg-white/5 border-white/10"}`}>
+          <span className="relative flex h-3 w-3">
+            {isLive && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>}
+            <span className={`relative inline-flex rounded-full h-3 w-3 ${isLive ? "bg-green-400" : "bg-slate-600"}`}></span>
+          </span>
+          <div>
+            <p className={`text-2xl font-bold leading-none ${isLive ? "text-green-400" : "text-slate-500"}`}>{stats.liveUsers}</p>
+            <p className="text-xs text-slate-400 mt-0.5">users online now</p>
           </div>
         </div>
-      </main>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {statCards.map((stat, index) => (
+          <div key={index} className="glass-card rounded-2xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <span className={`material-symbols-outlined text-3xl ${stat.color}`}>
+                {stat.icon}
+              </span>
+            </div>
+            <p className="text-3xl font-bold text-white">{stat.value}</p>
+            <p className="text-sm text-slate-400 mt-1">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Quick Actions */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <a href="/admin/products" className="glass-card rounded-2xl p-6 hover:border-[#f5be53]/30 transition-all group">
+          <div className="flex items-center gap-4">
+            <span className="material-symbols-outlined text-3xl text-blue-400 group-hover:text-[#f5be53] transition-colors">inventory_2</span>
+            <div>
+              <h3 className="font-bold text-white">Manage Products</h3>
+              <p className="text-sm text-slate-400">Add, edit, or remove products</p>
+            </div>
+          </div>
+        </a>
+        <a href="/admin/inquiries" className="glass-card rounded-2xl p-6 hover:border-[#f5be53]/30 transition-all group">
+          <div className="flex items-center gap-4">
+            <span className="material-symbols-outlined text-3xl text-green-400 group-hover:text-[#f5be53] transition-colors">request_quote</span>
+            <div>
+              <h3 className="font-bold text-white">View Inquiries</h3>
+              <p className="text-sm text-slate-400">Review and manage leads</p>
+            </div>
+          </div>
+        </a>
+        <a href="/admin/blog" className="glass-card rounded-2xl p-6 hover:border-[#f5be53]/30 transition-all group">
+          <div className="flex items-center gap-4">
+            <span className="material-symbols-outlined text-3xl text-purple-400 group-hover:text-[#f5be53] transition-colors">article</span>
+            <div>
+              <h3 className="font-bold text-white">Write Blog Post</h3>
+              <p className="text-sm text-slate-400">Create new content</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      {/* Recent Inquiries */}
+      <div className="glass-card rounded-2xl p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-bold text-white">Recent Inquiries</h2>
+          <a href="/admin/inquiries" className="text-[#f5be53] hover:underline text-sm">
+            View All
+          </a>
+        </div>
+        {recentInquiries.length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left text-sm font-medium text-slate-400 pb-4">Name</th>
+                  <th className="text-left text-sm font-medium text-slate-400 pb-4">Email</th>
+                  <th className="text-left text-sm font-medium text-slate-400 pb-4">Service</th>
+                  <th className="text-left text-sm font-medium text-slate-400 pb-4">Status</th>
+                  <th className="text-left text-sm font-medium text-slate-400 pb-4">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recentInquiries.map((inquiry) => (
+                  <tr key={inquiry.id} className="border-b border-white/5">
+                    <td className="py-4 text-white">{inquiry.name}</td>
+                    <td className="py-4 text-slate-400">{inquiry.email}</td>
+                    <td className="py-4 text-slate-400">{inquiry.service}</td>
+                    <td className="py-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        inquiry.status === "pending" ? "bg-yellow-500/20 text-yellow-400" :
+                        inquiry.status === "completed" ? "bg-green-500/20 text-green-400" :
+                        "bg-slate-500/20 text-slate-400"
+                      }`}>
+                        {inquiry.status}
+                      </span>
+                    </td>
+                    <td className="py-4 text-slate-400 text-sm">{inquiry.createdAt}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="text-center py-8 text-slate-500">
+            No inquiries yet. Inquiries will appear here when customers submit the contact form.
+          </div>
+        )}
+      </div>
     </div>
   );
 }

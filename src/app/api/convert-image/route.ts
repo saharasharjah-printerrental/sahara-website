@@ -24,6 +24,16 @@ function getR2Url(fileName: string): string {
   }
 }
 
+function detectImageFormat(buffer: Uint8Array): string {
+  const header = Array.from(buffer.slice(0, 4)).map(b => b.toString(16).padStart(2, '0')).join('');
+  if (header.startsWith('89504e47')) return 'image/png';
+  if (header.startsWith('ffd8')) return 'image/jpeg';
+  if (header.startsWith('47494638')) return 'image/gif';
+  if (header.startsWith('3c3f786d6c')) return 'image/svg+xml';
+  if (header.startsWith('52494646')) return 'image/webp';
+  return 'image/jpeg';
+}
+
 export async function POST(request: NextRequest) {
   const r2 = getR2();
 
@@ -91,9 +101,6 @@ export async function POST(request: NextRequest) {
     const ext = originalName.split('.').pop()?.toLowerCase() || '';
     const isWebP = ext === 'webp';
     const isSvg = ext === 'svg';
-    const isPng = ext === 'png';
-    const isGif = ext === 'gif';
-    const isJpg = ext === 'jpg' || ext === 'jpeg';
     
     let finalBuffer = imageBuffer;
     let finalContentType = 'image/webp';
@@ -105,22 +112,9 @@ export async function POST(request: NextRequest) {
     } else if (isWebP) {
       finalContentType = 'image/webp';
       converted = false;
-    } else if (isPng || isGif || isJpg || imageBuffer.byteLength > 0) {
-      try {
-        const uint8Array = new Uint8Array(imageBuffer);
-        const header = Array.from(uint8Array.slice(0, 4)).map(b => b.toString(16).padStart(2, '0')).join('');
-        
-        if (header.startsWith('89504e47') || header.startsWith('ffd8') || header.startsWith('47494638')) {
-          finalContentType = 'image/webp';
-          converted = true;
-        } else if (header.startsWith('3c3f786d6c')) {
-          finalContentType = 'image/svg+xml';
-          converted = false;
-        } else {
-          finalContentType = 'image/webp';
-          converted = true;
-        }
-      } catch {
+    } else {
+      const format = detectImageFormat(new Uint8Array(imageBuffer));
+      if (format !== 'image/webp') {
         finalContentType = 'image/webp';
         converted = true;
       }

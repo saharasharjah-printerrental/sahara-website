@@ -49,7 +49,7 @@ export default function RicohBrandPage() {
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <Image
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/RICOH_Aficio_MP_C3002_Color_Laser_Multifunction_Printer.jpg/700px-RICOH_Aficio_MP_C3002_Color_Laser_Multifunction_Printer.jpg"
+                src="/images/printer-ricoh.webp"
                 alt="Ricoh Printer"
                 width={700}
                 height={525}

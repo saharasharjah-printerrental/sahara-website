@@ -61,27 +61,52 @@ export default function PrinterRentalPage() {
     { step: "4", title: "Ongoing Support", desc: "Enjoy unlimited toner, maintenance, and 24/7 technical support." },
   ];
 
+  const rentVsBuyRows = [
+    { factor: "Upfront Investment", renting: "AED 0 — zero deposit", buying: "AED 8,000–25,000+ per machine" },
+    { factor: "Monthly Cost", renting: "AED 250–2,000 all-inclusive", buying: "Unpredictable: parts + toner + AMC" },
+    { factor: "Toner & Consumables", renting: "Unlimited OEM toner included", buying: "You pay per cartridge (~AED 200–800)" },
+    { factor: "Maintenance & Repairs", renting: "Free — covered in rental", buying: "Paid AMC or break-fix costs" },
+    { factor: "Technology Upgrades", renting: "Upgrade anytime, no penalty", buying: "Resell & repurchase at full cost" },
+    { factor: "Cash Flow Impact", renting: "Operational expense (OPEX)", buying: "Capital expense (CAPEX) — balance sheet" },
+    { factor: "Response to Breakdown", renting: "4-hr on-site + loaner machine", buying: "Depends on AMC or your IT team" },
+    { factor: "End of Life Disposal", renting: "Sahara handles it — eco-friendly", buying: "E-waste disposal cost is yours" },
+  ];
+
+  const freeZones = [
+    "JAFZA (Dubai)", "SAIF Zone (Sharjah)", "DAFZA (Dubai Airport)", "DMCC (JLT)",
+    "DIFC", "Dubai Silicon Oasis", "ICAD I (Abu Dhabi)", "Al Reem Island",
+    "Mussafah Industrial", "Dubai Media City", "Dubai Internet City", "KEZAD"
+  ];
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Printer Rental Services UAE",
-    "description": "Flexible printer and photocopier rental services in Dubai, Sharjah, Abu Dhabi and across UAE with full maintenance included.",
+    "alternateName": "Photocopier Rental Dubai",
+    "description": "Flexible printer and photocopier rental services in Dubai, Sharjah, Abu Dhabi and across UAE. Zero deposit, unlimited toner, full maintenance included. Plans from AED 250/month.",
     "provider": {
-      "@type": "Organization",
+      "@type": "LocalBusiness",
       "name": "Sahara Office Equipments",
+      "legalName": "Sahara Office Equipment Trading LLC",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Al Arabi Building, Industrial Area 11",
         "addressLocality": "Sharjah",
-        "addressCountry": "AE"
+        "addressCountry": "AE",
+        "postalCode": "47373"
       },
-      "telephone": "+971503823969"
+      "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
+      "telephone": "+971503823969",
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
     },
-    "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "RAK"],
+    "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain", "JAFZA", "SAIF Zone", "DAFZA"],
     "serviceType": "Printer Rental",
     "offers": {
-      "@type": "Offer",
-      "priceRange": "AED 250-2000",
-      "priceCurrency": "AED"
+      "@type": "AggregateOffer",
+      "lowPrice": "250",
+      "highPrice": "2000",
+      "priceCurrency": "AED",
+      "offerCount": "3"
     }
   };
 
@@ -120,19 +145,47 @@ export default function PrinterRentalPage() {
       <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#f5be53]/10 rounded-full blur-[150px]"></div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
+          {/* Breadcrumb */}
+          <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
+            <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
+            <span className="mx-2">/</span>
+            <a href="/services" className="hover:text-[#f5be53] transition-colors">Services</a>
+            <span className="mx-2">/</span>
+            <span className="text-[#f5be53]">Printer Rental UAE</span>
+          </nav>
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">Professional Solutions</span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
-                Printer <span className="text-[#f5be53]">Rental</span> Services
+              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-xs">Zero Deposit · Free Toner · Cancel Anytime</span>
+              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
+                Printer Rental<br /><span className="text-[#f5be53]">Dubai & UAE</span>
               </h1>
-              <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl">
-                Flexible leasing solutions for businesses of all sizes. Scale your printing infrastructure without capital investment. Full maintenance included.
-              </p>
+
+              {/* AEO Answer Block */}
+              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is Printer Rental in UAE?</p>
+                <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                  Printer rental in the UAE is a monthly leasing model where businesses access enterprise-grade
+                  Canon, Kyocera, HP, and Ricoh printers with <strong className="text-white">zero deposit</strong>,
+                  unlimited OEM toner, and full maintenance included — starting from{" "}
+                  <strong className="text-white">AED 250/month</strong>. Over 1,500 UAE businesses use this model
+                  to eliminate printing capital costs and unpredictable repair bills.
+                </p>
+              </div>
+
+              {/* Trust Pills */}
+              <div className="flex flex-wrap gap-3 mb-8">
+                {["AED 250/mo Starting", "Zero Deposit", "Unlimited Toner", "Same-Day Delivery", "Cancel Anytime"].map((t) => (
+                  <span key={t} className="text-xs font-bold text-white bg-[#f5be53]/10 border border-[#f5be53]/25 px-3 py-1.5 rounded-full">
+                    ✓ {t}
+                  </span>
+                ))}
+              </div>
+
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+                <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
                   Get a Quote
                 </a>
                 <a href="/rental-calculator" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
@@ -141,12 +194,20 @@ export default function PrinterRentalPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="glass-card rounded-3xl p-8">
-                <img 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF9Q2bdCblu-mAfUZQCEzTJ4XJCOn4QroTen8yX2meulXzvcuk3dFy_KrDu7FlutILG20R1k6a6mDK4xa6ARFoUb4pXqb33cZOulst0RdE3iIlzryRqUAQzVbCPbLhlAyFzTnY0YGXxdwD-j7t7mYOW47vlbwJPKovjqROhM6oeKlMKsrWkPwGTtO16FJAqLpfn0OyLG_xrPXAlfqNMyWUO2ofvy8UpEYB7WpO1VK_ggqIaejuoH0xay0WF7P66Kwg8NDzqKnAF_Nq"
-                  alt="Canon imageRUNNER ADVANCE multifunction printer for office rental"
-                  className="w-full h-full object-cover rounded-2xl"
+              <div className="absolute inset-0 bg-[#f5be53]/8 rounded-3xl blur-xl" />
+              <div className="relative rounded-3xl overflow-hidden border border-[#f5be53]/15"
+                style={{ boxShadow: '0 0 60px rgba(245,190,83,0.10), 0 24px 80px rgba(0,0,0,0.5)' }}>
+                <img
+                  src="/images/service-maintanence.webp"
+                  alt="Sahara printer technician servicing photocopier in Dubai UAE"
+                  className="w-full h-[440px] object-contain bg-[#0a1628]"
+                  loading="eager"
                 />
+                {/* COP28 badge */}
+                <div className="absolute top-4 left-4 bg-[#071325]/90 backdrop-blur-sm border border-[#f5be53]/30 rounded-xl px-3 py-2">
+                  <p className="text-[#f5be53] text-xs font-bold">🏆 COP28 Proud Supplier</p>
+                  <p className="text-slate-400 text-[10px]">Official Event Equipment Partner</p>
+                </div>
               </div>
             </div>
           </div>
@@ -374,6 +435,121 @@ export default function PrinterRentalPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Rent vs Buy Comparison ── */}
+      <section className="py-24 px-8 lg:px-24 bg-[#050d1a]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Decision Guide</span>
+            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Rent vs. Buy — The True Cost Breakdown</h2>
+            <p className="text-[#7a94ad] max-w-lg mx-auto text-sm">
+              Most businesses underestimate the total cost of owning printers. This table shows the real comparison.
+            </p>
+          </div>
+          <div className="overflow-x-auto rounded-2xl" style={{ border: '1px solid rgba(245,190,83,0.15)' }}>
+            <table className="w-full min-w-[540px]">
+              <thead>
+                <tr style={{ background: 'rgba(245,190,83,0.08)', borderBottom: '1px solid rgba(245,190,83,0.15)' }}>
+                  <th className="text-left text-white font-bold py-4 px-6 text-sm">Cost Factor</th>
+                  <th className="text-center text-[#f5be53] font-bold py-4 px-4 text-sm border-x border-[#f5be53]/20">Rent with Sahara</th>
+                  <th className="text-center text-slate-400 font-bold py-4 px-4 text-sm">Buy Your Own</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rentVsBuyRows.map((row, i) => (
+                  <tr key={i}
+                    className="border-t"
+                    style={{
+                      background: i % 2 === 0 ? 'rgba(10,20,38,0.6)' : 'rgba(7,15,30,0.6)',
+                      borderColor: 'rgba(255,255,255,0.04)'
+                    }}>
+                    <td className="py-4 px-6 text-white text-sm font-medium">{row.factor}</td>
+                    <td className="py-4 px-4 text-center text-[#f5be53] text-xs font-semibold border-x border-[#f5be53]/10">{row.renting}</td>
+                    <td className="py-4 px-4 text-center text-slate-500 text-xs">{row.buying}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="flex justify-center mt-8">
+            <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+              Get a Rental Quote — No Commitment
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Eco-Print / Sustainability ── */}
+      <section className="py-20 px-8 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="rounded-3xl overflow-hidden relative"
+            style={{
+              background: 'linear-gradient(135deg, rgba(10,26,18,0.98) 0%, rgba(5,16,12,0.99) 100%)',
+              border: '1px solid rgba(52,168,83,0.2)',
+              boxShadow: '0 0 60px rgba(52,168,83,0.06)',
+            }}>
+            <div className="grid lg:grid-cols-2 gap-0">
+              <div className="p-10 lg:p-14">
+                <span className="text-green-400 font-bold tracking-[0.2em] uppercase text-xs">🌱 Eco-Print Initiative</span>
+                <h2 className="text-3xl font-bold text-white mt-3 mb-5">
+                  Rent a Printer.<br />Reduce UAE's E-Waste.
+                </h2>
+                <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                  When you rent instead of buy, retired machines are returned to Sahara for refurbishment or
+                  responsible recycling — not landfill. Our circular equipment model has prevented over
+                  <strong className="text-white"> 2,000 printers</strong> from entering UAE waste streams since 2012.
+                </p>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  {[
+                    { stat: "2,000+", label: "Machines Recycled" },
+                    { stat: "0 AED", label: "E-Waste Cost to You" },
+                    { stat: "COP28", label: "Official Supplier" },
+                    { stat: "ISO", label: "Aligned Practices" },
+                  ].map((s, i) => (
+                    <div key={i} className="bg-white/5 rounded-xl p-3 text-center">
+                      <p className="text-green-400 font-bold text-lg">{s.stat}</p>
+                      <p className="text-slate-400 text-xs">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <a href="/get-quote" className="inline-block bg-green-500/20 border border-green-400/30 text-green-400 px-6 py-3 rounded-full font-bold text-sm hover:bg-green-500/30 transition-colors">
+                  Learn About Our Green Plan →
+                </a>
+              </div>
+              <div className="relative hidden lg:block">
+                <img
+                  src="/images/sustain1.webp"
+                  alt="Eco-friendly printer rental UAE sustainability circular economy"
+                  className="w-full h-full object-cover opacity-60"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[rgba(10,26,18,0.95)] via-[rgba(10,26,18,0.3)] to-transparent" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Free Zone Coverage ── */}
+      <section className="py-16 px-8 lg:px-24 bg-[#101c2e]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Coverage</span>
+            <h2 className="text-3xl font-bold text-white mt-3 mb-3">We Deliver to Every UAE Free Zone</h2>
+            <p className="text-[#7a94ad] text-sm max-w-md mx-auto">Free delivery and same-day setup across all major free zones and business districts.</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {freeZones.map((zone, i) => (
+              <span key={i}
+                className="px-4 py-2 rounded-full text-sm text-[#d3c5b0] font-medium border border-white/8 bg-white/3 hover:border-[#f5be53]/30 hover:text-white transition-all">
+                📍 {zone}
+              </span>
+            ))}
+          </div>
+          <p className="text-center text-slate-500 text-xs mt-6">
+            + All 7 emirates: Dubai · Sharjah · Abu Dhabi · Ajman · RAK · Fujairah · Al Ain
+          </p>
         </div>
       </section>
 

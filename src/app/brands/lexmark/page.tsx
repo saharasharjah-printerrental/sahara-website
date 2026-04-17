@@ -9,9 +9,9 @@ import Image from "next/image";
 
 export default function LexmarkBrandPage() {
   const products = [
-    { name: "Lexmark MS821dn", specs: ["55 PPM", "1200 DPI"], img: "https://media.lexmark.com/www/product/standard/12/12440.png" },
-    { name: "Lexmark CX825dte", specs: ["55 PPM", "Color"], img: "https://media.lexmark.com/www/product/standard/10/10285.png" },
-    { name: "Lexmark B3442dw", specs: ["42 PPM", "Wireless"], img: "https://media.lexmark.com/www/product/standard/15/15573.png" },
+    { name: "Lexmark MS821dn", specs: ["55 PPM", "1200 DPI"], img: "/images/printer-lexmark.webp" },
+    { name: "Lexmark CX825dte", specs: ["55 PPM", "Color"], img: "/images/printer-lexmark.webp" },
+    { name: "Lexmark B3442dw", specs: ["42 PPM", "Wireless"], img: "/images/printer-lexmark.webp" },
   ];
 
   const features = [
@@ -56,7 +56,7 @@ export default function LexmarkBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="https://media.lexmark.com/www/product/standard/10/10285.png"
+                  src="/images/printer-lexmark.webp"
                   alt="Lexmark CX825dte Printer"
                   width={600}
                   height={600}
@@ -100,8 +100,8 @@ export default function LexmarkBrandPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {products.map((p, i) => (
               <div key={i} className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500">
-                <div className="aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
-                  <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="relative aspect-square mb-8 rounded-2xl overflow-hidden bg-[#101c2e]">
+                  <Image src={p.img} alt={p.name} fill className="object-contain p-4 group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
                 <p className="text-[#d3c5b0] text-sm mb-6">Enterprise-grade performance for demanding workloads.</p>

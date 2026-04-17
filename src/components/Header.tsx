@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Print, CopyAll, Handyman, Build, Inventory, ShoppingCart, Home, SettingsSuggest, Inventory2, RequestQuote, LocationOn, Article, Call, ExpandMore, ExpandLess, MoreHoriz, InfoOutlined, Close, Groups } from "@mui/icons-material";
@@ -28,7 +29,7 @@ const brands = [
 
 const services = [
   { name: "Printer Rental", href: "/services/printer-rental", icon: Print },
-  { name: "Photocopier Rental", href: "/services/printer-rental", icon: CopyAll },
+  { name: "Photocopier Rental", href: "/services/photocopier-rental", icon: CopyAll },
   { name: "Annual Maintenance (AMC)", href: "/services/amc", icon: Handyman },
   { name: "Printer Repair", href: "/services/repair", icon: Build },
   { name: "Toner & Spare Parts", href: "/services/printer-spare-parts", icon: Inventory },
@@ -121,9 +122,11 @@ export default function Header() {
         <nav className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <img
-              src="https://www.saharaprinter.com/assets/Home/sahara-navbar-logo.webp"
+            <Image
+              src="/images/sahara-navbar-logo.webp"
               alt="Sahara Office Equipments"
+              width={120}
+              height={40}
               className="h-10 w-auto"
             />
           </Link>

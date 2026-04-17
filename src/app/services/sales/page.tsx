@@ -53,8 +53,8 @@ export default function SalesPage() {
             </div>
             <div className="relative">
               <div className="glass-card rounded-3xl p-8">
-                <img 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX"
+                <img
+                  src="/images/printer-hp.svg"
                   alt="HP LaserJet enterprise printer for sale UAE Dubai"
                   className="w-full h-full object-cover rounded-2xl"
                 />

@@ -17,15 +17,39 @@ interface Product {
 }
 
 const initialProducts: Product[] = [
-  { id: "1", name: "imageRUNNER ADVANCE C5500", brand: "Canon", category: "MFP", condition: "New", priceSale: "Contact for Pricing", priceRental: "AED 800/mo", specs: ["55 PPM", "Full Color"], image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCF9Q2bdCblu-mAfUZQCEzTJ4XJCOn4QroTen8yX2meulXzvcuk3dFy_KrDu7FlutILG20R1k6a6mDK4xa6ARFoUb4pXqb33cZOulst0RdE3iIlzryRqUAQzVbCPbLhlAyFzTnY0YGXxdwD-j7t7mYOW47vlbwJPKovjqROhM6oeKlMKsrWkPwGTtO16FJAqLpfn0OyLG_xrPXAlfqNMyWUO2ofvy8UpEYB7WpO1VK_ggqIaejuoH0xay0WF7P66Kwg8NDzqKnAF_Nq", isActive: true, isFeatured: true },
-  { id: "2", name: "DesignJet Z9+ PostScript", brand: "HP", category: "Plotters", condition: "Refurbished", priceSale: "AED 12,000", priceRental: "AED 600/mo", specs: ["44-inch Roll", "2400 DPI"], image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX", isActive: true, isFeatured: false },
-  { id: "3", name: "TASKalfa 6003i Series", brand: "Kyocera", category: "MFP", condition: "New", priceSale: "Contact for Pricing", priceRental: "AED 950/mo", specs: ["60 PPM", "Monochrome"], image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX", isActive: true, isFeatured: false },
-  { id: "4", name: "Xerox AltaLink C8170", brand: "Xerox", category: "MFP", condition: "New", priceSale: "Contact for Pricing", priceRental: "AED 1,100/mo", specs: ["10\" UI Tablet", "ConnectKey"], image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCF9Q2bdCblu-mAfUZQCEzTJ4XJCOn4QroTen8yX2meulXzvcuk3dFy_KrDu7FlutILG20R1k6a6mDK4xa6ARFoUb4pXqb33cZOulst0RdE3iIlzryRqUAQzVbCPbLhlAyFzTnY0YGXxdwD-j7t7mYOW47vlbwJPKovjqROhM6oeKlMKsrWkPwGTtO16FJAqLpfn0OyLG_xrPXAlfqNMyWUO2ofvy8UpEYB7WpO1VK_ggqIaejuoH0xay0WF7P66Kwg8NDzqKnAF_Nq", isActive: true, isFeatured: true },
-  { id: "5", name: "imagePROGRAF PRO-4100", brand: "Canon", category: "Plotters", condition: "New", priceSale: "AED 18,000", priceRental: "AED 1,200/mo", specs: ["12-Color Ink", "Data Encrypt"], image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCF9Q2bdCblu-mAfUZQCEzTJ4XJCOn4QroTen8yX2meulXzvcuk3dFy_KrDu7FlutILG20R1k6a6mDK4xa6ARFoUb4pXqb33cZOulst0RdE3iIlzryRqUAQzVbCPbLhlAyFzTnY0YGXxdwD-j7t7mYOW47vlbwJPKovjqROhM6oeKlMKsrWkPwGTtO16FJAqLpfn0OyLG_xrPXAlfqNMyWUO2ofvy8UpEYB7WpO1VK_ggqIaejuoH0xay0WF7P66Kwg8NDzqKnAF_Nq", isActive: true, isFeatured: false },
-  { id: "6", name: "LaserJet Managed E82560", brand: "HP", category: "A3 Printers", condition: "New", priceSale: "Contact for Pricing", priceRental: "AED 750/mo", specs: ["Wolf Security", "Energy Star"], image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX", isActive: true, isFeatured: true },
+  { id: "1",  name: "imageRUNNER ADVANCE C5500",  brand: "Canon",   category: "MFP",         condition: "New",         priceSale: "Contact for Pricing", priceRental: "AED 800/mo",   specs: ["55 PPM", "Full Color", "A3 Support", "Network Ready"],      image: "/images/printer-canon-1.webp",  isActive: true, isFeatured: true  },
+  { id: "2",  name: "DesignJet Z9+ PostScript",   brand: "HP",      category: "Plotters",    condition: "Refurbished", priceSale: "AED 12,000",           priceRental: "AED 600/mo",   specs: ["44-inch Roll", "2400 DPI", "PostScript", "HP Stitch"],      image: "/images/printer-hp.svg",       isActive: true, isFeatured: false },
+  { id: "3",  name: "TASKalfa 6003i Series",      brand: "Kyocera", category: "MFP",         condition: "New",         priceSale: "Contact for Pricing", priceRental: "AED 950/mo",   specs: ["60 PPM", "Monochrome", "HyPAS Platform", "1200 DPI"],       image: "/images/printer-kyocera.webp",  isActive: true, isFeatured: false },
+  { id: "4",  name: "AltaLink C8170",             brand: "Xerox",   category: "MFP",         condition: "New",         priceSale: "Contact for Pricing", priceRental: "AED 1,100/mo", specs: ["10\" UI Tablet", "ConnectKey", "Color", "70 PPM"],           image: "/images/printer-xerox.webp",    isActive: true, isFeatured: true  },
+  { id: "5",  name: "imagePROGRAF PRO-4100",      brand: "Canon",   category: "Plotters",    condition: "New",         priceSale: "AED 18,000",           priceRental: "AED 1,200/mo", specs: ["12-Color Ink", "44-inch Roll", "2400 DPI", "Data Encrypt"], image: "/images/printer-canon-1.webp",  isActive: true, isFeatured: false },
+  { id: "6",  name: "LaserJet Managed E82560",    brand: "HP",      category: "A3 Printers", condition: "New",         priceSale: "Contact for Pricing", priceRental: "AED 750/mo",   specs: ["Wolf Security", "Energy Star", "56 PPM", "Duplex"],         image: "/images/printer-hp.svg",       isActive: true, isFeatured: true  },
+  { id: "7",  name: "HL-L6400DW Enterprise",      brand: "Brother", category: "A4 Printers", condition: "New",         priceSale: "AED 2,800",            priceRental: "AED 400/mo",   specs: ["50 PPM", "Duplex", "Wi-Fi Direct", "250-sheet Tray"],       image: "/images/printer-brother.webp",  isActive: true, isFeatured: false },
+  { id: "8",  name: "MP 2555SP",                  brand: "Ricoh",   category: "MFP",         condition: "New",         priceSale: "AED 4,500",            priceRental: "AED 500/mo",   specs: ["25 PPM", "Copy/Print/Scan", "600 DPI", "Network Ready"],    image: "/images/printer-ricoh.webp",    isActive: true, isFeatured: false },
+  { id: "9",  name: "ProXpress M4580FX",          brand: "Samsung", category: "MFP",         condition: "Refurbished", priceSale: "AED 3,200",            priceRental: "AED 350/mo",   specs: ["43 PPM", "Fax Ready", "Duplex", "Auto Sort"],               image: "/images/printer-samsung.webp",  isActive: true, isFeatured: false },
+  { id: "10", name: "MS431dn Laser",              brand: "Lexmark", category: "A4 Printers", condition: "Refurbished", priceSale: "AED 2,000",            priceRental: "AED 300/mo",   specs: ["42 PPM", "1200 DPI", "512MB RAM", "USB 3.0"],               image: "/images/printer-lexmark.webp",  isActive: true, isFeatured: false },
+  { id: "11", name: "M6635cidn Color MFP",        brand: "Kyocera", category: "MFP",         condition: "New",         priceSale: "Contact for Pricing", priceRental: "AED 700/mo",   specs: ["35 PPM", "Full Color", "Duplex", "Gigabit Ethernet"],       image: "/images/printer-kyocera.webp",  isActive: true, isFeatured: false },
+  { id: "12", name: "Color LaserJet Pro M479fdw", brand: "HP",      category: "MFP",         condition: "New",         priceSale: "AED 3,500",            priceRental: "AED 450/mo",   specs: ["27 PPM Color", "Wi-Fi", "Fax", "Touch Display"],            image: "/images/heroBnr1.webp",         isActive: true, isFeatured: false },
 ];
 
 const API_BASE = '/api';
+
+const BRAND_IMAGES: Record<string, string> = {
+  Canon: "/images/printer-canon-1.webp",
+  HP: "/images/printer-hp.svg",
+  Kyocera: "/images/printer-kyocera.webp",
+  Xerox: "/images/printer-xerox.webp",
+  Brother: "/images/printer-brother.webp",
+  Ricoh: "/images/printer-ricoh.webp",
+  Samsung: "/images/printer-samsung.webp",
+  Lexmark: "/images/printer-lexmark.webp",
+};
+const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/printer-canon-2.webp"]);
+function localImg(image: string, brand: string): string {
+  if (!image || !image.startsWith("/") || (CANON_ONLY.has(image) && brand !== "Canon")) {
+    return BRAND_IMAGES[brand] || "/images/printer-canon-1.webp";
+  }
+  return image;
+}
 
 export default function AdminProducts() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -53,7 +77,7 @@ export default function AdminProducts() {
           priceSale: p.priceSale,
           priceRental: p.priceRental,
           specs: p.specs ? p.specs.split('|') : [],
-          image: p.image,
+          image: localImg(p.image, p.brand),
           isActive: p.isActive === 1,
           isFeatured: p.isFeatured === 1,
         }));
@@ -66,7 +90,8 @@ export default function AdminProducts() {
       console.error('Failed to fetch products from API, falling back to localStorage:', error);
       const stored = localStorage.getItem("sahara_products");
       if (stored) {
-        setProducts(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        setProducts(parsed.map((p: any) => ({ ...p, image: localImg(p.image, p.brand) })));
       } else {
         setProducts(initialProducts);
       }

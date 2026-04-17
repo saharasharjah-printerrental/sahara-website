@@ -90,7 +90,7 @@ export default function CanonPrinterDubai() {
       <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80"
+            src="/images/unsplash-office.webp"
             alt="Canon Printer Dubai"
             className="w-full h-full object-cover opacity-30"
           />
@@ -120,7 +120,7 @@ export default function CanonPrinterDubai() {
               <div className="absolute inset-0 bg-[#f5be53]/20 blur-[120px] rounded-full"></div>
               <div className="relative z-20 glass-card p-8 rounded-3xl overflow-hidden">
                 <img 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYsYbeoBdwCMdfKukPftrIWkhBOQx1lndcCm5Qs8XRbWgH1sOw1h5-rvEaCAGB9aa_KytGw2-L_GbchDCAtNQ01XejFtpAqqAaWfxe0ydzDFEJgryCFFz_fV-H4F2FbvE6_A__nILe03afsoax65a_fHoLk1DU85YBHeJkzEpvMNgDYMI4PPBFUIMwWUzHl91aJjxul2EvAcBTmx-5O-9pF72SloVRcbbfYNUufng5c6rUo1z2dKU-niv05rw8byh2L9HREmwtvC6b"
+                  src="/images/printer-canon-1.webp"
                   alt="Canon Photocopier Rental Dubai"
                   className="w-full h-full object-cover rounded-2xl mix-blend-screen opacity-90"
                 />

@@ -22,10 +22,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const auth = localStorage.getItem("sahara_admin_auth");
-    if (!auth && pathname !== "/admin/login") {
+    if (!auth && !pathname.startsWith("/admin/login")) {
       router.push("/admin/login");
     }
     if (auth) {
@@ -38,24 +40,32 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     router.push("/admin/login");
   };
 
-  if (pathname === "/admin/login") {
+  if (pathname.startsWith("/admin/login")) {
     return <>{children}</>;
+  }
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-surface flex items-center justify-center" suppressHydrationWarning>
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full" suppressHydrationWarning></div>
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#071325] flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-2 border-[#f5be53] border-t-transparent rounded-full"></div>
+      <div className="min-h-screen bg-surface flex items-center justify-center" suppressHydrationWarning>
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full" suppressHydrationWarning></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#071325] flex">
+    <div className="min-h-screen bg-surface flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#030e20] border-r border-white/5 flex flex-col fixed h-full">
+      <aside className="w-64 bg-slate-950 border-r border-white/5 flex flex-col fixed h-full">
         <div className="p-6 border-b border-white/5">
-          <Link href="/admin" className="text-xl font-bold text-[#f5be53]">
+          <Link href="/admin" className="text-xl font-bold text-primary">
             Sahara Admin
           </Link>
         </div>
@@ -67,7 +77,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                 pathname === item.href
-                  ? "bg-[#f5be53] text-[#412d00]"
+                  ? "bg-primary text-amber-950"
                   : "text-slate-400 hover:bg-white/5 hover:text-white"
               }`}
             >

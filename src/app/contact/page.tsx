@@ -157,19 +157,28 @@ export default function ContactPage() {
       <Header />
       
       {/* Hero */}
-      <section className="relative pt-32 pb-24 px-8 lg:px-24">
+      <section className="relative pt-32 pb-12 px-8 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Contact <span className="text-[#f5be53]">Us</span>
           </h1>
-          <p className="text-lg text-[#d3c5b0] max-w-2xl mb-12">
+          <p className="text-lg text-[#d3c5b0] max-w-2xl">
             Get in touch with our team for sales inquiries, technical support, or service requests. We're here to help!
           </p>
+        </div>
+      </section>
 
+      {/* Send us a Message - Upper Section */}
+      <section className="px-8 lg:px-24 pb-16">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+            <span className="w-2 h-8 bg-[#f5be53] rounded-full"></span>
+            Send us a Message
+          </h2>
+          
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="glass-card rounded-[2rem] p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
               {submitted ? (
                 <div className="text-center py-8">
                   <CheckCircle className="text-5xl text-green-400 mb-4" sx={{ fontSize: 60 }} />
@@ -242,9 +251,8 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="glass-card rounded-[2rem] p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   {contactNumbers.map((contact, i) => (
                     <div key={i} className="flex items-start gap-4">
@@ -288,7 +296,7 @@ export default function ContactPage() {
 
               {/* Social Media */}
               <div className="glass-card rounded-[2rem] p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Follow Us</h2>
+                <h2 className="text-xl font-bold text-white mb-4">Follow Us</h2>
                 <div className="flex gap-4">
                   {socialLinks.map((social) => (
                     <motion.a
@@ -298,9 +306,6 @@ export default function ContactPage() {
                       rel="noopener noreferrer"
                       whileHover={{ y: -5, scale: 1.1 }}
                       className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#1a2a3a] to-[#0d1520] flex items-center justify-center text-[#f5be53] transition-all duration-300 cursor-pointer shadow-lg"
-                      style={{
-                        boxShadow: '4px 4px 12px rgba(0,0,0,0.3), -2px -2px 8px rgba(255,255,255,0.05)',
-                      }}
                       aria-label={`Follow us on ${social.name}`}
                     >
                       <SocialIcon icon={social.icon} />
@@ -308,23 +313,48 @@ export default function ContactPage() {
                   ))}
                 </div>
               </div>
-
-              {/* Locations */}
-              <div className="glass-card rounded-[2rem] p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Other Locations</h2>
-                <div className="space-y-4">
-                  {locations.map((loc, i) => (
-                    <div key={i} className="flex justify-between items-center p-4 bg-[#101c2e] rounded-xl">
-                      <div>
-                        <h3 className="font-bold text-white">{loc.city}</h3>
-                        <p className="text-sm text-[#d3c5b0]">{loc.address}</p>
-                      </div>
-                      <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="text-[#f5be53] font-bold">{loc.phone}</a>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map View - Lower Section */}
+      <section className="py-16 px-8 lg:px-24 bg-[#0a1425]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+            <span className="w-2 h-8 bg-[#f5be53] rounded-full"></span>
+            Map View
+          </h2>
+          
+          <div className="glass-card rounded-[2rem] overflow-hidden">
+            <div className="relative w-full h-[450px] bg-[#0a1425]">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57709.04655847797!2d55.37228622257977!3d25.310405175118643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin"
+                width="100%" 
+                height="100%"
+                style={{ border: 0, position: 'absolute', top: 0, left: 0 }} 
+                allowFullScreen 
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Sahara Office Equipment Location Map"
+              />
+            </div>
+          </div>
+          
+          <div className="mt-6 p-6 bg-[#0d1b2e] rounded-2xl border border-[#f5be53]/20">
+            <p className="text-[#d3c5b0] text-center">
+              <span className="text-[#f5be53] font-semibold">Location:</span> Al Arabi Building, Industrial Area 11, Sharjah, UAE
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
+            {locations.map((loc, i) => (
+              <div key={i} className="glass-card rounded-2xl p-6">
+                <h3 className="font-bold text-white text-lg mb-2">{loc.city}</h3>
+                <p className="text-[#d3c5b0] text-sm mb-2">{loc.address}</p>
+                <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="text-[#f5be53] font-bold">{loc.phone}</a>
+              </div>
+            ))}
           </div>
         </div>
       </section>

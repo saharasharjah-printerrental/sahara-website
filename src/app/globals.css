@@ -63,6 +63,7 @@
 
 .animate-infinite-scroll {
   animation: scroll 30s linear infinite;
+  will-change: transform;
 }
 
 .animate-infinite-scroll:hover {
@@ -71,10 +72,19 @@
 
 .animate-carousel {
   animation: carousel 25s linear infinite;
+  will-change: transform;
 }
 
 .animate-carousel:hover {
   animation-play-state: paused;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-infinite-scroll,
+  .animate-carousel {
+    animation: none;
+  }
 }
 
 body {

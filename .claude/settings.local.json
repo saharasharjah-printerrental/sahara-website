@@ -10,7 +10,14 @@
       "Bash(powershell:*)",
       "Bash(node:*)",
       "Bash(python:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "WebFetch(domain:www.saharaprinter.com)",
+      "WebFetch(domain:www.sosauh.com)",
+      "WebFetch(domain:officeequipments.ae)",
+      "WebFetch(domain:www.printone.ae)",
+      "Bash(npx tsc:*)",
+      "Bash(cargo install:*)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }

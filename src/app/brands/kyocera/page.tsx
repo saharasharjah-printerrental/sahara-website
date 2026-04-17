@@ -10,9 +10,9 @@ import Image from "next/image";
 
 export default function KyoceraBrandPage() {
   const products = [
-    { name: "TASKalfa 2554ci", specs: ["25 PPM", "Color A3"], img: "https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA2554CI/540x540-TASKalfa_2554ci_Comb02_F.png" },
-    { name: "TASKalfa 4054ci", specs: ["40 PPM", "Color A3"], img: "https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA4054CI/540x540-TASKalfa_4054ci_Comb02_F.png" },
-    { name: "TASKalfa 5054ci", specs: ["50 PPM", "Color A3"], img: "https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA5054CI/540x540-TASKalfa_5054ci_Comb02_F.png" },
+    { name: "TASKalfa 2554ci", specs: ["25 PPM", "Color A3"], img: "/images/printer-kyocera.webp" },
+    { name: "TASKalfa 4054ci", specs: ["40 PPM", "Color A3"], img: "/images/printer-kyocera.webp" },
+    { name: "TASKalfa 5054ci", specs: ["50 PPM", "Color A3"], img: "/images/printer-kyocera.webp" },
   ];
 
   const features = [
@@ -57,7 +57,7 @@ export default function KyoceraBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="https://www.kyoceradocumentsolutions.us/content/dam/kyocera-americas/us/products/mfp/TASKALFA2554CI/540x540-TASKalfa_2554ci_Comb02_F.png"
+                  src="/images/printer-kyocera.webp"
                   alt="Kyocera TASKalfa Printer"
                   width={540}
                   height={540}

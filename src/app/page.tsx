@@ -34,6 +34,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
+      {/* Preload LCP hero image — only on homepage */}
+      <link rel="preload" as="image" href="/images/hero-bg.webp" fetchPriority="high" />
       <Header />
       <HeroSection />
       <BrandCarousel />
@@ -57,10 +59,11 @@ function HeroSection() {
     <section
       className="relative min-h-screen flex items-center pt-20 px-8 lg:px-24 overflow-hidden"
       style={{
-        backgroundImage: "url('/images/hero-bg.webp.webp')",
+        backgroundImage: "url('/images/hero-bg.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center right",
         backgroundRepeat: "no-repeat",
+        contentVisibility: "auto",
       }}
     >
       {/* Dark overlay — fades left-to-right so text stays legible against the neon scene */}
@@ -278,6 +281,25 @@ function StatsSection() {
   );
 }
 
+const BRAND_IMAGES: Record<string, string> = {
+  Canon: "/images/printer-canon-1.webp",
+  HP: "/images/printer-hp.svg",
+  Kyocera: "/images/printer-kyocera.webp",
+  Xerox: "/images/printer-xerox.webp",
+  Brother: "/images/printer-brother.webp",
+  Ricoh: "/images/printer-ricoh.webp",
+  Samsung: "/images/printer-samsung.webp",
+  Lexmark: "/images/printer-lexmark.webp",
+};
+// heroPrntr1.webp contains Canon-branded machines — never show it for non-Canon products
+const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/printer-canon-2.webp"]);
+function localImg(image: string, brand: string): string {
+  if (!image || !image.startsWith("/") || (CANON_ONLY.has(image) && brand !== "Canon")) {
+    return BRAND_IMAGES[brand] || "/images/printer-canon-1.webp";
+  }
+  return image;
+}
+
 function FeaturedProducts() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [products, setProducts] = useState<any[]>([]);
@@ -286,13 +308,18 @@ function FeaturedProducts() {
     const stored = localStorage.getItem("sahara_products");
     if (stored) {
       const parsed = JSON.parse(stored);
-      setProducts(parsed.filter((p: any) => p.isActive).slice(0, 8));
+      setProducts(
+        parsed
+          .filter((p: any) => p.isActive)
+          .map((p: any) => ({ ...p, image: localImg(p.image, p.brand) }))
+          .slice(0, 8)
+      );
     } else {
       setProducts([
-        { name: "HP LaserJet Enterprise M608", brand: "HP", desc: "High-speed monochromatic laser for heavy duty enterprise workloads.", priceRental: "Contact for Pricing", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX" },
-        { name: "Canon imageRUNNER ADVANCE", brand: "Canon", desc: "Comprehensive document imaging and integrated workflow management.", priceRental: "Leasing Available", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCF9Q2bdCblu-mAfUZQCEzTJ4XJCOn4QroTen8yX2meulXzvcuk3dFy_KrDu7FlutILG20R1k6a6mDK4xa6ARFoUb4pXqb33cZOulst0RdE3iIlzryRqUAQzVbCPbLhlAyFzTnY0YGXxdwD-j7t7mYOW47vlbwJPKovjqROhM6oeKlMKsrWkPwGTtO16FJAqLpfn0OyLG_xrPXAlfqNMyWUO2ofvy8UpEYB7WpO1VK_ggqIaejuoH0xay0WF7P66Kwg8NDzqKnAF_Nq" },
-        { name: "Brother HL-L6400DW", brand: "Brother", desc: "Robust wireless laser printing for medium-sized professional offices.", priceRental: "Sale Ready", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX" },
-        { name: "Kyocera ECOSYS", brand: "Kyocera", desc: "Ultra-reliable high-volume printing with exceptional cost efficiency.", priceRental: "Leasing Available", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAAERWQK3qqk13Z7BoPNtyd_ahfswNo3cAHfP8il3OnqNIb-H8xbY5wpLN73pZv1w7I-LUqgbSwU8pAdWtG0-U83-NA3lFUz4CR-JKj7OKbtGhqlBpw--P2zyDDtyOxUCIiFUoEch3GjRdAmb29wh-PAKsRTplPdT_InvjdUFTgZMD0Sjq4nhfHwwapSvedZp6Vr2A5B7MvVA5AXgNwff2zgGdCrBQbKxcL4wWnNGmPfICBq6St7tcvtFPButWk7Ah7dOicVLcHDEsx" },
+        { name: "HP LaserJet Enterprise M608",  brand: "HP",      desc: "High-speed monochromatic laser for heavy duty enterprise workloads.",    priceRental: "Contact for Pricing", image: "/images/printer-hp.svg"       },
+        { name: "Canon imageRUNNER ADVANCE",     brand: "Canon",   desc: "Comprehensive document imaging and integrated workflow management.",      priceRental: "Leasing Available",   image: "/images/printer-canon-1.webp"  },
+        { name: "Brother HL-L6400DW",            brand: "Brother", desc: "Robust wireless laser printing for medium-sized professional offices.",   priceRental: "Sale Ready",          image: "/images/printer-brother.webp"  },
+        { name: "Kyocera ECOSYS M6235cidn",      brand: "Kyocera", desc: "Ultra-reliable high-volume printing with exceptional cost efficiency.",   priceRental: "Leasing Available",   image: "/images/printer-kyocera.webp"  },
       ]);
     }
   }, []);
@@ -329,7 +356,7 @@ function FeaturedProducts() {
         {products.map((p, i) => (
           <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center glass-card rounded-3xl overflow-hidden group">
             <div className="h-64 bg-[#142032] relative overflow-hidden">
-              <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
               <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>
             </div>
             <div className="p-8">

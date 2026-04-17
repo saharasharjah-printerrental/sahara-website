@@ -9,9 +9,9 @@ import Image from "next/image";
 
 export default function BrotherBrandPage() {
   const products = [
-    { name: "HL-L2350DW", specs: ["32 PPM", "Auto Duplex"], img: "https://www.brother-usa.com/-/media/brother/product-catalog-media/images/hll2350dw_left.png" },
-    { name: "MFC-L8900CDW", specs: ["32 PPM", "Color"], img: "https://www.brother-usa.com/-/media/brother/product-catalog-media/images/2022/07/18/10/58/mfcl8900cdw_front.png" },
-    { name: "HL-L6400DW", specs: ["50 PPM", "Enterprise"], img: "https://www.brother-usa.com/-/media/brother/product-catalog-media/images/2023/04/26/08/38/hll6400dw_front.png" },
+    { name: "HL-L2350DW", specs: ["32 PPM", "Auto Duplex"], img: "/images/printer-brother.webp" },
+    { name: "MFC-L8900CDW", specs: ["32 PPM", "Color"], img: "/images/printer-brother.webp" },
+    { name: "HL-L6400DW", specs: ["50 PPM", "Enterprise"], img: "/images/printer-brother.webp" },
   ];
 
   const features = [
@@ -56,7 +56,7 @@ export default function BrotherBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="https://www.brother-usa.com/-/media/brother/product-catalog-media/images/2022/07/18/10/58/mfcl8900cdw_front.png"
+                  src="/images/printer-brother.webp"
                   alt="Brother MFC-L8900CDW"
                   width={600}
                   height={600}

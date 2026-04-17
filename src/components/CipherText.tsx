@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
 
@@ -20,29 +20,33 @@ export function CipherText({
   delay = 0
 }: CipherTextProps) {
   const [mounted, setMounted] = useState(false);
-  const [displayChars, setDisplayChars] = useState<string[]>(() => text.split(""));
+  const [displayChars, setDisplayChars] = useState<string[]>([]);
   const [isComplete, setIsComplete] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  const initialChars = useMemo(() => text.split("").map(() => " "), [text]);
+  const originalChars = useMemo(() => text.split(""), [text]);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    setDisplayChars(initialChars);
+  }, [initialChars]);
 
   useEffect(() => {
+    if (!mounted) return;
     const startTimer = setTimeout(() => {
       setStartAnimation(true);
     }, delay);
 
     return () => clearTimeout(startTimer);
-  }, [delay]);
+  }, [delay, mounted]);
 
   useEffect(() => {
     if (!startAnimation || !mounted) return;
 
     let iteration = 0;
     const maxIterations = text.length;
-    const originalChars = text.split("");
 
     intervalRef.current = setInterval(() => {
       setDisplayChars((prev) =>
@@ -51,7 +55,8 @@ export function CipherText({
           if (index < iteration) {
             return originalChars[index];
           }
-          return CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+          const randomIndex = (index * 7 + iteration * 3) % CHARACTERS.length;
+          return CHARACTERS[randomIndex];
         })
       );
 
@@ -72,7 +77,15 @@ export function CipherText({
         clearInterval(intervalRef.current);
       }
     };
-  }, [startAnimation, mounted, text]);
+  }, [startAnimation, mounted, text, originalChars]);
+
+  if (!mounted) {
+    return (
+      <div className={`relative cursor-default ${textSize} font-bold leading-tight ${className}`}>
+        <span className="whitespace-nowrap">{text}</span>
+      </div>
+    );
+  }
 
   return (
     <div className={`relative cursor-default ${textSize} font-bold leading-tight ${className}`}>

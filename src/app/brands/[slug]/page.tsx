@@ -14,7 +14,7 @@ const brandData: Record<string, any> = {
     name: "Kyocera",
     tagline: "Document Solutions",
     color: "#E3000E",
-    heroImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuAAERWQK3qqk13Z7BoPNtyd_ahfswNo3cAHfP8il3OnqNIb-H8xbY5wpLN73pZv1w7I-LUqgbSwU8pAdWtG0-U83-NA3lFUz4CR-JKj7OKbtGhqlBpw--P2zyDDtyOxUCIiFUoEch3GjRdAmb29wh-PAKsRTplPdT_InvjdUFTgZMD0Sjq4nhfHwwapSvedZp6Vr2A5B7MvVA5AXgNwff2zgGdCrBQbKxcL4wWnNGmPfICBq6St7tcvtFPButWk7Ah7dOicVLcHDEsx",
+    heroImg: "/images/printer-kyocera.webp",
     features: [
       { icon: "settings_suggest", title: "ECOSYS Technology", desc: "Long-life components reduce waste and total cost of ownership." },
       { icon: "savings", title: "Cost Efficiency", desc: "Industry-low cost per page with exceptional durability." },
@@ -31,7 +31,7 @@ const brandData: Record<string, any> = {
     name: "Brother",
     tagline: "At Your Side",
     color: "#000000",
-    heroImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8rr1lJJ4I71i6lOkkqq4p_2Aev6e3vmkP04ntBdotbP5s7Vb-kVyBUl9pzhg6mvZjX2soHsv1gNmzsq2AYeOwNfvZTQ28_8OQElDPtitchQSFyfM36CTbQ8HwGiYfCfzFeldUnAiU9Sm1jvba2MU1j1BFrUbvdvQ55mOLIkbQerOOKk12uXa9nXdkVJcCIceNvY8XSYOoNwzRQ5R3wZN-DyMhqPR2YGZHLCeAZXpQI2CfR68zt6a2ivQRXDtzNtbQu18tjA-wyBtX",
+    heroImg: "/images/printer-brother.webp",
     features: [
       { icon: "wifi", title: "Wireless Freedom", desc: "Industry-leading wireless connectivity for flexible office deployment." },
       { icon: "security", title: "Secure by Design", desc: "Advanced security features including biometric authentication." },
@@ -48,7 +48,7 @@ const brandData: Record<string, any> = {
     name: "Sharp",
     tagline: "Be Original",
     color: "#000000",
-    heroImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuBs4qU6tL5i7s0r0vU4pW1s8F5e8YxR4wK9mN2aC3lR7vT9sQ1dP6gH8jK5nM2",
+    heroImg: "/images/printer-ricoh.webp",
     features: [
       { icon: "touch_app", title: "Smart Operation", desc: "Intuitive touch-screen interface with customizable workflow." },
       { icon: "security", title: "Enterprise Security", desc: "Multiple layers of security protection for sensitive documents." },
@@ -65,7 +65,7 @@ const brandData: Record<string, any> = {
     name: "Epson",
     tagline: "Exceed Your Vision",
     color: "#0033A0",
-    heroImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuBj2vT5rK9s1pQ7wW3nX4oP6hF8eY9zA2cN5dG6lH7mR4vT1sQ9dP6gH3jK2nM",
+    heroImg: "/images/printer-lexmark.webp",
     features: [
       { icon: "palette", title: "PrecisionCore", desc: "Revolutionary inkjet technology for exceptional print quality." },
       { icon: "water_drop", title: "Heat-Free Printing", desc: "No heat means faster first-page-out and lower energy use." },
@@ -123,7 +123,7 @@ export default function BrandPage() {
     name: brand.name,
     tagline: "Premium Partner",
     color: "#f5be53",
-    heroImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuAqrseApeW8QY3gbRhJwF9xpn85cWiBjrr8yniA2yXfFZ0DoCmwY1gGsbXtIpFThDG9GhvxzWm0pbYjrNyYopByoMt6trc_IuZYlhRs8HmS8fWYeVgQBxdJyWB6hEM--a-0vb1DpKSQ5UfwWe9nWX2yJ3lVM3E9v21vNJpHUTlXhmGGl4A3yI4BcwAkeDzXHleGuabJfUvLBr3ynzIyOw4s_2Xxs3I_WV28EsTZdqGtwDzfadA2U9NypHHpcCZW6AbIuHJXdIgcO2QW",
+    heroImg: "/images/heroPrntr1.webp",
     features: [
       { icon: "verified", title: "Authorized Partner", desc: "Certified dealer with full manufacturer warranty support." },
       { icon: "support_agent", title: "Expert Support", desc: "Trained technicians for installation, maintenance, and repairs." },

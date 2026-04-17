@@ -10,6 +10,9 @@ export async function fetchAPI(endpoint: string, options?: RequestInit) {
       ...options,
     });
     const data = await res.json();
+    if (!res.ok) {
+      return { data: null, error: data.error || `HTTP ${res.status}` };
+    }
     return { data, error: null };
   } catch (error) {
     console.error(`API Error (${endpoint}):`, error);
@@ -19,6 +22,10 @@ export async function fetchAPI(endpoint: string, options?: RequestInit) {
 
 export async function getProducts() {
   return fetchAPI('/products');
+}
+
+export async function getProduct(id: string) {
+  return fetchAPI(`/products?id=${id}`);
 }
 
 export async function getBrands() {

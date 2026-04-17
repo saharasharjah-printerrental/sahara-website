@@ -211,13 +211,12 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-6">Our Services</h4>
             <ul className="space-y-4 text-sm text-slate-400">
-              <li><Link href="/services/printer-rental" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
-              <li><Link href="/services/printer-rental" className="hover:text-[#f5be53] transition-colors">Photocopier Rental Sharjah</Link></li>
-              <li><Link href="/services/amc" className="hover:text-[#f5be53] transition-colors">Annual Maintenance Contract</Link></li>
-              <li><Link href="/services/repair" className="hover:text-[#f5be53] transition-colors">Printer Repair Services</Link></li>
+              <li><Link href="/services/printer-rental" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
+              <li><Link href="/services/photocopier-rental" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
+              <li><Link href="/services/amc" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
+              <li><Link href="/services/repair" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
               <li><Link href="/services/printer-spare-parts" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
-              <li><Link href="/services/sales" className="hover:text-[#f5be53] transition-colors">Corporate Printer Sales</Link></li>
-              <li><Link href="/copier-lease-uae" className="hover:text-[#f5be53] transition-colors">Copier Lease UAE</Link></li>
+              <li><Link href="/services/sales" className="hover:text-[#f5be53] transition-colors">Corporate Sales</Link></li>
             </ul>
           </div>
           

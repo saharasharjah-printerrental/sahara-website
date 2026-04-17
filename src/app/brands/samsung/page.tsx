@@ -9,9 +9,9 @@ import Image from "next/image";
 
 export default function SamsungBrandPage() {
   const products = [
-    { name: "ProXpress SL-M3820ND", specs: ["38 PPM", "1200 DPI"], img: "https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg" },
-    { name: "MultiXpress SL-X7500", specs: ["50 PPM", "Color"], img: "https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg" },
-    { name: "Smart UX Panel", specs: ["Android Based", "Cloud Ready"], img: "https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg" },
+    { name: "ProXpress SL-M3820ND", specs: ["38 PPM", "1200 DPI"], img: "/images/printer-samsung.webp" },
+    { name: "MultiXpress SL-X7500", specs: ["50 PPM", "Color"], img: "/images/printer-samsung.webp" },
+    { name: "Smart UX Panel", specs: ["Android Based", "Cloud Ready"], img: "/images/printer-samsung.webp" },
   ];
 
   const features = [
@@ -56,7 +56,7 @@ export default function SamsungBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="https://d2g44tvvp35wo2.cloudfront.net/photo/global/2018/06/11/22514641234_ca312ff0a3_o.jpg"
+                  src="/images/printer-samsung.webp"
                   alt="Samsung ProXpress Printer"
                   width={800}
                   height={600}

@@ -9,8 +9,8 @@ import Image from "next/image";
 
 export default function XeroxBrandPage() {
   const products = [
-    { name: "VersaLink C235", type: "Color Multifunction", speed: "33 ppm", img: "https://www.xerox.com/assets/images/1200_layout/products/hardware/C235/thumbnail1-300x300.png" },
-    { name: "VersaLink C405", type: "Color Multifunction", speed: "45 ppm", img: "https://www.xerox.com/assets/images/1200_layout/products/hardware/C235/thumbnail1-300x300.png" },
+    { name: "VersaLink C235", type: "Color Multifunction", speed: "33 ppm", img: "/images/printer-xerox.webp" },
+    { name: "VersaLink C405", type: "Color Multifunction", speed: "45 ppm", img: "/images/printer-xerox.webp" },
   ];
 
   const features = [
@@ -49,7 +49,7 @@ export default function XeroxBrandPage() {
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <Image
-                src="https://www.xerox.com/assets/images/1200_layout/products/hardware/C235/thumbnail1-300x300.png"
+                src="/images/printer-xerox.webp"
                 alt="Xerox VersaLink Printer"
                 width={600}
                 height={600}

@@ -80,6 +80,7 @@ export default function CopierLeaseUAE() {
   return (
     <main className="min-h-screen bg-[#071325]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Header />
       
       {/* Hero */}
@@ -92,6 +93,18 @@ export default function CopierLeaseUAE() {
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
             Commercial Photocopier <span className="text-[#f5be53]">Lease</span>
           </h1>
+
+          {/* AEO Quick Answer Block */}
+          <div className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-6 max-w-2xl mx-auto text-left">
+            <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Copier Lease UAE — Quick Answer</p>
+            <p className="text-[#d3c5b0] text-sm leading-relaxed">
+              Copier leasing in the UAE is a long-term financial arrangement (12–60 months) where businesses access
+              enterprise Canon, Kyocera, and Xerox photocopiers with <strong className="text-white">zero upfront capital</strong>.
+              Lease payments qualify as OPEX — reducing taxable income under UAE Corporate Tax. Sahara offers
+              copier leases from <strong className="text-white">AED 250/month</strong> with full maintenance and toner included.
+            </p>
+          </div>
+
           <p className="text-lg text-[#d3c5b0] max-w-2xl mx-auto mb-8">
             Flexible copier lease solutions with tax advantages, flexible terms, and full maintenance included. Zero deposit options available.
           </p>

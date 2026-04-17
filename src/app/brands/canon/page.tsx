@@ -10,7 +10,7 @@ import Image from "next/image";
 import { Hub, DeveloperBoard, Nature, Palette, Print, Security } from "@mui/icons-material";
 
 export default function CanonBrandPage() {
-  const [brandImage, setBrandImage] = useState("https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80");
+  const [brandImage, setBrandImage] = useState("/images/unsplash-office.webp");
 
   useEffect(() => {
     const storedBrands = localStorage.getItem("sahara_brands");
@@ -22,7 +22,7 @@ export default function CanonBrandPage() {
   }, []);
 
   const products = [
-    { name: "imageRUNNER ADVANCE DX", type: "Cloud-connected A3 Color MFP", speed: "High-speed scanning", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAAERWQK3qqk13Z7BoPNtyd_ahfswNo3cAHfP8il3OnqNIb-H8xbY5wpLN73pZv1w7I-LUqgbSwU8pAdWtG0-U83-NA3lFUz4CR-JKj7OKbtGhqlBpw--P2zyDDtyOxUCIiFUoEch3GjRdAmb29wh-PAKsRTplPdT_InvjdUFTgZMD0Sjq4nhfHwwapSvedZp6Vr2A5B7MvVA5AXgNwff2zgGdCrBQbKxcL4wWnNGmPfICBq6St7tcvtFPButWk7Ah7dOicVLcHDEsx" },
+    { name: "imageRUNNER ADVANCE DX", type: "Cloud-connected A3 Color MFP", speed: "High-speed scanning", img: "/images/printer-canon-1.webp" },
     { name: "C3800 Series", type: "Compact powerhouses", speed: "Medium workgroups", img: "" },
     { name: "C5800 Series", type: "Enterprise security", speed: "360° document protection", img: "" },
   ];
@@ -84,7 +84,7 @@ export default function CanonBrandPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2 group relative h-[500px] rounded-lg overflow-hidden glass-card">
               <Image
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Canon_i-Sensys_MF237w.jpg/500px-Canon_i-Sensys_MF237w.jpg"
+                src="/images/printer-canon-1.webp"
                 alt="Canon imageRUNNER"
                 fill
                 className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-700 opacity-80"
@@ -142,7 +142,7 @@ export default function CanonBrandPage() {
           </div>
           <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Drupa_2012_Canon_by-RaBoe_06.jpg/500px-Drupa_2012_Canon_by-RaBoe_06.jpg"
+              src="/images/printer-canon-2.webp"
               alt="Canon Technology"
               fill
               className="object-cover"
