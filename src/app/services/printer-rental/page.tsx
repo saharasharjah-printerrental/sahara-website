@@ -8,6 +8,7 @@ import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 import CountUp from "@/components/CountUp";
 import { Savings, Inventory2, BuildCircle, Emergency, Upgrade, Cancel, SupportAgent, Sync, Build, Verified, ExpandMore, Print, CheckCircle, LocationOn, HeadsetMic } from "@mui/icons-material";
+import Link from "next/link";
 
 export default function PrinterRentalPage() {
   const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
@@ -574,6 +575,96 @@ export default function PrinterRentalPage() {
               <p className="mt-4 text-[#d3c5b0] leading-relaxed">{faq.a}</p>
             </details>
           ))}
+        </div>
+      </section>
+
+      {/* From Our Blog — Internal Link Cluster */}
+      <section className="py-24 px-8 lg:px-24 bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Resource Hub</span>
+            <h2 className="text-3xl font-bold text-white mt-3 mb-3">Learn Before You Rent</h2>
+            <p className="text-slate-400 text-sm max-w-lg mx-auto">Expert guides to help UAE businesses make smarter printer decisions.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              {
+                slug: "how-to-choose-the-best-printer-rental-dubai-service",
+                title: "How to Choose the Best Printer Rental Dubai Service?",
+                category: "Guide",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp",
+              },
+              {
+                slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
+                title: "Why a Company Chooses Copier Rental Over Buying",
+                category: "Guide",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg",
+              },
+              {
+                slug: "total-cost-of-printer-ownership",
+                title: "Total Cost of Printer Ownership",
+                category: "Finance",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
+              },
+              {
+                slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+                title: "Why Every UAE Business is Renting Printers in 2025",
+                category: "Trends",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
+              },
+            ].map((post) => (
+              <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
+                <div className="rounded-2xl border border-white/8 bg-[#0d1b2e] overflow-hidden hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col">
+                  <img src={post.img} alt={post.title} className="w-full h-36 object-cover" loading="lazy" />
+                  <div className="p-4 flex flex-col flex-1">
+                    <span className="inline-flex px-2 py-0.5 rounded-full bg-[#142032] border border-[#f5be53]/20 text-[#f5be53] text-xs font-medium mb-2 self-start">
+                      {post.category}
+                    </span>
+                    <h4 className="text-white text-sm font-semibold leading-snug group-hover:text-[#f5be53] transition-colors flex-1 line-clamp-3">
+                      {post.title}
+                    </h4>
+                    <span className="text-[#f5be53] text-xs mt-3 flex items-center gap-1">
+                      Read Article
+                      <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link href="/blogs" className="px-6 py-3 border border-[#f5be53]/30 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">
+              View All Articles →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Location Cross-Links */}
+      <section className="py-12 px-8 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Printer Rental by Location</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { href: "/printer-rental-dubai", label: "Printer Rental Dubai" },
+              { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi" },
+              { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah" },
+              { href: "/printer-rental-rak", label: "Printer Rental RAK" },
+              { href: "/printer-rental-fujairah", label: "Printer Rental Fujairah" },
+              { href: "/printer-rental-al-ain", label: "Printer Rental Al Ain" },
+              { href: "/copier-lease-uae", label: "Copier Lease UAE" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
+              >
+                📍 {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

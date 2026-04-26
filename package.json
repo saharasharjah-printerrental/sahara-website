@@ -9,6 +9,7 @@
     "deploy": "npx wrangler pages deploy .vercel/output/static --project-name=sahara-website"
   },
   "dependencies": {
+    "boneyard-js": "latest",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^6.5.0",

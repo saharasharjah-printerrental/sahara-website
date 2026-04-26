@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Skeleton } from "boneyard-js";
 
 interface Product {
   id: string;
@@ -206,6 +207,7 @@ export default function AdminProducts() {
           </div>
 
           {/* Products Table */}
+          <Skeleton name="admin-products-table" loading={loading} color="rgba(26,45,74,0.9)" darkColor="rgba(30,52,85,0.9)" animate="shimmer" stagger={60}>
           <div className="glass-card rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -221,7 +223,30 @@ export default function AdminProducts() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredProducts.map((product) => (
+                  {loading ? (
+                    Array(8).fill(null).map((_, i) => (
+                      <tr key={`skel-${i}`} className="border-b border-white/5">
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-lg bg-[#1a2d4a]" />
+                            <div className="h-4 w-32 rounded bg-[#1a2d4a]" />
+                          </div>
+                        </td>
+                        <td className="p-4"><div className="h-4 w-16 rounded bg-[#1a2d4a]" /></td>
+                        <td className="p-4"><div className="h-4 w-20 rounded bg-[#1a2d4a]" /></td>
+                        <td className="p-4"><div className="h-4 w-16 rounded bg-[#1a2d4a]" /></td>
+                        <td className="p-4"><div className="h-4 w-24 rounded bg-[#1a2d4a]" /></td>
+                        <td className="p-4"><div className="h-6 w-16 rounded-full bg-[#1a2d4a]" /></td>
+                        <td className="p-4">
+                          <div className="flex gap-2">
+                            <div className="w-8 h-8 rounded-lg bg-[#1a2d4a]" />
+                            <div className="w-8 h-8 rounded-lg bg-[#1a2d4a]" />
+                            <div className="w-8 h-8 rounded-lg bg-[#1a2d4a]" />
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : filteredProducts.map((product) => (
                     <tr key={product.id} className="border-b border-white/5">
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -282,6 +307,7 @@ export default function AdminProducts() {
               </table>
             </div>
           </div>
+          </Skeleton>
         </div>
       </main>
 

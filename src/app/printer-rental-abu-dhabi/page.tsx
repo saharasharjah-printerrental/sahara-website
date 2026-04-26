@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import MobileNav from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "Printer Rental Abu Dhabi | Photocopier Lease UAE – AED 250/mo | Sahara",
@@ -620,9 +622,123 @@ export default function PrinterRentalAbuDhabi() {
         </div>
       </section>
 
+      {/* ── Related Services — Internal Cross-Links ── */}
+      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Related Services</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { href: "/services/printer-rental", label: "Printer Rental UAE" },
+              { href: "/services/photocopier-rental", label: "Photocopier Rental" },
+              { href: "/services/amc", label: "Annual Maintenance (AMC)" },
+              { href: "/services/repair", label: "Printer Repair" },
+              { href: "/services/toner", label: "Toner & Spare Parts" },
+              { href: "/hp-printer-abu-dhabi", label: "HP Printer Abu Dhabi" },
+              { href: "/brands/canon", label: "Canon Printers" },
+              { href: "/brands/kyocera", label: "Kyocera Printers" },
+              { href: "/copier-lease-uae", label: "Copier Lease UAE" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Other UAE Locations ── */}
+      <section className="py-12 px-8 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Printer Rental in Other Emirates</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { href: "/printer-rental-dubai", label: "Printer Rental Dubai", desc: "Same-day delivery. Business Bay, DIFC, JLT, Marina & all Dubai areas." },
+              { href: "/photocopier-rental-sharjah", label: "Photocopier Rental Sharjah", desc: "Our HQ. Fastest service in Sharjah & Northern Emirates." },
+              { href: "/printer-rental-al-ain", label: "Printer Rental Al Ain", desc: "Serving Al Ain businesses, universities & clinics." },
+              { href: "/copier-lease-uae", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract & invoice." },
+            ].map((loc) => (
+              <Link
+                key={loc.href}
+                href={loc.href}
+                className="group rounded-2xl p-5 border border-white/6 bg-[#0d1b2e] hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-[#f5be53] transition-colors">{loc.label}</h4>
+                <p className="text-slate-500 text-xs leading-relaxed">{loc.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── From Our Blog ── */}
+      <section className="py-16 px-8 lg:px-24 bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Resource Hub</p>
+              <h2 className="text-2xl font-bold text-white">Abu Dhabi Printer Rental Guides</h2>
+            </div>
+            <Link href="/blogs" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All →</Link>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              {
+                slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
+                title: "Why Companies Choose Copier Rental Over Buying",
+                category: "Guide",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg",
+              },
+              {
+                slug: "total-cost-of-printer-ownership",
+                title: "Total Cost of Printer Ownership",
+                category: "Finance",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
+              },
+              {
+                slug: "what-a-copier-rental-service-must-deliver-to-a-client",
+                title: "What a Copier Rental Service Must Deliver",
+                category: "Guide",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758723167/blogs/gifymghto0ykchvzrjyt.jpg",
+              },
+              {
+                slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+                title: "Why Every UAE Business is Renting Printers in 2025",
+                category: "Trends",
+                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
+              },
+            ].map((post) => (
+              <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
+                <div className="rounded-2xl border border-white/8 bg-[#0d1b2e] overflow-hidden hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col">
+                  <img src={post.img} alt={post.title} className="w-full h-32 object-cover" loading="lazy" />
+                  <div className="p-4 flex flex-col flex-1">
+                    <span className="inline-flex px-2 py-0.5 rounded-full bg-[#142032] border border-[#f5be53]/20 text-[#f5be53] text-[10px] font-medium mb-2 self-start">
+                      {post.category}
+                    </span>
+                    <h4 className="text-white text-xs font-semibold leading-snug group-hover:text-[#f5be53] transition-colors flex-1 line-clamp-3">
+                      {post.title}
+                    </h4>
+                    <span className="text-[#f5be53] text-xs mt-3 flex items-center gap-1">
+                      Read
+                      <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
+      <MobileNav />
     </main>
   );
 }

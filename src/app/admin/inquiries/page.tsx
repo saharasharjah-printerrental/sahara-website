@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Skeleton } from "boneyard-js";
 
 interface Inquiry {
   id: string;
@@ -19,12 +20,14 @@ export default function AdminInquiries() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [filter, setFilter] = useState("all");
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_inquiries");
     if (stored) {
       setInquiries(JSON.parse(stored));
     }
+    setMounted(true);
   }, []);
 
   const saveInquiries = (newInquiries: Inquiry[]) => {
@@ -80,8 +83,9 @@ export default function AdminInquiries() {
           </div>
 
           {/* Inquiries List */}
+          <Skeleton name="admin-inquiries-table" loading={!mounted} color="rgba(26,45,74,0.9)" darkColor="rgba(30,52,85,0.9)" animate="shimmer" stagger={60}>
           <div className="glass-card rounded-2xl overflow-hidden">
-            {filteredInquiries.length > 0 ? (
+            {!mounted || filteredInquiries.length > 0 ? (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -95,7 +99,24 @@ export default function AdminInquiries() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredInquiries.map((inquiry) => (
+                    {!mounted ? (
+                      Array(5).fill(null).map((_, i) => (
+                        <tr key={`skel-${i}`} className="border-b border-white/5">
+                          <td className="p-4">
+                            <div className="h-4 w-28 rounded bg-[#1a2d4a] mb-1.5" />
+                            <div className="h-3 w-20 rounded bg-[#1a2d4a]" />
+                          </td>
+                          <td className="p-4">
+                            <div className="h-3.5 w-36 rounded bg-[#1a2d4a] mb-1.5" />
+                            <div className="h-3 w-24 rounded bg-[#1a2d4a]" />
+                          </td>
+                          <td className="p-4"><div className="h-4 w-20 rounded bg-[#1a2d4a]" /></td>
+                          <td className="p-4"><div className="h-6 w-20 rounded-full bg-[#1a2d4a]" /></td>
+                          <td className="p-4"><div className="h-4 w-20 rounded bg-[#1a2d4a]" /></td>
+                          <td className="p-4"><div className="h-7 w-12 rounded-lg bg-[#1a2d4a]" /></td>
+                        </tr>
+                      ))
+                    ) : filteredInquiries.map((inquiry) => (
                       <tr key={inquiry.id} className="border-b border-white/5">
                         <td className="p-4">
                           <p className="font-medium text-white">{inquiry.name}</p>
@@ -141,6 +162,7 @@ export default function AdminInquiries() {
               </div>
             )}
           </div>
+          </Skeleton>
         </div>
       </main>
 

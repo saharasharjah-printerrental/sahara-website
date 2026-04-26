@@ -296,6 +296,94 @@ export default function BlogPage() {
         </div>
       </section>
 
+      {/* Topic Clusters — Internal Linking Hub */}
+      <section className="py-16 px-8 bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-8">Explore by Topic</p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Printer Rental Guides",
+                desc: "Everything you need to know before renting a printer in the UAE.",
+                links: [
+                  { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" as const },
+                  { href: "/printer-rental-dubai", label: "Printer Rental Dubai", type: "location" as const },
+                  { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" as const },
+                  { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah", type: "location" as const },
+                ],
+              },
+              {
+                title: "Cost & Finance",
+                desc: "Understand the true cost of printing and how rental saves money.",
+                links: [
+                  { href: "/services/amc", label: "Annual Maintenance (AMC)", type: "service" as const },
+                  { href: "/rental-calculator", label: "Rental Cost Calculator", type: "tool" as const },
+                  { href: "/copier-lease-uae", label: "Copier Lease UAE", type: "location" as const },
+                  { href: "/get-quote", label: "Get a Free Quote", type: "tool" as const },
+                ],
+              },
+              {
+                title: "Repair & Maintenance",
+                desc: "Keep your office printers running at peak performance.",
+                links: [
+                  { href: "/services/repair", label: "Printer Repair Services", type: "service" as const },
+                  { href: "/printer-repair-dubai", label: "Printer Repair Dubai", type: "location" as const },
+                  { href: "/services/toner", label: "Toner & Spare Parts", type: "service" as const },
+                  { href: "/services/printer-spare-parts", label: "Printer Spare Parts", type: "service" as const },
+                ],
+              },
+            ].map((cluster) => (
+              <div key={cluster.title} className="rounded-2xl border border-white/8 bg-[#0d1b2e] p-6">
+                <h3 className="text-white font-bold mb-2">{cluster.title}</h3>
+                <p className="text-slate-400 text-xs mb-5 leading-relaxed">{cluster.desc}</p>
+                <ul className="space-y-2">
+                  {cluster.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="flex items-center gap-2 text-sm text-slate-300 hover:text-[#f5be53] transition-colors group"
+                      >
+                        <svg className="w-3.5 h-3.5 text-[#f5be53]/50 group-hover:text-[#f5be53] transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Brand Pages Cross-Links */}
+      <section className="py-12 px-8">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Printer Brands We Offer</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { href: "/brands/canon", label: "Canon" },
+              { href: "/brands/hp", label: "HP" },
+              { href: "/brands/kyocera", label: "Kyocera" },
+              { href: "/brands/ricoh", label: "Ricoh" },
+              { href: "/brands/xerox", label: "Xerox" },
+              { href: "/brands/brother", label: "Brother" },
+              { href: "/brands/samsung", label: "Samsung" },
+              { href: "/brands/lexmark", label: "Lexmark" },
+            ].map((brand) => (
+              <Link
+                key={brand.href}
+                href={brand.href}
+                className="px-5 py-2 rounded-full border border-white/10 text-slate-400 text-sm hover:text-white hover:border-[#f5be53]/30 transition-all"
+              >
+                {brand.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 px-8">
         <div className="max-w-5xl mx-auto glass-card rounded-[48px] p-12 md:p-20 text-center relative overflow-hidden">

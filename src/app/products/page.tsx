@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Skeleton } from "boneyard-js";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -50,6 +51,7 @@ export default function ProductsPage() {
   const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
   const [products, setProducts] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -65,6 +67,7 @@ export default function ProductsPage() {
           }));
           setProducts(mapped);
           localStorage.setItem("sahara_products", JSON.stringify(mapped));
+          setLoading(false);
           return;
         }
       } catch {
@@ -77,6 +80,7 @@ export default function ProductsPage() {
       } else {
         setProducts(defaultProducts);
       }
+      setLoading(false);
     })();
   }, []);
 
@@ -243,7 +247,36 @@ export default function ProductsPage() {
               </p>
             </div>
 
-            {paginatedProducts.length === 0 ? (
+            {loading ? (
+              <Skeleton
+                name="product-grid"
+                loading={true}
+                color="rgba(26,45,74,0.9)"
+                darkColor="rgba(30,52,85,0.9)"
+                animate="shimmer"
+                stagger={80}
+              >
+                <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                  {Array(9).fill(null).map((_, i) => (
+                    <div key={i} className="glass-card rounded-[2rem] overflow-hidden flex flex-col">
+                      <div className="h-64 bg-[#142032]" />
+                      <div className="p-6 flex-1 flex flex-col gap-4">
+                        <div className="h-6 rounded-lg bg-[#1a2d4a] w-3/4" />
+                        <div className="grid grid-cols-2 gap-3">
+                          {Array(4).fill(null).map((__, j) => (
+                            <div key={j} className="h-4 rounded bg-[#1a2d4a]" />
+                          ))}
+                        </div>
+                        <div className="mt-auto flex flex-col gap-3 pt-2">
+                          <div className="h-5 rounded-lg bg-[#1a2d4a] w-1/3" />
+                          <div className="h-12 rounded-2xl bg-[#1a2d4a]" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Skeleton>
+            ) : paginatedProducts.length === 0 ? (
               <div className="text-center py-24 text-[#d3c5b0]">
                 <span className="material-symbols-outlined text-5xl text-[#4f4536] mb-4 block">search_off</span>
                 No products match your filters.

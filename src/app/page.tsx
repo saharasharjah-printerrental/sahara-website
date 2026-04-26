@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useCallback, useState, useEffect } from "react";
+import { Skeleton } from "boneyard-js";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -41,6 +42,7 @@ export default function Home() {
       <BrandCarousel />
       <DefinitionBlock />
       <ServicesSection />
+      <LocationsSection />
       <StatsSection />
       <FeaturedProducts />
       <ReviewsSection />
@@ -266,6 +268,145 @@ function ServicesSection() {
   );
 }
 
+function LocationsSection() {
+  const locations = [
+    {
+      city: "Dubai",
+      href: "/printer-rental-dubai",
+      label: "Printer Rental Dubai",
+      desc: "Same-day delivery to Business Bay, DIFC, JLT, Marina & all Dubai districts.",
+      price: "From AED 250/mo",
+      highlight: true,
+      icon: "🏙️",
+    },
+    {
+      city: "Abu Dhabi",
+      href: "/printer-rental-abu-dhabi",
+      label: "Printer Rental Abu Dhabi",
+      desc: "Weekly maintenance visits. Mussafah, Al Reem Island, Khalifa City & ADGM.",
+      price: "From AED 250/mo",
+      highlight: true,
+      icon: "🕌",
+    },
+    {
+      city: "Sharjah",
+      href: "/photocopier-rental-sharjah",
+      label: "Photocopier Rental Sharjah",
+      desc: "HQ in Sharjah Industrial Area. Fastest response times in the emirate.",
+      price: "From AED 250/mo",
+      highlight: false,
+      icon: "🏭",
+    },
+    {
+      city: "RAK",
+      href: "/printer-rental-rak",
+      label: "Printer Rental RAK",
+      desc: "Serving Ras Al Khaimah businesses, free zones & industrial areas.",
+      price: "From AED 300/mo",
+      highlight: false,
+      icon: "🌿",
+    },
+    {
+      city: "Fujairah",
+      href: "/printer-rental-fujairah",
+      label: "Printer Rental Fujairah",
+      desc: "East coast coverage — Fujairah port, free zones & business centres.",
+      price: "From AED 300/mo",
+      highlight: false,
+      icon: "⛰️",
+    },
+    {
+      city: "Al Ain",
+      href: "/printer-rental-al-ain",
+      label: "Printer Rental Al Ain",
+      desc: "Garden city coverage — Al Ain businesses, universities & clinics.",
+      price: "From AED 300/mo",
+      highlight: false,
+      icon: "🌴",
+    },
+  ];
+
+  return (
+    <section className="py-24 px-8 lg:px-24 bg-[#050d1a]">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-14">
+          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">UAE Coverage</h2>
+          <p className="text-4xl font-bold text-white">Printer Rental Across All 7 Emirates</p>
+          <p className="text-[#7a94ad] mt-4 max-w-lg mx-auto text-sm">
+            Same-day delivery in Dubai & Abu Dhabi. Free delivery and setup across the UAE.
+          </p>
+        </div>
+
+        {/* Dubai & Abu Dhabi — hero cards */}
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          {locations.filter(l => l.highlight).map((loc) => (
+            <a
+              key={loc.href}
+              href={loc.href}
+              className="group relative rounded-3xl p-8 overflow-hidden hover:-translate-y-1 transition-all duration-300"
+              style={{
+                background: "linear-gradient(150deg, rgba(15,26,44,0.98) 0%, rgba(8,15,28,0.99) 100%)",
+                border: "1px solid rgba(245,190,83,0.25)",
+                boxShadow: "0 0 40px rgba(245,190,83,0.08), 0 20px 60px rgba(0,0,0,0.4)",
+              }}
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{ boxShadow: "inset 0 0 40px rgba(245,190,83,0.06)" }} />
+              <div className="flex items-start justify-between mb-4">
+                <span className="text-4xl">{loc.icon}</span>
+                <span className="text-xs font-bold text-[#f5be53] bg-[#f5be53]/10 border border-[#f5be53]/20 px-3 py-1 rounded-full">
+                  {loc.price}
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#f5be53] transition-colors">
+                {loc.label}
+              </h3>
+              <p className="text-[#7a94ad] text-sm leading-relaxed mb-6">{loc.desc}</p>
+              <span className="inline-flex items-center gap-2 text-[#f5be53] text-sm font-semibold">
+                View Plans
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+          ))}
+        </div>
+
+        {/* Other emirates — compact grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {locations.filter(l => !l.highlight).map((loc) => (
+            <a
+              key={loc.href}
+              href={loc.href}
+              className="group rounded-2xl p-5 hover:-translate-y-0.5 transition-all duration-300"
+              style={{
+                background: "linear-gradient(150deg, rgba(12,22,38,0.97) 0%, rgba(7,14,26,0.98) 100%)",
+                border: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-2xl">{loc.icon}</span>
+                <h3 className="text-white font-bold text-sm group-hover:text-[#f5be53] transition-colors leading-snug">
+                  {loc.label}
+                </h3>
+              </div>
+              <p className="text-slate-500 text-xs leading-relaxed mb-3">{loc.desc}</p>
+              <span className="text-[#f5be53]/70 text-xs font-medium">{loc.price}</span>
+            </a>
+          ))}
+        </div>
+
+        {/* Nationwide CTA */}
+        <div className="text-center mt-10">
+          <a href="/copier-lease-uae" className="px-6 py-3 border border-[#f5be53]/25 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">
+            View Nationwide Copier Lease Plans →
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StatsSection() {
   return (
     <StatsClay
@@ -300,9 +441,18 @@ function localImg(image: string, brand: string): string {
   return image;
 }
 
+const FEATURED_SKELETON = Array(4).fill(null).map(() => ({
+  name: "",
+  brand: "",
+  desc: "",
+  priceRental: "",
+  image: "",
+}));
+
 function FeaturedProducts() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_products");
@@ -322,7 +472,10 @@ function FeaturedProducts() {
         { name: "Kyocera ECOSYS M6235cidn",      brand: "Kyocera", desc: "Ultra-reliable high-volume printing with exceptional cost efficiency.",   priceRental: "Leasing Available",   image: "/images/printer-kyocera.webp"  },
       ]);
     }
+    setLoading(false);
   }, []);
+
+  const displayProducts = loading ? FEATURED_SKELETON : products;
 
   const scrollLeft = React.useCallback(() => {
     if (containerRef.current) {
@@ -352,26 +505,41 @@ function FeaturedProducts() {
           </button>
         </div>
       </div>
-      <div ref={containerRef} className="flex gap-8 no-scrollbar overflow-x-auto pb-8 snap-x max-w-7xl mx-auto scroll-smooth">
-        {products.map((p, i) => (
-          <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center glass-card rounded-3xl overflow-hidden group">
-            <div className="h-64 bg-[#142032] relative overflow-hidden">
-              <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
-              <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>
-            </div>
-            <div className="p-8">
-              <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
-              <p className="text-[#d3c5b0] text-sm mb-6">{p.desc}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-[#f5be53] font-bold text-lg">{p.priceRental || "Contact for Pricing"}</span>
-                <a href="/products" className="text-white hover:text-[#f5be53] transition-colors flex items-center gap-2">
-                  Details <East className="text-sm" />
-                </a>
+      <Skeleton
+        name="featured-products"
+        loading={loading}
+        color="rgba(26,45,74,0.9)"
+        darkColor="rgba(30,52,85,0.9)"
+        animate="shimmer"
+        stagger={100}
+      >
+        <div ref={containerRef} className="flex gap-8 no-scrollbar overflow-x-auto pb-8 snap-x max-w-7xl mx-auto scroll-smooth">
+          {displayProducts.map((p, i) => (
+            <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center glass-card rounded-3xl overflow-hidden group">
+              <div className="h-64 bg-[#142032] relative overflow-hidden">
+                {p.image && (
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                )}
+                {p.brand && (
+                  <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>
+                )}
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-bold text-white mb-2">{p.name || "\u00A0"}</h3>
+                <p className="text-[#d3c5b0] text-sm mb-6">{p.desc || "\u00A0"}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-[#f5be53] font-bold text-lg">{p.priceRental || "\u00A0"}</span>
+                  {!loading && (
+                    <a href="/products" className="text-white hover:text-[#f5be53] transition-colors flex items-center gap-2">
+                      Details <East className="text-sm" />
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Skeleton>
     </section>
   );
 }
@@ -414,8 +582,15 @@ function ReviewsSection() {
   );
 }
 
+const BRAND_SKELETON = Array(8).fill(null).map((_, i) => ({
+  name: `Brand${i}`,
+  slug: `brand-${i}`,
+  logoUrl: "",
+}));
+
 function BrandCarousel() {
   const [brands, setBrands] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const defaultBrands = [
     { name: "HP", slug: "hp", logoUrl: "" },
@@ -435,13 +610,15 @@ function BrandCarousel() {
       const activeBrands = parsed.filter((b: any) => b.isActive);
       if (activeBrands.length > 0) {
         setBrands(activeBrands);
+        setLoading(false);
         return;
       }
     }
     setBrands(defaultBrands);
+    setLoading(false);
   }, []);
 
-  if (brands.length === 0) return null;
+  const displayBrands = loading ? BRAND_SKELETON : [...brands, ...brands, ...brands];
 
   const getInitials = (name: string) => {
     return name.split(' ').map(word => word[0]).join('').slice(0, 2).toUpperCase();
@@ -452,35 +629,43 @@ function BrandCarousel() {
       <div className="text-center mb-8">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
       </div>
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10"></div>
-        <div className="flex items-center overflow-hidden">
-          <div className="flex gap-16 animate-carousel whitespace-nowrap">
-            {[...brands, ...brands, ...brands].map((brand, i) => (
-              <div key={i} className="flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                <div className="h-16 w-32 flex items-center justify-center rounded-xl bg-white/5 p-3">
-                  {brand.logoUrl ? (
-                    <img 
-                      src={brand.logoUrl} 
-                      alt={brand.name} 
-                      className="max-h-full max-w-full object-contain"
-                      loading="lazy"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = 'none';
-                        (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                      }}
-                    />
-                  ) : null}
-                  <div className={`text-slate-500 font-bold text-lg ${brand.logoUrl ? 'hidden' : ''}`}>
-                    {getInitials(brand.name)}
+      <Skeleton
+        name="brand-carousel"
+        loading={loading}
+        color="rgba(26,45,74,0.9)"
+        darkColor="rgba(30,52,85,0.9)"
+        animate="shimmer"
+      >
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10" />
+          <div className="flex items-center overflow-hidden">
+            <div className={`flex gap-16 whitespace-nowrap ${loading ? "" : "animate-carousel"}`}>
+              {displayBrands.map((brand, i) => (
+                <div key={i} className="flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                  <div className="h-16 w-32 flex items-center justify-center rounded-xl bg-white/5 p-3">
+                    {brand.logoUrl ? (
+                      <img
+                        src={brand.logoUrl}
+                        alt={brand.name}
+                        className="max-h-full max-w-full object-contain"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          (e.target as HTMLImageElement).nextElementSibling?.classList.remove("hidden");
+                        }}
+                      />
+                    ) : null}
+                    <div className={`text-slate-500 font-bold text-lg ${brand.logoUrl ? "hidden" : ""}`}>
+                      {brand.name ? getInitials(brand.name) : ""}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Skeleton>
     </section>
   );
 }
