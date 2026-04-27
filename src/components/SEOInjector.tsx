@@ -2,6 +2,25 @@
 
 import { useEffect, useState } from "react";
 
+type ParsedScript = { src: string; isAsync: boolean } | { inline: string };
+
+function parseScripts(html: string): ParsedScript[] {
+  if (!html?.trim()) return [];
+  const out: ParsedScript[] = [];
+  const re = /<script([^>]*)>([\s\S]*?)<\/script>/gi;
+  let m: RegExpExecArray | null;
+  let hasTag = false;
+  while ((m = re.exec(html)) !== null) {
+    hasTag = true;
+    const srcMatch = m[1].match(/src=["']([^"']+)["']/i);
+    const body = m[2].trim();
+    if (srcMatch) out.push({ src: srcMatch[1], isAsync: /\basync\b/i.test(m[1]) });
+    else if (body) out.push({ inline: body });
+  }
+  if (!hasTag && html.trim()) out.push({ inline: html.trim() });
+  return out;
+}
+
 interface SEOConfig {
   googleAnalyticsId: string;
   googleAnalytics4Id: string;
@@ -81,6 +100,20 @@ export default function SEOInjector() {
     };
   }, []);
 
+  // Inject custom body scripts via DOM — handles both raw JS and full <script> HTML snippets
+  useEffect(() => {
+    if (!config?.customBodyScripts) return;
+    const injected: HTMLScriptElement[] = [];
+    for (const s of parseScripts(config.customBodyScripts)) {
+      const el = document.createElement("script");
+      if ("src" in s) { el.src = s.src; el.async = s.isAsync; }
+      else { el.textContent = s.inline; }
+      document.body.appendChild(el);
+      injected.push(el);
+    }
+    return () => injected.forEach((el) => el.remove());
+  }, [config?.customBodyScripts]);
+
   if (!config) return null;
 
   return (
@@ -138,22 +171,6 @@ export default function SEOInjector() {
         />
       )}
 
-      {/* Google Tag Manager */}
-      {config.googleTagManagerId && (
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${config.googleTagManagerId}');
-              ${config.enableDevMode ? `console.log('[GTM] Initialized with ID: ${config.googleTagManagerId}');` : ''}
-            `,
-          }}
-        />
-      )}
-
       {/* Meta Pixel */}
       {config.metaPixelId && (
         <script
@@ -206,24 +223,6 @@ export default function SEOInjector() {
               })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
               ${config.enableDevMode ? `console.log('[Hotjar] Initialized with ID: ${config.hotjarId}');` : ''}
             `,
-          }}
-        />
-      )}
-
-      {/* Custom Head Scripts */}
-      {config.customHeadScripts && (
-        <script
-          dangerouslySetInnerHTML={{
-            __html: config.customHeadScripts,
-          }}
-        />
-      )}
-
-      {/* Custom Body Scripts - injected before closing body */}
-      {config.customBodyScripts && (
-        <script
-          dangerouslySetInnerHTML={{
-            __html: config.customBodyScripts,
           }}
         />
       )}

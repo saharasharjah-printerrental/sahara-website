@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SEOInjector from "@/components/SEOInjector";
 import VisitorTracker from "@/components/VisitorTracker";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const runtime = 'edge';
 
@@ -184,11 +185,47 @@ const organizationSchema = {
   }
 };
 
-export default function RootLayout({
+interface HeadSEOConfig {
+  googleTagManagerId?: string;
+  customHeadScripts?: string;
+}
+
+type ParsedScript = { src: string; isAsync: boolean } | { inline: string };
+
+function parseScripts(html: string): ParsedScript[] {
+  if (!html?.trim()) return [];
+  const out: ParsedScript[] = [];
+  const re = /<script([^>]*)>([\s\S]*?)<\/script>/gi;
+  let m: RegExpExecArray | null;
+  let hasTag = false;
+  while ((m = re.exec(html)) !== null) {
+    hasTag = true;
+    const srcMatch = m[1].match(/src=["']([^"']+)["']/i);
+    const body = m[2].trim();
+    if (srcMatch) out.push({ src: srcMatch[1], isAsync: /\basync\b/i.test(m[1]) });
+    else if (body) out.push({ inline: body });
+  }
+  if (!hasTag && html.trim()) out.push({ inline: html.trim() });
+  return out;
+}
+
+async function getHeadSEOConfig(): Promise<HeadSEOConfig | null> {
+  try {
+    const db = (getRequestContext().env as any).DB;
+    if (!db) return null;
+    const row: any = await db.prepare("SELECT value FROM settings WHERE key = ?").bind("seo_config").first();
+    if (row?.value) return JSON.parse(row.value);
+  } catch {}
+  return null;
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const seoConfig = await getHeadSEOConfig();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -200,8 +237,36 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
         />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        {/* GTM — server-side so it lands in the initial HTML response */}
+        {seoConfig?.googleTagManagerId && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${seoConfig.googleTagManagerId}');`,
+            }}
+          />
+        )}
+        {/* Custom head scripts — parsed server-side to handle full HTML snippets */}
+        {seoConfig?.customHeadScripts &&
+          parseScripts(seoConfig.customHeadScripts).map((s, i) =>
+            "src" in s ? (
+              <script key={i} async={s.isAsync} src={s.src} />
+            ) : (
+              <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
+            )
+          )}
       </head>
       <body className="bg-[#071325] text-[#d7e3fc]" suppressHydrationWarning>
+        {/* GTM noscript fallback — must be immediately after opening body tag */}
+        {seoConfig?.googleTagManagerId && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${seoConfig.googleTagManagerId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <SEOInjector />
         <VisitorTracker />
         {children}
