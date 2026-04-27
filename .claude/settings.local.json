@@ -17,7 +17,11 @@
       "WebFetch(domain:www.printone.ae)",
       "Bash(npx tsc:*)",
       "Bash(cargo install:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(npm info *)",
+      "PowerShell(npm info *)",
+      "PowerShell(Remove-Item *)",
+      "PowerShell(New-Item *)"
     ]
   }
 }

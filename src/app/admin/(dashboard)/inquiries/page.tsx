@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Skeleton } from "boneyard-js";
+import { Skeleton } from "boneyard-js/react";
 
 interface Inquiry {
   id: string;

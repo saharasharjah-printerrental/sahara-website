@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useCallback, useState, useEffect } from "react";
-import { Skeleton } from "boneyard-js";
+import { Skeleton } from "boneyard-js/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";

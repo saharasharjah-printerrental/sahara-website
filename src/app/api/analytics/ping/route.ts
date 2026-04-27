@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const runtime = "edge";
 
 function getDB() {
   try {
-    const { getRequestContext } = require("@cloudflare/next-on-pages");
     return getRequestContext().env.DB ?? null;
   } catch {
     return null;

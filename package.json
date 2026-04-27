@@ -12,7 +12,7 @@
     "boneyard-js": "latest",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^6.5.0",
+    "@mui/icons-material": "^9.0.0",
     "@mui/material": "^9.0.0",
     "@reduxjs/toolkit": "^2.11.2",
     "framer-motion": "^11.18.2",
