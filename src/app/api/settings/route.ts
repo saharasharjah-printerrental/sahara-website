@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
 
   try {
     if (key) {
-      const result = await db.prepare('SELECT * FROM settings WHERE key = ?').get(key);
+      const result = await db.prepare('SELECT * FROM settings WHERE key = ?').bind(key).first();
       return NextResponse.json({ setting: result });
     }
 
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
 
     await db.prepare(`
       INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)
-    `).run(body.key, body.value);
+    `).bind(body.key, body.value).run();
 
     return NextResponse.json({ success: true });
   } catch (error) {
