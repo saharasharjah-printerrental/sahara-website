@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SEOInjector from "@/components/SEOInjector";
 import VisitorTracker from "@/components/VisitorTracker";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 
@@ -185,9 +184,17 @@ const organizationSchema = {
   }
 };
 
-interface HeadSEOConfig {
+interface ServerSEOConfig {
+  googleAnalyticsId?: string;
+  googleAnalytics4Id?: string;
   googleTagManagerId?: string;
+  microsoftClarityId?: string;
+  metaPixelId?: string;
+  metaPixelAdvancedMatching?: boolean;
+  hotjarId?: string;
   customHeadScripts?: string;
+  customBodyScripts?: string;
+  schemaMarkup?: string;
 }
 
 type ParsedScript = { src: string; isAsync: boolean } | { inline: string };
@@ -209,7 +216,7 @@ function parseScripts(html: string): ParsedScript[] {
   return out;
 }
 
-async function getHeadSEOConfig(): Promise<HeadSEOConfig | null> {
+async function getSEOConfig(): Promise<ServerSEOConfig | null> {
   try {
     const db = (getRequestContext().env as any).DB;
     if (!db) return null;
@@ -224,12 +231,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const seoConfig = await getHeadSEOConfig();
+  const cfg = await getSEOConfig();
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Google Fonts — swap prevents FOIT, trim to used weights */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -237,37 +243,69 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
         />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-        {/* GTM — server-side so it lands in the initial HTML response */}
-        {seoConfig?.googleTagManagerId && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${seoConfig.googleTagManagerId}');`,
-            }}
-          />
+
+        {/* Google Tag Manager */}
+        {cfg?.googleTagManagerId && (
+          <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId}');` }} />
         )}
-        {/* Custom head scripts — parsed server-side to handle full HTML snippets */}
-        {seoConfig?.customHeadScripts &&
-          parseScripts(seoConfig.customHeadScripts).map((s, i) =>
-            "src" in s ? (
-              <script key={i} async={s.isAsync} src={s.src} />
-            ) : (
-              <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
-            )
+
+        {/* Google Analytics (UA + GA4) */}
+        {cfg?.googleAnalyticsId && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${cfg.googleAnalyticsId}`} />
+            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalyticsId}');${cfg.googleAnalytics4Id ? `gtag('config','${cfg.googleAnalytics4Id}');` : ""}` }} />
+          </>
+        )}
+        {/* GA4 standalone — only when no UA ID is set */}
+        {cfg?.googleAnalytics4Id && !cfg?.googleAnalyticsId && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${cfg.googleAnalytics4Id}`} />
+            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalytics4Id}');` }} />
+          </>
+        )}
+
+        {/* Meta Pixel */}
+        {cfg?.metaPixelId && (
+          <script dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${cfg.metaPixelId}'${cfg.metaPixelAdvancedMatching ? ",{'advanced_matching':true}" : ""});fbq('track','PageView');` }} />
+        )}
+
+        {/* Microsoft Clarity */}
+        {cfg?.microsoftClarityId && (
+          <script dangerouslySetInnerHTML={{ __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${cfg.microsoftClarityId}");` }} />
+        )}
+
+        {/* Hotjar */}
+        {cfg?.hotjarId && (
+          <script dangerouslySetInnerHTML={{ __html: `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${cfg.hotjarId},hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');` }} />
+        )}
+
+        {/* Custom schema markup */}
+        {cfg?.schemaMarkup && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: cfg.schemaMarkup }} />
+        )}
+
+        {/* Custom head scripts — handles raw JS or full <script> HTML snippets */}
+        {cfg?.customHeadScripts &&
+          parseScripts(cfg.customHeadScripts).map((s, i) =>
+            "src" in s
+              ? <script key={i} async={s.isAsync} src={s.src} />
+              : <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
           )}
       </head>
       <body className="bg-[#071325] text-[#d7e3fc]" suppressHydrationWarning>
-        {/* GTM noscript fallback — must be immediately after opening body tag */}
-        {seoConfig?.googleTagManagerId && (
+        {/* GTM noscript — must be immediately after opening body tag */}
+        {cfg?.googleTagManagerId && (
           <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${seoConfig.googleTagManagerId}`}
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            />
+            <iframe src={`https://www.googletagmanager.com/ns.html?id=${cfg.googleTagManagerId}`} height="0" width="0" style={{ display: "none", visibility: "hidden" }} />
           </noscript>
         )}
-        <SEOInjector />
+        {/* Custom body scripts — handles raw JS or full <script> HTML snippets */}
+        {cfg?.customBodyScripts &&
+          parseScripts(cfg.customBodyScripts).map((s, i) =>
+            "src" in s
+              ? <script key={i} async={s.isAsync} src={s.src} />
+              : <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
+          )}
         <VisitorTracker />
         {children}
       </body>
