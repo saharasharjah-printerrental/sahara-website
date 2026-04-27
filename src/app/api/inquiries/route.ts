@@ -3,8 +3,6 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 import { z } from 'zod';
 import { sendQuoteNotification } from '../send-email/email-service';
 
-export const runtime = 'edge';
-
 const inquirySchema = z.object({
   name: z.string().min(1).max(100),
   email: z.string().email().max(255),

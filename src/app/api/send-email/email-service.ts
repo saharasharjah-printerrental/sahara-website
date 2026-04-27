@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export interface QuoteEmailData {
@@ -115,6 +114,7 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<boole
   }
 
   try {
+    const nodemailer = await import('nodemailer').then(m => m.default || m);
     const transporter = nodemailer.createTransport({
       host: config.host,
       port: config.port,
