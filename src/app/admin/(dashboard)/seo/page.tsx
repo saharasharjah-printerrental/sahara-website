@@ -88,17 +88,19 @@ export default function AdminSEO() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ key: "seo_config", value: json }),
       });
-      if (!res.ok) throw new Error("API error");
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({})) as { error?: string; details?: string };
+        throw new Error(body.error || body.details || `HTTP ${res.status}`);
+      }
       localStorage.setItem("sahara_seo_config", json);
       window.dispatchEvent(new Event("seo-config-updated"));
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
-    } catch {
-      setError("Failed to save to database. Changes saved locally only.");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Unknown error";
+      setError(`DB save failed (${msg}). Config saved locally only — won't apply to visitors until DB is fixed.`);
       localStorage.setItem("sahara_seo_config", json);
       window.dispatchEvent(new Event("seo-config-updated"));
-      setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
     } finally {
       setSaving(false);
     }
