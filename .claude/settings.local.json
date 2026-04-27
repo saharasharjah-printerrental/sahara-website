@@ -34,7 +34,8 @@
       "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\" -File | Where-Object { $_.Extension -eq \".tsx\" -or $_.Extension -eq \".ts\" } | ForEach-Object { $_.FullName })",
       "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\" -Recurse -File | Where-Object { $_.Extension -eq \".tsx\" -or $_.Extension -eq \".ts\" } | ForEach-Object { $_.FullName })",
       "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -File | Where-Object { $_.Name -match \"env|wrangler|next.config\" } | ForEach-Object { $_.FullName })",
-      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\\\\\\(dashboard\\)\\\\banners\" -Recurse -File | ForEach-Object { $_.FullName })"
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\\\\\\(dashboard\\)\\\\banners\" -Recurse -File | ForEach-Object { $_.FullName })",
+      "Bash(rtk git *)"
     ]
   }
 }
