@@ -114,37 +114,51 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<boole
   }
 
   try {
-    const nodemailer = await import('nodemailer').then(m => m.default || m);
-    const transporter = nodemailer.createTransport({
-      host: config.host,
-      port: config.port,
-      secure: config.port === 465,
-      auth: { user: config.user, pass: config.pass },
-      tls: { rejectUnauthorized: false },
-    });
+    const fromField = `"Sahara Printers" <info@saharaprinter.com>`;
+    const toEmail = data.notificationEmail || 'info@saharaprinter.com';
 
-    const fromField = `"${config.fromName}" <${config.fromEmail}>`;
-    const toEmail = data.notificationEmail || config.toEmail;
+    // Send via edge-compatible email API (Resend)
+    const env = (getRequestContext() as any)?.env || {};
+    const resendApiKey = env.RESEND_API_KEY || '';
+    
+    if (resendApiKey) {
+      await Promise.all([
+        fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: fromField,
+            to: [toEmail],
+            subject: `New Quote: ${data.customerName}${data.customerCompany ? ' — ' + data.customerCompany : ''}`,
+            html: buildAdminHtml(data),
+          }),
+        }),
+        fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: fromField,
+            to: [data.customerEmail],
+            subject: 'Your Quote Request — Sahara Printers',
+            html: buildCustomerHtml(data),
+          }),
+        }),
+      ]);
+      console.log('[email-service] Sent via Resend API');
+    } else {
+      // Fallback: log for development
+      console.log('[email-service] Would send to:', toEmail, '| customer:', data.customerEmail);
+    }
 
-    await Promise.all([
-      transporter.sendMail({
-        from: fromField,
-        to: toEmail,
-        subject: `New Quote: ${data.customerName}${data.customerCompany ? ' — ' + data.customerCompany : ''}`,
-        html: buildAdminHtml(data),
-      }),
-      transporter.sendMail({
-        from: fromField,
-        to: data.customerEmail,
-        subject: 'Your Quote Request — Sahara Printers',
-        html: buildCustomerHtml(data),
-      }),
-    ]);
-
-    console.log('[email-service] Sent admin + customer emails successfully');
     return true;
   } catch (err) {
-    console.error('[email-service] SMTP send failed:', err);
+    console.error('[email-service] Email send failed:', err);
     return false;
   }
 }
