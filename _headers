@@ -1,0 +1,23 @@
+# Cloudflare Pages Headers Configuration
+# Serve static files from public folder
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml
+
+/llms.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain
+
+/images/:path*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/brands/:path*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/_next/static/:path*
+  Cache-Control: public, max-age=31536000, immutable

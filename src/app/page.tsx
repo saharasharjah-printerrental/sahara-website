@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useCallback, useState, useEffect } from "react";
-import { Skeleton } from "boneyard-js/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -505,15 +504,8 @@ function FeaturedProducts() {
           </button>
         </div>
       </div>
-      <Skeleton
-        name="featured-products"
-        loading={loading}
-        color="rgba(26,45,74,0.9)"
-        darkColor="rgba(30,52,85,0.9)"
-        animate="shimmer"
-        stagger={100}
-      >
-        <div ref={containerRef} className="flex gap-8 no-scrollbar overflow-x-auto pb-8 snap-x max-w-7xl mx-auto scroll-smooth">
+
+      <div ref={containerRef} className="flex gap-8 no-scrollbar overflow-x-auto pb-8 snap-x max-w-7xl mx-auto scroll-smooth">
           {displayProducts.map((p, i) => (
             <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center glass-card rounded-3xl overflow-hidden group">
               <div className="h-64 bg-[#142032] relative overflow-hidden">
@@ -539,7 +531,7 @@ function FeaturedProducts() {
             </div>
           ))}
         </div>
-      </Skeleton>
+
     </section>
   );
 }
@@ -551,18 +543,51 @@ function ReviewsSection() {
     { name: "David Chen", role: "IT Director", text: "Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara." },
   ];
 
+  const trackRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const posRef = useRef(0);
+  const pausedRef = useRef(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const SPEED = 0.6;
+    let half = 0;
+    const step = () => {
+      if (!pausedRef.current) {
+        posRef.current += SPEED;
+        if (half > 0 && posRef.current >= half) posRef.current -= half;
+        track.style.transform = `translateX(-${posRef.current}px)`;
+      }
+      rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(() => {
+      const pivot = track.children[reviews.length] as HTMLElement;
+      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
+      rafRef.current = requestAnimationFrame(step);
+    });
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  // Render triple on both server and client — identical HTML eliminates hydration mismatch.
+  const allReviews = [...reviews, ...reviews, ...reviews];
+
   return (
     <section className="py-24 bg-[#101c2e]/50 relative">
       <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
         <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
       </div>
-      <div className="flex gap-6 overflow-hidden max-w-7xl mx-auto px-8">
-        <div className="flex gap-6 flex-shrink-0 animate-infinite-scroll py-4">
-          {[...reviews, ...reviews].map((r, i) => (
-            <div key={i} className="glass-card min-w-[350px] p-8 rounded-2xl flex flex-col justify-between h-64">
+      <div
+        className="overflow-hidden"
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+      >
+        <div ref={trackRef} className="flex gap-6 py-4" style={{ width: 'max-content' }}>
+          {allReviews.map((r, i) => (
+            <div key={i} className="glass-card w-[350px] flex-shrink-0 p-8 rounded-2xl flex flex-col justify-between h-64">
               <div className="flex text-[#f5be53] gap-1 mb-4">
-                {[1,2,3,4,5].map(s => <Star key={s} className="text-xl" style={{fontSize: '1.25rem'}} />)}
+                {[1,2,3,4,5].map(s => <Star key={s} style={{fontSize: '1.25rem'}} />)}
               </div>
               <p className="text-[#d7e3fc] italic text-sm">&quot;{r.text}&quot;</p>
               <div className="mt-6 flex items-center gap-4">
@@ -582,90 +607,102 @@ function ReviewsSection() {
   );
 }
 
-const BRAND_SKELETON = Array(8).fill(null).map((_, i) => ({
-  name: `Brand${i}`,
-  slug: `brand-${i}`,
-  logoUrl: "",
-}));
+const LOCAL_BRAND_LOGOS: Record<string, string> = {
+  hp: "/brands/hp.png",
+  canon: "/brands/canon.png",
+  xerox: "/brands/xerox.png",
+  kyocera: "/brands/kyocera.png",
+  ricoh: "/brands/ricoh.png",
+  sharp: "/brands/sharp.png",
+  brother: "/brands/brother.png",
+  epson: "/brands/epson.png",
+};
+
+const DEFAULT_BRANDS = [
+  { name: "HP",      slug: "hp" },
+  { name: "Canon",   slug: "canon" },
+  { name: "Xerox",   slug: "xerox" },
+  { name: "Kyocera", slug: "kyocera" },
+  { name: "Ricoh",   slug: "ricoh" },
+  { name: "Sharp",   slug: "sharp" },
+  { name: "Brother", slug: "brother" },
+  { name: "Epson",   slug: "epson" },
+];
 
 function BrandCarousel() {
   const [brands, setBrands] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const defaultBrands = [
-    { name: "HP", slug: "hp", logoUrl: "" },
-    { name: "Canon", slug: "canon", logoUrl: "" },
-    { name: "Xerox", slug: "xerox", logoUrl: "" },
-    { name: "Kyocera", slug: "kyocera", logoUrl: "" },
-    { name: "Ricoh", slug: "ricoh", logoUrl: "" },
-    { name: "Sharp", slug: "sharp", logoUrl: "" },
-    { name: "Brother", slug: "brother", logoUrl: "" },
-    { name: "Epson", slug: "epson", logoUrl: "" },
-  ];
+  const [ready, setReady] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const posRef = useRef(0);
+  const pausedRef = useRef(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_brands");
     if (stored) {
       const parsed = JSON.parse(stored);
-      const activeBrands = parsed.filter((b: any) => b.isActive);
-      if (activeBrands.length > 0) {
-        setBrands(activeBrands);
-        setLoading(false);
-        return;
-      }
+      const active = parsed.filter((b: any) => b.isActive);
+      setBrands(active.length > 0 ? active : DEFAULT_BRANDS);
+    } else {
+      setBrands(DEFAULT_BRANDS);
     }
-    setBrands(defaultBrands);
-    setLoading(false);
+    setReady(true);
   }, []);
 
-  const displayBrands = loading ? BRAND_SKELETON : [...brands, ...brands];
+  useEffect(() => {
+    if (!ready || !brands.length) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const SPEED = 0.5;
+    let half = 0;
+    const step = () => {
+      if (!pausedRef.current) {
+        posRef.current += SPEED;
+        if (half > 0 && posRef.current >= half) posRef.current -= half;
+        track.style.transform = `translateX(-${posRef.current}px)`;
+      }
+      rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(() => {
+      const pivot = track.children[brands.length] as HTMLElement;
+      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
+      rafRef.current = requestAnimationFrame(step);
+    });
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [ready, brands]);
 
-  const getInitials = (name: string) => {
-    return name.split(' ').map(word => word[0]).join('').slice(0, 2).toUpperCase();
-  };
+  const displayBrands = [...brands, ...brands, ...brands];
+
+  const getLogo = (brand: any) =>
+    brand.logoUrl || LOCAL_BRAND_LOGOS[brand.slug?.toLowerCase()] || "";
 
   return (
-    <section className="py-12 bg-[#101c2e] overflow-hidden">
+    <section className="py-12 bg-[#101c2e]">
       <div className="text-center mb-8">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
       </div>
-      <Skeleton
-        name="brand-carousel"
-        loading={loading}
-        color="rgba(26,45,74,0.9)"
-        darkColor="rgba(30,52,85,0.9)"
-        animate="shimmer"
+      <div
+        className="relative overflow-hidden"
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
       >
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10" />
-          <div className="flex items-center overflow-hidden">
-            <div className={`flex gap-16 flex-shrink-0 ${loading ? "" : "animate-carousel"}`}>
-              {displayBrands.map((brand, i) => (
-                <div key={i} className="flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                  <div className="h-16 w-32 flex items-center justify-center rounded-xl bg-white/5 p-3">
-                    {brand.logoUrl ? (
-                      <img
-                        src={brand.logoUrl}
-                        alt={brand.name}
-                        className="max-h-full max-w-full object-contain"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = "none";
-                          (e.target as HTMLImageElement).nextElementSibling?.classList.remove("hidden");
-                        }}
-                      />
-                    ) : null}
-                    <div className={`text-slate-500 font-bold text-lg ${brand.logoUrl ? "hidden" : ""}`}>
-                      {brand.name ? getInitials(brand.name) : ""}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10 pointer-events-none" />
+        <div ref={trackRef} className="flex gap-12 items-center py-2" style={{ width: 'max-content' }}>
+          {displayBrands.map((brand, i) => {
+            const logo = getLogo(brand);
+            return (
+              <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                {logo ? (
+                  <img src={logo} alt={brand.name} className="max-h-full max-w-full object-contain" loading="lazy" />
+                ) : (
+                  <span className="text-slate-400 font-bold text-base">{brand.name}</span>
+                )}
+              </div>
+            );
+          })}
         </div>
-      </Skeleton>
+      </div>
     </section>
   );
 }

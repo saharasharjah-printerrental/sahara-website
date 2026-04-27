@@ -2,6 +2,16 @@
 
 import { useState, useEffect } from "react";
 
+interface SmtpSettings {
+  smtpHost: string;
+  smtpPort: string;
+  smtpUser: string;
+  smtpPass: string;
+  smtpFromName: string;
+  smtpFromEmail: string;
+  smtpToEmail: string;
+}
+
 interface Settings {
   companyName: string;
   companyEmail: string;
@@ -12,6 +22,8 @@ interface Settings {
   heroTitle: string;
   heroSubtitle: string;
   ctaText: string;
+  notificationEmail: string;
+  smtp: SmtpSettings;
   paymentGatewayEnabled: boolean;
   paymentGatewayUrl: string;
   paymentGatewayLabel: string;
@@ -31,6 +43,16 @@ interface Settings {
   };
 }
 
+const defaultSmtp: SmtpSettings = {
+  smtpHost: "smtp.gmail.com",
+  smtpPort: "587",
+  smtpUser: "",
+  smtpPass: "",
+  smtpFromName: "Sahara Printers",
+  smtpFromEmail: "",
+  smtpToEmail: "",
+};
+
 const defaultSettings: Settings = {
   companyName: "Sahara Office Equipments",
   companyEmail: "info@saharaprinter.com",
@@ -41,6 +63,8 @@ const defaultSettings: Settings = {
   heroTitle: "Rent, Buy, or Repair",
   heroSubtitle: "All Under One Roof",
   ctaText: "Get a Quote",
+  notificationEmail: "info@saharaprinter.com",
+  smtp: defaultSmtp,
   paymentGatewayEnabled: false,
   paymentGatewayUrl: "",
   paymentGatewayLabel: "Buy Now",
@@ -68,6 +92,10 @@ export default function AdminSettings() {
     return {
       ...defaultSettings,
       ...stored,
+      smtp: {
+        ...defaultSmtp,
+        ...(stored.smtp || {}),
+      },
       calculatorPrices: {
         ...defaultSettings.calculatorPrices,
         ...(stored.calculatorPrices || {}),
@@ -89,9 +117,35 @@ export default function AdminSettings() {
     }
   }, []);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     localStorage.setItem("sahara_settings", JSON.stringify(settings));
     window.dispatchEvent(new Event("sahara-settings-updated"));
+
+    const d1Entries = [
+      { key: "smtp_host", value: settings.smtp.smtpHost },
+      { key: "smtp_port", value: settings.smtp.smtpPort },
+      { key: "smtp_user", value: settings.smtp.smtpUser },
+      { key: "smtp_pass", value: settings.smtp.smtpPass },
+      { key: "smtp_from_name", value: settings.smtp.smtpFromName },
+      { key: "smtp_from_email", value: settings.smtp.smtpFromEmail },
+      { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
+      { key: "notification_email", value: settings.smtp.smtpToEmail },
+    ];
+
+    try {
+      await Promise.all(
+        d1Entries.map(({ key, value }) =>
+          fetch("/api/settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key, value }),
+          })
+        )
+      );
+    } catch {
+      // D1 may not be configured in dev — localStorage is the fallback
+    }
+
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -139,6 +193,125 @@ export default function AdminSettings() {
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-slate-300 mb-2">Working Hours</label>
                   <input type="text" value={settings.workingHours} onChange={(e) => setSettings({ ...settings, workingHours: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 pt-6">
+              <h2 className="text-lg font-bold text-white mb-1">Gmail SMTP — Email Notifications</h2>
+              <p className="text-sm text-slate-400 mb-4">When a visitor submits the quote form, two emails are sent: one to your sales inbox and one confirmation to the customer.</p>
+
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-5">
+                <div className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-amber-400 text-lg mt-0.5">key</span>
+                  <div>
+                    <h4 className="font-medium text-white text-sm">Gmail App Password required</h4>
+                    <ol className="text-xs text-slate-400 mt-2 space-y-1 list-decimal list-inside">
+                      <li>Enable 2-Step Verification on your Google account</li>
+                      <li>Go to <strong className="text-white">myaccount.google.com → Security → App passwords</strong></li>
+                      <li>Create an app password for "Mail" — copy the 16-character code</li>
+                      <li>Paste that code (without spaces) into the App Password field below</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">SMTP Host</label>
+                    <input
+                      type="text"
+                      value={settings.smtp.smtpHost}
+                      onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpHost: e.target.value } })}
+                      placeholder="smtp.gmail.com"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">SMTP Port</label>
+                    <input
+                      type="text"
+                      value={settings.smtp.smtpPort}
+                      onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpPort: e.target.value } })}
+                      placeholder="587"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Gmail Address</label>
+                    <input
+                      type="email"
+                      value={settings.smtp.smtpUser}
+                      onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpUser: e.target.value } })}
+                      placeholder="yourname@gmail.com"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">App Password</label>
+                    <input
+                      type="password"
+                      value={settings.smtp.smtpPass}
+                      onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpPass: e.target.value } })}
+                      placeholder="16-character app password"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white font-mono tracking-widest"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">From Name</label>
+                    <input
+                      type="text"
+                      value={settings.smtp.smtpFromName}
+                      onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpFromName: e.target.value } })}
+                      placeholder="Sahara Printers"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">From Email</label>
+                    <input
+                      type="email"
+                      value={settings.smtp.smtpFromEmail}
+                      onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpFromEmail: e.target.value } })}
+                      placeholder="noreply@saharaprinter.com"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                    />
+                    <p className="text-xs text-slate-500 mt-1">Leave blank to use the Gmail address above</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Sales Notification Email</label>
+                  <input
+                    type="email"
+                    value={settings.smtp.smtpToEmail}
+                    onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpToEmail: e.target.value } })}
+                    placeholder="sales@saharaprinter.com"
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">New quote requests will be delivered here</p>
+                </div>
+
+                <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="material-symbols-outlined text-green-400 text-lg mt-0.5">check_circle</span>
+                    <div>
+                      <h4 className="font-medium text-white text-sm">How it works</h4>
+                      <ul className="text-xs text-slate-400 mt-2 space-y-1">
+                        <li>• Every quote submission triggers two emails via Gmail SMTP</li>
+                        <li>• <strong className="text-white">Admin email</strong> → sent to the Sales Notification Email above</li>
+                        <li>• <strong className="text-white">Customer email</strong> → confirmation sent to the visitor's address</li>
+                        <li>• Works on Cloudflare Workers thanks to <code className="text-amber-400">nodejs_compat</code> flag</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

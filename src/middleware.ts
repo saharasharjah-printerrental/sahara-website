@@ -74,6 +74,6 @@ const rateLimitStore = new Map<string, { windowStart: number; requests: number }
 export const config = {
   matcher: [
     '/api/:path*',
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt).*)',
   ],
 };
