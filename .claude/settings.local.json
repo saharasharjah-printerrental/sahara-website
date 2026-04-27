@@ -21,7 +21,20 @@
       "Bash(npm info *)",
       "PowerShell(npm info *)",
       "PowerShell(Remove-Item *)",
-      "PowerShell(New-Item *)"
+      "PowerShell(New-Item *)",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Directory | ForEach-Object { $_.Name })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\" -Recurse -Directory | Select-Object -First 30 | ForEach-Object { $_.FullName -replace [regex]::Escape\\(\\(Get-Item \"src\"\\).FullName\\), \"src\" })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\" -Recurse -Directory | ForEach-Object { $_.FullName -replace [regex]::Escape\\(\\(Get-Item \"src\\\\app\"\\).FullName\\), \"src/app\" })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\\\\\\(dashboard\\)\\\\seo\" -Recurse -File | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\\\\\\(dashboard\\)\\\\settings\" -Recurse -File | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\api\" -Recurse -Directory | ForEach-Object { $_.FullName -replace [regex]::Escape\\(\\(Get-Item \"src\\\\app\\\\api\"\\).FullName\\), \"src/app/api\" })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"database\" -Recurse | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\api\\\\analytics\" -Recurse -File | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\api\\\\settings\" -Recurse -File | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\" -File | Where-Object { $_.Extension -eq \".tsx\" -or $_.Extension -eq \".ts\" } | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\" -Recurse -File | Where-Object { $_.Extension -eq \".tsx\" -or $_.Extension -eq \".ts\" } | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -File | Where-Object { $_.Name -match \"env|wrangler|next.config\" } | ForEach-Object { $_.FullName })",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\\\\\\(dashboard\\)\\\\banners\" -Recurse -File | ForEach-Object { $_.FullName })"
     ]
   }
 }

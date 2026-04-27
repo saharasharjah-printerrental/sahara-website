@@ -41,29 +41,67 @@ const labelClass = "block text-sm font-medium text-slate-300 mb-2";
 export default function AdminSEO() {
   const [config, setConfig] = useState<SEOConfig>(defaultConfig);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sahara_seo_config");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed && typeof parsed === "object") {
-          setConfig({ ...defaultConfig, ...parsed });
+    const load = async () => {
+      try {
+        const res = await fetch("/api/settings?key=seo_config");
+        const data = await res.json();
+        if (data.setting?.value) {
+          const parsed = JSON.parse(data.setting.value);
+          if (parsed && typeof parsed === "object") {
+            setConfig({ ...defaultConfig, ...parsed });
+            localStorage.setItem("sahara_seo_config", data.setting.value);
+            return;
+          }
         }
+      } catch {
+        // fall through to localStorage
       }
-    } catch {
-      // ignore parse errors
-    }
+      try {
+        const stored = localStorage.getItem("sahara_seo_config");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && typeof parsed === "object") {
+            setConfig({ ...defaultConfig, ...parsed });
+          }
+        }
+      } catch {
+        // ignore
+      }
+    };
+    load();
   }, []);
 
   const set = (key: keyof SEOConfig, value: string | boolean) =>
     setConfig((prev) => ({ ...prev, [key]: value }));
 
-  const handleSave = () => {
-    localStorage.setItem("sahara_seo_config", JSON.stringify(config));
-    window.dispatchEvent(new Event("seo-config-updated"));
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+  const handleSave = async () => {
+    setSaving(true);
+    setError("");
+    const json = JSON.stringify(config);
+    try {
+      const res = await fetch("/api/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: "seo_config", value: json }),
+      });
+      if (!res.ok) throw new Error("API error");
+      localStorage.setItem("sahara_seo_config", json);
+      window.dispatchEvent(new Event("seo-config-updated"));
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch {
+      setError("Failed to save to database. Changes saved locally only.");
+      localStorage.setItem("sahara_seo_config", json);
+      window.dispatchEvent(new Event("seo-config-updated"));
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -80,6 +118,11 @@ export default function AdminSEO() {
           {saved && (
             <div className="mb-6 bg-green-500/20 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl">
               SEO config saved successfully!
+            </div>
+          )}
+          {error && (
+            <div className="mb-6 bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 px-4 py-3 rounded-xl">
+              {error}
             </div>
           )}
 
@@ -271,9 +314,10 @@ export default function AdminSEO() {
 
             <button
               onClick={handleSave}
-              className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform"
+              disabled={saving}
+              className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
             >
-              Save SEO Config
+              {saving ? "Saving..." : "Save SEO Config"}
             </button>
           </div>
         </div>

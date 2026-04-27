@@ -22,43 +22,62 @@ export default function SEOInjector() {
   const [config, setConfig] = useState<SEOConfig | null>(null);
 
   useEffect(() => {
-    const loadConfig = () => {
+    const applyConfig = (parsed: SEOConfig) => {
+      setConfig(parsed);
+      if (parsed.enableDevMode) {
+        console.log("[SEO Config] Loaded:", parsed);
+      }
+    };
+
+    const loadFromAPI = async () => {
+      try {
+        const res = await fetch("/api/settings?key=seo_config");
+        const data = await res.json();
+        if (data.setting?.value) {
+          const parsed = JSON.parse(data.setting.value);
+          if (parsed && typeof parsed === "object") {
+            localStorage.setItem("sahara_seo_config", data.setting.value);
+            applyConfig(parsed);
+            return;
+          }
+        }
+      } catch {
+        // fall through to localStorage
+      }
       const stored = localStorage.getItem("sahara_seo_config");
       if (stored) {
-        const parsed = JSON.parse(stored);
-        setConfig(parsed);
-
-        if (parsed.enableDevMode) {
-          console.log("[SEO Config] Loaded:", parsed);
+        try {
+          const parsed = JSON.parse(stored);
+          applyConfig(parsed);
+        } catch {
+          // ignore
         }
       }
     };
 
-    loadConfig();
+    loadFromAPI();
 
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === "sahara_seo_config" && e.newValue) {
-        const parsed = JSON.parse(e.newValue);
-        setConfig(parsed);
-        if (parsed.enableDevMode) {
-          console.log("[SEO Config] Updated:", parsed);
+        try {
+          const parsed = JSON.parse(e.newValue);
+          applyConfig(parsed);
+        } catch {
+          // ignore
         }
       }
     };
 
     const handleCustomEvent = () => {
-      loadConfig();
+      loadFromAPI();
     };
 
     window.addEventListener("storage", handleStorageChange);
     window.addEventListener("seo-config-updated", handleCustomEvent);
 
-    const interval = setInterval(loadConfig, 2000);
-
     return () => {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("seo-config-updated", handleCustomEvent);
-      clearInterval(interval);
     };
   }, []);
 
@@ -87,16 +106,33 @@ export default function SEOInjector() {
         </>
       )}
 
-      {/* Google Analytics 4 */}
-      {config.googleAnalytics4Id && (
+      {/* Google Analytics 4 — only load if not already loaded by the UA block */}
+      {config.googleAnalytics4Id && !config.googleAnalyticsId && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics4Id}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${config.googleAnalytics4Id}');
+                ${config.enableDevMode ? `console.log('[GA4] Initialized with ID: ${config.googleAnalytics4Id}');` : ''}
+              `,
+            }}
+          />
+        </>
+      )}
+      {/* GA4 alongside UA — reuse the existing dataLayer */}
+      {config.googleAnalytics4Id && config.googleAnalyticsId && (
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
               gtag('config', '${config.googleAnalytics4Id}');
-              ${config.enableDevMode ? `console.log('[GA4] Initialized with ID: ${config.googleAnalytics4Id}');` : ''}
+              ${config.enableDevMode ? `console.log('[GA4] Added config: ${config.googleAnalytics4Id}');` : ''}
             `,
           }}
         />
