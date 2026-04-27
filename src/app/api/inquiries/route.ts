@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import { z } from 'zod';
-import { sendQuoteNotification } from '../send-email/route';
+import { sendQuoteNotification } from '../send-email/email-service';
 
 export const runtime = 'edge';
 

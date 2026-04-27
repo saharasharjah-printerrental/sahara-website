@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
@@ -98,8 +97,4 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<boole
     console.error('[send-email] Fetch error:', err);
     return false;
   }
-}
-
-export async function POST() {
-  return NextResponse.json({ error: 'Use sendQuoteNotification directly from inquiries route' }, { status: 405 });
 }
