@@ -90,7 +90,7 @@ export default function AdminSEO() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({})) as { error?: string; details?: string };
-        throw new Error(body.error || body.details || `HTTP ${res.status}`);
+        throw new Error(body.details || body.error || `HTTP ${res.status}`);
       }
       localStorage.setItem("sahara_seo_config", json);
       window.dispatchEvent(new Event("seo-config-updated"));

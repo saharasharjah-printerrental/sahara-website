@@ -37,7 +37,8 @@ export async function GET(request: NextRequest) {
 
     const result = await db.prepare('SELECT * FROM settings').all();
     const settings: Record<string, string> = {};
-    result.forEach((s: any) => {
+    const rows: any[] = result?.results ?? result ?? [];
+    rows.forEach((s: any) => {
       settings[s.key] = s.value;
     });
     return NextResponse.json({ settings });
