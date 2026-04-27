@@ -19,11 +19,11 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
   
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
-    "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com",
+    "img-src 'self' data: https: blob: https://www.google.com https://www.google-analytics.com",
+    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net",
     "frame-src 'self' https://www.google.com https://www.youtube.com",
   ].join('; ');
   

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import { z } from 'zod';
+import { sendQuoteNotification } from '../send-email/route';
 
 export const runtime = 'edge';
 
@@ -10,7 +11,9 @@ const inquirySchema = z.object({
   phone: z.string().max(30).optional().or(z.literal('')),
   company: z.string().max(200).optional().or(z.literal('')),
   service: z.string().max(100).optional().or(z.literal('')),
-  message: z.string().min(1).max(5000),
+  message: z.string().max(5000).optional().or(z.literal('')),
+  notes: z.string().max(2000).optional().or(z.literal('')),
+  estimatedRange: z.string().max(50).optional().or(z.literal('')),
 });
 
 function getDB() {
@@ -21,14 +24,22 @@ function getDB() {
   }
 }
 
+async function getNotificationEmail(db: any): Promise<string> {
+  try {
+    const result = await db.prepare(
+      "SELECT value FROM settings WHERE key = 'notification_email'"
+    ).first();
+    return result?.value || 'info@saharaprinter.com';
+  } catch {
+    return 'info@saharaprinter.com';
+  }
+}
+
 export async function GET() {
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({
-      error: 'Database not configured',
-      inquiries: []
-    });
+    return NextResponse.json({ error: 'Database not configured', inquiries: [] });
   }
 
   try {
@@ -36,10 +47,7 @@ export async function GET() {
     return NextResponse.json({ inquiries: result });
   } catch (error) {
     console.error('Inquiries GET Error:', error);
-    return NextResponse.json({
-      error: 'Failed to fetch inquiries',
-      inquiries: []
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch inquiries', inquiries: [] }, { status: 500 });
   }
 }
 
@@ -53,21 +61,21 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const parsed = inquirySchema.safeParse(body);
-    
+
     if (!parsed.success) {
       return NextResponse.json({
         error: 'Validation failed',
-        details: parsed.error.flatten().fieldErrors
+        details: parsed.error.flatten().fieldErrors,
       }, { status: 400 });
     }
-    
+
     const data = parsed.data;
     const id = Date.now().toString();
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT INTO inquiries (id, name, email, phone, company, service, message, status, createdAt)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO inquiries (id, name, email, phone, company, service, message, status, notes, createdAt)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
       data.name,
@@ -75,17 +83,28 @@ export async function POST(request: NextRequest) {
       data.phone || '',
       data.company || '',
       data.service || '',
-      data.message,
+      data.message || '',
       'new',
+      data.notes || '',
       now
     );
+
+    // Fire-and-forget email notification (don't block the response)
+    const notificationEmail = await getNotificationEmail(db);
+    sendQuoteNotification({
+      customerName: data.name,
+      customerEmail: data.email,
+      customerPhone: data.phone || '',
+      customerCompany: data.company || '',
+      configuration: data.service || '',
+      message: data.message || '',
+      estimatedRange: data.estimatedRange || 'Contact for pricing',
+      notificationEmail,
+    }).catch(err => console.error('Email notification error:', err));
 
     return NextResponse.json({ success: true, id });
   } catch (error) {
     console.error('Inquiries POST Error:', error);
-    return NextResponse.json({
-      error: 'Failed to create inquiry',
-      details: String(error)
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to create inquiry', details: String(error) }, { status: 500 });
   }
 }

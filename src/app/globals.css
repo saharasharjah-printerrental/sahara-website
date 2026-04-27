@@ -53,12 +53,12 @@
 
 @keyframes scroll {
   from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - 1.5rem)); }
+  to { transform: translateX(calc(-50% - 0.75rem)); }
 }
 
 @keyframes carousel {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-33.333%); }
+  100% { transform: translateX(calc(-50% - 2rem)); }
 }
 
 .animate-infinite-scroll {

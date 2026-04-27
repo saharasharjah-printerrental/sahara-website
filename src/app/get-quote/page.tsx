@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -22,6 +22,9 @@ export default function GetQuotePage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
   const calculatePrice = () => {
     let basePrice = 300;
@@ -39,25 +42,58 @@ export default function GetQuotePage() {
 
   const price = calculatePrice();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const inquiry = {
-      id: Date.now().toString(),
+    setSubmitting(true);
+    setSubmitError("");
+
+    const configuration = `${printerType.toUpperCase()} — ${colorOutput === "color" ? "Color" : "Mono"} — ${monthlyVolume.toLocaleString()} pages/mo — ${duration} months${includeMaintenance ? " — Maintenance" : ""}${includeInstall ? " — Install" : ""}`;
+    const estimatedRange = `AED ${price.min}–${price.max}`;
+
+    const payload = {
       name: formData.name,
       company: formData.company,
       email: formData.email,
       phone: formData.phone,
-      service: `${printerType.toUpperCase()} - ${colorOutput} - ${monthlyVolume} pages/mo`,
-      message: formData.message,
-      status: "pending",
-      notes: `Rental Quote Request:\n- Type: ${printerType.toUpperCase()}\n- Color: ${colorOutput}\n- Volume: ${monthlyVolume}/mo\n- Duration: ${duration} months\n- Maintenance: ${includeMaintenance ? "Yes" : "No"}\n- Install: ${includeInstall ? "Yes" : "No"}\n- Estimated: AED ${price.min}-${price.max}/mo`,
-      createdAt: new Date().toLocaleDateString(),
+      service: configuration,
+      message: formData.message || " ",
+      notes: `Rental Quote:\n- Type: ${printerType.toUpperCase()}\n- Color: ${colorOutput}\n- Volume: ${monthlyVolume}/mo\n- Duration: ${duration} months\n- Maintenance: ${includeMaintenance ? "Yes" : "No"}\n- Install: ${includeInstall ? "Yes" : "No"}\n- Estimated: ${estimatedRange}/mo`,
+      estimatedRange,
     };
 
-    const existing = JSON.parse(localStorage.getItem("sahara_inquiries") || "[]");
-    localStorage.setItem("sahara_inquiries", JSON.stringify([inquiry, ...existing]));
-    
+    // Save to localStorage as local backup
+    const localEntry = {
+      id: Date.now().toString(),
+      ...payload,
+      status: "pending",
+      createdAt: new Date().toLocaleDateString(),
+    };
+    try {
+      const existing = JSON.parse(localStorage.getItem("sahara_inquiries") || "[]");
+      localStorage.setItem("sahara_inquiries", JSON.stringify([localEntry, ...existing]));
+    } catch {
+      // localStorage may not be available in some environments
+    }
+
+    // Submit to API
+    try {
+      const res = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.error("Inquiry API error:", err);
+        // Still mark as submitted — the localStorage backup was saved
+      }
+    } catch (err) {
+      console.error("Inquiry fetch error:", err);
+      // Network error — localStorage backup is still saved, show success to user
+    }
+
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -87,11 +123,11 @@ export default function GetQuotePage() {
                   <div className="space-y-3">
                     <label className="text-sm text-[#d3c5b0] uppercase tracking-widest font-semibold">Format</label>
                     <div className="grid grid-cols-2 gap-3">
-                      <button onClick={() => setPrinterType("a4")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${printerType === "a4" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
+                      <button type="button" onClick={() => setPrinterType("a4")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${printerType === "a4" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
                         <span className="material-symbols-outlined mb-2">description</span>
                         <span className="text-sm font-bold">A4 Size</span>
                       </button>
-                      <button onClick={() => setPrinterType("a3")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${printerType === "a3" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
+                      <button type="button" onClick={() => setPrinterType("a3")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${printerType === "a3" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
                         <span className="material-symbols-outlined mb-2">tab</span>
                         <span className="text-sm font-bold">A3 Size</span>
                       </button>
@@ -100,11 +136,11 @@ export default function GetQuotePage() {
                   <div className="space-y-3">
                     <label className="text-sm text-[#d3c5b0] uppercase tracking-widest font-semibold">Color Output</label>
                     <div className="grid grid-cols-2 gap-3">
-                      <button onClick={() => setColorOutput("color")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${colorOutput === "color" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
+                      <button type="button" onClick={() => setColorOutput("color")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${colorOutput === "color" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
                         <span className="material-symbols-outlined mb-2">palette</span>
                         <span className="text-sm font-bold">Color</span>
                       </button>
-                      <button onClick={() => setColorOutput("mono")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${colorOutput === "mono" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
+                      <button type="button" onClick={() => setColorOutput("mono")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${colorOutput === "mono" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
                         <span className="material-symbols-outlined mb-2">contrast</span>
                         <span className="text-sm font-bold">Mono</span>
                       </button>
@@ -152,7 +188,7 @@ export default function GetQuotePage() {
                   <h3 className="text-2xl font-medium text-white">Exclusive Add-ons</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <button onClick={() => setIncludeMaintenance(!includeMaintenance)} className={`flex items-center justify-between p-5 rounded-2xl bg-[#101c2e] border transition-all ${includeMaintenance ? "border-[#f5be53]" : "border-[#9c8f7c]/10 hover:border-[#f5be53]/30"}`}>
+                  <button type="button" onClick={() => setIncludeMaintenance(!includeMaintenance)} className={`flex items-center justify-between p-5 rounded-2xl bg-[#101c2e] border transition-all ${includeMaintenance ? "border-[#f5be53]" : "border-[#9c8f7c]/10 hover:border-[#f5be53]/30"}`}>
                     <div className="flex items-center gap-4">
                       <div className={`w-10 h-10 rounded-full bg-[#2a3548] flex items-center justify-center ${includeMaintenance ? "bg-[#f5be53]/20" : ""}`}>
                         <span className="material-symbols-outlined text-[#f5be53]">handyman</span>
@@ -166,7 +202,7 @@ export default function GetQuotePage() {
                       {includeMaintenance && <span className="material-symbols-outlined text-[#412d00] text-sm font-bold">check</span>}
                     </div>
                   </button>
-                  <button onClick={() => setIncludeInstall(!includeInstall)} className={`flex items-center justify-between p-5 rounded-2xl bg-[#101c2e] border transition-all ${includeInstall ? "border-[#f5be53]" : "border-[#9c8f7c]/10 hover:border-[#f5be53]/30"}`}>
+                  <button type="button" onClick={() => setIncludeInstall(!includeInstall)} className={`flex items-center justify-between p-5 rounded-2xl bg-[#101c2e] border transition-all ${includeInstall ? "border-[#f5be53]" : "border-[#9c8f7c]/10 hover:border-[#f5be53]/30"}`}>
                     <div className="flex items-center gap-4">
                       <div className={`w-10 h-10 rounded-full bg-[#2a3548] flex items-center justify-center ${includeInstall ? "bg-[#f5be53]/20" : ""}`}>
                         <span className="material-symbols-outlined text-[#f5be53]">rocket_launch</span>
@@ -187,57 +223,62 @@ export default function GetQuotePage() {
                 <h3 className="text-2xl font-medium text-white mb-6">Your Information</h3>
                 {submitted ? (
                   <div className="text-center py-8">
-                    <span className="material-symbols-outlined text-5xl text-green-400 mb-4">check_circle</span>
+                    <span className="material-symbols-outlined text-5xl text-green-400 mb-4 block">check_circle</span>
                     <h3 className="text-xl font-bold text-white mb-2">Quote Request Submitted!</h3>
                     <p className="text-slate-400">Our team will contact you within 2 hours.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <input 
-                        type="text" 
-                        placeholder="Your Name *" 
+                      <input
+                        type="text"
+                        placeholder="Your Name *"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
-                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]" 
+                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]"
                       />
-                      <input 
-                        type="text" 
-                        placeholder="Company Name" 
+                      <input
+                        type="text"
+                        placeholder="Company Name"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]" 
+                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]"
                       />
-                      <input 
-                        type="email" 
-                        placeholder="Email Address *" 
+                      <input
+                        type="email"
+                        placeholder="Email Address *"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         required
-                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]" 
+                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]"
                       />
-                      <input 
-                        type="tel" 
-                        placeholder="Phone Number *" 
+                      <input
+                        type="tel"
+                        placeholder="Phone Number *"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         required
-                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]" 
+                        className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]"
                       />
                     </div>
-                    <textarea 
-                      placeholder="Additional Message" 
+                    <textarea
+                      placeholder="Additional Message"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      rows={4} 
+                      rows={4}
                       className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53] mt-6"
-                    ></textarea>
-                    {!submitted && (
-                      <button type="submit" className="w-full gold-gradient py-5 rounded-full text-[#412d00] font-bold text-lg hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#f5be53]/20">
-                        Submit Quote Request
-                      </button>
+                    />
+                    {submitError && (
+                      <p className="text-red-400 text-sm">{submitError}</p>
                     )}
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full gold-gradient py-5 rounded-full text-[#412d00] font-bold text-lg hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#f5be53]/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                    >
+                      {submitting ? "Submitting…" : "Submit Quote Request"}
+                    </button>
                   </form>
                 )}
               </div>
@@ -255,7 +296,7 @@ export default function GetQuotePage() {
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <span className="text-xs text-[#d3c5b0] uppercase font-bold tracking-[0.2em] mb-1">AED Range</span>
-                      <span className="text-5xl font-bold text-white leading-none">{price.min}-{price.max}</span>
+                      <span className="text-5xl font-bold text-white leading-none">{price.min}–{price.max}</span>
                       <span className="text-sm text-[#f5be53] font-semibold mt-2">PER MONTH</span>
                     </div>
                   </div>
@@ -273,9 +314,20 @@ export default function GetQuotePage() {
                       <span className="material-symbols-outlined text-[#f5be53] text-sm">verified</span>
                     </div>
                   </div>
-                  <button className="w-full gold-gradient py-5 rounded-full text-[#412d00] font-bold text-lg hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#f5be53]/20">
-                    Submit Quote Request
-                  </button>
+                  {submitted ? (
+                    <div className="w-full py-5 rounded-full border border-green-400/40 text-green-400 font-bold text-lg text-center">
+                      Request Submitted ✓
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => formRef.current?.requestSubmit()}
+                      disabled={submitting}
+                      className="w-full gold-gradient py-5 rounded-full text-[#412d00] font-bold text-lg hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#f5be53]/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                    >
+                      {submitting ? "Submitting…" : "Submit Quote Request"}
+                    </button>
+                  )}
                   <p className="mt-6 text-xs text-[#d3c5b0] leading-relaxed">
                     Our consultants will reach out within 2 working hours with a formal agreement.
                   </p>

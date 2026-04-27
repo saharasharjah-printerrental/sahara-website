@@ -558,7 +558,7 @@ function ReviewsSection() {
         <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
       </div>
       <div className="flex gap-6 overflow-hidden max-w-7xl mx-auto px-8">
-        <div className="flex gap-6 animate-infinite-scroll py-4">
+        <div className="flex gap-6 flex-shrink-0 animate-infinite-scroll py-4">
           {[...reviews, ...reviews].map((r, i) => (
             <div key={i} className="glass-card min-w-[350px] p-8 rounded-2xl flex flex-col justify-between h-64">
               <div className="flex text-[#f5be53] gap-1 mb-4">
@@ -618,7 +618,7 @@ function BrandCarousel() {
     setLoading(false);
   }, []);
 
-  const displayBrands = loading ? BRAND_SKELETON : [...brands, ...brands, ...brands];
+  const displayBrands = loading ? BRAND_SKELETON : [...brands, ...brands];
 
   const getInitials = (name: string) => {
     return name.split(' ').map(word => word[0]).join('').slice(0, 2).toUpperCase();
@@ -640,7 +640,7 @@ function BrandCarousel() {
           <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10" />
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10" />
           <div className="flex items-center overflow-hidden">
-            <div className={`flex gap-16 whitespace-nowrap ${loading ? "" : "animate-carousel"}`}>
+            <div className={`flex gap-16 flex-shrink-0 ${loading ? "" : "animate-carousel"}`}>
               {displayBrands.map((brand, i) => (
                 <div key={i} className="flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                   <div className="h-16 w-32 flex items-center justify-center rounded-xl bg-white/5 p-3">
