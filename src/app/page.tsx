@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -64,7 +64,6 @@ function HeroSection() {
         backgroundSize: "cover",
         backgroundPosition: "center right",
         backgroundRepeat: "no-repeat",
-        contentVisibility: "auto",
       }}
     >
       {/* Dark overlay — fades left-to-right so text stays legible against the neon scene */}
@@ -510,7 +509,7 @@ function FeaturedProducts() {
             <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center glass-card rounded-3xl overflow-hidden group">
               <div className="h-64 bg-[#142032] relative overflow-hidden">
                 {p.image && (
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                  <img src={p.image} alt={p.name} width={400} height={256} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
                 )}
                 {p.brand && (
                   <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>
@@ -543,34 +542,8 @@ function ReviewsSection() {
     { name: "David Chen", role: "IT Director", text: "Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara." },
   ];
 
-  const trackRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>(0);
-  const posRef = useRef(0);
-  const pausedRef = useRef(false);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const SPEED = 0.6;
-    let half = 0;
-    const step = () => {
-      if (!pausedRef.current) {
-        posRef.current += SPEED;
-        if (half > 0 && posRef.current >= half) posRef.current -= half;
-        track.style.transform = `translateX(-${posRef.current}px)`;
-      }
-      rafRef.current = requestAnimationFrame(step);
-    };
-    rafRef.current = requestAnimationFrame(() => {
-      const pivot = track.children[reviews.length] as HTMLElement;
-      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
-      rafRef.current = requestAnimationFrame(step);
-    });
-    return () => cancelAnimationFrame(rafRef.current);
-  }, []);
-
-  // Render triple on both server and client — identical HTML eliminates hydration mismatch.
-  const allReviews = [...reviews, ...reviews, ...reviews];
+  // Double for seamless CSS loop (calc(-50% - 0.75rem) lands exactly on one set boundary)
+  const allReviews = [...reviews, ...reviews];
 
   return (
     <section className="py-24 bg-[#101c2e]/50 relative">
@@ -578,12 +551,8 @@ function ReviewsSection() {
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
         <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
       </div>
-      <div
-        className="overflow-hidden"
-        onMouseEnter={() => { pausedRef.current = true; }}
-        onMouseLeave={() => { pausedRef.current = false; }}
-      >
-        <div ref={trackRef} className="flex gap-6 py-4" style={{ width: 'max-content' }}>
+      <div className="overflow-hidden">
+        <div className="flex gap-6 py-4 animate-infinite-scroll" style={{ width: 'max-content' }}>
           {allReviews.map((r, i) => (
             <div key={i} className="glass-card w-[350px] flex-shrink-0 p-8 rounded-2xl flex flex-col justify-between h-64">
               <div className="flex text-[#f5be53] gap-1 mb-4">
@@ -608,14 +577,14 @@ function ReviewsSection() {
 }
 
 const LOCAL_BRAND_LOGOS: Record<string, string> = {
-  hp: "/brands/hp.png",
-  canon: "/brands/canon.png",
-  xerox: "/brands/xerox.png",
-  kyocera: "/brands/kyocera.png",
-  ricoh: "/brands/ricoh.png",
-  sharp: "/brands/sharp.png",
-  brother: "/brands/brother.png",
-  epson: "/brands/epson.png",
+  hp: "/brands/hp.webp",
+  canon: "/brands/canon.webp",
+  xerox: "/brands/xerox.webp",
+  kyocera: "/brands/kyocera.webp",
+  ricoh: "/brands/ricoh.webp",
+  sharp: "/brands/sharp.webp",
+  brother: "/brands/brother.webp",
+  epson: "/brands/epson.webp",
 };
 
 const DEFAULT_BRANDS = [
@@ -630,75 +599,90 @@ const DEFAULT_BRANDS = [
 ];
 
 function BrandCarousel() {
-  const [brands, setBrands] = useState<any[]>([]);
-  const [ready, setReady] = useState(false);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>(0);
-  const posRef = useRef(0);
-  const pausedRef = useRef(false);
+  // Start with defaults so the carousel renders immediately on SSR/first paint
+  const [brands, setBrands] = useState<any[]>(DEFAULT_BRANDS);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_brands");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      const active = parsed.filter((b: any) => b.isActive);
-      setBrands(active.length > 0 ? active : DEFAULT_BRANDS);
-    } else {
-      setBrands(DEFAULT_BRANDS);
-    }
-    setReady(true);
+    try {
+      const stored = localStorage.getItem("sahara_brands");
+      // One-time migration: fix stale/invalid logoUrls
+      const migrated = localStorage.getItem("sahara_brands_logo_migrated_v1");
+      if (stored && !migrated) {
+        const parsed = JSON.parse(stored);
+        let changed = false;
+        const fixed = parsed.map((b: any) => {
+          if (b.logoUrl) {
+            const valid = /^https?:\/\/.+\.(webp|png|svg|jpg|jpeg)$/i.test(b.logoUrl);
+            if (!valid || b.logoUrl.startsWith("http://")) {
+              delete b.logoUrl;
+              changed = true;
+            }
+          }
+          return b;
+        });
+        if (changed) {
+          localStorage.setItem("sahara_brands", JSON.stringify(fixed));
+        }
+        localStorage.setItem("sahara_brands_logo_migrated_v1", "true");
+      }
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        const active = parsed.filter((b: any) => b.isActive);
+        if (active.length > 0) setBrands(active);
+      }
+    } catch {}
   }, []);
 
-  useEffect(() => {
-    if (!ready || !brands.length) return;
-    const track = trackRef.current;
-    if (!track) return;
-    const SPEED = 0.5;
-    let half = 0;
-    const step = () => {
-      if (!pausedRef.current) {
-        posRef.current += SPEED;
-        if (half > 0 && posRef.current >= half) posRef.current -= half;
-        track.style.transform = `translateX(-${posRef.current}px)`;
-      }
-      rafRef.current = requestAnimationFrame(step);
-    };
-    rafRef.current = requestAnimationFrame(() => {
-      const pivot = track.children[brands.length] as HTMLElement;
-      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
-      rafRef.current = requestAnimationFrame(step);
-    });
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [ready, brands]);
+  // Double for seamless CSS loop (calc(-50% - 2rem) lands on one set boundary)
+  const displayBrands = [...brands, ...brands];
 
-  const displayBrands = [...brands, ...brands, ...brands];
+  const getLogo = (brand: any) => {
+    const localLogo = LOCAL_BRAND_LOGOS[brand.slug?.toLowerCase()];
+    if (brand.logoUrl) {
+      const valid = /^https?:\/\/.+\.(webp|png|svg|jpg|jpeg)$/i.test(brand.logoUrl);
+      if (valid && brand.logoUrl.startsWith("https://")) return brand.logoUrl;
+    }
+    return localLogo || "";
+  };
 
-  const getLogo = (brand: any) =>
-    brand.logoUrl || LOCAL_BRAND_LOGOS[brand.slug?.toLowerCase()] || "";
+  function BrandLogo({ brand, logo }: { brand: any; logo: string }) {
+    const [errored, setErrored] = useState(false);
+    const localLogo = LOCAL_BRAND_LOGOS[brand.slug?.toLowerCase()];
+    const src = (!logo || errored) ? localLogo : logo;
+
+    return (
+      <div className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
+        {src ? (
+          <img
+            src={src}
+            alt={brand.name}
+            className="max-h-full max-w-full object-contain"
+            loading="lazy"
+            decoding="async"
+            width={200}
+            height={80}
+            onError={() => setErrored(true)}
+          />
+        ) : (
+          <span className="text-slate-400 font-bold text-base">{brand.name}</span>
+        )}
+      </div>
+    );
+  }
 
   return (
     <section className="py-12 bg-[#101c2e]">
       <div className="text-center mb-8">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
       </div>
-      <div
-        className="relative overflow-hidden"
-        onMouseEnter={() => { pausedRef.current = true; }}
-        onMouseLeave={() => { pausedRef.current = false; }}
-      >
+      <div className="relative overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10 pointer-events-none" />
-        <div ref={trackRef} className="flex gap-12 items-center py-2" style={{ width: 'max-content' }}>
+        <div className="flex gap-12 items-center py-2 animate-carousel" style={{ width: 'max-content' }}>
           {displayBrands.map((brand, i) => {
             const logo = getLogo(brand);
             return (
-              <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                {logo ? (
-                  <img src={logo} alt={brand.name} className="max-h-full max-w-full object-contain" loading="lazy" />
-                ) : (
-                  <span className="text-slate-400 font-bold text-base">{brand.name}</span>
-                )}
-              </div>
+              <BrandLogo key={i} brand={brand} logo={logo} />
             );
           })}
         </div>
