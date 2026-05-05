@@ -16,9 +16,20 @@ interface Settings {
   companyName: string;
   companyEmail: string;
   companyPhone: string;
+  companyLandline: string;
+  companyCustomerService: string;
   companyAddress: string;
+  companyPOBox: string;
   whatsappNumber: string;
   workingHours: string;
+  emergencySupport: string;
+  mapEmbedUrl: string;
+  locationDubaiAddress: string;
+  locationDubaiPhone: string;
+  locationAbuDhabiAddress: string;
+  locationAbuDhabiPhone: string;
+  locationSharjahAddress: string;
+  locationSharjahPhone: string;
   heroTitle: string;
   heroSubtitle: string;
   ctaText: string;
@@ -55,11 +66,22 @@ const defaultSmtp: SmtpSettings = {
 
 const defaultSettings: Settings = {
   companyName: "Sahara Office Equipments",
-  companyEmail: "info@saharaprinter.com",
-  companyPhone: "+971 4 505 5000",
-  companyAddress: "Sharjah, UAE",
+  companyEmail: "info@saharaedoc.com",
+  companyPhone: "+971 50 382 3969",
+  companyLandline: "+971 6 542 6169",
+  companyCustomerService: "+971 6 527 6444",
+  companyAddress: "Al Arabi Building, Industrial Area 11, Sharjah, UAE",
+  companyPOBox: "PO Box 47373, Sharjah",
   whatsappNumber: "+971 50 382 3969",
-  workingHours: "Sat - Thu: 9AM - 7PM",
+  workingHours: "Sat - Thu: 8:00 AM - 8:00 PM",
+  emergencySupport: "24/7 Emergency Support Available",
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57709.04655847797!2d55.37228622257977!3d25.310405175118643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin",
+  locationDubaiAddress: "Business Bay, Dubai",
+  locationDubaiPhone: "+971 50 382 3969",
+  locationAbuDhabiAddress: "Mussafah, Abu Dhabi",
+  locationAbuDhabiPhone: "+971 50 382 3969",
+  locationSharjahAddress: "Al Arabi Building, Industrial Area 11",
+  locationSharjahPhone: "+971 6 542 6169",
   heroTitle: "Rent, Buy, or Repair",
   heroSubtitle: "All Under One Roof",
   ctaText: "Get a Quote",
@@ -179,8 +201,16 @@ export default function AdminSettings() {
                   <input type="email" value={settings.companyEmail} onChange={(e) => setSettings({ ...settings, companyEmail: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Phone</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Phone (Mobile / Sales)</label>
                   <input type="text" value={settings.companyPhone} onChange={(e) => setSettings({ ...settings, companyPhone: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Landline (Sharjah)</label>
+                  <input type="text" value={settings.companyLandline} onChange={(e) => setSettings({ ...settings, companyLandline: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Customer Service Number</label>
+                  <input type="text" value={settings.companyCustomerService} onChange={(e) => setSettings({ ...settings, companyCustomerService: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">WhatsApp</label>
@@ -191,8 +221,16 @@ export default function AdminSettings() {
                   <input type="text" value={settings.companyAddress} onChange={(e) => setSettings({ ...settings, companyAddress: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
                 </div>
                 <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-slate-300 mb-2">PO Box</label>
+                  <input type="text" value={settings.companyPOBox} onChange={(e) => setSettings({ ...settings, companyPOBox: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                </div>
+                <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-slate-300 mb-2">Working Hours</label>
                   <input type="text" value={settings.workingHours} onChange={(e) => setSettings({ ...settings, workingHours: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Emergency Support Text</label>
+                  <input type="text" value={settings.emergencySupport} onChange={(e) => setSettings({ ...settings, emergencySupport: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
                 </div>
               </div>
             </div>
@@ -528,6 +566,43 @@ export default function AdminSettings() {
                     />
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 pt-6">
+              <h2 className="text-lg font-bold text-white mb-4">Contact Page — Location Cards</h2>
+              <div className="space-y-4">
+                {([
+                  { city: 'Dubai', addrKey: 'locationDubaiAddress', phoneKey: 'locationDubaiPhone' },
+                  { city: 'Abu Dhabi', addrKey: 'locationAbuDhabiAddress', phoneKey: 'locationAbuDhabiPhone' },
+                  { city: 'Sharjah', addrKey: 'locationSharjahAddress', phoneKey: 'locationSharjahPhone' },
+                ] as const).map(({ city, addrKey, phoneKey }) => (
+                  <div key={city} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">{city} — Address</label>
+                      <input type="text" value={settings[addrKey]} onChange={(e) => setSettings({ ...settings, [addrKey]: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">{city} — Phone</label>
+                      <input type="text" value={settings[phoneKey]} onChange={(e) => setSettings({ ...settings, [phoneKey]: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 pt-6">
+              <h2 className="text-lg font-bold text-white mb-4">Contact Page — Google Maps Embed</h2>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Map Embed URL</label>
+                <textarea
+                  value={settings.mapEmbedUrl}
+                  onChange={(e) => setSettings({ ...settings, mapEmbedUrl: e.target.value })}
+                  rows={3}
+                  placeholder="Paste Google Maps embed src URL here"
+                  className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white text-xs font-mono"
+                />
+                <p className="text-xs text-slate-500 mt-1">Get from Google Maps → Share → Embed a map → copy the src URL only</p>
               </div>
             </div>
 

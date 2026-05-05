@@ -17,6 +17,10 @@
   Cross-Origin-Embedder-Policy: unsafe-none
   Cross-Origin-Opener-Policy: same-origin-allow-popups
 
+/api/*
+  Access-Control-Allow-Origin: https://saharaprinter.com
+  Access-Control-Allow-Origin: https://www.saharaprinter.com
+
 /images/:path*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 

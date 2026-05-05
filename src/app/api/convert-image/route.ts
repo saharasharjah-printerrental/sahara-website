@@ -3,84 +3,87 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
-function getR2() {
+function getCloudinaryConfig() {
   try {
-    return getRequestContext().env.SAHARA_ASSETS as any;
+    const env = getRequestContext().env as any;
+    return {
+      cloudName: env.CLOUDINARY_CLOUD_NAME as string,
+      apiKey: env.CLOUDINARY_API_KEY as string,
+      apiSecret: env.CLOUDINARY_API_SECRET as string,
+    };
   } catch {
     return null;
   }
 }
 
-function getR2Url(fileName: string): string {
-  try {
-    const env = getRequestContext().env as any;
-    // Use R2_PUBLIC_URL if set (preferred — set this in Cloudflare Pages env vars)
-    if (env.R2_PUBLIC_URL) {
-      return `${env.R2_PUBLIC_URL.replace(/\/$/, '')}/${fileName}`;
-    }
-    // Fallback: internal R2 URL (not publicly accessible — set R2_PUBLIC_URL)
-    const accountId = env.CLOUDFLARE_ACCOUNT_ID as string;
-    if (accountId) {
-      return `https://sahara-printer-files.${accountId}.r2.cloudflarestorage.com/${fileName}`;
-    }
-    return `/${fileName}`;
-  } catch {
-    return `/${fileName}`;
-  }
-}
+async function uploadToCloudinary(
+  buffer: ArrayBuffer,
+  fileName: string,
+  contentType: string,
+  config: { cloudName: string; apiKey: string; apiSecret: string }
+): Promise<string> {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const folder = 'sahara-printer';
+  const publicId = `${folder}/${fileName.replace(/\.[^/.]+$/, '')}-${timestamp}`;
 
-function detectImageFormat(buffer: Uint8Array): string {
-  const header = Array.from(buffer.slice(0, 4)).map(b => b.toString(16).padStart(2, '0')).join('');
-  if (header.startsWith('89504e47')) return 'image/png';
-  if (header.startsWith('ffd8')) return 'image/jpeg';
-  if (header.startsWith('47494638')) return 'image/gif';
-  if (header.startsWith('3c3f786d6c')) return 'image/svg+xml';
-  if (header.startsWith('52494646')) return 'image/webp';
-  return 'image/jpeg';
+  // Build signature
+  const signatureString = `folder=${folder}&public_id=${publicId}&timestamp=${timestamp}${config.apiSecret}`;
+  const msgBuffer = new TextEncoder().encode(signatureString);
+  const hashBuffer = await crypto.subtle.digest('SHA-1', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const signature = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+  // Build multipart form
+  const form = new FormData();
+  const blob = new Blob([buffer], { type: contentType });
+  form.append('file', blob, fileName);
+  form.append('api_key', config.apiKey);
+  form.append('timestamp', String(timestamp));
+  form.append('signature', signature);
+  form.append('folder', folder);
+  form.append('public_id', publicId);
+
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${config.cloudName}/image/upload`,
+    { method: 'POST', body: form }
+  );
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Cloudinary upload failed: ${err}`);
+  }
+
+  const data = await res.json() as any;
+  return data.secure_url as string;
 }
 
 export async function POST(request: NextRequest) {
-  const r2 = getR2();
+  const config = getCloudinaryConfig();
 
-  if (!r2) {
-    const contentType = request.headers.get('content-type') || '';
-    
-    if (contentType.includes('application/json')) {
-      const body = await request.json();
-      if (body.url) {
-        return NextResponse.json({ 
-          success: true, 
-          url: body.url, 
-          fileName: 'direct-url',
-          converted: false,
-          originalName: body.url.split('/').pop() || 'image',
-          format: 'original',
-          note: 'R2 not configured - using direct URL'
-        });
-      }
-    }
-    
-    return NextResponse.json({
-      error: 'R2 storage not configured. Add R2 bucket in wrangler.toml or use direct URL input.'
-    }, { status: 200 });
+  if (!config?.cloudName || !config?.apiKey || !config?.apiSecret) {
+    return NextResponse.json(
+      { error: 'Cloudinary not configured. Add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET in Cloudflare Pages environment variables.' },
+      { status: 500 }
+    );
   }
 
   try {
     const contentType = request.headers.get('content-type') || '';
     let imageBuffer: ArrayBuffer;
     let originalName = 'image';
+    let mimeType = 'image/jpeg';
 
     if (contentType.includes('application/json')) {
-      const body = await request.json();
-      
+      const body = await request.json() as any;
+
       if (body.url) {
         const fetchRes = await fetch(body.url);
         if (!fetchRes.ok) {
           return NextResponse.json({ error: 'Failed to fetch image from URL' }, { status: 400 });
         }
         imageBuffer = await fetchRes.arrayBuffer();
-        const urlObj = new URL(body.url);
-        originalName = urlObj.pathname.split('/').pop() || 'image';
+        mimeType = fetchRes.headers.get('content-type') || 'image/jpeg';
+        originalName = body.url.split('/').pop() || 'image';
       } else if (body.base64) {
         const base64Data = body.base64.replace(/^data:image\/\w+;base64,/, '');
         const binaryString = atob(base64Data);
@@ -89,6 +92,7 @@ export async function POST(request: NextRequest) {
           bytes[i] = binaryString.charCodeAt(i);
         }
         imageBuffer = bytes.buffer;
+        mimeType = body.base64.match(/^data:(image\/\w+);/)?.[1] || 'image/jpeg';
         originalName = body.fileName || 'image';
       } else {
         return NextResponse.json({ error: 'No image data provided' }, { status: 400 });
@@ -101,70 +105,33 @@ export async function POST(request: NextRequest) {
       }
       imageBuffer = await file.arrayBuffer();
       originalName = file.name;
+      mimeType = file.type || 'image/jpeg';
     }
 
-    const ext = originalName.split('.').pop()?.toLowerCase() || '';
-    const isWebP = ext === 'webp';
-    const isSvg = ext === 'svg';
-    
-    let finalBuffer = imageBuffer;
-    let finalContentType = 'image/webp';
-    let converted = false;
+    const url = await uploadToCloudinary(imageBuffer, originalName, mimeType, config);
 
-    if (isSvg) {
-      finalContentType = 'image/svg+xml';
-      converted = false;
-    } else if (isWebP) {
-      finalContentType = 'image/webp';
-      converted = false;
-    } else {
-      const format = detectImageFormat(new Uint8Array(imageBuffer));
-      if (format !== 'image/webp') {
-        finalContentType = 'image/webp';
-        converted = true;
-      }
-    }
-
-    const baseName = originalName.replace(/\.[^/.]+$/, '');
-    const timestamp = Date.now();
-    
-    let webpName: string;
-    if (finalContentType === 'image/svg+xml') {
-      webpName = `${baseName}.svg`;
-    } else if (converted) {
-      webpName = `${baseName}-${timestamp}.webp`;
-    } else {
-      webpName = `${baseName}.webp`;
-    }
-
-    await r2.put(webpName, finalBuffer, {
-      httpMetadata: { contentType: finalContentType },
-    });
-
-    const url = getR2Url(webpName);
-
-    return NextResponse.json({ 
-      success: true, 
-      url, 
-      fileName: webpName,
-      converted,
+    return NextResponse.json({
+      success: true,
+      url,
+      fileName: originalName,
+      converted: false,
       originalName,
-      format: finalContentType
+      format: mimeType,
     });
   } catch (error) {
-    console.error('Image Conversion Error:', error);
-    return NextResponse.json({
-      error: 'Failed to convert image',
-      details: String(error)
-    }, { status: 500 });
+    console.error('Cloudinary Upload Error:', error);
+    return NextResponse.json(
+      { error: 'Failed to upload image', details: String(error) },
+      { status: 500 }
+    );
   }
 }
 
 export async function GET() {
   return NextResponse.json({
-    message: 'Image Conversion API',
+    message: 'Image Upload API (Cloudinary)',
     methods: {
-      POST: 'Convert image to WebP. Send either: 1) FormData with file, 2) JSON with url, or 3) JSON with base64'
-    }
+      POST: 'Upload image. Send either: 1) FormData with file, 2) JSON with url, or 3) JSON with base64',
+    },
   });
 }

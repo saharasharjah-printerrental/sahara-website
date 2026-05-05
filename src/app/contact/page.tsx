@@ -123,15 +123,15 @@ export default function ContactPage() {
   }, []);
 
   const contactNumbers = [
-    { label: "Mobile (Sales & Support)", phone: "+971 50 382 3969", icon: Smartphone },
-    { label: "Landline (Sharjah)", phone: "+971 6 542 6169", icon: Phone },
-    { label: "Customer Service", phone: "+971 6 527 6444", icon: Headphones },
+    { label: "Mobile (Sales & Support)", phone: settings?.companyPhone || "+971 50 382 3969", icon: Smartphone },
+    { label: "Landline (Sharjah)", phone: settings?.companyLandline || "+971 6 542 6169", icon: Phone },
+    { label: "Customer Service", phone: settings?.companyCustomerService || "+971 6 527 6444", icon: Headphones },
   ];
 
   const locations = [
-    { city: "Dubai", phone: "+971 50 382 3969", address: "Business Bay, Dubai" },
-    { city: "Abu Dhabi", phone: "+971 50 382 3969", address: "Mussafah, Abu Dhabi" },
-    { city: "Sharjah", phone: "+971 6 542 6169", address: "Al Arabi Building, Industrial Area 11" },
+    { city: "Dubai", phone: settings?.locationDubaiPhone || "+971 50 382 3969", address: settings?.locationDubaiAddress || "Business Bay, Dubai" },
+    { city: "Abu Dhabi", phone: settings?.locationAbuDhabiPhone || "+971 50 382 3969", address: settings?.locationAbuDhabiAddress || "Mussafah, Abu Dhabi" },
+    { city: "Sharjah", phone: settings?.locationSharjahPhone || "+971 6 542 6169", address: settings?.locationSharjahAddress || "Al Arabi Building, Industrial Area 11" },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -269,8 +269,8 @@ export default function ContactPage() {
                     <Email className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Email</h3>
-                      <a href="mailto:info@saharaedoc.com" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
-                        info@saharaedoc.com
+                      <a href={`mailto:${settings?.companyEmail || 'info@saharaedoc.com'}`} className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
+                        {settings?.companyEmail || 'info@saharaedoc.com'}
                       </a>
                     </div>
                   </div>
@@ -278,17 +278,17 @@ export default function ContactPage() {
                     <LocationOn className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Headquarters</h3>
-                      <p className="text-[#d3c5b0]">Al Arabi Building, Industrial Area 11</p>
+                      <p className="text-[#d3c5b0]">{settings?.companyAddress || 'Al Arabi Building, Industrial Area 11'}</p>
                       <p className="text-[#d3c5b0]">Sharjah, UAE</p>
-                      <p className="text-[#d3c5b0] text-sm mt-1">PO Box 47373, Sharjah</p>
+                      <p className="text-[#d3c5b0] text-sm mt-1">{settings?.companyPOBox || 'PO Box 47373, Sharjah'}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <AccessTime className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Business Hours</h3>
-                      <p className="text-[#d3c5b0]">Sat - Thu: 8:00 AM - 8:00 PM</p>
-                      <p className="text-[#f5be53] text-sm">24/7 Emergency Support Available</p>
+                      <p className="text-[#d3c5b0]">Sat - Thu: {settings?.workingHours || '8:00 AM - 8:00 PM'}</p>
+                      <p className="text-[#f5be53] text-sm">{settings?.emergencySupport || '24/7 Emergency Support Available'}</p>
                     </div>
                   </div>
                 </div>
@@ -329,7 +329,7 @@ export default function ContactPage() {
           <div className="glass-card rounded-[2rem] overflow-hidden">
             <div className="relative w-full h-[450px] bg-[#0a1425]">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57709.04655847797!2d55.37228622257977!3d25.310405175118643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin"
+                src={settings?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57709.04655847797!2d55.37228622257977!3d25.310405175118643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin"}
                 width="100%" 
                 height="100%"
                 style={{ border: 0, position: 'absolute', top: 0, left: 0 }} 
@@ -343,7 +343,7 @@ export default function ContactPage() {
           
           <div className="mt-6 p-6 bg-[#0d1b2e] rounded-2xl border border-[#f5be53]/20">
             <p className="text-[#d3c5b0] text-center">
-              <span className="text-[#f5be53] font-semibold">Location:</span> Al Arabi Building, Industrial Area 11, Sharjah, UAE
+              <span className="text-[#f5be53] font-semibold">Location:</span> {settings?.companyAddress || 'Al Arabi Building, Industrial Area 11, Sharjah, UAE'}
             </p>
           </div>
           

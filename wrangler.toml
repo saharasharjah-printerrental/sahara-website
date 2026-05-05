@@ -4,18 +4,20 @@ compatibility_flags = ["nodejs_compat"]
 
 pages_build_output_dir = ".vercel/output/static"
 
+# ─────────────────────────────────────────────
+# D1 DATABASE
+# ─────────────────────────────────────────────
 [[d1_databases]]
 binding = "DB"
 database_name = "sahara-printer-db"
 database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
 
-# R2 bucket for file storage
-[[r2_buckets]]
-binding = "SAHARA_ASSETS"
-bucket_name = "sahara-printer-files"
-
+# ─────────────────────────────────────────────
+# ENVIRONMENT VARIABLES
+# Replace the placeholder values below with
+# your real Cloudinary credentials, then save.
+# ─────────────────────────────────────────────
 [vars]
-CLOUDFLARE_ACCOUNT_ID = "SET_IN_CLOUDFLARE_DASHBOARD"
-# Set R2_PUBLIC_URL after enabling Public Access on your R2 bucket in Cloudflare Dashboard
-# It will look like: https://pub-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.r2.dev
-R2_PUBLIC_URL = ""
+CLOUDINARY_CLOUD_NAME = "YOUR_CLOUD_NAME"
+CLOUDINARY_API_KEY    = "YOUR_API_KEY"
+CLOUDINARY_API_SECRET = "YOUR_API_SECRET"

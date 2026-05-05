@@ -27,30 +27,22 @@ function getDB() {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get('slug');
-
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({
-      error: 'Database not configured',
-      blogs: []
-    });
+    return NextResponse.json({ error: 'Database not configured', blogs: [] });
   }
 
   try {
     if (slug) {
-      const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').get(slug);
+      const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').first(slug);
       return NextResponse.json({ blog: result });
     }
-
     const result = await db.prepare('SELECT * FROM blogs WHERE isActive = 1 ORDER BY publishedAt DESC').all();
-    return NextResponse.json({ blogs: result });
+    return NextResponse.json({ blogs: result?.results ?? [] });
   } catch (error) {
     console.error('Blogs GET Error:', error);
-    return NextResponse.json({
-      error: 'Failed to fetch blogs',
-      blogs: []
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch blogs', blogs: [] }, { status: 500 });
   }
 }
 
@@ -63,11 +55,13 @@ export async function POST(request: NextRequest) {
 
   try {
     const body: Blog = await request.json();
-    const id = body.id || Date.now().toString();
+    // Guard: never use route segment names as IDs
+    const reservedIds = ['editor', 'new', 'create', ''];
+    const id = (body.id && !reservedIds.includes(body.id)) ? body.id : Date.now().toString();
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT INTO blogs (id, title, slug, excerpt, content, image, author, category, isActive, publishedAt, createdAt)
+      INSERT OR REPLACE INTO blogs (id, title, slug, excerpt, content, image, author, category, isActive, publishedAt, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
@@ -86,9 +80,29 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, id });
   } catch (error) {
     console.error('Blogs POST Error:', error);
-    return NextResponse.json({
-      error: 'Failed to create blog',
-      details: String(error)
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to save blog', details: String(error) }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  const db = getDB();
+
+  if (!db) {
+    return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+  }
+
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'Blog ID required' }, { status: 400 });
+    }
+
+    await db.prepare('DELETE FROM blogs WHERE id = ?').run(id);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Blogs DELETE Error:', error);
+    return NextResponse.json({ error: 'Failed to delete blog', details: String(error) }, { status: 500 });
   }
 }
