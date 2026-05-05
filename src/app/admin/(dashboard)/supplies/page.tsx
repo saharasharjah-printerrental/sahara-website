@@ -284,6 +284,11 @@ export default function AdminSupplies() {
   return (
     <div className="min-h-screen bg-[#071325]">
       {ToastElement}
+      <main className="pt-8 pb-16 px-8 ml-64">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-white">Supplies & Parts</h1>
               <p className="text-slate-400 mt-1">Manage toners, drums, and spare parts inventory</p>
             </div>
             <button
