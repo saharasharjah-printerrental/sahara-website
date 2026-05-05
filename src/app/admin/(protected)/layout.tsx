@@ -10,7 +10,7 @@ const menuItems = [
   { icon: "shopping_cart", label: "Supplies & Parts", href: "/admin/supplies" },
   { icon: "request_quote", label: "Inquiries", href: "/admin/inquiries" },
   { icon: "article", label: "Blog Posts", href: "/admin/blog" },
-  { icon: "groups", label: "Clients", href: "/admin/clients" },
+  { icon: "groups", label: "Client Logos", href: "/admin/clients" },
   { icon: "quiz", label: "FAQs", href: "/admin/faqs" },
   { icon: "format_quote", label: "Testimonials", href: "/admin/testimonials" },
   { icon: "business", label: "Brands", href: "/admin/brands" },
