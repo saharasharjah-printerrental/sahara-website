@@ -36,9 +36,14 @@ export async function POST(request: NextRequest) {
       httpMetadata: { contentType },
     });
 
-    const accountId = getRequestContext().env.CLOUDFLARE_ACCOUNT_ID as string;
-    const r2Domain = `https://sahara-printer-files.${accountId}.r2.cloudflarestorage.com`;
-    const url = `${r2Domain}/${fileName}`;
+    const env = getRequestContext().env as any;
+    const r2PublicUrl = env.R2_PUBLIC_URL?.replace(/\/$/, '');
+    const accountId = env.CLOUDFLARE_ACCOUNT_ID as string;
+    const url = r2PublicUrl
+      ? `${r2PublicUrl}/${fileName}`
+      : accountId
+        ? `https://sahara-printer-files.${accountId}.r2.cloudflarestorage.com/${fileName}`
+        : `/${fileName}`;
 
     return NextResponse.json({ success: true, url, fileName });
   } catch (error) {

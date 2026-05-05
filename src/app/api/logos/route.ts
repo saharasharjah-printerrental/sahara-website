@@ -32,8 +32,8 @@ export async function GET() {
   }
 
   try {
-    const result = await db.prepare('SELECT * FROM logos WHERE isActive = 1 ORDER BY sortOrder ASC').all();
-    return NextResponse.json({ logos: result });
+    const result = await db.prepare('SELECT * FROM logos ORDER BY sortOrder ASC').all();
+    return NextResponse.json({ logos: result?.results ?? result ?? [] });
   } catch (error) {
     console.error('Logos GET Error:', error);
     return NextResponse.json({

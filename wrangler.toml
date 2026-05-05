@@ -13,3 +13,9 @@ database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
 [[r2_buckets]]
 binding = "SAHARA_ASSETS"
 bucket_name = "sahara-printer-files"
+
+[vars]
+CLOUDFLARE_ACCOUNT_ID = "SET_IN_CLOUDFLARE_DASHBOARD"
+# Set R2_PUBLIC_URL after enabling Public Access on your R2 bucket in Cloudflare Dashboard
+# It will look like: https://pub-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.r2.dev
+R2_PUBLIC_URL = ""

@@ -101,7 +101,6 @@ export default function AdminLogos() {
   };
 
   const handleSave = async (logo: Logo) => {
-    let apiSuccess = false;
     try {
       const res = await fetch(`${API_BASE}/logos`, {
         method: 'POST',
@@ -112,14 +111,13 @@ export default function AdminLogos() {
         })
       });
       const data = await res.json();
-      if (res.ok && data.success) {
-        apiSuccess = true;
-      } else {
+      if (!res.ok || !data.success) {
         showNotification('error', data.error || 'Failed to save logo');
         return;
       }
     } catch (e) {
-      showNotification('error', 'Database not available. Changes saved locally.');
+      showNotification('error', 'Network error. Please try again.');
+      return;
     }
 
     if (editingLogo) {
@@ -130,6 +128,7 @@ export default function AdminLogos() {
     setShowModal(false);
     setEditingLogo(null);
     showNotification('success', editingLogo ? 'Logo updated successfully' : 'Logo created successfully');
+    fetchLogos();
   };
 
   return (

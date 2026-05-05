@@ -41,5 +41,12 @@ next-env.d.ts
 # Cloudflare
 .wrangler/
 
+# Never commit files with real credentials
+CLOUDFLARE_DEPLOYMENT.md
+CLOUDFLARE_D1_R2_SETUP.md
+CLOUDFLARE_DATA_CONFIG.md
+CLOUDFLARE_SIMPLE_DEPLOY.md
+.env.production
+
 # Claude
 .claude/worktrees/

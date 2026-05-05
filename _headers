@@ -13,6 +13,10 @@
   Cache-Control: public, max-age=86400
   Content-Type: text/plain
 
+/admin/*
+  Cross-Origin-Embedder-Policy: unsafe-none
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
 /images/:path*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 

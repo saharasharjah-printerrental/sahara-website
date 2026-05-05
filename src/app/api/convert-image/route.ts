@@ -13,12 +13,17 @@ function getR2() {
 
 function getR2Url(fileName: string): string {
   try {
-    const accountId = getRequestContext().env.CLOUDFLARE_ACCOUNT_ID as string;
-    if (!accountId) {
-      return `/${fileName}`;
+    const env = getRequestContext().env as any;
+    // Use R2_PUBLIC_URL if set (preferred — set this in Cloudflare Pages env vars)
+    if (env.R2_PUBLIC_URL) {
+      return `${env.R2_PUBLIC_URL.replace(/\/$/, '')}/${fileName}`;
     }
-    const r2Domain = `https://sahara-printer-files.${accountId}.r2.cloudflarestorage.com`;
-    return `${r2Domain}/${fileName}`;
+    // Fallback: internal R2 URL (not publicly accessible — set R2_PUBLIC_URL)
+    const accountId = env.CLOUDFLARE_ACCOUNT_ID as string;
+    if (accountId) {
+      return `https://sahara-printer-files.${accountId}.r2.cloudflarestorage.com/${fileName}`;
+    }
+    return `/${fileName}`;
   } catch {
     return `/${fileName}`;
   }
