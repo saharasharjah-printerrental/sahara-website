@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Image as ImageIcon } from "@mui/icons-material";
+import { useToast } from "@/components/admin/Toast";
 
 interface Logo {
   id: string;
@@ -26,7 +27,7 @@ export default function AdminLogos() {
   const [showModal, setShowModal] = useState(false);
   const [editingLogo, setEditingLogo] = useState<Logo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
     fetchLogos();
@@ -59,10 +60,7 @@ export default function AdminLogos() {
     }
   };
 
-  const showNotification = (type: 'success' | 'error', message: string) => {
-    setNotification({ type, message });
-    setTimeout(() => setNotification(null), 3000);
-  };
+  const showNotification = (type: 'success' | 'error', message: string) => showToast(type, message);
 
   const saveLogos = (newLogos: Logo[]) => {
     setLogos(newLogos);
@@ -133,13 +131,7 @@ export default function AdminLogos() {
 
   return (
     <div className="min-h-screen bg-[#071325]">
-      {notification && (
-        <div className={`fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg ${
-          notification.type === 'success' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'
-        }`}>
-          {notification.message}
-        </div>
-      )}
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">

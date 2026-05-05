@@ -3,15 +3,6 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
-interface FAQ {
-  id: string;
-  pageSlug: string;
-  question: string;
-  answer: string;
-  sortOrder: number;
-  isActive: number;
-}
-
 function getDB() {
   try {
     return getRequestContext().env.DB as any;
@@ -23,69 +14,58 @@ function getDB() {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const pageSlug = searchParams.get('pageSlug');
-
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({
-      error: 'Database not configured',
-      faqs: []
-    });
+    return NextResponse.json({ error: 'Database not configured', faqs: [] });
   }
 
   try {
-    let sql = 'SELECT * FROM faqs WHERE isActive = 1';
-    const params: string[] = [];
-
-    if (pageSlug) {
-      sql += ' AND pageSlug = ?';
-      params.push(pageSlug);
-    }
-
-    sql += ' ORDER BY sortOrder ASC';
-
-    const result = await db.prepare(sql).all(...params);
-    return NextResponse.json({ faqs: result });
+    const sql = pageSlug
+      ? 'SELECT * FROM faqs WHERE isActive = 1 AND pageSlug = ? ORDER BY sortOrder ASC'
+      : 'SELECT * FROM faqs WHERE isActive = 1 ORDER BY sortOrder ASC';
+    const result = pageSlug
+      ? await db.prepare(sql).bind(pageSlug).all()
+      : await db.prepare(sql).all();
+    return NextResponse.json({ faqs: result?.results ?? [] });
   } catch (error) {
     console.error('FAQs GET Error:', error);
-    return NextResponse.json({
-      error: 'Failed to fetch FAQs',
-      faqs: []
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch FAQs', faqs: [] }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   const db = getDB();
-
-  if (!db) {
-    return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
-  }
+  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
 
   try {
-    const body: FAQ = await request.json();
+    const body = await request.json() as any;
     const id = body.id || Date.now().toString();
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT INTO faqs (id, pageSlug, question, answer, sortOrder, isActive, createdAt)
+      INSERT OR REPLACE INTO faqs (id, pageSlug, question, answer, sortOrder, isActive, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?)
-    `).run(
-      id,
-      body.pageSlug,
-      body.question,
-      body.answer,
-      body.sortOrder || 0,
-      body.isActive ?? 1,
-      now
-    );
+    `).run(id, body.pageSlug, body.question, body.answer, body.sortOrder || 0, body.isActive ?? 1, now);
 
     return NextResponse.json({ success: true, id });
   } catch (error) {
     console.error('FAQs POST Error:', error);
-    return NextResponse.json({
-      error: 'Failed to create FAQ',
-      details: String(error)
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to save FAQ', details: String(error) }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  const db = getDB();
+  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    if (!id) return NextResponse.json({ error: 'FAQ ID required' }, { status: 400 });
+    await db.prepare('DELETE FROM faqs WHERE id = ?').run(id);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to delete FAQ', details: String(error) }, { status: 500 });
   }
 }

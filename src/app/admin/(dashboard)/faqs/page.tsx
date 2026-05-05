@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useToast } from "@/components/admin/Toast";
 
 interface FAQ {
   id: string;
@@ -50,7 +51,7 @@ export default function AdminFAQs() {
   const [showModal, setShowModal] = useState(false);
   const [editingFAQ, setEditingFAQ] = useState<FAQ | null>(null);
   const [filterPage, setFilterPage] = useState<string>("all");
-  const [saved, setSaved] = useState(false);
+  const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_faqs");
@@ -85,14 +86,14 @@ export default function AdminFAQs() {
     }
     setShowModal(false);
     setEditingFAQ(null);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    showToast('success', editingFAQ ? 'FAQ updated' : 'FAQ created');
   };
 
   const filteredFAQs = filterPage === "all" ? faqs : faqs.filter(f => f.pageSlug === filterPage);
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
@@ -101,12 +102,6 @@ export default function AdminFAQs() {
               <p className="text-slate-400 mt-1">Manage frequently asked questions for each page</p>
             </div>
             <div className="flex items-center gap-4">
-              {saved && (
-                <span className="text-green-400 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">check_circle</span>
-                  Saved!
-                </span>
-              )}
               <button onClick={() => { setEditingFAQ(null); setShowModal(true); }} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-3 rounded-xl font-bold hover:scale-[1.02] transition-transform flex items-center gap-2">
                 <span className="material-symbols-outlined">add</span>
                 Add FAQ

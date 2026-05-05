@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 import { BLOG_CONTENT } from "@/lib/blogContent";
+import { useToast } from "@/components/admin/Toast";
 
 interface BlogPost {
   id: string;
@@ -33,6 +34,7 @@ export default function BlogEditorPage() {
   const [convertToWebp, setConvertToWebp] = useState(true);
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const { showToast, ToastElement } = useToast();
 
   const categories = ["Guide", "Buying Guide", "News", "Tips", "Case Study", "Troubleshooting", "Finance", "Trends", "Insights"];
 
@@ -124,6 +126,7 @@ export default function BlogEditorPage() {
       }];
     }
     localStorage.setItem("sahara_blogs", JSON.stringify(newPosts));
+    showToast('success', form.id ? 'Post updated' : 'Post created');
     router.push("/admin/blog");
   };
 
@@ -131,6 +134,7 @@ export default function BlogEditorPage() {
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center justify-between mb-8">

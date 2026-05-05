@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Star, StarBorder } from "@mui/icons-material";
+import { useToast } from "@/components/admin/Toast";
 
 interface Testimonial {
   id: string;
@@ -22,6 +23,7 @@ export default function AdminTestimonials() {
   const [showModal, setShowModal] = useState(false);
   const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
   const [loading, setLoading] = useState(true);
+  const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_testimonials");
@@ -125,10 +127,12 @@ export default function AdminTestimonials() {
     }
     setShowModal(false);
     setEditingTestimonial(null);
+    showToast('success', editingTestimonial ? 'Testimonial updated' : 'Testimonial created');
   };
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">

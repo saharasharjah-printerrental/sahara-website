@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useToast } from "@/components/admin/Toast";
 
 interface Brand {
   id: string;
@@ -34,6 +35,7 @@ export default function AdminBrands() {
   const [showModal, setShowModal] = useState(false);
   const [editingBrand, setEditingBrand] = useState<Brand | null>(null);
   const [loading, setLoading] = useState(true);
+  const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
     fetchBrands();
@@ -120,10 +122,12 @@ export default function AdminBrands() {
     }
     setShowModal(false);
     setEditingBrand(null);
+    showToast('success', editingBrand ? 'Brand updated' : 'Brand created');
   };
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">

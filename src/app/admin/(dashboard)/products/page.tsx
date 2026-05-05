@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useToast } from "@/components/admin/Toast";
 import { Skeleton } from "boneyard-js/react";
 
 interface Product {
@@ -58,6 +59,7 @@ export default function AdminProducts() {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
+  const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
     fetchProducts();
@@ -162,6 +164,7 @@ export default function AdminProducts() {
     }
     setShowModal(false);
     setEditingProduct(null);
+    showToast('success', editingProduct ? 'Product updated' : 'Product created');
   };
 
   const filteredProducts = products.filter(p => {
@@ -173,6 +176,7 @@ export default function AdminProducts() {
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">

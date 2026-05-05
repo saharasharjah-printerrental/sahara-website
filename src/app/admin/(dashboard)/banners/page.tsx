@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useToast } from "@/components/admin/Toast";
 
 interface Banner {
   id: string;
@@ -22,6 +23,7 @@ export default function AdminBanners() {
   const [banners, setBanners] = useState<Banner[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [editingBanner, setEditingBanner] = useState<Banner | null>(null);
+  const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_banners");
@@ -56,10 +58,12 @@ export default function AdminBanners() {
     }
     setShowModal(false);
     setEditingBanner(null);
+    showToast('success', editingBanner ? 'Banner updated' : 'Banner created');
   };
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">

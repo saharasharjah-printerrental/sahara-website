@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useToast } from "@/components/admin/Toast";
 
 interface SmtpSettings {
   smtpHost: string;
@@ -108,7 +109,7 @@ const defaultSettings: Settings = {
 
 export default function AdminSettings() {
   const [settings, setSettings] = useState<Settings>(defaultSettings);
-  const [saved, setSaved] = useState(false);
+  const { showToast, ToastElement } = useToast();
 
   const mergeWithDefaults = (stored: Partial<Settings>): Settings => {
     return {
@@ -168,25 +169,20 @@ export default function AdminSettings() {
       // D1 may not be configured in dev — localStorage is the fallback
     }
 
+    showToast('success', 'Settings saved successfully!');
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-white">Settings</h1>
             <p className="text-slate-400 mt-1">Manage your website settings</p>
           </div>
-
-          {saved && (
-            <div className="mb-6 bg-green-500/20 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl flex items-center gap-2">
-              <span className="material-symbols-outlined">check_circle</span>
-              Settings saved successfully!
-            </div>
-          )}
 
           <div className="glass-card rounded-2xl p-6 space-y-6">
             <div>

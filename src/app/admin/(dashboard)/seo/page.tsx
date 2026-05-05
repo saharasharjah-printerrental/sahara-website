@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useToast } from "@/components/admin/Toast";
 
 interface SEOConfig {
   googleAnalyticsId: string;
@@ -43,6 +44,7 @@ export default function AdminSEO() {
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
     const load = async () => {
@@ -94,11 +96,13 @@ export default function AdminSEO() {
       }
       localStorage.setItem("sahara_seo_config", json);
       window.dispatchEvent(new Event("seo-config-updated"));
+      showToast('success', 'SEO config saved successfully!');
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unknown error";
-      setError(`DB save failed (${msg}). Config saved locally only — won't apply to visitors until DB is fixed.`);
+      setError(`DB save failed (${msg}). Config saved locally only.`);
+      showToast('error', `DB save failed. Config saved locally only.`);
       localStorage.setItem("sahara_seo_config", json);
       window.dispatchEvent(new Event("seo-config-updated"));
     } finally {
@@ -108,6 +112,7 @@ export default function AdminSEO() {
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8">
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
@@ -117,11 +122,6 @@ export default function AdminSEO() {
             </p>
           </div>
 
-          {saved && (
-            <div className="mb-6 bg-green-500/20 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl">
-              SEO config saved successfully!
-            </div>
-          )}
           {error && (
             <div className="mb-6 bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 px-4 py-3 rounded-xl">
               {error}
