@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
-import { CloseIcon, ShoppingCartIcon, Inventory, LocalShippingIcon, BuildIcon, SpeedIcon, CheckCircleIcon, Delete, SettingsIcon, VerifiedIcon, SyncIcon } from "@/components/icons";
+import { CloseIcon, ShoppingCartIcon, Inventory, LocalShippingIcon, BuildIcon, SpeedIcon, CheckCircleIcon, Delete, SettingsIcon, VerifiedIcon, SyncIcon } from "@/components/icons/index";
 
 interface Supply {
   id: string;

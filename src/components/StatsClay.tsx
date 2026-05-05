@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LayersIcon, PeopleIcon, FavoriteIcon, ComputerIcon } from "@/components/icons";
+import { LayersIcon, PeopleIcon, FavoriteIcon, ComputerIcon } from "@/components/icons/index";
 import type { SvgIconComponent } from "@/components/icons";
 import CountUp from "./CountUp";
 

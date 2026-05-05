@@ -64,7 +64,7 @@
   100% { transform: translateX(calc(-50% - 1.5rem)); }
 }
 
-@keyframes carousel {
+@keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(-50% - 1.5rem)); }
 }
