@@ -532,60 +532,39 @@ function ReviewsSection() {
   const pausedRef = useRef(false);
 
   useEffect(() => {
-    // Load from localStorage first
-    const stored = localStorage.getItem("sahara_testimonials");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setTestimonials(parsed.filter((t: any) => t.isActive));
-    } else {
-      // Fallback to API
-      fetch('/api/testimonials')
-        .then(res => res.json())
-        .then(data => {
-          if (data.testimonials && data.testimonials.length > 0) {
-            setTestimonials(data.testimonials);
-            localStorage.setItem("sahara_testimonials", JSON.stringify(data.testimonials));
-          }
-        })
-        .catch(() => {});
-    }
-    setReady(true);
-
-    // Connect to SSE stream for realtime updates
-    const eventSource = new EventSource('/api/testimonials/stream');
-    eventSource.onmessage = (e) => {
-      try {
-        const data = JSON.parse(e.data);
-        if (data.type === 'init' || data.type === 'update') {
-          const active = data.data.filter((t: any) => t.isActive);
+    // Always fetch from D1 API first — source of truth
+    fetch('/api/testimonials')
+      .then(res => res.json())
+      .then(data => {
+        if (data.testimonials && data.testimonials.length > 0) {
+          // Normalise both snake_case (DB) and camelCase (localStorage)
+          const active = data.testimonials.filter((t: any) =>
+            t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true
+          );
           setTestimonials(active);
           localStorage.setItem("sahara_testimonials", JSON.stringify(active));
-        }
-      } catch (err) {
-        console.error('SSE parse error:', err);
-      }
-    };
-    eventSource.onerror = () => {
-      // Fallback to polling every 30s if SSE fails
-      const pollInterval = setInterval(async () => {
-        try {
-          const res = await fetch('/api/testimonials');
-          const data = await res.json();
-          if (data.testimonials) {
-            const active = data.testimonials.filter((t: any) => t.isActive);
-            setTestimonials(active);
-            localStorage.setItem("sahara_testimonials", JSON.stringify(active));
+        } else {
+          // Fall back to localStorage if DB returns empty
+          const stored = localStorage.getItem("sahara_testimonials");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            setTestimonials(parsed.filter((t: any) =>
+              t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true
+            ));
           }
-        } catch (err) {
-          console.error('Poll error:', err);
         }
-      }, 30000);
-      return () => clearInterval(pollInterval);
-    };
-
-    return () => {
-      eventSource.close();
-    };
+      })
+      .catch(() => {
+        // Network error — use localStorage cache
+        const stored = localStorage.getItem("sahara_testimonials");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setTestimonials(parsed.filter((t: any) =>
+            t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true
+          ));
+        }
+      })
+      .finally(() => setReady(true));
   }, []);
 
   useEffect(() => {

@@ -124,6 +124,19 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 
 -- ============================================
+-- LOGOS TABLE (Client Logos / Brand Carousel)
+-- ============================================
+CREATE TABLE IF NOT EXISTS logos (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  imageUrl TEXT DEFAULT '',
+  imageAlt TEXT DEFAULT '',
+  link TEXT DEFAULT '',
+  isActive INTEGER DEFAULT 1,
+  sortOrder INTEGER DEFAULT 0
+);
+
+-- ============================================
 -- TESTIMONIALS TABLE
 -- ============================================
 CREATE TABLE IF NOT EXISTS testimonials (

@@ -1,5 +1,4 @@
 # Cloudflare Pages Headers Configuration
-# Serve static files from public folder
 
 /robots.txt
   Cache-Control: public, max-age=86400
@@ -13,13 +12,16 @@
   Cache-Control: public, max-age=86400
   Content-Type: text/plain
 
+# Admin panel — allow external scripts/images (Wikimedia logos, Google Analytics, Cloudflare beacon)
 /admin/*
   Cross-Origin-Embedder-Policy: unsafe-none
   Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://unpkg.com; img-src 'self' data: blob: https: http:; connect-src 'self' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com;
 
 /api/*
-  Access-Control-Allow-Origin: https://saharaprinter.com
   Access-Control-Allow-Origin: https://www.saharaprinter.com
+  Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type
 
 /images/:path*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400

@@ -48,6 +48,14 @@ const nextConfig = {
         ],
       },
       {
+        // Admin panel — relax COEP so external scripts/images load
+        source: '/admin/:path*',
+        headers: [
+          { key: 'Cross-Origin-Embedder-Policy', value: 'unsafe-none' },
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' },
+        ],
+      },
+      {
         source: '/:path*',
         headers: [
           { key: 'X-Frame-Options', value: 'DENY' },

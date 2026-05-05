@@ -221,12 +221,19 @@ function LogoModal({ logo, onSave, onClose }: { logo: Logo | null; onSave: (l: L
       const data = await res.json();
       if (data.url) {
         setForm(prev => ({ ...prev, imageUrl: data.url, imageAlt: prev.imageAlt || `${prev.name} logo` }));
+        return;
       }
-    } catch (error) {
-      console.error("Upload failed:", error);
+    } catch {
+      // fall through to local preview
     } finally {
       setUploading(false);
     }
+    // Cloudinary not configured — show local preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setForm(prev => ({ ...prev, imageUrl: reader.result as string, imageAlt: prev.imageAlt || `${prev.name} logo` }));
+    };
+    reader.readAsDataURL(file);
   };
 
   return (

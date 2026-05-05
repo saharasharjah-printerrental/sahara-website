@@ -26,31 +26,13 @@ export default function AdminTestimonials() {
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_testimonials");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      if (parsed.length > 0) {
-        setTestimonials(parsed);
-        setLoading(false);
-        return;
-      }
-    }
-    // Seed data if nothing in localStorage
-    const seed = [
-      { id: "1", name: "Marcus Thorne", role: "Architectural Lead", text: "Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!", rating: 5, avatarUrl: "", avatarAlt: "Marcus Thorne avatar", isActive: true, sortOrder: 1 },
-      { id: "2", name: "Sarah Jenkins", role: "Operations Manager", text: "The printer rental program saved us 40% on operational costs this quarter. Professional and reliable.", rating: 5, avatarUrl: "", avatarAlt: "Sarah Jenkins avatar", isActive: true, sortOrder: 2 },
-      { id: "3", name: "David Chen", role: "IT Director", text: "Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara.", rating: 5, avatarUrl: "", avatarAlt: "David Chen avatar", isActive: true, sortOrder: 3 },
-    ];
-    setTestimonials(seed);
-    localStorage.setItem("sahara_testimonials", JSON.stringify(seed));
-    setLoading(false);
+    fetchTestimonials();
   }, []);
 
   const fetchTestimonials = async () => {
     try {
       const res = await fetch(`${API_BASE}/testimonials`);
       const data = await res.json();
-      
       if (data.testimonials && data.testimonials.length > 0) {
         const mapped = data.testimonials.map((t: any) => ({
           id: t.id,
@@ -58,76 +40,80 @@ export default function AdminTestimonials() {
           role: t.role || '',
           text: t.text,
           rating: t.rating || 5,
-          avatarUrl: t.avatarUrl || '',
+          avatarUrl: t.image_url || t.avatarUrl || '',
           avatarAlt: t.avatarAlt || '',
-          isActive: t.isActive === 1,
-          sortOrder: t.sortOrder || 0,
+          isActive: t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true,
+          sortOrder: t.sort_order ?? t.sortOrder ?? 0,
         }));
         setTestimonials(mapped);
+        localStorage.setItem("sahara_testimonials", JSON.stringify(mapped));
       } else {
-        setTestimonials([]);
-        localStorage.setItem("sahara_testimonials", JSON.stringify([]));
+        const stored = localStorage.getItem("sahara_testimonials");
+        if (stored) setTestimonials(JSON.parse(stored));
       }
-    } catch (error) {
-      console.error('Failed to fetch testimonials:', error);
+    } catch {
       const stored = localStorage.getItem("sahara_testimonials");
-      if (stored) {
-        setTestimonials(JSON.parse(stored));
-      }
+      if (stored) setTestimonials(JSON.parse(stored));
     } finally {
       setLoading(false);
     }
   };
 
-  const saveTestimonials = (newTestimonials: Testimonial[]) => {
-    setTestimonials(newTestimonials);
-    localStorage.setItem("sahara_testimonials", JSON.stringify(newTestimonials));
-  };
-
   const handleDelete = async (id: string) => {
-    if (confirm("Delete this testimonial?")) {
-      saveTestimonials(testimonials.filter(t => t.id !== id));
+    if (!confirm("Delete this testimonial?")) return;
+    try {
+      await fetch(`${API_BASE}/testimonials?id=${id}`, { method: 'DELETE' });
+    } catch (e) {
+      console.error('Delete failed:', e);
     }
+    const updated = testimonials.filter(t => t.id !== id);
+    setTestimonials(updated);
+    localStorage.setItem("sahara_testimonials", JSON.stringify(updated));
+    showToast('success', 'Testimonial deleted');
   };
 
   const handleToggle = async (id: string) => {
-    const testimonial = testimonials.find(t => t.id === id);
-    if (testimonial) {
-      try {
-        await fetch(`${API_BASE}/testimonials`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...testimonial, isActive: testimonial.isActive ? 0 : 1 })
-        });
-      } catch (e) {
-        console.log('API not available');
-      }
-    }
-    saveTestimonials(testimonials.map(t => t.id === id ? { ...t, isActive: !t.isActive } : t));
-  };
-
-  const handleSave = async (testimonial: Testimonial) => {
+    const t = testimonials.find(t => t.id === id);
+    if (!t) return;
+    const updated = testimonials.map(x => x.id === id ? { ...x, isActive: !x.isActive } : x);
+    setTestimonials(updated);
+    localStorage.setItem("sahara_testimonials", JSON.stringify(updated));
     try {
       await fetch(`${API_BASE}/testimonials`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...testimonial,
-          isActive: testimonial.isActive ? 1 : 0
-        })
+        body: JSON.stringify({ ...t, is_active: t.isActive ? 0 : 1, isActive: t.isActive ? 0 : 1 })
       });
     } catch (e) {
-      console.log('API not available');
+      console.error('Toggle failed:', e);
     }
-    
-    if (editingTestimonial) {
-      saveTestimonials(testimonials.map(t => t.id === testimonial.id ? testimonial : t));
-    } else {
-      saveTestimonials([...testimonials, { ...testimonial, id: Date.now().toString() }]);
+  };
+
+  const handleSave = async (testimonial: Testimonial) => {
+    try {
+      const res = await fetch(`${API_BASE}/testimonials`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...testimonial,
+          isActive: testimonial.isActive ? 1 : 0,
+          is_active: testimonial.isActive ? 1 : 0,
+          image_url: testimonial.avatarUrl,
+        })
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        showToast('error', data.error || 'Failed to save to database');
+        return;
+      }
+    } catch (e) {
+      showToast('error', 'Network error. Please try again.');
+      return;
     }
     setShowModal(false);
     setEditingTestimonial(null);
     showToast('success', editingTestimonial ? 'Testimonial updated' : 'Testimonial created');
+    fetchTestimonials();
   };
 
   return (
@@ -204,7 +190,6 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     setUploading(true);
     try {
       const formData = new FormData();
@@ -213,12 +198,19 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
       const data = await res.json();
       if (data.url) {
         setForm(prev => ({ ...prev, avatarUrl: data.url, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }));
+        return;
       }
-    } catch (error) {
-      console.error("Upload failed:", error);
+    } catch {
+      // fall through to local preview
     } finally {
       setUploading(false);
     }
+    // Cloudinary not configured — show local preview so admin can see the image
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setForm(prev => ({ ...prev, avatarUrl: reader.result as string, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }));
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
