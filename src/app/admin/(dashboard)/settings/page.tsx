@@ -170,8 +170,6 @@ export default function AdminSettings() {
     }
 
     showToast('success', 'Settings saved successfully!');
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
   };
 
   return (
