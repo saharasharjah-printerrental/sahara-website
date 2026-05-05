@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Layers, People, Favorite, Computer } from "@mui/icons-material";
-import type { SvgIconComponent } from "@mui/icons-material";
+import { LayersIcon, PeopleIcon, FavoriteIcon, ComputerIcon } from "@/components/icons";
+import type { SvgIconComponent } from "@/components/icons";
 import CountUp from "./CountUp";
 
 const parseNumericValue = (value: string) => {
@@ -16,7 +16,7 @@ const parseNumericValue = (value: string) => {
 interface Stat {
   value: string;
   label: string;
-  icon?: SvgIconComponent;
+  icon?: any;
 }
 
 interface StatsClayProps {
@@ -27,10 +27,10 @@ interface StatsClayProps {
 
 const StatsClay = ({
   stats = [
-    { value: "13+", label: "Years Active", icon: Layers },
-    { value: "1500+", label: "Happy Clients", icon: People },
-    { value: "50k+", label: "Parts Fixed", icon: Favorite },
-    { value: "24/7", label: "Support", icon: Computer },
+    { value: "13+", label: "Years Active", icon: LayersIcon },
+    { value: "1500+", label: "Happy Clients", icon: PeopleIcon },
+    { value: "50k+", label: "Parts Fixed", icon: FavoriteIcon },
+    { value: "24/7", label: "Support", icon: ComputerIcon },
   ],
   title = "Built for Scale, Designed for Craft",
   subtitle = "The numbers behind Sahara's growing ecosystem of premium office equipment solutions.",

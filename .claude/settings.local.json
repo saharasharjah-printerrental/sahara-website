@@ -36,7 +36,15 @@
       "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -File | Where-Object { $_.Name -match \"env|wrangler|next.config\" } | ForEach-Object { $_.FullName })",
       "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; Get-ChildItem -Path \"src\\\\app\\\\admin\\\\\\(dashboard\\)\\\\banners\" -Recurse -File | ForEach-Object { $_.FullName })",
       "Bash(rtk git *)",
-      "Bash(rtk tsc *)"
+      "Bash(rtk tsc *)",
+      "WebFetch(domain:pagespeed.web.dev)",
+      "Bash(rtk next *)",
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\"; npx next build 2>&1 | Out-String | Select-String -AllMatches \"ƒ /\\\\s\" | ForEach-Object { $_.Matches } | Select-Object -First 3)",
+      "PowerShell(head *)",
+      "PowerShell(Get-Content *)",
+      "PowerShell($files = @\\(\"brother.png\",\"canon.png\",\"ricoh.png\",\"xerox.png\",\"hp.webp\",\"brother.webp\",\"sharp.webp\"\\); foreach\\($f in $files\\) { $bytes = [System.IO.File]::ReadAllBytes\\(\"public\\\\brands\\\\$f\"\\)[0..31]; $hex = \\($bytes | ForEach-Object { $_.ToString\\(\"X2\"\\) }\\) -join \" \"; $ascii = -join \\($bytes | ForEach-Object { if\\($_ -ge 32 -and $_ -lt 127\\){[char]$_}else{\".\"} }\\); Write-Output \\(\"{0,-15} {1}\" -f $f, $hex\\); Write-Output \\(\"{0,-15} {1}\" -f \"\", $ascii\\) })",
+      "PowerShell(git log --oneline -8; Write-Output \"---\"; git diff --stat HEAD -- public/brands/; Write-Output \"---\"; git show HEAD --stat | Select-Object -First 20)",
+      "Bash(rtk grep *)"
     ]
   }
 }

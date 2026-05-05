@@ -1,0 +1,9 @@
+{
+  "id": "4",
+  "name": "Ricoh",
+  "slug": "ricoh",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Ricoh_logo.svg",
+  "description": "Ricoh IM and MP series",
+  "isActive": true,
+  "sortOrder": 4
+}

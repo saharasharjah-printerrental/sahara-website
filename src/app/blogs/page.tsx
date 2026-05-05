@@ -37,8 +37,8 @@ export default function BlogPage() {
         {
           id: "1",
           title: "How to Choose the Best Printer Rental Dubai Service?",
-          slug: "how-to-choose-the-best-printer-rental-dubai-service",
-          excerpt: "Start your search for printer rental Dubai with a quick audit you can finish this afternoon",
+          slug: "how-to-choose-the-best-Printer-rental-dubai-service",
+          excerpt: "StarIcont your search for Printer rental Dubai with a quick audit you can finish this afternoon",
           content: "Full content here...",
           category: "Guide",
           status: "published",
@@ -50,7 +50,7 @@ export default function BlogPage() {
           id: "2",
           title: "The Problem We Solve",
           slug: "the-problem-we-solve",
-          excerpt: "In any office, the sudden breakdown of a document printer or copier creates a cascade of problems. It's more than a minor inconvenience; it's a productivity killer.",
+          excerpt: "In any office, the sudden breakdown of a document Printer or copier creates a cascade of problems. It's more than a minor inconvenience; it's a productivity killer.",
           content: "Full content here...",
           category: "Insights",
           status: "published",
@@ -85,7 +85,7 @@ export default function BlogPage() {
         {
           id: "5",
           title: "Total Cost of Printer Ownership",
-          slug: "total-cost-of-printer-ownership",
+          slug: "total-cost-of-Printer-ownership",
           excerpt: "While the initial purchase price of a copier may seem affordable, the true cost of owning and operating the device is often much higher than a rental agreement.",
           content: "Full content here...",
           category: "Finance",
@@ -97,8 +97,8 @@ export default function BlogPage() {
         {
           id: "6",
           title: "Video Walkthrough: Solving Canon Printer Problems",
-          slug: "video-walkthrough-solving-canon-printer-problems",
-          excerpt: "This video tutorial guides you through practical steps to troubleshoot common Canon printer issues, such as paper jams, connection errors, and ink problems.",
+          slug: "video-walkthrough-solving-canon-Printer-problems",
+          excerpt: "This video tutorial guides you through practical steps to troubleshoot common Canon Printer issues, such as paper jams, connection errors, and ink problems.",
           content: "Full content here...",
           category: "Troubleshooting",
           status: "published",
@@ -121,7 +121,7 @@ export default function BlogPage() {
         {
           id: "8",
           title: "How Dubai Companies Save Budget by Choosing Value-Driven Printer Rental",
-          slug: "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
+          slug: "how-dubai-companies-save-budget-by-choosing-value-driven-Printer-rental",
           excerpt: "Dubai's dynamic business environment demands efficiency and cost-effectiveness. Companies are constantly seeking ways to optimize their operations.",
           content: "Full content here...",
           category: "Finance",
@@ -133,8 +133,8 @@ export default function BlogPage() {
         {
           id: "9",
           title: "Real Estate to Clinics: Why Every UAE Business is Renting Printers in 2025",
-          slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
-          excerpt: "Picture this: It's 2025, and even the most glamorous Dubai real estate offices and high-tech clinics have one thing in common—no one actually owns their printers anymore.",
+          slug: "real-estate-to-clinics-why-every-uae-business-is-renting-Printers-in-2025",
+          excerpt: "Picture this: It's 2025, and even the most glamorous Dubai real estate offices and high-tech clinics have one thing in common—no one actually owns their Printers anymore.",
           content: "Full content here...",
           category: "Trends",
           status: "published",
@@ -145,7 +145,7 @@ export default function BlogPage() {
         {
           id: "10",
           title: "Rent or Buy Your Office Printer? Let's Talk Smart Choices for Your Business",
-          slug: "rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business",
+          slug: "rent-or-buy-your-office-Printer-lets-talk-smart-choices-for-your-business",
           excerpt: "Every business owner knows that big decisions, and even the seemingly small ones, can really impact your wallet and your team.",
           content: "Full content here...",
           category: "Guide",
@@ -199,7 +199,7 @@ export default function BlogPage() {
             Sahara <span className="text-[#f5be53]">Blog</span>
           </h1>
           <p className="text-lg text-[#d3c5b0] max-w-2xl mx-auto leading-relaxed">
-            Expert insights on printer rental, office solutions, and managed print services for UAE businesses.
+            Expert insights on Printer rental, office solutions, and managed Print services for UAE businesses.
           </p>
         </div>
       </section>
@@ -296,7 +296,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Topic Clusters — Internal Linking Hub */}
+      {/* Topic Clusters — Internal Linking HubIcon */}
       <section className="py-16 px-8 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto">
           <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-8">Explore by Topic</p>
@@ -304,11 +304,11 @@ export default function BlogPage() {
             {[
               {
                 title: "Printer Rental Guides",
-                desc: "Everything you need to know before renting a printer in the UAE.",
+                desc: "Everything you need to know before renting a Printer in the UAE.",
                 links: [
-                  { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" as const },
-                  { href: "/printer-rental-dubai", label: "Printer Rental Dubai", type: "location" as const },
-                  { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" as const },
+                  { href: "/services/Printer-rental", label: "Printer Rental UAE", type: "service" as const },
+                  { href: "/Printer-rental-dubai", label: "Printer Rental Dubai", type: "location" as const },
+                  { href: "/Printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" as const },
                   { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah", type: "location" as const },
                 ],
               },
@@ -324,12 +324,12 @@ export default function BlogPage() {
               },
               {
                 title: "Repair & Maintenance",
-                desc: "Keep your office printers running at peak performance.",
+                desc: "Keep your office Printers running at peak performance.",
                 links: [
                   { href: "/services/repair", label: "Printer Repair Services", type: "service" as const },
-                  { href: "/printer-repair-dubai", label: "Printer Repair Dubai", type: "location" as const },
+                  { href: "/Printer-repair-dubai", label: "Printer Repair Dubai", type: "location" as const },
                   { href: "/services/toner", label: "Toner & Spare Parts", type: "service" as const },
-                  { href: "/services/printer-spare-parts", label: "Printer Spare Parts", type: "service" as const },
+                  { href: "/services/Printer-spare-parts", label: "Printer Spare Parts", type: "service" as const },
                 ],
               },
             ].map((cluster) => (
@@ -389,7 +389,7 @@ export default function BlogPage() {
         <div className="max-w-5xl mx-auto glass-card rounded-[48px] p-12 md:p-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-[#f5be53]/5 -z-10"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Need Printer Solutions?</h2>
-          <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">Contact our experts for personalized advice on printer rental, sales, and maintenance.</p>
+          <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">Contact our experts for Personalized advice on Printer rental, sales, and maintenance.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <a href="/get-quote" className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
               Get a Quote

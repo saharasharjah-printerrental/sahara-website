@@ -9,25 +9,25 @@ import CountUp from "@/components/CountUp";
 export const metadata: Metadata = {
   title: "About Sahara | UAE Printer Rental Experts Since 2012",
   description: "Sahara Office Equipment Trading LLC — 13 years in UAE. 1,500+ clients, 4.9★ Google rating. Printer & photocopier rental from AED 250/mo. Sharjah HQ, all-UAE coverage.",
-  keywords: "sahara office equipments, printer rental company uae, photocopier rental sharjah, printer service dubai, about sahara printer, printer amc dubai, UAE printer rental since 2012",
+  keywords: "sahara office equipments, Printer rental company uae, photocopier rental sharjah, Printer service dubai, about sahara Printer, Printer amc dubai, UAE Printer rental since 2012",
   openGraph: {
     title: "About Sahara | UAE Printer Rental Experts Since 2012",
     description: "13 years serving UAE businesses. 1,500+ clients, 4.9★ Google rating. Printer rental from AED 250/mo. Zero deposit, free toner & maintenance.",
-    url: "https://www.saharaprinter.com/about",
+    url: "https://www.saharaPrinter.com/about",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
-    images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "About Sahara Office Equipments UAE" }],
+    images: [{ url: "https://www.saharaPrinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "About Sahara Office Equipments UAE" }],
   },
-  alternates: { canonical: "https://www.saharaprinter.com/about" },
+  alternates: { canonical: "https://www.saharaPrinter.com/about" },
 };
 
 const aboutSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
   "name": "About Sahara Office Equipments",
-  "description": "Sahara Office Equipment Trading LLC — UAE's leading printer rental and photocopier leasing company since 2012. Headquartered in Sharjah, serving Dubai, Abu Dhabi, and all UAE emirates.",
-  "url": "https://saharaprinter.com/about",
+  "description": "Sahara Office Equipment Trading LLC — UAE's leading Printer rental and photocopier leasing company since 2012. Headquartered in Sharjah, serving Dubai, Abu Dhabi, and all UAE emirates.",
+  "url": "https://saharaPrinter.com/about",
   "dateModified": "2026-04-15",
   "mainEntity": {
     "@type": "Organization",
@@ -42,9 +42,9 @@ const aboutSchema = {
       "addressCountry": "AE",
       "postalCode": "47373"
     },
-    "telephone": "+971503823969",
-    "email": "info@saharaedoc.com",
-    "url": "https://saharaprinter.com",
+    "telePhoneIcon": "+971503823969",
+    "EmailIcon": "info@saharaedoc.com",
+    "url": "https://saharaPrinter.com",
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
   }
 };
@@ -73,17 +73,17 @@ export default function AboutPage() {
             <div className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-6 max-w-3xl mx-auto text-left">
               <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">About Sahara Office Equipments — Quick Answer</p>
               <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                Sahara Office Equipment Trading LLC is a UAE-based printer rental and photocopier leasing company
+                Sahara Office Equipment Trading LLC is a UAE-based Printer rental and photocopier leasing company
                 founded in <strong className="text-white">2012</strong>, headquartered in Sharjah (Industrial Area 11).
                 With <strong className="text-white">1,500+ clients</strong> and <strong className="text-white">50,000+ repairs</strong> completed,
                 Sahara serves Dubai, Abu Dhabi, Sharjah, RAK, Fujairah, and Al Ain — offering Canon, Kyocera, HP,
-                and Ricoh solutions from AED 250/month with a 4-hour emergency response guarantee.
+                and Ricoh solutions from AED 250/month with a 4-hour Emergency response guarantee.
               </p>
             </div>
 
             <p className="text-lg text-[#d3c5b0] max-w-3xl mx-auto">
-              Since 2012, we have been the UAE&apos;s trusted partner for printer rental,
-              photocopier leasing, repair services, and managed print solutions.
+              Since 2012, we have been the UAE&apos;s trusted partner for Printer rental,
+              photocopier leasing, repair services, and managed Print solutions.
             </p>
           </div>
         </div>
@@ -125,33 +125,33 @@ export default function AboutPage() {
                 </p>
                 <p>
                   What started as a small operation in Sharjah has grown into one of 
-                  the region's leading providers of managed print services. We serve 
+                  the region's leading providers of managed Print services. We serve 
                   businesses of all sizes—from startups to Fortune 500 companies.
                 </p>
                 <p>
                   Our team of certified technicians provides comprehensive support, 
-                  including printer rental, photocopier leasing, annual maintenance 
-                  contracts (AMC), and emergency repairs. We partner with world-renowned 
+                  including Printer rental, photocopier leasing, annual maintenance 
+                  contracts (AMC), and Emergency repairs. We partner with world-renowned 
                   brands including Canon, HP, Xerox, Ricoh, Kyocera, and Brother.
                 </p>
               </div>
             </div>
             <div className="glass-card p-8 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-6">Why Choose Us?</h3>
-              <ul className="space-y-4">
-                {[
-                  "Zero deposit rental options",
-                  "Free toner and maintenance",
-                  "4-hour response time",
-                  "24/7 emergency support",
-                  "Flexible lease terms",
-                  "Free delivery across UAE",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-slate-300">
-                    <span className="material-symbols-outlined text-[#f5be53]">check_circle</span>
-                    {item}
-                  </li>
-                ))}
+               <ul className="space-y-4">
+              {[
+                "Zero deposit rental options",
+                "Free toner and maintenance",
+                "4-hour response time",
+                "24/7 Emergency support",
+                "Flexible lease terms",
+                "Free delivery across UAE",
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-slate-300">
+                  <span className="text-[#f5be53] text-xl">✓</span>
+                  {item}
+                </li>
+              ))}
               </ul>
             </div>
           </div>
@@ -169,46 +169,46 @@ export default function AboutPage() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: "print",
-                title: "Printer Rental",
-                desc: "Short-term and long-term printer rental with flexible terms",
-              },
-              {
-                icon: "copy_all",
-                title: "Photocopier Lease",
-                desc: "High-volume photocopier leasing for offices of any size",
-              },
-              {
-                icon: "handyman",
-                title: "AMC Services",
-                desc: "Annual maintenance contracts to keep your equipment running",
-              },
-              {
-                icon: "build",
-                title: "Printer Repair",
-                desc: "Expert repair services for all major printer brands",
-              },
-              {
-                icon: "inventory",
-                title: "Toner & Parts",
-                desc: "Genuine OEM toners, drums, and spare parts supply",
-              },
-              {
-                icon: "shopping_cart",
-                title: "Corporate Sales",
-                desc: "New printer and photocopier sales at competitive prices",
-              },
-            ].map((service, i) => (
-              <div key={i} className="glass-card p-6 rounded-2xl">
-                <span className="material-symbols-outlined text-3xl text-[#f5be53] mb-4">
-                  {service.icon}
-                </span>
-                <h3 className="text-lg font-bold text-white mb-2">{service.title}</h3>
-                <p className="text-slate-400 text-sm">{service.desc}</p>
-              </div>
-            ))}
+              {[
+                {
+                  icon: "🖨️",
+                  title: "Printer Rental",
+                  desc: "Short-term and long-term Printer rental with flexible terms",
+                },
+                {
+                  icon: "📄",
+                  title: "Photocopier Lease",
+                  desc: "High-volume photocopier leasing for offices of any size",
+                },
+                {
+                  icon: "🔧",
+                  title: "AMC Services",
+                  desc: "Annual maintenance contracts to keep your equipment running",
+                },
+                {
+                  icon: "🛠️",
+                  title: "Printer Repair",
+                  desc: "Expert repair services for all major Printer brands",
+                },
+                {
+                  icon: "📦",
+                  title: "Toner & Parts",
+                  desc: "Genuine OEM toners, drums, and spare parts supply",
+                },
+                {
+                  icon: "🛒",
+                  title: "Corporate Sales",
+                  desc: "New Printer and photocopier sales at competitive prices",
+                },
+              ].map((service, i) => (
+                <div key={i} className="glass-card p-6 rounded-2xl">
+                  <span className="text-3xl mb-4 block">
+                    {service.icon}
+                  </span>
+                  <h3 className="text-lg font-bold text-white mb-2">{service.title}</h3>
+                  <p className="text-slate-400 text-sm">{service.desc}</p>
+                </div>
+              ))}
           </div>
         </div>
       </section>

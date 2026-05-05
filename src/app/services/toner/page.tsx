@@ -9,7 +9,7 @@ export default function TonerRedirect() {
 
   useEffect(() => {
     if (pathname === "/services/toner") {
-      router.replace("/services/printer-spare-parts");
+      router.replace("/services/Printer-spare-parts");
     }
   }, [pathname, router]);
 

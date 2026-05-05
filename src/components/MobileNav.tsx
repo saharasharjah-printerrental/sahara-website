@@ -4,32 +4,32 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, SettingsSuggest, Inventory2, RequestQuote, MoreHoriz, Close, LocationOn, Article, Call, Print, ShoppingCart, Build, Handyman, Groups } from "@mui/icons-material";
+import { HomeIcon, SettingsIconSuggestIcon, Inventory2Icon, RequestQuoteIcon, MoreHorizIcon, CloseIcon, LocationOnIcon, ArticleIcon, CallIcon, Print, ShoppingCartIcon, BuildIcon, HandymanIcon, GroupsIcon } from "@/components/icons";
 
 export default function MobileNav() {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   const bottomNavItems = [
-    { name: "Home", href: "/", icon: Home },
-    { name: "Services", href: "/services", icon: SettingsSuggest },
-    { name: "Products", href: "/products", icon: Inventory2 },
-    { name: "Get Quote", href: "/get-quote", icon: RequestQuote },
+    { name: "Home", href: "/", icon: HomeIcon },
+    { name: "Services", href: "/services", icon: SettingsIconSuggestIcon },
+    { name: "Products", href: "/products", icon: Inventory2Icon },
+    { name: "Get Quote", href: "/get-quote", icon: RequestQuoteIcon },
   ];
 
   const services = [
-    { name: "Printer Rental", href: "/services/printer-rental", icon: Print },
-    { name: "Toner & Parts", href: "/services/printer-spare-parts", icon: ShoppingCart },
-    { name: "Printer Repair", href: "/services/repair", icon: Build },
-    { name: "AMC Services", href: "/services/amc", icon: Handyman },
+    { name: "Printer Rental", href: "/services/Printer-rental", icon: Print },
+    { name: "Toner & Parts", href: "/services/Printer-spare-parts", icon: ShoppingCartIcon },
+    { name: "Printer Repair", href: "/services/repair", icon: BuildIcon },
+    { name: "AMC Services", href: "/services/amc", icon: HandymanIcon },
   ];
 
   const morePages = [
-    { name: "About Us", href: "/about", icon: Article },
-    { name: "Clients", href: "/our-clients", icon: Groups },
-    { name: "Blog", href: "/blogs", icon: Article },
-    { name: "Locations", href: "/printer-rental-dubai", icon: LocationOn },
-    { name: "Contact", href: "/contact", icon: Call },
+    { name: "About Us", href: "/about", icon: ArticleIcon },
+    { name: "Clients", href: "/our-clients", icon: GroupsIcon },
+    { name: "Blog", href: "/blogs", icon: ArticleIcon },
+    { name: "Locations", href: "/Printer-rental-dubai", icon: LocationOnIcon },
+    { name: "Contact", href: "/contact", icon: CallIcon },
   ];
 
   const isActive = (href: string) => {
@@ -46,12 +46,14 @@ export default function MobileNav() {
             <Link
               key={link.name}
               href={link.href}
-              className={`flex flex-col items-center justify-center p-3 rounded-full transition-all ${
+              className={`flex flex-col items-center justify-center px-3 py-2 rounded-full transition-all ${
                 isCurrentActive ? "bg-[#f5be53] text-[#412d00]" : "text-slate-400 hover:bg-slate-800/50"
               }`}
             >
-              <link.icon className="text-xl" />
-              <span className="text-[10px] font-medium uppercase tracking-widest mt-0.5 whitespace-nowrap">{link.name}</span>
+              <link.icon style={{ fontSize: 18 }} />
+              {isCurrentActive && (
+                <span className="text-[9px] font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap">{link.name}</span>
+              )}
             </Link>
           );
         })}
@@ -60,12 +62,14 @@ export default function MobileNav() {
         <button
           type="button"
           onClick={() => setIsMoreOpen(!isMoreOpen)}
-          className={`flex flex-col items-center justify-center p-3 rounded-full transition-all ${
+          className={`flex flex-col items-center justify-center px-3 py-2 rounded-full transition-all ${
             isMoreOpen ? "bg-[#f5be53] text-[#412d00]" : "text-slate-400 hover:bg-slate-800/50"
           }`}
         >
-          <MoreHoriz className="text-xl" />
-          <span className="text-[10px] font-medium uppercase tracking-widest mt-0.5 whitespace-nowrap">More</span>
+          <MoreHorizIcon style={{ fontSize: 18 }} />
+          {isMoreOpen && (
+            <span className="text-[9px] font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap">More</span>
+          )}
         </button>
       </nav>
 
@@ -103,7 +107,7 @@ export default function MobileNav() {
                   onClick={() => setIsMoreOpen(false)}
                   className="w-6 h-6 rounded-full bg-white/8 flex items-center justify-center text-slate-500 hover:text-white active:scale-90 transition-all"
                 >
-                  <Close style={{ fontSize: 13 }} />
+                  <CloseIcon style={{ fontSize: 13 }} />
                 </button>
               </div>
 

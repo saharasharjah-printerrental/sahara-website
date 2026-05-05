@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Skeleton } from "boneyard-js/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -11,36 +10,36 @@ import MobileNav from "@/components/MobileNav";
 const ITEMS_PER_PAGE = 9;
 
 const BRAND_IMAGES: Record<string, string> = {
-  Canon: "/images/printer-canon-1.webp",
-  HP: "/images/printer-hp.svg",
-  Kyocera: "/images/printer-kyocera.webp",
-  Xerox: "/images/printer-xerox.webp",
-  Brother: "/images/printer-brother.webp",
-  Ricoh: "/images/printer-ricoh.webp",
-  Samsung: "/images/printer-samsung.webp",
-  Lexmark: "/images/printer-lexmark.webp",
+  Canon: "/images/Printer-canon-1.webp",
+  HP: "/images/Printer-hp.svg",
+  Kyocera: "/images/Printer-kyocera.webp",
+  Xerox: "/images/Printer-xerox.webp",
+  Brother: "/images/Printer-brother.webp",
+  Ricoh: "/images/Printer-ricoh.webp",
+  Samsung: "/images/Printer-samsung.webp",
+  Lexmark: "/images/Printer-lexmark.webp",
 };
-const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/printer-canon-2.webp"]);
+const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/Printer-canon-2.webp"]);
 function localImg(image: string, brand: string): string {
   if (!image || !image.startsWith("/") || (CANON_ONLY.has(image) && brand !== "Canon")) {
-    return BRAND_IMAGES[brand] || "/images/printer-canon-1.webp";
+    return BRAND_IMAGES[brand] || "/images/Printer-canon-1.webp";
   }
   return image;
 }
 
 const defaultProducts = [
-  { id: "1",  name: "imageRUNNER ADVANCE C5500", brand: "Canon",   category: "MFP",        condition: "New",         priceRental: "AED 800/mo",   specs: ["55 PPM", "Full Color", "A3 Support", "Network Ready"],       image: "/images/printer-canon-1.webp",   isActive: true },
-  { id: "2",  name: "LaserJet Managed E82560",   brand: "HP",      category: "A3 Printers", condition: "New",         priceRental: "AED 750/mo",   specs: ["Wolf Security", "Energy Star", "56 PPM", "Duplex"],          image: "/images/printer-hp.svg",        isActive: true },
-  { id: "3",  name: "TASKalfa 6003i Series",     brand: "Kyocera", category: "MFP",        condition: "New",         priceRental: "AED 950/mo",   specs: ["60 PPM", "Monochrome", "HyPAS Platform", "1200 DPI"],        image: "/images/printer-kyocera.webp",   isActive: true },
-  { id: "4",  name: "AltaLink C8170",            brand: "Xerox",   category: "MFP",        condition: "New",         priceRental: "AED 1,100/mo", specs: ['10" UI Tablet', "ConnectKey", "Color", "70 PPM"],            image: "/images/printer-xerox.webp",     isActive: true },
-  { id: "5",  name: "HL-L6400DW Enterprise",     brand: "Brother", category: "A4 Printers", condition: "New",         priceRental: "AED 400/mo",   specs: ["50 PPM", "Duplex", "Wi-Fi Direct", "250-sheet Tray"],       image: "/images/printer-brother.webp",   isActive: true },
-  { id: "6",  name: "MP 2555SP",                 brand: "Ricoh",   category: "MFP",        condition: "New",         priceRental: "AED 500/mo",   specs: ["25 PPM", "Copy/Print/Scan", "600 DPI", "Network Ready"],     image: "/images/printer-ricoh.webp",     isActive: true },
-  { id: "7",  name: "ProXpress M4580FX",         brand: "Samsung", category: "MFP",        condition: "Refurbished", priceRental: "AED 350/mo",   specs: ["43 PPM", "Fax Ready", "Duplex", "Auto Sort"],               image: "/images/printer-samsung.webp",   isActive: true },
-  { id: "8",  name: "MS431dn Laser",             brand: "Lexmark", category: "A4 Printers", condition: "Refurbished", priceRental: "AED 300/mo",   specs: ["42 PPM", "1200 DPI", "512MB RAM", "USB 3.0"],               image: "/images/printer-lexmark.webp",   isActive: true },
-  { id: "9",  name: "M6635cidn Color MFP",       brand: "Kyocera", category: "MFP",        condition: "New",         priceRental: "AED 700/mo",   specs: ["35 PPM", "Full Color", "Duplex", "Gigabit Ethernet"],       image: "/images/printer-kyocera.webp",   isActive: true },
+  { id: "1",  name: "imageRUNNER ADVANCE C5500", brand: "Canon",   category: "MFP",        condition: "New",         priceRental: "AED 800/mo",   specs: ["55 PPM", "Full Color", "A3 Support", "Network Ready"],       image: "/images/Printer-canon-1.webp",   isActive: true },
+  { id: "2",  name: "LaserJet Managed E82560",   brand: "HP",      category: "A3 Printers", condition: "New",         priceRental: "AED 750/mo",   specs: ["Wolf Security", "Energy StarIcon", "56 PPM", "Duplex"],          image: "/images/Printer-hp.svg",        isActive: true },
+  { id: "3",  name: "TASKalfa 6003i Series",     brand: "Kyocera", category: "MFP",        condition: "New",         priceRental: "AED 950/mo",   specs: ["60 PPM", "Monochrome", "HyPAS Platform", "1200 DPI"],        image: "/images/Printer-kyocera.webp",   isActive: true },
+  { id: "4",  name: "AltaLink C8170",            brand: "Xerox",   category: "MFP",        condition: "New",         priceRental: "AED 1,100/mo", specs: ['10" UI Tablet', "ConnectKey", "Color", "70 PPM"],            image: "/images/Printer-xerox.webp",     isActive: true },
+  { id: "5",  name: "HL-L6400DW Enterprise",     brand: "Brother", category: "A4 Printers", condition: "New",         priceRental: "AED 400/mo",   specs: ["50 PPM", "Duplex", "Wi-Fi Direct", "250-sheet Tray"],       image: "/images/Printer-brother.webp",   isActive: true },
+  { id: "6",  name: "MP 2555SP",                 brand: "Ricoh",   category: "MFP",        condition: "New",         priceRental: "AED 500/mo",   specs: ["25 PPM", "Copy/Print/Scan", "600 DPI", "Network Ready"],     image: "/images/Printer-ricoh.webp",     isActive: true },
+  { id: "7",  name: "ProXpress M4580FX",         brand: "Samsung", category: "MFP",        condition: "Refurbished", priceRental: "AED 350/mo",   specs: ["43 PPM", "Fax Ready", "Duplex", "Auto Sort"],               image: "/images/Printer-samsung.webp",   isActive: true },
+  { id: "8",  name: "MS431dn Laser",             brand: "Lexmark", category: "A4 Printers", condition: "Refurbished", priceRental: "AED 300/mo",   specs: ["42 PPM", "1200 DPI", "512MB RAM", "USB 3.0"],               image: "/images/Printer-lexmark.webp",   isActive: true },
+  { id: "9",  name: "M6635cidn Color MFP",       brand: "Kyocera", category: "MFP",        condition: "New",         priceRental: "AED 700/mo",   specs: ["35 PPM", "Full Color", "Duplex", "Gigabit Ethernet"],       image: "/images/Printer-kyocera.webp",   isActive: true },
   { id: "10", name: "Color LaserJet Pro M479fdw", brand: "HP",     category: "MFP",        condition: "New",         priceRental: "AED 450/mo",   specs: ["27 PPM Color", "Wi-Fi", "Fax", "Touch Display"],            image: "/images/heroBnr1.webp",          isActive: true },
-  { id: "11", name: "imagePROGRAF PRO-4100",     brand: "Canon",   category: "Plotters",   condition: "New",         priceRental: "AED 1,200/mo", specs: ["12-Color Ink", "44-inch Roll", "2400 DPI", "Data Encrypt"],  image: "/images/printer-canon-1.webp",   isActive: true },
-  { id: "12", name: "DesignJet Z9+ PostScript",  brand: "HP",      category: "Plotters",   condition: "Refurbished", priceRental: "AED 600/mo",   specs: ["44-inch Roll", "2400 DPI", "PostScript", "HP Stitch"],      image: "/images/printer-hp.svg",        isActive: true },
+  { id: "11", name: "imagePROGRAF PRO-4100",     brand: "Canon",   category: "Plotters",   condition: "New",         priceRental: "AED 1,200/mo", specs: ["12-Color Ink", "44-inch Roll", "2400 DPI", "Data Encrypt"],  image: "/images/Printer-canon-1.webp",   isActive: true },
+  { id: "12", name: "DesignJet Z9+ PostScript",  brand: "HP",      category: "Plotters",   condition: "Refurbished", priceRental: "AED 600/mo",   specs: ["44-inch Roll", "2400 DPI", "PostScript", "HP Stitch"],      image: "/images/Printer-hp.svg",        isActive: true },
 ];
 
 export default function ProductsPage() {
@@ -221,7 +220,7 @@ export default function ProductsPage() {
                   >
                     <span className="text-white">{cond === "New" ? "Brand New" : cond}</span>
                     <span className={`material-symbols-outlined text-lg ${selectedConditions.includes(cond) ? "text-[#f5be53]" : "text-[#d3c5b0]"}`}>
-                      {cond === "New" ? "verified" : "history"}
+                      {cond === "New" ? "verified_user" : "history"}
                     </span>
                   </div>
                 ))}
@@ -248,17 +247,9 @@ export default function ProductsPage() {
             </div>
 
             {loading ? (
-              <Skeleton
-                name="product-grid"
-                loading={true}
-                color="rgba(26,45,74,0.9)"
-                darkColor="rgba(30,52,85,0.9)"
-                animate="shimmer"
-                stagger={80}
-              >
-                <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                   {Array(9).fill(null).map((_, i) => (
-                    <div key={i} className="glass-card rounded-[2rem] overflow-hidden flex flex-col">
+                    <div key={i} className="glass-card rounded-[2rem] overflow-hidden flex flex-col animate-pulse">
                       <div className="h-64 bg-[#142032]" />
                       <div className="p-6 flex-1 flex flex-col gap-4">
                         <div className="h-6 rounded-lg bg-[#1a2d4a] w-3/4" />
@@ -275,7 +266,6 @@ export default function ProductsPage() {
                     </div>
                   ))}
                 </div>
-              </Skeleton>
             ) : paginatedProducts.length === 0 ? (
               <div className="text-center py-24 text-[#d3c5b0]">
                 <span className="material-symbols-outlined text-5xl text-[#4f4536] mb-4 block">search_off</span>
@@ -292,7 +282,7 @@ export default function ProductsPage() {
                         loading="lazy"
                         decoding="async"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/images/printer-canon-1.webp"; }}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/images/Printer-canon-1.webp"; }}
                       />
                       <div className="absolute top-4 left-4 flex gap-2">
                         <span className="bg-[#c8962e]/90 text-[#412d00] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter backdrop-blur-md">
@@ -306,12 +296,50 @@ export default function ProductsPage() {
                     <div className="p-6 flex-1 flex flex-col">
                       <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
                       <div className="grid grid-cols-2 gap-3 mb-6">
-                        {(product.specs || []).slice(0, 4).map((spec: string, i: number) => (
-                          <div key={i} className="flex items-center gap-2">
-                            <span className="material-symbols-outlined text-[#f5be53] text-lg">speed</span>
-                            <span className="text-xs text-[#d3c5b0]">{spec}</span>
-                          </div>
-                        ))}
+                        {(product.specs || []).slice(0, 4).map((spec: string, i: number) => {
+                          let icon = '•';
+                          let bgColor = '#f5be53';
+                          const specLower = spec.toLowerCase();
+                          
+                          // Dynamic icon and color based on spec type
+                          if (specLower.includes('ppm') || specLower.includes('speed')) {
+                            icon = '⚡';
+                          } else if (specLower.includes('color') || specLower.includes('colour')) {
+                            icon = '🎨';
+                            bgColor = '#ff6b6b';
+                          } else if (specLower.includes('dpi') || specLower.includes('resolution')) {
+                            icon = '🎯';
+                            bgColor = '#4ecdc4';
+                          } else if (specLower.includes('duplex') || specLower.includes('fax') || specLower.includes('scan')) {
+                            icon = '📄';
+                            bgColor = '#95e1d3';
+                          } else if (specLower.includes('tablet') || specLower.includes('display') || specLower.includes('ui')) {
+                            icon = '📱';
+                            bgColor = '#a8e6cf';
+                          } else if (specLower.includes('memory') || specLower.includes('ram') || specLower.includes('storage')) {
+                            icon = '💾';
+                            bgColor = '#ffd3b6';
+                          } else if (specLower.includes('connectivity') || specLower.includes('network') || specLower.includes('ethernet') || specLower.includes('wifi')) {
+                            icon = '🌐';
+                            bgColor = '#ffaaa5';
+                          } else if (specLower.includes('security')) {
+                            icon = '🔒';
+                            bgColor = '#ff8b94';
+                          } else if (specLower.includes('platform') || specLower.includes('hypass')) {
+                            icon = '⚙️';
+                            bgColor = '#b4a7d6';
+                          } else if (specLower.includes('postscript') || specLower.includes('stitch')) {
+                            icon = '🖨️';
+                            bgColor = '#c7ceea';
+                          }
+                          
+                          return (
+                            <div key={i} className="flex items-center gap-2">
+                              <span className="text-lg flex-shrink-0" style={{ color: bgColor }}>{icon}</span>
+                              <span className="text-xs text-[#d3c5b0]">{spec}</span>
+                            </div>
+                          );
+                        })}
                       </div>
                       <div className="mt-auto">
                         <p className="text-[#f5be53] font-bold text-lg mb-4">{product.priceRental || "Contact for Pricing"}</p>
@@ -336,19 +364,21 @@ export default function ProductsPage() {
                   <span className="material-symbols-outlined">chevron_left</span>
                 </button>
 
-                {pageNumbers().map((page, i) =>
-                  page === "..." ? (
-                    <span key={`ellipsis-${i}`} className="text-[#d3c5b0] px-2">...</span>
-                  ) : (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page as number)}
-                      className={`w-12 h-12 rounded-full font-bold transition-all ${page === safePage ? "bg-[#f5be53] text-[#412d00]" : "border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-[#f5be53]"}`}
-                    >
-                      {page}
-                    </button>
-                  )
-                )}
+                <div className="flex items-center gap-1">
+                  {pageNumbers().map((page, i) =>
+                    page === "..." ? (
+                      <span key={`ellipsis-${i}`} className="text-[#d3c5b0] px-2">...</span>
+                    ) : (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page as number)}
+                        className={`w-10 h-10 rounded-full font-bold transition-all ${page === safePage ? "bg-[#f5be53] text-[#412d00]" : "border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-[#f5be53]"}`}
+                      >
+                        {page}
+                      </button>
+                    )
+                  )}
+                </div>
 
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}

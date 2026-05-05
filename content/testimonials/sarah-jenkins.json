@@ -1,0 +1,11 @@
+{
+  "id": "2",
+  "name": "Sarah Jenkins",
+  "role": "Operations Manager",
+  "company": "TechFlow Solutions",
+  "text": "The printer rental program saved us 40% on operational costs this quarter. Professional and reliable.",
+  "rating": 5,
+  "image_url": "",
+  "is_active": true,
+  "sort_order": 2
+}

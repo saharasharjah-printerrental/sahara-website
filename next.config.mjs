@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@mui/material", "@mui/icons-material", "@mui/system", "@mui/utils"],
+  transpilePackages: ["@mui/material", "@mui/icons-material", "@mui/system", "@mui/utils", "boneyard-js"],
   reactStrictMode: true,
   devIndicators: false,
   trailingSlash: true,

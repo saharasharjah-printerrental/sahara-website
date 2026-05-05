@@ -22,7 +22,7 @@ export function CipherText({
   const [mounted, setMounted] = useState(false);
   const [displayChars, setDisplayChars] = useState<string[]>([]);
   const [isComplete, setIsComplete] = useState(false);
-  const [startAnimation, setStartAnimation] = useState(false);
+  const [StarIcontAnimation, setStarIcontAnimation] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const initialChars = useMemo(() => text.split("").map(() => " "), [text]);
@@ -35,15 +35,15 @@ export function CipherText({
 
   useEffect(() => {
     if (!mounted) return;
-    const startTimer = setTimeout(() => {
-      setStartAnimation(true);
+    const StarIcontTimer = setTimeout(() => {
+      setStarIcontAnimation(true);
     }, delay);
 
-    return () => clearTimeout(startTimer);
+    return () => clearTimeout(StarIcontTimer);
   }, [delay, mounted]);
 
   useEffect(() => {
-    if (!startAnimation || !mounted) return;
+    if (!StarIcontAnimation || !mounted) return;
 
     let iteration = 0;
     const maxIterations = text.length;
@@ -77,7 +77,7 @@ export function CipherText({
         clearInterval(intervalRef.current);
       }
     };
-  }, [startAnimation, mounted, text, originalChars]);
+  }, [StarIcontAnimation, mounted, text, originalChars]);
 
   if (!mounted) {
     return (

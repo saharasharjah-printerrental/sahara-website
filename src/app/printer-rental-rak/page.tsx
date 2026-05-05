@@ -9,22 +9,22 @@ export const metadata: Metadata = {
   description:
     "Printer and photocopier rental in Ras Al Khaimah (RAK) from AED 250/month. Zero deposit, free toner. Serving Al Hamra, RAK Free Trade Zone, Al Marjan Island. Canon & Kyocera.",
   keywords: [
-    "printer rental ras al khaimah",
+    "Printer rental ras al khaimah",
     "photocopier rental rak",
     "copier lease rak",
-    "rak free zone printer rental",
-    "al hamra printer lease",
-    "zero deposit printer rak",
+    "rak free zone Printer rental",
+    "al hamra Printer lease",
+    "zero deposit Printer rak",
     "canon kyocera rental rak",
     "office equipment rental rak",
-    "printer rental northern emirates",
+    "Printer rental northern emirates",
   ],
-  alternates: { canonical: "https://saharaprinter.com/printer-rental-rak" },
+  alternates: { canonical: "https://saharaPrinter.com/Printer-rental-rak" },
   openGraph: {
     title: "Printer Rental RAK | AED 250/mo – Sahara Office Equipments",
     description:
-      "Rent Canon or Kyocera printers in Ras Al Khaimah from AED 250/month. Zero deposit, free toner. Al Hamra, RAK FTZ, Al Marjan Island.",
-    url: "https://saharaprinter.com/printer-rental-rak",
+      "Rent Canon or Kyocera Printers in Ras Al Khaimah from AED 250/month. Zero deposit, free toner. Al Hamra, RAK FTZ, Al Marjan Island.",
+    url: "https://saharaPrinter.com/Printer-rental-rak",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -38,9 +38,9 @@ const localBusinessSchema = {
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Printer and photocopier rental in Ras Al Khaimah (RAK) from AED 250/month. Zero deposit, free OEM toner, on-site support.",
-  url: "https://saharaprinter.com/printer-rental-rak",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
+  url: "https://saharaPrinter.com/Printer-rental-rak",
+  telePhoneIcon: "+971503823969",
+  EmailIcon: "info@saharaPrinter.com",
   foundingDate: "2012",
   address: {
     "@type": "PostalAddress",
@@ -64,7 +64,7 @@ const localBusinessSchema = {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
       opens: "08:00",
-      closes: "20:00",
+      CloseIcons: "20:00",
     },
   ],
   hasOfferCatalog: {
@@ -85,10 +85,10 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "How much does printer rental cost in Ras Al Khaimah?",
+      name: "How much does Printer rental cost in Ras Al Khaimah?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Printer rental in RAK starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise devices start at AED 1,000/month. All RAK plans include zero deposit, free toner, free delivery, and on-site support.",
+        text: "Printer rental in RAK StarIconts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise devices StarIcont at AED 1,000/month. All RAK plans include zero deposit, free toner, free delivery, and on-site support.",
       },
     },
     {
@@ -109,10 +109,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Is there a deposit for printer rental in RAK?",
+      name: "Is there a deposit for Printer rental in RAK?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No deposit. All RAK printer rental plans are zero-deposit — pay only your first month's rental to start. This makes it easy for new RAK Free Zone setups and growing businesses.",
+        text: "No deposit. All RAK Printer rental plans are zero-deposit — pay only your first month's rental to StarIcont. This makes it easy for new RAK Free Zone setups and growing businesses.",
       },
     },
     {
@@ -128,7 +128,7 @@ const faqSchema = {
       name: "Is toner included in the RAK rental plan?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. All RAK plans include unlimited genuine Canon or Kyocera OEM toner. We monitor toner levels remotely and deliver proactively before you run out — no waiting, no emergency orders.",
+        text: "Yes. All RAK plans include unlimited genuine Canon or Kyocera OEM toner. We monitor toner levels remotely and deliver proactively before you run out — no waiting, no Emergency orders.",
       },
     },
     {
@@ -144,15 +144,15 @@ const faqSchema = {
       name: "Do you provide network setup in Ras Al Khaimah?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Free network and Wi-Fi configuration is included with all RAK installations. Our technician connects the printer to your network, sets up scan-to-email, and configures mobile printing (AirPrint/Mopria) — all at no extra charge.",
+        text: "Yes. Free network and Wi-Fi configuration is included with all RAK installations. Our technician connects the Printer to your network, sets up scan-to-EmailIcon, and configures mobile printing (AirPrint/Mopria) — all at no extra charge.",
       },
     },
     {
       "@type": "Question",
-      name: "Can I upgrade my printer during the RAK contract?",
+      name: "Can I Upgrade my Printer during the RAK contract?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. You can upgrade to a higher-capacity model at any time during your RAK rental contract without penalty. This is common for RAK FTZ businesses that grow from 1 to multiple office locations.",
+        text: "Yes. You can Upgrade to a higher-capacity model at any time during your RAK rental contract without penalty. This is common for RAK FTZ businesses that grow from 1 to multiple office locations.",
       },
     },
     {
@@ -173,10 +173,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "What is the cost-per-page for rented printers in RAK?",
+      name: "What is the cost-per-page for rented Printers in RAK?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Black-and-white A4 printing on our rented Canon/Kyocera devices in RAK costs approximately 1–2 fils per page. Desktop inkjet and consumer laser printers cost 8–15 fils per page. For an office printing 3,000 pages/month, that saves AED 180–390/month.",
+        text: "Black-and-white A4 printing on our rented Canon/Kyocera devices in RAK costs approximately 1–2 fils per page. Desktop inkjet and consumer laser Printers cost 8–15 fils per page. For an office printing 3,000 pages/month, that saves AED 180–390/month.",
       },
     },
   ],
@@ -186,8 +186,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
-    { "@type": "ListItem", position: 2, name: "Printer Rental RAK", item: "https://saharaprinter.com/printer-rental-rak" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaPrinter.com" },
+    { "@type": "ListItem", position: 2, name: "Printer Rental RAK", item: "https://saharaPrinter.com/Printer-rental-rak" },
   ],
 };
 
@@ -203,7 +203,7 @@ const pricingTiers = [
       "Print, copy, scan",
       "Free genuine OEM toner",
       "On-site support included",
-      "4–6hr emergency response",
+      "4–6hr Emergency response",
     ],
   },
   {
@@ -216,7 +216,7 @@ const pricingTiers = [
       "35–55 ppm A3 & A4 mono",
       "Print, copy, scan, fax",
       "Colour option available",
-      "Scan to email / folder",
+      "Scan to EmailIcon / folder",
       "Free network setup",
       "Same-day replacement guarantee",
     ],
@@ -230,7 +230,7 @@ const pricingTiers = [
       "Canon imageRUNNER C5560i",
       "60–100 ppm A3 colour",
       "Staple, booklet finishers",
-      "Secure print, user auth",
+      "Secure Print, user auth",
       "50,000+ pages/month",
       "Dedicated account manager",
     ],
@@ -284,7 +284,7 @@ export default function PrinterRentalRAK() {
                 <span className="text-[#f5be53]">RAK</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
-                Canon &amp; Kyocera printer rental in Ras Al Khaimah from AED 250/month. Zero deposit, free toner,
+                Canon &amp; Kyocera Printer rental in Ras Al Khaimah from AED 250/month. Zero deposit, free toner,
                 and on-site support across RAK Free Trade Zone, Al Hamra, and Al Marjan Island.
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
@@ -334,10 +334,10 @@ export default function PrinterRentalRAK() {
             </p>
             <p className="text-white text-lg leading-relaxed">
               Printer rental in Ras Al Khaimah is a monthly service from{" "}
-              <strong className="text-[#f5be53]">AED 250/month</strong> providing Canon or Kyocera printers
+              <strong className="text-[#f5be53]">AED 250/month</strong> providing Canon or Kyocera Printers
               and photocopiers with toner, maintenance, and repairs included. Sahara Office Equipment Trading LLC
               serves RAK businesses including RAK Free Trade Zone, Al Hamra, and Al Marjan Island with{" "}
-              <strong className="text-[#f5be53]">zero deposit</strong> plans and 4–6hr emergency response.
+              <strong className="text-[#f5be53]">zero deposit</strong> plans and 4–6hr Emergency response.
             </p>
           </div>
         </div>
@@ -391,7 +391,7 @@ export default function PrinterRentalRAK() {
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             Cost-per-page on our rented devices is{" "}
             <strong className="text-white">1–2 fils per A4 page</strong> — compared to 8–15 fils for consumer
-            desktop printers. For a RAK office printing 3,000 pages/month, the saving in consumables alone
+            desktop Printers. For a RAK office printing 3,000 pages/month, the saving in consumables alone
             offsets a large portion of the monthly rental fee.
           </p>
         </div>
@@ -534,3 +534,4 @@ export default function PrinterRentalRAK() {
     </main>
   );
 }
+

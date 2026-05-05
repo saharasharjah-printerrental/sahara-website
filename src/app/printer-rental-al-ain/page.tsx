@@ -7,24 +7,24 @@ import JumpToTop from "@/components/JumpToTop";
 export const metadata: Metadata = {
   title: "Printer Rental Al Ain | Photocopier Lease UAE – AED 250/mo | Sahara",
   description:
-    "Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit, free toner. Serving Al Ain Central, Al Jimi, Al Khubaisi, Al Ain Industrial Area. Canon & Kyocera.",
+    "Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit, free toner. Serving Al Ain Central, Al Jimi, Al KHubIconaisi, Al Ain Industrial Area. Canon & Kyocera.",
   keywords: [
-    "printer rental al ain",
+    "Printer rental al ain",
     "photocopier rental al ain",
     "copier lease al ain",
-    "al ain industrial area printer",
-    "zero deposit printer al ain",
+    "al ain industrial area Printer",
+    "zero deposit Printer al ain",
     "canon kyocera rental al ain",
     "office equipment rental al ain",
-    "printer lease abu dhabi",
+    "Printer lease abu dhabi",
     "photocopier hire al ain",
   ],
-  alternates: { canonical: "https://saharaprinter.com/printer-rental-al-ain" },
+  alternates: { canonical: "https://saharaPrinter.com/Printer-rental-al-ain" },
   openGraph: {
     title: "Printer Rental Al Ain | AED 250/mo – Sahara Office Equipments",
     description:
-      "Rent Canon or Kyocera printers in Al Ain from AED 250/month. Zero deposit, free toner. Central District, Al Jimi, Industrial Area.",
-    url: "https://saharaprinter.com/printer-rental-al-ain",
+      "Rent Canon or Kyocera Printers in Al Ain from AED 250/month. Zero deposit, free toner. Central District, Al Jimi, Industrial Area.",
+    url: "https://saharaPrinter.com/Printer-rental-al-ain",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -38,9 +38,9 @@ const localBusinessSchema = {
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit, free OEM toner, and on-site support across Al Ain's business districts and industrial zones.",
-  url: "https://saharaprinter.com/printer-rental-al-ain",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
+  url: "https://saharaPrinter.com/Printer-rental-al-ain",
+  telePhoneIcon: "+971503823969",
+  EmailIcon: "info@saharaPrinter.com",
   foundingDate: "2012",
   address: {
     "@type": "PostalAddress",
@@ -57,14 +57,14 @@ const localBusinessSchema = {
     { "@type": "City", name: "Al Ain" },
     { "@type": "Place", name: "Al Ain Industrial Area" },
     { "@type": "Place", name: "Al Jimi" },
-    { "@type": "Place", name: "Al Khubaisi" },
+    { "@type": "Place", name: "Al KHubIconaisi" },
   ],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
       opens: "08:00",
-      closes: "20:00",
+      CloseIcons: "20:00",
     },
   ],
   hasOfferCatalog: {
@@ -81,19 +81,19 @@ const localBusinessSchema = {
 
 const faqsData = [
   {
-    q: "How much does printer rental cost in Al Ain?",
-    a: "Printer rental in Al Ain starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise high-volume devices start at AED 1,000/month. All Al Ain plans include zero deposit, free OEM toner, free delivery, and on-site support.",
+    q: "How much does Printer rental cost in Al Ain?",
+    a: "Printer rental in Al Ain StarIconts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise high-volume devices StarIcont at AED 1,000/month. All Al Ain plans include zero deposit, free OEM toner, free delivery, and on-site support.",
   },
   {
-    q: "What is the response time for printer support in Al Ain?",
-    a: "We schedule weekly preventive maintenance visits for Al Ain rental clients. For emergency breakdowns, a technician is dispatched within 4–6 hours to Al Ain Central, Al Jimi, Al Khubaisi, Al Murabba, and the Al Ain Industrial Area. Same-day replacement units are available if repair is not immediate.",
+    q: "What is the response time for Printer support in Al Ain?",
+    a: "We ScheduleIcon weekly preventive maintenance visits for Al Ain rental clients. For Emergency breakdowns, a technician is dispatched within 4–6 hours to Al Ain Central, Al Jimi, Al KHubIconaisi, Al Murabba, and the Al Ain Industrial Area. Same-day replacement units are available if repair is not immediate.",
   },
   {
-    q: "Do I need a deposit for printer rental in Al Ain?",
-    a: "No deposit required. All Al Ain printer rental plans are zero-deposit. You only pay the first month's rental to start — suitable for educational institutions, healthcare facilities, and SMEs in Al Ain's growing business districts.",
+    q: "Do I need a deposit for Printer rental in Al Ain?",
+    a: "No deposit required. All Al Ain Printer rental plans are zero-deposit. You only pay the first month's rental to StarIcont — suitable for educational institutions, healthcare facilities, and SMEs in Al Ain's growing business districts.",
   },
   {
-    q: "Which printer brands do you rent in Al Ain?",
+    q: "Which Printer brands do you rent in Al Ain?",
     a: "We rent Canon imageRUNNER ADVANCE, Kyocera TASKalfa, HP LaserJet Enterprise, and Xerox WorkCentre in Al Ain. Canon and Kyocera are the most popular choices for Al Ain's healthcare, education, and government sectors.",
   },
   {
@@ -109,24 +109,24 @@ const faqsData = [
     a: "Contracts are available for 12, 24, or 36 months. Short-term 1–6 month rentals are available for temporary project offices, events at Al Ain City Centre, and seasonal needs. Longer contracts attract lower monthly rates.",
   },
   {
-    q: "What happens if my printer breaks down in Al Ain?",
+    q: "What happens if my Printer breaks down in Al Ain?",
     a: "Call +971 50 382 3969 and we dispatch a technician within 4–6 hours to anywhere in Al Ain. If we cannot repair it same-day, we deliver a replacement unit at no extra charge so your operations continue without interruption.",
   },
   {
-    q: "Do you provide network setup for printers in Al Ain?",
-    a: "Yes. Free network and Wi-Fi configuration is included with every Al Ain installation. Our technician connects to your office network, configures scan-to-email, sets up mobile printing (AirPrint/Mopria), and handles user authentication if required.",
+    q: "Do you provide network setup for Printers in Al Ain?",
+    a: "Yes. Free network and Wi-Fi configuration is included with every Al Ain installation. Our technician connects to your office network, configures scan-to-EmailIcon, sets up mobile printing (AirPrint/Mopria), and handles user authentication if required.",
   },
   {
-    q: "Can I upgrade my printer during the Al Ain contract?",
-    a: "Yes. You can upgrade to a higher-capacity or colour model at any point during your Al Ain contract without penalty. This is common for Al Ain government offices and healthcare facilities that expand their document volumes.",
+    q: "Can I Upgrade my Printer during the Al Ain contract?",
+    a: "Yes. You can Upgrade to a higher-capacity or colour model at any point during your Al Ain contract without penalty. This is common for Al Ain government offices and healthcare facilities that expand their document volumes.",
   },
   {
     q: "Do you serve the Al Ain Industrial Area?",
     a: "Yes. Al Ain Industrial Area is within our regular service coverage. Manufacturing, food processing, and construction businesses in the industrial zone use our enterprise copiers for production documentation, with weekly preventive maintenance included.",
   },
   {
-    q: "What is cost-per-page (CPP) for rented printers in Al Ain?",
-    a: "Black-and-white A4 printing on our rented Canon/Kyocera devices costs approximately 1–2 fils per page. Consumer desktop printers cost 8–15 fils per page. For an office printing 4,000 pages/month, the saving in consumables is AED 240–520/month — making the rental cost-neutral or better.",
+    q: "What is cost-per-page (CPP) for rented Printers in Al Ain?",
+    a: "Black-and-white A4 printing on our rented Canon/Kyocera devices costs approximately 1–2 fils per page. Consumer desktop Printers cost 8–15 fils per page. For an office printing 4,000 pages/month, the saving in consumables is AED 240–520/month — making the rental cost-neutral or better.",
   },
 ];
 
@@ -144,8 +144,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
-    { "@type": "ListItem", position: 2, name: "Printer Rental Al Ain", item: "https://saharaprinter.com/printer-rental-al-ain" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaPrinter.com" },
+    { "@type": "ListItem", position: 2, name: "Printer Rental Al Ain", item: "https://saharaPrinter.com/Printer-rental-al-ain" },
   ],
 };
 
@@ -161,7 +161,7 @@ const pricingTiers = [
       "Print, copy, scan",
       "Free genuine OEM toner",
       "Weekly preventive maintenance",
-      "4–6hr emergency response",
+      "4–6hr Emergency response",
     ],
   },
   {
@@ -174,7 +174,7 @@ const pricingTiers = [
       "35–55 ppm A3 & A4 mono",
       "Print, copy, scan, fax",
       "Colour option available",
-      "Scan to email / folder / cloud",
+      "Scan to EmailIcon / folder / CloudIcon",
       "Free network setup",
       "Same-day replacement guarantee",
     ],
@@ -196,7 +196,7 @@ const pricingTiers = [
 ];
 
 const alAinAreas = [
-  "Central District", "Al Jimi", "Al Khubaisi", "Al Murabba",
+  "Central District", "Al Jimi", "Al KHubIconaisi", "Al Murabba",
   "Al Ain Industrial Area", "Al Dhahir", "Al Hili", "Al Ain Oasis Area",
   "Al Ain University Area", "Al Sarooj", "Al Towayya", "Zakher",
 ];
@@ -207,8 +207,8 @@ const industryInsights = [
     zone: "Al Ain Hospital / Oasis Hospital",
     icon: "🏥",
     challenge: "Hospitals and clinics need reliable, high-volume printing for patient records, prescriptions, and reports",
-    solution: "Enterprise Canon copiers with user authentication, secure print release, and 50,000+ monthly page capacity for healthcare environments.",
-    stat: "HIPAA-compliant secure print",
+    solution: "Enterprise Canon copiers with user authentication, secure Print release, and 50,000+ monthly page capacity for healthcare environments.",
+    stat: "HIPAA-compliant secure Print",
   },
   {
     sector: "Education",
@@ -223,7 +223,7 @@ const industryInsights = [
     zone: "Al Ain Municipality",
     icon: "🏛️",
     challenge: "Government offices need reliable documentation equipment with audit trails and multi-user access control",
-    solution: "Canon imageRUNNER ADVANCE with PIN-based secure print, user authentication, and full activity logging for compliance.",
+    solution: "Canon imageRUNNER ADVANCE with PIN-based secure Print, user authentication, and full activity logging for compliance.",
     stat: "Full audit trail logging",
   },
   {
@@ -277,7 +277,7 @@ export default function PrinterRentalAlAin() {
                 <span className="text-[#f5be53]">Al Ain</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
-                Canon &amp; Kyocera printer and photocopier rental in Al Ain from AED 250/month. Zero deposit,
+                Canon &amp; Kyocera Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit,
                 free toner, and weekly maintenance for healthcare, education, government, and industry.
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
@@ -327,11 +327,11 @@ export default function PrinterRentalAlAin() {
             </p>
             <p className="text-white text-lg leading-relaxed">
               Printer rental in Al Ain is a monthly subscription from{" "}
-              <strong className="text-[#f5be53]">AED 250/month</strong> providing Canon or Kyocera printers
+              <strong className="text-[#f5be53]">AED 250/month</strong> providing Canon or Kyocera Printers
               with toner, maintenance, and repairs included. Sahara Office Equipment Trading LLC has served UAE
               businesses since 2012, offering Al Ain clients{" "}
               <strong className="text-[#f5be53]">zero deposit</strong>, weekly preventive maintenance, and
-              4–6hr emergency response across all Al Ain districts including the Industrial Area and university zone.
+              4–6hr Emergency response across all Al Ain districts including the Industrial Area and university zone.
             </p>
           </div>
         </div>
@@ -370,8 +370,8 @@ export default function PrinterRentalAlAin() {
             reliable, high-volume document output with cost control and accountability.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Sahara's printer rental in Al Ain provides healthcare facilities with Canon imageRUNNER enterprise
-            copiers equipped with secure print release and user authentication — ensuring patient document
+            Sahara's Printer rental in Al Ain provides healthcare facilities with Canon imageRUNNER enterprise
+            copiers equipped with secure Print release and user authentication — ensuring patient document
             confidentiality while reducing paper waste. For universities, our user quota management systems
             track printing by department, enabling cost allocation to individual faculties.
           </p>
@@ -395,7 +395,7 @@ export default function PrinterRentalAlAin() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-4xl font-bold text-white">Al Ain Industry Use Cases</h2>
-            <p className="text-[#d3c5b0] mt-3">How Al Ain's key sectors use printer rental</p>
+            <p className="text-[#d3c5b0] mt-3">How Al Ain's key sectors use Printer rental</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {industryInsights.map((ins, i) => (
@@ -480,7 +480,7 @@ export default function PrinterRentalAlAin() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Areas We Serve in Al Ain</h2>
           <p className="text-[#d3c5b0] mb-8">
-            Weekly scheduled maintenance. Emergency response within 4–6 hours.
+            Weekly Scheduled maintenance. Emergency response within 4–6 hours.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {alAinAreas.map((area, i) => (
@@ -559,3 +559,4 @@ export default function PrinterRentalAlAin() {
     </main>
   );
 }
+

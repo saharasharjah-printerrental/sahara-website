@@ -1,0 +1,13 @@
+{
+  "id": "2",
+  "name": "HP 85A Black",
+  "brand": "HP",
+  "category": "Toner",
+  "compatibleModels": "LaserJet Pro M402, M501",
+  "color": "Black",
+  "yield": "3,000 pages",
+  "price": "AED 280",
+  "stock": 100,
+  "image": "",
+  "isActive": true
+}

@@ -1,0 +1,10 @@
+{
+  "id": "2",
+  "title": "Expert Repair Services",
+  "subtitle": "Fast turnaround and genuine parts for all major brands",
+  "ctaText": "Book Repair",
+  "ctaLink": "/services/repair",
+  "imageUrl": "",
+  "isActive": true,
+  "sortOrder": 2
+}

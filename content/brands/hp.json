@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "name": "HP",
+  "slug": "hp",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/HP_logo.svg",
+  "description": "HP printers and MFPs",
+  "isActive": true,
+  "sortOrder": 1
+}

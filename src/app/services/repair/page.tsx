@@ -7,18 +7,18 @@ import MobileNav from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "Printer Repair Dubai | 4-Hr Response | All Brands | Sahara",
-  description: "On-site printer repair in Dubai, Sharjah & Abu Dhabi. 4-hr emergency response, OEM parts. Canon, HP, Kyocera, Xerox, Ricoh. Same-day service. ☎ +971503823969",
-  keywords: "printer repair dubai, photocopier repair sharjah, canon printer repair uae, hp printer repair dubai, kyocera service uae, printer technician dubai, on-site printer repair",
+  description: "On-site Printer repair in Dubai, Sharjah & Abu Dhabi. 4-hr Emergency response, OEM parts. Canon, HP, Kyocera, Xerox, Ricoh. Same-day service. ☎ +971503823969",
+  keywords: "Printer repair dubai, photocopier repair sharjah, canon Printer repair uae, hp Printer repair dubai, kyocera service uae, Printer technician dubai, on-site Printer repair",
   openGraph: {
     title: "Printer Repair Service Dubai & UAE | Sahara Office Equipments",
-    description: "On-site printer repair with 4-hour emergency response across UAE. Certified technicians for Canon, HP, Kyocera, Xerox, Ricoh and all major brands.",
-    images: [{ url: "https://www.saharaprinter.com/images/homement.webp", width: 1200, height: 630, alt: "Printer Repair Dubai UAE" }],
-    url: "https://www.saharaprinter.com/services/repair",
+    description: "On-site Printer repair with 4-hour Emergency response across UAE. Certified technicians for Canon, HP, Kyocera, Xerox, Ricoh and all major brands.",
+    images: [{ url: "https://www.saharaPrinter.com/images/homement.webp", width: 1200, height: 630, alt: "Printer Repair Dubai UAE" }],
+    url: "https://www.saharaPrinter.com/services/repair",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
   },
-  alternates: { canonical: "https://www.saharaprinter.com/services/repair" },
+  alternates: { canonical: "https://www.saharaPrinter.com/services/repair" },
 };
 
 const repairServiceSchema = {
@@ -26,12 +26,12 @@ const repairServiceSchema = {
   "@type": "Service",
   "name": "Printer Repair Service UAE",
   "alternateName": "On-Site Photocopier Repair Dubai",
-  "description": "Professional on-site printer and photocopier repair service across UAE. Factory-certified technicians service all major brands including Canon, HP, Kyocera, Ricoh, and Xerox. 4-hour emergency response, OEM parts, 98% first-visit fix rate.",
+  "description": "Professional on-site Printer and photocopier repair service across UAE. Factory-certified technicians service all major brands including Canon, HP, Kyocera, Ricoh, and Xerox. 4-hour Emergency response, OEM parts, 98% first-visit fix rate.",
   "provider": {
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments",
     "legalName": "Sahara Office Equipment Trading LLC",
-    "telephone": "+971503823969",
+    "telePhoneIcon": "+971503823969",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Al Arabi Building, Industrial Area 11",
@@ -45,7 +45,7 @@ const repairServiceSchema = {
   "serviceType": "Printer Repair",
   "availableChannel": {
     "@type": "ServiceChannel",
-    "servicePhone": { "@type": "ContactPoint", "telephone": "+971503823969" },
+    "servicePhoneIcon": { "@type": "ContactPoint", "telePhoneIcon": "+971503823969" },
     "availableLanguage": ["English", "Arabic"]
   },
   "offers": {
@@ -59,14 +59,14 @@ const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "How to Get Printer Repair Service in Dubai UAE",
-  "description": "Steps to book on-site printer repair service from Sahara Office Equipments in UAE",
+  "description": "Steps to book on-site Printer repair service from Sahara Office Equipments in UAE",
   "totalTime": "PT4H",
   "estimatedCost": { "@type": "MonetaryAmount", "currency": "AED", "value": "Contact for quote" },
   "step": [
-    { "@type": "HowToStep", "position": 1, "name": "Call or WhatsApp Us", "text": "Contact our support line at +971503823969 or WhatsApp. Describe your printer issue and model." },
-    { "@type": "HowToStep", "position": 2, "name": "Technician Dispatched Within 1 Hour", "text": "A factory-certified technician is dispatched from the nearest service hub to your location." },
-    { "@type": "HowToStep", "position": 3, "name": "On-Site Diagnosis & Repair", "text": "The technician performs a full diagnostic, sources OEM parts from our mobile parts inventory, and completes the repair." },
-    { "@type": "HowToStep", "position": 4, "name": "Quality Check & Sign-Off", "text": "A test print run confirms the fix. You receive a service report with parts used and 30-day workmanship warranty." }
+    { "@type": "HowToStep", "position": 1, "name": "Call or WhatsApp Us", "text": "Contact our support line at +971503823969 or WhatsApp. Describe your Printer issue and model." },
+    { "@type": "HowToStep", "position": 2, "name": "Technician Dispatched Within 1 Hour", "text": "A factory-certified technician is dispatched from the nearest service HubIcon to your location." },
+    { "@type": "HowToStep", "position": 3, "name": "On-Site Diagnosis & Repair", "text": "The technician performs a full diagnostic, sources OEM parts from our mobile parts Inventory, and completes the repair." },
+    { "@type": "HowToStep", "position": 4, "name": "Quality Check & Sign-Off", "text": "A test Print run confirms the fix. You receive a service report with parts used and 30-day workmanship warranty." }
   ]
 };
 
@@ -76,15 +76,15 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How quickly can a printer repair technician reach my office in Dubai?",
+      "name": "How quickly can a Printer repair technician reach my office in Dubai?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For Dubai and Sharjah locations, our average response time is 4 hours for standard service and under 2 hours for emergency callouts. Abu Dhabi locations typically receive same-day service. We dispatch technicians from the nearest service hub to minimize travel time."
+        "text": "For Dubai and Sharjah locations, our average response time is 4 hours for standard service and under 2 hours for Emergency callouts. Abu Dhabi locations typically receive same-day service. We dispatch technicians from the nearest service HubIcon to minimize travel time."
       }
     },
     {
       "@type": "Question",
-      "name": "Do you use original OEM parts for printer repairs?",
+      "name": "Do you use original OEM parts for Printer repairs?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes — exclusively. Sahara only installs genuine OEM (Original Equipment Manufacturer) replacement parts for all brands including Canon, HP, Kyocera, Ricoh, and Xerox. We do not use compatible or third-party parts, which preserves your warranty and ensures long-term performance."
@@ -92,31 +92,31 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "Which printer brands do you repair in UAE?",
+      "name": "Which Printer brands do you repair in UAE?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Our certified technicians repair all major printer and photocopier brands: Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Konica Minolta, and Toshiba. We carry mobile parts inventory for the most common models."
+        "text": "Our certified technicians repair all major Printer and photocopier brands: Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Konica Minolta, and Toshiba. We carry mobile parts Inventory for the most common models."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the cost of printer repair service in Dubai?",
+      "name": "What is the cost of Printer repair service in Dubai?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Repair costs vary depending on the fault and parts required. We provide a transparent, itemized quote before any work begins — no surprise charges. Clients on our AMC (Annual Maintenance Contract) or printer rental plans receive repairs at no additional cost."
+        "text": "Repair costs vary depending on the fault and parts required. We provide a transparent, itemized quote before any work begins — no surprise charges. Clients on our AMC (Annual Maintenance Contract) or Printer rental plans receive repairs at no additional cost."
       }
     },
     {
       "@type": "Question",
-      "name": "Do you offer emergency printer repair service on weekends?",
+      "name": "Do you offer Emergency Printer repair service on weekends?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. We operate Saturday through Thursday, 8:00 AM – 8:00 PM, with 24/7 emergency support for critical failures. For rental clients and AMC contract holders, emergency response is guaranteed around the clock."
+        "text": "Yes. We operate Saturday through Thursday, 8:00 AM – 8:00 PM, with 24/7 Emergency support for critical failures. For rental clients and AMC contract holders, Emergency response is guaranteed around the clock."
       }
     },
     {
       "@type": "Question",
-      "name": "What warranty do you provide on printer repairs?",
+      "name": "What warranty do you provide on Printer repairs?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "All repair work carries a 30-day workmanship warranty. If the same fault recurs within 30 days of a completed repair, we return and fix it at no additional charge. OEM parts carry the manufacturer's standard warranty."
@@ -129,20 +129,20 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com" },
-    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaprinter.com/services" },
-    { "@type": "ListItem", "position": 3, "name": "Printer Repair UAE", "item": "https://saharaprinter.com/services/repair" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaPrinter.com" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaPrinter.com/services" },
+    { "@type": "ListItem", "position": 3, "name": "Printer Repair UAE", "item": "https://saharaPrinter.com/services/repair" }
   ]
 };
 
 const commonProblems = [
-  { code: "Paper Jam", brand: "All Brands", desc: "Roller wear, debris buildup, or incorrect media. We clear jams and replace worn feed rollers on-site.", icon: "⚠️" },
+  { code: "Paper Jam", brand: "All Brands", desc: "Roller wear, debris BuildIconup, or incorrect media. We clear jams and replace worn feed rollers on-site.", icon: "⚠️" },
   { code: "No Print Output", brand: "Canon / HP", desc: "Fuser assembly failure, drum unit end-of-life, or formatter board fault. Diagnosed in under 30 minutes.", icon: "🖨️" },
   { code: "Streaks / Lines", brand: "Kyocera / Ricoh", desc: "Dirty drum, scratched OPC drum, or developer unit failure. Cleaned or replaced with OEM components.", icon: "〰️" },
   { code: "Network / Wi-Fi Issues", brand: "All MFPs", desc: "NIC card failure, firmware corruption, or IP conflict. Reconfigured and tested against your network.", icon: "📶" },
   { code: "Error Codes", brand: "Xerox / Sharp", desc: "E-codes, SC codes, and service codes interpreted and resolved. Our technicians carry manufacturer error-code guides.", icon: "🔴" },
   { code: "Toner Not Fusing", brand: "All Brands", desc: "Fuser unit failure causes smearing or powdery output. Fuser replaced with OEM unit, calibrated to spec.", icon: "🔧" },
-  { code: "Slow Printing", brand: "HP / Brother", desc: "Driver corruption, memory shortage, or clogged print heads. Firmware updated, memory expanded where possible.", icon: "🐢" },
+  { code: "Slow Printing", brand: "HP / Brother", desc: "Driver corruption, memory shortage, or clogged Print heads. Firmware updated, memory expanded where possible.", icon: "🐢" },
   { code: "Scan / Copy Failure", brand: "Canon / Kyocera", desc: "ADF feed failure, scanner unit fault, or software error. Full multifunction diagnostic and component repair.", icon: "📄" },
 ];
 
@@ -157,9 +157,9 @@ const brandExpertise = [
 
 const processSteps = [
   { step: "01", title: "Call or WhatsApp", desc: "Describe your issue. Our support team triages the fault remotely and dispatches the right technician.", time: "< 5 min" },
-  { step: "02", title: "Technician Dispatched", desc: "A certified engineer leaves from the nearest hub. Real-time tracking available on request.", time: "< 60 min" },
+  { step: "02", title: "Technician Dispatched", desc: "A certified engineer leaves from the nearest HubIcon. Real-time tracking available on request.", time: "< 60 min" },
   { step: "03", title: "On-Site Diagnosis", desc: "Full diagnostic on your machine. Transparent cost quote before any part is touched.", time: "15–30 min" },
-  { step: "04", title: "Repair & Test Run", desc: "OEM parts installed. 50-page test print run confirms the fix before the technician leaves.", time: "30–120 min" },
+  { step: "04", title: "Repair & Test Run", desc: "OEM parts installed. 50-page test Print run confirms the fix before the technician leaves.", time: "30–120 min" },
 ];
 
 const industryUseCases = [
@@ -204,7 +204,7 @@ export default function RepairPage() {
               <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
                 <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is Printer Repair Service in UAE?</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  On-site printer repair is a professional service where factory-certified technicians visit your office,
+                  On-site Printer repair is a professional service where factory-certified technicians visit your office,
                   diagnose the fault, and fix it using genuine OEM parts — with a 4-hour response time across Dubai, Sharjah,
                   Abu Dhabi, and all UAE emirates. Sahara has completed 50,000+ repairs since 2012.
                 </p>
@@ -237,7 +237,7 @@ export default function RepairPage() {
                 style={{ boxShadow: '0 0 60px rgba(245,190,83,0.12), 0 24px 80px rgba(0,0,0,0.5)' }}>
                 <img
                   src="/images/homement.webp"
-                  alt="Sahara certified printer repair technician servicing Canon photocopier in Dubai UAE"
+                  alt="Sahara certified Printer repair technician servicing Canon photocopier in Dubai UAE"
                   className="w-full h-[480px] object-contain bg-[#0a1628]"
                   loading="eager"
                 />
@@ -292,7 +292,7 @@ export default function RepairPage() {
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Fault Diagnosis</span>
             <h2 className="text-4xl font-bold text-white mt-3 mb-4">8 Printer Problems We Fix Daily</h2>
             <p className="text-[#7a94ad] max-w-lg mx-auto text-sm leading-relaxed">
-              Our mobile parts inventory covers 95% of common faults — most resolved in a single visit without
+              Our mobile parts Inventory covers 95% of common faults — most resolved in a single visit without
               ordering parts from the manufacturer.
             </p>
           </div>
@@ -352,7 +352,7 @@ export default function RepairPage() {
           <div className="text-center mb-16">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Process</span>
             <h2 className="text-4xl font-bold text-white mt-3 mb-4">How a Repair Call Works</h2>
-            <p className="text-[#7a94ad] text-sm">From your call to a working printer — typically under 4 hours.</p>
+            <p className="text-[#7a94ad] text-sm">From your call to a working Printer — typically under 4 hours.</p>
           </div>
           <div className="relative">
             {/* Connecting line */}
@@ -453,3 +453,4 @@ export default function RepairPage() {
     </main>
   );
 }
+

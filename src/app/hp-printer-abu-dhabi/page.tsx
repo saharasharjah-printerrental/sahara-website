@@ -7,13 +7,13 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export default function HPPrinterAbuDhabi() {
-  const [settings, setSettings] = useState<any>(null);
+  const [SettingsIcon, setSettingsIcon] = useState<any>(null);
   const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_settings");
+    const stored = localStorage.getItem("sahara_SettingsIcon");
     if (stored) {
-      setSettings(JSON.parse(stored));
+      setSettingsIcon(JSON.parse(stored));
     }
     
     const faqStored = localStorage.getItem("sahara_faqs");
@@ -29,30 +29,30 @@ export default function HPPrinterAbuDhabi() {
   }, []);
 
   const defaultFaqs = [
-    { q: "Do you rent HP printers in Abu Dhabi?", a: "Yes! We offer a wide range of HP printers and photocopiers for rent in Abu Dhabi, including LaserJet Enterprise, PageWide, and OfficeJet series." },
-    { q: "What HP models are available for rental in Abu Dhabi?", a: "We rent HP LaserJet Enterprise, PageWide Pro, OfficeJet Pro, and Neverstop series. From desktop printers to heavy-duty enterprise copiers." },
-    { q: "How much does HP printer rental cost in Abu Dhabi?", a: "HP printer rental in Abu Dhabi starts from AED 250/month for A4 models, with enterprise copiers from AED 500-2000/month. All include free toner." },
-    { q: "Do you provide HP printer repair in Abu Dhabi?", a: "Yes, our certified technicians provide on-site HP printer repair in Abu Dhabi with fast response time." },
-    { q: "Is HP toner included in the rental price?", a: "Yes! All our HP printer rentals in Abu Dhabi include unlimited genuine HP toner at no extra cost." },
-    { q: "Can I upgrade my HP printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your HP printer anytime during the contract." },
-    { q: "Do you offer HP printer AMC in Abu Dhabi?", a: "Yes, we offer Annual Maintenance Contracts for HP printers covering all repairs, toner, and preventive maintenance." },
+    { q: "Do you rent HP Printers in Abu Dhabi?", a: "Yes! We offer a wide range of HP Printers and photocopiers for rent in Abu Dhabi, including LaserJet Enterprise, PageWide, and OfficeJet series." },
+    { q: "What HP models are available for rental in Abu Dhabi?", a: "We rent HP LaserJet Enterprise, PageWide Pro, OfficeJet Pro, and Neverstop series. From desktop Printers to heavy-duty enterprise copiers." },
+    { q: "How much does HP Printer rental cost in Abu Dhabi?", a: "HP Printer rental in Abu Dhabi StarIconts from AED 250/month for A4 models, with enterprise copiers from AED 500-2000/month. All include free toner." },
+    { q: "Do you provide HP Printer repair in Abu Dhabi?", a: "Yes, our certified technicians provide on-site HP Printer repair in Abu Dhabi with fast response time." },
+    { q: "Is HP toner included in the rental price?", a: "Yes! All our HP Printer rentals in Abu Dhabi include unlimited genuine HP toner at no extra cost." },
+    { q: "Can I Upgrade my HP Printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to Upgrade your HP Printer anytime during the contract." },
+    { q: "Do you offer HP Printer AMC in Abu Dhabi?", a: "Yes, we offer Annual Maintenance Contracts for HP Printers covering all repairs, toner, and preventive maintenance." },
     { q: "What areas in Abu Dhabi do you serve for HP rentals?", a: "We serve all Abu Dhabi areas including Mussafah, Al Reem Island, Khalifa City, Yas Island, Corniche, and all other districts." },
   ];
 
   const hpModels = [
-    { name: "HP LaserJet Enterprise M608", type: "B&W Enterprise", speed: "61 ppm", features: "High-volume, Security" },
-    { name: "HP PageWide Pro 750dw", type: "Color Enterprise", speed: "50 ppm", features: "Low cost per page" },
-    { name: "HP OfficeJet Pro 9022e", type: "A4 Color", speed: "24 ppm", features: "All-in-One, Smart" },
-    { name: "HP Neverstop Laser MFP", type: "A4 B&W", speed: "21 ppm", features: "Low running cost" },
+    { name: "HP LaserJet Enterprise M608", type: "B&W Enterprise", SpeedIcon: "61 ppm", features: "High-volume, Security" },
+    { name: "HP PageWide Pro 750dw", type: "Color Enterprise", SpeedIcon: "50 ppm", features: "Low cost per page" },
+    { name: "HP OfficeJet Pro 9022e", type: "A4 Color", SpeedIcon: "24 ppm", features: "All-in-One, Smart" },
+    { name: "HP Neverstop Laser MFP", type: "A4 B&W", SpeedIcon: "21 ppm", features: "Low running cost" },
   ];
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments - HP Abu Dhabi",
-    "description": "HP printer rental in Abu Dhabi. LaserJet, PageWide, OfficeJet series with zero deposit and free toner.",
-    "url": "https://saharaprinter.com/hp-printer-abu-dhabi",
-    "telephone": "+971503823969",
+    "description": "HP Printer rental in Abu Dhabi. LaserJet, PageWide, OfficeJet series with zero deposit and free toner.",
+    "url": "https://saharaPrinter.com/hp-Printer-abu-dhabi",
+    "telePhoneIcon": "+971503823969",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Mussafah",
@@ -105,7 +105,7 @@ export default function HPPrinterAbuDhabi() {
                 HP Photocopiers <span className="text-[#f5be53]">Abu Dhabi</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl">
-                Premium HP printer and photocopier rental in Abu Dhabi. LaserJet, PageWide, and OfficeJet series with zero deposit and free toner.
+                Premium HP Printer and photocopier rental in Abu Dhabi. LaserJet, PageWide, and OfficeJet series with zero deposit and free toner.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
@@ -120,7 +120,7 @@ export default function HPPrinterAbuDhabi() {
               <div className="absolute inset-0 bg-[#f5be53]/20 blur-[120px] rounded-full"></div>
               <div className="relative z-20 glass-card p-8 rounded-3xl overflow-hidden">
                 <img
-                  src="/images/printer-hp.svg"
+                  src="/images/Printer-hp.svg"
                   alt="HP Photocopier Rental Abu Dhabi"
                   className="w-full h-full object-cover rounded-2xl mix-blend-screen opacity-90"
                 />
@@ -140,7 +140,7 @@ export default function HPPrinterAbuDhabi() {
                 <h3 className="text-lg font-bold text-white mb-2">{model.name}</h3>
                 <p className="text-[#f5be53] text-sm mb-4">{model.type}</p>
                 <div className="space-y-2 text-sm text-[#d3c5b0]">
-                  <p><span className="font-semibold">Speed:</span> {model.speed}</p>
+                  <p><span className="font-semibold">SpeedIcon:</span> {model.SpeedIcon}</p>
                   <p><span className="font-semibold">Features:</span> {model.features}</p>
                 </div>
               </div>
@@ -155,9 +155,9 @@ export default function HPPrinterAbuDhabi() {
           <h2 className="text-3xl font-bold text-white text-center mb-12">Why Choose HP Printers in Abu Dhabi</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: "High Performance", desc: "HP Enterprise printers handle high-volume workloads with exceptional speed and reliability." },
+              { title: "High Performance", desc: "HP Enterprise Printers handle high-volume workloads with exceptional SpeedIcon and reliability." },
               { title: "Low Cost per Page", desc: "HP PageWide technology delivers the lowest cost per page in the industry." },
-              { title: "Security Features", desc: "HP printers include advanced security features to protect sensitive business data." },
+              { title: "Security Features", desc: "HP Printers include advanced Security features to protect sensitive business data." },
             ].map((feature, i) => (
               <div key={i} className="glass-card p-8 rounded-2xl text-center">
                 <h3 className="text-xl font-bold text-[#f5be53] mb-4">{feature.title}</h3>

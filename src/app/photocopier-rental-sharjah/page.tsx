@@ -7,25 +7,25 @@ import JumpToTop from "@/components/JumpToTop";
 export const metadata: Metadata = {
   title: "Photocopier Rental Sharjah | Printer Lease UAE – AED 250/mo | Sahara",
   description:
-    "Photocopier rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-min emergency response. Serving SAIF Zone, Industrial Area, Al Majaz. Canon & Kyocera. Call now.",
+    "Photocopier rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-min Emergency response. Serving SAIF Zone, Industrial Area, Al Majaz. Canon & Kyocera. Call now.",
   keywords: [
     "photocopier rental sharjah",
-    "printer rental sharjah",
+    "Printer rental sharjah",
     "copier lease sharjah",
-    "SAIF Zone printer rental",
+    "SAIF Zone Printer rental",
     "industrial area sharjah copier",
     "canon kyocera rental sharjah",
     "zero deposit copier sharjah",
-    "printer lease uae",
+    "Printer lease uae",
     "photocopier hire sharjah",
     "office equipment rental sharjah",
   ],
-  alternates: { canonical: "https://saharaprinter.com/photocopier-rental-sharjah" },
+  alternates: { canonical: "https://saharaPrinter.com/photocopier-rental-sharjah" },
   openGraph: {
     title: "Photocopier Rental Sharjah | AED 250/mo – Sahara Office Equipments",
     description:
       "Rent a Canon or Kyocera photocopier in Sharjah from AED 250/month. Zero deposit, free toner, 60-min response. Serving SAIF Zone, Industrial Area & all Sharjah areas.",
-    url: "https://saharaprinter.com/photocopier-rental-sharjah",
+    url: "https://saharaPrinter.com/photocopier-rental-sharjah",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -38,10 +38,10 @@ const localBusinessSchema = {
   name: "Sahara Office Equipments – Sharjah Photocopier Rental",
   legalName: "Sahara Office Equipment Trading LLC",
   description:
-    "Photocopier and printer rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
-  url: "https://saharaprinter.com/photocopier-rental-sharjah",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
+    "Photocopier and Printer rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-minute Emergency response. Canon, Kyocera, Xerox, HP authorized service.",
+  url: "https://saharaPrinter.com/photocopier-rental-sharjah",
+  telePhoneIcon: "+971503823969",
+  EmailIcon: "info@saharaPrinter.com",
   foundingDate: "2012",
   address: {
     "@type": "PostalAddress",
@@ -66,7 +66,7 @@ const localBusinessSchema = {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
       opens: "08:00",
-      closes: "20:00",
+      CloseIcons: "20:00",
     },
   ],
   hasOfferCatalog: {
@@ -85,7 +85,7 @@ const localBusinessSchema = {
         name: "A3 Mid-Range Copier Rental Sharjah",
         price: "500",
         priceCurrency: "AED",
-        description: "A3 multifunction — print, scan, copy, fax — for shared offices",
+        description: "A3 multifunction — Print, scan, copy, fax — for shared offices",
       },
       {
         "@type": "Offer",
@@ -120,12 +120,12 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaPrinter.com" },
     {
       "@type": "ListItem",
       position: 2,
       name: "Photocopier Rental Sharjah",
-      item: "https://saharaprinter.com/photocopier-rental-sharjah",
+      item: "https://saharaPrinter.com/photocopier-rental-sharjah",
     },
   ],
 };
@@ -133,15 +133,15 @@ const breadcrumbSchema = {
 const faqs = [
   {
     q: "How much does photocopier rental cost in Sharjah?",
-    a: "Photocopier rental in Sharjah starts from AED 250/month for an A4 desktop copier. A3 multifunction devices for shared offices range from AED 500–900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support.",
+    a: "Photocopier rental in Sharjah StarIconts from AED 250/month for an A4 desktop copier. A3 multifunction devices for shared offices range from AED 500–900/month. Enterprise high-volume copiers StarIcont at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support.",
   },
   {
-    q: "What is your emergency response time in Sharjah?",
-    a: "We guarantee a 60-minute on-site response time for emergency breakdowns across Sharjah, including SAIF Zone, Industrial Area, Al Majaz, and Muweilah. Our Sharjah-based technicians are dispatched immediately upon your call to +971 50 382 3969.",
+    q: "What is your Emergency response time in Sharjah?",
+    a: "We guarantee a 60-minute on-site response time for Emergency breakdowns across Sharjah, including SAIF Zone, Industrial Area, Al Majaz, and Muweilah. Our Sharjah-based technicians are dispatched immediately upon your call to +971 50 382 3969.",
   },
   {
     q: "Do I need to pay a deposit for photocopier rental in Sharjah?",
-    a: "No deposit required. Sahara offers zero-deposit photocopier rental across all Sharjah plans. You only pay your first month's rental to get started. This eliminates capital expenditure for businesses in Sharjah's Industrial Area and free zones.",
+    a: "No deposit required. Sahara offers zero-deposit photocopier rental across all Sharjah plans. You only pay your first month's rental to get StarIconted. This eliminates capital expenditure for businesses in Sharjah's Industrial Area and free zones.",
   },
   {
     q: "Which photocopier brands do you rent in Sharjah?",
@@ -165,11 +165,11 @@ const faqs = [
   },
   {
     q: "Do you provide network and Wi-Fi setup for rented copiers in Sharjah?",
-    a: "Yes. Free network configuration is included with every Sharjah rental installation. Our technicians connect the copier to your office network, configure scan-to-email, scan-to-folder, and set up user authentication if required — all at no extra charge.",
+    a: "Yes. Free network configuration is included with every Sharjah rental installation. Our technicians connect the copier to your office network, configure scan-to-EmailIcon, scan-to-folder, and set up user authentication if required — all at no extra charge.",
   },
   {
-    q: "Can I upgrade my copier during the Sharjah rental contract?",
-    a: "Yes. You can upgrade to a higher-capacity model at any point during your Sharjah rental contract without penalty. This is especially useful for fast-growing businesses in Sharjah Industrial Area and Sharjah Media City.",
+    q: "Can I Upgrade my copier during the Sharjah rental contract?",
+    a: "Yes. You can Upgrade to a higher-capacity model at any point during your Sharjah rental contract without penalty. This is especially useful for fast-growing businesses in Sharjah Industrial Area and Sharjah Media City.",
   },
   {
     q: "Do you service Sharjah Industrial Area specifically?",
@@ -177,7 +177,7 @@ const faqs = [
   },
   {
     q: "What is the cost-per-page for rented copiers in Sharjah?",
-    a: "Cost-per-page (CPP) for A4 black-and-white printing on our rented copiers in Sharjah is approximately 1–2 fils per page — significantly lower than desktop inkjet or laser cartridge printers which cost 5–15 fils per page. Colour CPP ranges from 8–15 fils depending on coverage.",
+    a: "Cost-per-page (CPP) for A4 black-and-white printing on our rented copiers in Sharjah is approximately 1–2 fils per page — significantly lower than desktop inkjet or laser cartridge Printers which cost 5–15 fils per page. Colour CPP ranges from 8–15 fils depending on coverage.",
   },
 ];
 
@@ -203,7 +203,7 @@ const pricingTiers = [
       "Print, copy, scan",
       "Free genuine toner",
       "Next-day delivery",
-      "60-min emergency support",
+      "60-min Emergency support",
     ],
     cta: "Get Quote",
   },
@@ -217,7 +217,7 @@ const pricingTiers = [
       "35–55 ppm A3 & A4",
       "Print, copy, scan, fax",
       "Colour option available",
-      "Scan to email / folder / cloud",
+      "Scan to EmailIcon / folder / CloudIcon",
       "Free network setup",
       "Same-day replacement guarantee",
     ],
@@ -232,7 +232,7 @@ const pricingTiers = [
       "Canon imageRUNNER C5560i / Kyocera 5053ci",
       "60–100 ppm A3 colour",
       "Staple, booklet, hole-punch finishers",
-      "Secure print, user authentication",
+      "Secure Print, user authentication",
       "Monthly 50,000+ page capacity",
       "Dedicated account manager",
       "Multi-site billing available",
@@ -334,17 +334,17 @@ export default function PhotocopierRentalSharjah() {
               <div className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-6">
                 <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Photocopier Rental Sharjah — Quick Answer</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Sahara Office Equipments provides photocopier and printer rental in Sharjah from{" "}
+                  Sahara Office Equipments provides photocopier and Printer rental in Sharjah from{" "}
                   <strong className="text-white">AED 250/month</strong> with zero deposit, unlimited genuine toner,
-                  and a <strong className="text-white">60-minute emergency response</strong> across SAIF Zone,
+                  and a <strong className="text-white">60-minute Emergency response</strong> across SAIF Zone,
                   Industrial Area, Al Majaz, and all Sharjah districts. Founded in 2012, Sahara is headquartered in
-                  Sharjah — making it the city&apos;s closest-based copier rental provider.
+                  Sharjah — making it the city&apos;s CloseIconst-based copier rental provider.
                 </p>
               </div>
 
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
                 Canon &amp; Kyocera photocopiers from AED 250/month. Zero deposit, free toner, and 60-minute
-                on-site emergency response across all Sharjah areas including SAIF Zone and Industrial Area.
+                on-site Emergency response across all Sharjah areas including SAIF Zone and Industrial Area.
               </p>
 
               {/* Trust pills */}
@@ -399,7 +399,7 @@ export default function PhotocopierRentalSharjah() {
               <strong className="text-[#f5be53]">AED 250/month</strong> to use a Canon or Kyocera multifunction
               copier — with toner, maintenance, and repairs all included. Sahara Office Equipment Trading LLC has
               served Sharjah businesses since 2012, offering{" "}
-              <strong className="text-[#f5be53]">60-minute emergency response</strong>, zero deposit, and free
+              <strong className="text-[#f5be53]">60-minute Emergency response</strong>, zero deposit, and free
               installation across SAIF Zone, Industrial Area, and all Sharjah districts.
             </p>
           </div>
@@ -444,17 +444,17 @@ export default function PhotocopierRentalSharjah() {
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             With Sahara's photocopier rental in Sharjah, businesses pay a fixed monthly fee that covers the machine,
             all genuine OEM toner cartridges, preventive maintenance visits, and unlimited on-site repairs. The
-            60-minute emergency response time is uniquely valuable for Sharjah Industrial Area businesses where a
+            60-minute Emergency response time is uniquely valuable for Sharjah Industrial Area businesses where a
             copier outage can halt production documentation, delivery orders, and compliance paperwork.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             SAIF Zone and Sharjah Media City companies benefit from Sahara's flexible billing — USD or AED invoicing
-            is available, and equipment can be added or upgraded mid-contract without renegotiation. New office
+            is available, and equipment can be added or Upgraded mid-contract without renegotiation. New office
             setups in SAIF Zone are completed within 24 hours of order, including full network configuration and
             user account setup.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Unlike desktop laser printers which cost 5–15 fils per A4 page, our rented photocopiers deliver
+            Unlike desktop laser Printers which cost 5–15 fils per A4 page, our rented photocopiers deliver
             black-and-white output at approximately <strong className="text-white">1–2 fils per page</strong> — a
             saving of up to 87% on per-page costs for businesses printing more than 3,000 pages per month.
           </p>
@@ -549,7 +549,7 @@ export default function PhotocopierRentalSharjah() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-8">Areas We Serve in Sharjah</h2>
           <p className="text-[#d3c5b0] mb-8">
-            60-minute emergency response across all Sharjah districts. Same-day delivery for new rentals.
+            60-minute Emergency response across all Sharjah districts. Same-day delivery for new rentals.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {sharjahAreas.map((area, i) => (
@@ -572,10 +572,10 @@ export default function PhotocopierRentalSharjah() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Zero Deposit", desc: "No upfront security deposit — pay only first month's rental to start." },
+              { title: "Zero Deposit", desc: "No upfront Security deposit — pay only first month's rental to StarIcont." },
               { title: "60-Min Response", desc: "Dedicated Sharjah-based technicians dispatched within minutes of your call." },
               { title: "Free OEM Toner", desc: "Genuine Canon/Kyocera toner proactively delivered before you run out." },
-              { title: "Network Setup Included", desc: "Full LAN/Wi-Fi, scan-to-email, and user authentication — no extra charge." },
+              { title: "Network Setup Included", desc: "Full LAN/Wi-Fi, scan-to-EmailIcon, and user authentication — no extra charge." },
               { title: "Replacement Guarantee", desc: "If your copier can't be fixed same-day, we install a replacement unit." },
               { title: "SAIF Zone Billing", desc: "USD or AED invoicing with free zone documentation support." },
             ].map((b, i) => (
@@ -657,3 +657,4 @@ export default function PhotocopierRentalSharjah() {
     </main>
   );
 }
+

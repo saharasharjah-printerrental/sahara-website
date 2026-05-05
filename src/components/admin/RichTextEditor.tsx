@@ -10,19 +10,19 @@ interface Props {
 
 export default function RichTextEditor({ value, onChange, placeholder = "Write your content here..." }: Props) {
   const editorRef = useRef<HTMLDivElement>(null);
-  const initialSyncDone = useRef(false);
+  const initialSyncIconDone = useRef(false);
 
   // Set content once after mount, using latest value
   useEffect(() => {
-    if (!initialSyncDone.current && editorRef.current) {
+    if (!initialSyncIconDone.current && editorRef.current) {
       editorRef.current.innerHTML = value || "";
-      initialSyncDone.current = true;
+      initialSyncIconDone.current = true;
     }
   }, []); // Only run once, but use latest captured value via closure
 
-  // Separate effect to handle value updates after initial sync
+  // Separate effect to handle value updates after initial SyncIcon
   useEffect(() => {
-    if (initialSyncDone.current && editorRef.current && value) {
+    if (initialSyncIconDone.current && editorRef.current && value) {
       editorRef.current.innerHTML = value;
     }
   }, [value]);
@@ -39,7 +39,7 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write y
       alert("Select some text first, then click Link.");
       return;
     }
-    const url = prompt("Enter URL (e.g. /services/printer-rental or https://...):", "https://");
+    const url = prompt("Enter URL (e.g. /services/Printer-rental or https://...):", "https://");
     if (url && url !== "https://") exec("createLink", url);
   }, [exec]);
 

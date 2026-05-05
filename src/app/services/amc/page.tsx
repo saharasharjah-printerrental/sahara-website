@@ -8,17 +8,17 @@ import MobileNav from "@/components/MobileNav";
 export const metadata: Metadata = {
   title: "Annual Maintenance Contract (AMC) for Printers UAE | Sahara",
   description: "Printer AMC plans in Dubai, Sharjah, Abu Dhabi. Quarterly to weekly servicing, all parts included, priority response. Protect your fleet from AED 299/month. Call +971503823969.",
-  keywords: "printer amc dubai, annual maintenance contract printer uae, photocopier amc sharjah, printer service contract uae, printer maintenance plan dubai, copier amc abu dhabi",
+  keywords: "Printer amc dubai, annual maintenance contract Printer uae, photocopier amc sharjah, Printer service contract uae, Printer maintenance plan dubai, copier amc abu dhabi",
   openGraph: {
     title: "Annual Maintenance Contract (AMC) for Printers UAE | Sahara Office Equipments",
-    description: "Comprehensive printer AMC plans from AED 299/month. All parts, priority response, and dedicated technician options across UAE.",
-    images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Printer AMC UAE" }],
-    url: "https://www.saharaprinter.com/services/amc",
+    description: "Comprehensive Printer AMC plans from AED 299/month. All parts, priority response, and dedicated technician options across UAE.",
+    images: [{ url: "https://www.saharaPrinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Printer AMC UAE" }],
+    url: "https://www.saharaPrinter.com/services/amc",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
   },
-  alternates: { canonical: "https://www.saharaprinter.com/services/amc" },
+  alternates: { canonical: "https://www.saharaPrinter.com/services/amc" },
 };
 
 const amcServiceSchema = {
@@ -26,12 +26,12 @@ const amcServiceSchema = {
   "@type": "Service",
   "name": "Annual Maintenance Contract (AMC) for Printers UAE",
   "alternateName": "Printer AMC Dubai",
-  "description": "Comprehensive annual maintenance contracts for office printers and photocopiers in UAE. Plans include quarterly to weekly servicing, all OEM parts, priority technical response, and optional dedicated technician. Serving Dubai, Sharjah, Abu Dhabi, and all UAE emirates.",
+  "description": "Comprehensive annual maintenance contracts for office Printers and photocopiers in UAE. Plans include quarterly to weekly servicing, all OEM parts, priority technical response, and optional dedicated technician. Serving Dubai, Sharjah, Abu Dhabi, and all UAE emirates.",
   "provider": {
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments",
     "legalName": "Sahara Office Equipment Trading LLC",
-    "telephone": "+971503823969",
+    "telePhoneIcon": "+971503823969",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Al Arabi Building, Industrial Area 11",
@@ -75,10 +75,10 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is an Annual Maintenance Contract (AMC) for printers in UAE?",
+      "name": "What is an Annual Maintenance Contract (AMC) for Printers in UAE?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A Printer Annual Maintenance Contract (AMC) is a service agreement where Sahara's certified technicians perform scheduled preventive maintenance visits on your office printers and photocopiers throughout the year. It includes regular servicing, cleaning, calibration, and priority emergency response — at a fixed monthly or annual fee. AMC clients avoid unpredictable repair bills and get priority over non-contract clients."
+        "text": "A Printer Annual Maintenance Contract (AMC) is a service agreement where Sahara's certified technicians perform Scheduled preventive maintenance visits on your office Printers and photocopiers throughout the year. It includes regular servicing, cleaning, calibration, and priority Emergency response — at a fixed monthly or annual fee. AMC clients avoid unpredictable repair bills and get priority over non-contract clients."
       }
     },
     {
@@ -86,7 +86,7 @@ const faqSchema = {
       "name": "How is a Printer AMC different from a rental plan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "With a printer rental from Sahara, you pay a monthly fee that includes the machine, toner, maintenance, and repairs — you never own the equipment. A Printer AMC is for equipment you already own: you pay a service contract fee covering maintenance and repairs, but continue owning the machine. If you own your printers and want to protect them, choose AMC. If you need equipment too, choose rental."
+        "text": "With a Printer rental from Sahara, you pay a monthly fee that includes the machine, toner, maintenance, and repairs — you never own the equipment. A Printer AMC is for equipment you already own: you pay a service contract fee covering maintenance and repairs, but continue owning the machine. If you own your Printers and want to protect them, choose AMC. If you need equipment too, choose rental."
       }
     },
     {
@@ -94,12 +94,12 @@ const faqSchema = {
       "name": "What does the Sahara Professional AMC plan include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The Professional AMC plan (AED 499/month per machine) includes: monthly preventive maintenance visits, all OEM replacement parts at no extra cost, 24/7 emergency support, a loaner device if repair exceeds 24 hours, priority scheduling, and a quarterly performance report for your fleet."
+        "text": "The Professional AMC plan (AED 499/month per machine) includes: monthly preventive maintenance visits, all OEM replacement parts at no extra cost, 24/7 Emergency support, a loaner device if repair exceeds 24 hours, priority scheduling, and a quarterly performance report for your fleet."
       }
     },
     {
       "@type": "Question",
-      "name": "How many printers can be covered under one AMC contract?",
+      "name": "How many Printers can be covered under one AMC contract?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "There is no minimum or maximum. Sahara covers single machines and multi-site enterprise fleets of 100+ devices under consolidated AMC contracts. Multi-machine contracts receive volume pricing discounts — contact our team for a fleet assessment and customized quote."
@@ -107,18 +107,18 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "Is toner included in the printer AMC?",
+      "name": "Is toner included in the Printer AMC?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Toner is not included in the Basic AMC plan but is included in our printer rental plans. The Professional and Enterprise AMC plans can be upgraded to include toner supply at an additional per-page or monthly rate. This is recommended for high-volume offices printing more than 3,000 pages per month."
+        "text": "Toner is not included in the Basic AMC plan but is included in our Printer rental plans. The Professional and Enterprise AMC plans can be Upgraded to include toner supply at an additional per-page or monthly rate. This is recommended for high-volume offices printing more than 3,000 pages per month."
       }
     },
     {
       "@type": "Question",
-      "name": "Do you offer AMC for all printer brands?",
+      "name": "Do you offer AMC for all Printer brands?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Sahara's AMC covers all major printer and photocopier brands: Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Konica Minolta, and Toshiba. Our technicians hold brand-specific certifications for Canon and Kyocera, and are authorized service partners for HP and Xerox."
+        "text": "Yes. Sahara's AMC covers all major Printer and photocopier brands: Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Konica Minolta, and Toshiba. Our technicians hold brand-specific certifications for Canon and Kyocera, and are authorized service partners for HP and Xerox."
       }
     }
   ]
@@ -128,9 +128,9 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com" },
-    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaprinter.com/services" },
-    { "@type": "ListItem", "position": 3, "name": "Annual Maintenance Contract", "item": "https://saharaprinter.com/services/amc" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaPrinter.com" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaPrinter.com/services" },
+    { "@type": "ListItem", "position": 3, "name": "Annual Maintenance Contract", "item": "https://saharaPrinter.com/services/amc" }
   ]
 };
 
@@ -146,11 +146,11 @@ const plans = [
       { text: "Priority scheduling over walk-ins", included: true },
       { text: "Labour & call-out charges included", included: true },
       { text: "OEM replacement parts", included: false },
-      { text: "24/7 emergency support", included: false },
+      { text: "24/7 Emergency support", included: false },
       { text: "Loaner device during repair", included: false },
       { text: "Quarterly performance report", included: false },
     ],
-    cta: "Get Started",
+    cta: "Get StarIconted",
     ctaStyle: "glass-card text-white"
   },
   {
@@ -164,7 +164,7 @@ const plans = [
       { text: "Priority scheduling over walk-ins", included: true },
       { text: "Labour & call-out charges included", included: true },
       { text: "All OEM replacement parts included", included: true },
-      { text: "24/7 emergency support", included: true },
+      { text: "24/7 Emergency support", included: true },
       { text: "Loaner device during extended repair", included: true },
       { text: "Quarterly performance report", included: true },
     ],
@@ -182,7 +182,7 @@ const plans = [
       { text: "Dedicated assigned technician", included: true },
       { text: "Labour & call-out charges included", included: true },
       { text: "All OEM replacement parts included", included: true },
-      { text: "24/7 emergency with 2-hr SLA", included: true },
+      { text: "24/7 Emergency with 2-hr SLA", included: true },
       { text: "Loaner device guaranteed", included: true },
       { text: "Monthly reporting & analytics", included: true },
     ],
@@ -214,18 +214,18 @@ const industryUseCases = [
     challenge: "Patient records, prescriptions, and lab reports cannot wait for a repair team to arrive.",
     solution: "Enterprise AMC with 2-hr SLA and loaner machine guarantees zero document workflow interruption.",
     icon: "🏥",
-    stat: "24/7 emergency coverage"
+    stat: "24/7 Emergency coverage"
   },
   {
     industry: "Schools & Universities",
     challenge: "Exam periods bring peak printing demand. Breakdowns during exams are catastrophic.",
-    solution: "Preventive servicing scheduled before exam season. Emergency response covers the entire campus fleet.",
+    solution: "Preventive servicing Scheduled before exam season. Emergency response covers the entire campus fleet.",
     icon: "🎓",
     stat: "100% uptime during exams"
   },
   {
     industry: "Logistics & Shipping",
-    challenge: "Label and manifest printers run 24/7. Any downtime stops shipment processing.",
+    challenge: "Label and manifest Printers run 24/7. Any downtime stops shipment processing.",
     solution: "Enterprise AMC with dedicated technician on weekly rotation. Parts kept on-site for zero-delay repair.",
     icon: "🚚",
     stat: "< 2-hour repair response"
@@ -233,7 +233,7 @@ const industryUseCases = [
 ];
 
 const whatIsAMC = [
-  { q: "Preventive, not reactive", a: "AMC schedules maintenance before breakdowns happen — not after your office is paralyzed." },
+  { q: "Preventive, not reactive", a: "AMC ScheduleIcons maintenance before breakdowns happen — not after your office is paralyzed." },
   { q: "Fixed cost, no surprises", a: "One monthly fee replaces unpredictable repair invoices. Budget with confidence." },
   { q: "Priority over walk-ins", a: "AMC clients jump the service queue. Emergency callouts are treated as critical." },
   { q: "Compliance documentation", a: "Receive service records every visit — required for ISO and industry compliance audits." },
@@ -273,9 +273,9 @@ export default function AMCPage() {
               <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
                 <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is a Printer AMC in UAE?</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  A Printer Annual Maintenance Contract (AMC) is a service agreement covering scheduled preventive
-                  maintenance, priority emergency repairs, and OEM parts for your office printers — at a fixed monthly fee.
-                  It converts unpredictable repair costs into a stable operational expense. Plans start from <strong className="text-white">AED 299/month</strong> per machine.
+                  A Printer Annual Maintenance Contract (AMC) is a service agreement covering Scheduled preventive
+                  maintenance, priority Emergency repairs, and OEM parts for your office Printers — at a fixed monthly fee.
+                  It converts unpredictable repair costs into a stable operational expense. Plans StarIcont from <strong className="text-white">AED 299/month</strong> per machine.
                 </p>
               </div>
 
@@ -329,7 +329,7 @@ export default function AMCPage() {
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Decision Guide</span>
             <h2 className="text-4xl font-bold text-white mt-3 mb-4">AMC vs. No Contract vs. Rental</h2>
             <p className="text-[#7a94ad] max-w-lg mx-auto text-sm">
-              Choose the right model for your business — not what costs least today, but what costs least overall.
+              Choose the right model for your business — not what costs lEast today, but what costs lEast overall.
             </p>
           </div>
 
@@ -508,3 +508,4 @@ export default function AMCPage() {
     </main>
   );
 }
+

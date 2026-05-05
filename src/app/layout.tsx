@@ -1,25 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Sora, Manrope } from "next/font/google";
+import "@fontsource/material-symbols";
 
 export const runtime = 'edge';
-
-const sora = Sora({
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
-  display: "swap",
-  variable: "--font-sora",
-  preload: true,
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  display: "swap",
-  variable: "--font-manrope",
-  preload: true,
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.saharaprinter.com'),
   title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance",
@@ -255,7 +238,7 @@ export default async function RootLayout({
   const cfg = await getSEOConfig();
 
   return (
-    <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script suppressHydrationWarning type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
 
@@ -307,7 +290,7 @@ export default async function RootLayout({
               : <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
           )}
       </head>
-      <body className={`${manrope.className} bg-[#071325] text-[#d7e3fc]`} suppressHydrationWarning>
+      <body className="bg-[#071325] text-[#d7e3fc]" suppressHydrationWarning>
         {/* GTM noscript — must be immediately after opening body tag */}
         {cfg?.googleTagManagerId && (
           <noscript>

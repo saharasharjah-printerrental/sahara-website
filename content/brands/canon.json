@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "name": "Canon",
+  "slug": "canon",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Canon_logo.svg",
+  "description": "Canon imageRUNNER series",
+  "isActive": true,
+  "sortOrder": 2
+}

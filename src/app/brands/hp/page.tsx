@@ -6,10 +6,10 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
-import { Shield, Nature, Cloud, WorkspacePremium, Speed } from "@mui/icons-material";
+import { ShieldIcon, NatureIcon, CloudIcon, WorkspacePremiumIcon, SpeedIcon } from "@/components/icons";
 
 export default function HPBrandPage() {
-  const [brandImage, setBrandImage] = useState("/images/printer-hp.svg");
+  const [brandImage, setBrandImage] = useState("/images/Printer-hp.svg");
 
   useEffect(() => {
     const storedBrands = localStorage.getItem("sahara_brands");
@@ -21,16 +21,16 @@ export default function HPBrandPage() {
   }, []);
 
   const products = [
-    { name: "LaserJet Enterprise", specs: ["55 PPM", "1200 DPI"], img: "/images/printer-hp.svg" },
-    { name: "DesignJet Z-Series", specs: ["9-Color Ink", "44-Inch Max"], img: "/images/printer-hp.svg" },
+    { name: "LaserJet Enterprise", specs: ["55 PPM", "1200 DPI"], img: "/images/Printer-hp.svg" },
+    { name: "DesignJet Z-Series", specs: ["9-Color Ink", "44-Inch Max"], img: "/images/Printer-hp.svg" },
     { name: "OfficeJet Pro Wide-Format", specs: ["High-Volume", "Network Ready"], img: "/images/unsplash-office.webp" },
   ];
 
   const features = [
-    { icon: Shield, title: "Wolf Security", desc: "Industry-leading hardware-enforced protection from BIOS to browser." },
-    { icon: Nature, title: "Eco Innovation", desc: "Closed-loop manufacturing and sustainable printing for modern ESG goals." },
-    { icon: Cloud, title: "Cloud Manageability", desc: "Seamless fleet management with HP Smart Admin and centralized control." },
-    { icon: WorkspacePremium, title: "Premium Heritage", desc: "Decades of engineering excellence translated into executive tools." },
+    { icon: ShieldIcon, title: "Wolf Security", desc: "Industry-leading hardware-enforced protection from BIOS to browser." },
+    { icon: NatureIcon, title: "Eco Innovation", desc: "CloseIcond-loop manufacturing and sustainable printing for modern ESG goals." },
+    { icon: CloudIcon, title: "CloudIcon Manageability", desc: "Seamless fleet management with HP Smart Admin and centralized control." },
+    { icon: WorkspacePremiumIcon, title: "Premium Heritage", desc: "Decades of engineering excellence translated into executive tools." },
   ];
 
   return (
@@ -83,7 +83,7 @@ export default function HPBrandPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Why Choose HP Excellence</h2>
-            <p className="text-[#d3c5b0] max-w-2xl mx-auto">Standard-setting technology for businesses that demand the absolute best in security, reliability, and innovation.</p>
+            <p className="text-[#d3c5b0] max-w-2xl mx-auto">Standard-setting technology for businesses that demand the absolute best in Security, reliability, and innovation.</p>
           </div>
           <div className="grid md:grid-cols-4 gap-8">
             {features.map((f, i) => {
@@ -116,11 +116,11 @@ export default function HPBrandPage() {
                   <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
-                <p className="text-[#d3c5b0] text-sm mb-6">Unrivaled security and performance for high-volume corporate fleets.</p>
+                <p className="text-[#d3c5b0] text-sm mb-6">Unrivaled Security and performance for high-volume corporate fleets.</p>
                 <div className="flex justify-between items-center py-4 border-t border-white/5">
                   {p.specs.map((s, j) => (
                     <div key={j} className="flex items-center gap-2">
-                      <Speed className="text-[#f5be53] text-sm" />
+                      <SpeedIcon className="text-[#f5be53] text-sm" />
                       <span className="text-xs text-[#d3c5b0]">{s}</span>
                     </div>
                   ))}
@@ -136,7 +136,7 @@ export default function HPBrandPage() {
         <div className="max-w-5xl mx-auto glass-card rounded-[48px] p-12 md:p-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-[#f5be53]/5 -z-10"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Upgrade Your <span className="text-[#f5be53]">Infrastructure?</span></h2>
-          <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">Schedule a private consultation with our HP product specialists to tailor the perfect solution for your corporate environment.</p>
+          <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">ScheduleIcon a private consultation with our HP product specialists to tailor the perfect solution for your corporate environment.</p>
           <a href="/get-quote?brand=hp" className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
             Enquire for HP Models
           </a>
@@ -150,3 +150,4 @@ export default function HPBrandPage() {
     </main>
   );
 }
+

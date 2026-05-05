@@ -1,6 +1,6 @@
 "use client";
 
-import { useInView, useMotionValue, useSpring } from "motion/react";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
 import { useCallback, useEffect, useRef } from "react";
 
 interface CountUpProps {
@@ -10,9 +10,9 @@ interface CountUpProps {
   delay?: number;
   duration?: number;
   className?: string;
-  startWhen?: boolean;
+  StarIcontWhen?: boolean;
   separator?: string;
-  onStart?: () => void;
+  onStarIcont?: () => void;
   onEnd?: () => void;
 }
 
@@ -23,9 +23,9 @@ export default function CountUp({
   delay = 0,
   duration = 2,
   className = "",
-  startWhen = true,
+  StarIcontWhen = true,
   separator = "",
-  onStart,
+  onStarIcont,
   onEnd,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -81,8 +81,8 @@ export default function CountUp({
   }, [from, to, direction, formatValue]);
 
   useEffect(() => {
-    if (isInView && startWhen) {
-      if (typeof onStart === "function") onStart();
+    if (isInView && StarIcontWhen) {
+      if (typeof onStarIcont === "function") onStarIcont();
 
       const timeoutId = setTimeout(() => {
         motionValue.set(direction === "down" ? from : to);
@@ -100,7 +100,7 @@ export default function CountUp({
         clearTimeout(durationTimeoutId);
       };
     }
-  }, [isInView, startWhen, motionValue, direction, from, to, delay, onStart, onEnd, duration]);
+  }, [isInView, StarIcontWhen, motionValue, direction, from, to, delay, onStarIcont, onEnd, duration]);
 
   useEffect(() => {
     const unsubscribe = springValue.on("change", (latest) => {

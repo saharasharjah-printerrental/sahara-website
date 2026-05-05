@@ -7,13 +7,13 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export default function CanonPrinterDubai() {
-  const [settings, setSettings] = useState<any>(null);
+  const [SettingsIcon, setSettingsIcon] = useState<any>(null);
   const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_settings");
+    const stored = localStorage.getItem("sahara_SettingsIcon");
     if (stored) {
-      setSettings(JSON.parse(stored));
+      setSettingsIcon(JSON.parse(stored));
     }
     
     const faqStored = localStorage.getItem("sahara_faqs");
@@ -29,30 +29,30 @@ export default function CanonPrinterDubai() {
   }, []);
 
   const defaultFaqs = [
-    { q: "Do you rent Canon printers in Dubai?", a: "Yes! We offer a wide range of Canon printers and photocopiers for rent in Dubai, including imageRUNNER, i-SENSYS, and imageCLASS series." },
-    { q: "What Canon models are available for rental in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, i-SENSYS MF, imageCLASS, and MAXIFY series. From compact A4 printers to heavy-duty A3 copiers." },
-    { q: "How much does Canon printer rental cost in Dubai?", a: "Canon printer rental in Dubai starts from AED 300/month for A4 models, with A3 enterprise copiers from AED 500-2000/month. All include free toner." },
-    { q: "Do you provide Canon printer repair in Dubai?", a: "Yes, our certified technicians provide on-site Canon printer repair in Dubai with 4-hour emergency response time." },
-    { q: "Is Canon toner included in the rental price?", a: "Yes! All our Canon printer rentals in Dubai include unlimited genuine Canon toner at no extra cost." },
-    { q: "Can I upgrade my Canon printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your Canon printer anytime during the contract." },
-    { q: "Do you offer Canon printer AMC in Dubai?", a: "Yes, we offer Annual Maintenance Contracts for Canon printers covering all repairs, toner, and preventive maintenance." },
+    { q: "Do you rent Canon Printers in Dubai?", a: "Yes! We offer a wide range of Canon Printers and photocopiers for rent in Dubai, including imageRUNNER, i-SENSYS, and imageCLASS series." },
+    { q: "What Canon models are available for rental in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, i-SENSYS MF, imageCLASS, and MAXIFY series. From compact A4 Printers to heavy-duty A3 copiers." },
+    { q: "How much does Canon Printer rental cost in Dubai?", a: "Canon Printer rental in Dubai StarIconts from AED 300/month for A4 models, with A3 enterprise copiers from AED 500-2000/month. All include free toner." },
+    { q: "Do you provide Canon Printer repair in Dubai?", a: "Yes, our certified technicians provide on-site Canon Printer repair in Dubai with 4-hour Emergency response time." },
+    { q: "Is Canon toner included in the rental price?", a: "Yes! All our Canon Printer rentals in Dubai include unlimited genuine Canon toner at no extra cost." },
+    { q: "Can I Upgrade my Canon Printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to Upgrade your Canon Printer anytime during the contract." },
+    { q: "Do you offer Canon Printer AMC in Dubai?", a: "Yes, we offer Annual Maintenance Contracts for Canon Printers covering all repairs, toner, and preventive maintenance." },
     { q: "What areas in Dubai do you serve for Canon rentals?", a: "We serve all Dubai areas including Business Bay, JLT, Deira, Marina, DIFC, Sheikh Zayed Road, and all other districts." },
   ];
 
   const canonModels = [
-    { name: "Canon imageRUNNER ADVANCE C356i", type: "A4 Color MFP", speed: "35 ppm", features: "Print, Copy, Scan, Send" },
-    { name: "Canon imageRUNNER ADVANCE 5540i", type: "A3 B&W", speed: "40 ppm", features: "High-speed, Security" },
-    { name: "Canon imageRUNNER ADVANCE C5250", type: "A3 Color", speed: "50 ppm", features: "Full Color, Professional" },
-    { name: "Canon i-SENSYS MF655Cdn", type: "A4 Color", speed: "21 ppm", features: "Compact, Network" },
+    { name: "Canon imageRUNNER ADVANCE C356i", type: "A4 Color MFP", SpeedIcon: "35 ppm", features: "Print, Copy, Scan, Send" },
+    { name: "Canon imageRUNNER ADVANCE 5540i", type: "A3 B&W", SpeedIcon: "40 ppm", features: "High-SpeedIcon, Security" },
+    { name: "Canon imageRUNNER ADVANCE C5250", type: "A3 Color", SpeedIcon: "50 ppm", features: "Full Color, Professional" },
+    { name: "Canon i-SENSYS MF655Cdn", type: "A4 Color", SpeedIcon: "21 ppm", features: "Compact, Network" },
   ];
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments - Canon Dubai",
-    "description": "Canon printer rental in Dubai. imageRUNNER, i-SENSYS, imageCLASS series with zero deposit and free toner.",
-    "url": "https://saharaprinter.com/canon-printer-dubai",
-    "telephone": "+971503823969",
+    "description": "Canon Printer rental in Dubai. imageRUNNER, i-SENSYS, imageCLASS series with zero deposit and free toner.",
+    "url": "https://saharaPrinter.com/canon-Printer-dubai",
+    "telePhoneIcon": "+971503823969",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Business Bay",
@@ -105,7 +105,7 @@ export default function CanonPrinterDubai() {
                 Canon Photocopiers <span className="text-[#f5be53]">Dubai</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl">
-                Premium Canon printer and photocopier rental in Dubai. imageRUNNER, i-SENSYS, and imageCLASS series with zero deposit and free toner.
+                Premium Canon Printer and photocopier rental in Dubai. imageRUNNER, i-SENSYS, and imageCLASS series with zero deposit and free toner.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
@@ -120,7 +120,7 @@ export default function CanonPrinterDubai() {
               <div className="absolute inset-0 bg-[#f5be53]/20 blur-[120px] rounded-full"></div>
               <div className="relative z-20 glass-card p-8 rounded-3xl overflow-hidden">
                 <img 
-                  src="/images/printer-canon-1.webp"
+                  src="/images/Printer-canon-1.webp"
                   alt="Canon Photocopier Rental Dubai"
                   className="w-full h-full object-cover rounded-2xl mix-blend-screen opacity-90"
                 />
@@ -140,7 +140,7 @@ export default function CanonPrinterDubai() {
                 <h3 className="text-lg font-bold text-white mb-2">{model.name}</h3>
                 <p className="text-[#f5be53] text-sm mb-4">{model.type}</p>
                 <div className="space-y-2 text-sm text-[#d3c5b0]">
-                  <p><span className="font-semibold">Speed:</span> {model.speed}</p>
+                  <p><span className="font-semibold">SpeedIcon:</span> {model.SpeedIcon}</p>
                   <p><span className="font-semibold">Features:</span> {model.features}</p>
                 </div>
               </div>

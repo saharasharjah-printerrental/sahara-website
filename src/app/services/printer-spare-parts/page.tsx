@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
-import { Close, ShoppingCart, Inventory, LocalShipping, Build, Speed, CheckCircle, Delete, Settings, VerifiedUser, Replay, SearchOff } from "@mui/icons-material";
+import { CloseIcon, ShoppingCartIcon, Inventory, LocalShippingIcon, BuildIcon, SpeedIcon, CheckCircleIcon, Delete, SettingsIcon, VerifiedIcon, SyncIcon } from "@/components/icons";
 
 interface Supply {
   id: string;
@@ -45,7 +45,7 @@ export default function PrinterSparePartsPage() {
   const [brandFilter, setBrandFilter] = useState("all");
   const [cart, setCart] = useState<{ supply: Supply; quantity: number }[]>([]);
   const [showCart, setShowCart] = useState(false);
-  const [paymentSettings, setPaymentSettings] = useState<{
+  const [paymentSettingsIcon, setPaymentSettingsIcon] = useState<{
     paymentGatewayEnabled: boolean;
     paymentGatewayUrl: string;
     paymentGatewayLabel: string;
@@ -67,29 +67,29 @@ export default function PrinterSparePartsPage() {
     if (storedCart) {
       setCart(JSON.parse(storedCart));
     }
-    const storedSettings = localStorage.getItem("sahara_settings");
-    if (storedSettings) {
-      const parsed = JSON.parse(storedSettings);
-      setPaymentSettings({
+    const storedSettingsIcon = localStorage.getItem("sahara_SettingsIcon");
+    if (storedSettingsIcon) {
+      const parsed = JSON.parse(storedSettingsIcon);
+      setPaymentSettingsIcon({
         paymentGatewayEnabled: parsed.paymentGatewayEnabled || false,
         paymentGatewayUrl: parsed.paymentGatewayUrl || "",
         paymentGatewayLabel: parsed.paymentGatewayLabel || "Buy Now",
       });
     }
 
-    const handleSettingsChange = () => {
-      const updated = localStorage.getItem("sahara_settings");
+    const handleSettingsIconChange = () => {
+      const updated = localStorage.getItem("sahara_SettingsIcon");
       if (updated) {
         const parsed = JSON.parse(updated);
-        setPaymentSettings({
+        setPaymentSettingsIcon({
           paymentGatewayEnabled: parsed.paymentGatewayEnabled || false,
           paymentGatewayUrl: parsed.paymentGatewayUrl || "",
           paymentGatewayLabel: parsed.paymentGatewayLabel || "Buy Now",
         });
       }
     };
-    window.addEventListener("sahara-settings-updated", handleSettingsChange);
-    return () => window.removeEventListener("sahara-settings-updated", handleSettingsChange);
+    window.addEventListener("sahara-SettingsIcon-updated", handleSettingsIconChange);
+    return () => window.removeEventListener("sahara-SettingsIcon-updated", handleSettingsIconChange);
   }, []);
 
   const addToCart = (supply: Supply) => {
@@ -183,7 +183,7 @@ export default function PrinterSparePartsPage() {
               onClick={() => setShowCart(false)}
               className="text-slate-400 hover:text-white"
             >
-              <Close />
+              <CloseIcon />
             </button>
           </div>
 
@@ -279,7 +279,7 @@ export default function PrinterSparePartsPage() {
                 Printer <span className="text-[#f5be53]">Spare Parts</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] max-w-xl">
-                Browse our complete inventory of OEM toners, drums, maintenance kits, and spare
+                Browse our complete Inventory of OEM toners, drums, maintenance kits, and spare
                 parts. Same-day delivery across UAE.
               </p>
             </div>
@@ -287,7 +287,7 @@ export default function PrinterSparePartsPage() {
               onClick={() => setShowCart(true)}
               className="hidden lg:flex items-center gap-3 glass-card px-6 py-3 rounded-full"
             >
-              <ShoppingCart className="text-[#f5be53]" />
+              <ShoppingCartIcon className="text-[#f5be53]" />
               <span className="text-white font-medium">
                 Cart ({cart.reduce((acc, item) => acc + item.quantity, 0)})
               </span>
@@ -386,11 +386,11 @@ export default function PrinterSparePartsPage() {
                         </div>
                       ) : supply.category === "Drum" ? (
                         <div className="flex flex-col items-center gap-4">
-                          <Settings className="text-6xl text-slate-600" sx={{ fontSize: 60 }} />
+                          <SettingsIcon className="text-6xl text-slate-600" style={{ fontSize: 60 }} />
                           <span className="text-slate-500 text-sm">OPC Drum</span>
                         </div>
                       ) : (
-                        <Build className="text-6xl text-slate-600" sx={{ fontSize: 60 }} />
+                        <BuildIcon className="text-6xl text-slate-600" style={{ fontSize: 60 }} />
                       )}
                     </div>
                   )}
@@ -438,14 +438,14 @@ export default function PrinterSparePartsPage() {
                     <span className="text-[#f5be53] font-bold text-lg">
                       {supply.price}
                     </span>
-                    {paymentSettings.paymentGatewayEnabled && paymentSettings.paymentGatewayUrl ? (
+                    {paymentSettingsIcon.paymentGatewayEnabled && paymentSettingsIcon.paymentGatewayUrl ? (
                       <a
-                        href={paymentSettings.paymentGatewayUrl}
+                        href={paymentSettingsIcon.paymentGatewayUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-4 py-2 rounded-lg font-medium transition-all bg-[#f5be53] text-[#412d00] hover:scale-105"
                       >
-                        {paymentSettings.paymentGatewayLabel}
+                        {paymentSettingsIcon.paymentGatewayLabel}
                       </a>
                     ) : (
                       <button
@@ -468,7 +468,7 @@ export default function PrinterSparePartsPage() {
 
           {filteredSupplies.length === 0 && (
             <div className="text-center py-16">
-              <SearchOff className="text-6xl text-slate-600 mb-4" sx={{ fontSize: 60 }} />
+              <div className="text-6xl text-slate-600 mb-4">🔍</div>
               <p className="text-slate-400 text-lg">
                 No products found matching your criteria
               </p>
@@ -483,12 +483,12 @@ export default function PrinterSparePartsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: VerifiedUser,
+                icon: VerifiedIcon,
                 title: "Genuine OEM",
                 desc: "Only original manufacturer supplies for optimal performance",
               },
               {
-                icon: LocalShipping,
+                icon: LocalShippingIcon,
                 title: "Same-Day Delivery",
                 desc: "Express delivery across Dubai, Abu Dhabi, and Sharjah",
               },
@@ -498,7 +498,7 @@ export default function PrinterSparePartsPage() {
                 desc: "Volume discounts for businesses with multiple devices",
               },
               {
-                icon: Replay,
+                icon: SyncIcon,
                 title: "Auto-Replenishment",
                 desc: "Automatic toner delivery based on usage tracking",
               },
@@ -552,7 +552,7 @@ export default function PrinterSparePartsPage() {
         onClick={() => setShowCart(true)}
         className="lg:hidden fixed bottom-24 right-6 z-40 bg-[#f5be53] text-[#412d00] px-6 py-3 rounded-full shadow-lg flex items-center gap-2"
       >
-        <ShoppingCart />
+        <ShoppingCartIcon />
         <span className="font-bold">{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
       </button>
     </main>

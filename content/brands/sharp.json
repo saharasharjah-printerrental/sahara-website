@@ -1,0 +1,9 @@
+{
+  "id": "7",
+  "name": "Sharp",
+  "slug": "sharp",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Sharp_logo.svg",
+  "description": "Sharp BP series",
+  "isActive": true,
+  "sortOrder": 7
+}

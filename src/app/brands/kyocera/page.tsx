@@ -10,13 +10,13 @@ import Image from "next/image";
 
 export default function KyoceraBrandPage() {
   const products = [
-    { name: "TASKalfa 2554ci", specs: ["25 PPM", "Color A3"], img: "/images/printer-kyocera.webp" },
-    { name: "TASKalfa 4054ci", specs: ["40 PPM", "Color A3"], img: "/images/printer-kyocera.webp" },
-    { name: "TASKalfa 5054ci", specs: ["50 PPM", "Color A3"], img: "/images/printer-kyocera.webp" },
+    { name: "TASKalfa 2554ci", specs: ["25 PPM", "Color A3"], img: "/images/Printer-kyocera.webp" },
+    { name: "TASKalfa 4054ci", specs: ["40 PPM", "Color A3"], img: "/images/Printer-kyocera.webp" },
+    { name: "TASKalfa 5054ci", specs: ["50 PPM", "Color A3"], img: "/images/Printer-kyocera.webp" },
   ];
 
   const features = [
-    { icon: "savings", title: "Lowest TCO", desc: "Industry's lowest cost per page with long-life components and ECOSYS technology." },
+    { icon: "SavingsIcon", title: "Lowest TCO", desc: "Industry's lowest cost per page with long-life components and ECOSYS technology." },
     { icon: "eco", title: "Eco-Friendly", desc: "Free from toxic chemicals, using reusable amorphous silicon drums." },
     { icon: "trusted", title: "Japanese Quality", desc: "Decades of precision engineering from Kyocera's Japanese manufacturing." },
     { icon: "hardware", title: "Durable Design", desc: "Built to last 100,000+ pages with minimal maintenance requirements." },
@@ -57,7 +57,7 @@ export default function KyoceraBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="/images/printer-kyocera.webp"
+                  src="/images/Printer-kyocera.webp"
                   alt="Kyocera TASKalfa Printer"
                   width={540}
                   height={540}
@@ -109,7 +109,7 @@ export default function KyoceraBrandPage() {
                 <div className="flex justify-between items-center py-4 border-t border-white/5">
                   {p.specs.map((s, j) => (
                     <div key={j} className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[#f5be53] text-sm">speed</span>
+                      <span className="material-symbols-outlined text-[#f5be53] text-sm">SpeedIcon</span>
                       <span className="text-xs text-[#d3c5b0]">{s}</span>
                     </div>
                   ))}
@@ -125,13 +125,13 @@ export default function KyoceraBrandPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Total Cost of Ownership</h2>
-            <p className="text-[#d3c5b0] max-w-2xl mx-auto">Kyocera saves you money over the lifetime of your printer</p>
+            <p className="text-[#d3c5b0] max-w-2xl mx-auto">Kyocera saves you money over the lifetime of your Printer</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="glass-card rounded-[32px] p-8 text-center">
               <div className="text-5xl font-bold text-[#f5be53] mb-2">70%</div>
               <p className="text-white font-medium">Lower Cost Per Page</p>
-              <p className="text-sm text-[#d3c5b0] mt-2">Compared to traditional laser printers</p>
+              <p className="text-sm text-[#d3c5b0] mt-2">Compared to traditional laser Printers</p>
             </div>
             <div className="glass-card rounded-[32px] p-8 text-center">
               <div className="text-5xl font-bold text-[#f5be53] mb-2">100K</div>
@@ -166,3 +166,4 @@ export default function KyoceraBrandPage() {
     </main>
   );
 }
+

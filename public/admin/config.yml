@@ -1,0 +1,206 @@
+# ============================================
+# SAHARA WEBSITE - DECAP CMS CONFIG
+# ============================================
+# Decap CMS (formerly Netlify CMS)
+# Git-based content management
+# ============================================
+
+backend:
+  name: git-gateway
+  repo: your-github-username/sahara-website
+  branch: main
+  base_backend: git-gateway
+
+media_folder: "public/images"
+public_folder: "/images"
+
+# ============================================
+# COLLECTIONS - Content Types
+# ============================================
+
+collections:
+  # ----------------------------------------
+  # PRODUCTS
+  # ----------------------------------------
+  - name: "products"
+    label: "Products"
+    folder: "content/products"
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Name", name: "name", widget: "string", required: true}
+      - {label: "Brand", name: "brand", widget: "string", default: ""}
+      - {label: "Category", name: "category", widget: "string", default: ""}
+      - {label: "Condition", name: "condition", widget: "select", options: ["New", "Refurbished"], default: "New"}
+      - {label: "Sale Price", name: "priceSale", widget: "string", default: ""}
+      - {label: "Rental Price", name: "priceRental", widget: "string", default: ""}
+      - {label: "Specs", name: "specs", widget: "text", default: ""}
+      - {label: "Image", name: "image", widget: "string", default: ""}
+      - {label: "Active", name: "isActive", widget: "boolean", default: true}
+      - {label: "Featured", name: "isFeatured", widget: "boolean", default: false}
+
+  # ----------------------------------------
+  # BRANDS
+  # ----------------------------------------
+  - name: "brands"
+    label: "Brands"
+    folder: "content/brands"
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Name", name: "name", widget: "string", required: true}
+      - {label: "Slug", name: "slug", widget: "string", required: false}
+      - {label: "Logo URL", name: "logoUrl", widget: "string", default: ""}
+      - {label: "Description", name: "description", widget: "text", default: ""}
+      - {label: "Active", name: "isActive", widget: "boolean", default: true}
+      - {label: "Sort Order", name: "sortOrder", widget: "number", default: 0}
+
+  # ----------------------------------------
+  # SUPPLIES (Toner, Ink, Parts)
+  # ----------------------------------------
+  - name: "supplies"
+    label: "Supplies"
+    folder: "content/supplies"
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Name", name: "name", widget: "string", required: true}
+      - {label: "Brand", name: "brand", widget: "string", default: ""}
+      - {label: "Category", name: "category", widget: "select", options: ["Toner", "Drum", "Ink", "Parts"], default: "Toner"}
+      - {label: "Compatible Models", name: "compatibleModels", widget: "string", default: ""}
+      - {label: "Color", name: "color", widget: "string", default: ""}
+      - {label: "Yield", name: "yield", widget: "string", default: ""}
+      - {label: "Price", name: "price", widget: "string", default: ""}
+      - {label: "Stock", name: "stock", widget: "number", default: 0}
+      - {label: "Image", name: "image", widget: "string", default: ""}
+      - {label: "Active", name: "isActive", widget: "boolean", default: true}
+
+  # ----------------------------------------
+  # FAQS
+  # ----------------------------------------
+  - name: "faqs"
+    label: "FAQs"
+    folder: "content/faqs"
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Page Slug", name: "pageSlug", widget: "string", default: ""}
+      - {label: "Question", name: "question", widget: "string", required: true}
+      - {label: "Answer", name: "answer", widget: "text", required: true}
+      - {label: "Sort Order", name: "sortOrder", widget: "number", default: 0}
+      - {label: "Active", name: "isActive", widget: "boolean", default: true}
+
+  # ----------------------------------------
+  # BLOGS (Markdown with frontmatter)
+  # ----------------------------------------
+  - name: "blogs"
+    label: "Blog Posts"
+    folder: "content/blogs"
+    create: true
+    format: yaml-frontmatter
+    extension: md
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Slug", name: "slug", widget: "string", required: true}
+      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
+      - {label: "Featured Image", name: "image", widget: "string", required: false}
+      - {label: "Author", name: "author", widget: "string", default: "Sahara Printer"}
+      - {label: "Category", name: "category", widget: "string", default: ""}
+      - {label: "Published Date", name: "publishedAt", widget: "datetime", required: false}
+      - {label: "Active", name: "isActive", widget: "boolean", default: true}
+      - {label: "Content", name: "body", widget: "markdown", required: true}
+
+  # ----------------------------------------
+  # BANNERS
+  # ----------------------------------------
+  - name: "banners"
+    label: "Banners"
+    folder: "content/banners"
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Title", name: "title", widget: "string", default: ""}
+      - {label: "Subtitle", name: "subtitle", widget: "string", default: ""}
+      - {label: "CTA Text", name: "ctaText", widget: "string", default: "Learn More"}
+      - {label: "CTA Link", name: "ctaLink", widget: "string", default: "#"}
+      - {label: "Image URL", name: "imageUrl", widget: "string", default: ""}
+      - {label: "Active", name: "isActive", widget: "boolean", default: true}
+      - {label: "Sort Order", name: "sortOrder", widget: "number", default: 0}
+
+  # ----------------------------------------
+  # TESTIMONIALS
+  # ----------------------------------------
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/testimonials"
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Name", name: "name", widget: "string", required: true}
+      - {label: "Role", name: "role", widget: "string", default: ""}
+      - {label: "Company", name: "company", widget: "string", default: ""}
+      - {label: "Testimonial", name: "text", widget: "text", required: true}
+      - {label: "Rating", name: "rating", widget: "select", options: [1, 2, 3, 4, 5], default: 5}
+      - {label: "Avatar URL", name: "image_url", widget: "string", default: ""}
+      - {label: "Active", name: "is_active", widget: "boolean", default: true}
+      - {label: "Sort Order", name: "sort_order", widget: "number", default: 0}
+
+  # ----------------------------------------
+  # LOGOS (Client Logos)
+  # ----------------------------------------
+  - name: "logos"
+    label: "Client Logos"
+    folder: "content/logos"
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", default: ""}
+      - {label: "Name", name: "name", widget: "string", required: true}
+      - {label: "Image URL", name: "imageUrl", widget: "string", default: ""}
+      - {label: "Alt Text", name: "imageAlt", widget: "string", default: ""}
+      - {label: "Link", name: "link", widget: "string", default: ""}
+      - {label: "Active", name: "isActive", widget: "boolean", default: true}
+      - {label: "Sort Order", name: "sortOrder", widget: "number", default: 0}
+
+  # ----------------------------------------
+  # INQUIRIES (Read-only - form submissions)
+  # ----------------------------------------
+  - name: "inquiries"
+    label: "Inquiries"
+    folder: "content/inquiries"
+    create: false
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string", read_only: true}
+      - {label: "Name", name: "name", widget: "string", read_only: true}
+      - {label: "Email", name: "email", widget: "string", read_only: true}
+      - {label: "Phone", name: "phone", widget: "string", read_only: true}
+      - {label: "Company", name: "company", widget: "string", read_only: true}
+      - {label: "Service", name: "service", widget: "string", read_only: true}
+      - {label: "Message", name: "message", widget: "text", read_only: true}
+      - {label: "Status", name: "status", widget: "select", options: ["new", "contacted", "completed", "archived"], default: "new"}
+      - {label: "Created", name: "createdAt", widget: "datetime", read_only: true}

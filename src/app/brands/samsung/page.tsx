@@ -9,16 +9,16 @@ import Image from "next/image";
 
 export default function SamsungBrandPage() {
   const products = [
-    { name: "ProXpress SL-M3820ND", specs: ["38 PPM", "1200 DPI"], img: "/images/printer-samsung.webp" },
-    { name: "MultiXpress SL-X7500", specs: ["50 PPM", "Color"], img: "/images/printer-samsung.webp" },
-    { name: "Smart UX Panel", specs: ["Android Based", "Cloud Ready"], img: "/images/printer-samsung.webp" },
+    { name: "ProXpress SL-M3820ND", specs: ["38 PPM", "1200 DPI"], img: "/images/Printer-samsung.webp" },
+    { name: "MultiXpress SL-X7500", specs: ["50 PPM", "Color"], img: "/images/Printer-samsung.webp" },
+    { name: "Smart UX Panel", specs: ["Android Based", "CloudIcon Ready"], img: "/images/Printer-samsung.webp" },
   ];
 
   const features = [
     { icon: "memory", title: "Smart UX", desc: "Android-based smart interface with intuitive touchscreen controls." },
-    { icon: "cloud", title: "Cloud Ready", desc: "Seamless integration with cloud services and mobile printing." },
-    { icon: "speed", title: "High Speed", desc: "Industry-leading print speeds up to 60 PPM for busy offices." },
-    { icon: "security", title: "Samsung Security", desc: "Enterprise-grade security features including chip-level encryption." },
+    { icon: "CloudIcon", title: "CloudIcon Ready", desc: "Seamless integration with CloudIcon services and mobile printing." },
+    { icon: "SpeedIcon", title: "High SpeedIcon", desc: "Industry-leading Print SpeedIcons up to 60 PPM for busy offices." },
+    { icon: "Security", title: "Samsung Security", desc: "Enterprise-grade Security features including chip-level encryption." },
   ];
 
   return (
@@ -41,7 +41,7 @@ export default function SamsungBrandPage() {
                 Samsung Authorized <span className="text-[#f5be53]">Partner</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
-                Experience smart printing with Samsung's innovative technology. Android-based interfaces and enterprise security for modern businesses.
+                Experience smart printing with Samsung's innovative technology. Android-based interfaces and enterprise Security for modern businesses.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="/get-quote?brand=samsung" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
@@ -56,7 +56,7 @@ export default function SamsungBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="/images/printer-samsung.webp"
+                  src="/images/Printer-samsung.webp"
                   alt="Samsung ProXpress Printer"
                   width={800}
                   height={600}
@@ -108,7 +108,7 @@ export default function SamsungBrandPage() {
                 <div className="flex justify-between items-center py-4 border-t border-white/5">
                   {p.specs.map((s, j) => (
                     <div key={j} className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[#f5be53] text-sm">speed</span>
+                      <span className="material-symbols-outlined text-[#f5be53] text-sm">SpeedIcon</span>
                       <span className="text-xs text-[#d3c5b0]">{s}</span>
                     </div>
                   ))}
@@ -134,8 +134,8 @@ export default function SamsungBrandPage() {
             </div>
             <div className="glass-card rounded-[32px] p-8">
               <div className="text-4xl font-bold text-[#f5be53] mb-4">60 PPM</div>
-              <h3 className="text-xl font-bold text-white mb-2">Maximum Speed</h3>
-              <p className="text-[#d3c5b0]">Industry-leading print speeds for high-volume offices.</p>
+              <h3 className="text-xl font-bold text-white mb-2">Maximum SpeedIcon</h3>
+              <p className="text-[#d3c5b0]">Industry-leading Print SpeedIcons for high-volume offices.</p>
             </div>
             <div className="glass-card rounded-[32px] p-8">
               <div className="text-4xl font-bold text-[#f5be53] mb-4">AES-256</div>
@@ -165,3 +165,4 @@ export default function SamsungBrandPage() {
     </main>
   );
 }
+

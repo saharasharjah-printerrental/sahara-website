@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "name": "Xerox",
+  "slug": "xerox",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Xerox_logo.svg",
+  "description": "Xerox AltaLink and VersaLink",
+  "isActive": true,
+  "sortOrder": 3
+}

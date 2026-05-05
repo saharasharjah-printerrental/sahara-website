@@ -9,16 +9,16 @@ import Image from "next/image";
 
 export default function LexmarkBrandPage() {
   const products = [
-    { name: "Lexmark MS821dn", specs: ["55 PPM", "1200 DPI"], img: "/images/printer-lexmark.webp" },
-    { name: "Lexmark CX825dte", specs: ["55 PPM", "Color"], img: "/images/printer-lexmark.webp" },
-    { name: "Lexmark B3442dw", specs: ["42 PPM", "Wireless"], img: "/images/printer-lexmark.webp" },
+    { name: "Lexmark MS821dn", specs: ["55 PPM", "1200 DPI"], img: "/images/Printer-lexmark.webp" },
+    { name: "Lexmark CX825dte", specs: ["55 PPM", "Color"], img: "/images/Printer-lexmark.webp" },
+    { name: "Lexmark B3442dw", specs: ["42 PPM", "Wireless"], img: "/images/Printer-lexmark.webp" },
   ];
 
   const features = [
     { icon: "factory", title: "American Heritage", desc: "Proudly designed and manufactured in the USA with 30+ years of innovation." },
     { icon: "recycling", title: "Lexmark Circle", desc: "Free recycling program for used toner cartridges and imaging units." },
-    { icon: "print", title: "Precision Printing", desc: "Lexmark's exclusive Unison toner delivers consistent, high-quality output." },
-    { icon: "enterprise", title: "Enterprise Ready", desc: "Robust security features and enterprise integration capabilities." },
+    { icon: "Print", title: "Precision Printing", desc: "Lexmark's exclusive Unison toner delivers consistent, high-quality output." },
+    { icon: "enterprise", title: "Enterprise Ready", desc: "Robust Security features and enterprise integration capabilities." },
   ];
 
   return (
@@ -56,7 +56,7 @@ export default function LexmarkBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="/images/printer-lexmark.webp"
+                  src="/images/Printer-lexmark.webp"
                   alt="Lexmark CX825dte Printer"
                   width={600}
                   height={600}
@@ -108,7 +108,7 @@ export default function LexmarkBrandPage() {
                 <div className="flex justify-between items-center py-4 border-t border-white/5">
                   {p.specs.map((s, j) => (
                     <div key={j} className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[#f5be53] text-sm">speed</span>
+                      <span className="material-symbols-outlined text-[#f5be53] text-sm">SpeedIcon</span>
                       <span className="text-xs text-[#d3c5b0]">{s}</span>
                     </div>
                   ))}
@@ -140,7 +140,7 @@ export default function LexmarkBrandPage() {
             <div className="glass-card rounded-[32px] p-8">
               <div className="text-4xl font-bold text-[#f5be53] mb-4">Unison</div>
               <h3 className="text-xl font-bold text-white mb-2">Toner Technology</h3>
-              <p className="text-[#d3c5b0]">Exclusive formula for consistent, high-quality prints every time.</p>
+              <p className="text-[#d3c5b0]">Exclusive formula for consistent, high-quality Prints every time.</p>
             </div>
           </div>
         </div>
@@ -165,3 +165,4 @@ export default function LexmarkBrandPage() {
     </main>
   );
 }
+

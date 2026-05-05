@@ -9,22 +9,22 @@ export const metadata: Metadata = {
   description:
     "Printer and photocopier rental in Fujairah from AED 250/month. Zero deposit, free toner. Serving Fujairah City, Dibba, Kalba, Fujairah Free Trade Zone. Canon & Kyocera.",
   keywords: [
-    "printer rental fujairah",
+    "Printer rental fujairah",
     "photocopier rental fujairah",
     "copier lease fujairah",
-    "fujairah free zone printer rental",
+    "fujairah free zone Printer rental",
     "dibba copier rental",
-    "zero deposit printer fujairah",
+    "zero deposit Printer fujairah",
     "canon kyocera rental fujairah",
     "office equipment rental fujairah",
-    "printer lease eastern emirates",
+    "Printer lease Eastern emirates",
   ],
-  alternates: { canonical: "https://saharaprinter.com/printer-rental-fujairah" },
+  alternates: { canonical: "https://saharaPrinter.com/Printer-rental-fujairah" },
   openGraph: {
     title: "Printer Rental Fujairah | AED 250/mo – Sahara Office Equipments",
     description:
-      "Rent Canon or Kyocera printers in Fujairah from AED 250/month. Zero deposit, free toner. Fujairah City, Dibba, Kalba, Free Trade Zone.",
-    url: "https://saharaprinter.com/printer-rental-fujairah",
+      "Rent Canon or Kyocera Printers in Fujairah from AED 250/month. Zero deposit, free toner. Fujairah City, Dibba, Kalba, Free Trade Zone.",
+    url: "https://saharaPrinter.com/Printer-rental-fujairah",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -38,9 +38,9 @@ const localBusinessSchema = {
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Printer and photocopier rental in Fujairah from AED 250/month. Zero deposit, free OEM toner, and on-site support across Fujairah City, Dibba, Kalba, and Free Trade Zone.",
-  url: "https://saharaprinter.com/printer-rental-fujairah",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
+  url: "https://saharaPrinter.com/Printer-rental-fujairah",
+  telePhoneIcon: "+971503823969",
+  EmailIcon: "info@saharaPrinter.com",
   foundingDate: "2012",
   address: {
     "@type": "PostalAddress",
@@ -64,7 +64,7 @@ const localBusinessSchema = {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
       opens: "08:00",
-      closes: "20:00",
+      CloseIcons: "20:00",
     },
   ],
   hasOfferCatalog: {
@@ -81,20 +81,20 @@ const localBusinessSchema = {
 
 const faqsData = [
   {
-    q: "How much does printer rental cost in Fujairah?",
-    a: "Printer rental in Fujairah starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise high-volume devices start at AED 1,000/month. All Fujairah plans include zero deposit, free toner, free delivery, and on-site support.",
+    q: "How much does Printer rental cost in Fujairah?",
+    a: "Printer rental in Fujairah StarIconts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise high-volume devices StarIcont at AED 1,000/month. All Fujairah plans include zero deposit, free toner, free delivery, and on-site support.",
   },
   {
     q: "What is your response time for Fujairah clients?",
-    a: "We provide weekly scheduled service visits for Fujairah rental clients. For emergency breakdowns, we dispatch a technician within 4–6 hours to Fujairah City, Dibba, Kalba, and the Fujairah Free Trade Zone. If same-day repair is not possible, a replacement unit is delivered.",
+    a: "We provide weekly Scheduled service visits for Fujairah rental clients. For Emergency breakdowns, we dispatch a technician within 4–6 hours to Fujairah City, Dibba, Kalba, and the Fujairah Free Trade Zone. If same-day repair is not possible, a replacement unit is delivered.",
   },
   {
     q: "Do you serve the Fujairah Free Trade Zone?",
     a: "Yes. Fujairah Free Trade Zone (FFTZ) clients are served with the same zero-deposit, free-toner plans. We handle free zone documentation for equipment leases and can invoice in USD or AED as preferred.",
   },
   {
-    q: "Is there a deposit for printer rental in Fujairah?",
-    a: "No deposit required. All Fujairah printer rental plans are zero-deposit. You only pay your first month to start — ideal for new businesses in Fujairah's growing industrial and free zone sectors.",
+    q: "Is there a deposit for Printer rental in Fujairah?",
+    a: "No deposit required. All Fujairah Printer rental plans are zero-deposit. You only pay your first month to StarIcont — ideal for new businesses in Fujairah's growing industrial and free zone sectors.",
   },
   {
     q: "Which brands do you rent in Fujairah?",
@@ -102,11 +102,11 @@ const faqsData = [
   },
   {
     q: "Is toner included in the Fujairah rental plan?",
-    a: "Yes. All Fujairah plans include unlimited genuine Canon or Kyocera OEM toner at no extra charge. We monitor toner remotely and deliver replacements proactively — no emergency orders needed.",
+    a: "Yes. All Fujairah plans include unlimited genuine Canon or Kyocera OEM toner at no extra charge. We monitor toner remotely and deliver replacements proactively — no Emergency orders needed.",
   },
   {
     q: "Do you serve Dibba and Kalba?",
-    a: "Yes. Dibba Al Fujairah and Kalba are within our regular Fujairah service coverage. These East Coast areas receive weekly scheduled maintenance and are included in our emergency response coverage.",
+    a: "Yes. Dibba Al Fujairah and Kalba are within our regular Fujairah service coverage. These East Coast areas receive weekly Scheduled maintenance and are included in our Emergency response coverage.",
   },
   {
     q: "How long are your Fujairah rental contracts?",
@@ -114,19 +114,19 @@ const faqsData = [
   },
   {
     q: "Do you provide network setup in Fujairah?",
-    a: "Yes. Free network and Wi-Fi configuration is included with every Fujairah installation. Our technician connects the printer to your office network and sets up scan-to-email, mobile printing, and user authentication — all included.",
+    a: "Yes. Free network and Wi-Fi configuration is included with every Fujairah installation. Our technician connects the Printer to your office network and sets up scan-to-EmailIcon, mobile printing, and user authentication — all included.",
   },
   {
-    q: "Can I upgrade my printer during the Fujairah contract?",
+    q: "Can I Upgrade my Printer during the Fujairah contract?",
     a: "Yes. Upgrade to a higher-capacity or colour model at any time during your Fujairah contract without penalty. Useful for growing businesses near Fujairah Port and the industrial zone.",
   },
   {
-    q: "Do you offer short-term printer rental in Fujairah for construction sites?",
-    a: "Yes. Construction site offices and project-based businesses near Fujairah can rent printers from 1 month upward. We deliver, install, and collect — making it suitable for time-limited projects. All equipment includes free toner.",
+    q: "Do you offer short-term Printer rental in Fujairah for construction sites?",
+    a: "Yes. Construction site offices and project-based businesses near Fujairah can rent Printers from 1 month upward. We deliver, install, and collect — making it suitable for time-limited projects. All equipment includes free toner.",
   },
   {
-    q: "What is the cost-per-page for rented printers in Fujairah?",
-    a: "Black-and-white A4 printing on our rented Kyocera/Canon devices in Fujairah costs approximately 1–2 fils per page. Desktop consumer printers cost 8–15 fils per page. For an office printing 3,000 pages/month, that saves AED 180–390/month in consumables.",
+    q: "What is the cost-per-page for rented Printers in Fujairah?",
+    a: "Black-and-white A4 printing on our rented Kyocera/Canon devices in Fujairah costs approximately 1–2 fils per page. Desktop consumer Printers cost 8–15 fils per page. For an office printing 3,000 pages/month, that saves AED 180–390/month in consumables.",
   },
 ];
 
@@ -144,8 +144,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
-    { "@type": "ListItem", position: 2, name: "Printer Rental Fujairah", item: "https://saharaprinter.com/printer-rental-fujairah" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaPrinter.com" },
+    { "@type": "ListItem", position: 2, name: "Printer Rental Fujairah", item: "https://saharaPrinter.com/Printer-rental-fujairah" },
   ],
 };
 
@@ -161,7 +161,7 @@ const pricingTiers = [
       "Print, copy, scan",
       "Free genuine OEM toner",
       "On-site support included",
-      "4–6hr emergency response",
+      "4–6hr Emergency response",
     ],
   },
   {
@@ -174,7 +174,7 @@ const pricingTiers = [
       "35–55 ppm A3 & A4 mono",
       "Print, copy, scan, fax",
       "Colour option available",
-      "Scan to email / folder",
+      "Scan to EmailIcon / folder",
       "Free network setup",
       "Same-day replacement guarantee",
     ],
@@ -188,7 +188,7 @@ const pricingTiers = [
       "Canon imageRUNNER C5560i",
       "60–100 ppm A3 colour",
       "Staple, booklet finishers",
-      "Secure print, user auth",
+      "Secure Print, user auth",
       "50,000+ pages/month capacity",
       "Dedicated account manager",
     ],
@@ -242,7 +242,7 @@ export default function PrinterRentalFujairah() {
                 <span className="text-[#f5be53]">Fujairah</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
-                Canon &amp; Kyocera printer and photocopier rental in Fujairah from AED 250/month. Zero deposit,
+                Canon &amp; Kyocera Printer and photocopier rental in Fujairah from AED 250/month. Zero deposit,
                 free toner, and on-site support across Fujairah City, Dibba, Kalba, and FFTZ.
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
@@ -292,7 +292,7 @@ export default function PrinterRentalFujairah() {
             </p>
             <p className="text-white text-lg leading-relaxed">
               Printer rental in Fujairah is a monthly service from{" "}
-              <strong className="text-[#f5be53]">AED 250/month</strong> providing Canon or Kyocera printers
+              <strong className="text-[#f5be53]">AED 250/month</strong> providing Canon or Kyocera Printers
               with toner, maintenance, and repairs included. Sahara Office Equipment Trading LLC has served UAE
               businesses since 2012 and covers Fujairah City, Dibba, Kalba, and FFTZ with{" "}
               <strong className="text-[#f5be53]">zero deposit</strong>, weekly maintenance visits, and free
@@ -330,26 +330,26 @@ export default function PrinterRentalFujairah() {
             Printer Rental in Fujairah — Serving the East Coast
           </h2>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Fujairah's economy is centred around Fujairah Port — one of the world's largest bunkering hubs —
+            Fujairah's economy is centred around Fujairah Port — one of the world's largest bunkering HubIcons —
             along with oil storage, logistics, fishing, and a growing tourism sector in Dibba and Khor Fakkan.
             These industries generate significant documentation requirements: shipping manifests, logistics forms,
             compliance certificates, and administrative paperwork.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Sahara's printer rental in Fujairah provides these businesses with reliable Canon and Kyocera equipment
+            Sahara's Printer rental in Fujairah provides these businesses with reliable Canon and Kyocera equipment
             delivered and installed within 24–48 hours. The zero-deposit model is particularly valuable for new
             Fujairah Free Trade Zone setups and construction project offices that need documentation infrastructure
             immediately without capital commitment.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Dibba Al Fujairah and Kalba — on the East Coast — are included in our weekly scheduled service
+            Dibba Al Fujairah and Kalba — on the East Coast — are included in our weekly Scheduled service
             coverage. Emergency response to these more remote locations is within 4–6 hours. For businesses in
             these areas that previously had no local service provider, Sahara fills an important gap.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             Our rented devices deliver A4 black-and-white output at{" "}
             <strong className="text-white">1–2 fils per page</strong> — compared to 8–15 fils for desktop consumer
-            printers. For Fujairah logistics businesses printing shipping and port documentation daily, this
+            Printers. For Fujairah logistics businesses printing shipping and port documentation daily, this
             difference is substantial over a 12-month contract.
           </p>
         </div>
@@ -413,7 +413,7 @@ export default function PrinterRentalFujairah() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Areas We Serve in Fujairah</h2>
           <p className="text-[#d3c5b0] mb-8">
-            Weekly scheduled visits. Emergency response within 4–6 hours across the Emirate.
+            Weekly Scheduled visits. Emergency response within 4–6 hours across the Emirate.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {fujairahAreas.map((area, i) => (
@@ -492,3 +492,4 @@ export default function PrinterRentalFujairah() {
     </main>
   );
 }
+

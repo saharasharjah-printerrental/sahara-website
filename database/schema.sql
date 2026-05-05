@@ -124,6 +124,34 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 
 -- ============================================
+-- TESTIMONIALS TABLE
+-- ============================================
+CREATE TABLE IF NOT EXISTS testimonials (
+  id          TEXT    PRIMARY KEY,
+  name        TEXT    NOT NULL,
+  role        TEXT,
+  company     TEXT,
+  text        TEXT    NOT NULL,
+  rating      INTEGER NOT NULL DEFAULT 5 CHECK (rating BETWEEN 1 AND 5),
+  image_url   TEXT,
+  is_active   INTEGER NOT NULL DEFAULT 1,
+  sort_order  INTEGER NOT NULL DEFAULT 0,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
+  updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_testimonials_active_sort
+  ON testimonials(is_active, sort_order);
+
+-- ============================================
+-- SEED DATA - TESTIMONIALS
+-- ============================================
+INSERT OR REPLACE INTO testimonials (id, name, role, company, text, rating, image_url, is_active, sort_order) VALUES
+('1', 'Marcus Thorne', 'Architectural Lead', 'Studio 91', 'Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!', 5, '', 1, 1),
+('2', 'Sarah Jenkins', 'Operations Manager', 'TechFlow Solutions', 'The printer rental program saved us 40% on operational costs this quarter. Professional and reliable.', 5, '', 1, 2),
+('3', 'David Chen', 'IT Director', 'DataCore Systems', 'Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara.', 5, '', 1, 3);
+
+-- ============================================
 -- SEED DATA - BRANDS
 -- ============================================
 INSERT OR REPLACE INTO brands (id, name, slug, logoUrl, description, isActive, sortOrder) VALUES

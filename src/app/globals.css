@@ -16,9 +16,6 @@
   --outline: #9c8f7c;
 }
 
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
 
 .glass-card {
   background: rgba(42, 53, 72, 0.4);
@@ -51,19 +48,32 @@
   scrollbar-width: none;
 }
 
+.hero-bg {
+  background-image: url('/images/hero-bg.webp');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.brand-logo {
+  filter: brightness(0) invert(1);
+}
+
 @keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - 0.75rem)); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 1.5rem)); }
 }
 
 @keyframes carousel {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 2rem)); }
+  100% { transform: translateX(calc(-50% - 1.5rem)); }
 }
 
 .animate-infinite-scroll {
   animation: scroll 30s linear infinite;
   will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .animate-infinite-scroll:hover {
@@ -73,21 +83,36 @@
 .animate-carousel {
   animation: carousel 25s linear infinite;
   will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .animate-carousel:hover {
   animation-play-state: paused;
 }
 
+@keyframes float-loop {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(0.5deg); }
+  66% { transform: translateY(-6px) rotate(-0.5deg); }
+}
+
+.float-loop {
+  animation: float-loop 8s ease-in-out infinite;
+  will-change: transform;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .animate-infinite-scroll,
-  .animate-carousel {
+  .animate-carousel,
+  .float-loop {
     animation: none;
   }
 }
 
 body {
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
   background-color: #071325;
   color: #d7e3fc;
 }
@@ -193,7 +218,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Sora', sans-serif;
+  font-family: var(--font-sora), 'Sora', sans-serif;
 }
 
 /* Safe area for mobile devices */

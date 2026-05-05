@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "name": "Canon Toner C-EXV 18",
+  "brand": "Canon",
+  "category": "Toner",
+  "compatibleModels": "imageRUNNER C2380, C2580",
+  "color": "Black",
+  "yield": "25,000 pages",
+  "price": "AED 450",
+  "stock": 50,
+  "image": "",
+  "isActive": true
+}

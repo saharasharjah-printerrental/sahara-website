@@ -1,0 +1,9 @@
+{
+  "id": "5",
+  "name": "Kyocera",
+  "slug": "kyocera",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kyocera_logo.svg",
+  "description": "Kyocera TASKalfa series",
+  "isActive": true,
+  "sortOrder": 5
+}

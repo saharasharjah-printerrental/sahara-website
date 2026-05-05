@@ -1,0 +1,62 @@
+import type { MetadataRoute } from 'next';
+
+export const runtime = 'edge';
+
+const SITE = 'https://www.saharaprinter.com';
+const LASTMOD = '2026-04-15';
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    { url: SITE, lastModified: LASTMOD, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${SITE}/services`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/services/printer-rental`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/services/toner`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/services/repair`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/services/sales`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/services/amc`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/services/photocopier-rental`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/services/printer-spare-parts`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/products`, lastModified: LASTMOD, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE}/locations`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/locations/dubai`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/locations/sharjah`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/locations/abu-dhabi`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/locations/ajman`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}/locations/rak`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}/printer-rental-dubai`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/photocopier-rental-sharjah`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/printer-rental-abu-dhabi`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/copier-lease-uae`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/printer-rental-al-ain`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/printer-rental-rak`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/printer-rental-fujairah`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/printer-repair-dubai`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/canon-printer-dubai`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/hp-printer-abu-dhabi`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs`, lastModified: LASTMOD, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${SITE}/blogs/how-to-choose-the-best-printer-rental-dubai-service`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/the-problem-we-solve`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/what-a-copier-rental-service-must-deliver-to-a-client`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/why-a-company-chooses-copier-rental-service-over-buying-a-copier`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/total-cost-of-printer-ownership`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/video-walkthrough-solving-canon-printer-problems`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/the-hidden-cost-of-your-office-copier`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/blogs/stop-wasting-money-on-printing-your-guide-to-smarter-office-habits`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/about`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/brands/hp`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/brands/canon`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/brands/xerox`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/brands/ricoh`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/brands/kyocera`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/brands/brother`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/brands/samsung`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/brands/lexmark`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE}/our-clients`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}/rental-calculator`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}/contact`, lastModified: LASTMOD, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/get-quote`, lastModified: LASTMOD, changeFrequency: 'weekly', priority: 0.9 },
+  ];
+}

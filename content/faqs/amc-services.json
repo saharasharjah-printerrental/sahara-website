@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "pageSlug": "printer-rental",
+  "question": "Do you provide AMC services?",
+  "answer": "Yes, we offer Annual Maintenance Contracts covering toner, parts, labor, and preventive maintenance. AMC clients get priority scheduling and faster response times.",
+  "sortOrder": 3,
+  "isActive": true
+}

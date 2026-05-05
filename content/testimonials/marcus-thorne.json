@@ -1,0 +1,11 @@
+{
+  "id": "1",
+  "name": "Marcus Thorne",
+  "role": "Architectural Lead",
+  "company": "Studio 91",
+  "text": "Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!",
+  "rating": 5,
+  "image_url": "",
+  "is_active": true,
+  "sort_order": 1
+}

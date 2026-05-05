@@ -1,0 +1,9 @@
+{
+  "id": "6",
+  "name": "Brother",
+  "slug": "brother",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Brother_Logo.svg",
+  "description": "Brother laser and inkjet",
+  "isActive": true,
+  "sortOrder": 6
+}
