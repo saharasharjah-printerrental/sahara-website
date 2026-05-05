@@ -5,16 +5,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import { AccountBalanceIcon, ScheduleIcon, Upgrade, BuildIcon, Inventory2Icon, Cancel, ExpandMoreIcon } from "@/components/icons";
+import { AccountBalance, Schedule, Upgrade, Build, Inventory2, Cancel, ExpandMore } from "@mui/icons-material";
 
 export default function CopierLeaseUAE() {
-  const [SettingsIcon, setSettingsIcon] = useState<any>(null);
+  const [settings, setSettings] = useState<any>(null);
   const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_SettingsIcon");
+    const stored = localStorage.getItem("sahara_settings");
     if (stored) {
-      setSettingsIcon(JSON.parse(stored));
+      setSettings(JSON.parse(stored));
     }
     
     const faqStored = localStorage.getItem("sahara_faqs");
@@ -30,10 +30,10 @@ export default function CopierLeaseUAE() {
   }, []);
 
   const defaultFaqs = [
-    { q: "What is the difference between copier lease and rental?", a: "Copier lease is a long-term financing option (typically 2-5 years) where you essentially finance the machine with the option to own it at the end. Rental is a shorter-term commitment with more flexibility to return or Upgrade." },
+    { q: "What is the difference between copier lease and rental?", a: "Copier lease is a long-term financing option (typically 2-5 years) where you essentially finance the machine with the option to own it at the end. Rental is a shorter-term commitment with more flexibility to return or upgrade." },
     { q: "What are the tax advantages of leasing in UAE?", a: "Lease payments are treated as operating expenses, which can be deducted from taxable income. This provides better cash flow and tax benefits compared to capital expenditure." },
-    { q: "Can I Upgrade my leased copier?", a: "Yes! Our lease agreements include Upgrade options. You can Upgrade to a newer model during the lease period, often without additional costs." },
-    { q: "What happens at the end of the lease term?", a: "At the end of your lease term, you can either return the equipment, purchase it at a residual value, or Upgrade to a newer model." },
+    { q: "Can I upgrade my leased copier?", a: "Yes! Our lease agreements include upgrade options. You can upgrade to a newer model during the lease period, often without additional costs." },
+    { q: "What happens at the end of the lease term?", a: "At the end of your lease term, you can either return the equipment, purchase it at a residual value, or upgrade to a newer model." },
     { q: "Do you offer zero deposit leases?", a: "Yes! We offer competitive lease options with zero or minimal deposits for qualified businesses." },
     { q: "Which brands are available for lease?", a: "We lease all major brands including Canon, Kyocera, HP, Xerox, Ricoh, Sharp, Brother, and Konica Minolta." },
     { q: "How long are your typical lease agreements?", a: "Our lease terms typically range from 2-5 years. We offer flexible terms to match your business requirements." },
@@ -78,9 +78,10 @@ export default function CopierLeaseUAE() {
   };
 
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+    <main className="min-h-screen bg-[#071325]">
       <Header />
       
       {/* Hero */}
@@ -142,12 +143,12 @@ export default function CopierLeaseUAE() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: AccountBalanceIcon, title: "Tax Advantages", desc: "Lease payments are operating expenses, offering tax benefits over capital purchase." },
-              { icon: ScheduleIcon, title: "Flexible Terms", desc: "Choose lease terms from 2-5 years with customizable payment structures." },
-              { icon: Upgrade, title: "Upgrade Included", desc: "Stay current with technology through easy Upgrades during the lease." },
-              { icon: BuildIcon, title: "Zero Maintenance Costs", desc: "All repairs, parts, and servicing included throughout the lease period." },
-              { icon: Inventory2Icon, title: "Free Toner", desc: "Unlimited genuine toner included for the entire lease duration." },
-              { icon: Cancel, title: "No Exit Fees", desc: "Flexible return or Upgrade options at the end of your lease term." },
+              { icon: AccountBalance, title: "Tax Advantages", desc: "Lease payments are operating expenses, offering tax benefits over capital purchase." },
+              { icon: Schedule, title: "Flexible Terms", desc: "Choose lease terms from 2-5 years with customizable payment structures." },
+              { icon: Upgrade, title: "Upgrade Included", desc: "Stay current with technology through easy upgrades during the lease." },
+              { icon: Build, title: "Zero Maintenance Costs", desc: "All repairs, parts, and servicing included throughout the lease period." },
+              { icon: Inventory2, title: "Free Toner", desc: "Unlimited genuine toner included for the entire lease duration." },
+              { icon: Cancel, title: "No Exit Fees", desc: "Flexible return or upgrade options at the end of your lease term." },
             ].map((b, i) => (
               <div key={i} className="glass-card p-8 rounded-3xl">
                 <b.icon className="text-4xl text-[#f5be53] mb-4" />
@@ -234,7 +235,7 @@ export default function CopierLeaseUAE() {
             >
               <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
                 {f.q}
-                <ExpandMoreIcon className="text-[#f5be53] group-open:rotate-180 transition-transform" />
+                <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
               </summary>
               <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
             </details>
@@ -245,11 +246,7 @@ export default function CopierLeaseUAE() {
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
     </main>
+    </>
   );
 }
-

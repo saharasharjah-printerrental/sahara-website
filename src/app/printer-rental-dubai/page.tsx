@@ -8,18 +8,18 @@ import MobileNav from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "Printer Rental Dubai | AED 250/mo | Zero Deposit | Sahara",
-  description: "Dubai Printer rental from AED 250/mo. Zero deposit, free toner & maintenance. 4-hr Emergency response. Business Bay, JLT, DIFC, Marina, Deira & all areas. ☎ +971503823969",
-  keywords: "Printer rental dubai, photocopier rental dubai, copier lease dubai, Printer rental business bay, Printer rental DIFC, Printer rental JLT, canon Printer rental dubai, kyocera Printer dubai, zero deposit Printer rental dubai",
+  description: "Dubai printer rental from AED 250/mo. Zero deposit, free toner & maintenance. 4-hr emergency response. Business Bay, JLT, DIFC, Marina, Deira & all areas. ☎ +971503823969",
+  keywords: "printer rental dubai, photocopier rental dubai, copier lease dubai, printer rental business bay, printer rental DIFC, printer rental JLT, canon printer rental dubai, kyocera printer dubai, zero deposit printer rental dubai",
   openGraph: {
     title: "Printer Rental Dubai | Sahara Office Equipments",
-    description: "Canon & Kyocera Printer rental in Dubai from AED 250/month. Zero deposit, free toner, 4-hour response. Serving Business Bay, JLT, DIFC, Marina, Deira and all Dubai districts.",
-    images: [{ url: "https://www.saharaPrinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Printer Rental Dubai" }],
-    url: "https://www.saharaPrinter.com/Printer-rental-dubai",
+    description: "Canon & Kyocera printer rental in Dubai from AED 250/month. Zero deposit, free toner, 4-hour response. Serving Business Bay, JLT, DIFC, Marina, Deira and all Dubai districts.",
+    images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Printer Rental Dubai" }],
+    url: "https://www.saharaprinter.com/printer-rental-dubai",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
   },
-  alternates: { canonical: "https://www.saharaPrinter.com/Printer-rental-dubai" },
+  alternates: { canonical: "https://www.saharaprinter.com/printer-rental-dubai" },
 };
 
 const localBusinessSchema = {
@@ -27,10 +27,10 @@ const localBusinessSchema = {
   "@type": ["LocalBusiness", "ProfessionalService"],
   "name": "Sahara Office Equipments — Dubai Printer Rental",
   "legalName": "Sahara Office Equipment Trading LLC",
-  "description": "Printer rental and photocopier lease services in Dubai. Zero deposit, unlimited free toner, 4-hour Emergency response. Serving Business Bay, JLT, DIFC, Deira, Marina and all Dubai districts. Plans from AED 250/month.",
-  "url": "https://saharaPrinter.com/Printer-rental-dubai",
-  "telePhoneIcon": "+971503823969",
-  "EmailIcon": "info@saharaedoc.com",
+  "description": "Printer rental and photocopier lease services in Dubai. Zero deposit, unlimited free toner, 4-hour emergency response. Serving Business Bay, JLT, DIFC, Deira, Marina and all Dubai districts. Plans from AED 250/month.",
+  "url": "https://saharaprinter.com/printer-rental-dubai",
+  "telephone": "+971503823969",
+  "email": "info@saharaedoc.com",
   "image": "/images/heroPrntr1.webp",
   "address": {
     "@type": "PostalAddress",
@@ -45,7 +45,7 @@ const localBusinessSchema = {
   },
   "priceRange": "AED 250–2000",
   "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "CloseIcons": "20:00" }
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "20:00" }
   ],
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" },
   "hasOfferCatalog": {
@@ -60,18 +60,18 @@ const localBusinessSchema = {
 };
 
 const faqData = [
-  { q: "How much does Printer rental cost in Dubai?", a: "Printer rental in Dubai StarIconts from AED 250/month for an A4 desktop Printer. A3 multifunction photocopiers (Print, copy, scan) StarIcont from AED 500/month. High-SpeedIcon enterprise copiers for large offices range from AED 1,000–2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and free delivery across Dubai." },
-  { q: "Do you offer zero deposit Printer rental in Dubai?", a: "Yes. Sahara offers zero deposit Printer rental for qualified Dubai businesses. There is no upfront Security deposit — you pay only the monthly rental. This applies to standard 12–36 month contracts for established businesses." },
-  { q: "How fast can you deliver a rented Printer to my Dubai office?", a: "We offer same-day delivery to most Dubai districts including Business Bay, DIFC, JLT, Marina, Sheikh Zayed Road, and Deira. Next-day delivery is standard for all other Dubai locations. Our engineers handle the full network setup on delivery day at no extra charge." },
-  { q: "What Printer brands do you rent in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, Kyocera TASKalfa, HP LaserJet Enterprise, Ricoh MP series, and Xerox AltaLink in Dubai. Canon and Kyocera are our most popular brands due to their proven reliability in UAE climate conditions." },
-  { q: "What is your Emergency repair response time in Dubai?", a: "Our average Emergency repair response time in Dubai is 4 hours. For critical rental clients in Business Bay, DIFC, and Downtown Dubai, we maintain a priority dispatch queue with 2-hour target response. If a repair exceeds 24 hours, we deliver a loaner machine at no charge." },
-  { q: "Is toner included in the Dubai Printer rental price?", a: "Yes — unlimited genuine OEM toner is included in all Sahara rental plans across Dubai. We remotely monitor toner levels and replenish proactively — you never need to order consumables or worry about running out mid-Print." },
-  { q: "Can I rent a Printer for a short-term event or exhibition in Dubai?", a: "Yes. We supply Printers and photocopiers for Dubai exhibitions, DWTC events, trade shows, hotel functions, and temporary office setups. Short-term rentals are available from 1 day to 3 months. We have supplied equipment for COP28 and major exhibitions at Dubai World Trade Centre." },
-  { q: "Do you serve free zones like JAFZA, DMCC, and DIFC?", a: "Yes. We regularly supply and service rental Printers in JAFZA (Jebel Ali Free Zone), DMCC (JLT), DIFC, Dubai Internet City, Dubai Media City, Dubai Silicon Oasis, and DAFZA (Dubai Airport Free Zone). Billing can be arranged in AED or USD for free zone entities." },
-  { q: "Can I Upgrade my rented Printer during the contract in Dubai?", a: "Absolutely. Our 'Growth Guard' policy allows you to Upgrade your Printer or photocopier at any point during the rental contract — scaling from a small desktop unit to a high-volume A3 copier as your business grows. No termination fees apply for Upgrades." },
-  { q: "Do you offer multi-location Printer rental for companies with multiple Dubai offices?", a: "Yes. We manage corporate fleet deployments across multiple Dubai locations under one contract with consolidated billing. This is ideal for businesses with branches in Business Bay, Deira, and Jebel Ali, for example. Fleet discount pricing applies for 3+ machines." },
-  { q: "What happens to the Printer at the end of the Dubai rental contract?", a: "At the end of the rental term, we collect the equipment at no charge. You can renew, Upgrade to newer equipment, or simply return the machine. There are no exit fees and no disposal costs — Sahara handles the full lifecycle of every machine we rent." },
-  { q: "Can the rented Printer connect to our Dubai office Wi-Fi and EmailIcon system?", a: "Yes. Our technicians configure full network integration including: LAN and Wi-Fi connectivity, scan-to-EmailIcon via your office SMTP server, scan-to-folder for your server or NAS, CloudIcon integration (Google Drive, OneDrive, SharePoint), and secure Print release. Full setup is included in delivery." },
+  { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for an A4 desktop printer. A3 multifunction photocopiers (print, copy, scan) start from AED 500/month. High-speed enterprise copiers for large offices range from AED 1,000–2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and free delivery across Dubai." },
+  { q: "Do you offer zero deposit printer rental in Dubai?", a: "Yes. Sahara offers zero deposit printer rental for qualified Dubai businesses. There is no upfront security deposit — you pay only the monthly rental. This applies to standard 12–36 month contracts for established businesses." },
+  { q: "How fast can you deliver a rented printer to my Dubai office?", a: "We offer same-day delivery to most Dubai districts including Business Bay, DIFC, JLT, Marina, Sheikh Zayed Road, and Deira. Next-day delivery is standard for all other Dubai locations. Our engineers handle the full network setup on delivery day at no extra charge." },
+  { q: "What printer brands do you rent in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, Kyocera TASKalfa, HP LaserJet Enterprise, Ricoh MP series, and Xerox AltaLink in Dubai. Canon and Kyocera are our most popular brands due to their proven reliability in UAE climate conditions." },
+  { q: "What is your emergency repair response time in Dubai?", a: "Our average emergency repair response time in Dubai is 4 hours. For critical rental clients in Business Bay, DIFC, and Downtown Dubai, we maintain a priority dispatch queue with 2-hour target response. If a repair exceeds 24 hours, we deliver a loaner machine at no charge." },
+  { q: "Is toner included in the Dubai printer rental price?", a: "Yes — unlimited genuine OEM toner is included in all Sahara rental plans across Dubai. We remotely monitor toner levels and replenish proactively — you never need to order consumables or worry about running out mid-print." },
+  { q: "Can I rent a printer for a short-term event or exhibition in Dubai?", a: "Yes. We supply printers and photocopiers for Dubai exhibitions, DWTC events, trade shows, hotel functions, and temporary office setups. Short-term rentals are available from 1 day to 3 months. We have supplied equipment for COP28 and major exhibitions at Dubai World Trade Centre." },
+  { q: "Do you serve free zones like JAFZA, DMCC, and DIFC?", a: "Yes. We regularly supply and service rental printers in JAFZA (Jebel Ali Free Zone), DMCC (JLT), DIFC, Dubai Internet City, Dubai Media City, Dubai Silicon Oasis, and DAFZA (Dubai Airport Free Zone). Billing can be arranged in AED or USD for free zone entities." },
+  { q: "Can I upgrade my rented printer during the contract in Dubai?", a: "Absolutely. Our 'Growth Guard' policy allows you to upgrade your printer or photocopier at any point during the rental contract — scaling from a small desktop unit to a high-volume A3 copier as your business grows. No termination fees apply for upgrades." },
+  { q: "Do you offer multi-location printer rental for companies with multiple Dubai offices?", a: "Yes. We manage corporate fleet deployments across multiple Dubai locations under one contract with consolidated billing. This is ideal for businesses with branches in Business Bay, Deira, and Jebel Ali, for example. Fleet discount pricing applies for 3+ machines." },
+  { q: "What happens to the printer at the end of the Dubai rental contract?", a: "At the end of the rental term, we collect the equipment at no charge. You can renew, upgrade to newer equipment, or simply return the machine. There are no exit fees and no disposal costs — Sahara handles the full lifecycle of every machine we rent." },
+  { q: "Can the rented printer connect to our Dubai office Wi-Fi and email system?", a: "Yes. Our technicians configure full network integration including: LAN and Wi-Fi connectivity, scan-to-email via your office SMTP server, scan-to-folder for your server or NAS, cloud integration (Google Drive, OneDrive, SharePoint), and secure print release. Full setup is included in delivery." },
 ];
 
 const faqSchema = {
@@ -88,8 +88,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaPrinter.com" },
-    { "@type": "ListItem", "position": 2, "name": "Printer Rental Dubai", "item": "https://saharaPrinter.com/Printer-rental-dubai" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com" },
+    { "@type": "ListItem", "position": 2, "name": "Printer Rental Dubai", "item": "https://saharaprinter.com/printer-rental-dubai" }
   ]
 };
 
@@ -101,9 +101,9 @@ const dubaiAreas = [
 ];
 
 const pricingTiers = [
-  { name: "A4 Desktop", price: "AED 250–400", period: "/month", users: "1–5 users", volume: "Up to 2,000 pages", includes: ["A4 Print only", "Unlimited toner", "Quarterly maintenance", "4-hr Emergency response"], popular: false },
-  { name: "A3 Mid-Range", price: "AED 500–900", period: "/month", users: "10–30 users", volume: "Up to 15,000 pages", includes: ["A3 + A4 Print, copy, scan", "Unlimited toner", "Monthly maintenance", "4-hr Emergency response", "Network setup included"], popular: true },
-  { name: "A3 Enterprise", price: "AED 1,000–2,000", period: "/month", users: "30–80 users", volume: "Unlimited pages", includes: ["High-SpeedIcon A3 color MFP", "Unlimited toner", "Weekly maintenance", "2-hr priority response", "Loaner machine guarantee", "Multi-site billing"], popular: false },
+  { name: "A4 Desktop", price: "AED 250–400", period: "/month", users: "1–5 users", volume: "Up to 2,000 pages", includes: ["A4 print only", "Unlimited toner", "Quarterly maintenance", "4-hr emergency response"], popular: false },
+  { name: "A3 Mid-Range", price: "AED 500–900", period: "/month", users: "10–30 users", volume: "Up to 15,000 pages", includes: ["A3 + A4 print, copy, scan", "Unlimited toner", "Monthly maintenance", "4-hr emergency response", "Network setup included"], popular: true },
+  { name: "A3 Enterprise", price: "AED 1,000–2,000", period: "/month", users: "30–80 users", volume: "Unlimited pages", includes: ["High-speed A3 color MFP", "Unlimited toner", "Weekly maintenance", "2-hr priority response", "Loaner machine guarantee", "Multi-site billing"], popular: false },
 ];
 
 const dubaiIndustries = [
@@ -115,10 +115,11 @@ const dubaiIndustries = [
 
 export default function PrinterRentalDubai() {
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+    <main className="min-h-screen bg-[#071325]">
       <Header />
 
       {/* ── Hero ── */}
@@ -151,8 +152,8 @@ export default function PrinterRentalDubai() {
               <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
                 <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Printer Rental Dubai — Quick Answer</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Sahara Office Equipments provides Printer and photocopier rental in Dubai from <strong className="text-white">AED 250/month</strong> with
-                  zero deposit, unlimited OEM toner, and a <strong className="text-white">4-hour Emergency response</strong> across all Dubai districts.
+                  Sahara Office Equipments provides printer and photocopier rental in Dubai from <strong className="text-white">AED 250/month</strong> with
+                  zero deposit, unlimited OEM toner, and a <strong className="text-white">4-hour emergency response</strong> across all Dubai districts.
                   Canon and Kyocera multifunction devices are delivered and network-configured same day.
                   Over 1,500 Dubai businesses have trusted Sahara since 2012.
                 </p>
@@ -230,7 +231,7 @@ export default function PrinterRentalDubai() {
             <div className="space-y-4 text-[#d3c5b0] leading-relaxed">
               <p>
                 Printer rental in Dubai is a managed equipment leasing model where businesses access enterprise-grade
-                Canon, Kyocera, HP, or Ricoh Printers and photocopiers through a fixed monthly contract — without
+                Canon, Kyocera, HP, or Ricoh printers and photocopiers through a fixed monthly contract — without
                 purchasing the equipment outright. The monthly fee covers the machine, unlimited OEM toner, all maintenance
                 and repairs, and technical support.
               </p>
@@ -238,13 +239,13 @@ export default function PrinterRentalDubai() {
                 In Dubai's fast-moving business environment — from the towers of Business Bay and DIFC to the warehouses
                 of Jebel Ali and Al Quoz — printing needs change rapidly. Printer rental eliminates the risk of owning
                 depreciating assets. Instead of tying up capital in hardware that becomes obsolete in 3–4 years, companies
-                pay a predictable monthly operational expense and Upgrade seamlessly.
+                pay a predictable monthly operational expense and upgrade seamlessly.
               </p>
               <p>
                 Sahara Office Equipments has operated in Dubai since 2012, deploying over 2,500 devices across the
                 emirate. Our Dubai clients include multinationals in DIFC, logistics operators in JAFZA, healthcare
                 providers, real estate agencies, and government-adjacent organizations in Business Bay. The 4-hour
-                Emergency response and free replacement machine guarantee make our service the benchmark in the market.
+                emergency response and free replacement machine guarantee make our service the benchmark in the market.
               </p>
               <p>
                 Unlike buying — where toner, maintenance contracts, spare parts, and technician callouts add 40–60%
@@ -262,7 +263,7 @@ export default function PrinterRentalDubai() {
           <div className="text-center mb-10">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Coverage</span>
             <h2 className="text-3xl font-bold text-white mt-3 mb-3">All Dubai Districts — Same-Day Delivery</h2>
-            <p className="text-[#7a94ad] text-sm">Our technicians operate from a Dubai service HubIcon for fast response across all areas.</p>
+            <p className="text-[#7a94ad] text-sm">Our technicians operate from a Dubai service hub for fast response across all areas.</p>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
             {dubaiAreas.map((area, i) => (
@@ -347,13 +348,13 @@ export default function PrinterRentalDubai() {
           <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Related Services</p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { href: "/services/Printer-rental", label: "Printer Rental UAE" },
+              { href: "/services/printer-rental", label: "Printer Rental UAE" },
               { href: "/services/photocopier-rental", label: "Photocopier Rental" },
               { href: "/services/amc", label: "Annual Maintenance (AMC)" },
               { href: "/services/repair", label: "Printer Repair" },
               { href: "/services/toner", label: "Toner & Spare Parts" },
-              { href: "/Printer-repair-dubai", label: "Printer Repair Dubai" },
-              { href: "/canon-Printer-dubai", label: "Canon Printer Dubai" },
+              { href: "/printer-repair-dubai", label: "Printer Repair Dubai" },
+              { href: "/canon-printer-dubai", label: "Canon Printer Dubai" },
               { href: "/brands/canon", label: "Canon Printers" },
               { href: "/brands/kyocera", label: "Kyocera Printers" },
             ].map((link) => (
@@ -375,9 +376,9 @@ export default function PrinterRentalDubai() {
           <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Printer Rental in Other Emirates</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { href: "/Printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
+              { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
               { href: "/photocopier-rental-sharjah", label: "Photocopier Rental Sharjah", desc: "Our HQ. Fastest response in Sharjah & Northern Emirates." },
-              { href: "/Printer-rental-rak", label: "Printer Rental RAK", desc: "Ras Al Khaimah businesses & free zones." },
+              { href: "/printer-rental-rak", label: "Printer Rental RAK", desc: "Ras Al Khaimah businesses & free zones." },
               { href: "/copier-lease-uae", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract." },
             ].map((loc) => (
               <Link
@@ -398,7 +399,7 @@ export default function PrinterRentalDubai() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Resource HubIcon</p>
+              <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Resource Hub</p>
               <h2 className="text-2xl font-bold text-white">Dubai Printer Rental Guides</h2>
             </div>
             <Link href="/blogs" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All →</Link>
@@ -406,25 +407,25 @@ export default function PrinterRentalDubai() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
-                slug: "how-to-choose-the-best-Printer-rental-dubai-service",
+                slug: "how-to-choose-the-best-printer-rental-dubai-service",
                 title: "How to Choose the Best Printer Rental Dubai Service?",
                 category: "Guide",
                 img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp",
               },
               {
-                slug: "how-dubai-companies-save-budget-by-choosing-value-driven-Printer-rental",
+                slug: "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
                 title: "How Dubai Companies Save Budget with Printer Rental",
                 category: "Finance",
                 img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1752651510/blogs/l3byyc7o8a8f1lddujis.jpg",
               },
               {
-                slug: "real-estate-to-clinics-why-every-uae-business-is-renting-Printers-in-2025",
+                slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
                 title: "Why Every UAE Business is Renting Printers in 2025",
                 category: "Trends",
                 img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
               },
               {
-                slug: "total-cost-of-Printer-ownership",
+                slug: "total-cost-of-printer-ownership",
                 title: "Total Cost of Printer Ownership vs. Rental",
                 category: "Finance",
                 img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
@@ -481,6 +482,6 @@ export default function PrinterRentalDubai() {
       <JumpToTop />
       <MobileNav />
     </main>
+    </>
   );
 }
-

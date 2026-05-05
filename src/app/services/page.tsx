@@ -5,8 +5,8 @@ import { useEffect } from "react";
 
 export default function ServicesPage() {
   useEffect(() => {
-    // Redirect to Printer-rental as default service
-    redirect("/services/Printer-rental");
+    // Redirect to printer-rental as default service
+    redirect("/services/printer-rental");
   }, []);
 
   return null;

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "@fontsource/material-symbols";
+import VisitorTracker from "@/components/VisitorTracker";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const runtime = 'edge';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.saharaprinter.com'),
   title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance",
   description: "UAE printer & photocopier rental from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 4.9★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
   keywords: "printer rental dubai, photocopier rental sharjah, copier lease uae, printer amc dubai, printer rental from AED 250, zero deposit printer rental uae, free toner printer rental, printer repair uae, photocopier rental abu dhabi, corporate printer rental uae",
@@ -36,7 +37,7 @@ const organizationSchema = {
   "legalName": "Sahara Office Equipment Trading LLC",
   "alternateName": ["Sahara Printer", "Sahara Printers UAE"],
   "disambiguatingDescription": "Sahara Office Equipment Trading LLC (saharaprinter.com) is a printer rental and copier leasing company in Sharjah, UAE — not to be confused with Sahara Gulf Printing Press LLC (saharagulf.com), a commercial print shop in Al Quoz, Dubai.",
-  "url": "https://www.saharaprinter.com",
+  "url": "https://saharaprinter.com",
   "logo": {
     "@type": "ImageObject",
     "url": "https://www.saharaprinter.com/assets/Home/sahara-navbar-logo.webp",
@@ -216,18 +217,13 @@ function parseScripts(html: string): ParsedScript[] {
 }
 
 async function getSEOConfig(): Promise<ServerSEOConfig | null> {
-  return {
-    googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID,
-    googleAnalytics4Id: process.env.GOOGLE_ANALYTICS_4_ID,
-    googleTagManagerId: process.env.GOOGLE_TAG_MANAGER_ID,
-    microsoftClarityId: process.env.MICROSOFT_CLARITY_ID,
-    metaPixelId: process.env.META_PIXEL_ID,
-    metaPixelAdvancedMatching: process.env.META_PIXEL_ADVANCED_MATCHING === 'true',
-    hotjarId: process.env.HOTJAR_ID,
-    customHeadScripts: process.env.CUSTOM_HEAD_SCRIPTS,
-    customBodyScripts: process.env.CUSTOM_BODY_SCRIPTS,
-    schemaMarkup: process.env.SCHEMA_MARKUP,
-  };
+  try {
+    const db = (getRequestContext().env as any).DB;
+    if (!db) return null;
+    const row: any = await db.prepare("SELECT value FROM settings WHERE key = ?").bind("seo_config").first();
+    if (row?.value) return JSON.parse(row.value);
+  } catch {}
+  return null;
 }
 
 export default async function RootLayout({
@@ -240,7 +236,13 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script suppressHydrationWarning type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
+        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
 
         {/* Google Tag Manager */}
         {cfg?.googleTagManagerId && (
@@ -304,6 +306,7 @@ export default async function RootLayout({
               ? <script key={i} async={s.isAsync} src={s.src} />
               : <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
           )}
+        <VisitorTracker />
         {children}
       </body>
     </html>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function AdminLogin() {
   const router = useRouter();
-  const [EmailIcon, setEmailIcon] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export default function AdminLogin() {
     setLoading(true);
 
     // Demo credentials - in production, this would call an API
-    if (EmailIcon === "admin@sahara.ae" && password === "sahara2026") {
+    if (email === "admin@sahara.ae" && password === "sahara2026") {
       localStorage.setItem("sahara_admin_auth", "true");
       router.push("/admin");
     } else {
@@ -44,12 +44,12 @@ export default function AdminLogin() {
 
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
-                EmailIcon Address
+                Email Address
               </label>
               <input
-                type="EmailIcon"
-                value={EmailIcon}
-                onChange={(e) => setEmailIcon(e.target.value)}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-slate-900 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-500 focus:border-primary focus:outline-none"
                 placeholder="admin@sahara.ae"
                 required

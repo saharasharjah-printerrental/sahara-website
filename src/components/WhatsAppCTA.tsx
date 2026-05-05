@@ -2,18 +2,18 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ChatIcon } from "@/components/icons";
+import { Chat } from "@mui/icons-material";
 
 export default function WhatsAppCTA() {
   const [whatsapp, setWhatsapp] = useState("971503823969");
   const dragged = useRef(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_SettingsIcon");
+    const stored = localStorage.getItem("sahara_settings");
     if (stored) {
-      const SettingsIcon = JSON.parse(stored);
-      if (SettingsIcon.whatsappNumber) {
-        setWhatsapp(SettingsIcon.whatsappNumber.replace(/[^0-9]/g, ""));
+      const settings = JSON.parse(stored);
+      if (settings.whatsappNumber) {
+        setWhatsapp(settings.whatsappNumber.replace(/[^0-9]/g, ""));
       }
     }
   }, []);
@@ -46,10 +46,9 @@ export default function WhatsAppCTA() {
         boxShadow: "6px 6px 16px rgba(0,0,0,0.3), -2px -2px 8px rgba(255,255,255,0.1)",
         touchAction: "none",
       }}
-      aria-label="ChatIcon on WhatsApp"
+      aria-label="Chat on WhatsApp"
     >
-      <ChatIcon className="w-6 h-6 text-white pointer-events-none" />
+      <Chat className="w-6 h-6 text-white pointer-events-none" />
     </motion.div>
   );
 }
-

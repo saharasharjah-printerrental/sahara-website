@@ -9,16 +9,16 @@ import Image from "next/image";
 
 export default function BrotherBrandPage() {
   const products = [
-    { name: "HL-L2350DW", specs: ["32 PPM", "Auto Duplex"], img: "/images/Printer-brother.webp" },
-    { name: "MFC-L8900CDW", specs: ["32 PPM", "Color"], img: "/images/Printer-brother.webp" },
-    { name: "HL-L6400DW", specs: ["50 PPM", "Enterprise"], img: "/images/Printer-brother.webp" },
+    { name: "HL-L2350DW", specs: ["32 PPM", "Auto Duplex"], img: "/images/printer-brother.webp" },
+    { name: "MFC-L8900CDW", specs: ["32 PPM", "Color"], img: "/images/printer-brother.webp" },
+    { name: "HL-L6400DW", specs: ["50 PPM", "Enterprise"], img: "/images/printer-brother.webp" },
   ];
 
   const features = [
     { icon: "support_agent", title: "Award-Winning Support", desc: "Brother's US-based support team rated #1 in customer satisfaction." },
-    { icon: "VerifiedIcon", title: "Industry-Leading Warranty", desc: "Free lifetime PhoneIcon support and industry-best limited warranty." },
+    { icon: "verified", title: "Industry-Leading Warranty", desc: "Free lifetime phone support and industry-best limited warranty." },
     { icon: "local_shipping", title: "Fast Delivery", desc: "Same-day shipping on orders placed before 3pm EST." },
-    { icon: "Inventory_2", title: "Extensive Supplies Stock", desc: "Wide range of Brother consumables in stock with same-day shipping." },
+    { icon: "inventory_2", title: "Extensive Supplies Stock", desc: "Wide range of Brother consumables in stock with same-day shipping." },
   ];
 
   return (
@@ -56,7 +56,7 @@ export default function BrotherBrandPage() {
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#030e20]">
                 <Image
-                  src="/images/Printer-brother.webp"
+                  src="/images/printer-brother.webp"
                   alt="Brother MFC-L8900CDW"
                   width={600}
                   height={600}
@@ -108,7 +108,7 @@ export default function BrotherBrandPage() {
                 <div className="flex justify-between items-center py-4 border-t border-white/5">
                   {p.specs.map((s, j) => (
                     <div key={j} className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[#f5be53] text-sm">SpeedIcon</span>
+                      <span className="material-symbols-outlined text-[#f5be53] text-sm">speed</span>
                       <span className="text-xs text-[#d3c5b0]">{s}</span>
                     </div>
                   ))}
@@ -134,8 +134,8 @@ export default function BrotherBrandPage() {
             </div>
             <div className="glass-card rounded-[32px] p-8">
               <div className="text-4xl font-bold text-[#f5be53] mb-4">Lifetime</div>
-              <h3 className="text-xl font-bold text-white mb-2">PhoneIcon Support</h3>
-              <p className="text-[#d3c5b0]">Free lifetime PhoneIcon support included with every Brother product.</p>
+              <h3 className="text-xl font-bold text-white mb-2">Phone Support</h3>
+              <p className="text-[#d3c5b0]">Free lifetime phone support included with every Brother product.</p>
             </div>
             <div className="glass-card rounded-[32px] p-8">
               <div className="text-4xl font-bold text-[#f5be53] mb-4">Same Day</div>
@@ -165,4 +165,3 @@ export default function BrotherBrandPage() {
     </main>
   );
 }
-

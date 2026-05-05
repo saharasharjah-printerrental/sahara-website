@@ -9,12 +9,12 @@ import Image from "next/image";
 
 export default function RicohBrandPage() {
   const products = [
-    { name: "MP 4055", type: "B&W Multifunction", SpeedIcon: "55 ppm", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ricoh_5055_MFP.jpg/500px-Ricoh_5055_MFP.jpg" },
-    { name: "IM C2000", type: "Color Smart MFP", SpeedIcon: "20 ppm", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/RICOH_Aficio_MP_C3002_Color_Laser_Multifunction_Printer.jpg/500px-RICOH_Aficio_MP_C3002_Color_Laser_Multifunction_Printer.jpg" },
+    { name: "MP 4055", type: "B&W Multifunction", speed: "55 ppm", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ricoh_5055_MFP.jpg/500px-Ricoh_5055_MFP.jpg" },
+    { name: "IM C2000", type: "Color Smart MFP", speed: "20 ppm", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/RICOH_Aficio_MP_C3002_Color_Laser_Multifunction_Printer.jpg/500px-RICOH_Aficio_MP_C3002_Color_Laser_Multifunction_Printer.jpg" },
   ];
 
   const features = [
-    { icon: "bolt", title: "High SpeedIcon", desc: "Industry-leading Print SpeedIcons up to 135 ppm for production environments" },
+    { icon: "bolt", title: "High Speed", desc: "Industry-leading print speeds up to 135 ppm for production environments" },
     { icon: "touch_app", title: "Smart Operation", desc: "10.1\" tablet-like interface with intuitive controls and customization" },
     { icon: "eco", title: "Eco-Friendly", desc: "Lowest power consumption in its class with sustainable design" },
     { icon: "precision_manufacturing", title: "Precision Engineering", desc: "Japanese quality built for demanding high-volume workflows" },
@@ -40,21 +40,20 @@ export default function RicohBrandPage() {
                 High-Performance <span className="text-[#f5be53]">Printing</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
-                Ricoh's authorized partner delivering production-ready Printers and smart MFPs for high-volume UAE enterprises. Experience Japanese precision engineered for demanding workflows.
+                Ricoh's authorized partner delivering production-ready printers and smart MFPs for high-volume UAE enterprises. Experience Japanese precision engineered for demanding workflows.
               </p>
               <a href="/get-quote?brand=ricoh" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
                 Enquire Now
               </a>
             </div>
-            <div className="relative" data-scene="brand-hero">
-              <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full" aria-hidden="true"></div>
-              <div className="absolute -inset-4 bg-[#f5be53]/5 blur-[60px] rounded-full" aria-hidden="true"></div>
+            <div className="relative">
+              <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <Image
-                src="/images/Printer-ricoh.webp"
-                alt="Ricoh Printer — Authorized Partner"
+                src="/images/printer-ricoh.webp"
+                alt="Ricoh Printer"
                 width={700}
                 height={525}
-                className="w-full h-auto rounded-3xl shadow-2xl float-loop"
+                className="w-full h-auto rounded-3xl shadow-2xl"
                 priority
               />
             </div>
@@ -67,7 +66,7 @@ export default function RicohBrandPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Why Choose Ricoh?</h2>
-            <p className="text-[#d3c5b0] max-w-2xl mx-auto">Built for high-volume environments where reliability and SpeedIcon are critical to your business operations.</p>
+            <p className="text-[#d3c5b0] max-w-2xl mx-auto">Built for high-volume environments where reliability and speed are critical to your business operations.</p>
           </div>
           <div className="grid md:grid-cols-4 gap-8">
             {features.map((f, i) => (
@@ -98,7 +97,7 @@ export default function RicohBrandPage() {
                   <h3 className="text-xl font-bold text-white mb-3">{p.name}</h3>
                   <div className="flex justify-between text-sm text-[#d3c5b0]">
                     <span>{p.type}</span>
-                    <span className="text-[#f5be53]">{p.SpeedIcon}</span>
+                    <span className="text-[#f5be53]">{p.speed}</span>
                   </div>
                 </div>
               </div>
@@ -111,7 +110,7 @@ export default function RicohBrandPage() {
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto glass-card rounded-[3rem] p-12 md:p-16 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Boost Productivity?</h2>
-          <p className="text-[#d3c5b0] mb-8">Get a customized quote for Ricoh Printers tailored to your business needs.</p>
+          <p className="text-[#d3c5b0] mb-8">Get a customized quote for Ricoh printers tailored to your business needs.</p>
           <a href="/get-quote?brand=ricoh" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform inline-block">
             Enquire for Ricoh Models
           </a>

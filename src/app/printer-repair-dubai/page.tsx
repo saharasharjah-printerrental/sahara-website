@@ -7,19 +7,19 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export default function PrinterRepairDubai() {
-  const [SettingsIcon, setSettingsIcon] = useState<any>(null);
+  const [settings, setSettings] = useState<any>(null);
   const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_SettingsIcon");
+    const stored = localStorage.getItem("sahara_settings");
     if (stored) {
-      setSettingsIcon(JSON.parse(stored));
+      setSettings(JSON.parse(stored));
     }
     
     const faqStored = localStorage.getItem("sahara_faqs");
     if (faqStored) {
       const allFaqs = JSON.parse(faqStored);
-      const pageFaqs = allFaqs.filter((f: any) => f.pageSlug === "Printer-repair-dubai" && f.isActive)
+      const pageFaqs = allFaqs.filter((f: any) => f.pageSlug === "printer-repair-dubai" && f.isActive)
         .sort((a: any, b: any) => a.sortOrder - b.sortOrder)
         .map((f: any) => ({ q: f.question, a: f.answer }));
       setFaqs(pageFaqs.length > 0 ? pageFaqs : defaultFaqs);
@@ -29,30 +29,30 @@ export default function PrinterRepairDubai() {
   }, []);
 
   const defaultFaqs = [
-    { q: "Do you offer Printer repair services in Dubai?", a: "Yes! We provide professional Printer and photocopier repair services across Dubai. Our certified technicians can fix all major brands." },
-    { q: "What is your Printer repair response time in Dubai?", a: "We offer 4-hour Emergency response for critical Printer failures in Dubai. Standard repairs Scheduled within 24 hours." },
-    { q: "Do you repair all Printer brands in Dubai?", a: "Yes! We repair Canon, HP, Kyocera, Xerox, Ricoh, Sharp, Brother, Samsung, and Lexmark Printers in Dubai." },
-    { q: "How much does Printer repair cost in Dubai?", a: "Our Printer repair services in Dubai StarIcont from AED 150 for minor issues. Complex repairs quoted after diagnosis. Free assessment for rental clients." },
-    { q: "Do you provide on-site Printer repair in Dubai?", a: "Yes! Our technicians provide on-site repair services at your office in Dubai. No need to transport the equipment." },
-    { q: "What Printer issues can you repair in Dubai?", a: "We repair paper jams, printing quality issues, network connectivity, software errors, mechanical failures, and more." },
-    { q: "Do you offer Printer repair contracts in Dubai?", a: "Yes! Our AMC (Annual Maintenance Contract) includes unlimited repairs, preventive maintenance, and priority response." },
-    { q: "Do you offer Printer repair in other areas of Dubai?", a: "We serve all Dubai areas including Business Bay, JLT, Deira, Marina, DIFC, Sheikh Zayed Road, and all other districts." },
+    { q: "Do you offer printer repair services in Dubai?", a: "Yes! We provide professional printer and photocopier repair services across Dubai. Our certified technicians can fix all major brands." },
+    { q: "What is your printer repair response time in Dubai?", a: "We offer 4-hour emergency response for critical printer failures in Dubai. Standard repairs scheduled within 24 hours." },
+    { q: "Do you repair all printer brands in Dubai?", a: "Yes! We repair Canon, HP, Kyocera, Xerox, Ricoh, Sharp, Brother, Samsung, and Lexmark printers in Dubai." },
+    { q: "How much does printer repair cost in Dubai?", a: "Our printer repair services in Dubai start from AED 150 for minor issues. Complex repairs quoted after diagnosis. Free assessment for rental clients." },
+    { q: "Do you provide on-site printer repair in Dubai?", a: "Yes! Our technicians provide on-site repair services at your office in Dubai. No need to transport the equipment." },
+    { q: "What printer issues can you repair in Dubai?", a: "We repair paper jams, printing quality issues, network connectivity, software errors, mechanical failures, and more." },
+    { q: "Do you offer printer repair contracts in Dubai?", a: "Yes! Our AMC (Annual Maintenance Contract) includes unlimited repairs, preventive maintenance, and priority response." },
+    { q: "Do you offer printer repair in other areas of Dubai?", a: "We serve all Dubai areas including Business Bay, JLT, Deira, Marina, DIFC, Sheikh Zayed Road, and all other districts." },
   ];
 
   const repairServices = [
-    { icon: "BuildIcon", title: "Hardware Repair", desc: "Mechanical repairs, component replacement, roller changes, fuser unit repairs" },
-    { icon: "SettingsIcon", title: "Software & Network", desc: "Driver installation, network configuration, firmware updates, troubleshooting" },
-    { icon: "cleaning_services", title: "Deep Cleaning", desc: "Interior cleaning, roller cleaning, belt replacement, Printhead maintenance" },
-    { icon: "Emergency", title: "Emergency Repairs", desc: "4-hour response for critical issues, same-day service for urgent requests" },
+    { icon: "build", title: "Hardware Repair", desc: "Mechanical repairs, component replacement, roller changes, fuser unit repairs" },
+    { icon: "settings", title: "Software & Network", desc: "Driver installation, network configuration, firmware updates, troubleshooting" },
+    { icon: "cleaning_services", title: "Deep Cleaning", desc: "Interior cleaning, roller cleaning, belt replacement, printhead maintenance" },
+    { icon: "emergency", title: "Emergency Repairs", desc: "4-hour response for critical issues, same-day service for urgent requests" },
   ];
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments - Printer Repair Dubai",
-    "description": "Professional Printer repair services in Dubai. On-site repairs, 4-hour response, all brands serviced.",
-    "url": "https://saharaPrinter.com/Printer-repair-dubai",
-    "telePhoneIcon": "+971503823969",
+    "description": "Professional printer repair services in Dubai. On-site repairs, 4-hour response, all brands serviced.",
+    "url": "https://saharaprinter.com/printer-repair-dubai",
+    "telephone": "+971503823969",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Business Bay",
@@ -81,9 +81,10 @@ export default function PrinterRepairDubai() {
   };
 
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+    <main className="min-h-screen bg-[#071325]">
       <Header />
       
       {/* Hero Section */}
@@ -105,7 +106,7 @@ export default function PrinterRepairDubai() {
                 Printer & Photocopier <span className="text-[#f5be53]">Repair</span>
               </h1>
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl">
-                Professional Printer repair services in Dubai with 4-hour Emergency response. All brands serviced including Canon, HP, Kyocera, Xerox.
+                Professional printer repair services in Dubai with 4-hour emergency response. All brands serviced including Canon, HP, Kyocera, Xerox.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
@@ -209,5 +210,6 @@ export default function PrinterRepairDubai() {
       <WhatsAppCTA />
       <JumpToTop />
     </main>
+    </>
   );
 }

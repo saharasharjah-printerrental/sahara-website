@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import { CipherText } from "@/components/CipherText";
 import StatsClay from "@/components/StatsClay";
-import Icon from "@/components/Icon";
-import { IconName } from "@/components/Icon";
-import { ArrowBackIcon, ArrowForwardIcon, East } from "@/components/icons";
+import { Layers, People, Favorite, Computer, Print, ShoppingCart, Build, Opacity, ArrowBack, ArrowForward, East, Star, Person, ExpandMore, Savings, Verified, LocationOn } from "@mui/icons-material";
 
 export default function Home() {
   const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
@@ -28,10 +26,15 @@ export default function Home() {
   }, []);
 
   const defaultHomeFaqs = [
-    { q: "What is the duration of your Printer rental plans?", a: "We offer flexible rental periods Starting from short-term event hire (1-7 days) to long-term corporate leases (12-36 months), all with included maintenance." },
+    { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery. Contact us for a customized quote based on your printing volume." },
+    { q: "What are the benefits of printer rental in UAE?", a: "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options. It's ideal for businesses avoiding large capital expenditures while ensuring reliable printing infrastructure." },
+    { q: "Do you offer printer rental in Abu Dhabi?", a: "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD. Our Abu Dhabi fleet includes Canon, HP, and Kyocera equipment with same-day delivery and 24/7 support." },
+    { q: "What printer brands do you rent?", a: "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother. All equipment is brand new with full manufacturer warranty." },
+    { q: "Is toner included in printer rental?", a: "Yes — unlimited genuine OEM toner is included in all rental plans. We monitor levels remotely and replenish proactively, ensuring you never run out of toner during critical printing periods." },
+    { q: "What is the duration of your printer rental plans?", a: "We offer flexible rental periods starting from short-term event hire (1-7 days) to long-term corporate leases (12-36 months), all with included maintenance." },
     { q: "Do you provide on-site repair services?", a: "Yes, our factory-certified technicians provide on-site repairs across all major service areas. We aim for a 4-hour response time for critical failures." },
     { q: "Are the spare parts and toners original?", a: "Exclusively. Sahara only supplies OEM (Original Equipment Manufacturer) consumables and parts to ensure the longevity of your hardware." },
-    { q: "Can I Upgrade my rented equipment during the contract?", a: "Absolutely. Our 'Growth Guard' policy allows you to Upgrade your fleet as your office printing demands increase without hefty termination fees." },
+    { q: "Can I upgrade my rented equipment during the contract?", a: "Absolutely. Our 'Growth Guard' policy allows you to upgrade your fleet as your office printing demands increase without hefty termination fees." },
   ];
 
   return (
@@ -60,7 +63,14 @@ export default function Home() {
 function HeroSection() {
   return (
     <section
-      className="hero-bg relative min-h-screen flex items-center pt-20 px-8 lg:px-24 overflow-hidden"
+      className="relative min-h-screen flex items-center pt-20 px-8 lg:px-24 overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/hero-bg.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center right",
+        backgroundRepeat: "no-repeat",
+        contentVisibility: "auto",
+      }}
     >
       {/* Dark overlay — fades left-to-right so text stays legible against the neon scene */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#071325]/95 via-[#071325]/75 to-[#071325]/30 z-0" />
@@ -132,82 +142,89 @@ function DefinitionBlock() {
             What is <span className="text-[#f5be53]">Printer Rental</span> in the UAE?
           </h2>
           <p className="text-[#7a94ad] text-base max-w-lg mx-auto leading-relaxed">
-            Flexible leasing options to access top-tier multifunction Printers (MFPs) and
+            Flexible leasing options to access top-tier multifunction printers (MFPs) and
             photocopiers with low monthly operational costs.
           </p>
         </div>
 
         {/* ── 4-card grid — outer cards normal, inner two elevated ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:items-end">
-           {([
-             {
-               Icon: "BuildIcon",
-               title: 'All-Inclusive Leasing',
-               body: 'A simple monthly fee that covers your machine, unlimited toner, maintenance, repairs, and full technical support.',
-               elevated: false,
-             },
-             {
-               Icon: "SavingsIcon",
-               title: 'Smart Financials',
-               body: 'Healthy cash flow with zero upfront capital investment, zero deposit, and absolutely no exit fees.',
-               elevated: true,
-             },
-             {
-               Icon: "VerifiedIcon",
-               title: 'Premium Equipment',
-               body: 'Enjoy access to high-performance, industry-leading devices from trusted brands like Canon and Kyocera.',
-               elevated: true,
-             },
-             {
-               Icon: "LocationOnIcon",
-               title: 'Seamless UAE Coverage',
-               body: 'Popular and fully supported across major business centers: Dubai, Sharjah, and Abu Dhabi.',
-               elevated: false,
-             },
-            ] as const).map(({ Icon: iconName, title, body, elevated }, i) => (
-             <div key={i}
-               className={`group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ${elevated ? 'lg:-translate-y-5' : ''}`}
-               style={{
-                 background: 'linear-gradient(170deg, rgba(8,18,36,0.97) 0%, rgba(5,11,22,0.99) 100%)',
-                 border: '1px solid rgba(245,190,83,0.22)',
-                 boxShadow: elevated
-                   ? '0 0 0 1px rgba(245,190,83,0.15), 0 0 40px rgba(245,190,83,0.12), 0 20px 60px rgba(0,0,0,0.5)'
-                   : '0 0 0 1px rgba(245,190,83,0.08), 0 0 20px rgba(245,190,83,0.06), 0 8px 32px rgba(0,0,0,0.4)',
-               }}>
- 
-               {/* Corner circuit node — top-left */}
-               <div className="absolute top-0 left-0 w-4 h-4 pointer-events-none">
-                 <div className="absolute top-2 left-0 w-3 h-px" style={{ background: 'rgba(245,190,83,0.35)' }} />
-                 <div className="absolute top-0 left-2 w-px h-3" style={{ background: 'rgba(245,190,83,0.35)' }} />
-              </div>
- 
-               {/* Glow intensifies on hover */}
-               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-                 style={{ boxShadow: 'inset 0 0 30px rgba(245,190,83,0.06)' }} />
- 
-               {/* ── Icon illustration area ── */}
-               <div className="relative flex items-center justify-center pt-8 pb-6 px-6">
-                 {/* Radial backdrop behind icon */}
-                 <div className="absolute inset-0"
-                   style={{ background: 'radial-gradient(ellipse 70% 80% at 50% 60%, rgba(245,190,83,0.07) 0%, transparent 70%)' }} />
-                 <div className="relative w-20 h-20 rounded-[1.25rem] flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                   style={{
-                     background: 'linear-gradient(145deg, rgba(245,190,83,0.16) 0%, rgba(245,190,83,0.04) 100%)',
-                     border: '1px solid rgba(245,190,83,0.32)',
-                     boxShadow: '0 0 0 6px rgba(245,190,83,0.05), 0 0 30px rgba(245,190,83,0.14)',
-                   }}>
-                  <Icon name={iconName} style={{ fontSize: 38, color: '#f5be53' }} />
-                 </div>
-               </div>
- 
-               {/* ── Text area ── */}
-               <div className="px-6 pb-7 flex flex-col flex-1"
-                 style={{ borderTop: '1px solid rgba(245,190,83,0.08)' }}>
-                 <h3 className="text-white font-bold text-[0.95rem] mt-5 mb-2 leading-snug">{title}</h3>
-                 <p className="text-[#6a87a4] text-[0.8rem] leading-relaxed">{body}</p>
-               </div>
- 
+          {([
+            {
+              Icon: Build,
+              title: 'All-Inclusive Leasing',
+              body: 'A simple monthly fee that covers your machine, unlimited toner, maintenance, repairs, and full technical support.',
+              elevated: false,
+            },
+            {
+              Icon: Savings,
+              title: 'Smart Financials',
+              body: 'Healthy cash flow with zero upfront capital investment, zero deposit, and absolutely no exit fees.',
+              elevated: true,
+            },
+            {
+              Icon: Verified,
+              title: 'Premium Equipment',
+              body: 'Enjoy access to high-performance, industry-leading devices from trusted brands like Canon and Kyocera.',
+              elevated: true,
+            },
+            {
+              Icon: LocationOn,
+              title: 'Seamless UAE Coverage',
+              body: 'Popular and fully supported across major business centers: Dubai, Sharjah, and Abu Dhabi.',
+              elevated: false,
+            },
+          ] as const).map(({ Icon, title, body, elevated }, i) => (
+            <div key={i}
+              className={`group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ${elevated ? 'lg:-translate-y-5' : ''}`}
+              style={{
+                background: 'linear-gradient(170deg, rgba(8,18,36,0.97) 0%, rgba(5,11,22,0.99) 100%)',
+                border: '1px solid rgba(245,190,83,0.22)',
+                boxShadow: elevated
+                  ? '0 0 0 1px rgba(245,190,83,0.15), 0 0 40px rgba(245,190,83,0.12), 0 20px 60px rgba(0,0,0,0.5)'
+                  : '0 0 0 1px rgba(245,190,83,0.08), 0 0 20px rgba(245,190,83,0.06), 0 8px 32px rgba(0,0,0,0.4)',
+              }}>
 
+              {/* Corner circuit node — top-left */}
+              <div className="absolute top-0 left-0 w-4 h-4 pointer-events-none">
+                <div className="absolute top-2 left-0 w-3 h-px" style={{ background: 'rgba(245,190,83,0.35)' }} />
+                <div className="absolute top-0 left-2 w-px h-3" style={{ background: 'rgba(245,190,83,0.35)' }} />
+              </div>
+              {/* Corner circuit node — bottom-right */}
+              <div className="absolute bottom-0 right-0 w-4 h-4 pointer-events-none">
+                <div className="absolute bottom-2 right-0 w-3 h-px" style={{ background: 'rgba(245,190,83,0.35)' }} />
+                <div className="absolute bottom-0 right-2 w-px h-3" style={{ background: 'rgba(245,190,83,0.35)' }} />
+              </div>
+
+              {/* Glow intensifies on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                style={{ boxShadow: 'inset 0 0 30px rgba(245,190,83,0.06)' }} />
+
+              {/* ── Icon illustration area ── */}
+              <div className="relative flex items-center justify-center pt-8 pb-6 px-6">
+                {/* Radial backdrop behind icon */}
+                <div className="absolute inset-0"
+                  style={{ background: 'radial-gradient(ellipse 70% 80% at 50% 60%, rgba(245,190,83,0.07) 0%, transparent 70%)' }} />
+                <div className="relative w-20 h-20 rounded-[1.25rem] flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(245,190,83,0.16) 0%, rgba(245,190,83,0.04) 100%)',
+                    border: '1px solid rgba(245,190,83,0.32)',
+                    boxShadow: '0 0 0 6px rgba(245,190,83,0.05), 0 0 30px rgba(245,190,83,0.14)',
+                  }}>
+                  <Icon style={{ fontSize: 38, color: '#f5be53' }} />
+                </div>
+              </div>
+
+              {/* ── Text area ── */}
+              <div className="px-6 pb-7 flex flex-col flex-1"
+                style={{ borderTop: '1px solid rgba(245,190,83,0.08)' }}>
+                <h3 className="text-white font-bold text-[0.95rem] mt-5 mb-2 leading-snug">{title}</h3>
+                <p className="text-[#6a87a4] text-[0.8rem] leading-relaxed">{body}</p>
+              </div>
+
+              {/* Bottom glow bar — appears on hover */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: 'linear-gradient(90deg, transparent, #f5be53, transparent)' }} />
             </div>
           ))}
         </div>
@@ -226,10 +243,10 @@ function DefinitionBlock() {
 
 function ServicesSection() {
   const services = [
-    { icon: "Print", title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental" },
-    { icon: "ShoppingCartIcon", title: "Equipment Sales", desc: "The latest fleet of industrial-grade Printers and photocopiers from world-leading brands.", href: "/services/sales" },
-    { icon: "BuildIcon", title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair" },
-    { icon: "BuildIcon", title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/toner" },
+    { icon: Print, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental" },
+    { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/services/sales" },
+    { icon: Build, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair" },
+    { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/toner" },
   ];
 
   return (
@@ -240,15 +257,15 @@ function ServicesSection() {
           <p className="text-4xl font-bold text-white">Office Solutions Redefined</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-{services.map((s, i) => (
-             <a key={i} href={s.href} className="glass-card p-8 rounded-3xl light-leak group hover:scale-[1.02] transition-all duration-500 block">
-               <div className="w-14 h-14 rounded-2xl bg-[#2a3548] flex items-center justify-center mb-6 text-[#f5be53] group-hover:bg-[#f5be53] group-hover:text-[#412d00] transition-colors">
-                 <Icon name={s.icon as IconName} className="text-3xl" />
-               </div>
-               <h3 className="text-xl font-bold text-white mb-3 whitespace-nowrap">{s.title}</h3>
-               <p className="text-[#d3c5b0] text-sm leading-relaxed">{s.desc}</p>
-             </a>
-           ))}
+          {services.map((s, i) => (
+            <a key={i} href={s.href} className="glass-card p-8 rounded-3xl light-leak group hover:scale-[1.02] transition-all duration-500 block">
+              <div className="w-14 h-14 rounded-2xl bg-[#2a3548] flex items-center justify-center mb-6 text-[#f5be53] group-hover:bg-[#f5be53] group-hover:text-[#412d00] transition-colors">
+                <s.icon className="text-3xl" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 whitespace-nowrap">{s.title}</h3>
+              <p className="text-[#d3c5b0] text-sm leading-relaxed">{s.desc}</p>
+            </a>
+          ))}
         </div>
       </div>
     </section>
@@ -259,7 +276,7 @@ function LocationsSection() {
   const locations = [
     {
       city: "Dubai",
-      href: "/Printer-rental-dubai",
+      href: "/printer-rental-dubai",
       label: "Printer Rental Dubai",
       desc: "Same-day delivery to Business Bay, DIFC, JLT, Marina & all Dubai districts.",
       price: "From AED 250/mo",
@@ -268,7 +285,7 @@ function LocationsSection() {
     },
     {
       city: "Abu Dhabi",
-      href: "/Printer-rental-abu-dhabi",
+      href: "/printer-rental-abu-dhabi",
       label: "Printer Rental Abu Dhabi",
       desc: "Weekly maintenance visits. Mussafah, Al Reem Island, Khalifa City & ADGM.",
       price: "From AED 250/mo",
@@ -286,7 +303,7 @@ function LocationsSection() {
     },
     {
       city: "RAK",
-      href: "/Printer-rental-rak",
+      href: "/printer-rental-rak",
       label: "Printer Rental RAK",
       desc: "Serving Ras Al Khaimah businesses, free zones & industrial areas.",
       price: "From AED 300/mo",
@@ -295,7 +312,7 @@ function LocationsSection() {
     },
     {
       city: "Fujairah",
-      href: "/Printer-rental-fujairah",
+      href: "/printer-rental-fujairah",
       label: "Printer Rental Fujairah",
       desc: "East coast coverage — Fujairah port, free zones & business centres.",
       price: "From AED 300/mo",
@@ -304,7 +321,7 @@ function LocationsSection() {
     },
     {
       city: "Al Ain",
-      href: "/Printer-rental-al-ain",
+      href: "/printer-rental-al-ain",
       label: "Printer Rental Al Ain",
       desc: "Garden city coverage — Al Ain businesses, universities & clinics.",
       price: "From AED 300/mo",
@@ -398,10 +415,10 @@ function StatsSection() {
   return (
     <StatsClay
       stats={[
-        { value: "13+", label: "Years Active", icon: "LayersIcon" },
-        { value: "1500+", label: "Happy Clients", icon: "PeopleIcon" },
-        { value: "50k+", label: "Parts Fixed", icon: "FavoriteIcon" },
-        { value: "24/7", label: "Support", icon: "ComputerIcon" },
+        { value: "13+", label: "Years Active", icon: Layers },
+        { value: "1500+", label: "Happy Clients", icon: People },
+        { value: "50k+", label: "Parts Fixed", icon: Favorite },
+        { value: "24/7", label: "Support", icon: Computer },
       ]}
       title="Numbers That Speak"
       subtitle="Proven track record of delivering premium office equipment solutions across the UAE since 2012."
@@ -409,24 +426,6 @@ function StatsSection() {
   );
 }
 
-const BRAND_IMAGES: Record<string, string> = {
-  Canon: "/images/Printer-canon-1.webp",
-  HP: "/images/Printer-hp.svg",
-  Kyocera: "/images/Printer-kyocera.webp",
-  Xerox: "/images/Printer-xerox.webp",
-  Brother: "/images/Printer-brother.webp",
-  Ricoh: "/images/Printer-ricoh.webp",
-  Samsung: "/images/Printer-samsung.webp",
-  Lexmark: "/images/Printer-lexmark.webp",
-};
-// heroPrntr1.webp contains Canon-branded machines — never show it for non-Canon products
-const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/Printer-canon-2.webp"]);
-function localImg(image: string, brand: string): string {
-  if (!image || !image.startsWith("/") || (CANON_ONLY.has(image) && brand !== "Canon")) {
-    return BRAND_IMAGES[brand] || "/images/Printer-canon-1.webp";
-  }
-  return image;
-}
 
 const FEATURED_SKELETON = Array(4).fill(null).map(() => ({
   name: "",
@@ -448,15 +447,15 @@ function FeaturedProducts() {
       setProducts(
         parsed
           .filter((p: any) => p.isActive)
-          .map((p: any) => ({ ...p, image: localImg(p.image, p.brand) }))
+          .map((p: any) => ({ ...p, image: p.image || "" }))
           .slice(0, 8)
       );
     } else {
       setProducts([
-        { name: "HP LaserJet Enterprise M608",  brand: "HP",      desc: "High-speed monochromatic laser for heavy duty enterprise workloads.",    priceRental: "Contact for Pricing", image: "/images/Printer-hp.svg"       },
-        { name: "Canon imageRUNNER ADVANCE",     brand: "Canon",   desc: "Comprehensive document imaging and integrated workflow management.",      priceRental: "Leasing Available",   image: "/images/Printer-canon-1.webp"  },
-        { name: "Brother HL-L6400DW",            brand: "Brother", desc: "Robust wireless laser printing for medium-sized professional offices.",   priceRental: "Sale Ready",          image: "/images/Printer-brother.webp"  },
-        { name: "Kyocera ECOSYS M6235cidn",      brand: "Kyocera", desc: "Ultra-reliable high-volume printing with exceptional cost efficiency.",   priceRental: "Leasing Available",   image: "/images/Printer-kyocera.webp"  },
+        { name: "HP LaserJet Enterprise M608",  brand: "HP",      desc: "High-speed monochromatic laser for heavy duty enterprise workloads.",    priceRental: "Contact for Pricing", image: "/images/printer-hp.svg"       },
+        { name: "Canon imageRUNNER ADVANCE",     brand: "Canon",   desc: "Comprehensive document imaging and integrated workflow management.",      priceRental: "Leasing Available",   image: "/images/printer-canon-1.webp"  },
+        { name: "Brother HL-L6400DW",            brand: "Brother", desc: "Robust wireless laser printing for medium-sized professional offices.",   priceRental: "Sale Ready",          image: "/images/printer-brother.webp"  },
+        { name: "Kyocera ECOSYS M6235cidn",      brand: "Kyocera", desc: "Ultra-reliable high-volume printing with exceptional cost efficiency.",   priceRental: "Leasing Available",   image: "/images/printer-kyocera.webp"  },
       ]);
     }
     setLoading(false);
@@ -485,10 +484,10 @@ function FeaturedProducts() {
         </div>
         <div className="flex gap-4">
           <button type="button" onClick={scrollLeft} className="w-12 h-12 rounded-full border border-[#9c8f7c]/20 flex items-center justify-center hover:border-[#f5be53] text-[#d3c5b0] hover:text-[#f5be53] transition-all cursor-pointer">
-            <ArrowBackIcon className="text-xl" />
+            <ArrowBack className="text-xl" />
           </button>
           <button type="button" onClick={scrollRight} className="w-12 h-12 rounded-full bg-[#f5be53] text-[#412d00] flex items-center justify-center hover:scale-110 transition-all cursor-pointer">
-            <ArrowForwardIcon className="text-xl" />
+            <ArrowForward className="text-xl" />
           </button>
         </div>
       </div>
@@ -498,7 +497,7 @@ function FeaturedProducts() {
             <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center glass-card rounded-3xl overflow-hidden group">
               <div className="h-64 bg-[#142032] relative overflow-hidden">
                 {p.image && (
-                  <img src={p.image} alt={p.name} width={400} height={256} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
                 )}
                 {p.brand && (
                   <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>
@@ -525,128 +524,134 @@ function FeaturedProducts() {
 }
 
 function ReviewsSection() {
-  const SAFE_DEFAULTS = [
-    { name: "Marcus Thorne", role: "Architectural Lead", company: "Studio 91", text: "Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!", rating: 5, image_url: "" },
-    { name: "Sarah Jenkins", role: "Operations Manager", company: "TechFlow Solutions", text: "The Printer rental program saved us 40% on operational costs this quarter. Professional and reliable.", rating: 5, image_url: "" },
-    { name: "David Chen", role: "IT Director", company: "DataCore Systems", text: "Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara.", rating: 5, image_url: "" },
-  ];
-
-  const [reviews, setReviews] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [ready, setReady] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const posRef = useRef(0);
+  const pausedRef = useRef(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Load from localStorage first
+    const stored = localStorage.getItem("sahara_testimonials");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      setTestimonials(parsed.filter((t: any) => t.isActive));
+    } else {
+      // Fallback to API
+      fetch('/api/testimonials')
+        .then(res => res.json())
+        .then(data => {
+          if (data.testimonials && data.testimonials.length > 0) {
+            setTestimonials(data.testimonials);
+            localStorage.setItem("sahara_testimonials", JSON.stringify(data.testimonials));
+          }
+        })
+        .catch(() => {});
+    }
+    setReady(true);
+
+    // Connect to SSE stream for realtime updates
+    const eventSource = new EventSource('/api/testimonials/stream');
+    eventSource.onmessage = (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        if (data.type === 'init' || data.type === 'update') {
+          const active = data.data.filter((t: any) => t.isActive);
+          setTestimonials(active);
+          localStorage.setItem("sahara_testimonials", JSON.stringify(active));
+        }
+      } catch (err) {
+        console.error('SSE parse error:', err);
+      }
+    };
+    eventSource.onerror = () => {
+      // Fallback to polling every 30s if SSE fails
+      const pollInterval = setInterval(async () => {
+        try {
+          const res = await fetch('/api/testimonials');
+          const data = await res.json();
+          if (data.testimonials) {
+            const active = data.testimonials.filter((t: any) => t.isActive);
+            setTestimonials(active);
+            localStorage.setItem("sahara_testimonials", JSON.stringify(active));
+          }
+        } catch (err) {
+          console.error('Poll error:', err);
+        }
+      }, 30000);
+      return () => clearInterval(pollInterval);
+    };
+
+    return () => {
+      eventSource.close();
+    };
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
-    loadReviews();
-    const handleFocus = () => {
-      loadReviews();
+    if (!ready || !testimonials.length) return;
+    const track = trackRef.current;
+    if (!track) return;
+    
+    // Reset position when data changes to ensure smooth animation
+    posRef.current = 0;
+    track.style.transform = 'translateX(0px)';
+    
+    const SPEED = 0.6;
+    let half = 0;
+    const step = () => {
+      if (!pausedRef.current) {
+        posRef.current += SPEED;
+        if (half > 0 && posRef.current >= half) posRef.current -= half;
+        track.style.transform = `translateX(-${posRef.current}px)`;
+      }
+      rafRef.current = requestAnimationFrame(step);
     };
-    window.addEventListener('focus', handleFocus);
-    return () => window.removeEventListener('focus', handleFocus);
-  }, [mounted]);
+    rafRef.current = requestAnimationFrame(() => {
+      const pivot = track.children[testimonials.length] as HTMLElement;
+      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
+      rafRef.current = requestAnimationFrame(step);
+    });
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [ready, testimonials.length]);
 
-  const loadReviews = async () => {
-    try {
-      const res = await fetch('/api/testimonials');
-      const data = await res.json();
-      if (data.testimonials && data.testimonials.length > 0) {
-        const mapped = data.testimonials.map((t: any) => ({
-          name: t.name,
-          role: t.role || '',
-          company: t.company || '',
-          text: t.text,
-          rating: t.rating || 5,
-          image_url: t.image_url || '',
-        }));
-        setReviews(mapped);
-        localStorage.setItem("sahara_testimonials", JSON.stringify(mapped));
-      } else {
-        const stored = localStorage.getItem("sahara_testimonials");
-        if (stored) {
-          setReviews(JSON.parse(stored));
-        } else {
-          setReviews(SAFE_DEFAULTS);
-        }
-      }
-    } catch {
-      const stored = localStorage.getItem("sahara_testimonials");
-      if (stored) {
-        setReviews(JSON.parse(stored));
-      } else {
-        setReviews(SAFE_DEFAULTS);
-      }
-    }
-    setLoading(false);
-  };
-
-  if (loading || !mounted) {
-    return (
-      <section className="py-24 bg-[#101c2e]/50 relative">
-        <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
-          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
-          <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
-        </div>
-        <div className="flex items-center justify-center h-64">
-          <div className="w-8 h-8 border-2 border-[#f5be53] border-t-transparent rounded-full animate-spin" />
-        </div>
-      </section>
-    );
-  }
-
-  const allReviews = [...reviews, ...reviews];
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Sahara Printer",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": reviews.length
-    },
-    "review": reviews.map(r => ({
-      "@type": "Review",
-      "author": { "@type": "Person", "name": r.name },
-      "reviewBody": r.text,
-      "reviewRating": { "@type": "Rating", "ratingValue": r.rating }
-    }))
-  };
+  const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   return (
     <section className="py-24 bg-[#101c2e]/50 relative">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
         <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
       </div>
-       <div className="relative overflow-hidden max-w-full">
-        <div className="flex py-4 gap-6 w-max animate-carousel" suppressHydrationWarning>
-          {allReviews.map((r, i) => (
+      <div
+        className="overflow-hidden"
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+      >
+        <div ref={trackRef} className="flex gap-6 py-4" style={{ width: 'max-content' }}>
+          {allTestimonials.map((t, i) => (
             <div key={i} className="glass-card w-[350px] flex-shrink-0 p-8 rounded-2xl flex flex-col justify-between h-64">
               <div className="flex text-[#f5be53] gap-1 mb-4">
-                {[1,2,3,4,5].map(s => (
-                  <span key={s} style={{fontSize: '1.25rem'}} className={s <= r.rating ? "text-[#f5be53]" : "text-slate-600"}>★</span>
+                {[1,2,3,4,5].map(star => (
+                  star <= (t.rating || 5) ? (
+                    <Star key={star} style={{fontSize: '1.25rem'}} />
+                  ) : (
+                    <Star key={star} style={{fontSize: '1.25rem', opacity: 0.3}} />
+                  )
                 ))}
               </div>
-              <p className="text-[#d7e3fc] italic text-sm">&quot;{r.text}&quot;</p>
+              <p className="text-[#d7e3fc] italic text-sm">&quot;{t.text}&quot;</p>
               <div className="mt-6 flex items-center gap-4">
-                {r.image_url ? (
-                  <img src={r.image_url} alt={r.name} className="w-10 h-10 rounded-full object-cover" width={40} height={40} loading="lazy" decoding="async" />
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-[#2a3548] flex items-center justify-center">
-                     <span className="text-[#f5be53]">👤</span>
-                  </div>
-                )}
+                <div className="w-10 h-10 rounded-full bg-[#2a3548] flex items-center justify-center overflow-hidden">
+                  {t.avatarUrl ? (
+                    <img src={t.avatarUrl} alt={t.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <Person className="text-[#f5be53]" />
+                  )}
+                </div>
                 <div>
-                  <p className="text-white font-bold text-sm">{r.name}</p>
-                  <p className="text-slate-500 text-xs">{r.role}{r.company ? ` at ${r.company}` : ''}</p>
+                  <p className="text-white font-bold text-sm">{t.name}</p>
+                  <p className="text-slate-500 text-xs">{t.role}</p>
                 </div>
               </div>
             </div>
@@ -668,82 +673,88 @@ const LOCAL_BRAND_LOGOS: Record<string, string> = {
   epson: "/brands/epson.webp",
 };
 
-const DEFAULT_BRANDS = [
-  { name: "HP",      slug: "hp" },
-  { name: "Canon",   slug: "canon" },
-  { name: "Xerox",   slug: "xerox" },
-  { name: "Kyocera", slug: "kyocera" },
-  { name: "Ricoh",   slug: "ricoh" },
-  { name: "Sharp",   slug: "sharp" },
-  { name: "Brother", slug: "brother" },
-  { name: "Epson",   slug: "epson" },
-];
-
 function BrandCarousel() {
-  const [brands, setBrands] = useState<any[]>(DEFAULT_BRANDS);
+  const [logos, setLogos] = useState<any[]>([]);
+  const [ready, setReady] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const posRef = useRef(0);
+  const pausedRef = useRef(false);
+
+  const FALLBACK_LOGOS = [
+    { id: "1", name: "HP", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/ac/HP_logo.svg", link: "https://www.hp.com", isActive: true, sortOrder: 1 },
+    { id: "2", name: "Canon", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/28/Canon_logo.svg", link: "https://www.canon.com", isActive: true, sortOrder: 2 },
+    { id: "3", name: "Xerox", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Xerox_logo.svg", link: "https://www.xerox.com", isActive: true, sortOrder: 3 },
+    { id: "4", name: "Ricoh", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/44/Ricoh_logo.svg", link: "https://www.ricoh.com", isActive: true, sortOrder: 4 },
+    { id: "5", name: "Kyocera", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kyocera_logo.svg", link: "https://www.kyocera.com", isActive: true, sortOrder: 5 },
+    { id: "6", name: "Brother", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/44/Brother_Logo.svg", link: "https://www.brother.com", isActive: true, sortOrder: 6 },
+  ];
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sahara_brands");
-      const migrated = localStorage.getItem("sahara_brands_logo_migrated_v1");
-      if (stored && !migrated) {
-        const parsed = JSON.parse(stored);
-        let changed = false;
-        const fixed = parsed.map((b: any) => {
-          if (b.logoUrl) {
-            const valid = /^https?:\/\/.+\.(webp|png|svg|jpg|jpeg)$/i.test(b.logoUrl);
-            if (!valid || b.logoUrl.startsWith("http://")) { delete b.logoUrl; changed = true; }
-          }
-          return b;
-        });
-        if (changed) localStorage.setItem("sahara_brands", JSON.stringify(fixed));
-        localStorage.setItem("sahara_brands_logo_migrated_v1", "true");
-      }
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        const active = parsed.filter((b: any) => b.isActive);
-        if (active.length > 0) setBrands(active);
-      }
-    } catch { /* keep defaults */ }
+    fetch('/api/logos')
+      .then(res => res.json())
+      .then(data => {
+        if (data.logos && data.logos.length > 0) {
+          const active = data.logos.filter((l: any) => l.isActive);
+          setLogos(active);
+        } else {
+          setLogos(FALLBACK_LOGOS);
+        }
+      })
+      .catch(() => {
+        setLogos(FALLBACK_LOGOS);
+      })
+      .finally(() => setReady(true));
   }, []);
 
-  const getLogo = (brand: any) => {
-    const localLogo = LOCAL_BRAND_LOGOS[brand.slug?.toLowerCase()];
-    if (brand.logoUrl) {
-      const valid = /^https?:\/\/.+\.(webp|png|svg|jpg|jpeg)$/i.test(brand.logoUrl);
-      if (valid && brand.logoUrl.startsWith("https://")) return brand.logoUrl;
-    }
-    return localLogo || "";
-  };
+  useEffect(() => {
+    if (!ready || !logos.length) return;
+    const track = trackRef.current;
+    if (!track) return;
+    
+    // Reset position when data changes to ensure smooth animation
+    posRef.current = 0;
+    track.style.transform = 'translateX(0px)';
+    
+    const SPEED = 0.5;
+    let half = 0;
+    const step = () => {
+      if (!pausedRef.current) {
+        posRef.current += SPEED;
+        if (half > 0 && posRef.current >= half) posRef.current -= half;
+        track.style.transform = `translateX(-${posRef.current}px)`;
+      }
+      rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(() => {
+      const pivot = track.children[logos.length] as HTMLElement;
+      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
+      rafRef.current = requestAnimationFrame(step);
+    });
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [ready, logos.length]);
 
-  const track = [...brands, ...brands];
+  const displayLogos = [...logos, ...logos, ...logos];
 
   return (
     <section className="py-12 bg-[#101c2e]">
       <div className="text-center mb-8">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
       </div>
-      <div className="relative overflow-hidden">
+      <div
+        className="relative overflow-hidden"
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+      >
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10 pointer-events-none" />
-        <div
-          className="flex items-center py-2 gap-6 w-max animate-infinite-scroll"
-          suppressHydrationWarning
-        >
-          {track.map((brand, i) => (
-            <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-70 hover:opacity-100 transition-opacity duration-300">
-              {getLogo(brand) ? (
-                <img
-                  src={getLogo(brand)}
-                  alt={brand.name}
-                  className="brand-logo max-h-full max-w-full object-contain"
-                  loading="lazy"
-                  decoding="async"
-                  width={200}
-                  height={80}
-                />
+        <div ref={trackRef} className="flex gap-12 items-center py-2" style={{ width: 'max-content' }}>
+          {displayLogos.map((logo, i) => (
+            <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
+              {logo.imageUrl ? (
+                <img src={logo.imageUrl} alt={logo.name} className="max-h-full max-w-full object-contain" loading="lazy" />
               ) : (
-                <span className="text-slate-400 font-bold text-base">{brand.name}</span>
+                <span className="text-slate-400 font-bold text-base">{logo.name}</span>
               )}
             </div>
           ))}
@@ -798,7 +809,7 @@ function FAQSection({ faqs }: { faqs: { q: string; a: string }[] }) {
           >
             <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
               {f.q}
-               <span className="text-[#f5be53] group-open:rotate-180 transition-transform">▼</span>
+              <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
             </summary>
             <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
           </details>
@@ -829,4 +840,3 @@ function FAQSchema({ faqs }: { faqs: { q: string; a: string }[] }) {
     />
   );
 }
-

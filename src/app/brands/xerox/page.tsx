@@ -9,13 +9,13 @@ import Image from "next/image";
 
 export default function XeroxBrandPage() {
   const products = [
-    { name: "VersaLink C235", type: "Color Multifunction", SpeedIcon: "33 ppm", img: "/images/Printer-xerox.webp" },
-    { name: "VersaLink C405", type: "Color Multifunction", SpeedIcon: "45 ppm", img: "/images/Printer-xerox.webp" },
+    { name: "VersaLink C235", type: "Color Multifunction", speed: "33 ppm", img: "/images/printer-xerox.webp" },
+    { name: "VersaLink C405", type: "Color Multifunction", speed: "45 ppm", img: "/images/printer-xerox.webp" },
   ];
 
   const features = [
-    { icon: "CloudIcon_SyncIcon", title: "ConnectKey Technology", desc: "Embedded apps and CloudIcon connectivity for modern workflows" },
-    { icon: "fingerPrint", title: "Security Excellence", desc: "Comprehensive protection and compliance features" },
+    { icon: "cloud_sync", title: "ConnectKey Technology", desc: "Embedded apps and cloud connectivity for modern workflows" },
+    { icon: "fingerprint", title: "Security Excellence", desc: "Comprehensive protection and compliance features" },
     { icon: "integration_instructions", title: "Easy Integration", desc: "Seamless connection to business workflows" },
     { icon: "auto_awesome", title: "Premium Print Quality", desc: "Industry-leading color accuracy and finishing options" },
   ];
@@ -49,7 +49,7 @@ export default function XeroxBrandPage() {
             <div className="relative">
               <div className="absolute -inset-10 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
               <Image
-                src="/images/Printer-xerox.webp"
+                src="/images/printer-xerox.webp"
                 alt="Xerox VersaLink Printer"
                 width={600}
                 height={600}
@@ -97,7 +97,7 @@ export default function XeroxBrandPage() {
                   <h3 className="text-xl font-bold text-white mb-3">{p.name}</h3>
                   <div className="flex justify-between text-sm text-[#d3c5b0]">
                     <span>{p.type}</span>
-                    <span className="text-[#f5be53]">{p.SpeedIcon}</span>
+                    <span className="text-[#f5be53]">{p.speed}</span>
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export default function XeroxBrandPage() {
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto glass-card rounded-[3rem] p-12 md:p-16 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Transform Your Workplace</h2>
-          <p className="text-[#d3c5b0] mb-8">Get a customized quote for Xerox Printers tailored to your business needs.</p>
+          <p className="text-[#d3c5b0] mb-8">Get a customized quote for Xerox printers tailored to your business needs.</p>
           <a href="/get-quote?brand=xerox" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform inline-block">
             Enquire for Xerox Models
           </a>

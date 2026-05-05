@@ -7,7 +7,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 import Image from "next/image";
-import { HubIcon, DeveloperBoardIcon, NatureIcon, PaletteIcon, Print, Security } from "@/components/icons";
+import { Hub, DeveloperBoard, Nature, Palette, Print, Security } from "@mui/icons-material";
 
 export default function CanonBrandPage() {
   const [brandImage, setBrandImage] = useState("/images/unsplash-office.webp");
@@ -22,16 +22,16 @@ export default function CanonBrandPage() {
   }, []);
 
   const products = [
-    { name: "imageRUNNER ADVANCE DX", type: "CloudIcon-connected A3 Color MFP", SpeedIcon: "High-SpeedIcon scanning", img: "/images/Printer-canon-1.webp" },
-    { name: "C3800 Series", type: "Compact powerhouses", SpeedIcon: "Medium workgroups", img: "" },
-    { name: "C5800 Series", type: "Enterprise Security", SpeedIcon: "360° document protection", img: "" },
+    { name: "imageRUNNER ADVANCE DX", type: "Cloud-connected A3 Color MFP", speed: "High-speed scanning", img: "/images/printer-canon-1.webp" },
+    { name: "C3800 Series", type: "Compact powerhouses", speed: "Medium workgroups", img: "" },
+    { name: "C5800 Series", type: "Enterprise security", speed: "360° document protection", img: "" },
   ];
 
   const features = [
-    { icon: HubIcon, title: "uniFLOW Online", desc: "Single CloudIcon solution to manage all printing and scanning workflows. Increase Security by requiring user authentication." },
-    { icon: DeveloperBoardIcon, title: "MEAP Integration", desc: "Custom-built software to run directly on the device, bridging physical documents and digital systems." },
-    { icon: NatureIcon, title: "Sustainable Precision", desc: "Low-energy consumption modes and long-life components reduce waste without sacrificing performance." },
-    { icon: PaletteIcon, title: "V² Color Technology", desc: "Exceptional color accuracy and consistency for professional results." },
+    { icon: Hub, title: "uniFLOW Online", desc: "Single cloud solution to manage all printing and scanning workflows. Increase security by requiring user authentication." },
+    { icon: DeveloperBoard, title: "MEAP Integration", desc: "Custom-built software to run directly on the device, bridging physical documents and digital systems." },
+    { icon: Nature, title: "Sustainable Precision", desc: "Low-energy consumption modes and long-life components reduce waste without sacrificing performance." },
+    { icon: Palette, title: "V² Color Technology", desc: "Exceptional color accuracy and consistency for professional results." },
   ];
 
   return (
@@ -77,14 +77,14 @@ export default function CanonBrandPage() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-2xl">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">imageRUNNER Series</h2>
-              <p className="text-[#d3c5b0] text-lg">Engineered for high-volume productivity and uncompromising Security, the imageRUNNER ADVANCE series sets the gold standard for office efficiency.</p>
+              <p className="text-[#d3c5b0] text-lg">Engineered for high-volume productivity and uncompromising security, the imageRUNNER ADVANCE series sets the gold standard for office efficiency.</p>
             </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2 group relative h-[500px] rounded-lg overflow-hidden glass-card">
               <Image
-                src="/images/Printer-canon-1.webp"
+                src="/images/printer-canon-1.webp"
                 alt="Canon imageRUNNER"
                 fill
                 className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-700 opacity-80"
@@ -93,7 +93,7 @@ export default function CanonBrandPage() {
               />
               <div className="absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-[#071325] to-transparent">
                 <h3 className="text-3xl font-bold text-white mb-2">imageRUNNER ADVANCE DX</h3>
-                <p className="text-[#d3c5b0] max-w-md">CloudIcon-connected A3 color multifunction devices with high-SpeedIcon scanning and integrated uniFLOW software.</p>
+                <p className="text-[#d3c5b0] max-w-md">Cloud-connected A3 color multifunction devices with high-speed scanning and integrated uniFLOW software.</p>
               </div>
             </div>
             <div className="grid grid-rows-2 gap-8">
@@ -108,7 +108,7 @@ export default function CanonBrandPage() {
                 <div>
                   <Security className="text-[#f5be53] text-4xl mb-4 group-hover:rotate-12 transition-transform" />
                   <h4 className="text-xl font-bold text-white mb-2">C5800 Series</h4>
-                  <p className="text-[#d3c5b0] text-sm">Enterprise-grade Security with 360-degree document protection.</p>
+                  <p className="text-[#d3c5b0] text-sm">Enterprise-grade security with 360-degree document protection.</p>
                 </div>
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function CanonBrandPage() {
           </div>
           <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="/images/Printer-canon-2.webp"
+              src="/images/printer-canon-2.webp"
               alt="Canon Technology"
               fill
               className="object-cover"

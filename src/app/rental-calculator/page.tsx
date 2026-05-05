@@ -7,7 +7,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 
-interface CalculatorSettingsIcon {
+interface CalculatorSettings {
   a4BasePrice: number;
   a3BasePrice: number;
   plotterBasePrice: number;
@@ -22,7 +22,7 @@ interface CalculatorSettingsIcon {
   discount12Months: number;
 }
 
-const defaultCalcSettingsIcon: CalculatorSettingsIcon = {
+const defaultCalcSettings: CalculatorSettings = {
   a4BasePrice: 600,
   a3BasePrice: 1200,
   plotterBasePrice: 2500,
@@ -38,52 +38,52 @@ const defaultCalcSettingsIcon: CalculatorSettingsIcon = {
 };
 
 export default function RentalCalculatorPage() {
-  const [PrinterType, setPrinterType] = useState("a4");
+  const [printerType, setPrinterType] = useState("a4");
   const [colorOutput, setColorOutput] = useState("mono");
   const [monthlyVolume, setMonthlyVolume] = useState(5000);
   const [duration, setDuration] = useState(12);
-  const [calcSettingsIcon, setCalcSettingsIcon] = useState<CalculatorSettingsIcon>(defaultCalcSettingsIcon);
+  const [calcSettings, setCalcSettings] = useState<CalculatorSettings>(defaultCalcSettings);
 
-  const loadSettingsIcon = () => {
+  const loadSettings = () => {
     try {
-      const stored = localStorage.getItem("sahara_SettingsIcon");
+      const stored = localStorage.getItem("sahara_settings");
       if (stored) {
-        const SettingsIcon = JSON.parse(stored);
-        if (SettingsIcon && SettingsIcon.calculatorPrices) {
-          setCalcSettingsIcon(SettingsIcon.calculatorPrices);
+        const settings = JSON.parse(stored);
+        if (settings && settings.calculatorPrices) {
+          setCalcSettings(settings.calculatorPrices);
         }
       }
     } catch (e) {
-      console.error("Error loading calculator SettingsIcon:", e);
+      console.error("Error loading calculator settings:", e);
     }
   };
 
   useEffect(() => {
-    loadSettingsIcon();
-    const handleSettingsIconUpdate = () => loadSettingsIcon();
-    window.addEventListener("sahara-SettingsIcon-updated", handleSettingsIconUpdate);
-    return () => window.removeEventListener("sahara-SettingsIcon-updated", handleSettingsIconUpdate);
+    loadSettings();
+    const handleSettingsUpdate = () => loadSettings();
+    window.addEventListener("sahara-settings-updated", handleSettingsUpdate);
+    return () => window.removeEventListener("sahara-settings-updated", handleSettingsUpdate);
   }, []);
 
   const getBasePrice = () => {
-    if (PrinterType === "plotter") return calcSettingsIcon.plotterBasePrice;
-    if (PrinterType === "a3") return calcSettingsIcon.a3BasePrice;
-    return calcSettingsIcon.a4BasePrice;
+    if (printerType === "plotter") return calcSettings.plotterBasePrice;
+    if (printerType === "a3") return calcSettings.a3BasePrice;
+    return calcSettings.a4BasePrice;
   };
 
-  const getColorMultiplier = () => colorOutput === "color" ? calcSettingsIcon.colorMultiplier : 1;
+  const getColorMultiplier = () => colorOutput === "color" ? calcSettings.colorMultiplier : 1;
 
   const getVolumeMultiplier = () => {
-    if (monthlyVolume > 20000) return calcSettingsIcon.volumeMultiplier3;
-    if (monthlyVolume > calcSettingsIcon.volumeThreshold2) return calcSettingsIcon.volumeMultiplier3;
-    if (monthlyVolume > calcSettingsIcon.volumeThreshold1) return calcSettingsIcon.volumeMultiplier2;
-    return calcSettingsIcon.volumeMultiplier1;
+    if (monthlyVolume > 20000) return calcSettings.volumeMultiplier3;
+    if (monthlyVolume > calcSettings.volumeThreshold2) return calcSettings.volumeMultiplier3;
+    if (monthlyVolume > calcSettings.volumeThreshold1) return calcSettings.volumeMultiplier2;
+    return calcSettings.volumeMultiplier1;
   };
 
   const getDurationDiscount = () => {
-    if (duration >= 36) return calcSettingsIcon.discount36Months;
-    if (duration >= 24) return calcSettingsIcon.discount24Months;
-    if (duration >= 12) return calcSettingsIcon.discount12Months;
+    if (duration >= 36) return calcSettings.discount36Months;
+    if (duration >= 24) return calcSettings.discount24Months;
+    if (duration >= 12) return calcSettings.discount12Months;
     return 1;
   };
 
@@ -107,7 +107,7 @@ export default function RentalCalculatorPage() {
             Rental <span className="text-[#f5be53]">Calculator</span>
           </h1>
           <p className="text-lg text-[#d3c5b0] max-w-2xl mx-auto">
-            Calculate your monthly Printer rental cost based on your requirements. Get instant pricing for your business needs.
+            Calculate your monthly printer rental cost based on your requirements. Get instant pricing for your business needs.
           </p>
         </div>
       </section>
@@ -131,7 +131,7 @@ export default function RentalCalculatorPage() {
                         key={opt.value}
                         onClick={() => setPrinterType(opt.value)}
                         className={`p-4 rounded-xl border transition-all ${
-                          PrinterType === opt.value
+                          printerType === opt.value
                             ? "bg-[#f5be53] text-[#412d00] border-[#f5be53]"
                             : "border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53]"
                         }`}

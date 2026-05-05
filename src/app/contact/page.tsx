@@ -8,7 +8,7 @@ import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircleIcon, SmartphoneIcon, PhoneIcon, HeadPhoneIconsIcon, EmailIcon, LocationOnIcon, AccessTimeIcon } from "@/components/icons";
+import { CheckCircle, Smartphone, Phone, Headphones, Email, LocationOn, AccessTime } from "@mui/icons-material";
 
 function FacebookIcon() {
   return (
@@ -43,7 +43,7 @@ function YoutubeIcon() {
 }
 
 const SocialIcon = ({ icon }: { icon: string }) => {
-  const icons: Record<string, JSX.Element> = {
+  const icons: Record<string, React.ReactElement> = {
     facebook: <FacebookIcon />,
     instagram: <InstagramIcon />,
     linkedin: <LinkedinIcon />,
@@ -62,13 +62,13 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [SettingsIcon, setSettingsIcon] = useState<any>(null);
+  const [settings, setSettings] = useState<any>(null);
   const [socialLinks, setSocialLinks] = useState<{ name: string; url: string; icon: string }[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_SettingsIcon");
+    const stored = localStorage.getItem("sahara_settings");
     if (stored) {
-      setSettingsIcon(JSON.parse(stored));
+      setSettings(JSON.parse(stored));
     }
 
     const loadSocialLinks = () => {
@@ -90,7 +90,7 @@ export default function ContactPage() {
               { name: "Facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
               { name: "Instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
               { name: "LinkedIn", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
-              { name: "YouTube", url: "https://www.youtube.com/@saharaPrinter", icon: "youtube" },
+              { name: "YouTube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
             ]);
           }
         } else {
@@ -98,7 +98,7 @@ export default function ContactPage() {
             { name: "Facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
             { name: "Instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
             { name: "LinkedIn", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
-            { name: "YouTube", url: "https://www.youtube.com/@saharaPrinter", icon: "youtube" },
+            { name: "YouTube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
           ]);
         }
       } catch (e) {
@@ -107,7 +107,7 @@ export default function ContactPage() {
           { name: "Facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
           { name: "Instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
           { name: "LinkedIn", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
-          { name: "YouTube", url: "https://www.youtube.com/@saharaPrinter", icon: "youtube" },
+          { name: "YouTube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
         ]);
       }
     };
@@ -123,15 +123,15 @@ export default function ContactPage() {
   }, []);
 
   const contactNumbers = [
-    { label: "Mobile (Sales & Support)", PhoneIcon: "+971 50 382 3969", icon: SmartphoneIcon },
-    { label: "Landline (Sharjah)", PhoneIcon: "+971 6 542 6169", icon: PhoneIcon },
-    { label: "Customer Service", PhoneIcon: "+971 6 527 6444", icon: HeadPhoneIconsIcon },
+    { label: "Mobile (Sales & Support)", phone: "+971 50 382 3969", icon: Smartphone },
+    { label: "Landline (Sharjah)", phone: "+971 6 542 6169", icon: Phone },
+    { label: "Customer Service", phone: "+971 6 527 6444", icon: Headphones },
   ];
 
   const locations = [
-    { city: "Dubai", PhoneIcon: "+971 50 382 3969", address: "Business Bay, Dubai" },
-    { city: "Abu Dhabi", PhoneIcon: "+971 50 382 3969", address: "Mussafah, Abu Dhabi" },
-    { city: "Sharjah", PhoneIcon: "+971 6 542 6169", address: "Al Arabi Building, Industrial Area 11" },
+    { city: "Dubai", phone: "+971 50 382 3969", address: "Business Bay, Dubai" },
+    { city: "Abu Dhabi", phone: "+971 50 382 3969", address: "Mussafah, Abu Dhabi" },
+    { city: "Sharjah", phone: "+971 6 542 6169", address: "Al Arabi Building, Industrial Area 11" },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -142,7 +142,7 @@ export default function ContactPage() {
       ...formData,
       status: "pending",
       notes: "",
-      createdAt: new Date().toISOString(),
+      createdAt: new Date().toLocaleDateString(),
     };
 
     const existing = JSON.parse(localStorage.getItem("sahara_inquiries") || "[]");
@@ -181,7 +181,7 @@ export default function ContactPage() {
             <div className="glass-card rounded-[2rem] p-8">
               {submitted ? (
                 <div className="text-center py-8">
-                  <CheckCircleIcon className="text-5xl text-green-400 mb-4" style={{ fontSize: 60 }} />
+                  <CheckCircle className="text-5xl text-green-400 mb-4" sx={{ fontSize: 60 }} />
                   <h3 className="text-xl font-bold text-white mb-2">Thank You!</h3>
                   <p className="text-slate-400">Your inquiry has been submitted. We'll get back to you within 30 minutes.</p>
                 </div>
@@ -205,22 +205,22 @@ export default function ContactPage() {
                     />
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
-                     <input 
-                       type="email" 
-                       placeholder="Email Address *" 
-                       value={formData.email}
-                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                       required
-                       className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
-                     />
-                     <input 
-                       type="tel" 
-                       placeholder="Phone Number *" 
-                       value={formData.phone}
-                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                       required
-                       className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
-                     />
+                    <input 
+                      type="email" 
+                      placeholder="Email Address *" 
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
+                    />
+                    <input 
+                      type="tel" 
+                      placeholder="Phone Number *" 
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      required
+                      className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
+                    />
                   </div>
                   <select 
                     value={formData.service}
@@ -256,26 +256,26 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   {contactNumbers.map((contact, i) => (
                     <div key={i} className="flex items-start gap-4">
-                      <contact.icon className="text-3xl text-[#f5be53]" style={{ fontSize: 36 }} />
+                      <contact.icon className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                       <div>
                         <h3 className="font-bold text-white">{contact.label}</h3>
-                        <a href={`tel:${contact.PhoneIcon.replace(/\s/g, '')}`} className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
-                          {contact.PhoneIcon}
+                        <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
+                          {contact.phone}
                         </a>
                       </div>
                     </div>
                   ))}
                   <div className="flex items-start gap-4">
-                    <EmailIcon className="text-3xl text-[#f5be53]" style={{ fontSize: 36 }} />
+                    <Email className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
-                      <h3 className="font-bold text-white">EmailIcon</h3>
+                      <h3 className="font-bold text-white">Email</h3>
                       <a href="mailto:info@saharaedoc.com" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
                         info@saharaedoc.com
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <LocationOnIcon className="text-3xl text-[#f5be53]" style={{ fontSize: 36 }} />
+                    <LocationOn className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Headquarters</h3>
                       <p className="text-[#d3c5b0]">Al Arabi Building, Industrial Area 11</p>
@@ -284,7 +284,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <AccessTimeIcon className="text-3xl text-[#f5be53]" style={{ fontSize: 36 }} />
+                    <AccessTime className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Business Hours</h3>
                       <p className="text-[#d3c5b0]">Sat - Thu: 8:00 AM - 8:00 PM</p>
@@ -352,7 +352,7 @@ export default function ContactPage() {
               <div key={i} className="glass-card rounded-2xl p-6">
                 <h3 className="font-bold text-white text-lg mb-2">{loc.city}</h3>
                 <p className="text-[#d3c5b0] text-sm mb-2">{loc.address}</p>
-                <a href={`tel:${loc.PhoneIcon.replace(/\s/g, '')}`} className="text-[#f5be53] font-bold">{loc.PhoneIcon}</a>
+                <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="text-[#f5be53] font-bold">{loc.phone}</a>
               </div>
             ))}
           </div>

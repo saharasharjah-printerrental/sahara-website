@@ -7,18 +7,18 @@ import MobileNav from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "Photocopier Rental UAE | A3 Copier Lease Dubai Sharjah | Sahara",
-  description: "Rent A3 multifunction photocopiers in Dubai, Sharjah, Abu Dhabi. Canon imageRUNNER, Kyocera TASKalfa — Print, copy, scan, fax in one device. From AED 500/month. Zero deposit. Call +971503823969.",
+  description: "Rent A3 multifunction photocopiers in Dubai, Sharjah, Abu Dhabi. Canon imageRUNNER, Kyocera TASKalfa — print, copy, scan, fax in one device. From AED 500/month. Zero deposit. Call +971503823969.",
   keywords: "photocopier rental dubai, copier rental sharjah, A3 photocopier lease uae, multifunction copier rental dubai, canon imagerunner rental uae, kyocera copier rental dubai, photocopier lease abu dhabi",
   openGraph: {
     title: "Photocopier Rental UAE | A3 Copier Lease Dubai Sharjah | Sahara Office Equipments",
-    description: "Rent A3 multifunction photocopiers with Print, copy, scan and fax. Canon & Kyocera. From AED 500/month, zero deposit, free toner. Serving all UAE.",
-    images: [{ url: "https://www.saharaPrinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Photocopier Rental UAE" }],
-    url: "https://www.saharaPrinter.com/services/photocopier-rental",
+    description: "Rent A3 multifunction photocopiers with print, copy, scan and fax. Canon & Kyocera. From AED 500/month, zero deposit, free toner. Serving all UAE.",
+    images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Photocopier Rental UAE" }],
+    url: "https://www.saharaprinter.com/services/photocopier-rental",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
   },
-  alternates: { canonical: "https://www.saharaPrinter.com/services/photocopier-rental" },
+  alternates: { canonical: "https://www.saharaprinter.com/services/photocopier-rental" },
 };
 
 const serviceSchema = {
@@ -26,12 +26,12 @@ const serviceSchema = {
   "@type": "Service",
   "name": "Photocopier Rental UAE",
   "alternateName": ["Copier Lease Dubai", "A3 Multifunction Printer Rental UAE", "Photocopier Lease Sharjah"],
-  "description": "Lease A3 multifunction photocopiers in Dubai, Sharjah, Abu Dhabi and all UAE. Devices include Print, copy, scan, fax and CloudIcon connectivity. Canon imageRUNNER ADVANCE and Kyocera TASKalfa available from AED 500/month with zero deposit, unlimited toner, and full maintenance included.",
+  "description": "Lease A3 multifunction photocopiers in Dubai, Sharjah, Abu Dhabi and all UAE. Devices include print, copy, scan, fax and cloud connectivity. Canon imageRUNNER ADVANCE and Kyocera TASKalfa available from AED 500/month with zero deposit, unlimited toner, and full maintenance included.",
   "provider": {
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments",
     "legalName": "Sahara Office Equipment Trading LLC",
-    "telePhoneIcon": "+971503823969",
+    "telephone": "+971503823969",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Al Arabi Building, Industrial Area 11",
@@ -61,19 +61,19 @@ const howToSchema = {
   "step": [
     { "@type": "HowToStep", "position": 1, "name": "Tell Us Your Copy Volume", "text": "Share your monthly copy volume, number of users, and whether you need color or monochrome. We match you to the right device." },
     { "@type": "HowToStep", "position": 2, "name": "Receive a Tailored Quote", "text": "Our team provides a cost-per-page breakdown and monthly lease quote within 2 hours — no obligation." },
-    { "@type": "HowToStep", "position": 3, "name": "Same-Day Delivery & Network Setup", "text": "Our engineers deliver and connect the photocopier to your office network, EmailIcon server, and document management system." },
-    { "@type": "HowToStep", "position": 4, "name": "Ongoing Managed Support", "text": "Toner auto-replenished, maintenance Scheduled, repairs covered — we manage the machine so you focus on your work." }
+    { "@type": "HowToStep", "position": 3, "name": "Same-Day Delivery & Network Setup", "text": "Our engineers deliver and connect the photocopier to your office network, email server, and document management system." },
+    { "@type": "HowToStep", "position": 4, "name": "Ongoing Managed Support", "text": "Toner auto-replenished, maintenance scheduled, repairs covered — we manage the machine so you focus on your work." }
   ]
 };
 
 const faqData = [
   {
-    q: "What is the difference between photocopier rental and Printer rental?",
-    a: "A photocopier (multifunction device / MFP) combines high-volume copying, printing, scanning, and faxing in a single A3-capable device — designed for shared office use by 10–50+ PeopleIcon. A desktop Printer is typically A4-only and serves 1–5 users. Photocopiers process thousands of pages daily at a lower cost-per-page (CPP) than desktop Printers, making them more cost-effective for document-intensive offices."
+    q: "What is the difference between photocopier rental and printer rental?",
+    a: "A photocopier (multifunction device / MFP) combines high-volume copying, printing, scanning, and faxing in a single A3-capable device — designed for shared office use by 10–50+ people. A desktop printer is typically A4-only and serves 1–5 users. Photocopiers process thousands of pages daily at a lower cost-per-page (CPP) than desktop printers, making them more cost-effective for document-intensive offices."
   },
   {
     q: "How much does photocopier rental cost in UAE?",
-    a: "Photocopier rental in UAE StarIconts from AED 500/month for a monochrome A3 multifunction device (e.g., Kyocera ECOSYS M8124cidn). Color A3 photocopiers StarIcont from AED 700/month. Enterprise high-SpeedIcon devices (60+ ppm) range from AED 1,200–2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and repairs. Contact us for a cost-per-page quote based on your volume."
+    a: "Photocopier rental in UAE starts from AED 500/month for a monochrome A3 multifunction device (e.g., Kyocera ECOSYS M8124cidn). Color A3 photocopiers start from AED 700/month. Enterprise high-speed devices (60+ ppm) range from AED 1,200–2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and repairs. Contact us for a cost-per-page quote based on your volume."
   },
   {
     q: "Which photocopier brands do you rent in Dubai and Sharjah?",
@@ -88,16 +88,16 @@ const faqData = [
     a: "Standard photocopier rental contracts run 12–36 months. For events, exhibitions, or temporary office setups, we offer short-term rentals from 1 day to 3 months. Short-term rates apply; contact us for current event rental pricing."
   },
   {
-    q: "Can the rented photocopier connect to our office network and EmailIcon?",
-    a: "Yes. Our engineers configure full network integration including: LAN/Wi-Fi connectivity, scan-to-EmailIcon via your SMTP server, scan-to-folder on your server or NAS, CloudIcon integration (Google Drive, OneDrive, SharePoint), and user authentication. Setup is included in the delivery fee at no additional charge."
+    q: "Can the rented photocopier connect to our office network and email?",
+    a: "Yes. Our engineers configure full network integration including: LAN/Wi-Fi connectivity, scan-to-email via your SMTP server, scan-to-folder on your server or NAS, cloud integration (Google Drive, OneDrive, SharePoint), and user authentication. Setup is included in the delivery fee at no additional charge."
   },
   {
     q: "What happens if the photocopier breaks down?",
     a: "All rental photocopiers are covered by our full service agreement. We target a 4-hour on-site response for Dubai and Sharjah. If a repair cannot be completed within 24 hours, we deliver a loaner machine at no cost so your office is never without a working device."
   },
   {
-    q: "Can I Upgrade to a faster or color photocopier mid-contract?",
-    a: "Yes. Our 'Growth Guard' policy allows you to Upgrade your photocopier at any point during the contract — for example, moving from a 35 ppm monochrome to a 45 ppm color device as your business grows. Upgrades are processed without termination fees."
+    q: "Can I upgrade to a faster or color photocopier mid-contract?",
+    a: "Yes. Our 'Growth Guard' policy allows you to upgrade your photocopier at any point during the contract — for example, moving from a 35 ppm monochrome to a 45 ppm color device as your business grows. Upgrades are processed without termination fees."
   },
   {
     q: "Do you offer photocopier rental for SAIF Zone and JAFZA companies?",
@@ -105,7 +105,7 @@ const faqData = [
   },
   {
     q: "Is maintenance included in photocopier rental?",
-    a: "Fully included. All rental photocopiers receive preventive maintenance on a Scheduled basis. This includes internal cleaning, roller replacement, calibration, firmware updates, and drum inspection. Emergency repairs are covered at no additional cost under the full service agreement."
+    a: "Fully included. All rental photocopiers receive preventive maintenance on a scheduled basis. This includes internal cleaning, roller replacement, calibration, firmware updates, and drum inspection. Emergency repairs are covered at no additional cost under the full service agreement."
   },
   {
     q: "Can we rent multiple photocopiers for different office locations?",
@@ -113,7 +113,7 @@ const faqData = [
   },
   {
     q: "What is cost-per-page (CPP) and how does it apply to copier rental?",
-    a: "Cost-per-page (CPP) is the total monthly cost divided by your Print/copy volume. With Sahara's all-inclusive rental, your effective CPP includes the machine, toner, maintenance, and parts — typically AED 0.02–0.05 per black-and-white page and AED 0.15–0.25 per color page, depending on volume and model. This is 30–50% lower than the total cost of owning and maintaining your own copier."
+    a: "Cost-per-page (CPP) is the total monthly cost divided by your print/copy volume. With Sahara's all-inclusive rental, your effective CPP includes the machine, toner, maintenance, and parts — typically AED 0.02–0.05 per black-and-white page and AED 0.15–0.25 per color page, depending on volume and model. This is 30–50% lower than the total cost of owning and maintaining your own copier."
   }
 ];
 
@@ -131,9 +131,9 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaPrinter.com" },
-    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaPrinter.com/services" },
-    { "@type": "ListItem", "position": 3, "name": "Photocopier Rental UAE", "item": "https://saharaPrinter.com/services/photocopier-rental" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaprinter.com/services" },
+    { "@type": "ListItem", "position": 3, "name": "Photocopier Rental UAE", "item": "https://saharaprinter.com/services/photocopier-rental" }
   ]
 };
 
@@ -141,16 +141,16 @@ const devices = [
   {
     name: "Canon imageRUNNER ADVANCE C5540i",
     type: "A3 Color MFP",
-    SpeedIcon: "40 ppm color / 40 ppm mono",
+    speed: "40 ppm color / 40 ppm mono",
     users: "15–40 users",
-    functions: ["Print", "Copy", "Scan", "Fax", "CloudIcon"],
+    functions: ["Print", "Copy", "Scan", "Fax", "Cloud"],
     price: "From AED 750/mo",
     highlight: true
   },
   {
     name: "Kyocera TASKalfa 3553ci",
     type: "A3 Color MFP",
-    SpeedIcon: "35 ppm color / 35 ppm mono",
+    speed: "35 ppm color / 35 ppm mono",
     users: "10–30 users",
     functions: ["Print", "Copy", "Scan", "Fax"],
     price: "From AED 650/mo",
@@ -159,7 +159,7 @@ const devices = [
   {
     name: "Canon imageRUNNER ADVANCE 4551i",
     type: "A3 Mono MFP",
-    SpeedIcon: "51 ppm mono",
+    speed: "51 ppm mono",
     users: "20–50 users",
     functions: ["Print", "Copy", "Scan", "Fax"],
     price: "From AED 500/mo",
@@ -168,26 +168,26 @@ const devices = [
   {
     name: "Kyocera TASKalfa 5053ci",
     type: "A3 Color MFP",
-    SpeedIcon: "50 ppm color / 50 ppm mono",
+    speed: "50 ppm color / 50 ppm mono",
     users: "30–80 users",
-    functions: ["Print", "Copy", "Scan", "Fax", "CloudIcon"],
+    functions: ["Print", "Copy", "Scan", "Fax", "Cloud"],
     price: "From AED 1,000/mo",
     highlight: false
   },
 ];
 
-const PrinterVsCopier = [
-  { feature: "Page Format", copier: "A3 + A4 (both)", Printer: "A4 only (mostly)" },
-  { feature: "Monthly Volume", copier: "5,000–100,000+ pages", Printer: "200–3,000 pages" },
-  { feature: "Concurrent Users", copier: "10–80 users", Printer: "1–5 users" },
-  { feature: "Functions", copier: "Print + Copy + Scan + Fax + CloudIcon", Printer: "Print (+ basic scan)" },
-  { feature: "Cost-Per-Page", copier: "AED 0.02–0.05 (mono)", Printer: "AED 0.08–0.15 (mono)" },
-  { feature: "Monthly Rental", copier: "AED 500–2,000", Printer: "AED 250–400" },
-  { feature: "Best For", copier: "Shared office, legal, real estate, HR, accounts", Printer: "Individual workstation, reception desk" },
+const printerVsCopier = [
+  { feature: "Page Format", copier: "A3 + A4 (both)", printer: "A4 only (mostly)" },
+  { feature: "Monthly Volume", copier: "5,000–100,000+ pages", printer: "200–3,000 pages" },
+  { feature: "Concurrent Users", copier: "10–80 users", printer: "1–5 users" },
+  { feature: "Functions", copier: "Print + Copy + Scan + Fax + Cloud", printer: "Print (+ basic scan)" },
+  { feature: "Cost-Per-Page", copier: "AED 0.02–0.05 (mono)", printer: "AED 0.08–0.15 (mono)" },
+  { feature: "Monthly Rental", copier: "AED 500–2,000", printer: "AED 250–400" },
+  { feature: "Best For", copier: "Shared office, legal, real estate, HR, accounts", printer: "Individual workstation, reception desk" },
 ];
 
 const industries = [
-  { name: "Legal & Accounting Firms", need: "High-volume contract, report and agreement printing. Secure Print release keeps confidential documents private.", icon: "⚖️", volume: "10,000–50,000 pages/month" },
+  { name: "Legal & Accounting Firms", need: "High-volume contract, report and agreement printing. Secure print release keeps confidential documents private.", icon: "⚖️", volume: "10,000–50,000 pages/month" },
   { name: "Real Estate Agencies", need: "Large-format property brochures, A3 floor plans, and high-volume contract duplication during sales periods.", icon: "🏢", volume: "5,000–20,000 pages/month" },
   { name: "Medical & Dental Clinics", need: "Patient file printing, prescription reproduction, and HIPAA-compliant secure scanning to EMR systems.", icon: "🏥", volume: "3,000–10,000 pages/month" },
   { name: "Construction & Engineering", need: "A3 technical drawings, site plans, and report reproduction. Durable devices that handle dusty environments.", icon: "🏗️", volume: "8,000–30,000 pages/month" },
@@ -196,21 +196,22 @@ const industries = [
 ];
 
 const workflowFeatures = [
-  { title: "Scan to EmailIcon", desc: "Direct scan-to-EmailIcon via your office SMTP server. No third-party apps. Configured on delivery day." },
+  { title: "Scan to Email", desc: "Direct scan-to-email via your office SMTP server. No third-party apps. Configured on delivery day." },
   { title: "Scan to Shared Folder", desc: "Scans go straight to your server or NAS. Works with Windows, Samba, FTP, and SMB shares." },
-  { title: "CloudIcon Integration", desc: "Native connectors for Google Drive, OneDrive, SharePoint, and Dropbox on supported models." },
+  { title: "Cloud Integration", desc: "Native connectors for Google Drive, OneDrive, SharePoint, and Dropbox on supported models." },
   { title: "Secure Print Release", desc: "PIN or card-authenticated release prevents confidential documents from sitting in the output tray." },
-  { title: "User Authentication", desc: "Department-level cost tracking. Know exactly which team Prints how much every month." },
-  { title: "Mobile Printing", desc: "AirPrint, Google CloudIcon Print, and manufacturer apps for printing directly from PhoneIcons and tablets." },
+  { title: "User Authentication", desc: "Department-level cost tracking. Know exactly which team prints how much every month." },
+  { title: "Mobile Printing", desc: "AirPrint, Google Cloud Print, and manufacturer apps for printing directly from phones and tablets." },
 ];
 
 export default function PhotocopierRentalPage() {
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+    <main className="min-h-screen bg-[#071325]">
       <Header />
 
       {/* ── Hero ── */}
@@ -309,7 +310,7 @@ export default function PhotocopierRentalPage() {
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Which Do You Need?</span>
             <h2 className="text-4xl font-bold text-white mt-3 mb-4">Photocopier vs. Desktop Printer</h2>
             <p className="text-[#7a94ad] max-w-lg mx-auto text-sm">
-              Many businesses waste money renting desktop Printers when a single A3 photocopier would handle
+              Many businesses waste money renting desktop printers when a single A3 photocopier would handle
               the same workload at half the cost-per-page.
             </p>
           </div>
@@ -323,12 +324,12 @@ export default function PhotocopierRentalPage() {
                 </tr>
               </thead>
               <tbody>
-                {PrinterVsCopier.map((row, i) => (
+                {printerVsCopier.map((row, i) => (
                   <tr key={i} className="border-t"
                     style={{ background: i % 2 === 0 ? 'rgba(10,20,38,0.6)' : 'rgba(7,15,30,0.6)', borderColor: 'rgba(255,255,255,0.04)' }}>
                     <td className="py-4 px-6 text-white text-sm font-medium">{row.feature}</td>
                     <td className="py-4 px-4 text-center text-[#f5be53] text-xs font-semibold border-x border-[#f5be53]/10">{row.copier}</td>
-                    <td className="py-4 px-4 text-center text-slate-500 text-xs">{row.Printer}</td>
+                    <td className="py-4 px-4 text-center text-slate-500 text-xs">{row.printer}</td>
                   </tr>
                 ))}
               </tbody>
@@ -361,7 +362,7 @@ export default function PhotocopierRentalPage() {
                   <h3 className="text-white font-bold text-sm leading-snug">{d.name}</h3>
                 </div>
                 <div className="space-y-2 mb-4 flex-1">
-                  <p className="text-[#6a87a4] text-xs">⚡ {d.SpeedIcon}</p>
+                  <p className="text-[#6a87a4] text-xs">⚡ {d.speed}</p>
                   <p className="text-[#6a87a4] text-xs">👥 {d.users}</p>
                   <div className="flex flex-wrap gap-1 mt-2">
                     {d.functions.map((fn) => (
@@ -387,7 +388,7 @@ export default function PhotocopierRentalPage() {
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Document Workflows</span>
             <h2 className="text-4xl font-bold text-white mt-3 mb-4">Beyond Copying — Full Office Integration</h2>
             <p className="text-[#7a94ad] max-w-lg mx-auto text-sm">
-              Modern A3 photocopiers are document workflow HubIcons. Our engineers configure every feature on delivery day.
+              Modern A3 photocopiers are document workflow hubs. Our engineers configure every feature on delivery day.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -514,6 +515,6 @@ export default function PhotocopierRentalPage() {
       <JumpToTop />
       <MobileNav />
     </main>
+    </>
   );
 }
-

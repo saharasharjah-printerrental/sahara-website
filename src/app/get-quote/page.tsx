@@ -8,7 +8,7 @@ import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 
 export default function GetQuotePage() {
-  const [PrinterType, setPrinterType] = useState("a4");
+  const [printerType, setPrinterType] = useState("a4");
   const [colorOutput, setColorOutput] = useState("mono");
   const [monthlyVolume, setMonthlyVolume] = useState(5000);
   const [duration, setDuration] = useState(12);
@@ -17,8 +17,8 @@ export default function GetQuotePage() {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
-    EmailIcon: "",
-    PhoneIcon: "",
+    email: "",
+    phone: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -28,7 +28,7 @@ export default function GetQuotePage() {
 
   const calculatePrice = () => {
     let basePrice = 300;
-    if (PrinterType === "a3") basePrice += 150;
+    if (printerType === "a3") basePrice += 150;
     if (colorOutput === "color") basePrice += 200;
     if (monthlyVolume > 5000) basePrice += 100;
     if (duration < 12) basePrice *= 1.1;
@@ -47,17 +47,17 @@ export default function GetQuotePage() {
     setSubmitting(true);
     setSubmitError("");
 
-    const configuration = `${PrinterType.toUpperCase()} — ${colorOutput === "color" ? "Color" : "Mono"} — ${monthlyVolume.toLocaleString()} pages/mo — ${duration} months${includeMaintenance ? " — Maintenance" : ""}${includeInstall ? " — Install" : ""}`;
+    const configuration = `${printerType.toUpperCase()} — ${colorOutput === "color" ? "Color" : "Mono"} — ${monthlyVolume.toLocaleString()} pages/mo — ${duration} months${includeMaintenance ? " — Maintenance" : ""}${includeInstall ? " — Install" : ""}`;
     const estimatedRange = `AED ${price.min}–${price.max}`;
 
     const payload = {
       name: formData.name,
       company: formData.company,
-      EmailIcon: formData.EmailIcon,
-      PhoneIcon: formData.PhoneIcon,
+      email: formData.email,
+      phone: formData.phone,
       service: configuration,
       message: formData.message || " ",
-      notes: `Rental Quote:\n- Type: ${PrinterType.toUpperCase()}\n- Color: ${colorOutput}\n- Volume: ${monthlyVolume}/mo\n- Duration: ${duration} months\n- Maintenance: ${includeMaintenance ? "Yes" : "No"}\n- Install: ${includeInstall ? "Yes" : "No"}\n- Estimated: ${estimatedRange}/mo`,
+      notes: `Rental Quote:\n- Type: ${printerType.toUpperCase()}\n- Color: ${colorOutput}\n- Volume: ${monthlyVolume}/mo\n- Duration: ${duration} months\n- Maintenance: ${includeMaintenance ? "Yes" : "No"}\n- Install: ${includeInstall ? "Yes" : "No"}\n- Estimated: ${estimatedRange}/mo`,
       estimatedRange,
     };
 
@@ -123,11 +123,11 @@ export default function GetQuotePage() {
                   <div className="space-y-3">
                     <label className="text-sm text-[#d3c5b0] uppercase tracking-widest font-semibold">Format</label>
                     <div className="grid grid-cols-2 gap-3">
-                      <button type="button" onClick={() => setPrinterType("a4")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${PrinterType === "a4" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
+                      <button type="button" onClick={() => setPrinterType("a4")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${printerType === "a4" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
                         <span className="material-symbols-outlined mb-2">description</span>
                         <span className="text-sm font-bold">A4 Size</span>
                       </button>
-                      <button type="button" onClick={() => setPrinterType("a3")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${PrinterType === "a3" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
+                      <button type="button" onClick={() => setPrinterType("a3")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${printerType === "a3" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
                         <span className="material-symbols-outlined mb-2">tab</span>
                         <span className="text-sm font-bold">A3 Size</span>
                       </button>
@@ -137,7 +137,7 @@ export default function GetQuotePage() {
                     <label className="text-sm text-[#d3c5b0] uppercase tracking-widest font-semibold">Color Output</label>
                     <div className="grid grid-cols-2 gap-3">
                       <button type="button" onClick={() => setColorOutput("color")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${colorOutput === "color" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
-                        <span className="material-symbols-outlined mb-2">PaletteIcon</span>
+                        <span className="material-symbols-outlined mb-2">palette</span>
                         <span className="text-sm font-bold">Color</span>
                       </button>
                       <button type="button" onClick={() => setColorOutput("mono")} className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-colors ${colorOutput === "mono" ? "border-[#f5be53] bg-[#f5be53]/5 text-[#f5be53]" : "border-[#9c8f7c]/20 bg-[#101c2e] hover:border-[#f5be53]/50 text-white"}`}>
@@ -246,18 +246,18 @@ export default function GetQuotePage() {
                         className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]"
                       />
                       <input
-                        type="EmailIcon"
-                        placeholder="EmailIcon Address *"
-                        value={formData.EmailIcon}
-                        onChange={(e) => setFormData({ ...formData, EmailIcon: e.target.value })}
+                        type="email"
+                        placeholder="Email Address *"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         required
                         className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]"
                       />
                       <input
                         type="tel"
-                        placeholder="PhoneIcon Number *"
-                        value={formData.PhoneIcon}
-                        onChange={(e) => setFormData({ ...formData, PhoneIcon: e.target.value })}
+                        placeholder="Phone Number *"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         required
                         className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50 focus:ring-2 focus:ring-[#f5be53]"
                       />
@@ -311,7 +311,7 @@ export default function GetQuotePage() {
                     </div>
                     <div className="flex justify-between items-center py-4">
                       <span className="text-[#d3c5b0] italic text-sm">Quotes exclude 5% VAT</span>
-                      <span className="material-symbols-outlined text-[#f5be53] text-sm">VerifiedIcon</span>
+                      <span className="material-symbols-outlined text-[#f5be53] text-sm">verified</span>
                     </div>
                   </div>
                   {submitted ? (
@@ -344,4 +344,3 @@ export default function GetQuotePage() {
     </main>
   );
 }
-

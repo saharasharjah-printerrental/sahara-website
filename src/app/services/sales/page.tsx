@@ -5,23 +5,23 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
-import { Inventory2Icon, VerifiedIcon, SupportAgentIcon, Print } from "@/components/icons";
+import { Inventory2, Verified, SupportAgent, Calculate, Print } from "@mui/icons-material";
 
 export default function SalesPage() {
   const products = [
-    { name: "HP LaserJet Enterprise M608", type: "Monochrome Laser", SpeedIcon: "65 ppm", brand: "HP" },
-    { name: "Canon imageRUNNER ADVANCE C5735", type: "Color Multifunction", SpeedIcon: "35 ppm", brand: "Canon" },
-    { name: "Ricoh MP C6004", type: "Color Multifunction", SpeedIcon: "60 ppm", brand: "Ricoh" },
-    { name: "Xerox VersaLink C405", type: "Color Laser", SpeedIcon: "45 ppm", brand: "Xerox" },
-    { name: "Brother MFC-L8900CDW", type: "Color Laser", SpeedIcon: "32 ppm", brand: "Brother" },
-    { name: "Sharp MX-6070N", type: "Color Multifunction", SpeedIcon: "60 ppm", brand: "Sharp" },
+    { name: "HP LaserJet Enterprise M608", type: "Monochrome Laser", speed: "65 ppm", brand: "HP" },
+    { name: "Canon imageRUNNER ADVANCE C5735", type: "Color Multifunction", speed: "35 ppm", brand: "Canon" },
+    { name: "Ricoh MP C6004", type: "Color Multifunction", speed: "60 ppm", brand: "Ricoh" },
+    { name: "Xerox VersaLink C405", type: "Color Laser", speed: "45 ppm", brand: "Xerox" },
+    { name: "Brother MFC-L8900CDW", type: "Color Laser", speed: "32 ppm", brand: "Brother" },
+    { name: "Sharp MX-6070N", type: "Color Multifunction", speed: "60 ppm", brand: "Sharp" },
   ];
 
   const features = [
-    { icon: Inventory2Icon, title: "In Stock", desc: "Ready-to-ship Inventory with next-day delivery across UAE" },
-    { icon: VerifiedIcon, title: "Warranty", desc: "Comprehensive manufacturer warranty on all equipment" },
-    { icon: SupportAgentIcon, title: "Installation", desc: "Professional on-site setup and network configuration" },
-    { icon: Inventory2Icon, title: "Trade-In", desc: "Old device trade-in program with competitive valuations" },
+    { icon: Inventory2, title: "In Stock", desc: "Ready-to-ship inventory with next-day delivery across UAE" },
+    { icon: Verified, title: "Warranty", desc: "Comprehensive manufacturer warranty on all equipment" },
+    { icon: SupportAgent, title: "Installation", desc: "Professional on-site setup and network configuration" },
+    { icon: Calculate, title: "Trade-In", desc: "Old device trade-in program with competitive valuations" },
   ];
 
   return (
@@ -54,8 +54,8 @@ export default function SalesPage() {
             <div className="relative">
               <div className="glass-card rounded-3xl p-8">
                 <img
-                  src="/images/Printer-hp.svg"
-                  alt="HP LaserJet enterprise Printer for sale UAE Dubai"
+                  src="/images/printer-hp.svg"
+                  alt="HP LaserJet enterprise printer for sale UAE Dubai"
                   className="w-full h-full object-cover rounded-2xl"
                 />
               </div>
@@ -92,7 +92,7 @@ export default function SalesPage() {
                   <h3 className="text-lg font-bold text-white mb-2">{p.name}</h3>
                   <div className="flex justify-between text-sm text-[#d3c5b0]">
                     <span>{p.type}</span>
-                    <span>{p.SpeedIcon}</span>
+                    <span>{p.speed}</span>
                   </div>
                 </div>
               </div>

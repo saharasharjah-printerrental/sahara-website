@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useMotionValue } from "framer-motion";
 import { useRef } from "react";
-import Icon from "@/components/Icon";
+import { Smartphone, Phone, Headphones, Email } from "@mui/icons-material";
 
 function FacebookIcon() {
   return (
@@ -42,7 +42,7 @@ const defaultSocialLinks = [
   { name: "facebook", url: "https://www.facebook.com/share/1GM5UxFLTq/?mibextid=wwXIfr", icon: "facebook" },
   { name: "instagram", url: "https://www.instagram.com/sahara_office_equipments", icon: "instagram" },
   { name: "linkedin", url: "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/", icon: "linkedin" },
-  { name: "youtube", url: "https://www.youtube.com/@saharaPrinter", icon: "youtube" },
+  { name: "youtube", url: "https://www.youtube.com/@saharaprinter", icon: "youtube" },
 ];
 
 const MagneticButton = ({ children, variant = "primary" }: { children: React.ReactNode; variant?: "primary" | "outline" }) => {
@@ -82,7 +82,7 @@ const MagneticButton = ({ children, variant = "primary" }: { children: React.Rea
 };
 
 const SocialIcon = ({ icon }: { icon: string }) => {
-  const socialIcons: Record<string, JSX.Element> = {
+  const socialIcons: Record<string, React.ReactElement> = {
     facebook: <FacebookIcon />,
     instagram: <InstagramIcon />,
     linkedin: <LinkedinIcon />,
@@ -92,20 +92,20 @@ const SocialIcon = ({ icon }: { icon: string }) => {
 };
 
 export default function Footer() {
-  const [SettingsIcon, setSettingsIcon] = useState<any>(null);
+  const [settings, setSettings] = useState<any>(null);
   const [socialLinks, setSocialLinks] = useState(defaultSocialLinks);
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("sahara_SettingsIcon");
+      const stored = localStorage.getItem("sahara_settings");
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed && typeof parsed === "object") {
-          setSettingsIcon(parsed);
+          setSettings(parsed);
         }
       }
     } catch (e) {
-      console.error("Error loading SettingsIcon:", e);
+      console.error("Error loading settings:", e);
     }
 
     const loadSocialLinks = () => {
@@ -150,7 +150,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
           <div className="space-y-6 lg:col-span-1">
             <div className="text-xl font-bold text-[#f5be53]">Sahara Office Equipments</div>
-            <p className="text-slate-400 text-sm leading-relaxed">UAE's trusted partner for Printer rental, sales, repair, and managed Print solutions since 2012.</p>
+            <p className="text-slate-400 text-sm leading-relaxed">UAE's trusted partner for printer rental, sales, repair, and managed print solutions since 2012.</p>
 
             {/* Social Media Links with motion */}
             <div className="flex gap-4">
@@ -184,19 +184,19 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-6">Contact</h4>
             <ul className="space-y-4 text-sm text-slate-400">
               <li className="flex items-center gap-2">
-                <span className="text-[#f5be53] text-lg">📱</span>
+                <Smartphone className="text-[#f5be53] text-lg" />
                 <a href="tel:+971503823969" className="hover:text-[#f5be53] transition-colors">+971 50 382 3969</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-[#f5be53] text-lg">📞</span>
+                <Phone className="text-[#f5be53] text-lg" />
                 <a href="tel:+97165426169" className="hover:text-[#f5be53] transition-colors">+971 6 542 6169</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-[#f5be53] text-lg">🎧</span>
+                <Headphones className="text-[#f5be53] text-lg" />
                 <a href="tel:+97165276444" className="hover:text-[#f5be53] transition-colors">+971 6 527 6444</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-[#f5be53] text-lg">✉️</span>
+                <Email className="text-[#f5be53] text-lg" />
                 <a href="mailto:info@saharaedoc.com" className="hover:text-[#f5be53] transition-colors">info@saharaedoc.com</a>
               </li>
             </ul>
@@ -211,7 +211,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-6">Our Services</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><Link href="/services/Printer-rental" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
+              <li><Link href="/services/printer-rental" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
               <li><Link href="/services/photocopier-rental" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
               <li><Link href="/services/amc" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
               <li><Link href="/services/repair" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
@@ -224,13 +224,13 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-6">Locations</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><Link href="/Printer-rental-dubai" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
+              <li><Link href="/printer-rental-dubai" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
               <li><Link href="/photocopier-rental-sharjah" className="hover:text-[#f5be53] transition-colors">Photocopier Sharjah</Link></li>
-              <li><Link href="/Printer-rental-abu-dhabi" className="hover:text-[#f5be53] transition-colors">Printer Rental Abu Dhabi</Link></li>
-              <li><Link href="/Printer-rental-rak" className="hover:text-[#f5be53] transition-colors">Printer Rental RAK</Link></li>
-              <li><Link href="/Printer-rental-fujairah" className="hover:text-[#f5be53] transition-colors">Printer Rental Fujairah</Link></li>
-              <li><Link href="/Printer-rental-al-ain" className="hover:text-[#f5be53] transition-colors">Printer Rental Al Ain</Link></li>
-              <li><Link href="/Printer-repair-dubai" className="hover:text-[#f5be53] transition-colors">Printer Repair Dubai</Link></li>
+              <li><Link href="/printer-rental-abu-dhabi" className="hover:text-[#f5be53] transition-colors">Printer Rental Abu Dhabi</Link></li>
+              <li><Link href="/printer-rental-rak" className="hover:text-[#f5be53] transition-colors">Printer Rental RAK</Link></li>
+              <li><Link href="/printer-rental-fujairah" className="hover:text-[#f5be53] transition-colors">Printer Rental Fujairah</Link></li>
+              <li><Link href="/printer-rental-al-ain" className="hover:text-[#f5be53] transition-colors">Printer Rental Al Ain</Link></li>
+              <li><Link href="/printer-repair-dubai" className="hover:text-[#f5be53] transition-colors">Printer Repair Dubai</Link></li>
             </ul>
           </div>
 
@@ -238,12 +238,12 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-6">Blog Resources</h4>
             <ul className="space-y-3 text-sm text-slate-400">
               <li>
-                <Link href="/blogs/how-to-choose-the-best-Printer-rental-dubai-service" className="hover:text-[#f5be53] transition-colors leading-snug">
+                <Link href="/blogs/how-to-choose-the-best-printer-rental-dubai-service" className="hover:text-[#f5be53] transition-colors leading-snug">
                   How to Choose Printer Rental Dubai
                 </Link>
               </li>
               <li>
-                <Link href="/blogs/total-cost-of-Printer-ownership" className="hover:text-[#f5be53] transition-colors leading-snug">
+                <Link href="/blogs/total-cost-of-printer-ownership" className="hover:text-[#f5be53] transition-colors leading-snug">
                   Total Cost of Printer Ownership
                 </Link>
               </li>
@@ -274,11 +274,11 @@ export default function Footer() {
         {/* SEO Internal Links — Keyword Anchor Text */}
         <div className="py-8 border-t border-white/5">
           <div className="text-center flex flex-wrap justify-center gap-x-3 gap-y-1.5 mb-3">
-            <Link href="/Printer-rental-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Rental Dubai</Link>
+            <Link href="/printer-rental-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Rental Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/photocopier-rental-sharjah" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Photocopier Sharjah</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/Printer-rental-abu-dhabi" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Copier Abu Dhabi</Link>
+            <Link href="/printer-rental-abu-dhabi" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Copier Abu Dhabi</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/copier-lease-uae" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Lease UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
@@ -290,11 +290,11 @@ export default function Footer() {
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/brands/kyocera" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Kyocera Photocopier</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/Printer-repair-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Repair Dubai</Link>
+            <Link href="/printer-repair-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Repair Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/canon-Printer-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Dubai</Link>
+            <Link href="/canon-printer-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/hp-Printer-abu-dhabi" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">HP Printer Abu Dhabi</Link>
+            <Link href="/hp-printer-abu-dhabi" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">HP Printer Abu Dhabi</Link>
           </div>
           <p className="text-slate-600 text-xs text-center">
             Serving: Dubai · Sharjah · Abu Dhabi · Ajman · RAK · Fujairah · Al Ain — Free delivery across UAE
@@ -308,4 +308,3 @@ export default function Footer() {
     </footer>
   );
 }
-
