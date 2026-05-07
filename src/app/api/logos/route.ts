@@ -19,7 +19,7 @@ export async function GET() {
   }
 
   try {
-    const result = await db.prepare('SELECT * FROM logos ORDER BY sort_order ASC').all();
+    const result = await db.prepare('SELECT * FROM logos ORDER BY sortOrder ASC').all();
     return NextResponse.json({ logos: result?.results ?? [] });
   } catch (error) {
     console.error('Logos GET Error:', error);
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     const id = body.id || Date.now().toString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO logos (id, name, image_url, image_alt, link, is_active, sort_order)
+      INSERT OR REPLACE INTO logos (id, name, imageUrl, imageAlt, link, isActive, sortOrder)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
