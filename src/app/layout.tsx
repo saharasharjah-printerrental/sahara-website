@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "LocalBusiness", "ProfessionalService", "Store"],
+  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
   "name": "Sahara Office Equipments",
   "legalName": "Sahara Office Equip Tr LLC",
   "alternateName": ["Sahara Printer", "Sahara Printers UAE", "Sahara Office Equipment Trading LLC"],
@@ -138,10 +138,10 @@ const organizationSchema = {
   "priceRange": "AED 250–2000",
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "1500",
-    "bestRating": "5",
-    "worstRating": "1"
+    "ratingValue": 4.9,
+    "reviewCount": 1500,
+    "bestRating": 5,
+    "worstRating": 1
   },
   "brand": [
     { "@type": "Brand", "name": "Canon" },
@@ -238,7 +238,7 @@ const organizationSchema = {
     "https://www.quora.com/profile/Sahara-Printer-Printer-Rental-Expert-for-Businesses-UAE"
   ],
   "dateEstablished": "2012-01-01",
-  "dateModified": "2026-07-17",
+  "dateModified": "2026-05-07",
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": ["h1", "h2", ".aeo-block"]

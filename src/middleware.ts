@@ -23,7 +23,7 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' data: https: blob: https://www.google.com https://www.google-analytics.com",
-    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://static.cloudflareinsights.com",
+    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://static.cloudflareinsights.com https://googleads.g.doubleclick.net",
     "frame-src 'self' https://www.google.com https://www.youtube.com",
   ].join('; ');
   
