@@ -131,9 +131,12 @@ export default function ProductsPage() {
   };
 
   return (
+    <>
     <main className="min-h-screen bg-[#071325]">
+      <link rel="canonical" href="https://www.saharaprinter.com/products/" />
       <Header />
-      <div className="pt-24 pb-40 px-8 min-h-screen">
+
+      <section className="pt-32 pb-8 px-8 lg:px-24">
         <header className="max-w-7xl mx-auto mb-12">
           <nav className="flex mb-6 text-sm font-medium text-[#d3c5b0] gap-2 items-center">
             <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
@@ -165,8 +168,9 @@ export default function ProductsPage() {
             </div>
           </div>
         </header>
+      </section>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Sidebar Filters */}
           <aside className="space-y-10">
             <div className="relative">
@@ -360,47 +364,13 @@ export default function ProductsPage() {
               </div>
             )}
           </div>
-        </div>
       </div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "name": "Printer Rental Products - Sahara Office Equipments",
-            "description": "Browse our complete range of printer rental products including Canon, HP, Kyocera, Xerox, and more. Zero deposit rental available across Dubai, Abu Dhabi, and UAE.",
-            "url": "https://saharaprinter.com/products",
-            "mainEntity": {
-              "@type": "ItemList",
-              "name": "Available Printer Rental Products",
-              "numberOfItems": defaultProducts.length,
-              "itemListElement": defaultProducts.map((product, index) => ({
-                "@type": "Product",
-                "position": index + 1,
-                "name": product.name,
-                "brand": {
-                  "@type": "Brand",
-                  "name": product.brand
-                },
-                "category": product.category,
-                "offers": {
-                  "@type": "Offer",
-                  "priceCurrency": "AED",
-                  "availability": "https://schema.org/InStock",
-                  "price": product.priceRental.replace(/[^\d]/g, ''),
-                  "description": product.priceRental
-                },
-                "description": `${product.brand} ${product.name} - ${product.specs.join(', ')}`
-              }))
-            }
-          })
-        }}
-      />
+
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
       <MobileNav />
     </main>
+    </>
   );
 }

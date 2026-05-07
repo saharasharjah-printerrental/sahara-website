@@ -9,9 +9,16 @@ export const metadata: Metadata = {
   title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance",
   description: "UAE printer & photocopier rental from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 4.9★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
   keywords: "printer rental dubai, photocopier rental sharjah, copier lease uae, printer amc dubai, printer rental from AED 250, zero deposit printer rental uae, free toner printer rental, printer repair uae, photocopier rental abu dhabi, corporate printer rental uae",
+  alternates: { canonical: "https://www.saharaprinter.com/" },
+  icons: {
+    icon: "/images/sahara-navbar-logo.webp",
+    shortcut: "/images/sahara-navbar-logo.webp",
+    apple: "/images/sahara-navbar-logo.webp",
+  },
   openGraph: {
     title: "Printer Rental UAE | AED 250/mo | Free Toner | Sahara",
     description: "Zero deposit printer & photocopier rental across UAE. Free toner & maintenance, 4-hr emergency response. 4.9★ · 1,500+ clients. Since 2012.",
+    url: "https://www.saharaprinter.com/",
     type: "website",
     locale: "en_AE",
     alternateLocale: "ar_AE",
@@ -32,19 +39,24 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+  "@type": ["Organization", "LocalBusiness", "ProfessionalService", "Store"],
   "name": "Sahara Office Equipments",
-  "legalName": "Sahara Office Equipment Trading LLC",
-  "alternateName": ["Sahara Printer", "Sahara Printers UAE"],
+  "legalName": "Sahara Office Equip Tr LLC",
+  "alternateName": ["Sahara Printer", "Sahara Printers UAE", "Sahara Office Equipment Trading LLC"],
+  "slogan": "Rent, Buy, or Repair — All Under One Roof",
   "disambiguatingDescription": "Sahara Office Equipment Trading LLC (saharaprinter.com) is a printer rental and copier leasing company in Sharjah, UAE — not to be confused with Sahara Gulf Printing Press LLC (saharagulf.com), a commercial print shop in Al Quoz, Dubai.",
   "url": "https://saharaprinter.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://www.saharaprinter.com/assets/Home/sahara-navbar-logo.webp",
+    "url": "https://www.saharaprinter.com/images/sahara-navbar-logo.webp",
     "width": 200,
     "height": 60
   },
-  "image": "https://www.saharaprinter.com/assets/Home/heroPrntr1.webp",
+  "image": [
+    "https://www.saharaprinter.com/images/heroPrntr1.webp",
+    "https://www.saharaprinter.com/images/homement.webp",
+    "https://www.saharaprinter.com/images/unsplash-office.webp"
+  ],
   "description": "UAE's trusted partner for printer rental, photocopier leasing, repair services, and managed print solutions since 2012. Serving Dubai, Sharjah, Abu Dhabi, Ajman, RAK and all free zones.",
   "foundingDate": "2012",
   "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 15, "maxValue": 50 },
@@ -58,17 +70,25 @@ const organizationSchema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 25.2942534,
-    "longitude": 55.4260483
+    "latitude": 25.3187,
+    "longitude": 55.4196
   },
-  "hasMap": "https://maps.google.com/?q=25.2942534,55.4260483",
+  "hasMap": "https://www.google.com/maps/place/SAHARA+office+equipments/@25.3187,55.4196,17z",
   "telephone": "+971503823969",
+  "email": "info@saharaprinter.com",
   "contactPoint": [
     {
       "@type": "ContactPoint",
       "telephone": "+971503823969",
       "contactType": "sales",
       "availableLanguage": ["English", "Arabic"],
+      "areaServed": "AE"
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+971503802095",
+      "contactType": "customer support",
+      "availableLanguage": ["English", "Arabic", "Hindi"],
       "areaServed": "AE"
     },
     {
@@ -87,7 +107,7 @@ const organizationSchema = {
       "areaServed": "AE"
     }
   ],
-  "email": "info@saharaedoc.com",
+  "paymentAccepted": "Cash, Cheque, Bank Transfer",
   "areaServed": [
     { "@type": "City", "name": "Dubai" },
     { "@type": "City", "name": "Sharjah" },
@@ -97,6 +117,13 @@ const organizationSchema = {
     { "@type": "City", "name": "Fujairah" },
     { "@type": "City", "name": "Al Ain" },
     { "@type": "Place", "name": "JAFZA" },
+    { "@type": "Place", "name": "JLT" },
+    { "@type": "Place", "name": "DIP" },
+    { "@type": "Place", "name": "Al Quoz" },
+    { "@type": "Place", "name": "Dubai Media City" },
+    { "@type": "Place", "name": "Mussafah" },
+    { "@type": "Place", "name": "ICAD" },
+    { "@type": "Place", "name": "Hamriyah Free Zone" },
     { "@type": "Place", "name": "SAIF Zone" },
     { "@type": "Place", "name": "DAFZA" }
   ],
@@ -109,6 +136,37 @@ const organizationSchema = {
     }
   ],
   "priceRange": "AED 250–2000",
+  "brand": [
+    { "@type": "Brand", "name": "Canon" },
+    { "@type": "Brand", "name": "Kyocera" },
+    { "@type": "Brand", "name": "HP" },
+    { "@type": "Brand", "name": "Konica Minolta" },
+    { "@type": "Brand", "name": "Xerox" },
+    { "@type": "Brand", "name": "Ricoh" },
+    { "@type": "Brand", "name": "Brother" },
+    { "@type": "Brand", "name": "Epson" },
+    { "@type": "Brand", "name": "Toshiba" }
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "name": "Daily Printer Rental",
+      "description": "Flexible short-term printer rental starting at AED 10 per day — ideal for events, exhibitions, and project-based needs.",
+      "price": "10",
+      "priceCurrency": "AED",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "10",
+        "priceCurrency": "AED",
+        "referenceQuantity": { "@type": "QuantitativeValue", "value": "1", "unitText": "day" }
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Hassle-Free Monthly Payment Terms",
+      "description": "Zero deposit, flexible monthly payment plans with free toner and maintenance included."
+    }
+  ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Printer Rental & Office Equipment Services",
@@ -164,10 +222,13 @@ const organizationSchema = {
     "Office Equipment Leasing"
   ],
   "sameAs": [
-    "https://www.facebook.com/share/1GM5UxFLTq/",
-    "https://www.instagram.com/sahara_office_equipments",
+    "https://www.wikidata.org/wiki/Q137021158",
+    "https://www.facebook.com/saharaedoc",
+    "https://www.instagram.com/sahara_office_equipments/",
     "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/",
-    "https://www.youtube.com/@saharaprinter"
+    "https://www.youtube.com/@saharaprinter",
+    "https://www.reddit.com/user/Weekly_Drawing_8562/",
+    "https://www.quora.com/profile/Sahara-Printer-Printer-Rental-Expert-for-Businesses-UAE"
   ],
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -177,7 +238,7 @@ const organizationSchema = {
     "worstRating": "1"
   },
   "dateEstablished": "2012-01-01",
-  "dateModified": "2026-04-15",
+  "dateModified": "2026-07-17",
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": ["h1", "h2", ".aeo-block"]

@@ -182,6 +182,7 @@ export default function BlogPage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
+      <link rel="canonical" href="https://www.saharaprinter.com/blogs/" />
       <Header />
 
       {/* Hero */}

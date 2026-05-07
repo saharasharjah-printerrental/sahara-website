@@ -66,6 +66,19 @@ export default function ContactPage() {
   const [socialLinks, setSocialLinks] = useState<{ name: string; url: string; icon: string }[]>([]);
 
   useEffect(() => {
+    // Load settings from D1 API first (takes precedence)
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.settings && Object.keys(data.settings).length > 0) {
+          setSettings(prev => ({ ...prev, ...data.settings }));
+          // Also cache to localStorage for offline use
+          localStorage.setItem("sahara_settings", JSON.stringify(data.settings));
+        }
+      })
+      .catch(console.error);
+
+    // Fallback to localStorage
     const stored = localStorage.getItem("sahara_settings");
     if (stored) {
       setSettings(JSON.parse(stored));
@@ -154,10 +167,11 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
+      <link rel="canonical" href="https://www.saharaprinter.com/contact/" />
       <Header />
-      
-      {/* Hero */}
-      <section className="relative pt-32 pb-12 px-8 lg:px-24">
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 px-8 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Contact <span className="text-[#f5be53]">Us</span>

@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     "photocopier hire sharjah",
     "office equipment rental sharjah",
   ],
-  alternates: { canonical: "https://saharaprinter.com/photocopier-rental-sharjah" },
+  alternates: { canonical: "https://www.saharaprinter.com/photocopier-rental-sharjah/" },
   openGraph: {
     title: "Photocopier Rental Sharjah | AED 250/mo – Sahara Office Equipments",
     description:
       "Rent a Canon or Kyocera photocopier in Sharjah from AED 250/month. Zero deposit, free toner, 60-min response. Serving SAIF Zone, Industrial Area & all Sharjah areas.",
-    url: "https://saharaprinter.com/photocopier-rental-sharjah",
+    url: "https://www.saharaprinter.com/photocopier-rental-sharjah/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",

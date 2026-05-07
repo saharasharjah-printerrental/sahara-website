@@ -99,6 +99,7 @@ export default function GetQuotePage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
+      <link rel="canonical" href="https://www.saharaprinter.com/get-quote/" />
       <Header />
       <main className="pt-32 pb-40 px-6 min-h-screen">
         <div className="max-w-7xl mx-auto">

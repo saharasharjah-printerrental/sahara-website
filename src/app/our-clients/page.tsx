@@ -19,53 +19,38 @@ export default function OurClientsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const seedClients: Client[] = [
-      { id: "1", name: "HP", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/a/ac/HP_logo.svg", website: "https://www.hp.com", isActive: true, sortOrder: 1 },
-      { id: "2", name: "Canon", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/2/28/Canon_logo.svg", website: "https://www.canon.com", isActive: true, sortOrder: 2 },
-      { id: "3", name: "Xerox", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Xerox_logo.svg", website: "https://www.xerox.com", isActive: true, sortOrder: 3 },
-      { id: "4", name: "Ricoh", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/4/44/Ricoh_logo.svg", website: "https://www.ricoh.com", isActive: true, sortOrder: 4 },
-      { id: "5", name: "Kyocera", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kyocera_logo.svg", website: "https://www.kyocera.com", isActive: true, sortOrder: 5 },
-      { id: "6", name: "Brother", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/4/44/Brother_Logo.svg", website: "https://www.brother.com", isActive: true, sortOrder: 6 },
-    ];
-
-    const stored = localStorage.getItem("sahara_clients");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      if (parsed.length > 0) {
-        setClients(parsed.filter((c: Client) => c.isActive).sort((a: Client, b: Client) => a.sortOrder - b.sortOrder));
-        setLoading(false);
-        return;
-      }
-    }
-    // Try API
     fetch('/api/logos')
       .then(res => res.json())
       .then(data => {
         if (data.logos && data.logos.length > 0) {
-          const mapped = data.logos.map((l: any) => ({
-            id: l.id,
-            name: l.name,
-            logoUrl: l.imageUrl || '',
-            website: l.link || '',
-            isActive: l.isActive === 1,
-            sortOrder: l.sortOrder || 0,
+          const mapped: Client[] = data.logos.map((l: any) => ({
+            id: l.id, name: l.name, logoUrl: l.imageUrl || '',
+            website: l.link || '', isActive: l.isActive === 1, sortOrder: l.sortOrder || 0,
           }));
-          setClients(mapped.filter((c: Client) => c.isActive).sort((a: Client, b: Client) => a.sortOrder - b.sortOrder));
+          const active = mapped.filter(c => c.isActive).sort((a, b) => a.sortOrder - b.sortOrder);
+          setClients(active);
           localStorage.setItem("sahara_clients", JSON.stringify(mapped));
         } else {
-          setClients(seedClients);
-          localStorage.setItem("sahara_clients", JSON.stringify(seedClients));
+          const stored = localStorage.getItem("sahara_clients");
+          if (stored) {
+            const parsed: Client[] = JSON.parse(stored);
+            setClients(parsed.filter(c => c.isActive).sort((a, b) => a.sortOrder - b.sortOrder));
+          }
         }
       })
       .catch(() => {
-        setClients(seedClients);
-        localStorage.setItem("sahara_clients", JSON.stringify(seedClients));
+        const stored = localStorage.getItem("sahara_clients");
+        if (stored) {
+          const parsed: Client[] = JSON.parse(stored);
+          setClients(parsed.filter(c => c.isActive).sort((a, b) => a.sortOrder - b.sortOrder));
+        }
       })
       .finally(() => setLoading(false));
   }, []);
 
   return (
     <main className="min-h-screen bg-[#030e20]">
+      <link rel="canonical" href="https://www.saharaprinter.com/our-clients/" />
       <Header />
       
       <div className="pt-20">

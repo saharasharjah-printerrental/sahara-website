@@ -83,6 +83,18 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    // Load settings from D1 API first
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.settings && Object.keys(data.settings).length > 0) {
+          setSettings(prev => ({ ...prev, ...data.settings }));
+          localStorage.setItem("sahara_settings", JSON.stringify(data.settings));
+        }
+      })
+      .catch(console.error);
+
+    // Fallback to localStorage
     const storedSettings = localStorage.getItem("sahara_settings");
     if (storedSettings) {
       setSettings(JSON.parse(storedSettings));
@@ -127,7 +139,7 @@ export default function Header() {
               alt="Sahara Office Equipments"
               width={120}
               height={40}
-              className="h-10 w-auto"
+              style={{ height: "40px", width: "auto" }}
             />
           </Link>
 

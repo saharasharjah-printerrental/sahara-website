@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     "office equipment rental fujairah",
     "printer lease eastern emirates",
   ],
-  alternates: { canonical: "https://saharaprinter.com/printer-rental-fujairah" },
+  alternates: { canonical: "https://www.saharaprinter.com/printer-rental-fujairah/" },
   openGraph: {
     title: "Printer Rental Fujairah | AED 250/mo – Sahara Office Equipments",
     description:
       "Rent Canon or Kyocera printers in Fujairah from AED 250/month. Zero deposit, free toner. Fujairah City, Dibba, Kalba, Free Trade Zone.",
-    url: "https://saharaprinter.com/printer-rental-fujairah",
+    url: "https://www.saharaprinter.com/printer-rental-fujairah/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",

@@ -26,12 +26,12 @@ export default function SalesPage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
+      <link rel="canonical" href="https://www.saharaprinter.com/services/sales/" />
       <Header />
-      
+
       <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]"></div>
         <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#f5be53]/10 rounded-full blur-[150px]"></div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>

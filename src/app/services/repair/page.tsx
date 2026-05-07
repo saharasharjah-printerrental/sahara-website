@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     locale: "en_AE",
     type: "website",
   },
-  alternates: { canonical: "https://www.saharaprinter.com/services/repair" },
+  alternates: { canonical: "https://www.saharaprinter.com/services/repair/" },
 };
 
 const repairServiceSchema = {

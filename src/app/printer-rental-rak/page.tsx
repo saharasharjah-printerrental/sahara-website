@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     "office equipment rental rak",
     "printer rental northern emirates",
   ],
-  alternates: { canonical: "https://saharaprinter.com/printer-rental-rak" },
+  alternates: { canonical: "https://www.saharaprinter.com/printer-rental-rak/" },
   openGraph: {
     title: "Printer Rental RAK | AED 250/mo – Sahara Office Equipments",
     description:
       "Rent Canon or Kyocera printers in Ras Al Khaimah from AED 250/month. Zero deposit, free toner. Al Hamra, RAK FTZ, Al Marjan Island.",
-    url: "https://saharaprinter.com/printer-rental-rak",
+    url: "https://www.saharaprinter.com/printer-rental-rak/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",

@@ -46,8 +46,10 @@ const BRAND_IMAGES: Record<string, string> = {
   Lexmark: "/images/printer-lexmark.webp",
 };
 const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/printer-canon-2.webp"]);
-function localImg(image: string, brand: string): string {
-  if (!image || !image.startsWith("/") || (CANON_ONLY.has(image) && brand !== "Canon")) {
+function resolveImg(image: string, brand: string): string {
+  // Preserve Cloudinary/external URLs as-is
+  if (image && image.startsWith("http")) return image;
+  if (!image || (CANON_ONLY.has(image) && brand !== "Canon")) {
     return BRAND_IMAGES[brand] || "/images/printer-canon-1.webp";
   }
   return image;
@@ -80,7 +82,7 @@ export default function AdminProducts() {
           priceSale: p.priceSale,
           priceRental: p.priceRental,
           specs: p.specs ? p.specs.split('|') : [],
-          image: localImg(p.image, p.brand),
+          image: resolveImg(p.image, p.brand),
           isActive: p.isActive === 1,
           isFeatured: p.isFeatured === 1,
         }));
@@ -94,7 +96,7 @@ export default function AdminProducts() {
       const stored = localStorage.getItem("sahara_products");
       if (stored) {
         const parsed = JSON.parse(stored);
-        setProducts(parsed.map((p: any) => ({ ...p, image: localImg(p.image, p.brand) })));
+        setProducts(parsed.map((p: any) => ({ ...p, image: resolveImg(p.image, p.brand) })));
       } else {
         setProducts(initialProducts);
       }
@@ -137,13 +139,22 @@ export default function AdminProducts() {
   };
 
   const handleToggleFeatured = async (id: string) => {
-    const updated = products.map(p => p.id === id ? { ...p, isFeatured: !p.isFeatured } : p);
-    saveProducts(updated);
+    const product = products.find(p => p.id === id);
+    if (product) {
+      try {
+        await fetch(`${API_BASE}/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...product, specs: product.specs.join('|'), isActive: product.isActive ? 1 : 0, isFeatured: product.isFeatured ? 0 : 1 })
+        });
+      } catch { /* continue with local */ }
+    }
+    saveProducts(products.map(p => p.id === id ? { ...p, isFeatured: !p.isFeatured } : p));
   };
 
   const handleSave = async (product: Product) => {
     try {
-      await fetch(`${API_BASE}/products`, {
+      const res = await fetch(`${API_BASE}/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -153,8 +164,14 @@ export default function AdminProducts() {
           isFeatured: product.isFeatured ? 1 : 0
         })
       });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        showToast('error', data.error || 'Failed to save to database');
+        return;
+      }
     } catch (e) {
-      console.log('API not available, local only');
+      showToast('error', 'Network error. Please try again.');
+      return;
     }
     
     if (editingProduct) {
@@ -355,28 +372,17 @@ function ProductModal({ product, onSave, onClose }: { product: Product | null; o
 
     setUploading(true);
     try {
-      if (convertToWebp) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
-        const data = await res.json();
-        if (data.url) {
-          setForm(prev => ({ ...prev, image: data.url }));
-        } else {
-          const reader = new FileReader();
-          reader.onloadend = () => setForm(prev => ({ ...prev, image: reader.result as string }));
-          reader.readAsDataURL(file);
-        }
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+      const data = await res.json();
+      if (data.url) {
+        setForm(prev => ({ ...prev, image: data.url }));
       } else {
-        const reader = new FileReader();
-        reader.onloadend = () => setForm(prev => ({ ...prev, image: reader.result as string }));
-        reader.readAsDataURL(file);
+        alert(`Image upload failed: ${data.error || 'Unknown error'}. Please configure Cloudinary credentials in wrangler.toml.`);
       }
     } catch (error) {
-      console.error("Upload failed:", error);
-      const reader = new FileReader();
-      reader.onloadend = () => setForm(prev => ({ ...prev, image: reader.result as string }));
-      reader.readAsDataURL(file);
+      alert(`Image upload failed: ${String(error)}`);
     } finally {
       setUploading(false);
     }

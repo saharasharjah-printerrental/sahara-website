@@ -25,6 +25,7 @@ interface Settings {
   workingHours: string;
   emergencySupport: string;
   mapEmbedUrl: string;
+  hasMapUrl: string;
   locationDubaiAddress: string;
   locationDubaiPhone: string;
   locationAbuDhabiAddress: string;
@@ -77,6 +78,7 @@ const defaultSettings: Settings = {
   workingHours: "Sat - Thu: 8:00 AM - 8:00 PM",
   emergencySupport: "24/7 Emergency Support Available",
   mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57709.04655847797!2d55.37228622257977!3d25.310405175118643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin",
+  hasMapUrl: "https://www.google.com/maps/place/SAHARA+office+equipments/@25.3187,55.4196,17z",
   locationDubaiAddress: "Business Bay, Dubai",
   locationDubaiPhone: "+971 50 382 3969",
   locationAbuDhabiAddress: "Mussafah, Abu Dhabi",
@@ -127,24 +129,38 @@ export default function AdminSettings() {
   };
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sahara_settings");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed && typeof parsed === "object") {
-          setSettings(mergeWithDefaults(parsed));
+    (async () => {
+      try {
+        const res = await fetch('/api/settings?key=site_settings');
+        const data = await res.json();
+        if (data.setting?.value) {
+          const parsed = JSON.parse(data.setting.value);
+          if (parsed && typeof parsed === "object") {
+            setSettings(mergeWithDefaults(parsed));
+            localStorage.setItem("sahara_settings", data.setting.value);
+            return;
+          }
         }
+      } catch { /* fall through to localStorage */ }
+      try {
+        const stored = localStorage.getItem("sahara_settings");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && typeof parsed === "object") setSettings(mergeWithDefaults(parsed));
+        }
+      } catch (e) {
+        console.error("Error loading settings:", e);
       }
-    } catch (e) {
-      console.error("Error loading settings:", e);
-    }
+    })();
   }, []);
 
   const handleSave = async () => {
-    localStorage.setItem("sahara_settings", JSON.stringify(settings));
+    const json = JSON.stringify(settings);
+    localStorage.setItem("sahara_settings", json);
     window.dispatchEvent(new Event("sahara-settings-updated"));
 
     const d1Entries = [
+      { key: "site_settings", value: json },
       { key: "smtp_host", value: settings.smtp.smtpHost },
       { key: "smtp_port", value: settings.smtp.smtpPort },
       { key: "smtp_user", value: settings.smtp.smtpUser },
@@ -153,6 +169,7 @@ export default function AdminSettings() {
       { key: "smtp_from_email", value: settings.smtp.smtpFromEmail },
       { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
       { key: "notification_email", value: settings.smtp.smtpToEmail },
+      { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
     ];
 
     try {
@@ -165,11 +182,10 @@ export default function AdminSettings() {
           })
         )
       );
+      showToast('success', 'Settings saved to database!');
     } catch {
-      // D1 may not be configured in dev — localStorage is the fallback
+      showToast('success', 'Settings saved locally (database unavailable)');
     }
-
-    showToast('success', 'Settings saved successfully!');
   };
 
   return (
@@ -429,135 +445,71 @@ export default function AdminSettings() {
             </div>
 
             <div className="border-t border-white/10 pt-6">
-              <h2 className="text-lg font-bold text-white mb-4">Rental Calculator Pricing</h2>
+              <h2 className="text-lg font-bold text-white mb-1">Rental Calculator Pricing</h2>
+              <p className="text-sm text-slate-400 mb-4">New model: AED 350 base includes free print pool. Overage charged per page.</p>
               <div className="space-y-4">
-                <p className="text-sm text-slate-400 mb-4">Configure the base prices and multipliers for the rental calculator</p>
-                
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">A4 Base Price (AED)</label>
-                    <input 
-                      type="number" 
-                      value={settings.calculatorPrices.a4BasePrice}
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Base Rent (AED/mo)</label>
+                    <input type="number" value={settings.calculatorPrices.a4BasePrice}
                       onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a4BasePrice: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Minimum monthly rental (default 350)</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">A3 Base Price (AED)</label>
-                    <input 
-                      type="number" 
-                      value={settings.calculatorPrices.a3BasePrice}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a3BasePrice: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
+                    <label className="block text-sm font-medium text-slate-300 mb-2">B&W Price (AED/page)</label>
+                    <input type="number" step="0.01" value={settings.calculatorPrices.colorMultiplier}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, colorMultiplier: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Per-page overage rate (default 0.06)</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Plotter Base Price (AED)</label>
-                    <input 
-                      type="number" 
-                      value={settings.calculatorPrices.plotterBasePrice}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, plotterBasePrice: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Colour Price (AED/page)</label>
+                    <input type="number" step="0.01" value={settings.calculatorPrices.volumeMultiplier1}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeMultiplier1: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Per-page overage rate (default 0.20)</p>
                   </div>
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Color Multiplier (1.4 = 40% extra)</label>
-                    <input 
-                      type="number" 
-                      step="0.1"
-                      value={settings.calculatorPrices.colorMultiplier}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, colorMultiplier: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Free B&W Prints Included</label>
+                    <input type="number" step="100" value={settings.calculatorPrices.volumeThreshold1}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeThreshold1: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 3,000 pages free</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Volume Thresholds (pages)</label>
-                    <div className="flex gap-2">
-                      <input 
-                        type="number" 
-                        placeholder="5000"
-                        value={settings.calculatorPrices.volumeThreshold1}
-                        onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeThreshold1: Number(e.target.value) } })}
-                        className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                      />
-                      <input 
-                        type="number" 
-                        placeholder="10000"
-                        value={settings.calculatorPrices.volumeThreshold2}
-                        onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeThreshold2: Number(e.target.value) } })}
-                        className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                      />
-                    </div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Free Colour Prints Included</label>
+                    <input type="number" step="100" value={settings.calculatorPrices.volumeThreshold2}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeThreshold2: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 1,000 pages free</p>
                   </div>
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Multiplier at {settings.calculatorPrices.volumeThreshold1}+</label>
-                    <input 
-                      type="number" 
-                      step="0.05"
-                      value={settings.calculatorPrices.volumeMultiplier2}
+                    <label className="block text-sm font-medium text-slate-300 mb-2">A3-Only Surcharge (AED)</label>
+                    <input type="number" value={settings.calculatorPrices.volumeMultiplier2}
                       onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeMultiplier2: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 80</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Multiplier at {settings.calculatorPrices.volumeThreshold2}+</label>
-                    <input 
-                      type="number" 
-                      step="0.05"
-                      value={settings.calculatorPrices.volumeMultiplier3}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeMultiplier3: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Multiplier at 20K+</label>
-                    <input 
-                      type="number" 
-                      step="0.05"
-                      value={settings.calculatorPrices.volumeMultiplier3 > 1.25 ? 1.5 : settings.calculatorPrices.volumeMultiplier3}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeMultiplier3: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">12 Month Discount (%)</label>
-                    <input 
-                      type="number" 
-                      step="5"
-                      value={Math.round((1 - settings.calculatorPrices.discount12Months) * 100)}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, discount12Months: 1 - Number(e.target.value) / 100 } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">24 Month Discount (%)</label>
-                    <input 
-                      type="number" 
-                      step="5"
+                    <label className="block text-sm font-medium text-slate-300 mb-2">24-Month Discount (%)</label>
+                    <input type="number" step="1"
                       value={Math.round((1 - settings.calculatorPrices.discount24Months) * 100)}
                       onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, discount24Months: 1 - Number(e.target.value) / 100 } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 5%</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">36 Month Discount (%)</label>
-                    <input 
-                      type="number" 
-                      step="5"
+                    <label className="block text-sm font-medium text-slate-300 mb-2">36-Month Discount (%)</label>
+                    <input type="number" step="1"
                       value={Math.round((1 - settings.calculatorPrices.discount36Months) * 100)}
                       onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, discount36Months: 1 - Number(e.target.value) / 100 } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" 
-                    />
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 10%</p>
                   </div>
                 </div>
               </div>
@@ -586,17 +538,30 @@ export default function AdminSettings() {
             </div>
 
             <div className="border-t border-white/10 pt-6">
-              <h2 className="text-lg font-bold text-white mb-4">Contact Page — Google Maps Embed</h2>
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Map Embed URL</label>
-                <textarea
-                  value={settings.mapEmbedUrl}
-                  onChange={(e) => setSettings({ ...settings, mapEmbedUrl: e.target.value })}
-                  rows={3}
-                  placeholder="Paste Google Maps embed src URL here"
-                  className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white text-xs font-mono"
-                />
-                <p className="text-xs text-slate-500 mt-1">Get from Google Maps → Share → Embed a map → copy the src URL only</p>
+              <h2 className="text-lg font-bold text-white mb-4">Contact Page — Google Maps</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Map Embed URL</label>
+                  <textarea
+                    value={settings.mapEmbedUrl}
+                    onChange={(e) => setSettings({ ...settings, mapEmbedUrl: e.target.value })}
+                    rows={3}
+                    placeholder="Paste Google Maps embed src URL here"
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white text-xs font-mono"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Get from Google Maps → Share → Embed a map → copy the src URL only</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Google Maps Direct Link <span className="text-slate-500 font-normal">(used in schema hasMap + admin panel)</span></label>
+                  <input
+                    type="url"
+                    value={settings.hasMapUrl}
+                    onChange={(e) => setSettings({ ...settings, hasMapUrl: e.target.value })}
+                    placeholder="https://www.google.com/maps/place/..."
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white text-xs font-mono"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Get from Google Maps → Share → Copy link. This is injected into the Organization schema as <code className="text-amber-400">hasMap</code>.</p>
+                </div>
               </div>
             </div>
 

@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     "printer lease uae",
     "masdar city printer rental",
   ],
-  alternates: { canonical: "https://saharaprinter.com/printer-rental-abu-dhabi" },
+  alternates: { canonical: "https://www.saharaprinter.com/printer-rental-abu-dhabi/" },
   openGraph: {
     title: "Printer Rental Abu Dhabi | AED 250/mo – Sahara Office Equipments",
     description:
       "Rent Canon or Kyocera printers and copiers in Abu Dhabi from AED 250/month. Zero deposit, free toner, weekly maintenance. Mussafah, Khalifa City, Al Reem Island.",
-    url: "https://saharaprinter.com/printer-rental-abu-dhabi",
+    url: "https://www.saharaprinter.com/printer-rental-abu-dhabi/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",

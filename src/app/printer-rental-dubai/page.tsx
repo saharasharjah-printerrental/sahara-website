@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     locale: "en_AE",
     type: "website",
   },
-  alternates: { canonical: "https://www.saharaprinter.com/printer-rental-dubai" },
+  alternates: { canonical: "https://www.saharaprinter.com/printer-rental-dubai/" },
 };
 
 const localBusinessSchema = {

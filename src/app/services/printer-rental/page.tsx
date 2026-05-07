@@ -141,6 +141,7 @@ export default function PrinterRentalPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <link rel="canonical" href="https://www.saharaprinter.com/services/printer-rental/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
       

@@ -26,8 +26,8 @@ async function uploadToCloudinary(
   const folder = 'sahara-printer';
   const publicId = `${folder}/${fileName.replace(/\.[^/.]+$/, '')}-${timestamp}`;
 
-  // Build signature
-  const signatureString = `folder=${folder}&public_id=${publicId}&timestamp=${timestamp}${config.apiSecret}`;
+  // Params must be sorted alphabetically for signature
+  const signatureString = `public_id=${publicId}&timestamp=${timestamp}${config.apiSecret}`;
   const msgBuffer = new TextEncoder().encode(signatureString);
   const hashBuffer = await crypto.subtle.digest('SHA-1', msgBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -40,7 +40,6 @@ async function uploadToCloudinary(
   form.append('api_key', config.apiKey);
   form.append('timestamp', String(timestamp));
   form.append('signature', signature);
-  form.append('folder', folder);
   form.append('public_id', publicId);
 
   const res = await fetch(

@@ -81,6 +81,7 @@ export default function CopierLeaseUAE() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <link rel="canonical" href="https://www.saharaprinter.com/copier-lease-uae/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
       

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "About Sahara Office Equipments UAE" }],
   },
-  alternates: { canonical: "https://www.saharaprinter.com/about" },
+  alternates: { canonical: "https://www.saharaprinter.com/about/" },
 };
 
 const aboutSchema = {

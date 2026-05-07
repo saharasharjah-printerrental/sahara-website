@@ -164,6 +164,7 @@ export default function PrinterSparePartsPage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
+      <link rel="canonical" href="https://www.saharaprinter.com/services/printer-spare-parts/" />
       <Header />
 
       {/* Cart Sidebar */}

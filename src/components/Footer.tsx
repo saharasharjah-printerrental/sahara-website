@@ -96,6 +96,18 @@ export default function Footer() {
   const [socialLinks, setSocialLinks] = useState(defaultSocialLinks);
 
   useEffect(() => {
+    // Load settings from D1 API first
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.settings && Object.keys(data.settings).length > 0) {
+          setSettings(prev => ({ ...prev, ...data.settings }));
+          localStorage.setItem("sahara_settings", JSON.stringify(data.settings));
+        }
+      })
+      .catch(console.error);
+
+    // Fallback to localStorage
     try {
       const stored = localStorage.getItem("sahara_settings");
       if (stored) {

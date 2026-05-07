@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CloudUpload, Delete, Edit, Link as LinkIcon, Add } from "@mui/icons-material";
+import { useToast } from "@/components/admin/Toast";
 
 interface Client {
   id: string;
@@ -11,6 +12,8 @@ interface Client {
   isActive: boolean;
   sortOrder: number;
 }
+
+const API_BASE = '/api';
 
 const defaultClients: Client[] = [
   { id: "1", name: "Emirates Global Aluminium", logoUrl: "", website: "https://www.ega.com", isActive: true, sortOrder: 1 },
@@ -114,33 +117,84 @@ export default function AdminClients() {
   const [editingClient, setEditingClient] = useState<Client | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [showActiveOnly, setShowActiveOnly] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { showToast, ToastElement } = useToast();
 
-  useEffect(() => {
-    const stored = localStorage.getItem("sahara_clients");
-    if (stored) {
-      setClients(JSON.parse(stored));
-    } else {
-      setClients(defaultClients);
-      localStorage.setItem("sahara_clients", JSON.stringify(defaultClients));
+  useEffect(() => { fetchClients(); }, []);
+
+  const fetchClients = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/logos`);
+      const data = await res.json();
+      if (data.logos && data.logos.length > 0) {
+        const mapped = data.logos.map((l: any) => ({
+          id: l.id, name: l.name, logoUrl: l.imageUrl || '',
+          website: l.link || '', isActive: l.isActive === 1, sortOrder: l.sortOrder || 0,
+        }));
+        setClients(mapped);
+        localStorage.setItem("sahara_clients", JSON.stringify(mapped));
+      } else {
+        const stored = localStorage.getItem("sahara_clients");
+        if (stored) {
+          setClients(JSON.parse(stored));
+        } else {
+          setClients(defaultClients);
+          await seedDefaultClients(defaultClients);
+        }
+      }
+    } catch {
+      const stored = localStorage.getItem("sahara_clients");
+      if (stored) setClients(JSON.parse(stored));
+      else setClients(defaultClients);
+    } finally {
+      setLoading(false);
     }
-  }, []);
+  };
+
+  const seedDefaultClients = async (list: Client[]) => {
+    await Promise.allSettled(list.map((c, i) =>
+      fetch(`${API_BASE}/logos`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: c.id, name: c.name, imageUrl: c.logoUrl, imageAlt: `${c.name} logo`, link: c.website, isActive: c.isActive ? 1 : 0, sortOrder: i + 1 }),
+      })
+    ));
+  };
+
+  const syncToAPI = async (client: Client) => {
+    const res = await fetch(`${API_BASE}/logos`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: client.id, name: client.name, imageUrl: client.logoUrl, imageAlt: `${client.name} logo`, link: client.website, isActive: client.isActive ? 1 : 0, sortOrder: client.sortOrder }),
+    });
+    return res.ok;
+  };
 
   const saveClients = (newClients: Client[]) => {
     setClients(newClients);
     localStorage.setItem("sahara_clients", JSON.stringify(newClients));
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Delete this client?")) {
-      saveClients(clients.filter(c => c.id !== id));
-    }
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this client?")) return;
+    try {
+      await fetch(`${API_BASE}/logos?id=${id}`, { method: 'DELETE' });
+    } catch { /* continue with local */ }
+    saveClients(clients.filter(c => c.id !== id));
+    showToast('success', 'Client deleted');
   };
 
-  const handleToggle = (id: string) => {
-    saveClients(clients.map(c => c.id === id ? { ...c, isActive: !c.isActive } : c));
+  const handleToggle = async (id: string) => {
+    const client = clients.find(c => c.id === id);
+    if (!client) return;
+    const updated = { ...client, isActive: !client.isActive };
+    try { await syncToAPI(updated); } catch { /* continue */ }
+    saveClients(clients.map(c => c.id === id ? updated : c));
   };
 
-  const handleSave = (client: Client) => {
+  const handleSave = async (client: Client) => {
+    try {
+      const ok = await syncToAPI(client);
+      if (!ok) { showToast('error', 'Failed to save to database'); return; }
+    } catch { showToast('error', 'Network error. Please try again.'); return; }
     if (editingClient) {
       saveClients(clients.map(c => c.id === client.id ? client : c));
     } else {
@@ -148,6 +202,7 @@ export default function AdminClients() {
     }
     setShowModal(false);
     setEditingClient(null);
+    showToast('success', editingClient ? 'Client updated' : 'Client added');
   };
 
   const handleReorder = (fromIndex: number, toIndex: number) => {
@@ -167,12 +222,13 @@ export default function AdminClients() {
 
   return (
     <div className="min-h-screen bg-[#071325]">
+      {ToastElement}
       <main className="pt-8 pb-16 px-8 ml-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-3xl font-bold text-white">Clients</h1>
-              <p className="text-slate-400 mt-1">Manage client logos from saharaprinter.com - 93 companies ({activeCount} active)</p>
+              <p className="text-slate-400 mt-1">Manage client logos — {clients.length} companies ({activeCount} active)</p>
             </div>
             <button 
               onClick={() => { setEditingClient(null); setShowModal(true); }} 
@@ -302,9 +358,18 @@ function ClientModal({ client, onSave, onClose }: { client: Client | null; onSav
 
     setUploading(true);
     try {
-      const reader = new FileReader();
-      reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
-      reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+      const data = await res.json();
+      if (data.url) {
+        setForm(prev => ({ ...prev, logoUrl: data.url }));
+      } else {
+        // Fallback to local preview if Cloudinary not configured
+        const reader = new FileReader();
+        reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
+        reader.readAsDataURL(file);
+      }
     } catch (error) {
       console.error("Upload failed:", error);
     } finally {

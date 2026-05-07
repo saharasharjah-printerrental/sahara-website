@@ -124,6 +124,22 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 
 -- ============================================
+-- CALCULATOR SETTINGS SEED
+-- New pricing model: AED 350 base, per-page overage
+-- Run this after schema creation to set defaults
+-- ============================================
+INSERT OR IGNORE INTO settings (key, value) VALUES
+  ('calc_base_rent',        '350'),
+  ('calc_bw_price',         '0.06'),
+  ('calc_color_price',      '0.20'),
+  ('calc_free_bw',          '3000'),
+  ('calc_free_color',       '1000'),
+  ('calc_a3_surcharge',     '80'),
+  ('calc_a3_both_surcharge','50'),
+  ('calc_discount_24mo',    '0.95'),
+  ('calc_discount_36mo',    '0.90');
+
+-- ============================================
 -- LOGOS TABLE (Client Logos / Brand Carousel)
 -- ============================================
 CREATE TABLE IF NOT EXISTS logos (

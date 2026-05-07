@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     "printer lease abu dhabi",
     "photocopier hire al ain",
   ],
-  alternates: { canonical: "https://saharaprinter.com/printer-rental-al-ain" },
+  alternates: { canonical: "https://www.saharaprinter.com/printer-rental-al-ain/" },
   openGraph: {
     title: "Printer Rental Al Ain | AED 250/mo – Sahara Office Equipments",
     description:
       "Rent Canon or Kyocera printers in Al Ain from AED 250/month. Zero deposit, free toner. Central District, Al Jimi, Industrial Area.",
-    url: "https://saharaprinter.com/printer-rental-al-ain",
+    url: "https://www.saharaprinter.com/printer-rental-al-ain/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",

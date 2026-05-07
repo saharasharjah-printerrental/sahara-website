@@ -84,14 +84,15 @@ export default function CanonPrinterDubai() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <link rel="canonical" href="https://www.saharaprinter.com/canon-printer-dubai/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
-      
-      {/* Hero Section */}
+
+      {/* Hero */}
       <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
         <div className="absolute inset-0">
-          <img 
-            src="/images/unsplash-office.webp"
+          <img
+            src="/images/canon-hero.webp"
             alt="Canon Printer Dubai"
             className="w-full h-full object-cover opacity-30"
           />
