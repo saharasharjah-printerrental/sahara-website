@@ -46,7 +46,9 @@
       "PowerShell(git log --oneline -8; Write-Output \"---\"; git diff --stat HEAD -- public/brands/; Write-Output \"---\"; git show HEAD --stat | Select-Object -First 20)",
       "Bash(rtk grep *)",
       "Bash(git checkout *)",
-      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\" && Select-String -Path \"src\\\\app\\\\products\\\\page.tsx\" -Pattern \"\\(<div|</div>|<main|</main>|<aside|</aside>|<Footer\\)\" | Where-Object { $_.LineNumber -gt 130 } | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line\\)\" })"
+      "PowerShell(cd \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\" && Select-String -Path \"src\\\\app\\\\products\\\\page.tsx\" -Pattern \"\\(<div|</div>|<main|</main>|<aside|</aside>|<Footer\\)\" | Where-Object { $_.LineNumber -gt 130 } | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line\\)\" })",
+      "Bash(rtk npm *)",
+      "PowerShell(npm run *)"
     ]
   }
 }
