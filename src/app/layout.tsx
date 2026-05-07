@@ -237,13 +237,6 @@ const organizationSchema = {
     "https://www.reddit.com/user/Weekly_Drawing_8562/",
     "https://www.quora.com/profile/Sahara-Printer-Printer-Rental-Expert-for-Businesses-UAE"
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "1500",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
   "dateEstablished": "2012-01-01",
   "dateModified": "2026-07-17",
   "speakable": {
