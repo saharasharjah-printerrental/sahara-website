@@ -1,79 +1,140 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { NextFetchEvent } from 'next/server';
 
-export function middleware(request: NextRequest, event: NextFetchEvent) {
-  const forwardedFor = request.headers.get('x-forwarded-for');
-  const ip = forwardedFor ? forwardedFor.split(',')[0].trim() : 
-             request.headers.get('x-real-ip') ?? 
-             'unknown';
-  
+// Per-endpoint rate limit tiers (checked in order, first match wins)
+const RATE_LIMITS = [
+  // Image upload — expensive Cloudinary API call
+  { pattern: /^\/api\/convert-image/, requests: 5,  windowMs: 60_000 },
+  { pattern: /^\/api\/upload/,        requests: 5,  windowMs: 60_000 },
+  // Inquiry / quote form — prevent spam
+  { pattern: /^\/api\/inquiries/,     requests: 10, windowMs: 60_000 },
+  // Email sending
+  { pattern: /^\/api\/send-email/,    requests: 10, windowMs: 60_000 },
+  // Default for all other /api/* routes
+  { pattern: /^\/api\//,              requests: 60, windowMs: 60_000 },
+] as const;
+
+const MAX_BODY_SIZE = 10 * 1024 * 1024; // 10 MB (covers image uploads)
+
+// In-memory store — per edge worker instance (acceptable on Cloudflare Workers free tier)
+const store = new Map<string, { windowStart: number; count: number }>();
+
+function getLimit(pathname: string) {
+  for (const l of RATE_LIMITS) {
+    if (l.pattern.test(pathname)) return l;
+  }
+  return null;
+}
+
+function getClientIp(req: NextRequest): string {
+  // cf-connecting-ip is Cloudflare's authoritative real-IP header (most accurate)
+  return (
+    req.headers.get('cf-connecting-ip') ??
+    req.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
+    req.headers.get('x-real-ip') ??
+    'unknown'
+  );
+}
+
+export function middleware(request: NextRequest, _event: NextFetchEvent) {
+  const pathname = request.nextUrl.pathname;
+  const isAdmin  = pathname.startsWith('/admin');
+
   const response = NextResponse.next();
-  
-  response.headers.set('X-Frame-Options', 'DENY');
+
+  // ── Security headers ──────────────────────────────────────────────────────
+  response.headers.set('X-Frame-Options',        'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-XSS-Protection', '1; mode=block');
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  response.headers.set('Cross-Origin-Embedder-Policy', 'credentialless');
-  response.headers.set('Cross-Origin-Opener-Policy', 'same-origin');
-  
+  response.headers.set('X-XSS-Protection',       '1; mode=block');
+  response.headers.set('Referrer-Policy',        'strict-origin-when-cross-origin');
+  response.headers.set('Permissions-Policy',     'camera=(), microphone=(), geolocation=()');
+
+  // COEP/COOP: relax on admin so Wikimedia logos, GA scripts, etc. load
+  if (isAdmin) {
+    response.headers.set('Cross-Origin-Embedder-Policy', 'unsafe-none');
+    response.headers.set('Cross-Origin-Opener-Policy',   'same-origin-allow-popups');
+  } else {
+    response.headers.set('Cross-Origin-Embedder-Policy', 'credentialless');
+    response.headers.set('Cross-Origin-Opener-Policy',   'same-origin');
+  }
+
+  // CSP — admin gets broader connect-src/img-src for management tools
+  const scriptSrc = isAdmin
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://unpkg.com"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com";
+
+  const connectSrc = isAdmin
+    ? "connect-src 'self' https:"
+    : "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://static.cloudflareinsights.com https://googleads.g.doubleclick.net";
+
+  const imgSrc = isAdmin
+    ? "img-src 'self' data: blob: https: http:"
+    : "img-src 'self' data: https: blob:";
+
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com",
+    scriptSrc,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
-    "img-src 'self' data: https: blob: https://www.google.com https://www.google-analytics.com",
-    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://static.cloudflareinsights.com https://googleads.g.doubleclick.net",
+    imgSrc,
+    connectSrc,
     "frame-src 'self' https://www.google.com https://www.youtube.com",
   ].join('; ');
-  
+
   response.headers.set('Content-Security-Policy', csp);
-  
-  const url = request.nextUrl.pathname;
-  
-  if (url.startsWith('/api/')) {
-    const rateLimit = rateLimitStore.get(ip);
+
+  // ── Rate limiting ─────────────────────────────────────────────────────────
+  const limit = getLimit(pathname);
+  if (limit) {
+    const ip  = getClientIp(request);
+    // Key: ip + route-prefix (e.g. "1.2.3.4:/api/inquiries")
+    const key = `${ip}:${pathname.replace(/\/[^/]+$/, '') || pathname}`;
     const now = Date.now();
-    
-    if (rateLimit) {
-      if (now - rateLimit.windowStart < WINDOW_MS) {
-        if (rateLimit.requests >= MAX_REQUESTS) {
-          return NextResponse.json(
-            { error: 'Too many requests. Please try again later.' },
-            { status: 429, headers: { 'Retry-After': '60' } }
-          );
-        }
-        rateLimit.requests++;
-      } else {
-        rateLimitStore.set(ip, { windowStart: now, requests: 1 });
+    const rec = store.get(key);
+
+    if (rec && now - rec.windowStart < limit.windowMs) {
+      if (rec.count >= limit.requests) {
+        const retryAfter = Math.ceil((rec.windowStart + limit.windowMs - now) / 1000);
+        return NextResponse.json(
+          { error: 'Too many requests. Please try again later.' },
+          {
+            status: 429,
+            headers: {
+              'Retry-After':         String(retryAfter),
+              'X-RateLimit-Limit':   String(limit.requests),
+              'X-RateLimit-Remaining': '0',
+              'X-RateLimit-Reset':   String(Math.ceil((rec.windowStart + limit.windowMs) / 1000)),
+            },
+          }
+        );
       }
+      rec.count++;
+      response.headers.set('X-RateLimit-Remaining', String(limit.requests - rec.count));
     } else {
-      rateLimitStore.set(ip, { windowStart: now, requests: 1 });
+      store.set(key, { windowStart: now, count: 1 });
+      response.headers.set('X-RateLimit-Remaining', String(limit.requests - 1));
     }
-    
+
+    response.headers.set('X-RateLimit-Limit', String(limit.requests));
+    response.headers.set('X-RateLimit-Reset',
+      String(Math.ceil(((store.get(key)?.windowStart ?? now) + limit.windowMs) / 1000))
+    );
+
+    // Body size guard for upload routes
     if (request.method === 'POST' || request.method === 'PUT') {
       const contentLength = request.headers.get('content-length');
       if (contentLength && parseInt(contentLength) > MAX_BODY_SIZE) {
-        return NextResponse.json(
-          { error: 'Request body too large' },
-          { status: 413 }
-        );
+        return NextResponse.json({ error: 'Request body too large' }, { status: 413 });
       }
     }
   }
-  
+
   return response;
 }
-
-const MAX_REQUESTS = 60;
-const WINDOW_MS = 60 * 1000;
-const MAX_BODY_SIZE = 1024 * 1024;
-
-const rateLimitStore = new Map<string, { windowStart: number; requests: number }>();
 
 export const config = {
   matcher: [
     '/api/:path*',
-    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt).*)',
+    '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt).*)',
   ],
 };
