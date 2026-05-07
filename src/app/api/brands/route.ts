@@ -16,7 +16,7 @@ export async function GET() {
   if (!db) return NextResponse.json({ error: 'Database not configured', brands: [] });
 
   try {
-    const result = await db.prepare('SELECT * FROM brands WHERE isActive = 1 ORDER BY sortOrder ASC').all();
+    const result = await db.prepare('SELECT * FROM brands WHERE is_active = 1 ORDER BY sort_order ASC').all();
     return NextResponse.json({ brands: result?.results ?? [] });
   } catch (error) {
     console.error('Brands GET Error:', error);
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO brands (id, name, slug, logoUrl, description, isActive, sortOrder, createdAt)
+      INSERT OR REPLACE INTO brands (id, name, slug, logo_url, description, is_active, sort_order, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, body.name,

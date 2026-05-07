@@ -40,7 +40,7 @@ export async function GET() {
       // Send initial data
       try {
         const result = await db.prepare(
-          'SELECT * FROM brands WHERE isActive = 1 ORDER BY sortOrder ASC'
+          'SELECT * FROM brands WHERE is_active = 1 ORDER BY sort_order ASC'
         ).all();
         
         lastCount = result.length;
@@ -56,7 +56,7 @@ export async function GET() {
       const interval = setInterval(async () => {
         try {
           const result = await db.prepare(
-            'SELECT * FROM brands WHERE isActive = 1 ORDER BY sortOrder ASC'
+            'SELECT * FROM brands WHERE is_active = 1 ORDER BY sort_order ASC'
           ).all();
           
           const currentCount = result.length;

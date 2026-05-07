@@ -43,7 +43,7 @@ export async function GET() {
   }
 
   try {
-    const result = await db.prepare('SELECT * FROM inquiries ORDER BY createdAt DESC').all();
+    const result = await db.prepare('SELECT * FROM inquiries ORDER BY created_at DESC').all();
     return NextResponse.json({ inquiries: result });
   } catch (error) {
     console.error('Inquiries GET Error:', error);

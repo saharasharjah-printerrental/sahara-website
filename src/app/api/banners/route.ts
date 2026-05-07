@@ -16,7 +16,7 @@ export async function GET() {
   if (!db) return NextResponse.json({ error: 'Database not configured', banners: [] });
 
   try {
-    const result = await db.prepare('SELECT * FROM banners ORDER BY sortOrder ASC').all();
+    const result = await db.prepare('SELECT * FROM banners ORDER BY sort_order ASC').all();
     return NextResponse.json({ banners: result?.results ?? [] });
   } catch (error) {
     console.error('Banners GET Error:', error);
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO banners (id, title, subtitle, ctaText, ctaLink, imageUrl, isActive, sortOrder, createdAt)
+      INSERT OR REPLACE INTO banners (id, title, subtitle, cta_text, cta_link, image_url, is_active, sort_order, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, body.title || '', body.subtitle || '',

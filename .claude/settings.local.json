@@ -54,7 +54,8 @@
       "PowerShell(python -c \"import pandas as pd; df = pd.read_excel\\('C:\\\\Users\\\\SAHARA\\\\Downloads\\\\saharaprinter.com-FAQ-2026-05-07.xlsx'\\); print\\(df.to_string\\(\\)\\)\")",
       "PowerShell(python -c \"import pandas as pd; df = pd.read_excel\\(r'C:\\\\Users\\\\SAHARA\\\\Downloads\\\\saharaprinter.com-FAQ-2026-05-07.xlsx'\\); print\\(df.to_string\\(\\)\\)\")",
       "PowerShell(python -c \"import pandas as pd; df = pd.read_excel\\(r'C:\\\\Users\\\\SAHARA\\\\Downloads\\\\saharaprinter.com-Coverage-2026-05-07.xlsx'\\); print\\(df.to_string\\(\\)\\)\")",
-      "WebFetch(domain:saharaprinter.com)"
+      "WebFetch(domain:saharaprinter.com)",
+      "Bash(npx wrangler *)"
     ]
   }
 }

@@ -14,13 +14,13 @@ CREATE TABLE IF NOT EXISTS products (
   brand TEXT DEFAULT '',
   category TEXT DEFAULT '',
   condition TEXT DEFAULT 'New',
-  priceSale TEXT DEFAULT '',
-  priceRental TEXT DEFAULT '',
+  price_sale TEXT DEFAULT '',
+  price_rental TEXT DEFAULT '',
   specs TEXT DEFAULT '',
   image TEXT DEFAULT '',
-  isActive INTEGER DEFAULT 1,
-  isFeatured INTEGER DEFAULT 0,
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+  is_active INTEGER DEFAULT 1,
+  is_featured INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ============================================
@@ -30,11 +30,11 @@ CREATE TABLE IF NOT EXISTS brands (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   slug TEXT UNIQUE,
-  logoUrl TEXT DEFAULT '',
+  logo_url TEXT DEFAULT '',
   description TEXT DEFAULT '',
-  isActive INTEGER DEFAULT 1,
-  sortOrder INTEGER DEFAULT 0,
-  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+  is_active INTEGER DEFAULT 1,
+  sort_order INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ============================================

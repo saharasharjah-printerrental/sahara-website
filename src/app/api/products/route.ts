@@ -26,9 +26,9 @@ export async function GET(request: NextRequest) {
       const result = await db.prepare('SELECT * FROM products WHERE id = ?').first(id);
       return NextResponse.json({ products: result ? [result] : [] });
     }
-    let sql = 'SELECT * FROM products WHERE isActive = 1';
-    if (featured === 'true') sql += ' AND isFeatured = 1';
-    sql += ' ORDER BY createdAt DESC';
+    let sql = 'SELECT * FROM products WHERE is_active = 1';
+    if (featured === 'true') sql += ' AND is_featured = 1';
+    sql += ' ORDER BY created_at DESC';
     const result = await db.prepare(sql).all();
     return NextResponse.json({ products: result?.results ?? [] });
   } catch (error) {
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO products (id, name, brand, category, condition, priceSale, priceRental, specs, image, isActive, isFeatured, createdAt)
+      INSERT OR REPLACE INTO products (id, name, brand, category, condition, price_sale, price_rental, specs, image, is_active, is_featured, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, body.name, body.brand || '', body.category || '',
