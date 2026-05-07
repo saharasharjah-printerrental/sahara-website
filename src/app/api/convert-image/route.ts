@@ -59,10 +59,10 @@ async function uploadToCloudinary(
 export async function POST(request: NextRequest) {
   const config = getCloudinaryConfig();
 
-  if (!config?.cloudName || !config?.apiKey || !config?.apiSecret) {
+  if (!config?.cloudName || !config?.apiKey || !config?.apiSecret || config.cloudName.startsWith('YOUR_')) {
     return NextResponse.json(
-      { error: 'Cloudinary not configured. Add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET in Cloudflare Pages environment variables.' },
-      { status: 500 }
+      { error: 'Cloudinary not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET in Cloudflare Pages environment variables.' },
+      { status: 503 }
     );
   }
 

@@ -26,6 +26,7 @@ database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
 # Get credentials from: https://console.cloudinary.com → Settings → API Keys
 # ─────────────────────────────────────────────
 [vars]
-CLOUDINARY_CLOUD_NAME = "YOUR_CLOUD_NAME"
-CLOUDINARY_API_KEY    = "YOUR_API_KEY"
-CLOUDINARY_API_SECRET = "YOUR_API_SECRET"
+
+CLOUDINARY_CLOUD_NAME = "REMOVED_CLOUD_NAME"
+CLOUDINARY_API_KEY    = "REMOVED_API_KEY"
+CLOUDINARY_API_SECRET = "REMOVED_API_SECRET"
