@@ -124,10 +124,10 @@ export default function AdminClients() {
 
   const fetchClients = async () => {
     try {
-      const res = await fetch(`${API_BASE}/logos`);
+      const res = await fetch(`${API_BASE}/clients`);
       const data = await res.json();
-      if (data.logos && data.logos.length > 0) {
-        const mapped = data.logos.map((l: any) => ({
+      if (data.clients && data.clients.length > 0) {
+        const mapped = data.clients.map((l: any) => ({
           id: l.id, name: l.name, logoUrl: l.imageUrl || '',
           website: l.link || '', isActive: l.isActive === 1, sortOrder: l.sortOrder || 0,
         }));
@@ -153,7 +153,7 @@ export default function AdminClients() {
 
   const seedDefaultClients = async (list: Client[]) => {
     await Promise.allSettled(list.map((c, i) =>
-      fetch(`${API_BASE}/logos`, {
+      fetch(`${API_BASE}/clients`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: c.id, name: c.name, imageUrl: c.logoUrl, imageAlt: `${c.name} logo`, link: c.website, isActive: c.isActive ? 1 : 0, sortOrder: i + 1 }),
       })
@@ -161,7 +161,7 @@ export default function AdminClients() {
   };
 
   const syncToAPI = async (client: Client) => {
-    const res = await fetch(`${API_BASE}/logos`, {
+    const res = await fetch(`${API_BASE}/clients`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: client.id, name: client.name, imageUrl: client.logoUrl, imageAlt: `${client.name} logo`, link: client.website, isActive: client.isActive ? 1 : 0, sortOrder: client.sortOrder }),
     });
@@ -176,7 +176,7 @@ export default function AdminClients() {
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this client?")) return;
     try {
-      await fetch(`${API_BASE}/logos?id=${id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/clients?id=${id}`, { method: 'DELETE' });
     } catch { /* continue with local */ }
     saveClients(clients.filter(c => c.id !== id));
     showToast('success', 'Client deleted');
