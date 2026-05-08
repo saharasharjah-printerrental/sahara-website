@@ -17,7 +17,17 @@ export async function GET() {
 
   try {
     const result = await db.prepare('SELECT * FROM brands WHERE is_active = 1 ORDER BY sort_order ASC').all();
-    return NextResponse.json({ brands: result?.results ?? [] });
+    const mapped = (result?.results ?? []).map((b: any) => ({
+      id: b.id,
+      name: b.name,
+      slug: b.slug,
+      logoUrl: b.logo_url,
+      description: b.description,
+      isActive: b.is_active,
+      sortOrder: b.sort_order,
+      createdAt: b.created_at,
+    }));
+    return NextResponse.json({ brands: mapped });
   } catch (error) {
     console.error('Brands GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch brands', brands: [] }, { status: 500 });
@@ -34,13 +44,13 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO brands (id, name, slug, logo_url, description, is_active, sort_order, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT OR REPLACE INTO brands (id, name, slug, logo_url, description, is_active, sort_order)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, body.name,
       body.slug || body.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       body.logoUrl || '', body.description || '',
-      body.isActive ?? 1, body.sortOrder || 0, now
+      body.isActive ?? 1, body.sortOrder || 0
     );
 
     return NextResponse.json({ success: true, id });

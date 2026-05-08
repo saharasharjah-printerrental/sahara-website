@@ -16,8 +16,18 @@ export async function GET() {
   if (!db) return NextResponse.json({ error: 'Database not configured', banners: [] });
 
   try {
-    const result = await db.prepare('SELECT * FROM banners ORDER BY sort_order ASC').all();
-    return NextResponse.json({ banners: result?.results ?? [] });
+    const result = await db.prepare('SELECT * FROM banners WHERE is_active = 1 ORDER BY sort_order ASC').all();
+    const mapped = (result?.results ?? []).map((b: any) => ({
+      id: b.id,
+      title: b.title,
+      subtitle: b.subtitle,
+      ctaText: b.cta_text,
+      ctaLink: b.cta_link,
+      imageUrl: b.image_url,
+      isActive: b.is_active,
+      sortOrder: b.sort_order,
+    }));
+    return NextResponse.json({ banners: mapped });
   } catch (error) {
     console.error('Banners GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch banners', banners: [] }, { status: 500 });
@@ -31,15 +41,14 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json() as any;
     const id = body.id || Date.now().toString();
-    const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO banners (id, title, subtitle, cta_text, cta_link, image_url, is_active, sort_order, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT OR REPLACE INTO banners (id, title, subtitle, cta_text, cta_link, image_url, is_active, sort_order)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, body.title || '', body.subtitle || '',
       body.ctaText || 'Learn More', body.ctaLink || '#',
-      body.imageUrl || '', body.isActive ?? 1, body.sortOrder || 0, now
+      body.imageUrl || '', body.isActive ?? 1, body.sortOrder || 0
     );
 
     return NextResponse.json({ success: true, id });

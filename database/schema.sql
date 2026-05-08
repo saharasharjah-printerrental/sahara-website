@@ -153,6 +153,18 @@ CREATE TABLE IF NOT EXISTS logos (
 );
 
 -- ============================================
+-- CLIENTS TABLE (Trusted clients list in admin)
+-- ============================================
+CREATE TABLE IF NOT EXISTS clients (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  logoUrl TEXT DEFAULT '',
+  website TEXT DEFAULT '',
+  isActive INTEGER DEFAULT 1,
+  sortOrder INTEGER DEFAULT 0
+);
+
+-- ============================================
 -- TESTIMONIALS TABLE
 -- ============================================
 CREATE TABLE IF NOT EXISTS testimonials (
@@ -183,7 +195,7 @@ INSERT OR REPLACE INTO testimonials (id, name, role, company, text, rating, imag
 -- ============================================
 -- SEED DATA - BRANDS
 -- ============================================
-INSERT OR REPLACE INTO brands (id, name, slug, logoUrl, description, isActive, sortOrder) VALUES
+INSERT OR REPLACE INTO brands (id, name, slug, logo_url, description, is_active, sort_order) VALUES
 ('1', 'HP', 'hp', 'https://upload.wikimedia.org/wikipedia/commons/a/ac/HP_logo.svg', 'HP printers and MFPs', 1, 1),
 ('2', 'Canon', 'canon', 'https://upload.wikimedia.org/wikipedia/commons/2/28/Canon_logo.svg', 'Canon imageRUNNER series', 1, 2),
 ('3', 'Xerox', 'xerox', 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Xerox_logo.svg', 'Xerox AltaLink and VersaLink', 1, 3),
@@ -196,7 +208,7 @@ INSERT OR REPLACE INTO brands (id, name, slug, logoUrl, description, isActive, s
 -- ============================================
 -- SEED DATA - SAMPLE PRODUCTS
 -- ============================================
-INSERT OR REPLACE INTO products (id, name, brand, category, condition, priceSale, priceRental, specs, image, isActive, isFeatured) VALUES
+INSERT OR REPLACE INTO products (id, name, brand, category, condition, price_sale, price_rental, specs, image, is_active, is_featured) VALUES
 ('1', 'imageRUNNER ADVANCE C5500', 'Canon', 'MFP', 'New', 'Contact for Pricing', 'AED 800/mo', '55 PPM|Full Color|A3', '', 1, 1),
 ('2', 'DesignJet Z9+ PostScript', 'HP', 'Plotters', 'Refurbished', 'AED 12,000', 'AED 600/mo', '44-inch Roll|2400 DPI', '', 1, 0),
 ('3', 'TASKalfa 6003i Series', 'Kyocera', 'MFP', 'New', 'Contact for Pricing', 'AED 950/mo', '60 PPM|Monochrome', '', 1, 0),

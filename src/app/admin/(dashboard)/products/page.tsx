@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
-import { Skeleton } from "boneyard-js/react";
 
 interface Product {
   id: string;
@@ -228,7 +227,6 @@ export default function AdminProducts() {
           </div>
 
           {/* Products Table */}
-          <Skeleton name="admin-products-table" loading={loading} color="rgba(26,45,74,0.9)" darkColor="rgba(30,52,85,0.9)" animate="shimmer" stagger={60}>
           <div className="glass-card rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -328,7 +326,6 @@ export default function AdminProducts() {
               </table>
             </div>
           </div>
-          </Skeleton>
         </div>
       </main>
 

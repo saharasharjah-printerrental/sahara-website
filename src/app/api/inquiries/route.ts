@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT INTO inquiries (id, name, email, phone, company, service, message, status, notes, createdAt)
+      INSERT INTO inquiries (id, name, email, phone, company, service_type, message, status, notes, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,

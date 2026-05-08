@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Skeleton } from "boneyard-js/react";
 
 interface Inquiry {
   id: string;
@@ -83,7 +82,6 @@ export default function AdminInquiries() {
           </div>
 
           {/* Inquiries List */}
-          <Skeleton name="admin-inquiries-table" loading={!mounted} color="rgba(26,45,74,0.9)" darkColor="rgba(30,52,85,0.9)" animate="shimmer" stagger={60}>
           <div className="glass-card rounded-2xl overflow-hidden">
             {!mounted || filteredInquiries.length > 0 ? (
               <div className="overflow-x-auto">
@@ -162,7 +160,6 @@ export default function AdminInquiries() {
               </div>
             )}
           </div>
-          </Skeleton>
         </div>
       </main>
 

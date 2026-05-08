@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Skeleton } from "boneyard-js/react";
 
 interface Stats {
   totalProducts: number;
@@ -100,19 +99,17 @@ export default function AdminDashboard() {
             <div className="h-4 w-64 bg-[#1a2d4a] rounded-lg" />
           </div>
         </div>
-        <Skeleton name="admin-stat-cards" loading={true} color="rgba(26,45,74,0.9)" darkColor="rgba(30,52,85,0.9)" animate="shimmer" stagger={100}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {Array(4).fill(null).map((_, i) => (
-              <div key={i} className="glass-card rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-[#1a2d4a]" />
-                </div>
-                <div className="h-9 w-10 rounded-lg bg-[#1a2d4a] mb-2" />
-                <div className="h-3.5 w-24 rounded-lg bg-[#1a2d4a]" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {Array(4).fill(null).map((_, i) => (
+            <div key={i} className="glass-card rounded-2xl p-6 animate-pulse">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-8 h-8 rounded-lg bg-[#1a2d4a]" />
               </div>
-            ))}
-          </div>
-        </Skeleton>
+              <div className="h-9 w-10 rounded-lg bg-[#1a2d4a] mb-2" />
+              <div className="h-3.5 w-24 rounded-lg bg-[#1a2d4a]" />
+            </div>
+          ))}
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {Array(3).fill(null).map((_, i) => (
             <div key={i} className="glass-card rounded-2xl p-6">
@@ -126,24 +123,22 @@ export default function AdminDashboard() {
             </div>
           ))}
         </div>
-        <Skeleton name="admin-recent-table" loading={true} color="rgba(26,45,74,0.9)" darkColor="rgba(30,52,85,0.9)" animate="shimmer" stagger={50}>
-          <div className="glass-card rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <div className="h-6 w-36 bg-[#1a2d4a] rounded-lg" />
-            </div>
-            <div className="space-y-0">
-              {Array(5).fill(null).map((_, i) => (
-                <div key={i} className="flex gap-6 py-4 border-b border-white/5 items-center">
-                  <div className="h-4 rounded bg-[#1a2d4a] w-28" />
-                  <div className="h-4 rounded bg-[#1a2d4a] w-36" />
-                  <div className="h-4 rounded bg-[#1a2d4a] w-20" />
-                  <div className="h-6 w-16 rounded-full bg-[#1a2d4a]" />
-                  <div className="h-4 rounded bg-[#1a2d4a] w-20" />
-                </div>
-              ))}
-            </div>
+        <div className="glass-card rounded-2xl p-6 animate-pulse">
+          <div className="flex items-center justify-between mb-6">
+            <div className="h-6 w-36 bg-[#1a2d4a] rounded-lg" />
           </div>
-        </Skeleton>
+          <div className="space-y-0">
+            {Array(5).fill(null).map((_, i) => (
+              <div key={i} className="flex gap-6 py-4 border-b border-white/5 items-center">
+                <div className="h-4 rounded bg-[#1a2d4a] w-28" />
+                <div className="h-4 rounded bg-[#1a2d4a] w-36" />
+                <div className="h-4 rounded bg-[#1a2d4a] w-20" />
+                <div className="h-6 w-16 rounded-full bg-[#1a2d4a]" />
+                <div className="h-4 rounded bg-[#1a2d4a] w-20" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

@@ -80,9 +80,14 @@ export default function AdminBrands() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Delete this brand?")) {
-      saveBrands(brands.filter(b => b.id !== id));
+    if (!confirm("Delete this brand?")) return;
+    try {
+      await fetch(`${API_BASE}/brands?id=${id}`, { method: 'DELETE' });
+    } catch (e) {
+      console.error('Delete failed:', e);
     }
+    saveBrands(brands.filter(b => b.id !== id));
+    showToast('success', 'Brand deleted');
   };
 
   const handleToggle = async (id: string) => {

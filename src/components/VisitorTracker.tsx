@@ -17,7 +17,7 @@ export default function VisitorTracker() {
     }
 
     const ping = () =>
-      fetch("/api/analytics/ping", {
+      fetch("/api/analytics/ping/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId: sid, page: window.location.pathname }),
