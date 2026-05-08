@@ -35,4 +35,4 @@ bucket_name = "sahara-printer-files"
 
 # R2 PUBLIC URL - Get from Cloudflare Dashboard → R2 → Your bucket → Settings → Public Access
 # Copy the public URL and paste it below (e.g., https://sahara-printer-files.your-account.r2.cloud)
-R2_PUBLIC_URL = "https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev"continue
+R2_PUBLIC_URL = "https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev"
