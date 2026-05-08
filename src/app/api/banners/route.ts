@@ -24,6 +24,7 @@ export async function GET() {
       ctaText: b.cta_text,
       ctaLink: b.cta_link,
       imageUrl: b.image_url,
+      position: b.position || 'hero',
       isActive: b.is_active,
       sortOrder: b.sort_order,
     }));
@@ -43,12 +44,13 @@ export async function POST(request: NextRequest) {
     const id = body.id || Date.now().toString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO banners (id, title, subtitle, cta_text, cta_link, image_url, is_active, sort_order)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT OR REPLACE INTO banners (id, title, subtitle, cta_text, cta_link, image_url, position, is_active, sort_order)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, body.title || '', body.subtitle || '',
       body.ctaText || 'Learn More', body.ctaLink || '#',
-      body.imageUrl || '', body.isActive ?? 1, body.sortOrder || 0
+      body.imageUrl || '', body.position || 'hero',
+      body.isActive ?? 1, body.sortOrder || 0
     );
 
     return NextResponse.json({ success: true, id });

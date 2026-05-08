@@ -205,15 +205,6 @@ INSERT OR REPLACE INTO brands (id, name, slug, logo_url, description, is_active,
 ('7', 'Sharp', 'sharp', 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Sharp_logo.svg', 'Sharp BP series', 1, 7),
 ('8', 'Epson', 'epson', 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Epson_logo.svg', 'Epson business printers', 1, 8);
 
--- ============================================
--- SEED DATA - SAMPLE PRODUCTS
--- ============================================
-INSERT OR REPLACE INTO products (id, name, brand, category, condition, price_sale, price_rental, specs, image, is_active, is_featured) VALUES
-('1', 'imageRUNNER ADVANCE C5500', 'Canon', 'MFP', 'New', 'Contact for Pricing', 'AED 800/mo', '55 PPM|Full Color|A3', '', 1, 1),
-('2', 'DesignJet Z9+ PostScript', 'HP', 'Plotters', 'Refurbished', 'AED 12,000', 'AED 600/mo', '44-inch Roll|2400 DPI', '', 1, 0),
-('3', 'TASKalfa 6003i Series', 'Kyocera', 'MFP', 'New', 'Contact for Pricing', 'AED 950/mo', '60 PPM|Monochrome', '', 1, 0),
-('4', 'Xerox AltaLink C8170', 'Xerox', 'MFP', 'New', 'Contact for Pricing', 'AED 1,100/mo', '10" UI Tablet|ConnectKey', '', 1, 1),
-('5', 'LaserJet Managed E82560', 'HP', 'A3 Printers', 'New', 'Contact for Pricing', 'AED 750/mo', 'Wolf Security|Energy Star', '', 1, 1);
 
 -- ============================================
 -- SEED DATA - SAMPLE FAQS
@@ -224,10 +215,4 @@ INSERT OR REPLACE INTO faqs (id, pageSlug, question, answer, sortOrder, isActive
 ('3', 'printer-rental', 'Do you provide AMC services?', 'Yes, we offer Annual Maintenance Contracts covering toner, parts, labor, and preventive maintenance. AMC clients get priority scheduling and faster response times.', 3, 1),
 ('4', 'printer-rental', 'What areas do you serve?', 'We serve all across UAE including Dubai, Abu Dhabi, Sharjah, Al Ain, Fujairah, RAK, and all major cities.', 4, 1);
 
--- ============================================
--- SEED DATA - SAMPLE BANNERS
--- ============================================
-INSERT OR REPLACE INTO banners (id, title, subtitle, ctaText, ctaLink, imageUrl, isActive, sortOrder) VALUES
-('1', 'Professional Printer Rental', 'Reliable copiers & printers for your business with zero deposit options', 'Get Quote', '/get-quote', '', 1, 1),
-('2', 'Expert Repair Services', 'Fast turnaround and genuine parts for all major brands', 'Book Repair', '/services/repair', '', 1, 2),
-('3', 'Quality Supplies & Toner', 'Original and compatible toners for all printer models', 'View Products', '/products', '', 1, 3);
+-- Banners seed removed — live D1 table uses snake_case columns and has position NOT NULL
