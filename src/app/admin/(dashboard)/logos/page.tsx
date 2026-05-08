@@ -217,7 +217,8 @@ function LogoModal({ logo, onSave, onClose }: { logo: Logo | null; onSave: (l: L
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+      // Logos → R2 (no conversion needed, R2 serves directly)
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
       const data = await res.json();
       if (data.url) {
         setForm(prev => ({ ...prev, imageUrl: data.url, imageAlt: prev.imageAlt || `${prev.name} logo` }));
@@ -228,7 +229,7 @@ function LogoModal({ logo, onSave, onClose }: { logo: Logo | null; onSave: (l: L
     } finally {
       setUploading(false);
     }
-    // Cloudinary not configured — show local preview
+    // R2 not configured — show local preview
     const reader = new FileReader();
     reader.onloadend = () => {
       setForm(prev => ({ ...prev, imageUrl: reader.result as string, imageAlt: prev.imageAlt || `${prev.name} logo` }));

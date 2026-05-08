@@ -78,7 +78,7 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
     "font-src 'self' https://fonts.gstatic.com data:",
     imgSrc,
     connectSrc,
-    "frame-src 'self' https://www.google.com https://www.youtube.com",
+    "frame-src 'self' https://www.google.com https://www.google.com/maps https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com",
   ].join('; ');
 
   response.headers.set('Content-Security-Policy', csp);

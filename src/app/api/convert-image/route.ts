@@ -4,27 +4,56 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 export const runtime = 'edge';
 
 function getCloudinaryConfig() {
-  try {
-    const env = getRequestContext().env as any;
-    return {
-      cloudName: env.CLOUDINARY_CLOUD_NAME as string,
-      apiKey: env.CLOUDINARY_API_KEY as string,
-      apiSecret: env.CLOUDINARY_API_SECRET as string,
-    };
-  } catch {
+  // Use safer env reading pattern (same as email-service.ts)
+  const ctx = getRequestContext() as any;
+  const env = ctx?.env || {};
+
+  const cloudName = env.CLOUDINARY_CLOUD_NAME || '';
+  const apiKey = env.CLOUDINARY_API_KEY || '';
+  const apiSecret = env.CLOUDINARY_API_SECRET || '';
+
+  // Debug log what we're getting
+  console.log('[Cloudinary] Config check:', {
+    hasCloudName: !!cloudName,
+    hasApiKey: !!apiKey,
+    hasApiSecret: !!apiSecret,
+    cloudNamePreview: cloudName ? cloudName.substring(0, 5) + '...' : 'empty',
+    cloudNameValue: cloudName,
+  });
+
+  if (!cloudName || !apiKey || !apiSecret || cloudName.startsWith('YOUR_')) {
     return null;
   }
+
+  return {
+    cloudName,
+    apiKey,
+    apiSecret,
+  };
+}
+
+function isWebPFormat(mimeType: string, fileName: string): boolean {
+  // Check MIME type
+  if (mimeType === 'image/webp') return true;
+  // Check file extension
+  if (fileName.toLowerCase().endsWith('.webp')) return true;
+  // Check base64 data header
+  return false;
 }
 
 async function uploadToCloudinary(
   buffer: ArrayBuffer,
   fileName: string,
   contentType: string,
-  config: { cloudName: string; apiKey: string; apiSecret: string }
+  config: { cloudName: string; apiKey: string; apiSecret: string },
+  alreadyWebP: boolean = false
 ): Promise<string> {
   const timestamp = Math.floor(Date.now() / 1000);
   const folder = 'sahara-printer';
-  const publicId = `${folder}/${fileName.replace(/\.[^/.]+$/, '')}-${timestamp}`;
+  const baseName = fileName.replace(/\.[^/.]+$/, '');
+  // Ensure WebP extension if converting
+  const webpFileName = alreadyWebP ? fileName : `${baseName}.webp`;
+  const publicId = `${folder}/${baseName}-${timestamp}`;
 
   // Params must be sorted alphabetically for signature
   const signatureString = `public_id=${publicId}&timestamp=${timestamp}${config.apiSecret}`;
@@ -35,12 +64,19 @@ async function uploadToCloudinary(
 
   // Build multipart form
   const form = new FormData();
-  const blob = new Blob([buffer], { type: contentType });
-  form.append('file', blob, fileName);
+  // If already WebP, use the original content type, otherwise force WebP
+  const uploadContentType = alreadyWebP ? contentType : 'image/webp';
+  const blob = new Blob([buffer], { type: uploadContentType });
+  form.append('file', blob, webpFileName);
   form.append('api_key', config.apiKey);
   form.append('timestamp', String(timestamp));
   form.append('signature', signature);
   form.append('public_id', publicId);
+
+  // If not already WebP, request Cloudinary to convert to WebP
+  if (!alreadyWebP) {
+    form.append('transformation', 'f_webp,q_auto');
+  }
 
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${config.cloudName}/image/upload`,
@@ -107,15 +143,19 @@ export async function POST(request: NextRequest) {
       mimeType = file.type || 'image/jpeg';
     }
 
-    const url = await uploadToCloudinary(imageBuffer, originalName, mimeType, config);
+    // Check if already WebP - skip conversion if true
+    const alreadyWebP = isWebPFormat(mimeType, originalName);
+    console.log('[Cloudinary] Upload check:', { originalName, mimeType, alreadyWebP });
+
+    const url = await uploadToCloudinary(imageBuffer, originalName, mimeType, config, alreadyWebP);
 
     return NextResponse.json({
       success: true,
       url,
       fileName: originalName,
-      converted: false,
+      converted: !alreadyWebP,
       originalName,
-      format: mimeType,
+      format: alreadyWebP ? mimeType : 'image/webp',
     });
   } catch (error) {
     console.error('Cloudinary Upload Error:', error);

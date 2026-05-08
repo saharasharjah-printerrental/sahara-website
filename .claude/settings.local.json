@@ -59,7 +59,28 @@
       "PowerShell(git remote *)",
       "PowerShell(rtk git *)",
       "PowerShell(git push *)",
-      "PowerShell(Select-String -Path \"src\\\\app\\\\layout.tsx\" -Pattern '\"Store\"|ratingValue|dateModified' | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })"
+      "PowerShell(Select-String -Path \"src\\\\app\\\\layout.tsx\" -Pattern '\"Store\"|ratingValue|dateModified' | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "WebSearch",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\" -File)",
+      "Bash(Select-Object Name)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\\\\.claude\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -Property Name, FullPath)",
+      "PowerShell(npx -y @cloudflare/mcp-server-cloudflare --help 2>&1 | Select-Object -First 50)",
+      "PowerShell(npx wrangler whoami 2>&1)",
+      "PowerShell($env:CLOUDFLARE_API_TOKEN)",
+      "PowerShell(npx @cloudflare/mcp-server-cloudflare --version 2>&1)",
+      "PowerShell(npx -y @cloudflare/mcp-server-cloudflare 2>&1 | Select-Object -First 30)",
+      "Bash(npx mcp-remote *)",
+      "PowerShell(npx mcp-remote https://mcp.cloudflare.com/sse 2>&1 | Select-Object -First 30)",
+      "PowerShell(npx mcp-remote https://mcp.cloudflare.com/jsonrpc 2>&1 | Select-Object -First 30)",
+      "PowerShell(npx mcp-remote https://mcp.cloudflare.com/mcp 2>&1 | Select-Object -First 40)",
+      "PowerShell(npx mcp-remote https://mcp.cloudflare.com/mcp 2>&1)",
+      "mcp__MCP_DOCKER__browser_navigate",
+      "mcp__MCP_DOCKER__browser_console_messages",
+      "PowerShell(python -c \"import pandas as pd; df = pd.read_excel\\('C:/Users/SAHARA/Downloads/saharaprinter.com-FAQ-2026-05-07.xlsx'\\); print\\(df.to_string\\(\\)\\)\")",
+      "PowerShell(python -c \"import pandas as pd; df = pd.read_excel\\('C:/Users/SAHARA/Downloads/saharaprinter.com-Breadcrumbs-2026-05-07.xlsx'\\); print\\(df.to_string\\(\\)\\)\")",
+      "PowerShell(python -c \"import pandas as pd; df = pd.read_excel\\('C:/Users/SAHARA/Downloads/saharaprinter.com-Coverage-2026-05-07.xlsx'\\); print\\(df.to_string\\(\\)\\)\")",
+      "mcp__token-optimizer__smart_api_fetch"
     ]
   }
 }

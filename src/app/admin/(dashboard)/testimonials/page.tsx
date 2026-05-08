@@ -194,7 +194,8 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+      // Testimonials → R2 (no conversion needed, R2 serves directly)
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
       const data = await res.json();
       if (data.url) {
         setForm(prev => ({ ...prev, avatarUrl: data.url, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }));
@@ -205,7 +206,7 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
     } finally {
       setUploading(false);
     }
-    // Cloudinary not configured — show local preview so admin can see the image
+    // R2 not configured — show local preview so admin can see the image
     const reader = new FileReader();
     reader.onloadend = () => {
       setForm(prev => ({ ...prev, avatarUrl: reader.result as string, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }));

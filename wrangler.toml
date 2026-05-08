@@ -13,15 +13,26 @@ database_name = "sahara-printer-db"
 database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
 
 # ─────────────────────────────────────────────
+# R2 STORAGE (for image uploads)
+# Create bucket in Cloudflare Dashboard → R2 → Create bucket
+# Name: sahara-printer-files
+# Add binding below after creating bucket
+# ─────────────────────────────────────────────
+[[r2_buckets]]
+binding = "SAHARA_ASSETS"
+bucket_name = "sahara-printer-files"
+
+# ─────────────────────────────────────────────
 # CLOUDINARY CONFIGURATION
-# IMPORTANT: Never commit credentials to git!
 # Set these in Cloudflare Dashboard → Pages → sahara-website → Settings → Environment variables:
 #   - CLOUDINARY_CLOUD_NAME
 #   - CLOUDINARY_API_KEY
 #   - CLOUDINARY_API_SECRET
 # Get credentials from: https://console.cloudinary.com → Settings → API Keys
 # ─────────────────────────────────────────────
+# Vars set in Cloudflare Dashboard - do not add here to avoid override
 [vars]
-# CLOUDINARY_CLOUD_NAME = "your-cloud-name"
-# CLOUDINARY_API_KEY    = "your-api-key"
-# CLOUDINARY_API_SECRET = "your-api-secret"
+
+# R2 PUBLIC URL - Get from Cloudflare Dashboard → R2 → Your bucket → Settings → Public Access
+# Copy the public URL and paste it below (e.g., https://sahara-printer-files.your-account.r2.cloud)
+R2_PUBLIC_URL = "https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev"continue
