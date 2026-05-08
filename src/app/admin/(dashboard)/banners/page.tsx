@@ -26,13 +26,20 @@ export default function AdminBanners() {
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_banners");
-    if (stored) {
-      setBanners(JSON.parse(stored));
-    } else {
-      setBanners(initialBanners);
-      localStorage.setItem("sahara_banners", JSON.stringify(initialBanners));
-    }
+    fetch('/api/banners')
+      .then(r => r.json())
+      .then(data => {
+        if (data.banners?.length) {
+          setBanners(data.banners);
+        } else {
+          const stored = localStorage.getItem("sahara_banners");
+          setBanners(stored ? JSON.parse(stored) : initialBanners);
+        }
+      })
+      .catch(() => {
+        const stored = localStorage.getItem("sahara_banners");
+        setBanners(stored ? JSON.parse(stored) : initialBanners);
+      });
   }, []);
 
   const saveBanners = (newBanners: Banner[]) => {
@@ -40,21 +47,32 @@ export default function AdminBanners() {
     localStorage.setItem("sahara_banners", JSON.stringify(newBanners));
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Delete this banner?")) {
-      saveBanners(banners.filter(b => b.id !== id));
-    }
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this banner?")) return;
+    try {
+      await fetch(`/api/banners?id=${id}`, { method: 'DELETE' });
+    } catch (e) { console.error('Delete failed:', e); }
+    saveBanners(banners.filter(b => b.id !== id));
+    showToast('success', 'Banner deleted');
   };
 
   const handleToggle = (id: string) => {
     saveBanners(banners.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b));
   };
 
-  const handleSave = (banner: Banner) => {
+  const handleSave = async (banner: Banner) => {
+    const finalBanner = editingBanner ? banner : { ...banner, id: Date.now().toString() };
+    try {
+      await fetch('/api/banners', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(finalBanner),
+      });
+    } catch (e) { console.error('Save failed:', e); }
     if (editingBanner) {
-      saveBanners(banners.map(b => b.id === banner.id ? banner : b));
+      saveBanners(banners.map(b => b.id === banner.id ? finalBanner : b));
     } else {
-      saveBanners([...banners, { ...banner, id: Date.now().toString() }]);
+      saveBanners([...banners, finalBanner]);
     }
     setShowModal(false);
     setEditingBanner(null);

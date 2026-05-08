@@ -6,9 +6,11 @@ import { Chat } from "@mui/icons-material";
 
 export default function WhatsAppCTA() {
   const [whatsapp, setWhatsapp] = useState("971503823969");
+  const [mounted, setMounted] = useState(false);
   const dragged = useRef(false);
 
   useEffect(() => {
+    setMounted(true);
     const stored = localStorage.getItem("sahara_settings");
     if (stored) {
       const settings = JSON.parse(stored);
@@ -29,6 +31,8 @@ export default function WhatsAppCTA() {
       "noopener,noreferrer"
     );
   };
+
+  if (!mounted) return null;
 
   return (
     <motion.div

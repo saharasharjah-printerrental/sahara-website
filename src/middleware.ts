@@ -54,8 +54,8 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
     response.headers.set('Cross-Origin-Embedder-Policy', 'unsafe-none');
     response.headers.set('Cross-Origin-Opener-Policy',   'same-origin-allow-popups');
   } else {
-    response.headers.set('Cross-Origin-Embedder-Policy', 'credentialless');
-    response.headers.set('Cross-Origin-Opener-Policy',   'same-origin');
+    response.headers.set('Cross-Origin-Embedder-Policy', 'unsafe-none');
+    response.headers.set('Cross-Origin-Opener-Policy',   'same-origin-allow-popups');
   }
 
   // CSP — admin gets broader connect-src/img-src for management tools
