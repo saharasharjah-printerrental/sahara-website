@@ -10,6 +10,9 @@ BASELINES_DIR="tests/e2e/visual/baselines"
 DIFFS_DIR="tests/e2e/visual/diffs"
 FAILED=0
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+AB="node \"$SCRIPT_DIR/ab.js\""
+
 mkdir -p "$DIFFS_DIR"
 
 echo "=============================================="
@@ -18,8 +21,7 @@ echo "  Threshold: ${THRESHOLD}% pixel difference"
 echo "  Baselines: $BASELINES_DIR"
 echo "=============================================="
 
-# Close any existing session
-agent-browser close --all 2>/dev/null || true
+$AB close --all 2>/dev/null || true
 
 run_test() {
   local ROUTE="$1"
@@ -29,28 +31,20 @@ run_test() {
   echo ""
   echo "Testing: $LABEL ($ROUTE)"
 
-  agent-browser --session "$SESSION" open "$BASE_URL$ROUTE" > /dev/null 2>&1
-  agent-browser --session "$SESSION" wait --load networkidle > /dev/null 2>&1
+  $AB --session "$SESSION" open "$BASE_URL$ROUTE" > /dev/null 2>&1
+  $AB --session "$SESSION" wait --load networkidle > /dev/null 2>&1
 
   local BASELINE="$BASELINES_DIR/$NAME.png"
   local CURRENT="$DIFFS_DIR/${NAME}-current.png"
   local DIFF="$DIFFS_DIR/${NAME}-diff.png"
 
-  # Capture current screenshot
-  agent-browser --session "$SESSION" screenshot "$CURRENT" > /dev/null 2>&1
+  $AB --session "$SESSION" screenshot "$CURRENT" > /dev/null 2>&1
 
   if [ -f "$BASELINE" ]; then
-    # Compare against baseline
-    agent-browser --session "$SESSION" diff screenshot \
+    DIFF_OUTPUT=$($AB --session "$SESSION" diff screenshot \
       --baseline "$BASELINE" \
       --threshold "$THRESHOLD" \
-      -o "$DIFF" 2>/dev/null || true
-
-    # Check diff ratio
-    DIFF_OUTPUT=$(agent-browser --session "$SESSION" diff screenshot \
-      --baseline "$BASELINE" \
-      --threshold "$THRESHOLD" \
-      -o /dev/null 2>&1 || true)
+      -o "$DIFF" 2>&1 || true)
 
     if echo "$DIFF_OUTPUT" | grep -q "PASSED\|passed"; then
       echo "  ✓ PASSED: No visual regression"
@@ -60,17 +54,13 @@ run_test() {
       FAILED=$((FAILED + 1))
     fi
   else
-    # First run - capture baseline
     echo "  ○ BASELINE: No baseline found, capturing..."
     cp "$CURRENT" "$BASELINE"
     echo "  ✓ Baseline captured at $BASELINE"
     echo "  (This is expected on first run)"
   fi
-
-  agent-browser --session "$SESSION" close > /dev/null 2>&1 || true
 }
 
-# Test key pages
 run_test "/" "Homepage"
 run_test "/contact" "Contact"
 run_test "/products" "Products"
@@ -80,8 +70,7 @@ run_test "/services/printer-rental" "Printer Rental"
 run_test "/brands/hp" "HP Brand"
 run_test "/blogs" "Blog Listing"
 
-# Close browser
-agent-browser close --all 2>/dev/null || true
+$AB close --all 2>/dev/null || true
 
 echo ""
 echo "=============================================="

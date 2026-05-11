@@ -6,29 +6,28 @@ BASE_URL="${1:-http://localhost:3000}"
 SESSION="${2:-a11y-tests}"
 FAILED=0
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+AB="node \"$SCRIPT_DIR/ab.js\""
+
 echo "=============================================="
 echo "  Accessibility Tests - WCAG 2.2 AA"
 echo "  Base URL: $BASE_URL"
 echo "=============================================="
 
-# Close any existing session
-agent-browser close --all 2>/dev/null || true
+$AB close --all 2>/dev/null || true
 
 run_a11y_test() {
   local ROUTE="$1"
   local LABEL="$2"
-  local NAME=$(echo "$ROUTE" | tr '/' '-' | sed 's/^-//')
 
   echo ""
   echo "Checking: $LABEL ($ROUTE)"
 
-  agent-browser --session "$SESSION" open "$BASE_URL$ROUTE" > /dev/null 2>&1
-  agent-browser --session "$SESSION" wait --load networkidle > /dev/null 2>&1
+  $AB --session "$SESSION" open "$BASE_URL$ROUTE" > /dev/null 2>&1
+  $AB --session "$SESSION" wait --load networkidle > /dev/null 2>&1
 
-  # Get interactive elements snapshot
-  SNAPSHOT=$(agent-browser --session "$SESSION" snapshot -i --urls 2>/dev/null || echo "")
+  SNAPSHOT=$($AB --session "$SESSION" snapshot -i --urls 2>/dev/null || echo "")
 
-  # Check 1: Page has interactive elements with accessible names
   HAS_BUTTONS=$(echo "$SNAPSHOT" | grep -c -i "button" || echo "0")
   if [ "$HAS_BUTTONS" -gt 0 ]; then
     echo "  ✓ PASSED: $HAS_BUTTONS button(s) found"
@@ -36,7 +35,6 @@ run_a11y_test() {
     echo "  ○ WARNING: No buttons found - may be static page"
   fi
 
-  # Check 2: Interactive elements have refs
   HAS_REFS=$(echo "$SNAPSHOT" | grep -c "@e[0-9]" || echo "0")
   if [ "$HAS_REFS" -gt 0 ]; then
     echo "  ✓ PASSED: $HAS_REFS interactive element(s) with refs"
@@ -44,18 +42,16 @@ run_a11y_test() {
     echo "  ○ WARNING: No refs found in snapshot"
   fi
 
-  # Check 3: No JavaScript errors
-  ERRORS=$(agent-browser --session "$SESSION" errors 2>/dev/null | grep -c "error" || echo "0")
+  ERRORS=$($AB --session "$SESSION" errors 2>/dev/null | grep -c "error" || echo "0")
   if [ "$ERRORS" -eq 0 ]; then
     echo "  ✓ PASSED: No console errors"
   else
     echo "  ✗ FAILED: $ERRORS console error(s)"
-    agent-browser --session "$SESSION" errors
+    $AB --session "$SESSION" errors
     FAILED=$((FAILED + 1))
   fi
 
-  # Check 4: Page title exists (screen reader essential)
-  TITLE=$(agent-browser --session "$SESSION" get title 2>/dev/null || echo "")
+  TITLE=$($AB --session "$SESSION" get title 2>/dev/null || echo "")
   if [ -n "$TITLE" ]; then
     echo "  ✓ PASSED: Page has title: \"$TITLE\""
   else
@@ -63,7 +59,6 @@ run_a11y_test() {
     FAILED=$((FAILED + 1))
   fi
 
-  # Check 5: Snapshot tree is accessible (has depth)
   TREE_DEPTH=$(echo "$SNAPSHOT" | grep -c "^│" || echo "0")
   if [ "$TREE_DEPTH" -gt 0 ]; then
     echo "  ✓ PASSED: Accessibility tree populated ($TREE_DEPTH lines)"
@@ -77,8 +72,7 @@ run_a11y_test "/contact" "Contact"
 run_a11y_test "/products" "Products"
 run_a11y_test "/get-quote" "Get Quote"
 
-# Close browser
-agent-browser close --all 2>/dev/null || true
+$AB close --all 2>/dev/null || true
 
 echo ""
 echo "=============================================="

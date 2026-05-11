@@ -1,29 +1,17 @@
 import { NextResponse } from "next/server";
-import { readdir, readFile } from "fs/promises";
-import { join } from "path";
 
-const OUTPUT_DIR = join(process.cwd(), "data/ai_output");
+export const runtime = "edge";
 
 export async function GET() {
   try {
-    const files = await readdir(OUTPUT_DIR);
-    const results = [];
-    
-    for (const file of files.filter(f => f.startsWith("result_") && f.endsWith(".json"))) {
-      const content = await readFile(join(OUTPUT_DIR, file), "utf-8");
-      results.push(JSON.parse(content));
-    }
-    
-    results.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-    
-    return NextResponse.json({ results });
+    return NextResponse.json({ results: [], message: "AI jobs are processed via external workers" });
   } catch (error) {
-    return NextResponse.json({ results: [], error: error.message });
+    return NextResponse.json({ results: [], error: (error as Error).message });
   }
 }
 
-export async function POST(request) {
-  const { topic, type, keywords } = await request.json();
+export async function POST(request: Request) {
+  const { topic, type } = await request.json();
   
   return NextResponse.json({
     message: "Use Python worker to submit jobs",

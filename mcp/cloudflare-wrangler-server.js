@@ -182,23 +182,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case "pages_deployments_list": {
       const limit = args.limit || 10;
-      const res = runWrangler(`pages deployment list --project-name="${args.projectName}" --per-page=${limit} --format=json`);
+      const res = runWrangler(`pages deployment list --project-name="${args.projectName}" --json`);
       return { content: [{ type: "text", text: JSON.stringify(res, null, 2) }] };
     }
 
     case "pages_deployment_info": {
-      const res = runWrangler(`pages deployment get "${args.deploymentId}" --project-name="${args.projectName}" --format=json`);
+      const res = runWrangler(`pages deployment get "${args.deploymentId}" --project-name="${args.projectName}" --json`);
       return { content: [{ type: "text", text: JSON.stringify(res, null, 2) }] };
     }
 
     case "pages_project_info": {
-      const res = runWrangler(`pages project list --format=json`);
+      const res = runWrangler(`pages project list --json`);
       return { content: [{ type: "text", text: JSON.stringify(res, null, 2) }] };
     }
 
     case "tail_logs": {
-      const format = args.format || "pretty";
-      const res = runWrangler(`pages deployment tail --project-name="${args.projectName}" --format=${format}`);
+      const res = runWrangler(`pages deployment tail --project-name="${args.projectName}"`);
       return { content: [{ type: "text", text: JSON.stringify(res, null, 2) }] };
     }
 
