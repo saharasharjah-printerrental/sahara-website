@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { CipherText } from "@/components/CipherText";
 import HomepageClient from "@/components/HomepageClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -115,7 +114,7 @@ export default function HomePage() {
       },
       {
         "@type": "Question",
-        name: "What printer brands do you rent?",
+        name: "What printer brands do we rent?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother. All equipment is brand new with full manufacturer warranty.",
@@ -139,65 +138,10 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* Preload LCP hero image */}
       <link rel="preload" as="image" href="/images/hero-bg.webp" fetchPriority="high" />
 
       <Header />
-
-      {/* Hero Section */}
-      <section
-        className="relative min-h-screen flex items-center pt-20 px-8 lg:px-24 overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/hero-bg.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center right",
-          backgroundRepeat: "no-repeat",
-          contentVisibility: "auto",
-        }}
-      >
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071325]/95 via-[#071325]/75 to-[#071325]/30 z-0" />
-        {/* Bottom vignette */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#071325] to-transparent z-0" />
-
-        <div className="w-full max-w-3xl relative z-10 space-y-8">
-          <h1 className="sr-only">Printer Rental Dubai & UAE | Photocopier Leasing Services</h1>
-          <CipherText
-            text="Rent, Buy, or Repair"
-            textSize="text-2xl sm:text-3xl md:text-7xl"
-            className="mb-2 drop-shadow-[0_2px_24px_rgba(0,0,0,0.8)]"
-            textColor="#ffffff"
-            delay={500}
-          />
-          <CipherText
-            text="All Under One Roof"
-            textSize="text-xl sm:text-2xl md:text-6xl"
-            className="mb-4 drop-shadow-[0_2px_24px_rgba(0,0,0,0.8)]"
-            delay={1500}
-          />
-          <p className="text-lg md:text-xl text-white/90 max-w-xl leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
-            Premium office equipment solutions for the modern executive. From high-speed printing to expert technical support, we power your productivity with precision.
-          </p>
-          <div className="flex flex-wrap gap-4 pt-2">
-            <a
-              href="/get-quote"
-              className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.4)]"
-            >
-              Get a Quote
-            </a>
-            <a
-              href="/services"
-              className="px-8 py-4 rounded-full font-bold text-lg text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors"
-            >
-              Explore Services
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* All interactive sections in client component */}
       <HomepageClient />
-
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
