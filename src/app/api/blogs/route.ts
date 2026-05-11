@@ -24,27 +24,29 @@ function getDB() {
   }
 }
 
+const CACHE_CONTROL = { 'Cache-Control': 'no-store, max-age=0' };
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get('slug');
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({ error: 'Database not configured', blogs: [] });
+    return NextResponse.json({ error: 'Database not configured', blogs: [] }, { headers: CACHE_CONTROL });
   }
 
   try {
     const includeDrafts = searchParams.get('includeDrafts') === '1';
     if (slug) {
       const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').first(slug);
-      return NextResponse.json({ blog: result });
+      return NextResponse.json({ blog: result }, { headers: CACHE_CONTROL });
     }
     if (includeDrafts) {
       const result = await db.prepare('SELECT * FROM blogs ORDER BY createdAt DESC').all();
-      return NextResponse.json({ blogs: result?.results ?? [] });
+      return NextResponse.json({ blogs: result?.results ?? [] }, { headers: CACHE_CONTROL });
     }
     const result = await db.prepare('SELECT * FROM blogs WHERE isActive = 1 ORDER BY publishedAt DESC').all();
-    return NextResponse.json({ blogs: result?.results ?? [] });
+    return NextResponse.json({ blogs: result?.results ?? [] }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Blogs GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch blogs', blogs: [] }, { status: 500 });
@@ -55,7 +57,7 @@ export async function POST(request: NextRequest) {
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+    return NextResponse.json({ error: 'Database not configured' }, { status: 500, headers: CACHE_CONTROL });
   }
 
   try {
@@ -82,7 +84,7 @@ export async function POST(request: NextRequest) {
       now
     );
 
-    return NextResponse.json({ success: true, id });
+    return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Blogs POST Error:', error);
     return NextResponse.json({ error: 'Failed to save blog', details: String(error) }, { status: 500 });
@@ -93,7 +95,7 @@ export async function DELETE(request: NextRequest) {
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+    return NextResponse.json({ error: 'Database not configured' }, { status: 500, headers: CACHE_CONTROL });
   }
 
   try {
@@ -105,7 +107,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     await db.prepare('DELETE FROM blogs WHERE id = ?').run(id);
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Blogs DELETE Error:', error);
     return NextResponse.json({ error: 'Failed to delete blog', details: String(error) }, { status: 500 });

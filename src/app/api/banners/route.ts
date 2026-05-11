@@ -11,9 +11,11 @@ function getDB() {
   }
 }
 
+const CACHE_CONTROL = { 'Cache-Control': 'no-store, max-age=0' };
+
 export async function GET() {
   const db = getDB();
-  if (!db) return NextResponse.json({ error: 'Database not configured', banners: [] });
+  if (!db) return NextResponse.json({ error: 'Database not configured', banners: [] }, { headers: CACHE_CONTROL });
 
   try {
     const result = await db.prepare('SELECT * FROM banners WHERE is_active = 1 ORDER BY sort_order ASC').all();
@@ -28,7 +30,7 @@ export async function GET() {
       isActive: b.is_active,
       sortOrder: b.sort_order,
     }));
-    return NextResponse.json({ banners: mapped });
+    return NextResponse.json({ banners: mapped }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Banners GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch banners', banners: [] }, { status: 500 });
@@ -37,7 +39,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const db = getDB();
-  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500, headers: CACHE_CONTROL });
 
   try {
     const body = await request.json() as any;
@@ -53,7 +55,7 @@ export async function POST(request: NextRequest) {
       body.isActive ?? 1, body.sortOrder || 0
     );
 
-    return NextResponse.json({ success: true, id });
+    return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Banners POST Error:', error);
     return NextResponse.json({ error: 'Failed to save banner', details: String(error) }, { status: 500 });
@@ -62,14 +64,14 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const db = getDB();
-  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500, headers: CACHE_CONTROL });
 
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Banner ID required' }, { status: 400 });
     await db.prepare('DELETE FROM banners WHERE id = ?').run(id);
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true }, { headers: CACHE_CONTROL });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete banner', details: String(error) }, { status: 500 });
   }

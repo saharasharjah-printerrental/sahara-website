@@ -179,7 +179,7 @@ export default function PrinterRentalDubai() {
       </section>
 
       {/* ── Pricing Tiers ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#0a1425]">
+      <section className="py-16 px-4 lg:px-12 bg-[#0a1425]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Dubai Pricing</span>
@@ -224,7 +224,7 @@ export default function PrinterRentalDubai() {
       </section>
 
       {/* ── What is Printer Rental in Dubai ── (Word count / depth) */}
-      <section className="py-24 px-8 lg:px-24">
+      <section className="py-16 px-4 lg:px-12">
         <div className="max-w-4xl mx-auto">
           <div className="glass-card rounded-3xl p-8 md:p-12" style={{ borderLeft: '4px solid #f5be53' }}>
             <h2 className="text-3xl font-bold text-white mb-6">What is Printer Rental in Dubai?</h2>
@@ -276,7 +276,7 @@ export default function PrinterRentalDubai() {
       </section>
 
       {/* ── Dubai Industries ── */}
-      <section className="py-24 px-8 lg:px-24">
+      <section className="py-16 px-4 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Who We Serve in Dubai</span>

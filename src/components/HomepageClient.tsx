@@ -169,20 +169,21 @@ function BrandCarouselSection() {
     posRef.current = 0;
     track.style.transform = "translateX(0px)";
     const SPEED = 0.5;
-    let half = 0;
+    // Calculate total width of original items (first set)
+    let totalWidth = 0;
+    for (let i = 0; i < logos.length; i++) {
+      const el = track.children[i] as HTMLElement;
+      if (el) totalWidth += el.offsetWidth + 48; // 48 = gap-12
+    }
     const step = () => {
       if (!pausedRef.current) {
         posRef.current += SPEED;
-        if (half > 0 && posRef.current >= half) posRef.current -= half;
+        if (totalWidth > 0 && posRef.current >= totalWidth) posRef.current -= totalWidth;
         track.style.transform = `translateX(-${posRef.current}px)`;
       }
       rafRef.current = requestAnimationFrame(step);
     };
-    rafRef.current = requestAnimationFrame(() => {
-      const pivot = track.children[logos.length] as HTMLElement;
-      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
-      rafRef.current = requestAnimationFrame(step);
-    });
+    rafRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafRef.current);
   }, [ready, logos.length]);
 
@@ -218,7 +219,7 @@ function BrandCarouselSection() {
 
 function DefinitionSection() {
   return (
-    <section className="relative py-28 px-8 lg:px-24 overflow-hidden" style={{ background: "#050d1a" }}>
+    <section className="relative py-16 px-4 lg:px-12 overflow-hidden" style={{ background: "#050d1a" }}>
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `linear-gradient(rgba(245,190,83,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,190,83,0.04) 1px, transparent 1px)`, backgroundSize: "40px 40px" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `radial-gradient(circle, rgba(245,190,83,0.12) 1px, transparent 1px)`, backgroundSize: "40px 40px" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 75% 60% at 50% 50%, rgba(7,19,37,0.7) 0%, transparent 75%)" }} />
@@ -267,7 +268,7 @@ function ServicesSection() {
     { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/toner" },
   ];
   return (
-    <section className="py-24 px-8 lg:px-24 bg-[#101c2e]">
+    <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Our Expertise</h2>
@@ -299,7 +300,7 @@ function LocationsSection() {
     { city: "Al Ain", href: "/printer-rental-al-ain", label: "Printer Rental Al Ain", desc: "Garden city coverage — Al Ain businesses, universities & clinics.", price: "From AED 300/mo", highlight: false, icon: "🌴" },
   ];
   return (
-    <section className="py-24 px-8 lg:px-24 bg-[#050d1a]">
+    <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">UAE Coverage</h2>
@@ -380,7 +381,7 @@ function FeaturedProductsSection() {
   const scrollRight = useCallback(() => containerRef.current?.scrollBy({ left: 420, behavior: "smooth" }), []);
 
   return (
-    <section className="py-24 px-8 overflow-hidden">
+    <section className="py-16 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto mb-16 flex justify-between items-end">
         <div>
           <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Inventory</h2>
@@ -426,21 +427,18 @@ function ReviewsSectionContent() {
   const pausedRef = useRef(false);
 
   useEffect(() => {
+    // Fetch fresh testimonials from API - no localStorage caching for real-time updates
     fetch("/api/testimonials/")
       .then((res) => res.json())
       .then((data) => {
         if (data.testimonials && data.testimonials.length > 0) {
           setTestimonials(data.testimonials.filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true));
         } else {
-          const stored = localStorage.getItem("sahara_testimonials");
-          if (stored) setTestimonials(JSON.parse(stored).filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true));
-          else setTestimonials(defaultTestimonials);
+          setTestimonials(defaultTestimonials);
         }
       })
       .catch(() => {
-        const stored = localStorage.getItem("sahara_testimonials");
-        if (stored) setTestimonials(JSON.parse(stored).filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true));
-        else setTestimonials(defaultTestimonials);
+        setTestimonials(defaultTestimonials);
       })
       .finally(() => setReady(true));
   }, []);
@@ -452,20 +450,21 @@ function ReviewsSectionContent() {
     posRef.current = 0;
     track.style.transform = "translateX(0px)";
     const SPEED = 0.6;
-    let half = 0;
+    // Calculate total width of original items (first set)
+    let totalWidth = 0;
+    for (let i = 0; i < testimonials.length; i++) {
+      const el = track.children[i] as HTMLElement;
+      if (el) totalWidth += el.offsetWidth + 24; // 24 = gap-6
+    }
     const step = () => {
       if (!pausedRef.current) {
         posRef.current += SPEED;
-        if (half > 0 && posRef.current >= half) posRef.current -= half;
+        if (totalWidth > 0 && posRef.current >= totalWidth) posRef.current -= totalWidth;
         track.style.transform = `translateX(-${posRef.current}px)`;
       }
       rafRef.current = requestAnimationFrame(step);
     };
-    rafRef.current = requestAnimationFrame(() => {
-      const pivot = track.children[testimonials.length] as HTMLElement;
-      half = pivot ? pivot.offsetLeft : track.scrollWidth / 2;
-      rafRef.current = requestAnimationFrame(step);
-    });
+    rafRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafRef.current);
   }, [ready, testimonials.length]);
 
@@ -504,7 +503,7 @@ function ReviewsSectionContent() {
 
 function CTASection() {
   return (
-    <section className="py-24 px-8">
+    <section className="py-16 px-4">
       <div className="max-w-7xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-20 relative overflow-hidden text-center md:text-left">
         <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-12 -left-12 w-96 h-96 bg-black/5 rounded-full blur-3xl"></div>
@@ -525,18 +524,31 @@ function CTASection() {
 
 function FAQSectionContent() {
   const [faqs, setFaqs] = useState<{ q: string; a: string }[]>(defaultHomeFaqs);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const faqStored = localStorage.getItem("sahara_faqs");
-    if (faqStored) {
-      const allFaqs = JSON.parse(faqStored);
-      const pageFaqs = allFaqs.filter((f: any) => f.pageSlug === "homepage" && f.isActive).sort((a: any, b: any) => a.sortOrder - b.sortOrder).map((f: any) => ({ q: f.question, a: f.answer }));
-      setFaqs(pageFaqs.length > 0 ? pageFaqs : defaultHomeFaqs);
-    }
+    // Fetch fresh FAQs from API - no localStorage caching for real-time updates
+    fetch("/api/faqs?pageSlug=homepage")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.faqs && data.faqs.length > 0) {
+          const mapped = data.faqs.map((f: any) => ({
+            q: f.question,
+            a: f.answer,
+          }));
+          setFaqs(mapped);
+        } else {
+          setFaqs(defaultHomeFaqs);
+        }
+      })
+      .catch(() => {
+        setFaqs(defaultHomeFaqs);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
-    <section className="py-24 px-8 max-w-4xl mx-auto">
+    <section className="py-16 px-4 max-w-4xl mx-auto">
       <div className="text-center mb-16">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Questions</h2>
         <p className="text-4xl font-bold text-white">Frequently Asked</p>

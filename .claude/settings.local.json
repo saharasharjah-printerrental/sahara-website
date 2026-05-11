@@ -108,7 +108,14 @@
       "PowerShell(npm search *)",
       "PowerShell(npx -y agent-browser-mcp 2>&1)",
       "Bash(npx -y agent-browser-mcp --version)",
-      "PowerShell(npx -y agent-browser-mcp --version 2>&1)"
+      "PowerShell(npx -y agent-browser-mcp --version 2>&1)",
+      "PowerShell(Start-Sleep -Seconds 3; Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing | Select-Object StatusCode)",
+      "PowerShell(netstat *)",
+      "mcp__agent-browser__browser_new_session",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/sitemap.xml\" -UseBasicParsing | Select-Object StatusCode, Content)",
+      "mcp__MCP_DOCKER__browser_install",
+      "mcp__MCP_DOCKER__n8n_health_check",
+      "mcp__MCP_DOCKER__tools_documentation"
     ]
   },
   "enableAllProjectMcpServers": true,

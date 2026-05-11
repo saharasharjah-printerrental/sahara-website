@@ -378,7 +378,7 @@ export default function PrinterRentalPage() {
       </section>
 
       {/* Features */}
-      <section className="py-24 px-8 lg:px-24 bg-[#101c2e]">
+      <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -478,7 +478,7 @@ export default function PrinterRentalPage() {
       </section>
 
       {/* ── Rent vs Buy Comparison ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#050d1a]">
+      <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Decision Guide</span>
@@ -596,7 +596,7 @@ export default function PrinterRentalPage() {
       <FAQAccordionClient defaultFaqs={DEFAULT_FAQS} pageSlug="services/printer-rental" />
 
       {/* From Our Blog — Internal Link Cluster */}
-      <section className="py-24 px-8 lg:px-24 bg-[#0a1628]">
+      <section className="py-16 px-4 lg:px-12 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Resource Hub</span>

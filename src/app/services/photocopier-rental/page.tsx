@@ -304,7 +304,7 @@ export default function PhotocopierRentalPage() {
       </section>
 
       {/* ── Copier vs Printer Comparison ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#0a1425]">
+      <section className="py-16 px-4 lg:px-12 bg-[#0a1425]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Which Do You Need?</span>
@@ -339,7 +339,7 @@ export default function PhotocopierRentalPage() {
       </section>
 
       {/* ── Featured Devices ── */}
-      <section className="py-24 px-8 lg:px-24">
+      <section className="py-16 px-4 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Our Fleet</span>
@@ -382,7 +382,7 @@ export default function PhotocopierRentalPage() {
       </section>
 
       {/* ── Workflow & Connectivity ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#101c2e]">
+      <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Document Workflows</span>
@@ -408,7 +408,7 @@ export default function PhotocopierRentalPage() {
       </section>
 
       {/* ── How It Works ── */}
-      <section className="py-24 px-8 lg:px-24">
+      <section className="py-16 px-4 lg:px-12">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Process</span>
@@ -432,7 +432,7 @@ export default function PhotocopierRentalPage() {
       </section>
 
       {/* ── Industries ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#050d1a]">
+      <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Industry Solutions</span>
