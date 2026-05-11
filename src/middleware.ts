@@ -37,6 +37,19 @@ function getClientIp(req: NextRequest): string {
 }
 
 export function middleware(request: NextRequest, _event: NextFetchEvent) {
+  // ── Non-WWW → WWW redirect (301) ────────────────────────────────────────
+  // Redirect non-www to www at the edge — fires BEFORE any routing
+  // Works on Cloudflare Pages (via @cloudflare/next-on-pages) and Vercel
+  const hostname = request.headers.get('host') || '';
+  if (
+    hostname === 'saharaprinter.com' ||
+    hostname === 'saharaprinter.com:443'
+  ) {
+    const url = new URL(request.url);
+    url.hostname = 'www.saharaprinter.com';
+    return NextResponse.redirect(url.toString(), 301);
+  }
+
   const pathname = request.nextUrl.pathname;
   const isAdmin  = pathname.startsWith('/admin');
 

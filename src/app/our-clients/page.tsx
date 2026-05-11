@@ -1,126 +1,75 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StatsClay from "@/components/StatsClay";
+import ClientsList from "@/components/ClientsClient";
 
-interface Client {
-  id: string;
-  name: string;
-  logoUrl: string;
-  website: string;
-  isActive: boolean;
-  sortOrder: number;
-}
+export const metadata: Metadata = {
+  title: "Our Clients | Trusted by 1500+ UAE Businesses | Sahara Office",
+  description: "Sahara Office Equipments serves 1500+ businesses across the UAE including Dubai, Abu Dhabi, Sharjah, RAK, and Fujairah. View our client portfolio of enterprise printer and photocopier deployments. ☎ +971503823969",
+  keywords: "sahara office clients, uae businesses printer service, dubai printer clients, photocopier customers uae, office equipment clients dubai",
+  openGraph: {
+    title: "Our Clients | Sahara Office Equipments UAE",
+    description: "Trusted by 1500+ businesses across the UAE. Enterprise printer and photocopier deployments for leading organizations.",
+    url: "https://www.saharaprinter.com/our-clients/",
+    siteName: "Sahara Office Equipments",
+    locale: "en_AE",
+    type: "website",
+  },
+  alternates: { canonical: "https://www.saharaprinter.com/our-clients/" },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Sahara Office Equipments",
+  "alternateName": "Sahara Office Equipment Trading LLC",
+  "url": "https://www.saharaprinter.com",
+  "logo": "https://www.saharaprinter.com/favicon.ico",
+  "telephone": "+971503823969",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Al Arabi Building, Industrial Area 11",
+    "addressLocality": "Sharjah",
+    "addressCountry": "AE",
+    "postalCode": "47373"
+  },
+  "areaServed": ["UAE", "Dubai", "Abu Dhabi", "Sharjah", "RAK", "Fujairah", "Al Ain", "Ajman"],
+  "sameAs": [],
+};
 
 export default function OurClientsPage() {
-  const [clients, setClients] = useState<Client[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/logos')
-      .then(res => res.json())
-      .then(data => {
-        if (data.logos && data.logos.length > 0) {
-          const mapped: Client[] = data.logos.map((l: any) => ({
-            id: l.id, name: l.name, logoUrl: l.imageUrl || '',
-            website: l.link || '', isActive: l.isActive === 1, sortOrder: l.sortOrder || 0,
-          }));
-          const active = mapped.filter(c => c.isActive).sort((a, b) => a.sortOrder - b.sortOrder);
-          setClients(active);
-          localStorage.setItem("sahara_clients", JSON.stringify(mapped));
-        } else {
-          const stored = localStorage.getItem("sahara_clients");
-          if (stored) {
-            const parsed: Client[] = JSON.parse(stored);
-            setClients(parsed.filter(c => c.isActive).sort((a, b) => a.sortOrder - b.sortOrder));
-          }
-        }
-      })
-      .catch(() => {
-        const stored = localStorage.getItem("sahara_clients");
-        if (stored) {
-          const parsed: Client[] = JSON.parse(stored);
-          setClients(parsed.filter(c => c.isActive).sort((a, b) => a.sortOrder - b.sortOrder));
-        }
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
   return (
-    <main className="min-h-screen bg-[#030e20]">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <link rel="canonical" href="https://www.saharaprinter.com/our-clients/" />
-      <Header />
-      
-      <div className="pt-20">
-        {/* Hero Section */}
-        <section className="relative py-16 px-4 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#f5be53]/10 via-transparent to-transparent" />
-          <div className="max-w-7xl mx-auto relative">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Our Happy <span className="text-[#f5be53]">Clients</span>
-            </h1>
-            <p className="text-xl text-slate-300 max-w-2xl">
-              Trusted by 1500+ businesses across the UAE. We take pride in building lasting partnerships with companies that value quality and reliability.
-            </p>
-          </div>
-        </section>
+      <main className="min-h-screen bg-[#030e20]">
+        <Header />
+        
+        <div className="pt-20">
+          <section className="relative py-16 px-4 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#f5be53]/10 via-transparent to-transparent" />
+            <div className="max-w-7xl mx-auto relative">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Our Happy <span className="text-[#f5be53]">Clients</span>
+              </h1>
+              <p className="text-xl text-slate-300 max-w-2xl">
+                Trusted by 1500+ businesses across the UAE. We take pride in building lasting partnerships with companies that value quality and reliability.
+              </p>
+            </div>
+          </section>
 
-        {/* Clients Grid */}
-        <section className="py-12 px-4 pb-20">
-          <div className="max-w-7xl mx-auto">
-            {loading ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {[...Array(20)].map((_, i) => (
-                  <div key={i} className="aspect-square bg-white/5 rounded-2xl animate-pulse" />
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {clients.map((client) => (
-                  <a
-                    key={client.id}
-                    href={client.website || "#"}
-                    target={client.website ? "_blank" : "_self"}
-                    rel={client.website ? "noopener noreferrer" : undefined}
-                    className="group aspect-square bg-white/5 rounded-2xl p-6 flex items-center justify-center hover:bg-white/10 transition-all cursor-pointer"
-                  >
-                    {client.logoUrl ? (
-                      <img
-                        src={client.logoUrl}
-                        alt={client.name}
-                        className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all"
-                      />
-                    ) : (
-                      <div className="text-center">
-                        <span className="material-symbols-outlined text-4xl text-slate-600 group-hover:text-[#f5be53] transition-colors">
-                          business
-                        </span>
-                        <p className="text-sm text-slate-500 mt-2 group-hover:text-white transition-colors line-clamp-2">
-                          {client.name}
-                        </p>
-                      </div>
-                    )}
-                  </a>
-                ))}
-              </div>
-            )}
+          <section className="py-12 px-4 pb-20">
+            <div className="max-w-7xl mx-auto">
+              <ClientsList />
+            </div>
+          </section>
 
-            {!loading && clients.length === 0 && (
-              <div className="text-center py-16">
-                <span className="material-symbols-outlined text-6xl text-slate-600">business</span>
-                <p className="text-slate-400 mt-4">No clients to display yet.</p>
-              </div>
-            )}
-          </div>
-        </section>
+          <StatsClay />
+        </div>
 
-        {/* Stats Section */}
-        <StatsClay />
-      </div>
-
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </>
   );
 }

@@ -12,8 +12,8 @@
     "test:visual": "bash tests/scripts/run-visual-tests.sh",
     "test:a11y": "bash tests/scripts/run-a11y-tests.sh",
     "test:screenshots": "bash tests/scripts/run-screenshot-tests.sh",
-    "browser:install": "node node_modules/agent-browser/bin/agent-browser-win32-x64.exe install --with-deps",
-    "browser:doctor": "node node_modules/agent-browser/bin/agent-browser-win32-x64.exe doctor"
+    "browser:install": "node node_modules/agent-browser/bin/agent-browser.js install --with-deps",
+    "browser:doctor": "node node_modules/agent-browser/bin/agent-browser.js doctor"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -41,6 +41,7 @@
     "@types/react-dom": "^19",
     "agent-browser": "^0.27.0",
     "autoprefixer": "^10.4.19",
+    "playwright": "^1.59.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.21.0",

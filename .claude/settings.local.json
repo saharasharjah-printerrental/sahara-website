@@ -101,7 +101,18 @@
       "Bash(netstat -ano)",
       "Bash(findstr \"LISTENING\")",
       "Bash(findstr \":8080 :5173 :3000\")",
-      "PowerShell(Get-NetTCPConnection *)"
+      "PowerShell(Get-NetTCPConnection *)",
+      "Bash(npx -y @agent-browser-io/browser mcp)",
+      "PowerShell(npx -y @agent-browser-io/browser-mcp 2>&1)",
+      "PowerShell(npx -y @anthropic-ai/mcp-browser 2>&1 | Select-Object -First 10)",
+      "PowerShell(npm search *)",
+      "PowerShell(npx -y agent-browser-mcp 2>&1)",
+      "Bash(npx -y agent-browser-mcp --version)",
+      "PowerShell(npx -y agent-browser-mcp --version 2>&1)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "agent-browser"
+  ]
 }
