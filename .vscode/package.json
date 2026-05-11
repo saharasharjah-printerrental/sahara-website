@@ -1,0 +1,45 @@
+{
+  "name": "sahara-ai-agent",
+  "displayName": "Sahara AI Agent",
+  "description": "Invoke crewAI agents for SEO content generation",
+  "version": "0.0.1",
+  "publisher": "sahara",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["AI", "Other"],
+  "activationEvents": ["onCommand:sahara-ai.researchKeywords", "onCommand:sahara-ai.generateContent"],
+  "main": "extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sahara-ai.researchKeywords",
+        "title": "Sahara: Research Keywords",
+        "description": "Research SEO keywords for selected text"
+      },
+      {
+        "command": "sahara-ai.generateContent",
+        "title": "Sahara: Generate SEO Content",
+        "description": "Generate SEO content for selected text"
+      },
+      {
+        "command": "sahara-ai.viewResults",
+        "title": "Sahara: View Results",
+        "description": "View AI job results"
+      },
+      {
+        "command": "sahara-ai.startWorker",
+        "title": "Sahara: Start Worker",
+        "description": "Start the background worker"
+      }
+    ],
+    "configuration": {
+      "title": "Sahara AI Agent",
+      "properties": {
+        "saharaAi.workerPath": {
+          "type": "string",
+          "default": "${workspaceFolder}",
+          "description": "Path to Sahara website project"
+        }
+      }
+    }
+  }
+}

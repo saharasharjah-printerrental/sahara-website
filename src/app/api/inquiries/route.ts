@@ -44,7 +44,7 @@ export async function GET() {
 
   try {
     const result = await db.prepare('SELECT * FROM inquiries ORDER BY created_at DESC').all();
-    return NextResponse.json({ inquiries: result });
+    return NextResponse.json({ inquiries: result?.results ?? [] });
   } catch (error) {
     console.error('Inquiries GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch inquiries', inquiries: [] }, { status: 500 });
@@ -74,8 +74,8 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT INTO inquiries (id, name, email, phone, company, service_type, message, status, notes, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO inquiries (id, name, email, phone, company, service, message, status, createdAt)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
       data.name,
@@ -85,7 +85,6 @@ export async function POST(request: NextRequest) {
       data.service || '',
       data.message || '',
       'new',
-      data.notes || '',
       now
     );
 

@@ -32,11 +32,14 @@ lerna-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
+# Test artifacts
+tests/e2e/visual/diffs/
+tests/e2e/screenshots/*.png
+*.agent-browser-state*
+
+# IDE - restore needed for MCP config
+!.vscode/mcp.json
+!.vscode/settings.json
 
 # Cloudflare
 .wrangler/

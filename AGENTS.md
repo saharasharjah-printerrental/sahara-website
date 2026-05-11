@@ -20,7 +20,52 @@
 - TypeScript: `tsconfig.json` (includes path aliases, Next.js plugin)
 
 ## Testing & Linting
-No test or lint scripts defined in package.json. Add as needed.
+
+### Browser Automation (agent-browser)
+Installed as dev dependency. MCP server enabled — Claude Code, OpenCode, and VS Code AI extension all connect automatically.
+
+**Setup once per machine:**
+```bash
+npm run browser:install        # Download Chrome for Testing
+```
+
+**Setup once per project (MCP connection):**
+```bash
+# Claude Code
+claude mcp add agent-browser -- npx -y @agent-browser-io/browser mcp
+
+# OpenCode & VS Code
+# Already configured in .vscode/mcp.json and tests/mcp.json
+```
+
+**Run tests (dev server must be running):**
+```bash
+npm run dev                     # Start dev server first
+npm run test:smoke              # Smoke tests (page loads, key flows)
+npm run test:visual             # Visual regression (3% threshold)
+npm run test:a11y               # Accessibility checks (WCAG 2.2 AA)
+npm run test:screenshots         # Capture SEO/marketing screenshots
+npm run test:e2e                # Run ALL test suites sequentially
+```
+
+**Quick manual check:**
+```bash
+npx tsx tests/scripts/smoke-tests.ts  # TypeScript smoke flows
+bash tests/scripts/run-smoke-tests.sh  # Shell smoke tests
+```
+
+**Browser troubleshooting:**
+```bash
+npm run browser:doctor          # Diagnose browser install issues
+npm run browser:doctor --fix    # Auto-repair
+```
+
+**Rules file:** `.claude/rules/browser-automation.md` — read this for element refs, naming conventions, and CLI patterns.
+
+### Test Artifacts
+- **Baselines:** `tests/e2e/visual/baselines/` (committed to repo)
+- **Diffs:** `tests/e2e/visual/diffs/` (gitignored)
+- **Screenshots:** `tests/e2e/screenshots/` (gitignored)
 
 ## Environment
 - Node.js 20+ (from @types/node version)

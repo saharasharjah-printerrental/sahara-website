@@ -34,11 +34,16 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    const includeDrafts = searchParams.get('includeDrafts') === '1';
     if (slug) {
-      const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND is_active = 1').first(slug);
+      const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').first(slug);
       return NextResponse.json({ blog: result });
     }
-    const result = await db.prepare('SELECT * FROM blogs WHERE is_active = 1 ORDER BY published_at DESC').all();
+    if (includeDrafts) {
+      const result = await db.prepare('SELECT * FROM blogs ORDER BY createdAt DESC').all();
+      return NextResponse.json({ blogs: result?.results ?? [] });
+    }
+    const result = await db.prepare('SELECT * FROM blogs WHERE isActive = 1 ORDER BY publishedAt DESC').all();
     return NextResponse.json({ blogs: result?.results ?? [] });
   } catch (error) {
     console.error('Blogs GET Error:', error);
@@ -61,7 +66,7 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO blogs (id, title, slug, excerpt, content, image, author, category, is_active, published_at, created_at)
+      INSERT OR REPLACE INTO blogs (id, title, slug, excerpt, content, image, author, category, isActive, publishedAt, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,

@@ -85,37 +85,61 @@ export default function AdminBlog() {
   const router = useRouter();
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sahara_blogs");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          // Migrate: replace stale placeholder content with real BLOG_CONTENT
-          const migrated = parsed.map((p: BlogPost) => {
-            const isPlaceholder = !p.content || p.content.trim() === "" || p.content === "Full content here...";
-            if (isPlaceholder && BLOG_CONTENT[p.slug]) {
-              return { ...p, content: BLOG_CONTENT[p.slug] };
-            }
-            return p;
-          });
-          // Merge: add any new samplePosts not yet in localStorage
-          const existingIds = new Set(migrated.map((p: BlogPost) => p.id));
-          const newEntries = samplePosts.filter(p => !existingIds.has(p.id));
-          const merged = newEntries.length > 0 ? [...migrated, ...newEntries] : migrated;
-          localStorage.setItem("sahara_blogs", JSON.stringify(merged));
-          setPosts(merged);
-        } else {
-          setPosts(samplePosts);
-          localStorage.setItem("sahara_blogs", JSON.stringify(samplePosts));
+    const loadPosts = async () => {
+      try {
+        // 1. Fetch from D1 API
+        const res = await fetch('/api/blogs/?includeDrafts=1');
+        const data = await res.json();
+        let merged: BlogPost[] = [];
+
+        if (data.blogs && data.blogs.length > 0) {
+          const apiPosts = data.blogs.map((b: any) => ({
+            id: b.id,
+            title: b.title,
+            slug: b.slug,
+            excerpt: b.excerpt,
+            content: b.content,
+            category: b.category,
+            status: b.isActive === 1 ? 'published' : 'draft',
+            coverImage: b.image,
+            publishedAt: b.publishedAt,
+            createdAt: b.createdAt,
+          }));
+          merged = apiPosts;
         }
-      } else {
-        setPosts(samplePosts);
-        localStorage.setItem("sahara_blogs", JSON.stringify(samplePosts));
+
+        // 2. Check localStorage for drafts not in API
+        const stored = localStorage.getItem("sahara_blogs");
+        if (stored) {
+          const localPosts = JSON.parse(stored) as BlogPost[];
+          const apiIds = new Set(merged.map(p => p.id));
+          const localOnly = localPosts.filter(p => !apiIds.has(p.id));
+          if (localOnly.length > 0) merged = [...merged, ...localOnly];
+        }
+
+        // 3. Merge with samplePosts (add any missing)
+        const existingIds = new Set(merged.map(p => p.id));
+        const newSamples = samplePosts.filter(p => !existingIds.has(p.id));
+        if (newSamples.length > 0) merged = [...merged, ...newSamples];
+
+        // Migrate stale content
+        const migrated = merged.map(p => {
+          const isPlaceholder = !p.content || p.content.trim() === "" || p.content === "Full content here...";
+          if (isPlaceholder && BLOG_CONTENT[p.slug]) return { ...p, content: BLOG_CONTENT[p.slug] };
+          return p;
+        });
+
+        localStorage.setItem("sahara_blogs", JSON.stringify(migrated));
+        setPosts(migrated);
+      } catch (e) {
+        console.error("Error loading blog posts:", e);
+        // Fall back to localStorage or samplePosts
+        const stored = localStorage.getItem("sahara_blogs");
+        if (stored) setPosts(JSON.parse(stored));
+        else setPosts(samplePosts);
       }
-    } catch (e) {
-      console.error("Error loading blog posts:", e);
-      setPosts(samplePosts);
-    }
+    };
+    loadPosts();
   }, []);
 
   const savePosts = (newPosts: BlogPost[]) => {
@@ -123,14 +147,35 @@ export default function AdminBlog() {
     localStorage.setItem("sahara_blogs", JSON.stringify(newPosts));
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm("Delete this blog post?")) {
+      try {
+        await fetch(`/api/blogs?id=${id}`, { method: 'DELETE' });
+      } catch { /* continue with local */ }
       savePosts(posts.filter(p => p.id !== id));
     }
   };
 
-  const handleStatus = (id: string, status: string) => {
-    savePosts(posts.map(p => p.id === id ? { ...p, status, publishedAt: status === "published" ? new Date().toISOString().split("T")[0] : "" } : p));
+  const handleStatus = async (id: string, status: string) => {
+    const updated = posts.map(p => p.id === id ? { ...p, status, publishedAt: status === "published" ? new Date().toISOString().split("T")[0] : "" } : p);
+    const post = updated.find(p => p.id === id);
+    if (post) {
+      try {
+        await fetch('/api/blogs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: post.id, title: post.title, slug: post.slug,
+            excerpt: post.excerpt, content: post.content,
+            image: post.coverImage, author: 'Sahara Printer',
+            category: post.category,
+            isActive: status === 'published' ? 1 : 0,
+            publishedAt: post.publishedAt,
+          }),
+        });
+      } catch { /* continue with local */ }
+    }
+    savePosts(updated);
   };
 
   const filteredPosts = posts.filter(p => {

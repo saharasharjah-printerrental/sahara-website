@@ -83,9 +83,33 @@ export default function AdminSEO() {
   const handleSave = async () => {
     setSaving(true);
     setError("");
-    const json = JSON.stringify(config);
+
+    // Trim all string inputs
+    const trimmed = {
+      ...config,
+      googleAnalyticsId: config.googleAnalyticsId.trim(),
+      googleAnalytics4Id: config.googleAnalytics4Id.trim(),
+      googleTagManagerId: config.googleTagManagerId.trim(),
+      microsoftClarityId: config.microsoftClarityId.trim(),
+      metaPixelId: config.metaPixelId.trim(),
+      hotjarId: config.hotjarId.trim(),
+      semrushDomainId: config.semrushDomainId.trim(),
+      ahrefsDomainId: config.ahrefsDomainId.trim(),
+      customHeadScripts: config.customHeadScripts.trim(),
+      customBodyScripts: config.customBodyScripts.trim(),
+      schemaMarkup: config.schemaMarkup.trim(),
+    };
+
+    // Validate GA4 ID format if provided
+    if (trimmed.googleAnalytics4Id && !/^G-[A-Z0-9]{10,}$/.test(trimmed.googleAnalytics4Id)) {
+      setError("GA4 Measurement ID must start with 'G-' followed by at least 10 alphanumeric characters (e.g., G-XXXXXXXXXX)");
+      setSaving(false);
+      return;
+    }
+
+    const json = JSON.stringify(trimmed);
     try {
-      const res = await fetch("/api/settings", {
+      const res = await fetch("/api/settings/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ key: "seo_config", value: json }),
@@ -96,6 +120,7 @@ export default function AdminSEO() {
       }
       localStorage.setItem("sahara_seo_config", json);
       window.dispatchEvent(new Event("seo-config-updated"));
+      setConfig(trimmed);
       showToast('success', 'SEO config saved successfully!');
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);

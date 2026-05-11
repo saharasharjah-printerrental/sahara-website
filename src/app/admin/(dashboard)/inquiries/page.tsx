@@ -22,11 +22,36 @@ export default function AdminInquiries() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_inquiries");
-    if (stored) {
-      setInquiries(JSON.parse(stored));
-    }
-    setMounted(true);
+    const load = async () => {
+      try {
+        const res = await fetch('/api/inquiries/');
+        const data = await res.json();
+        if (data.inquiries && data.inquiries.length > 0) {
+          const mapped = data.inquiries.map((i: any) => ({
+            id: i.id,
+            name: i.name,
+            email: i.email || '',
+            phone: i.phone || '',
+            company: i.company || '',
+            service: i.service || i.service_type || 'General',
+            message: i.message || '',
+            status: i.status || 'new',
+            notes: i.notes || '',
+            createdAt: i.createdAt || i.created_at || '',
+          }));
+          setInquiries(mapped);
+          localStorage.setItem("sahara_inquiries", JSON.stringify(mapped));
+        } else {
+          const stored = localStorage.getItem("sahara_inquiries");
+          if (stored) setInquiries(JSON.parse(stored));
+        }
+      } catch {
+        const stored = localStorage.getItem("sahara_inquiries");
+        if (stored) setInquiries(JSON.parse(stored));
+      }
+      setMounted(true);
+    };
+    load();
   }, []);
 
   const saveInquiries = (newInquiries: Inquiry[]) => {

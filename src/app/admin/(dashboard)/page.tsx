@@ -33,47 +33,97 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     setMounted(true);
-    try {
-      const storedInquiries = localStorage.getItem("sahara_inquiries");
-      if (storedInquiries) {
-        const inquiries = JSON.parse(storedInquiries);
-        if (Array.isArray(inquiries)) {
+
+    const loadStats = async () => {
+      try {
+        // Fetch from D1 APIs
+        const [inqRes, prodRes, blogRes] = await Promise.all([
+          fetch('/api/inquiries/').catch(() => null),
+          fetch('/api/products/').catch(() => null),
+          fetch('/api/blogs/?includeDrafts=1').catch(() => null),
+        ]);
+
+        if (inqRes?.ok) {
+          const inqData = await inqRes.json();
+          const inquiries = inqData.inquiries || [];
           setStats((prev) => ({
             ...prev,
             totalInquiries: inquiries.length,
-            pendingInquiries: inquiries.filter((i: any) => i.status === "pending").length,
+            pendingInquiries: inquiries.filter((i: any) => (i.status || 'new') === 'new' || (i.status || 'pending') === 'pending').length,
           }));
-          setRecentInquiries(inquiries.slice(0, 5));
+          setRecentInquiries(
+            inquiries
+              .sort((a: any, b: any) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
+              .slice(0, 5)
+              .map((i: any) => ({
+                id: i.id,
+                name: i.name,
+                email: i.email,
+                service: i.service || i.service_type || 'General',
+                status: i.status || 'new',
+                createdAt: i.createdAt || i.created_at || '',
+              }))
+          );
+        } else {
+          // Fall back to localStorage
+          const storedInquiries = localStorage.getItem("sahara_inquiries");
+          if (storedInquiries) {
+            const inquiries = JSON.parse(storedInquiries);
+            if (Array.isArray(inquiries)) {
+              setStats((prev) => ({
+                ...prev,
+                totalInquiries: inquiries.length,
+                pendingInquiries: inquiries.filter((i: any) => i.status === "pending").length,
+              }));
+              setRecentInquiries(inquiries.slice(0, 5));
+            }
+          }
         }
-      }
 
-      const storedProducts = localStorage.getItem("sahara_products");
-      if (storedProducts) {
-        const products = JSON.parse(storedProducts);
-        if (Array.isArray(products)) {
+        if (prodRes?.ok) {
+          const prodData = await prodRes.json();
+          const products = prodData.products || [];
           setStats((prev) => ({ ...prev, totalProducts: products.length }));
+        } else {
+          const storedProducts = localStorage.getItem("sahara_products");
+          if (storedProducts) {
+            const products = JSON.parse(storedProducts);
+            if (Array.isArray(products)) {
+              setStats((prev) => ({ ...prev, totalProducts: products.length }));
+            }
+          }
         }
-      }
 
-      const storedBlogs = localStorage.getItem("sahara_blogs");
-      if (storedBlogs) {
-        const blogs = JSON.parse(storedBlogs);
-        if (Array.isArray(blogs)) {
+        if (blogRes?.ok) {
+          const blogData = await blogRes.json();
+          const blogs = blogData.blogs || [];
           setStats((prev) => ({
             ...prev,
-            publishedBlogs: blogs.filter((b: any) => b.status === "published").length,
+            publishedBlogs: blogs.filter((b: any) => b.isActive === 1).length,
           }));
+        } else {
+          const storedBlogs = localStorage.getItem("sahara_blogs");
+          if (storedBlogs) {
+            const blogs = JSON.parse(storedBlogs);
+            if (Array.isArray(blogs)) {
+              setStats((prev) => ({
+                ...prev,
+                publishedBlogs: blogs.filter((b: any) => b.status === "published").length,
+              }));
+            }
+          }
         }
+      } catch (e) {
+        console.error("Error loading dashboard data:", e);
       }
-    } catch (e) {
-      console.error("Error loading dashboard data:", e);
-    }
+      setLoading(false);
+    };
 
-    setLoading(false);
+    loadStats();
 
     // Live user tracking — poll every 30s
     const fetchLive = () =>
-      fetch("/api/analytics/stats")
+      fetch("/api/analytics/stats/")
         .then((r) => r.json())
         .then((d) => setStats((prev) => ({ ...prev, liveUsers: d.online ?? 0 })))
         .catch(() => {});

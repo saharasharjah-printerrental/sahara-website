@@ -1,0 +1,14 @@
+[
+  {
+    "command": "sahara-ai.researchKeywords",
+    "key": "ctrl+shift+k"
+  },
+  {
+    "command": "sahara-ai.generateContent",
+    "key": "ctrl+shift+g"
+  },
+  {
+    "command": "sahara-ai.viewResults",
+    "key": "ctrl+shift+r"
+  }
+]

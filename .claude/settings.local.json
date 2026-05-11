@@ -82,7 +82,26 @@
       "PowerShell(python -c \"import pandas as pd; df = pd.read_excel\\('C:/Users/SAHARA/Downloads/saharaprinter.com-Coverage-2026-05-07.xlsx'\\); print\\(df.to_string\\(\\)\\)\")",
       "mcp__token-optimizer__smart_api_fetch",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\" -Force)",
-      "PowerShell(tail *)"
+      "PowerShell(tail *)",
+      "Bash(Get-ChildItem -Path . -Recurse -Include \"route.ts\", \"next.config.*\", \"schema.sql\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "mcp__MCP_DOCKER__mcp-find",
+      "mcp__MCP_DOCKER__mcp-add",
+      "mcp__MCP_DOCKER__search_cloudflare_documentation",
+      "mcp__token-optimizer__smart_schema",
+      "mcp__MCP_DOCKER__mcp-remove",
+      "mcp__token-optimizer__smart_api_fetch",
+      "mcp__MCP_DOCKER__mcp-add",
+      "PowerShell(uv pip *)",
+      "PowerShell(pip install *)",
+      "PowerShell(python -c \"import crewai; print\\(f'crewAI version: {crewai.__version__}'\\)\")",
+      "PowerShell(C:\\\\Users\\\\SAHARA\\\\AppData\\\\Local\\\\Programs\\\\Ollama\\\\ollama.exe list)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8080\" -UseBasicParsing -TimeoutSec 3 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty StatusCode)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:5173\" -UseBasicParsing -TimeoutSec 3 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty StatusCode)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \"LISTENING\")",
+      "Bash(findstr \":8080 :5173 :3000\")",
+      "PowerShell(Get-NetTCPConnection *)"
     ]
   }
 }

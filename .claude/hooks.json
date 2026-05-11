@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostReadFile": [
+      {
+        "match": ["**/layout.tsx", "**/page.tsx", "**/layout.ts"],
+        "prompt": "Check if this file has proper SEO meta tags (title, description, Open Graph, JSON-LD schema). Flag any missing or issues."
+      }
+    ],
+    "PreToolUse": [
+      {
+        "match": ["Edit", "Write"],
+        "prompt": "When editing React/Next.js files, ensure MUI icons use PascalCase without 'Icon' suffix (e.g., use 'Layers' not 'LayersIcon')."
+      }
+    ]
+  }
+}

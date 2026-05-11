@@ -8,27 +8,23 @@ interface Brand {
   name: string;
   slug: string;
   logoUrl: string;
-  altText: string;
-  imageWidth: number;
-  imageHeight: number;
-  heroImage: string;
   description: string;
   isActive: boolean;
   sortOrder: number;
 }
 
 const initialBrands: Brand[] = [
-  { id: "1", name: "HP", slug: "hp", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/HP_logo.svg/512px-HP_logo.svg.png", altText: "HP Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1612815154858-60aa4c84e6ac?w=800&q=80", description: "HP printers and MFPs", isActive: true, sortOrder: 1 },
-  { id: "2", name: "Canon", slug: "canon", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Canon_logo.svg/512px-Canon_logo.svg.png", altText: "Canon Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80", description: "Canon imageRUNNER series", isActive: true, sortOrder: 2 },
-  { id: "3", name: "Xerox", slug: "xerox", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Xerox_logo.svg/512px-Xerox_logo.svg.png", altText: "Xerox Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=800&q=80", description: "Xerox AltaLink and VersaLink", isActive: true, sortOrder: 3 },
-  { id: "4", name: "Ricoh", slug: "ricoh", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ricoh_logo.svg/512px-Ricoh_logo.svg.png", altText: "Ricoh Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80", description: "Ricoh IM and MP series", isActive: true, sortOrder: 4 },
-  { id: "5", name: "Kyocera", slug: "kyocera", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kyocera_logo.svg/512px-Kyocera_logo.svg.png", altText: "Kyocera Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1516959511247-47f1dd3f9931?w=800&q=80", description: "Kyocera TASKalfa series", isActive: true, sortOrder: 5 },
-  { id: "6", name: "Brother", slug: "brother", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Brother_Logo.svg/512px-Brother_Logo.svg.png", altText: "Brother Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1625846579064-358872420434?w=800&q=80", description: "Brother laser and inkjet", isActive: true, sortOrder: 6 },
-  { id: "7", name: "Samsung", slug: "samsung", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Samsung_Logo.svg/512px-Samsung_Logo.svg.png", altText: "Samsung Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1632882765546-1c976638b544?w=800&q=80", description: "Samsung office printers", isActive: true, sortOrder: 7 },
-  { id: "8", name: "Lexmark", slug: "lexmark", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Lexmark_Logo.svg/512px-Lexmark_Logo.svg.png", altText: "Lexmark Printer Logo", imageWidth: 512, imageHeight: 512, heroImage: "https://images.unsplash.com/photo-1579766594465-98a3d2c6a3b7?w=800&q=80", description: "Lexmark enterprise printers", isActive: true, sortOrder: 8 },
+  { id: "1", name: "HP", slug: "hp", logoUrl: "/brands/hp.webp", description: "HP printers and MFPs", isActive: true, sortOrder: 1 },
+  { id: "2", name: "Canon", slug: "canon", logoUrl: "/brands/canon.webp", description: "Canon imageRUNNER series", isActive: true, sortOrder: 2 },
+  { id: "3", name: "Xerox", slug: "xerox", logoUrl: "/brands/xerox.webp", description: "Xerox AltaLink and VersaLink", isActive: true, sortOrder: 3 },
+  { id: "4", name: "Ricoh", slug: "ricoh", logoUrl: "/brands/ricoh.webp", description: "Ricoh IM and MP series", isActive: true, sortOrder: 4 },
+  { id: "5", name: "Kyocera", slug: "kyocera", logoUrl: "/brands/kyocera.webp", description: "Kyocera TASKalfa series", isActive: true, sortOrder: 5 },
+  { id: "6", name: "Brother", slug: "brother", logoUrl: "/brands/brother.webp", description: "Brother laser and inkjet", isActive: true, sortOrder: 6 },
+  { id: "7", name: "Samsung", slug: "samsung", logoUrl: "/brands/samsung.webp", description: "Samsung office printers", isActive: true, sortOrder: 7 },
+  { id: "8", name: "Lexmark", slug: "lexmark", logoUrl: "/brands/lexmark.webp", description: "Lexmark enterprise printers", isActive: true, sortOrder: 8 },
 ];
 
-const API_BASE = '/api';
+const API_BASE = '/api/';
 
 export default function AdminBrands() {
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -184,21 +180,11 @@ export default function AdminBrands() {
 
 function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (b: Brand) => void; onClose: () => void }) {
   const [form, setForm] = useState<Brand>(brand || {
-    id: "", name: "", slug: "", logoUrl: "", altText: "", imageWidth: 512, imageHeight: 512, heroImage: "", description: "", isActive: true, sortOrder: 0
+    id: "", name: "", slug: "", logoUrl: "", description: "", isActive: true, sortOrder: 0
   });
   const [uploading, setUploading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
-  const [convertToWebp, setConvertToWebp] = useState(true);
-
-  const getImageDimensions = (src: string): Promise<{ width: number; height: number }> => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve({ width: img.width, height: img.height });
-      img.onerror = () => resolve({ width: 512, height: 512 });
-      img.src = src;
-    });
-  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -206,39 +192,24 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
 
     setUploading(true);
     try {
-      if (convertToWebp) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
-        const data = await res.json();
-        if (data.url) {
-          const dims = await getImageDimensions(data.url);
-          setForm(prev => ({ ...prev, logoUrl: data.url, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.name} logo` }));
-        } else {
-          const reader = new FileReader();
-          reader.onloadend = async () => {
-            const result = reader.result as string;
-            const dims = await getImageDimensions(result);
-            setForm(prev => ({ ...prev, logoUrl: result, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.name} logo` }));
-          };
-          reader.readAsDataURL(file);
-        }
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+      const data = await res.json();
+      if (data.url) {
+        setForm(prev => ({ ...prev, logoUrl: data.url }));
       } else {
         const reader = new FileReader();
-        reader.onloadend = async () => {
-          const result = reader.result as string;
-          const dims = await getImageDimensions(result);
-          setForm(prev => ({ ...prev, logoUrl: result, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.name} logo` }));
+        reader.onloadend = () => {
+          setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
         };
         reader.readAsDataURL(file);
       }
     } catch (error) {
       console.error("Upload failed:", error);
       const reader = new FileReader();
-      reader.onloadend = async () => {
-        const result = reader.result as string;
-        const dims = await getImageDimensions(result);
-        setForm(prev => ({ ...prev, logoUrl: result, imageWidth: dims.width, imageHeight: dims.height }));
+      reader.onloadend = () => {
+        setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
       };
       reader.readAsDataURL(file);
     } finally {
@@ -256,16 +227,8 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
         body: JSON.stringify({ url: imageUrl })
       });
       const data = await res.json();
-      
       if (data.url) {
-        const dims = await getImageDimensions(data.url);
-        setForm(prev => ({ 
-          ...prev, 
-          logoUrl: data.url, 
-          imageWidth: dims.width, 
-          imageHeight: dims.height,
-          altText: prev.altText || `${prev.name} logo`
-        }));
+        setForm(prev => ({ ...prev, logoUrl: data.url }));
       }
       setImageUrl("");
     } catch (error) {
@@ -290,18 +253,12 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Logo</label>
-            <div className="flex items-center gap-3 mb-3">
-              <label className="flex-1 cursor-pointer">
-                <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-                <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                  {uploading ? "Uploading..." : form.logoUrl ? "Change Image" : "Upload Image"}
-                </div>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={convertToWebp} onChange={(e) => setConvertToWebp(e.target.checked)} className="w-4 h-4 rounded" />
-                <span className="text-sm text-slate-400">Convert to WebP</span>
-              </label>
-            </div>
+            <label className="flex-1 cursor-pointer block">
+              <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+              <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
+                {uploading ? "Uploading..." : form.logoUrl ? "Change Image" : "Upload Image"}
+              </div>
+            </label>
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Or fetch from URL</label>
@@ -326,64 +283,13 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
           {form.logoUrl && (
             <div className="flex items-center gap-3">
               <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
-                <img src={form.logoUrl} alt={form.altText || "Preview"} className="w-full h-full object-contain" />
+                <img src={form.logoUrl} alt="Preview" className="w-full h-full object-contain" />
               </div>
-              <button onClick={() => setForm(prev => ({ ...prev, logoUrl: "", imageWidth: 512, imageHeight: 512 }))} className="text-slate-400 hover:text-red-400 text-sm">
+              <button onClick={() => setForm(prev => ({ ...prev, logoUrl: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
                 Remove
               </button>
             </div>
           )}
-          {form.logoUrl && (
-            <div className="grid grid-cols-3 gap-3">
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Alt Text (SEO)</label>
-                <input 
-                  type="text" 
-                  value={form.altText} 
-                  onChange={(e) => setForm({ ...form, altText: e.target.value })} 
-                  className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" 
-                  placeholder="Brand logo for SEO"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Width</label>
-                <input 
-                  type="number" 
-                  value={form.imageWidth} 
-                  onChange={(e) => setForm({ ...form, imageWidth: parseInt(e.target.value) || 512 })} 
-                  className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" 
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Height</label>
-                <input 
-                  type="number" 
-                  value={form.imageHeight} 
-                  onChange={(e) => setForm({ ...form, imageHeight: parseInt(e.target.value) || 512 })} 
-                  className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" 
-                />
-              </div>
-            </div>
-          )}
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Hero Image (Brand Page)</label>
-            <div className="flex gap-2">
-              <input 
-                type="text" 
-                value={form.heroImage || ""} 
-                onChange={(e) => setForm({ ...form, heroImage: e.target.value })} 
-                className="flex-1 bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" 
-                placeholder="https://example.com/hero-image.webp"
-              />
-            </div>
-            <p className="text-xs text-slate-500 mt-1">Hero image displayed on brand page (recommended: 800x600px WebP)</p>
-            {form.heroImage && (
-              <div className="mt-2 w-24 h-16 rounded-lg bg-white/10 overflow-hidden">
-                <img src={form.heroImage} alt="Hero" className="w-full h-full object-cover" />
-              </div>
-            )}
-          </div>
-
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Description</label>
             <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white h-20" />

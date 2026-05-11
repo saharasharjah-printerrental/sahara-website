@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Claude Code: claude mcp add agent-browser -- npx -y @agent-browser-io/browser mcp
+# OpenCode: reads ~/.claude/mcp.json or project-level mcp.json
+# VS Code: reads .vscode/mcp.json
+# This file enables the MCP config for OpenCode at the project level.
+{
+  "mcpServers": {
+    "agent-browser": {
+      "command": "npx",
+      "args": ["-y", "@agent-browser-io/browser", "mcp"]
+    }
+  }
+}

@@ -11,7 +11,7 @@ const RATE_LIMITS = [
   // Email sending
   { pattern: /^\/api\/send-email/,    requests: 10, windowMs: 60_000 },
   // Default for all other /api/* routes
-  { pattern: /^\/api\//,              requests: 60, windowMs: 60_000 },
+  { pattern: /^\/api\//,              requests: 180, windowMs: 60_000 },
 ] as const;
 
 const MAX_BODY_SIZE = 10 * 1024 * 1024; // 10 MB (covers image uploads)

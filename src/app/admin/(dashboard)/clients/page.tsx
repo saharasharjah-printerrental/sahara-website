@@ -13,7 +13,7 @@ interface Client {
   sortOrder: number;
 }
 
-const API_BASE = '/api';
+const API_BASE = '/api/';
 
 const defaultClients: Client[] = [
   { id: "1", name: "Emirates Global Aluminium", logoUrl: "", website: "https://www.ega.com", isActive: true, sortOrder: 1 },
@@ -128,11 +128,16 @@ export default function AdminClients() {
       const data = await res.json();
       if (data.clients && data.clients.length > 0) {
         const mapped = data.clients.map((l: any) => ({
-          id: l.id, name: l.name, logoUrl: l.imageUrl || '',
-          website: l.link || '', isActive: l.isActive === 1, sortOrder: l.sortOrder || 0,
+          id: l.id, name: l.name, logoUrl: l.logoUrl || '',
+          website: l.website || '', isActive: l.isActive === 1, sortOrder: l.sortOrder || 0,
         }));
         setClients(mapped);
         localStorage.setItem("sahara_clients", JSON.stringify(mapped));
+      } else if (data.error) {
+        // DB not configured — skip seed, use localStorage or defaults
+        const stored = localStorage.getItem("sahara_clients");
+        if (stored) setClients(JSON.parse(stored));
+        else setClients(defaultClients);
       } else {
         const stored = localStorage.getItem("sahara_clients");
         if (stored) {
@@ -152,18 +157,27 @@ export default function AdminClients() {
   };
 
   const seedDefaultClients = async (list: Client[]) => {
-    await Promise.allSettled(list.map((c, i) =>
-      fetch(`${API_BASE}/clients`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: c.id, name: c.name, imageUrl: c.logoUrl, imageAlt: `${c.name} logo`, link: c.website, isActive: c.isActive ? 1 : 0, sortOrder: i + 1 }),
-      })
-    ));
+    // Batch into groups of 10 to avoid rate limits
+    const batchSize = 10;
+    for (let i = 0; i < list.length; i += batchSize) {
+      const batch = list.slice(i, i + batchSize);
+      await Promise.allSettled(batch.map((c, j) =>
+        fetch(`${API_BASE}/clients`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: c.id, name: c.name, logoUrl: c.logoUrl, website: c.website, isActive: c.isActive ? 1 : 0, sortOrder: i + j + 1 }),
+        })
+      ));
+      // Small delay between batches
+      if (i + batchSize < list.length) {
+        await new Promise(r => setTimeout(r, 200));
+      }
+    }
   };
 
   const syncToAPI = async (client: Client) => {
     const res = await fetch(`${API_BASE}/clients`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: client.id, name: client.name, imageUrl: client.logoUrl, imageAlt: `${client.name} logo`, link: client.website, isActive: client.isActive ? 1 : 0, sortOrder: client.sortOrder }),
+      body: JSON.stringify({ id: client.id, name: client.name, logoUrl: client.logoUrl, website: client.website, isActive: client.isActive ? 1 : 0, sortOrder: client.sortOrder }),
     });
     return res.ok;
   };
@@ -203,6 +217,8 @@ export default function AdminClients() {
     setShowModal(false);
     setEditingClient(null);
     showToast('success', editingClient ? 'Client updated' : 'Client added');
+    // Re-fetch to confirm persistence
+    await fetchClients();
   };
 
   const handleReorder = (fromIndex: number, toIndex: number) => {

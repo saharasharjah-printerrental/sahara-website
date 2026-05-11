@@ -65,7 +65,7 @@ export default function BlogEditorPage() {
       if (convertToWebp) {
         const formData = new FormData();
         formData.append("file", file);
-        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
+        const res = await fetch("/api/convert-image/", { method: "POST", body: formData });
         const data = await res.json();
         if (data.url) {
           setForm(prev => ({ ...prev, coverImage: data.url }));
@@ -88,7 +88,7 @@ export default function BlogEditorPage() {
     if (!imageUrl) return;
     setConverting(true);
     try {
-      const res = await fetch("/api/convert-image", {
+      const res = await fetch("/api/convert-image/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: imageUrl })
@@ -110,21 +110,45 @@ export default function BlogEditorPage() {
     setForm(prev => ({ ...prev, title, slug }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     let newPosts: BlogPost[];
+    let postToSave: BlogPost;
     if (form.id && posts.some(p => p.id === form.id)) {
       newPosts = posts.map(p => p.id === form.id
         ? { ...form, publishedAt: form.status === "published" ? new Date().toISOString().split("T")[0] : p.publishedAt }
         : p
       );
+      postToSave = newPosts.find(p => p.id === form.id)!;
     } else {
-      newPosts = [...posts, {
+      postToSave = {
         ...form,
         id: Date.now().toString(),
         createdAt: new Date().toISOString().split("T")[0],
         publishedAt: form.status === "published" ? new Date().toISOString().split("T")[0] : ""
-      }];
+      };
+      newPosts = [...posts, postToSave];
     }
+
+    // Sync to D1 API
+    try {
+      await fetch('/api/blogs/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: postToSave.id,
+          title: postToSave.title,
+          slug: postToSave.slug,
+          excerpt: postToSave.excerpt,
+          content: postToSave.content,
+          image: postToSave.coverImage,
+          author: 'Sahara Printer',
+          category: postToSave.category,
+          isActive: postToSave.status === 'published' ? 1 : 0,
+          publishedAt: postToSave.publishedAt,
+        }),
+      });
+    } catch { /* continue with local */ }
+
     localStorage.setItem("sahara_blogs", JSON.stringify(newPosts));
     showToast('success', form.id ? 'Post updated' : 'Post created');
     router.push("/admin/blog");

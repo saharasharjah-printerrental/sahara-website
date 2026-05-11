@@ -16,7 +16,16 @@ interface Testimonial {
   sortOrder: number;
 }
 
-const API_BASE = '/api';
+const API_BASE = '/api/';
+
+const defaultTestimonials: Testimonial[] = [
+  { id: "1", name: "Marcus Thorne", role: "Architectural Lead", text: "Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!", rating: 5, avatarUrl: "", avatarAlt: "Marcus Thorne", isActive: true, sortOrder: 1 },
+  { id: "2", name: "Sarah Jenkins", role: "Operations Manager", text: "The printer rental program saved us 40% on operational costs this quarter. Professional and reliable.", rating: 5, avatarUrl: "", avatarAlt: "Sarah Jenkins", isActive: true, sortOrder: 2 },
+  { id: "3", name: "David Chen", role: "IT Director", text: "Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara.", rating: 5, avatarUrl: "", avatarAlt: "David Chen", isActive: true, sortOrder: 3 },
+  { id: "4", name: "Fatima Al-Rashid", role: "Office Manager", text: "We rented 5 copiers for our new Dubai office. Setup was done same day. Outstanding service!", rating: 5, avatarUrl: "", avatarAlt: "Fatima Al-Rashid", isActive: true, sortOrder: 4 },
+  { id: "5", name: "James O'Brien", role: "Facilities Coordinator", text: "The AMC contract has eliminated all our printer downtime. Their preventive maintenance is top-notch.", rating: 5, avatarUrl: "", avatarAlt: "James O'Brien", isActive: true, sortOrder: 5 },
+  { id: "6", name: "Aisha Mohammed", role: "Procurement Head", text: "Best printer rental rates in Abu Dhabi. Transparent pricing, no hidden fees. Will renew our contract.", rating: 5, avatarUrl: "", avatarAlt: "Aisha Mohammed", isActive: true, sortOrder: 6 },
+];
 
 export default function AdminTestimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -47,13 +56,19 @@ export default function AdminTestimonials() {
         }));
         setTestimonials(mapped);
         localStorage.setItem("sahara_testimonials", JSON.stringify(mapped));
+      } else if (data.error) {
+        const stored = localStorage.getItem("sahara_testimonials");
+        if (stored) setTestimonials(JSON.parse(stored));
+        else setTestimonials(defaultTestimonials);
       } else {
         const stored = localStorage.getItem("sahara_testimonials");
         if (stored) setTestimonials(JSON.parse(stored));
+        else setTestimonials(defaultTestimonials);
       }
     } catch {
       const stored = localStorage.getItem("sahara_testimonials");
       if (stored) setTestimonials(JSON.parse(stored));
+      else setTestimonials(defaultTestimonials);
     } finally {
       setLoading(false);
     }

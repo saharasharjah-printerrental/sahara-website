@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "npx wrangler pages deploy .vercel/output/static --project-name=sahara-website"
+    "deploy": "npx wrangler pages deploy .vercel/output/static --project-name=sahara-website",
+    "test:e2e": "node tests/scripts/run-all-tests.js",
+    "test:smoke": "bash tests/scripts/run-smoke-tests.sh",
+    "test:visual": "bash tests/scripts/run-visual-tests.sh",
+    "test:a11y": "bash tests/scripts/run-a11y-tests.sh",
+    "test:screenshots": "bash tests/scripts/run-screenshot-tests.sh",
+    "browser:install": "node node_modules/agent-browser/bin/agent-browser-win32-x64.exe install --with-deps",
+    "browser:doctor": "node node_modules/agent-browser/bin/agent-browser-win32-x64.exe doctor"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -22,19 +29,23 @@
     "react": "^19",
     "react-dom": "^19",
     "react-redux": "^9.2.0",
-    "sharp": "^0.34.5",
-    "zod": "^4.3.6"
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@agent-browser-io/browser": "^0.3.0",
     "@cloudflare/next-on-pages": "^1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "agent-browser": "^0.27.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.21.0",
     "typescript": "^5",
-    "wrangler": "^4.85.0"
+    "wrangler": "^4.85.0",
+    "zod": "^4.4.3"
   }
 }

@@ -4,32 +4,35 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 export const runtime = 'edge';
 
 function getCloudinaryConfig() {
-  // Use safer env reading pattern (same as email-service.ts)
   const ctx = getRequestContext() as any;
   const env = ctx?.env || {};
-
   const cloudName = env.CLOUDINARY_CLOUD_NAME || '';
   const apiKey = env.CLOUDINARY_API_KEY || '';
   const apiSecret = env.CLOUDINARY_API_SECRET || '';
-
-  // Debug log what we're getting
-  console.log('[Cloudinary] Config check:', {
-    hasCloudName: !!cloudName,
-    hasApiKey: !!apiKey,
-    hasApiSecret: !!apiSecret,
-    cloudNamePreview: cloudName ? cloudName.substring(0, 5) + '...' : 'empty',
-    cloudNameValue: cloudName,
-  });
-
   if (!cloudName || !apiKey || !apiSecret || cloudName.startsWith('YOUR_')) {
     return null;
   }
+  return { cloudName, apiKey, apiSecret };
+}
 
-  return {
-    cloudName,
-    apiKey,
-    apiSecret,
-  };
+function getR2() {
+  try {
+    return getRequestContext().env.SAHARA_ASSETS as any;
+  } catch {
+    return null;
+  }
+}
+
+async function uploadToR2(buffer: ArrayBuffer, fileName: string, contentType: string): Promise<string> {
+  const r2 = getR2();
+  if (!r2) {
+    throw new Error('R2 storage not configured. Add SAHARA_ASSETS binding in wrangler.toml');
+  }
+  const key = `uploads/${Date.now()}-${fileName.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+  await r2.put(key, buffer, { httpMetadata: { contentType } });
+  const env = getRequestContext().env as any;
+  const r2PublicUrl = env.R2_PUBLIC_URL?.replace(/\/$/, '') || 'https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev';
+  return `${r2PublicUrl}/${key}`;
 }
 
 function isWebPFormat(mimeType: string, fileName: string): boolean {
@@ -95,13 +98,6 @@ async function uploadToCloudinary(
 export async function POST(request: NextRequest) {
   const config = getCloudinaryConfig();
 
-  if (!config?.cloudName || !config?.apiKey || !config?.apiSecret || config.cloudName.startsWith('YOUR_')) {
-    return NextResponse.json(
-      { error: 'Cloudinary not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET in Cloudflare Pages environment variables.' },
-      { status: 503 }
-    );
-  }
-
   try {
     const contentType = request.headers.get('content-type') || '';
     let imageBuffer: ArrayBuffer;
@@ -143,11 +139,23 @@ export async function POST(request: NextRequest) {
       mimeType = file.type || 'image/jpeg';
     }
 
-    // Check if already WebP - skip conversion if true
     const alreadyWebP = isWebPFormat(mimeType, originalName);
-    console.log('[Cloudinary] Upload check:', { originalName, mimeType, alreadyWebP });
+    let url: string;
+    let source = 'cloudinary';
 
-    const url = await uploadToCloudinary(imageBuffer, originalName, mimeType, config, alreadyWebP);
+    if (config) {
+      try {
+        url = await uploadToCloudinary(imageBuffer, originalName, mimeType, config, alreadyWebP);
+      } catch (cloudinaryErr) {
+        console.warn('[Upload] Cloudinary failed, falling back to R2:', cloudinaryErr);
+        url = await uploadToR2(imageBuffer, originalName, mimeType);
+        source = 'r2';
+      }
+    } else {
+      console.log('[Upload] Cloudinary not configured, using R2 fallback');
+      url = await uploadToR2(imageBuffer, originalName, mimeType);
+      source = 'r2';
+    }
 
     return NextResponse.json({
       success: true,
@@ -156,9 +164,10 @@ export async function POST(request: NextRequest) {
       converted: !alreadyWebP,
       originalName,
       format: alreadyWebP ? mimeType : 'image/webp',
+      source,
     });
   } catch (error) {
-    console.error('Cloudinary Upload Error:', error);
+    console.error('Upload Error:', error);
     return NextResponse.json(
       { error: 'Failed to upload image', details: String(error) },
       { status: 500 }

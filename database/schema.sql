@@ -11,15 +11,21 @@
 CREATE TABLE IF NOT EXISTS products (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
+  slug TEXT UNIQUE,
   brand TEXT DEFAULT '',
   category TEXT DEFAULT '',
+  subcategory TEXT DEFAULT '',
   condition TEXT DEFAULT 'New',
   price_sale TEXT DEFAULT '',
   price_rental TEXT DEFAULT '',
-  specs TEXT DEFAULT '',
-  image TEXT DEFAULT '',
+  specifications TEXT DEFAULT '[]',
+  image_urls TEXT DEFAULT '[]',
+  description TEXT DEFAULT '',
+  meta_title TEXT DEFAULT '',
+  meta_description TEXT DEFAULT '',
   is_active INTEGER DEFAULT 1,
   is_featured INTEGER DEFAULT 0,
+  sort_order INTEGER DEFAULT 0,
   created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -190,7 +196,10 @@ CREATE INDEX IF NOT EXISTS idx_testimonials_active_sort
 INSERT OR REPLACE INTO testimonials (id, name, role, company, text, rating, image_url, is_active, sort_order) VALUES
 ('1', 'Marcus Thorne', 'Architectural Lead', 'Studio 91', 'Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!', 5, '', 1, 1),
 ('2', 'Sarah Jenkins', 'Operations Manager', 'TechFlow Solutions', 'The printer rental program saved us 40% on operational costs this quarter. Professional and reliable.', 5, '', 1, 2),
-('3', 'David Chen', 'IT Director', 'DataCore Systems', 'Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara.', 5, '', 1, 3);
+('3', 'David Chen', 'IT Director', 'DataCore Systems', 'Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara.', 5, '', 1, 3),
+('4', 'Fatima Al-Rashid', 'Office Manager', 'Gulf Properties LLC', 'We rented 5 copiers for our new Dubai office. Setup was done same day. Outstanding service!', 5, '', 1, 4),
+('5', 'James O''Brien', 'Facilities Coordinator', 'MediCare UAE', 'The AMC contract has eliminated all our printer downtime. Their preventive maintenance is top-notch.', 5, '', 1, 5),
+('6', 'Aisha Mohammed', 'Procurement Head', 'Emirates Logistics', 'Best printer rental rates in Abu Dhabi. Transparent pricing, no hidden fees. Will renew our contract.', 5, '', 1, 6);
 
 -- ============================================
 -- SEED DATA - BRANDS

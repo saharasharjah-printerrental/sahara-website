@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 const BASE = 'https://www.saharaprinter.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -44,5 +44,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/rental-calculator/`,            lastModified: now, changeFrequency: 'monthly', priority: 0.65 },
   ];
 
-  return staticRoutes;
+  // Dynamic: blog posts
+  let blogRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const res = await fetch(`${BASE}/api/blogs/`, { next: { revalidate: 3600 } });
+    const data = await res.json();
+    blogRoutes = (data.blogs || []).map((b: any) => ({
+      url: `${BASE}/blogs/${b.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+  } catch { /* ignore */ }
+
+  // Dynamic: products
+  let productRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const res = await fetch(`${BASE}/api/products/`, { next: { revalidate: 3600 } });
+    const data = await res.json();
+    productRoutes = (data.products || []).map((p: any) => ({
+      url: `${BASE}/products/${p.id}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.75,
+    }));
+  } catch { /* ignore */ }
+
+  return [...staticRoutes, ...blogRoutes, ...productRoutes];
 }

@@ -50,7 +50,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="min-h-screen bg-surface flex">
+    <div className="min-h-screen bg-surface flex" suppressHydrationWarning>
       <aside className="w-64 bg-slate-950 border-r border-white/5 flex flex-col fixed h-full">
         <div className="p-6 border-b border-white/5">
           <Link href="/admin" className="text-xl font-bold text-primary">

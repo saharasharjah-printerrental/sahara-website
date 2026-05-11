@@ -1,0 +1,240 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke-tests:
+    name: Smoke Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install --with-deps
+
+      - name: Build app
+        run: npm run build
+
+      - name: Start dev server
+        run: npm run dev &
+        env:
+          PORT: 3000
+
+      - name: Wait for server
+        run: bash tests/scripts/wait-for-server.sh http://localhost:3000 60
+
+      - name: Run smoke tests
+        run: bash tests/scripts/run-smoke-tests.sh http://localhost:3000 smoke-ci
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Upload artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-errors
+          path: |
+            tests/e2e/visual/diffs/
+          retention-days: 7
+
+  a11y-tests:
+    name: Accessibility Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install --with-deps
+
+      - name: Build app
+        run: npm run build
+
+      - name: Start dev server
+        run: npm run dev &
+        env:
+          PORT: 3000
+
+      - name: Wait for server
+        run: bash tests/scripts/wait-for-server.sh http://localhost:3000 60
+
+      - name: Run a11y tests
+        run: bash tests/scripts/run-a11y-tests.sh http://localhost:3000 a11y-ci
+        env:
+          BASE_URL: http://localhost:3000
+
+  visual-regression:
+    name: Visual Regression Tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install --with-deps
+
+      - name: Build app
+        run: npm run build
+
+      - name: Start dev server
+        run: npm run dev &
+        env:
+          PORT: 3000
+
+      - name: Wait for server
+        run: bash tests/scripts/wait-for-server.sh http://localhost:3000 60
+
+      - name: Download existing baselines
+        uses: actions/download-artifact@v4
+        if: always()
+        with:
+          name: visual-baselines
+          path: tests/e2e/visual/baselines/
+        continue-on-error: true
+
+      - name: Run visual tests
+        run: bash tests/scripts/run-visual-tests.sh http://localhost:3000 visual-ci
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Upload baselines
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines
+          path: tests/e2e/visual/baselines/
+          retention-days: 30
+
+      - name: Upload diffs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diffs-${{ github.sha }}
+          path: tests/e2e/visual/diffs/
+          retention-days: 14
+
+  screenshots:
+    name: Screenshot Capture
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install --with-deps
+
+      - name: Build app
+        run: npm run build
+
+      - name: Start dev server
+        run: npm run dev &
+        env:
+          PORT: 3000
+
+      - name: Wait for server
+        run: bash tests/scripts/wait-for-server.sh http://localhost:3000 60
+
+      - name: Capture screenshots
+        run: bash tests/scripts/run-screenshot-tests.sh http://localhost:3000 screenshots-ci
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ github.sha }}
+          path: tests/e2e/screenshots/
+          retention-days: 7
+
+  ts-flows:
+    name: TypeScript Flow Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install --with-deps
+
+      - name: Build app
+        run: npm run build
+
+      - name: Start dev server
+        run: npm run dev &
+        env:
+          PORT: 3000
+
+      - name: Wait for server
+        run: bash tests/scripts/wait-for-server.sh http://localhost:3000 60
+
+      - name: Run TypeScript smoke flows
+        run: npx tsx tests/scripts/smoke-tests.ts
+        env:
+          BASE_URL: http://localhost:3000

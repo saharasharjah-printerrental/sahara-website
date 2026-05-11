@@ -530,9 +530,18 @@ function ReviewsSection() {
   const posRef = useRef(0);
   const pausedRef = useRef(false);
 
+  const defaultTestimonials = [
+    { id: "1", name: "Marcus Thorne", role: "Architectural Lead", text: "Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!", rating: 5, avatarUrl: "", isActive: true },
+    { id: "2", name: "Sarah Jenkins", role: "Operations Manager", text: "The printer rental program saved us 40% on operational costs this quarter. Professional and reliable.", rating: 5, avatarUrl: "", isActive: true },
+    { id: "3", name: "David Chen", role: "IT Director", text: "Prompt toner delivery. Never had to wait more than a day. Highly recommend Sahara.", rating: 5, avatarUrl: "", isActive: true },
+    { id: "4", name: "Fatima Al-Rashid", role: "Office Manager", text: "We rented 5 copiers for our new Dubai office. Setup was done same day. Outstanding service!", rating: 5, avatarUrl: "", isActive: true },
+    { id: "5", name: "James O'Brien", role: "Facilities Coordinator", text: "The AMC contract has eliminated all our printer downtime. Their preventive maintenance is top-notch.", rating: 5, avatarUrl: "", isActive: true },
+    { id: "6", name: "Aisha Mohammed", role: "Procurement Head", text: "Best printer rental rates in Abu Dhabi. Transparent pricing, no hidden fees. Will renew our contract.", rating: 5, avatarUrl: "", isActive: true },
+  ];
+
   useEffect(() => {
     // Always fetch from D1 API first — source of truth
-    fetch('/api/testimonials')
+    fetch('/api/testimonials/')
       .then(res => res.json())
       .then(data => {
         if (data.testimonials && data.testimonials.length > 0) {
@@ -542,6 +551,17 @@ function ReviewsSection() {
           );
           setTestimonials(active);
           localStorage.setItem("sahara_testimonials", JSON.stringify(active));
+        } else if (data.error) {
+          // DB not configured — use localStorage or defaults
+          const stored = localStorage.getItem("sahara_testimonials");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            setTestimonials(parsed.filter((t: any) =>
+              t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true
+            ));
+          } else {
+            setTestimonials(defaultTestimonials);
+          }
         } else {
           // Fall back to localStorage if DB returns empty
           const stored = localStorage.getItem("sahara_testimonials");
@@ -550,17 +570,21 @@ function ReviewsSection() {
             setTestimonials(parsed.filter((t: any) =>
               t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true
             ));
+          } else {
+            setTestimonials(defaultTestimonials);
           }
         }
       })
       .catch(() => {
-        // Network error — use localStorage cache
+        // Network error — use localStorage cache or defaults
         const stored = localStorage.getItem("sahara_testimonials");
         if (stored) {
           const parsed = JSON.parse(stored);
           setTestimonials(parsed.filter((t: any) =>
             t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true
           ));
+        } else {
+          setTestimonials(defaultTestimonials);
         }
       })
       .finally(() => setReady(true));
@@ -660,12 +684,14 @@ function BrandCarousel() {
   const pausedRef = useRef(false);
 
   const FALLBACK_LOGOS = [
-    { id: "1", name: "HP", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/ac/HP_logo.svg", link: "https://www.hp.com", isActive: true, sortOrder: 1 },
-    { id: "2", name: "Canon", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/28/Canon_logo.svg", link: "https://www.canon.com", isActive: true, sortOrder: 2 },
-    { id: "3", name: "Xerox", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Xerox_logo.svg", link: "https://www.xerox.com", isActive: true, sortOrder: 3 },
-    { id: "4", name: "Ricoh", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/44/Ricoh_logo.svg", link: "https://www.ricoh.com", isActive: true, sortOrder: 4 },
-    { id: "5", name: "Kyocera", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kyocera_logo.svg", link: "https://www.kyocera.com", isActive: true, sortOrder: 5 },
-    { id: "6", name: "Brother", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/44/Brother_Logo.svg", link: "https://www.brother.com", isActive: true, sortOrder: 6 },
+    { id: "1", name: "HP", imageUrl: "/brands/hp.webp", link: "https://www.hp.com", isActive: true, sortOrder: 1 },
+    { id: "2", name: "Canon", imageUrl: "/brands/canon.webp", link: "https://www.canon.com", isActive: true, sortOrder: 2 },
+    { id: "3", name: "Xerox", imageUrl: "/brands/xerox.webp", link: "https://www.xerox.com", isActive: true, sortOrder: 3 },
+    { id: "4", name: "Ricoh", imageUrl: "/brands/ricoh.webp", link: "https://www.ricoh.com", isActive: true, sortOrder: 4 },
+    { id: "5", name: "Kyocera", imageUrl: "/brands/kyocera.webp", link: "https://www.kyocera.com", isActive: true, sortOrder: 5 },
+    { id: "6", name: "Brother", imageUrl: "/brands/brother.webp", link: "https://www.brother.com", isActive: true, sortOrder: 6 },
+    { id: "7", name: "Sharp", imageUrl: "/brands/sharp.webp", link: "https://www.sharp.com", isActive: true, sortOrder: 7 },
+    { id: "8", name: "Epson", imageUrl: "/brands/epson.webp", link: "https://www.epson.com", isActive: true, sortOrder: 8 },
   ];
 
   useEffect(() => {
@@ -730,7 +756,7 @@ function BrandCarousel() {
           {displayLogos.map((logo, i) => (
             <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
               {logo.imageUrl ? (
-                <img src={logo.imageUrl} alt={logo.name} className="max-h-full max-w-full object-contain" loading="lazy" />
+                <img src={LOCAL_BRAND_LOGOS[logo.name.toLowerCase()] || logo.imageUrl} alt={logo.name} className="max-h-full max-w-full object-contain" loading="lazy" />
               ) : (
                 <span className="text-slate-400 font-bold text-base">{logo.name}</span>
               )}
