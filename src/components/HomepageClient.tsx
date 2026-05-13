@@ -378,11 +378,20 @@ function FeaturedProductsSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_products");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setProducts(parsed.filter((p: any) => p.isActive).map((p: any) => ({ ...p, image: p.image || "" })).slice(0, 8));
-    } else {
+    try {
+      const stored = localStorage.getItem("sahara_products");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setProducts(parsed.filter((p: any) => p.isActive).map((p: any) => ({ ...p, image: p.image || "" })).slice(0, 8));
+      } else {
+        setProducts([
+          { name: "HP LaserJet Enterprise M608", brand: "HP", desc: "High-speed monochromatic laser for heavy duty enterprise workloads.", priceRental: "Contact for Pricing", image: "/images/printer-hp.svg" },
+          { name: "Canon imageRUNNER ADVANCE", brand: "Canon", desc: "Comprehensive document imaging and integrated workflow management.", priceRental: "Leasing Available", image: "/images/printer-canon-1.webp" },
+          { name: "Brother HL-L6400DW", brand: "Brother", desc: "Robust wireless laser printing for medium-sized professional offices.", priceRental: "Sale Ready", image: "/images/printer-brother.webp" },
+          { name: "Kyocera ECOSYS M6235cidn", brand: "Kyocera", desc: "Ultra-reliable high-volume printing with exceptional cost efficiency.", priceRental: "Leasing Available", image: "/images/printer-kyocera.webp" },
+        ]);
+      }
+    } catch (error) {
       setProducts([
         { name: "HP LaserJet Enterprise M608", brand: "HP", desc: "High-speed monochromatic laser for heavy duty enterprise workloads.", priceRental: "Contact for Pricing", image: "/images/printer-hp.svg" },
         { name: "Canon imageRUNNER ADVANCE", brand: "Canon", desc: "Comprehensive document imaging and integrated workflow management.", priceRental: "Leasing Available", image: "/images/printer-canon-1.webp" },
