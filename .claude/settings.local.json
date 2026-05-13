@@ -126,7 +126,13 @@
       "Bash(Select-Object FullName)",
       "Bash(Format-Table -HideTableHeaders)",
       "mcp__MCP_DOCKER__browser_evaluate",
-      "PowerShell($token = \"bdrhH6-2EDOYDINJ_QjZ4b4RJaLy_yo9rSI21hHLoE4.5I7a5mQYzv0tyBCVuwnZER5SEkMv_1Ep4qVvBuThJQM\"; $accountId = \"034ddee1699595a19ee79f688de3b421\"; $project = \"saharaprinter\"; $response = Invoke-RestMethod -Uri \"https://api.cloudflare.com/client/v4/accounts/$accountId/pages/projects/$project\" -Headers @{ \"Authorization\" = \"Bearer $token\" } -Method GET; $response.result | ConvertTo-Json -Depth 5 2>&1 | Select-Object -First 80)"
+      "PowerShell($token = \"bdrhH6-2EDOYDINJ_QjZ4b4RJaLy_yo9rSI21hHLoE4.5I7a5mQYzv0tyBCVuwnZER5SEkMv_1Ep4qVvBuThJQM\"; $accountId = \"034ddee1699595a19ee79f688de3b421\"; $project = \"saharaprinter\"; $response = Invoke-RestMethod -Uri \"https://api.cloudflare.com/client/v4/accounts/$accountId/pages/projects/$project\" -Headers @{ \"Authorization\" = \"Bearer $token\" } -Method GET; $response.result | ConvertTo-Json -Depth 5 2>&1 | Select-Object -First 80)",
+      "mcp__MCP_DOCKER__browser_network_requests",
+      "mcp__MCP_DOCKER__browser_take_screenshot",
+      "PowerShell($pkg = Get-Content \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\\\\package.json\" | ConvertFrom-Json; $pkg.scripts)",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://www.saharaprinter.com/\" -UseBasicParsing; $response.Content | Select-String \"_next/static/chunks\" -AllMatches | ForEach-Object { $_.Matches } | Select-Object -ExpandProperty Value | Sort-Object -Unique)",
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://www.saharaprinter.com/_next/static/chunks/polyfills-42372ed130431b0a.js\" -UseBasicParsing -ErrorAction SilentlyContinue; \"Status: $\\($r.StatusCode\\) | Cache-Control: $\\($r.Headers.'Cache-Control'\\)\"; $r = Invoke-WebRequest -Uri \"https://www.saharaprinter.com/_next/static/chunks/5964-4050cddb6b98762f.js\" -UseBasicParsing -ErrorAction SilentlyContinue; \"Status: $\\($r.StatusCode\\) | Cache-Control: $\\($r.Headers.'Cache-Control'\\)\")",
+      "mcp__MCP_DOCKER__browser_close"
     ]
   },
   "enableAllProjectMcpServers": true,
