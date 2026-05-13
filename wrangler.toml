@@ -1,8 +1,18 @@
 name = "sahara-website"
-compatibility_date = "2024-09-23"
+compatibility_date = "2024-12-16"
 compatibility_flags = ["nodejs_compat"]
 
 pages_build_output_dir = ".vercel/output/static"
+
+# ─────────────────────────────────────────────
+# SITE CONFIGURATION
+# ─────────────────────────────────────────────
+[env.production]
+name = "sahara-website"
+routes = [
+  { pattern = "saharaprinter.com", zone_name = "saharaprinter.com" },
+  { pattern = "www.saharaprinter.com", zone_name = "saharaprinter.com" }
+]
 
 # ─────────────────────────────────────────────
 # D1 DATABASE
@@ -36,3 +46,28 @@ bucket_name = "sahara-printer-files"
 # R2 PUBLIC URL - Get from Cloudflare Dashboard → R2 → Your bucket → Settings → Public Access
 # Copy the public URL and paste it below (e.g., https://sahara-printer-files.your-account.r2.cloud)
 R2_PUBLIC_URL = "https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev"
+
+# Site URL for RSC and API route fetching - Required for server-side API calls
+NEXT_PUBLIC_SITE_URL = "https://www.saharaprinter.com"
+
+# ─────────────────────────────────────────────
+# CLOUDFLARE DASHBOARD CONFIGURATION REQUIRED
+# ─────────────────────────────────────────────
+# 1. WAF BYPASS (Cloudflare Dashboard → Security → WAF → Custom Rules)
+#    Create bypass rule:
+#    (http.user_agent contains "Googlebot" and
+#     http.request.uri.path in {"/api/logos" "/api/settings" "/api/testimonials"})
+#    → Action: Skip → WAF Managed Rules
+#
+# 2. CACHE RULES (Cloudflare Dashboard → Caching → Cache Rules)
+#    Rule 1: Path matches "/api/*"
+#    → Cache mode: Bypass
+#    Rule 2: Path matches "/api/logos" OR "/api/settings" OR "/api/testimonials"
+#    → Cache status: Cache
+#    → TTL: 1 hour
+#
+# 3. PAGE RULES (Cloudflare Dashboard → Rules → Page Rules)
+#    Rule: URL matches "*/api/*"
+#    → Cache Level: Bypass
+#    → Security Level: Medium (allows Googlebot)
+# ─────────────────────────────────────────────

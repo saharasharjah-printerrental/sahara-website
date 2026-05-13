@@ -141,14 +141,18 @@ function HeroSection() {
 }
 
 function BrandCarouselSection() {
-  const [logos, setLogos] = useState<any[]>([]);
+  const [mounted, setMounted] = useState(false);
+  const [logos, setLogos] = useState<any[]>(FALLBACK_LOGOS);
   const [ready, setReady] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const posRef = useRef(0);
   const pausedRef = useRef(false);
 
+  // Avoid hydration mismatch: don't render until mounted on client
   useEffect(() => {
+    setMounted(true);
+
     fetch("/api/logos")
       .then((res) => res.json())
       .then((data) => {
@@ -186,6 +190,18 @@ function BrandCarouselSection() {
     rafRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafRef.current);
   }, [ready, logos.length]);
+
+  // Don't render carousel until mounted to avoid hydration mismatch
+  if (!mounted) {
+    return (
+      <section className="py-12 bg-[#101c2e]">
+        <div className="text-center mb-8">
+          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
+        </div>
+        <div className="h-24 bg-[#0a1117] rounded animate-pulse" />
+      </section>
+    );
+  }
 
   const displayLogos = [...logos, ...logos, ...logos];
 
@@ -419,14 +435,18 @@ function FeaturedProductsSection() {
 }
 
 function ReviewsSectionContent() {
-  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [mounted, setMounted] = useState(false);
+  const [testimonials, setTestimonials] = useState<any[]>(defaultTestimonials);
   const [ready, setReady] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const posRef = useRef(0);
   const pausedRef = useRef(false);
 
+  // Avoid hydration mismatch: don't render until mounted on client
   useEffect(() => {
+    setMounted(true);
+
     // Fetch fresh testimonials from API - no localStorage caching for real-time updates
     fetch("/api/testimonials/")
       .then((res) => res.json())
@@ -467,6 +487,19 @@ function ReviewsSectionContent() {
     rafRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafRef.current);
   }, [ready, testimonials.length]);
+
+  // Don't render carousel until mounted to avoid hydration mismatch
+  if (!mounted) {
+    return (
+      <section className="py-24 bg-[#101c2e]/50 relative">
+        <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
+          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
+          <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
+        </div>
+        <div className="h-64 bg-[#0a1117] rounded animate-pulse mx-8" />
+      </section>
+    );
+  }
 
   const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
 

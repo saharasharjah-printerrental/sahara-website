@@ -68,6 +68,19 @@ const nextConfig = {
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
           { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net",
+              "img-src 'self' data: https: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.facebook.com",
+              "connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.clarity.ms https://connect.facebook.net https://www.facebook.com",
+              "frame-src 'self' https://www.googletagmanager.com https://www.facebook.com https://www.clarity.ms",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "media-src 'self'",
+            ].join('; ')
+          },
         ],
       },
     ];

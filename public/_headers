@@ -1,0 +1,31 @@
+# Cloudflare Pages Headers Configuration
+
+# API routes — cache with proper headers
+/api/logos
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+/api/settings
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+/api/testimonials
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+# Prevent robots from indexing API endpoints
+/api/*
+  X-Robots-Tag: noindex
+
+# Google and analytics scripts — allow cross-origin
+*.js
+  Access-Control-Allow-Origin: *
+
+# Security headers for all routes
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block

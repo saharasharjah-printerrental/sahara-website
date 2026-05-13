@@ -24,8 +24,8 @@ export async function GET(request: NextRequest) {
 
   try {
     const sql = pageSlug
-      ? 'SELECT * FROM faqs WHERE is_active = 1 AND page_slug = ? ORDER BY sort_order ASC'
-      : 'SELECT * FROM faqs WHERE is_active = 1 ORDER BY sort_order ASC';
+      ? 'SELECT * FROM faqs WHERE isActive = 1 AND pageSlug = ? ORDER BY sortOrder ASC'
+      : 'SELECT * FROM faqs WHERE isActive = 1 ORDER BY sortOrder ASC';
     const result = pageSlug
       ? await db.prepare(sql).bind(pageSlug).all()
       : await db.prepare(sql).all();
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO faqs (id, page_slug, question, answer, sort_order, is_active, created_at)
+      INSERT OR REPLACE INTO faqs (id, pageSlug, question, answer, sortOrder, isActive, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `).run(id, body.pageSlug, body.question, body.answer, body.sortOrder || 0, body.isActive ?? 1, now);
 

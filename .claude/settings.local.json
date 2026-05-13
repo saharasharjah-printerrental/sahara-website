@@ -115,7 +115,12 @@
       "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/sitemap.xml\" -UseBasicParsing | Select-Object StatusCode, Content)",
       "mcp__MCP_DOCKER__browser_install",
       "mcp__MCP_DOCKER__n8n_health_check",
-      "mcp__MCP_DOCKER__tools_documentation"
+      "mcp__MCP_DOCKER__tools_documentation",
+      "PowerShell(wrangler login *)",
+      "PowerShell(Out-Null *)",
+      "PowerShell(curl *)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(Get-ChildItem *)"
     ]
   },
   "enableAllProjectMcpServers": true,

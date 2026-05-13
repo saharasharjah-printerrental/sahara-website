@@ -50,6 +50,15 @@ CLOUDFLARE_D1_R2_SETUP.md
 CLOUDFLARE_DATA_CONFIG.md
 CLOUDFLARE_SIMPLE_DEPLOY.md
 .env.production
+*.env
+
+# AI processing artifacts
+data/ai_jobs/
+data/ai_output/
+video-frames/
+
+# Flowbaby
+.flowbaby/
 
 # Claude
 .claude/worktrees/
