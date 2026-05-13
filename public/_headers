@@ -20,9 +20,9 @@
 /api/*
   X-Robots-Tag: noindex
 
-# Google and analytics scripts — allow cross-origin
-*.js
-  Access-Control-Allow-Origin: *
+# Immutable cache for hashed static assets — served directly by Cloudflare, not the Worker
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
 
 # Security headers for all routes
 /*
