@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { CloudUpload, Delete, Edit, Link as LinkIcon, Add } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";

@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import type { Metadata } from "next";
 import BlogsClient from "@/components/BlogsClient";
 
