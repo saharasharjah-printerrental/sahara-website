@@ -121,7 +121,10 @@
       "PowerShell(curl *)",
       "PowerShell(Test-Path *)",
       "PowerShell(Get-ChildItem *)",
-      "PowerShell(npx wrangler whoami)"
+      "PowerShell(npx wrangler whoami)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\\\\src\\\\app\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(Format-Table -HideTableHeaders)"
     ]
   },
   "enableAllProjectMcpServers": true,

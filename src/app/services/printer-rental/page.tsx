@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
+
+export const runtime = 'edge';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:cf": "npx @cloudflare/next-on-pages",
     "start": "next start",
     "deploy": "npx wrangler pages deploy .next --project-name=saharaprinter",
     "test:e2e": "node tests/scripts/run-all-tests.js",
