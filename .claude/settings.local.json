@@ -120,7 +120,8 @@
       "PowerShell(Out-Null *)",
       "PowerShell(curl *)",
       "PowerShell(Test-Path *)",
-      "PowerShell(Get-ChildItem *)"
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(npx wrangler whoami)"
     ]
   },
   "enableAllProjectMcpServers": true,

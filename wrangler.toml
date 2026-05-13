@@ -2,22 +2,16 @@ name = "sahara-website"
 compatibility_date = "2024-12-16"
 compatibility_flags = ["nodejs_compat"]
 
-pages_build_output_dir = ".vercel/output/static"
-
 # ─────────────────────────────────────────────
 # SITE CONFIGURATION
 # ─────────────────────────────────────────────
 [env.production]
-name = "sahara-website"
-routes = [
-  { pattern = "saharaprinter.com", zone_name = "saharaprinter.com" },
-  { pattern = "www.saharaprinter.com", zone_name = "saharaprinter.com" }
-]
+name = "saharaprinter"
 
 # ─────────────────────────────────────────────
 # D1 DATABASE
 # ─────────────────────────────────────────────
-[[d1_databases]]
+[[env.production.d1_databases]]
 binding = "DB"
 database_name = "sahara-printer-db"
 database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
@@ -28,7 +22,7 @@ database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
 # Name: sahara-printer-files
 # Add binding below after creating bucket
 # ─────────────────────────────────────────────
-[[r2_buckets]]
+[[env.production.r2_buckets]]
 binding = "SAHARA_ASSETS"
 bucket_name = "sahara-printer-files"
 
@@ -41,7 +35,7 @@ bucket_name = "sahara-printer-files"
 # Get credentials from: https://console.cloudinary.com → Settings → API Keys
 # ─────────────────────────────────────────────
 # Vars set in Cloudflare Dashboard - do not add here to avoid override
-[vars]
+[env.production.vars]
 
 # R2 PUBLIC URL - Get from Cloudflare Dashboard → R2 → Your bucket → Settings → Public Access
 # Copy the public URL and paste it below (e.g., https://sahara-printer-files.your-account.r2.cloud)

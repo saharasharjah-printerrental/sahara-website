@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "npx wrangler pages deploy .vercel/output/static --project-name=sahara-website",
+    "deploy": "npx wrangler pages deploy .next --project-name=saharaprinter",
     "test:e2e": "node tests/scripts/run-all-tests.js",
     "test:smoke": "bash tests/scripts/run-smoke-tests.sh",
     "test:visual": "bash tests/scripts/run-visual-tests.sh",
