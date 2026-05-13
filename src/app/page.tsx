@@ -85,11 +85,49 @@ export default function HomePage() {
   };
 
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does printer rental cost in Dubai?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the benefits of printer rental in UAE?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer printer rental in Abu Dhabi?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD with same-day delivery and 24/7 support." }
+      },
+      {
+        "@type": "Question",
+        "name": "What printer brands do you rent?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is toner included in printer rental?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — unlimited genuine OEM toner is included in all rental plans. We monitor levels remotely and replenish proactively." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide on-site repair services?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, our factory-certified technicians provide on-site repairs across all major service areas with a 4-hour response time for critical failures." }
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-[#071325]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <link rel="preload" as="image" href="/images/hero-bg.webp" fetchPriority="high" />
 

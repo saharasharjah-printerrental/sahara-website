@@ -245,68 +245,6 @@ const organizationSchema = {
   }
 };
 
-// Validation function to ensure FAQ schema quality
-function createValidFAQSchema(faqs: Array<{ question: string; answer: string }>) {
-  // Filter and validate FAQs per Google's requirements
-  const validFaqs = faqs
-    .filter(faq => {
-      // Must have non-empty question and answer
-      if (!faq.question?.trim() || !faq.answer?.trim()) return false;
-      // Answer must be at least 10 characters and not just a URL
-      if (faq.answer.trim().length < 10) return false;
-      if (/^https?:\/\//.test(faq.answer.trim())) return false;
-      return true;
-    })
-    .map(faq => ({
-      "@type": "Question",
-      "name": faq.question.trim(),
-      "acceptedAnswer": {
-        "@type": "Answer",
-        // Strip HTML tags from answer text (Google requires plain text)
-        "text": faq.answer
-          .replace(/<[^>]*>/g, '')
-          .trim()
-      }
-    }));
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": validFaqs
-  };
-}
-
-// FAQ data source
-const faqData = [
-  {
-    question: "How much does printer rental cost in Dubai?",
-    answer: "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery."
-  },
-  {
-    question: "What are the benefits of printer rental in UAE?",
-    answer: "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options."
-  },
-  {
-    question: "Do you offer printer rental in Abu Dhabi?",
-    answer: "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD with same-day delivery and 24/7 support."
-  },
-  {
-    question: "What printer brands do you rent?",
-    answer: "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother."
-  },
-  {
-    question: "Is toner included in printer rental?",
-    answer: "Yes — unlimited genuine OEM toner is included in all rental plans. We monitor levels remotely and replenish proactively."
-  },
-  {
-    question: "Do you provide on-site repair services?",
-    answer: "Yes, our factory-certified technicians provide on-site repairs across all major service areas with a 4-hour response time for critical failures."
-  }
-];
-
-// Generate validated FAQ schema
-const faqSchema = createValidFAQSchema(faqData);
-
 interface ServerSEOConfig {
   googleAnalyticsId?: string;
   googleAnalytics4Id?: string;
@@ -366,7 +304,6 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
         />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
         {/* Google Tag Manager */}
         {cfg?.googleTagManagerId && (
