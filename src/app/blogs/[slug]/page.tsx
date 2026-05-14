@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import BlogPostClient from "@/components/BlogPostClient";
-import { BLOG_LINK_MAP, BlogLinkConfig } from "@/lib/internalLinks";
+import type { BlogLinkConfig } from "@/lib/internalLinks";
 
 interface BlogPost {
   id: string;
@@ -110,8 +110,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     post = fallback;
     allPosts = fallbackPosts;
   }
-
-  if (!linkConfig) linkConfig = BLOG_LINK_MAP[slug] ?? null;
 
   const articleSchema = {
     "@context": "https://schema.org",
