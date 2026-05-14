@@ -71,17 +71,23 @@ const defaultHomeFaqs = [
   { q: "Is toner included in printer rental?", a: "Yes — unlimited genuine OEM toner is included in all rental plans. We monitor levels remotely and replenish proactively." },
 ];
 
-export default function HomepageClient() {
+export default function HomepageClient({
+  initialLogos = [],
+  initialTestimonials = [],
+}: {
+  initialLogos?: any[];
+  initialTestimonials?: any[];
+}) {
   return (
     <>
       <HeroSection />
-      <BrandCarouselSection />
+      <BrandCarouselSection initialLogos={initialLogos} />
       <DefinitionSection />
       <ServicesSection />
       <LocationsSection />
       <StatsSectionContent />
       <FeaturedProductsSection />
-      <ReviewsSectionContent />
+      <ReviewsSectionContent initialTestimonials={initialTestimonials} />
       <CTASection />
       <FAQSectionContent />
     </>
@@ -140,9 +146,11 @@ function HeroSection() {
   );
 }
 
-function BrandCarouselSection() {
+function BrandCarouselSection({ initialLogos = [] }: { initialLogos?: any[] }) {
   const [mounted, setMounted] = useState(false);
-  const [logos, setLogos] = useState<any[]>(FALLBACK_LOGOS);
+  const [logos, setLogos] = useState<any[]>(
+    initialLogos.length > 0 ? initialLogos.filter((l: any) => l.isActive) : FALLBACK_LOGOS
+  );
   const [ready, setReady] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
@@ -191,18 +199,6 @@ function BrandCarouselSection() {
     return () => cancelAnimationFrame(rafRef.current);
   }, [ready, logos.length]);
 
-  // Don't render carousel until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return (
-      <section className="py-12 bg-[#101c2e]">
-        <div className="text-center mb-8">
-          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
-        </div>
-        <div className="h-24 bg-[#0a1117] rounded animate-pulse" />
-      </section>
-    );
-  }
-
   const displayLogos = [...logos, ...logos, ...logos];
 
   return (
@@ -217,7 +213,7 @@ function BrandCarouselSection() {
       >
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10 pointer-events-none" />
-        <div ref={trackRef} className="flex gap-12 items-center py-2" style={{ width: "max-content" }}>
+        <div ref={trackRef} className="flex gap-12 items-center py-2" style={{ width: "max-content" }} suppressHydrationWarning>
           {displayLogos.map((logo, i) => (
             <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity">
               {logo.imageUrl ? (
@@ -443,9 +439,11 @@ function FeaturedProductsSection() {
   );
 }
 
-function ReviewsSectionContent() {
+function ReviewsSectionContent({ initialTestimonials = [] }: { initialTestimonials?: any[] }) {
   const [mounted, setMounted] = useState(false);
-  const [testimonials, setTestimonials] = useState<any[]>(defaultTestimonials);
+  const [testimonials, setTestimonials] = useState<any[]>(
+    initialTestimonials.length > 0 ? initialTestimonials : defaultTestimonials
+  );
   const [ready, setReady] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
@@ -497,19 +495,6 @@ function ReviewsSectionContent() {
     return () => cancelAnimationFrame(rafRef.current);
   }, [ready, testimonials.length]);
 
-  // Don't render carousel until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return (
-      <section className="py-24 bg-[#101c2e]/50 relative">
-        <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
-          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
-          <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
-        </div>
-        <div className="h-64 bg-[#0a1117] rounded animate-pulse mx-8" />
-      </section>
-    );
-  }
-
   const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   return (
@@ -519,7 +504,7 @@ function ReviewsSectionContent() {
         <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
       </div>
       <div className="overflow-hidden" onMouseEnter={() => (pausedRef.current = true)} onMouseLeave={() => (pausedRef.current = false)}>
-        <div ref={trackRef} className="flex gap-6 py-4" style={{ width: "max-content" }}>
+        <div ref={trackRef} className="flex gap-6 py-4" style={{ width: "max-content" }} suppressHydrationWarning>
           {allTestimonials.map((t, i) => (
             <div key={i} className="glass-card w-[350px] flex-shrink-0 p-8 rounded-2xl flex flex-col justify-between h-64">
               <div className="flex text-[#f5be53] gap-1 mb-4">

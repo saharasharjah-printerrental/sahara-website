@@ -256,6 +256,7 @@ interface ServerSEOConfig {
   customHeadScripts?: string;
   customBodyScripts?: string;
   schemaMarkup?: string;
+  organizationSchema?: string;
 }
 
 type ParsedScript = { src: string; isAsync: boolean } | { inline: string };
@@ -282,7 +283,15 @@ async function getSEOConfig(): Promise<ServerSEOConfig | null> {
     const db = (getRequestContext().env as any).DB;
     if (!db) return null;
     const row: any = await db.prepare("SELECT value FROM settings WHERE key = ?").bind("seo_config").first();
-    if (row?.value) return JSON.parse(row.value);
+    if (row?.value) {
+      const parsed: ServerSEOConfig = JSON.parse(row.value);
+      // Stored analytics IDs can carry stray whitespace — sanitize at the boundary
+      // so every consumer (inline script + noscript iframe) gets a clean value.
+      for (const k of ["googleAnalyticsId", "googleAnalytics4Id", "googleTagManagerId", "microsoftClarityId", "metaPixelId", "hotjarId"] as const) {
+        if (typeof parsed[k] === "string") (parsed as any)[k] = (parsed[k] as string).trim();
+      }
+      return parsed;
+    }
   } catch {}
   return null;
 }
@@ -303,7 +312,7 @@ export default async function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
         />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchema) }} />
 
         {/* Google Tag Manager */}
         {cfg?.googleTagManagerId && (

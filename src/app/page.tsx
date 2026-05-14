@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 import HomepageClient from "@/components/HomepageClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,7 +24,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  let initialLogos: any[] = [];
+  let initialTestimonials: any[] = [];
+  try {
+    const db = (getRequestContext().env as any).DB;
+    if (db) {
+      const [lr, tr] = await Promise.all([
+        db.prepare('SELECT * FROM logos WHERE isActive = 1 ORDER BY sortOrder ASC').all(),
+        db.prepare('SELECT * FROM testimonials WHERE is_active = 1 ORDER BY sort_order ASC').all(),
+      ]);
+      if (lr?.results?.length > 0) initialLogos = lr.results;
+      if (tr?.results?.length > 0) initialTestimonials = tr.results;
+    }
+  } catch { /* D1 unavailable in dev — components fall back to hardcoded defaults */ }
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -133,7 +148,7 @@ export default function HomePage() {
       <link rel="preload" as="image" href="/images/hero-bg.webp" fetchPriority="high" />
 
       <Header />
-      <HomepageClient />
+      <HomepageClient initialLogos={initialLogos} initialTestimonials={initialTestimonials} />
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

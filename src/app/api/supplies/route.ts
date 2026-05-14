@@ -11,12 +11,17 @@ function getDB() {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const all = searchParams.get('all') === 'true';
   const db = getDB();
   if (!db) return NextResponse.json({ error: 'Database not configured', supplies: [] });
 
   try {
-    const result = await db.prepare('SELECT * FROM supplies WHERE is_active = 1 ORDER BY name ASC').all();
+    const sql = all
+      ? 'SELECT * FROM supplies ORDER BY name ASC'
+      : 'SELECT * FROM supplies WHERE isActive = 1 ORDER BY name ASC';
+    const result = await db.prepare(sql).all();
     return NextResponse.json({ supplies: result?.results ?? [] });
   } catch (error) {
     console.error('Supplies GET Error:', error);
@@ -34,13 +39,15 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO supplies (id, name, brand, category, compatible_models, color, yield, price, stock, image, is_active, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT OR REPLACE INTO supplies
+        (id, name, brand, category, compatibleModels, color, yield, price, stock, image, alt_text, image_width, image_height, isActive, createdAt)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, body.name, body.brand || '', body.category || '',
       body.compatibleModels || '', body.color || '',
       body.yield || '', body.price || '',
       body.stock || 0, body.image || '',
+      body.altText || '', body.imageWidth || 800, body.imageHeight || 800,
       body.isActive ?? 1, now
     );
 

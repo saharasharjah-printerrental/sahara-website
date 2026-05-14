@@ -175,7 +175,7 @@ export default function AdminSettings() {
     ];
 
     try {
-      await Promise.all(
+      const results = await Promise.all(
         d1Entries.map(({ key, value }) =>
           fetch("/api/settings", {
             method: "POST",
@@ -184,9 +184,14 @@ export default function AdminSettings() {
           })
         )
       );
-      showToast('success', 'Settings saved to database!');
+      const allOk = results.every(r => r.ok);
+      if (allOk) {
+        showToast('success', 'Settings saved to database!');
+      } else {
+        showToast('error', 'Some settings failed to save. Check your database connection.');
+      }
     } catch {
-      showToast('success', 'Settings saved locally (database unavailable)');
+      showToast('info', 'Settings saved locally (database unavailable)');
     }
   };
 

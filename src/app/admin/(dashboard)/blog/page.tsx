@@ -2,9 +2,10 @@
 
 export const runtime = 'edge';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { BLOG_CONTENT } from "@/lib/blogContent";
+import { BLOG_LINK_MAP } from "@/lib/internalLinks";
 
 interface BlogPost {
   id: string;
@@ -19,6 +20,7 @@ interface BlogPost {
   createdAt: string;
 }
 
+// Minimal fallback when both D1 and localStorage are unavailable (localhost first run)
 const samplePosts: BlogPost[] = [
   { id: "1", title: "How to Choose the Best Printer Rental Dubai Service?", slug: "how-to-choose-the-best-printer-rental-dubai-service", excerpt: "Start your search for printer rental Dubai with a quick audit you can finish this afternoon", content: BLOG_CONTENT["how-to-choose-the-best-printer-rental-dubai-service"] ?? "", category: "Guide", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp", publishedAt: "2/16/2026", createdAt: "2026-02-16" },
   { id: "2", title: "The Problem We Solve", slug: "the-problem-we-solve", excerpt: "In any office, the sudden breakdown of a document printer or copier creates a cascade of problems.", content: BLOG_CONTENT["the-problem-we-solve"] ?? "", category: "Insights", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758721285/blogs/iblcpt0jm18wwey7nm41.jpg", publishedAt: "9/24/2025", createdAt: "2025-09-24" },
@@ -119,12 +121,7 @@ export default function AdminBlog() {
           if (localOnly.length > 0) merged = [...merged, ...localOnly];
         }
 
-        // 3. Merge with samplePosts (add any missing)
-        const existingIds = new Set(merged.map(p => p.id));
-        const newSamples = samplePosts.filter(p => !existingIds.has(p.id));
-        if (newSamples.length > 0) merged = [...merged, ...newSamples];
-
-        // Migrate stale content
+        // Migrate stale placeholder content
         const migrated = merged.map(p => {
           const isPlaceholder = !p.content || p.content.trim() === "" || p.content === "Full content here...";
           if (isPlaceholder && BLOG_CONTENT[p.slug]) return { ...p, content: BLOG_CONTENT[p.slug] };
@@ -135,7 +132,6 @@ export default function AdminBlog() {
         setPosts(migrated);
       } catch (e) {
         console.error("Error loading blog posts:", e);
-        // Fall back to localStorage or samplePosts
         const stored = localStorage.getItem("sahara_blogs");
         if (stored) setPosts(JSON.parse(stored));
         else setPosts(samplePosts);
@@ -186,6 +182,22 @@ export default function AdminBlog() {
     return true;
   });
 
+  const linkAnalysis = useMemo(() => {
+    const linkedSlugs = new Set(Object.keys(BLOG_LINK_MAP));
+    const orphans = posts.filter(p => p.status === "published" && !linkedSlugs.has(p.slug));
+    const typeCounts: Record<string, number> = {};
+    Object.values(BLOG_LINK_MAP).forEach(cfg => {
+      cfg.relatedLinks.forEach(l => { typeCounts[l.type] = (typeCounts[l.type] || 0) + 1; });
+    });
+    const outboundCounts = posts.map(p => ({
+      slug: p.slug,
+      title: p.title,
+      outbound: (BLOG_LINK_MAP[p.slug]?.relatedLinks.length ?? 0) + (BLOG_LINK_MAP[p.slug]?.relatedSlugs.length ?? 0),
+      hasConfig: linkedSlugs.has(p.slug),
+    }));
+    return { orphans, typeCounts, outboundCounts };
+  }, [posts]);
+
   return (
     <div className="min-h-screen bg-[#071325]">
       <main className="pt-8 pb-16 px-8 ml-64">
@@ -199,6 +211,44 @@ export default function AdminBlog() {
               <span className="material-symbols-outlined">add</span>
               New Post
             </button>
+          </div>
+
+          {/* Internal Linking Analysis */}
+          <div className="glass-card rounded-2xl p-6 mb-6">
+            <h2 className="text-lg font-bold text-white mb-4">Internal Linking Analysis</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-[#101c2e] rounded-xl p-4">
+                <p className="text-2xl font-bold text-white">{posts.filter(p => p.status === "published").length}</p>
+                <p className="text-xs text-slate-400 mt-1">Published posts</p>
+              </div>
+              <div className="bg-[#101c2e] rounded-xl p-4">
+                <p className="text-2xl font-bold text-[#f5be53]">{Object.keys(BLOG_LINK_MAP).length}</p>
+                <p className="text-xs text-slate-400 mt-1">Posts with link config</p>
+              </div>
+              <div className="bg-[#101c2e] rounded-xl p-4">
+                <p className="text-2xl font-bold text-red-400">{linkAnalysis.orphans.length}</p>
+                <p className="text-xs text-slate-400 mt-1">Orphan posts (no links)</p>
+              </div>
+              <div className="bg-[#101c2e] rounded-xl p-4">
+                <p className="text-2xl font-bold text-green-400">{Object.values(linkAnalysis.typeCounts).reduce((a, b) => a + b, 0)}</p>
+                <p className="text-xs text-slate-400 mt-1">Total internal links</p>
+              </div>
+            </div>
+            {linkAnalysis.orphans.length > 0 && (
+              <div className="mb-4">
+                <p className="text-sm font-medium text-red-400 mb-2">Missing link config:</p>
+                <div className="flex flex-wrap gap-2">
+                  {linkAnalysis.orphans.map(p => (
+                    <span key={p.id} className="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs">{p.slug}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(linkAnalysis.typeCounts).map(([type, count]) => (
+                <span key={type} className="px-3 py-1 rounded-full bg-[#142032] border border-white/10 text-slate-300 text-xs">{type}: {count}</span>
+              ))}
+            </div>
           </div>
 
           <div className="flex gap-4 mb-6">

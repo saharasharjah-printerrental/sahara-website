@@ -32,7 +32,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/brands/xerox/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/brands/ricoh/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/brands/brother/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
-    { url: `${BASE}/brands/sharp/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/brands/lexmark/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/brands/samsung/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/products/`,                     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },

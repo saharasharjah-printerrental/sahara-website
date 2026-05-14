@@ -6,7 +6,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/api/'],
+        // Only block private endpoints — never blanket-block /api/, it stops
+        // Googlebot fetching data routes that pages depend on for rendering.
+        disallow: ['/admin/', '/api/admin/', '/api/auth/', '/api/analytics/ping'],
       },
     ],
     sitemap: 'https://www.saharaprinter.com/sitemap.xml',

@@ -1,15 +1,12 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import MobileNav from "@/components/MobileNav";
 import BlogInternalLinks from "@/components/BlogInternalLinks";
-import { BLOG_CONTENT } from "@/lib/blogContent";
+import { BlogLinkConfig } from "@/lib/internalLinks";
 
 interface BlogPost {
   id: string;
@@ -18,85 +15,24 @@ interface BlogPost {
   excerpt: string;
   content: string;
   category: string;
-  status: string;
   coverImage: string;
   publishedAt: string;
   createdAt: string;
 }
 
-export default function BlogPostClient({ slug }: { slug: string }) {
-  const router = useRouter();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
+interface BlogPostClientProps {
+  post: BlogPost;
+  allPosts: BlogPost[];
+  linkConfig?: BlogLinkConfig | null;
+}
 
-  useEffect(() => {
-    const stored = localStorage.getItem("sahara_blogs");
-    if (stored) {
-      const allPostsData = JSON.parse(stored);
-      const publishedPosts = allPostsData.filter((p: BlogPost) => p.status === "published");
-      setAllPosts(publishedPosts);
-      const found = publishedPosts.find((p: BlogPost) => p.slug === slug);
-      if (found) { setPost(found); return; }
-    }
-    const defaultFound = defaultPosts.find(p => p.slug === slug);
-    if (defaultFound) { setPost(defaultFound); }
-    else { router.push("/blogs"); }
-  }, [slug, router]);
-
-  if (!post) {
-    return (
-      <main className="min-h-screen bg-[#071325]">
-        <Header />
-        <div className="pt-32 text-center"><div className="text-white text-xl">Loading...</div></div>
-        <Footer />
-      </main>
-    );
-  }
-
-  const defaultPosts: BlogPost[] = [
-    { id: "1", title: "How to Choose the Best Printer Rental Dubai Service?", slug: "how-to-choose-the-best-printer-rental-dubai-service", excerpt: "Start your search for printer rental Dubai with a quick audit you can finish this afternoon", content: BLOG_CONTENT["how-to-choose-the-best-printer-rental-dubai-service"] ?? "", category: "Guide", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp", publishedAt: "2/16/2026", createdAt: "2026-02-16" },
-    { id: "2", title: "The Problem We Solve", slug: "the-problem-we-solve", excerpt: "In any office, the sudden breakdown of a document printer or copier creates a cascade of problems.", content: BLOG_CONTENT["the-problem-we-solve"] ?? "", category: "Insights", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758721285/blogs/iblcpt0jm18wwey7nm41.jpg", publishedAt: "9/24/2025", createdAt: "2025-09-24" },
-    { id: "3", title: "What a Copier Rental Service Must Deliver to a Client", slug: "what-a-copier-rental-service-must-deliver-to-a-client", excerpt: "A successful copier rental service is defined not just by the equipment it provides, but by the quality of service it delivers.", content: BLOG_CONTENT["what-a-copier-rental-service-must-deliver-to-a-client"] ?? "", category: "Guide", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758723167/blogs/gifymghto0ykchvzrjyt.jpg", publishedAt: "9/24/2025", createdAt: "2025-09-24" },
-    { id: "4", title: "Why a Company Chooses Copier Rental Service Over Buying a Copier", slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier", excerpt: "A company's decision to rent a copier instead of buying one is about far more than just the initial investment.", content: BLOG_CONTENT["why-a-company-chooses-copier-rental-service-over-buying-a-copier"] ?? "", category: "Guide", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg", publishedAt: "8/23/2025", createdAt: "2025-08-23" },
-    { id: "5", title: "Total Cost of Printer Ownership", slug: "total-cost-of-printer-ownership", excerpt: "While the initial purchase price of a copier may seem affordable, the true cost of ownership is often much higher than rental.", content: BLOG_CONTENT["total-cost-of-printer-ownership"] ?? "", category: "Finance", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg", publishedAt: "8/23/2025", createdAt: "2025-08-23" },
-    { id: "6", title: "Video Walkthrough: Solving Canon Printer Problems", slug: "video-walkthrough-solving-canon-printer-problems", excerpt: "This video tutorial guides you through practical steps to troubleshoot common Canon printer issues.", content: BLOG_CONTENT["video-walkthrough-solving-canon-printer-problems"] ?? "", category: "Troubleshooting", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1754304132/blogs/mmmyp3kxrfsp1aryzule.png", publishedAt: "8/4/2025", createdAt: "2025-08-04" },
-    { id: "7", title: "The Hidden Cost of Your Office Copier", slug: "the-hidden-cost-of-your-office-copier", excerpt: "Our competitors may offer a cheaper initial price, but this often comes at the expense of hidden costs.", content: BLOG_CONTENT["the-hidden-cost-of-your-office-copier"] ?? "", category: "Finance", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758285328/blogs/mukam5nzst3o6lvhac5m.jpg", publishedAt: "8/4/2025", createdAt: "2025-08-04" },
-    { id: "8", title: "How Dubai Companies Save Budget by Choosing Value-Driven Printer Rental", slug: "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental", excerpt: "Dubai's dynamic business environment demands efficiency and cost-effectiveness.", content: BLOG_CONTENT["how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental"] ?? "", category: "Finance", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1752651510/blogs/l3byyc7o8a8f1lddujis.jpg", publishedAt: "7/16/2025", createdAt: "2025-07-16" },
-    { id: "9", title: "Real Estate to Clinics: Why Every UAE Business is Renting Printers in 2025", slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025", excerpt: "Even the most glamorous Dubai real estate offices and high-tech clinics have one thing in common—no one owns their printers anymore.", content: BLOG_CONTENT["real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025"] ?? "", category: "Trends", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg", publishedAt: "6/28/2025", createdAt: "2025-06-28" },
-    { id: "10", title: "Rent or Buy Your Office Printer? Let's Talk Smart Choices for Your Business", slug: "rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business", excerpt: "Every business owner knows that big decisions, and even the seemingly small ones, can really impact your wallet.", content: BLOG_CONTENT["rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business"] ?? "", category: "Guide", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1749630742/blogs/ue4jwdxdlp655oeoylsq.png", publishedAt: "6/11/2025", createdAt: "2025-06-11" },
-    { id: "11", title: "Stop Wasting Money on Printing: Your Guide to Smarter Office Habits", slug: "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits", excerpt: "Does your business constantly track every penny, yet somehow printing costs just fly under the radar?", content: BLOG_CONTENT["stop-wasting-money-on-printing-your-guide-to-smarter-office-habits"] ?? "", category: "Tips", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1749638040/blogs/ldevdfienoa4ibffpix0.png", publishedAt: "6/11/2025", createdAt: "2025-06-11" },
-  ];
-
-  const sameCategoryPosts = allPosts.filter(p => p.slug !== slug && p.category === post.category);
-  const otherPosts = allPosts.filter(p => p.slug !== slug && p.category !== post.category);
+export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostClientProps) {
+  const sameCategoryPosts = allPosts.filter(p => p.slug !== post.slug && p.category === post.category);
+  const otherPosts = allPosts.filter(p => p.slug !== post.slug && p.category !== post.category);
   const morePosts = [...sameCategoryPosts, ...otherPosts].slice(0, 3);
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": post.title,
-    "description": post.excerpt,
-    "image": post.coverImage,
-    "datePublished": post.createdAt,
-    "author": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://saharaprinter.com" },
-    "publisher": { "@type": "Organization", "name": "Sahara Office Equipments", "logo": { "@type": "ImageObject", "url": "https://saharaprinter.com/images/sahara-navbar-logo.webp" } },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://saharaprinter.com/blogs/${slug}` },
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://saharaprinter.com/blogs/" },
-      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://saharaprinter.com/blogs/${slug}/` },
-    ],
-  };
 
   return (
     <main className="min-h-screen bg-[#071325]">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Header />
 
       <section className="relative pt-32 pb-16 px-8 lg:px-24 overflow-hidden">
@@ -137,7 +73,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
       </section>
 
       <section className="px-8 lg:px-24 pb-16">
-        <BlogInternalLinks currentSlug={slug} allPosts={allPosts} />
+        <BlogInternalLinks currentSlug={post.slug} allPosts={allPosts} linkConfig={linkConfig} />
       </section>
 
       <section className="py-16 px-8 bg-[#101c2e]">
@@ -197,7 +133,6 @@ export default function BlogPostClient({ slug }: { slug: string }) {
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
-      <MobileNav />
     </main>
   );
 }

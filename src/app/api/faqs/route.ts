@@ -16,6 +16,7 @@ const CACHE_CONTROL = { 'Cache-Control': 'no-store, max-age=0' };
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const pageSlug = searchParams.get('pageSlug');
+  const all = searchParams.get('all') === 'true';
   const db = getDB();
 
   if (!db) {
@@ -23,9 +24,10 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    const activeFilter = all ? '' : ' AND isActive = 1';
     const sql = pageSlug
-      ? 'SELECT * FROM faqs WHERE isActive = 1 AND pageSlug = ? ORDER BY sortOrder ASC'
-      : 'SELECT * FROM faqs WHERE isActive = 1 ORDER BY sortOrder ASC';
+      ? `SELECT * FROM faqs WHERE pageSlug = ?${activeFilter} ORDER BY sortOrder ASC`
+      : `SELECT * FROM faqs WHERE 1=1${activeFilter} ORDER BY sortOrder ASC`;
     const result = pageSlug
       ? await db.prepare(sql).bind(pageSlug).all()
       : await db.prepare(sql).all();

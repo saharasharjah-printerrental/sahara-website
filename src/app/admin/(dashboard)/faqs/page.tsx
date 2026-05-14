@@ -1,7 +1,5 @@
 "use client";
 
-export const runtime = 'edge';
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 
@@ -53,42 +51,94 @@ export default function AdminFAQs() {
   const [showModal, setShowModal] = useState(false);
   const [editingFAQ, setEditingFAQ] = useState<FAQ | null>(null);
   const [filterPage, setFilterPage] = useState<string>("all");
+  const [loading, setLoading] = useState(true);
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_faqs");
-    if (stored) {
-      setFAQs(JSON.parse(stored));
-    } else {
-      setFAQs(defaultFAQs);
-      localStorage.setItem("sahara_faqs", JSON.stringify(defaultFAQs));
-    }
+    fetchFAQs();
   }, []);
 
-  const saveFAQs = (newFAQs: FAQ[]) => {
-    setFAQs(newFAQs);
-    localStorage.setItem("sahara_faqs", JSON.stringify(newFAQs));
-  };
-
-  const handleDelete = (id: string) => {
-    if (confirm("Delete this FAQ?")) {
-      saveFAQs(faqs.filter(f => f.id !== id));
+  const fetchFAQs = async () => {
+    try {
+      const res = await fetch('/api/faqs?all=true');
+      const data = await res.json();
+      if (data.faqs && data.faqs.length > 0) {
+        const mapped = data.faqs.map((f: any) => ({
+          id: String(f.id),
+          question: f.question,
+          answer: f.answer,
+          pageSlug: f.pageSlug || '',
+          isActive: f.isActive === 1 || f.isActive === true,
+          sortOrder: f.sortOrder ?? 0,
+        }));
+        setFAQs(mapped);
+        localStorage.setItem("sahara_faqs", JSON.stringify(mapped));
+      } else if (data.error) {
+        const stored = localStorage.getItem("sahara_faqs");
+        setFAQs(stored ? JSON.parse(stored) : defaultFAQs);
+      } else {
+        const stored = localStorage.getItem("sahara_faqs");
+        setFAQs(stored ? JSON.parse(stored) : defaultFAQs);
+      }
+    } catch {
+      const stored = localStorage.getItem("sahara_faqs");
+      setFAQs(stored ? JSON.parse(stored) : defaultFAQs);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleToggle = (id: string) => {
-    saveFAQs(faqs.map(f => f.id === id ? { ...f, isActive: !f.isActive } : f));
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this FAQ?")) return;
+    try {
+      await fetch(`/api/faqs?id=${id}`, { method: 'DELETE' });
+    } catch (e) {
+      console.error('Delete failed:', e);
+    }
+    const updated = faqs.filter(f => f.id !== id);
+    setFAQs(updated);
+    localStorage.setItem("sahara_faqs", JSON.stringify(updated));
+    showToast('success', 'FAQ deleted');
   };
 
-  const handleSave = (faq: FAQ) => {
-    if (editingFAQ) {
-      saveFAQs(faqs.map(f => f.id === faq.id ? faq : f));
-    } else {
-      saveFAQs([...faqs, { ...faq, id: Date.now().toString() }]);
+  const handleToggle = async (id: string) => {
+    const faq = faqs.find(f => f.id === id);
+    if (!faq) return;
+    const updated = faqs.map(f => f.id === id ? { ...f, isActive: !f.isActive } : f);
+    setFAQs(updated);
+    localStorage.setItem("sahara_faqs", JSON.stringify(updated));
+    try {
+      await fetch('/api/faqs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...faq, isActive: faq.isActive ? 0 : 1 }),
+      });
+    } catch (e) {
+      console.error('Toggle failed:', e);
+    }
+  };
+
+  const handleSave = async (faq: FAQ) => {
+    const id = faq.id || Date.now().toString();
+    try {
+      const res = await fetch('/api/faqs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...faq, id, isActive: faq.isActive ? 1 : 0 }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        showToast('error', data.error || 'Failed to save to database');
+        return;
+      }
+    } catch {
+      showToast('error', 'Network error. Please try again.');
+      return;
     }
     setShowModal(false);
     setEditingFAQ(null);
     showToast('success', editingFAQ ? 'FAQ updated' : 'FAQ created');
+    fetchFAQs();
   };
 
   const filteredFAQs = filterPage === "all" ? faqs : faqs.filter(f => f.pageSlug === filterPage);
@@ -120,49 +170,58 @@ export default function AdminFAQs() {
           </div>
 
           <div className="glass-card rounded-2xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Question</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Page</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Status</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Order</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredFAQs.map((faq) => (
-                    <tr key={faq.id} className="border-b border-white/5">
-                      <td className="p-4">
-                        <p className="font-medium text-white">{faq.question}</p>
-                      </td>
-                      <td className="p-4 text-slate-300">
-                        <span className="px-3 py-1 rounded-full bg-[#101c2e] text-xs">
-                          {pageOptions.find(p => p.value === faq.pageSlug)?.label || faq.pageSlug}
-                        </span>
-                      </td>
-                      <td className="p-4">
-                        <button onClick={() => handleToggle(faq.id)} className={`px-3 py-1 rounded-full text-xs font-medium ${faq.isActive ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
-                          {faq.isActive ? "Active" : "Inactive"}
-                        </button>
-                      </td>
-                      <td className="p-4 text-slate-400">{faq.sortOrder}</td>
-                      <td className="p-4">
-                        <div className="flex gap-2">
-                          <button onClick={() => { setEditingFAQ(faq); setShowModal(true); }} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white">
-                            <span className="material-symbols-outlined text-sm">edit</span>
-                          </button>
-                          <button onClick={() => handleDelete(faq.id)} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-red-400">
-                            <span className="material-symbols-outlined text-sm">delete</span>
-                          </button>
-                        </div>
-                      </td>
+            {loading ? (
+              <div className="p-8 text-center text-slate-400">Loading FAQs...</div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-white/10">
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Question</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Page</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Status</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Order</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {filteredFAQs.map((faq) => (
+                      <tr key={faq.id} className="border-b border-white/5">
+                        <td className="p-4">
+                          <p className="font-medium text-white">{faq.question}</p>
+                        </td>
+                        <td className="p-4 text-slate-300">
+                          <span className="px-3 py-1 rounded-full bg-[#101c2e] text-xs">
+                            {pageOptions.find(p => p.value === faq.pageSlug)?.label || faq.pageSlug}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <button onClick={() => handleToggle(faq.id)} className={`px-3 py-1 rounded-full text-xs font-medium ${faq.isActive ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
+                            {faq.isActive ? "Active" : "Inactive"}
+                          </button>
+                        </td>
+                        <td className="p-4 text-slate-400">{faq.sortOrder}</td>
+                        <td className="p-4">
+                          <div className="flex gap-2">
+                            <button onClick={() => { setEditingFAQ(faq); setShowModal(true); }} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white">
+                              <span className="material-symbols-outlined text-sm">edit</span>
+                            </button>
+                            <button onClick={() => handleDelete(faq.id)} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-red-400">
+                              <span className="material-symbols-outlined text-sm">delete</span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {filteredFAQs.length === 0 && (
+                      <tr>
+                        <td colSpan={5} className="p-8 text-center text-slate-400">No FAQs found</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </main>

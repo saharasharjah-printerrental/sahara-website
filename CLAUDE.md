@@ -9,9 +9,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Core Commands
 ```bash
 npm run dev              # Start dev server (localhost:3000)
-npm run build            # Build for production (Next.js static export)
+npm run build            # Next.js production build (server/edge runtime — NOT static export)
+npm run build:cf         # Cloudflare build: npx @cloudflare/next-on-pages (outputs .vercel/output/static)
 npm run start            # Start production server locally
-npm run deploy           # Deploy static build to Cloudflare Pages
+npm run deploy           # Deploy .vercel/output/static to Cloudflare Pages (CI uses GitHub Desktop → CF auto-deploy)
 ```
 
 ### Testing Commands
@@ -104,12 +105,14 @@ Before committing, verify:
 
 2. **Build commands:**
    ```bash
-   npm run build               # Verify no errors (static export mode)
+   npm run build               # Verify no errors (Next.js server build)
+   npm run build:cf            # Cloudflare build — produces .vercel/output/static
    npm run start               # Test production locally
    ```
 
 3. **Post-build verification:**
-   - Check `.next/` folder exists (full static export)
+   - Check `.vercel/output/static/` exists (next-on-pages output that CF deploys)
+   - Confirm `.vercel/output/static/_routes.json` excludes `/_next/static/*` from the Worker
    - Verify homepage meta tags in browser DevTools
    - Run smoke test: `npm run test:smoke`
 

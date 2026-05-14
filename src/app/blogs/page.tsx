@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { getRequestContext } from '@cloudflare/next-on-pages';
 import BlogsClient from "@/components/BlogsClient";
 
 export const metadata: Metadata = {
@@ -19,7 +20,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+async function fetchInitialPosts() {
+  try {
+    const db = getRequestContext().env.DB as any;
+    const result = await db.prepare('SELECT id, title, slug, excerpt, image, category, publishedAt, createdAt FROM blogs WHERE isActive = 1 ORDER BY publishedAt DESC').all();
+    return (result?.results ?? []).map((b: any) => ({
+      id: String(b.id), title: b.title, slug: b.slug, excerpt: b.excerpt || '',
+      content: '', category: b.category || '', status: 'published',
+      coverImage: b.image || '', publishedAt: b.publishedAt || '', createdAt: b.createdAt || '',
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function BlogPage() {
+  const initialPosts = await fetchInitialPosts();
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -35,7 +51,7 @@ export default function BlogPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
-      <BlogsClient />
+      <BlogsClient initialPosts={initialPosts.length > 0 ? initialPosts : undefined} />
     </>
   );
 }

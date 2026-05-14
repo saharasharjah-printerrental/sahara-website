@@ -36,17 +36,18 @@ const defaultPosts: BlogPost[] = [
   { id: "11", title: "Stop Wasting Money on Printing", slug: "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits", excerpt: "Learn how to reduce printing waste and save money.", content: "Full content here...", category: "Tips", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1749638040/blogs/ldevdfienoa4ibffpix0.png", publishedAt: "6/11/2025", createdAt: "2025-06-11" },
 ];
 
-export default function BlogsClient() {
+export default function BlogsClient({ initialPosts }: { initialPosts?: BlogPost[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<BlogPost[]>(initialPosts ?? []);
+  const [loading, setLoading] = useState(!initialPosts);
 
   const searchQuery = searchParams.get("search") || "";
   const selectedCategory = searchParams.get("category") || "all";
 
   useEffect(() => {
+    if (initialPosts && initialPosts.length > 0) return; // already hydrated from server
     (async () => {
       try {
         const res = await fetch("/api/blogs/");

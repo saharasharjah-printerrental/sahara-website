@@ -14,6 +14,11 @@ interface Blog {
   category: string;
   isActive: number;
   publishedAt: string;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+  internal_links?: string;
+  schema_jsonld?: string;
 }
 
 function getDB() {
@@ -37,6 +42,12 @@ export async function GET(request: NextRequest) {
 
   try {
     const includeDrafts = searchParams.get('includeDrafts') === '1';
+    const id = searchParams.get('id');
+    if (id) {
+      const filter = includeDrafts ? '' : ' AND isActive = 1';
+      const result = await db.prepare(`SELECT * FROM blogs WHERE id = ?${filter}`).first(id);
+      return NextResponse.json({ blog: result }, { headers: CACHE_CONTROL });
+    }
     if (slug) {
       const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').first(slug);
       return NextResponse.json({ blog: result }, { headers: CACHE_CONTROL });
@@ -68,8 +79,8 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
 
     await db.prepare(`
-      INSERT OR REPLACE INTO blogs (id, title, slug, excerpt, content, image, author, category, isActive, publishedAt, createdAt)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT OR REPLACE INTO blogs (id, title, slug, excerpt, content, image, author, category, isActive, publishedAt, createdAt, meta_title, meta_description, meta_keywords, internal_links, schema_jsonld)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
       body.title,
@@ -81,7 +92,12 @@ export async function POST(request: NextRequest) {
       body.category || '',
       body.isActive ?? 1,
       body.publishedAt || now,
-      now
+      now,
+      body.meta_title || '',
+      body.meta_description || '',
+      body.meta_keywords || '',
+      body.internal_links || '',
+      body.schema_jsonld || ''
     );
 
     return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
