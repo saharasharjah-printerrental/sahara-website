@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import RichTextEditor from "@/components/admin/RichTextEditor";
@@ -39,22 +41,45 @@ export default function BlogEditorPage() {
   const categories = ["Guide", "Buying Guide", "News", "Tips", "Case Study", "Troubleshooting", "Finance", "Trends", "Insights"];
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_blogs");
-    if (stored) {
-      const allPosts: BlogPost[] = JSON.parse(stored);
-      // Migrate stale placeholder content to real content
-      const migrated = allPosts.map(p => {
-        const isPlaceholder = !p.content || p.content.trim() === "" || p.content === "Full content here...";
-        if (isPlaceholder && BLOG_CONTENT[p.slug]) return { ...p, content: BLOG_CONTENT[p.slug] };
-        return p;
-      });
-      setPosts(migrated);
+    const load = async () => {
+      // Try D1 first when editing an existing post
       if (postId) {
-        const post = migrated.find(p => p.id === postId);
-        if (post) setForm(post);
+        try {
+          const res = await fetch(`/api/blogs?id=${postId}&includeDrafts=1`);
+          const data = await res.json();
+          if (data.blog) {
+            const b = data.blog;
+            setForm({
+              id: String(b.id), title: b.title, slug: b.slug, excerpt: b.excerpt || '',
+              content: b.content || BLOG_CONTENT[b.slug] || '',
+              category: b.category || 'Guide',
+              status: b.isActive === 1 ? 'published' : 'draft',
+              coverImage: b.image || '', publishedAt: b.publishedAt || '', createdAt: b.createdAt || '',
+            });
+            setLoaded(true);
+            return;
+          }
+        } catch {}
       }
-    }
-    setLoaded(true);
+
+      // Fall back to localStorage
+      const stored = localStorage.getItem("sahara_blogs");
+      if (stored) {
+        const allPosts: BlogPost[] = JSON.parse(stored);
+        const migrated = allPosts.map(p => {
+          const isPlaceholder = !p.content || p.content.trim() === "" || p.content === "Full content here...";
+          if (isPlaceholder && BLOG_CONTENT[p.slug]) return { ...p, content: BLOG_CONTENT[p.slug] };
+          return p;
+        });
+        setPosts(migrated);
+        if (postId) {
+          const post = migrated.find(p => p.id === postId);
+          if (post) setForm(post);
+        }
+      }
+      setLoaded(true);
+    };
+    load();
   }, [postId]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

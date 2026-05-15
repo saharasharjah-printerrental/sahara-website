@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -324,7 +325,7 @@ export default function AMCPage() {
       </section>
 
       {/* ── Comparison Table: No AMC vs AMC vs Rental ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#050d1a]">
+      <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Decision Guide</span>
@@ -368,7 +369,7 @@ export default function AMCPage() {
       </section>
 
       {/* ── Plans ── */}
-      <section className="py-24 px-8 lg:px-24">
+      <section className="py-16 px-4 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">AMC Plans</span>
@@ -421,7 +422,7 @@ export default function AMCPage() {
       </section>
 
       {/* ── Industry Use Cases ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#101c2e]">
+      <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Industry Coverage</span>

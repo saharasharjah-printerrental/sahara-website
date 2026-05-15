@@ -1,141 +1,178 @@
-"use client";
+import type { Metadata } from "next";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 
-import { useState, useEffect } from "react";
+export const runtime = 'edge';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 import CountUp from "@/components/CountUp";
+import FAQAccordionClient from "@/components/FAQAccordionClient";
 import { Savings, Inventory2, BuildCircle, Emergency, Upgrade, Cancel, SupportAgent, Sync, Build, Verified, ExpandMore, Print, CheckCircle, LocationOn, HeadsetMic } from "@mui/icons-material";
 import Link from "next/link";
 
-export default function PrinterRentalPage() {
-  const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
+interface FAQItem { q: string; a: string; }
 
-  useEffect(() => {
-    const faqStored = localStorage.getItem("sahara_faqs");
-    if (faqStored) {
-      const allFaqs = JSON.parse(faqStored);
-      const pageFaqs = allFaqs.filter((f: any) => f.pageSlug === "services/printer-rental" && f.isActive)
-        .sort((a: any, b: any) => a.sortOrder - b.sortOrder)
-        .map((f: any) => ({ q: f.question, a: f.answer }));
-      setFaqs(pageFaqs.length > 0 ? pageFaqs : defaultFaqs);
-    } else {
-      setFaqs(defaultFaqs);
+const DEFAULT_FAQS: FAQItem[] = [
+  { q: "What is the minimum rental duration?", a: "We offer flexible rental periods starting from 3 months to 36 months. Short-term rentals are available for events and temporary needs." },
+  { q: "Is maintenance included in the rental?", a: "Yes, all our rental plans include comprehensive maintenance coverage. Our technicians perform regular servicing and emergency repairs at no additional cost." },
+  { q: "Can I upgrade my rented printer?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your equipment anytime during the contract based on your business needs." },
+  { q: "What brands do you offer for rental?", a: "We offer all major brands including HP, Canon, Brother, Ricoh, Xerox, Sharp, Kyocera, and Epson. Our fleet includes enterprise, mid-range, and budget options." },
+  { q: "Do you require a deposit?", a: "We offer zero deposit options for qualified businesses. Contact us to learn more about our deposit-free plans." },
+  { q: "What happens if the printer breaks down?", a: "All rentals include full maintenance and repair coverage. We aim for 4-hour emergency response for critical issues." },
+  { q: "Can I cancel my rental contract?", a: "Yes, we offer flexible terms with no exit fees. You can return or upgrade equipment at any time." },
+  { q: "Is toner included in the rental price?", a: "Yes! All our rental plans include unlimited genuine toner. No hidden costs for consumables." },
+  { q: "Do you offer short-term rentals?", a: "Yes, we offer short-term rentals for events, conferences, and temporary office needs. Contact us for daily and weekly rates." },
+  { q: "What areas do you serve?", a: "We serve all across UAE including Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah, and Al Ain." },
+];
+
+async function getFaqsFromD1(): Promise<FAQItem[]> {
+  try {
+    const env = getRequestContext().env as any;
+    if (!env?.DB) return DEFAULT_FAQS;
+    const result = await env.DB.prepare(
+      "SELECT question, answer FROM faqs WHERE pageSlug = ? AND isActive = 1 ORDER BY sortOrder ASC"
+    ).bind("services/printer-rental").all();
+    if (result?.results?.length > 0) {
+      return result.results.map((r: any) => ({ q: r.question, a: r.answer }));
     }
-  }, []);
+    return DEFAULT_FAQS;
+  } catch {
+    return DEFAULT_FAQS;
+  }
+}
 
-  const defaultFaqs = [
-    { q: "What is the minimum rental duration?", a: "We offer flexible rental periods starting from 3 months to 36 months. Short-term rentals are available for events and temporary needs." },
-    { q: "Is maintenance included in the rental?", a: "Yes, all our rental plans include comprehensive maintenance coverage. Our technicians perform regular servicing and emergency repairs at no additional cost." },
-    { q: "Can I upgrade my rented printer?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your equipment anytime during the contract based on your business needs." },
-    { q: "What brands do you offer for rental?", a: "We offer all major brands including HP, Canon, Brother, Ricoh, Xerox, Sharp, Kyocera, and Epson. Our fleet includes enterprise, mid-range, and budget options." },
-    { q: "Do you require a deposit?", a: "We offer zero deposit options for qualified businesses. Contact us to learn more about our deposit-free plans." },
-    { q: "What happens if the printer breaks down?", a: "All rentals include full maintenance and repair coverage. We aim for 4-hour emergency response for critical issues." },
-    { q: "Can I cancel my rental contract?", a: "Yes, we offer flexible terms with no exit fees. You can return or upgrade equipment at any time." },
-    { q: "Is toner included in the rental price?", a: "Yes! All our rental plans include unlimited genuine toner. No hidden costs for consumables." },
-    { q: "Do you offer short-term rentals?", a: "Yes, we offer short-term rentals for events, conferences, and temporary office needs. Contact us for daily and weekly rates." },
-    { q: "What areas do you serve?", a: "We serve all across UAE including Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah, and Al Ain." },
-  ];
-
-  const benefits = [
-    { icon: Savings, title: "Zero Deposit Option", desc: "No upfront security deposit required. Start renting with minimal initial investment." },
-    { icon: Inventory2, title: "Unlimited Free Toner", desc: "All plans include genuine OEM toner at no extra cost. Never worry about consumables again." },
-    { icon: BuildCircle, title: "Full Maintenance Included", desc: "Comprehensive servicing, repairs, and preventive maintenance covered in your rental." },
-    { icon: Emergency, title: "4-Hour Emergency Response", desc: "Critical issues get resolved within 4 hours. Keep your business running without downtime." },
-    { icon: Upgrade, title: "Upgrade Anytime Policy", desc: "Scale up your equipment as your business grows. Upgrade without heavy termination fees." },
-    { icon: Cancel, title: "No Exit Fees", desc: "Flexible contracts with no hidden termination fees. Return or upgrade easily." },
-    { icon: SupportAgent, title: "24/7 Technical Support", desc: "Round-the-clock assistance from certified technicians across all UAE locations." },
-  ];
-
-  const pricingTiers = [
-    { tier: "A4 Desktop", range: "AED 250-400/mo", desc: "Ideal for small offices, 1-10 users" },
-    { tier: "A3 Mid-Range", range: "AED 500-800/mo", desc: "Perfect for medium offices, 10-30 users" },
-    { tier: "A3 Enterprise", range: "AED 1000-2000/mo", desc: "High-volume for large organizations" },
-  ];
-
-  const process = [
-    { step: "1", title: "Choose Your Machine", desc: "Select from our wide range of printers and photocopiers based on your needs." },
-    { step: "2", title: "Get Quote Within 2 Hours", desc: "Our team provides a detailed quote tailored to your requirements." },
-    { step: "3", title: "Same-Day Delivery & Setup", desc: "We deliver and install your equipment at no extra cost." },
-    { step: "4", title: "Ongoing Support", desc: "Enjoy unlimited toner, maintenance, and 24/7 technical support." },
-  ];
-
-  const rentVsBuyRows = [
-    { factor: "Upfront Investment", renting: "AED 0 — zero deposit", buying: "AED 8,000–25,000+ per machine" },
-    { factor: "Monthly Cost", renting: "AED 250–2,000 all-inclusive", buying: "Unpredictable: parts + toner + AMC" },
-    { factor: "Toner & Consumables", renting: "Unlimited OEM toner included", buying: "You pay per cartridge (~AED 200–800)" },
-    { factor: "Maintenance & Repairs", renting: "Free — covered in rental", buying: "Paid AMC or break-fix costs" },
-    { factor: "Technology Upgrades", renting: "Upgrade anytime, no penalty", buying: "Resell & repurchase at full cost" },
-    { factor: "Cash Flow Impact", renting: "Operational expense (OPEX)", buying: "Capital expense (CAPEX) — balance sheet" },
-    { factor: "Response to Breakdown", renting: "4-hr on-site + loaner machine", buying: "Depends on AMC or your IT team" },
-    { factor: "End of Life Disposal", renting: "Sahara handles it — eco-friendly", buying: "E-waste disposal cost is yours" },
-  ];
-
-  const freeZones = [
-    "JAFZA (Dubai)", "SAIF Zone (Sharjah)", "DAFZA (Dubai Airport)", "DMCC (JLT)",
-    "DIFC", "Dubai Silicon Oasis", "ICAD I (Abu Dhabi)", "Al Reem Island",
-    "Mussafah Industrial", "Dubai Media City", "Dubai Internet City", "KEZAD"
-  ];
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Printer Rental Services UAE",
-    "alternateName": "Photocopier Rental Dubai",
-    "description": "Flexible printer and photocopier rental services in Dubai, Sharjah, Abu Dhabi and across UAE. Zero deposit, unlimited toner, full maintenance included. Plans from AED 250/month.",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Sahara Office Equipments",
-      "legalName": "Sahara Office Equipment Trading LLC",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Al Arabi Building, Industrial Area 11",
-        "addressLocality": "Sharjah",
-        "addressCountry": "AE",
-        "postalCode": "47373"
-      },
-      "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
-      "telephone": "+971503823969",
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
-    },
-    "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain", "JAFZA", "SAIF Zone", "DAFZA"],
-    "serviceType": "Printer Rental",
-    "offers": {
-      "@type": "AggregateOffer",
-      "lowPrice": "250",
-      "highPrice": "2000",
-      "priceCurrency": "AED",
-      "offerCount": "3"
-    }
-  };
-
-  const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Rent a Printer",
-    "step": [
-      { "@type": "HowToStep", "name": "Choose Your Machine", "text": "Select from our wide range of printers and photocopiers based on your needs." },
-      { "@type": "HowToStep", "name": "Get Quote Within 2 Hours", "text": "Our team provides a detailed quote tailored to your requirements." },
-      { "@type": "HowToStep", "name": "Same-Day Delivery & Setup", "text": "We deliver and install your equipment at no extra cost." },
-      { "@type": "HowToStep", "name": "Ongoing Support", "text": "Enjoy unlimited toner, maintenance, and 24/7 technical support." }
-    ]
-  };
-
+export async function generateMetadata(): Promise<Metadata> {
+  const faqs = await getFaqsFromD1();
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
   };
 
+  return {
+    title: "Printer Rental UAE | AED 250/mo | Zero Deposit | Free Toner | Sahara",
+    description: "Printer rental in the UAE from AED 250/month. Zero deposit, unlimited OEM toner, full maintenance. Canon, Kyocera, HP. Serving Dubai, Abu Dhabi, Sharjah, RAK, Fujairah & Al Ain. ☎ +971503823969",
+    keywords: "printer rental uae, photocopier rental dubai, copier lease uae, printer rental sharjah, zero deposit printer rental uae, canon printer uae, kyocera photocopier uae",
+    openGraph: {
+      title: "Printer Rental UAE | Sahara Office Equipments",
+      description: "Printer and photocopier rental across UAE from AED 250/month. Zero deposit, free toner, full maintenance. Canon, Kyocera, HP, Ricoh. Dubai, Sharjah, Abu Dhabi.",
+      images: [{ url: "https://www.saharaprinter.com/images/og-sahara-printer-rental-dubai-uae.jpg", width: 1200, height: 630, alt: "Printer Rental UAE Dubai — Sahara Office Equipments. Professional Canon, Kyocera, HP enterprise photocopiers on flexible monthly rental with zero deposit and free toner." }],
+      url: "https://www.saharaprinter.com/services/printer-rental",
+      siteName: "Sahara Office Equipments",
+      locale: "en_AE",
+      type: "website",
+    },
+    alternates: { canonical: "https://www.saharaprinter.com/services/printer-rental/" },
+    other: {
+      "script:ld+json": JSON.stringify(faqSchema),
+    },
+};
+}
+
+const benefits = [
+  { icon: Savings, title: "Zero Deposit Option", desc: "No upfront security deposit required. Start renting with minimal initial investment." },
+  { icon: Inventory2, title: "Unlimited Free Toner", desc: "All plans include genuine OEM toner at no extra cost. Never worry about consumables again." },
+  { icon: BuildCircle, title: "Full Maintenance Included", desc: "Comprehensive servicing, repairs, and preventive maintenance covered in your rental." },
+  { icon: Emergency, title: "4-Hour Emergency Response", desc: "Critical issues get resolved within 4 hours. Keep your business running without downtime." },
+  { icon: Upgrade, title: "Upgrade Anytime Policy", desc: "Scale up your equipment as your business grows. Upgrade without heavy termination fees." },
+  { icon: Cancel, title: "No Exit Fees", desc: "Flexible contracts with no hidden termination fees. Return or upgrade easily." },
+  { icon: SupportAgent, title: "24/7 Technical Support", desc: "Round-the-clock assistance from certified technicians across all UAE locations." },
+];
+
+const pricingTiers = [
+  { tier: "A4 Desktop", range: "AED 250-400/mo", desc: "Ideal for small offices, 1-10 users" },
+  { tier: "A3 Mid-Range", range: "AED 500-800/mo", desc: "Perfect for medium offices, 10-30 users" },
+  { tier: "A3 Enterprise", range: "AED 1000-2000/mo", desc: "High-volume for large organizations" },
+];
+
+const process = [
+  { step: "1", title: "Choose Your Machine", desc: "Select from our wide range of printers and photocopiers based on your needs." },
+  { step: "2", title: "Get Quote Within 2 Hours", desc: "Our team provides a detailed quote tailored to your requirements." },
+  { step: "3", title: "Same-Day Delivery & Setup", desc: "We deliver and install your equipment at no extra cost." },
+  { step: "4", title: "Ongoing Support", desc: "Enjoy unlimited toner, maintenance, and 24/7 technical support." },
+];
+
+const rentVsBuyRows = [
+  { factor: "Upfront Investment", renting: "AED 0 — zero deposit", buying: "AED 8,000–25,000+ per machine" },
+  { factor: "Monthly Cost", renting: "AED 250–2,000 all-inclusive", buying: "Unpredictable: parts + toner + AMC" },
+  { factor: "Toner & Consumables", renting: "Unlimited OEM toner included", buying: "You pay per cartridge (~AED 200–800)" },
+  { factor: "Maintenance & Repairs", renting: "Free — covered in rental", buying: "Paid AMC or break-fix costs" },
+  { factor: "Technology Upgrades", renting: "Upgrade anytime, no penalty", buying: "Resell & repurchase at full cost" },
+  { factor: "Cash Flow Impact", renting: "Operational expense (OPEX)", buying: "Capital expense (CAPEX) — balance sheet" },
+  { factor: "Response to Breakdown", renting: "4-hr on-site + loaner machine", buying: "Depends on AMC or your IT team" },
+  { factor: "End of Life Disposal", renting: "Sahara handles it — eco-friendly", buying: "E-waste disposal cost is yours" },
+];
+
+const freeZones = [
+  "JAFZA (Dubai)", "SAIF Zone (Sharjah)", "DAFZA (Dubai Airport)", "DMCC (JLT)",
+  "DIFC", "Dubai Silicon Oasis", "ICAD I (Abu Dhabi)", "Al Reem Island",
+  "Mussafah Industrial", "Dubai Media City", "Dubai Internet City", "KEZAD"
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Printer Rental Services UAE",
+  "alternateName": "Photocopier Rental Dubai",
+  "description": "Flexible printer and photocopier rental services in Dubai, Sharjah, Abu Dhabi and across UAE. Zero deposit, unlimited toner, full maintenance included. Plans from AED 250/month.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Sahara Office Equipments",
+    "legalName": "Sahara Office Equipment Trading LLC",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Al Arabi Building, Industrial Area 11",
+      "addressLocality": "Sharjah",
+      "addressCountry": "AE",
+      "postalCode": "47373"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
+    "telephone": "+971503823969",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
+  },
+  "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain", "JAFZA", "SAIF Zone", "DAFZA"],
+  "serviceType": "Printer Rental",
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "250",
+    "highPrice": "2000",
+    "priceCurrency": "AED",
+    "offerCount": "3"
+  }
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Rent a Printer",
+  "step": [
+    { "@type": "HowToStep", "name": "Choose Your Machine", "text": "Select from our wide range of printers and photocopiers based on your needs." },
+    { "@type": "HowToStep", "name": "Get Quote Within 2 Hours", "text": "Our team provides a detailed quote tailored to your requirements." },
+    { "@type": "HowToStep", "name": "Same-Day Delivery & Setup", "text": "We deliver and install your equipment at no extra cost." },
+    { "@type": "HowToStep", "name": "Ongoing Support", "text": "Enjoy unlimited toner, maintenance, and 24/7 technical support." }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": DEFAULT_FAQS.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
+};
+
+export default function PrinterRentalPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
@@ -343,7 +380,7 @@ export default function PrinterRentalPage() {
       </section>
 
       {/* Features */}
-      <section className="py-24 px-8 lg:px-24 bg-[#101c2e]">
+      <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -443,7 +480,7 @@ export default function PrinterRentalPage() {
       </section>
 
       {/* ── Rent vs Buy Comparison ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#050d1a]">
+      <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Decision Guide</span>
@@ -558,31 +595,10 @@ export default function PrinterRentalPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-8 max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
-        <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <details 
-              key={i} 
-              className="rounded-2xl p-6 group cursor-pointer"
-              style={{
-                background: 'linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)',
-                boxShadow: '6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)',
-              }}
-              open={i === 0}
-            >
-              <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
-                {faq.q}
-                <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
-              </summary>
-              <p className="mt-4 text-[#d3c5b0] leading-relaxed">{faq.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <FAQAccordionClient defaultFaqs={DEFAULT_FAQS} pageSlug="services/printer-rental" />
 
       {/* From Our Blog — Internal Link Cluster */}
-      <section className="py-24 px-8 lg:px-24 bg-[#0a1628]">
+      <section className="py-16 px-4 lg:px-12 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Resource Hub</span>

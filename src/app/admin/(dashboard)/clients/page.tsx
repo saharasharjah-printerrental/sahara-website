@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { CloudUpload, Delete, Edit, Link as LinkIcon, Add } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
@@ -118,6 +120,7 @@ export default function AdminClients() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showActiveOnly, setShowActiveOnly] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => { fetchClients(); }, []);
@@ -140,12 +143,7 @@ export default function AdminClients() {
         else setClients(defaultClients);
       } else {
         const stored = localStorage.getItem("sahara_clients");
-        if (stored) {
-          setClients(JSON.parse(stored));
-        } else {
-          setClients(defaultClients);
-          await seedDefaultClients(defaultClients);
-        }
+        setClients(stored ? JSON.parse(stored) : defaultClients);
       }
     } catch {
       const stored = localStorage.getItem("sahara_clients");
@@ -204,20 +202,49 @@ export default function AdminClients() {
     saveClients(clients.map(c => c.id === id ? updated : c));
   };
 
-  const handleSave = async (client: Client) => {
+  const handleBulkDelete = async () => {
+    if (selectedIds.size === 0) return;
+    if (!confirm(`Delete ${selectedIds.size} selected client(s)?`)) return;
+    const ids = Array.from(selectedIds);
     try {
-      const ok = await syncToAPI(client);
+      await fetch(`${API_BASE}/clients?ids=${ids.join(',')}`, { method: 'DELETE' });
+    } catch { /* continue with local */ }
+    saveClients(clients.filter(c => !selectedIds.has(c.id)));
+    setSelectedIds(new Set());
+    showToast('success', `${ids.length} client(s) deleted`);
+  };
+
+  const toggleSelect = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === filteredClients.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(filteredClients.map(c => c.id)));
+    }
+  };
+
+  const handleSave = async (client: Client) => {
+    const id = editingClient ? client.id : Date.now().toString();
+    const finalClient = { ...client, id };
+    try {
+      const ok = await syncToAPI(finalClient);
       if (!ok) { showToast('error', 'Failed to save to database'); return; }
     } catch { showToast('error', 'Network error. Please try again.'); return; }
     if (editingClient) {
-      saveClients(clients.map(c => c.id === client.id ? client : c));
+      saveClients(clients.map(c => c.id === client.id ? finalClient : c));
     } else {
-      saveClients([...clients, { ...client, id: Date.now().toString() }]);
+      saveClients([...clients, finalClient]);
     }
     setShowModal(false);
     setEditingClient(null);
     showToast('success', editingClient ? 'Client updated' : 'Client added');
-    // Re-fetch to confirm persistence
     await fetchClients();
   };
 
@@ -267,21 +294,49 @@ export default function AdminClients() {
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
             </div>
             <label className="flex items-center gap-2 cursor-pointer bg-[#101c2e] border border-white/10 rounded-xl px-4 py-3">
-              <input 
-                type="checkbox" 
-                checked={showActiveOnly} 
-                onChange={(e) => setShowActiveOnly(e.target.checked)} 
-                className="w-4 h-4 rounded" 
+              <input
+                type="checkbox"
+                checked={showActiveOnly}
+                onChange={(e) => setShowActiveOnly(e.target.checked)}
+                className="w-4 h-4 rounded"
               />
               <span className="text-slate-300">Active only</span>
             </label>
+            <label className="flex items-center gap-2 cursor-pointer bg-[#101c2e] border border-white/10 rounded-xl px-4 py-3">
+              <input
+                type="checkbox"
+                checked={filteredClients.length > 0 && selectedIds.size === filteredClients.length}
+                onChange={toggleSelectAll}
+                className="w-4 h-4 rounded"
+              />
+              <span className="text-slate-300">Select all</span>
+            </label>
           </div>
+
+          {selectedIds.size > 0 && (
+            <div className="flex items-center gap-4 mb-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+              <span className="text-red-400 text-sm font-medium">{selectedIds.size} selected</span>
+              <button
+                onClick={handleBulkDelete}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 text-sm font-medium transition-colors"
+              >
+                <Delete sx={{ fontSize: 16 }} />
+                Delete selected
+              </button>
+              <button
+                onClick={() => setSelectedIds(new Set())}
+                className="px-4 py-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white text-sm transition-colors"
+              >
+                Clear
+              </button>
+            </div>
+          )}
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {filteredClients.map((client, index) => (
-              <div 
-                key={client.id} 
-                className={`glass-card rounded-2xl p-4 relative group ${!client.isActive ? 'opacity-50' : ''}`}
+              <div
+                key={client.id}
+                className={`glass-card rounded-2xl p-4 relative group ${!client.isActive ? 'opacity-50' : ''} ${selectedIds.has(client.id) ? 'ring-2 ring-[#f5be53]' : ''}`}
                 draggable
                 onDragStart={(e) => e.dataTransfer.setData("index", index.toString())}
                 onDragOver={(e) => e.preventDefault()}
@@ -290,6 +345,13 @@ export default function AdminClients() {
                   if (fromIndex !== index) handleReorder(fromIndex, index);
                 }}
               >
+                <input
+                  type="checkbox"
+                  checked={selectedIds.has(client.id)}
+                  onChange={() => toggleSelect(client.id)}
+                  className="absolute top-2 left-2 w-4 h-4 rounded cursor-pointer z-10"
+                  onClick={(e) => e.stopPropagation()}
+                />
                 <div className="aspect-square rounded-xl bg-white/5 flex items-center justify-center mb-3 overflow-hidden">
                   {client.logoUrl ? (
                     <img src={client.logoUrl} alt={client.name} className="w-full h-full object-contain p-2" />

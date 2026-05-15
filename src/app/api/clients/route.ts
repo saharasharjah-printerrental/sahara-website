@@ -66,7 +66,17 @@ export async function DELETE(request: NextRequest) {
 
   try {
     const { searchParams } = new URL(request.url);
+    const ids = searchParams.get('ids');
     const id = searchParams.get('id');
+
+    if (ids) {
+      // Bulk delete: ?ids=a,b,c
+      const idList = ids.split(',').map(s => s.trim()).filter(Boolean);
+      if (idList.length === 0) return NextResponse.json({ error: 'No IDs provided' }, { status: 400 });
+      await db.batch(idList.map(i => db.prepare('DELETE FROM clients WHERE id = ?').bind(i)));
+      return NextResponse.json({ success: true, deleted: idList.length });
+    }
+
     if (!id) return NextResponse.json({ error: 'Client ID required' }, { status: 400 });
     await db.prepare('DELETE FROM clients WHERE id = ?').run(id);
     return NextResponse.json({ success: true });

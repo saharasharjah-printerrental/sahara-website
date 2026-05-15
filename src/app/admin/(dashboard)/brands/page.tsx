@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 
@@ -103,23 +105,26 @@ export default function AdminBrands() {
   };
 
   const handleSave = async (brand: Brand) => {
+    const id = editingBrand ? brand.id : Date.now().toString();
+    const finalBrand = { ...brand, id };
     try {
-      await fetch(`${API_BASE}/brands`, {
+      const res = await fetch(`${API_BASE}/brands`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...brand,
-          isActive: brand.isActive ? 1 : 0
-        })
+        body: JSON.stringify({ ...finalBrand, isActive: finalBrand.isActive ? 1 : 0 }),
       });
+      if (!res.ok) {
+        showToast('error', 'Failed to save brand to database');
+        return;
+      }
     } catch (e) {
-      console.log('API not available');
+      showToast('error', 'Network error. Please try again.');
+      return;
     }
-    
     if (editingBrand) {
-      saveBrands(brands.map(b => b.id === brand.id ? brand : b));
+      saveBrands(brands.map(b => b.id === brand.id ? finalBrand : b));
     } else {
-      saveBrands([...brands, { ...brand, id: Date.now().toString() }]);
+      saveBrands([...brands, finalBrand]);
     }
     setShowModal(false);
     setEditingBrand(null);

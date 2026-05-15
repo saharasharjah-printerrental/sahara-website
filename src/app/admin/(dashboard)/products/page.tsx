@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 
@@ -152,15 +154,17 @@ export default function AdminProducts() {
   };
 
   const handleSave = async (product: Product) => {
+    const id = editingProduct ? product.id : Date.now().toString();
+    const finalProduct = { ...product, id };
     try {
       const res = await fetch(`${API_BASE}/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...product,
-          specs: product.specs.join('|'),
-          isActive: product.isActive ? 1 : 0,
-          isFeatured: product.isFeatured ? 1 : 0
+          ...finalProduct,
+          specs: finalProduct.specs.join('|'),
+          isActive: finalProduct.isActive ? 1 : 0,
+          isFeatured: finalProduct.isFeatured ? 1 : 0,
         })
       });
       const data = await res.json();
@@ -172,11 +176,10 @@ export default function AdminProducts() {
       showToast('error', 'Network error. Please try again.');
       return;
     }
-    
     if (editingProduct) {
-      saveProducts(products.map(p => p.id === product.id ? product : p));
+      saveProducts(products.map(p => p.id === product.id ? finalProduct : p));
     } else {
-      saveProducts([...products, { ...product, id: Date.now().toString() }]);
+      saveProducts([...products, finalProduct]);
     }
     setShowModal(false);
     setEditingProduct(null);

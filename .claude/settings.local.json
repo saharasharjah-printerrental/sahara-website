@@ -101,7 +101,42 @@
       "Bash(netstat -ano)",
       "Bash(findstr \"LISTENING\")",
       "Bash(findstr \":8080 :5173 :3000\")",
-      "PowerShell(Get-NetTCPConnection *)"
+      "PowerShell(Get-NetTCPConnection *)",
+      "Bash(npx -y @agent-browser-io/browser mcp)",
+      "PowerShell(npx -y @agent-browser-io/browser-mcp 2>&1)",
+      "PowerShell(npx -y @anthropic-ai/mcp-browser 2>&1 | Select-Object -First 10)",
+      "PowerShell(npm search *)",
+      "PowerShell(npx -y agent-browser-mcp 2>&1)",
+      "Bash(npx -y agent-browser-mcp --version)",
+      "PowerShell(npx -y agent-browser-mcp --version 2>&1)",
+      "PowerShell(Start-Sleep -Seconds 3; Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing | Select-Object StatusCode)",
+      "PowerShell(netstat *)",
+      "mcp__agent-browser__browser_new_session",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/sitemap.xml\" -UseBasicParsing | Select-Object StatusCode, Content)",
+      "mcp__MCP_DOCKER__browser_install",
+      "mcp__MCP_DOCKER__n8n_health_check",
+      "mcp__MCP_DOCKER__tools_documentation",
+      "PowerShell(wrangler login *)",
+      "PowerShell(Out-Null *)",
+      "PowerShell(curl *)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(npx wrangler whoami)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\\\\src\\\\app\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(Format-Table -HideTableHeaders)",
+      "mcp__MCP_DOCKER__browser_evaluate",
+      "PowerShell($token = \"bdrhH6-2EDOYDINJ_QjZ4b4RJaLy_yo9rSI21hHLoE4.5I7a5mQYzv0tyBCVuwnZER5SEkMv_1Ep4qVvBuThJQM\"; $accountId = \"034ddee1699595a19ee79f688de3b421\"; $project = \"saharaprinter\"; $response = Invoke-RestMethod -Uri \"https://api.cloudflare.com/client/v4/accounts/$accountId/pages/projects/$project\" -Headers @{ \"Authorization\" = \"Bearer $token\" } -Method GET; $response.result | ConvertTo-Json -Depth 5 2>&1 | Select-Object -First 80)",
+      "mcp__MCP_DOCKER__browser_network_requests",
+      "mcp__MCP_DOCKER__browser_take_screenshot",
+      "PowerShell($pkg = Get-Content \"C:\\\\Users\\\\SAHARA\\\\Downloads\\\\stitch_sahara_printer_website\\\\sahara-website\\\\package.json\" | ConvertFrom-Json; $pkg.scripts)",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://www.saharaprinter.com/\" -UseBasicParsing; $response.Content | Select-String \"_next/static/chunks\" -AllMatches | ForEach-Object { $_.Matches } | Select-Object -ExpandProperty Value | Sort-Object -Unique)",
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://www.saharaprinter.com/_next/static/chunks/polyfills-42372ed130431b0a.js\" -UseBasicParsing -ErrorAction SilentlyContinue; \"Status: $\\($r.StatusCode\\) | Cache-Control: $\\($r.Headers.'Cache-Control'\\)\"; $r = Invoke-WebRequest -Uri \"https://www.saharaprinter.com/_next/static/chunks/5964-4050cddb6b98762f.js\" -UseBasicParsing -ErrorAction SilentlyContinue; \"Status: $\\($r.StatusCode\\) | Cache-Control: $\\($r.Headers.'Cache-Control'\\)\")",
+      "mcp__MCP_DOCKER__browser_close"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "agent-browser"
+  ]
 }

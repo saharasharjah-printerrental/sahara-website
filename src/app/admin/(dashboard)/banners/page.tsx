@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 
@@ -56,19 +58,38 @@ export default function AdminBanners() {
     showToast('success', 'Banner deleted');
   };
 
-  const handleToggle = (id: string) => {
-    saveBanners(banners.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b));
-  };
-
-  const handleSave = async (banner: Banner) => {
-    const finalBanner = editingBanner ? banner : { ...banner, id: Date.now().toString() };
+  const handleToggle = async (id: string) => {
+    const banner = banners.find(b => b.id === id);
+    if (!banner) return;
+    const updated = banners.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b);
+    saveBanners(updated);
     try {
       await fetch('/api/banners', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...banner, isActive: !banner.isActive }),
+      });
+    } catch (e) { console.error('Toggle failed:', e); }
+  };
+
+  const handleSave = async (banner: Banner) => {
+    const id = editingBanner ? banner.id : Date.now().toString();
+    const finalBanner = { ...banner, id };
+    try {
+      const res = await fetch('/api/banners', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(finalBanner),
       });
-    } catch (e) { console.error('Save failed:', e); }
+      if (!res.ok) {
+        showToast('error', 'Failed to save banner to database');
+        return;
+      }
+    } catch (e) {
+      console.error('Save failed:', e);
+      showToast('error', 'Network error. Please try again.');
+      return;
+    }
     if (editingBanner) {
       saveBanners(banners.map(b => b.id === banner.id ? finalBanner : b));
     } else {

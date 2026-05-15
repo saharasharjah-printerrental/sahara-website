@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { Image as ImageIcon } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";

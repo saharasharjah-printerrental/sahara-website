@@ -43,11 +43,35 @@ export async function GET() {
   }
 
   try {
-    const result = await db.prepare('SELECT * FROM inquiries ORDER BY created_at DESC').all();
+    const result = await db.prepare('SELECT * FROM inquiries ORDER BY id DESC').all();
     return NextResponse.json({ inquiries: result?.results ?? [] });
   } catch (error) {
     console.error('Inquiries GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch inquiries', inquiries: [] }, { status: 500 });
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  const db = getDB();
+  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+
+  try {
+    const body = await request.json() as any;
+    const { id, status, notes } = body;
+    if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
+
+    if (status !== undefined && notes !== undefined) {
+      await db.prepare('UPDATE inquiries SET status = ?, notes = ? WHERE id = ?').run(status, notes, id);
+    } else if (status !== undefined) {
+      await db.prepare('UPDATE inquiries SET status = ? WHERE id = ?').run(status, id);
+    } else if (notes !== undefined) {
+      await db.prepare('UPDATE inquiries SET notes = ? WHERE id = ?').run(notes, id);
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Inquiries PATCH Error:', error);
+    return NextResponse.json({ error: 'Failed to update inquiry', details: String(error) }, { status: 500 });
   }
 }
 

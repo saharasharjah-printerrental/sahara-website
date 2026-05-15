@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 
@@ -16,6 +18,7 @@ interface SEOConfig {
   customHeadScripts: string;
   customBodyScripts: string;
   schemaMarkup: string;
+  organizationSchema: string;
   enableDevMode: boolean;
 }
 
@@ -32,6 +35,7 @@ const defaultConfig: SEOConfig = {
   customHeadScripts: "",
   customBodyScripts: "",
   schemaMarkup: "",
+  organizationSchema: "",
   enableDevMode: false,
 };
 
@@ -98,7 +102,24 @@ export default function AdminSEO() {
       customHeadScripts: config.customHeadScripts.trim(),
       customBodyScripts: config.customBodyScripts.trim(),
       schemaMarkup: config.schemaMarkup.trim(),
+      organizationSchema: config.organizationSchema.trim(),
     };
+
+    // Validate organizationSchema if provided
+    if (trimmed.organizationSchema) {
+      try {
+        const parsed = JSON.parse(trimmed.organizationSchema);
+        if (!parsed['@context'] || !parsed['@type']) {
+          setError('Organization schema must have "@context" and "@type" fields');
+          setSaving(false);
+          return;
+        }
+      } catch {
+        setError('Organization schema is not valid JSON. Fix it before saving.');
+        setSaving(false);
+        return;
+      }
+    }
 
     // Validate GA4 ID format if provided
     if (trimmed.googleAnalytics4Id && !/^G-[A-Z0-9]{10,}$/.test(trimmed.googleAnalytics4Id)) {
@@ -318,6 +339,17 @@ export default function AdminSEO() {
               </div>
             </section>
 
+            {/* Site-Wide Organization Schema */}
+            <section className="glass-card rounded-2xl p-6">
+              <div className="mb-4">
+                <h2 className="text-lg font-bold text-white">Site-Wide Organization Schema</h2>
+                <p className="text-sm text-slate-400 mt-1">
+                  This JSON-LD appears on every page. Leave empty to use the built-in default. Edit here to override.
+                </p>
+              </div>
+              <OrgSchemaEditor value={config.organizationSchema} onChange={(v) => set("organizationSchema", v)} />
+            </section>
+
             {/* Dev Mode */}
             <section className="glass-card rounded-2xl p-6">
               <div className="flex items-center justify-between">
@@ -349,6 +381,54 @@ export default function AdminSEO() {
           </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+function OrgSchemaEditor({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [valid, setValid] = useState<boolean | null>(null);
+
+  const validate = (text: string) => {
+    if (!text.trim()) { setValid(null); return; }
+    try {
+      const p = JSON.parse(text);
+      setValid(!!(p['@context'] && p['@type']));
+    } catch {
+      setValid(false);
+    }
+  };
+
+  const format = () => {
+    try {
+      const pretty = JSON.stringify(JSON.parse(value), null, 2);
+      onChange(pretty);
+      setValid(true);
+    } catch {
+      setValid(false);
+    }
+  };
+
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-2">
+        <button
+          type="button"
+          onClick={format}
+          className="px-3 py-1.5 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white text-sm transition-colors"
+        >
+          Format JSON
+        </button>
+        {valid === true && <span className="text-green-400 text-sm">Valid JSON-LD</span>}
+        {valid === false && <span className="text-red-400 text-sm">Invalid JSON or missing @context/@type</span>}
+        {value.trim() === '' && <span className="text-slate-500 text-sm">Using built-in default</span>}
+      </div>
+      <textarea
+        rows={12}
+        value={value}
+        onChange={(e) => { onChange(e.target.value); validate(e.target.value); }}
+        placeholder={'Leave empty to use built-in default schema.\n\nPaste your custom Organization JSON-LD here to override it.'}
+        className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white font-mono text-sm resize-y focus:border-[#f5be53] focus:outline-none placeholder:text-slate-500"
+      />
     </div>
   );
 }

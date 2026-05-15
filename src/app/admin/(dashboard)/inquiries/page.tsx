@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = 'edge';
+
 import { useState, useEffect } from "react";
 
 interface Inquiry {
@@ -59,12 +61,29 @@ export default function AdminInquiries() {
     localStorage.setItem("sahara_inquiries", JSON.stringify(newInquiries));
   };
 
-  const updateStatus = (id: string, status: string) => {
+  const updateStatus = async (id: string, status: string) => {
     saveInquiries(inquiries.map(i => i.id === id ? { ...i, status } : i));
+    try {
+      await fetch('/api/inquiries', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status }),
+      });
+    } catch (e) { console.error('Status update failed:', e); }
   };
 
   const updateNotes = (id: string, notes: string) => {
     saveInquiries(inquiries.map(i => i.id === id ? { ...i, notes } : i));
+  };
+
+  const saveNotes = async (id: string, notes: string) => {
+    try {
+      await fetch('/api/inquiries', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, notes }),
+      });
+    } catch (e) { console.error('Notes save failed:', e); }
   };
 
   const filteredInquiries = inquiries.filter(i => {
@@ -236,6 +255,7 @@ export default function AdminInquiries() {
                     <button
                       key={status}
                       onClick={() => { updateStatus(selectedInquiry.id, status); setSelectedInquiry({ ...selectedInquiry, status }); }}
+
                       className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-all ${
                         selectedInquiry.status === status
                           ? "bg-[#f5be53] text-[#412d00]"
@@ -252,10 +272,16 @@ export default function AdminInquiries() {
                 <p className="text-sm text-slate-400 mb-2">Notes</p>
                 <textarea
                   value={selectedInquiry.notes}
-                  onChange={(e) => updateNotes(selectedInquiry.id, e.target.value)}
+                  onChange={(e) => { updateNotes(selectedInquiry.id, e.target.value); setSelectedInquiry({ ...selectedInquiry, notes: e.target.value }); }}
                   placeholder="Add notes about this inquiry..."
                   className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-500 h-24"
                 />
+                <button
+                  onClick={() => saveNotes(selectedInquiry.id, selectedInquiry.notes)}
+                  className="mt-2 px-4 py-2 rounded-lg bg-[#f5be53] text-[#412d00] text-sm font-medium hover:bg-[#c8962e] transition-colors"
+                >
+                  Save Notes
+                </button>
               </div>
 
               <div className="flex gap-4 pt-4">

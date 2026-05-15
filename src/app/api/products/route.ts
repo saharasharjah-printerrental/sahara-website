@@ -11,6 +11,8 @@ function getDB() {
   }
 }
 
+const CACHE_CONTROL = { 'Cache-Control': 'no-store, max-age=0' };
+
 function makeSlug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
@@ -78,19 +80,19 @@ export async function GET(request: NextRequest) {
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({ error: 'Database not configured', products: [] });
+    return NextResponse.json({ error: 'Database not configured', products: [] }, { headers: CACHE_CONTROL });
   }
 
   try {
     if (id) {
       const result = await db.prepare('SELECT * FROM products WHERE id = ?').first(id);
-      return NextResponse.json({ products: result ? [dbRowToProduct(result)] : [] });
+      return NextResponse.json({ products: result ? [dbRowToProduct(result)] : [] }, { headers: CACHE_CONTROL });
     }
     let sql = 'SELECT * FROM products WHERE is_active = 1';
     if (featured === 'true') sql += ' AND is_featured = 1';
     sql += ' ORDER BY created_at DESC';
     const result = await db.prepare(sql).all();
-    return NextResponse.json({ products: (result?.results ?? []).map(dbRowToProduct) });
+    return NextResponse.json({ products: (result?.results ?? []).map(dbRowToProduct) }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Products GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch products', products: [] }, { status: 500 });

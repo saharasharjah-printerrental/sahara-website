@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BLOG_LINK_MAP, LINK_TYPE_COLORS, LINK_TYPE_LABELS } from "@/lib/internalLinks";
+import { BLOG_LINK_MAP, LINK_TYPE_COLORS, LINK_TYPE_LABELS, BlogLinkConfig } from "@/lib/internalLinks";
 
 interface BlogPost {
   id: string;
@@ -16,10 +16,11 @@ interface BlogPost {
 interface BlogInternalLinksProps {
   currentSlug: string;
   allPosts: BlogPost[];
+  linkConfig?: BlogLinkConfig | null;
 }
 
-export default function BlogInternalLinks({ currentSlug, allPosts }: BlogInternalLinksProps) {
-  const config = BLOG_LINK_MAP[currentSlug];
+export default function BlogInternalLinks({ currentSlug, allPosts, linkConfig }: BlogInternalLinksProps) {
+  const config = linkConfig ?? BLOG_LINK_MAP[currentSlug];
   if (!config) return null;
 
   const relatedPosts = config.relatedSlugs

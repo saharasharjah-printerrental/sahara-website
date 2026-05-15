@@ -7,17 +7,13 @@ import { execSync } from 'child_process';
 import { readFileSync, copyFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { platform } from 'os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
 const BASELINES_DIR = join(ROOT, 'tests/e2e/visual/baselines');
 const DIFFS_DIR = join(ROOT, 'tests/e2e/visual/diffs');
 
-const isWin = platform() === 'win32';
-const EXE = isWin
-  ? join(ROOT, 'node_modules', 'agent-browser', 'bin', 'agent-browser-win32-x64.exe')
-  : join(ROOT, 'node_modules', 'agent-browser', 'bin', 'agent-browser-linux-x64');
+const EXE = join(ROOT, 'node_modules', 'agent-browser', 'bin', 'agent-browser.js');
 
 function ab(cmd, session = 'ts-smoke') {
   const full = `"${EXE}" --session ${session} ${cmd}`;
@@ -110,7 +106,6 @@ async function main() {
   console.log('═══════════════════════════════════════════');
   console.log('  TypeScript Smoke Tests');
   console.log(`  Base: ${baseUrl}`);
-  console.log(`  OS: ${platform()}`);
   console.log('═══════════════════════════════════════════');
 
   ab('close --all');

@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -282,7 +283,7 @@ export default function RepairPage() {
       </section>
 
       {/* ── Common Problems We Fix ── */}
-      <section className="relative py-24 px-8 lg:px-24" style={{ background: '#050d1a' }}>
+      <section className="relative py-16 px-4 lg:px-12" style={{ background: '#050d1a' }}>
         {/* Circuit grid */}
         <div className="absolute inset-0 pointer-events-none" style={{
           backgroundImage: `linear-gradient(rgba(245,190,83,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,190,83,0.03) 1px, transparent 1px)`,
@@ -319,7 +320,7 @@ export default function RepairPage() {
       </section>
 
       {/* ── Brand Expertise ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#0a1425]">
+      <section className="py-16 px-4 lg:px-12 bg-[#0a1425]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Brand Expertise</span>
@@ -348,7 +349,7 @@ export default function RepairPage() {
       </section>
 
       {/* ── How It Works — Process Timeline ── */}
-      <section className="py-24 px-8 lg:px-24">
+      <section className="py-16 px-4 lg:px-12">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Process</span>
@@ -375,7 +376,7 @@ export default function RepairPage() {
       </section>
 
       {/* ── Industry Use Cases ── */}
-      <section className="py-24 px-8 lg:px-24 bg-[#101c2e]">
+      <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Who We Serve</span>

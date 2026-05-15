@@ -75,10 +75,14 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const storedBrands = localStorage.getItem("sahara_brands");
-    if (storedBrands) {
-      const parsed = JSON.parse(storedBrands).filter((b: any) => b.isActive);
-      setBrands(parsed.map((b: any) => ({ name: b.name, href: `/brands/${b.slug}` })));
+    try {
+      const storedBrands = localStorage.getItem("sahara_brands");
+      if (storedBrands) {
+        const parsed = JSON.parse(storedBrands).filter((b: any) => b.isActive);
+        setBrands(parsed.map((b: any) => ({ name: b.name, href: `/brands/${b.slug}` })));
+      }
+    } catch (e) {
+      localStorage.removeItem("sahara_brands");
     }
   }, []);
 
@@ -95,9 +99,14 @@ export default function Header() {
       .catch(console.error);
 
     // Fallback to localStorage
-    const storedSettings = localStorage.getItem("sahara_settings");
-    if (storedSettings) {
-      setSettings(JSON.parse(storedSettings));
+    try {
+      const storedSettings = localStorage.getItem("sahara_settings");
+      if (storedSettings) {
+        const parsed = JSON.parse(storedSettings);
+        if (parsed && typeof parsed === "object") setSettings(parsed);
+      }
+    } catch (e) {
+      localStorage.removeItem("sahara_settings");
     }
   }, []);
 

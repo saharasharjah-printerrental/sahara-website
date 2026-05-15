@@ -245,62 +245,6 @@ const organizationSchema = {
   }
 };
 
-// FAQPage Schema - for Google FAQ rich results
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much does printer rental cost in Dubai?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are the benefits of printer rental in UAE?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer printer rental in Abu Dhabi?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD with same-day delivery and 24/7 support."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What printer brands do you rent?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is toner included in printer rental?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — unlimited genuine OEM toner is included in all rental plans. We monitor levels remotely and replenish proactively."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you provide on-site repair services?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, our factory-certified technicians provide on-site repairs across all major service areas with a 4-hour response time for critical failures."
-      }
-    }
-  ]
-};
-
 interface ServerSEOConfig {
   googleAnalyticsId?: string;
   googleAnalytics4Id?: string;
@@ -312,6 +256,7 @@ interface ServerSEOConfig {
   customHeadScripts?: string;
   customBodyScripts?: string;
   schemaMarkup?: string;
+  organizationSchema?: string;
 }
 
 type ParsedScript = { src: string; isAsync: boolean } | { inline: string };
@@ -338,7 +283,15 @@ async function getSEOConfig(): Promise<ServerSEOConfig | null> {
     const db = (getRequestContext().env as any).DB;
     if (!db) return null;
     const row: any = await db.prepare("SELECT value FROM settings WHERE key = ?").bind("seo_config").first();
-    if (row?.value) return JSON.parse(row.value);
+    if (row?.value) {
+      const parsed: ServerSEOConfig = JSON.parse(row.value);
+      // Stored analytics IDs can carry stray whitespace — sanitize at the boundary
+      // so every consumer (inline script + noscript iframe) gets a clean value.
+      for (const k of ["googleAnalyticsId", "googleAnalytics4Id", "googleTagManagerId", "microsoftClarityId", "metaPixelId", "hotjarId"] as const) {
+        if (typeof parsed[k] === "string") (parsed as any)[k] = (parsed[k] as string).trim();
+      }
+      return parsed;
+    }
   } catch {}
   return null;
 }
@@ -359,12 +312,11 @@ export default async function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
         />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchema) }} />
 
         {/* Google Tag Manager */}
         {cfg?.googleTagManagerId && (
-          <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId}');` }} />
+          <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId.trim()}');` }} />
         )}
 
         {/* Google Analytics (UA + GA4) */}
