@@ -71,7 +71,7 @@ export default function AdminSupplies() {
 
   const fetchSupplies = async () => {
     try {
-      const res = await fetch('/api/supplies?all=true');
+      const res = await fetch('/api/supplies/?all=true');
       const data = await res.json();
       if (data.supplies && data.supplies.length > 0) {
         const mapped = data.supplies.map(mapSupply);
@@ -96,7 +96,7 @@ export default function AdminSupplies() {
     if (!confirm("Are you sure you want to delete this supply item?")) return;
     const row = supplies.find(s => s.id === id);
     try {
-      const res = await fetch(`/api/supplies?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/supplies/?id=${id}`, { method: 'DELETE' });
       if (res.ok && row?.image) await deleteRemoteImage(row.image);
     } catch (e) {
       console.error('Delete failed:', e);
@@ -113,7 +113,7 @@ export default function AdminSupplies() {
     setSupplies(updated);
     localStorage.setItem("sahara_supplies", JSON.stringify(updated));
     try {
-      await fetch('/api/supplies', {
+      await fetch('/api/supplies/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...supply, isActive: supply.isActive ? 0 : 1 }),
@@ -135,7 +135,7 @@ export default function AdminSupplies() {
     }
     const finalSupply = { ...supply, id, image: finalImage };
     try {
-      const res = await fetch('/api/supplies', {
+      const res = await fetch('/api/supplies/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...finalSupply, isActive: finalSupply.isActive ? 1 : 0 }),

@@ -133,7 +133,7 @@ export default function AdminSettings() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/api/settings?key=site_settings');
+        const res = await fetch('/api/settings/?key=site_settings');
         const data = await res.json();
         if (data.setting?.value) {
           const parsed = JSON.parse(data.setting.value);
@@ -177,7 +177,7 @@ export default function AdminSettings() {
     try {
       const results = await Promise.all(
         d1Entries.map(({ key, value }) =>
-          fetch("/api/settings", {
+          fetch("/api/settings/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ key, value }),

@@ -27,7 +27,7 @@ const initialBrands: Brand[] = [
   { id: "8", name: "Lexmark", slug: "lexmark", logoUrl: "/brands/lexmark.webp", description: "Lexmark enterprise printers", isActive: true, sortOrder: 8 },
 ];
 
-const API_BASE = '/api/';
+const API_BASE = '/api';
 
 export default function AdminBrands() {
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -42,7 +42,7 @@ export default function AdminBrands() {
 
   const fetchBrands = async () => {
     try {
-      const res = await fetch(`${API_BASE}/brands`);
+      const res = await fetch(`${API_BASE}/brands/`);
       const data = await res.json();
       
       if (data.brands && data.brands.length > 0) {
@@ -95,7 +95,7 @@ export default function AdminBrands() {
     const brand = brands.find(b => b.id === id);
     if (brand) {
       try {
-        await fetch(`${API_BASE}/brands`, {
+        await fetch(`${API_BASE}/brands/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...brand, isActive: brand.isActive ? 0 : 1 })
@@ -119,7 +119,7 @@ export default function AdminBrands() {
     }
     const finalBrand = { ...brand, id, logoUrl: finalLogoUrl };
     try {
-      const res = await fetch(`${API_BASE}/brands`, {
+      const res = await fetch(`${API_BASE}/brands/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...finalBrand, isActive: finalBrand.isActive ? 1 : 0 }),

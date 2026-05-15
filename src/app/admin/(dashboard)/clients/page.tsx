@@ -16,7 +16,7 @@ interface Client {
   sortOrder: number;
 }
 
-const API_BASE = '/api/';
+const API_BASE = '/api';
 
 const defaultClients: Client[] = [
   { id: "1", name: "Emirates Global Aluminium", logoUrl: "", website: "https://www.ega.com", isActive: true, sortOrder: 1 },
@@ -128,7 +128,7 @@ export default function AdminClients() {
 
   const fetchClients = async () => {
     try {
-      const res = await fetch(`${API_BASE}/clients`);
+      const res = await fetch(`${API_BASE}/clients/`);
       const data = await res.json();
       if (data.clients && data.clients.length > 0) {
         const mapped = data.clients.map((l: any) => ({
@@ -161,7 +161,7 @@ export default function AdminClients() {
     for (let i = 0; i < list.length; i += batchSize) {
       const batch = list.slice(i, i + batchSize);
       await Promise.allSettled(batch.map((c, j) =>
-        fetch(`${API_BASE}/clients`, {
+        fetch(`${API_BASE}/clients/`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: c.id, name: c.name, logoUrl: c.logoUrl, website: c.website, isActive: c.isActive ? 1 : 0, sortOrder: i + j + 1 }),
         })
@@ -190,7 +190,7 @@ export default function AdminClients() {
     if (!confirm("Delete this client?")) return;
     const row = clients.find(c => c.id === id);
     try {
-      const res = await fetch(`${API_BASE}/clients?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/clients/?id=${id}`, { method: 'DELETE' });
       if (res.ok && row?.logoUrl) await deleteRemoteImage(row.logoUrl);
     } catch { /* continue with local */ }
     saveClients(clients.filter(c => c.id !== id));
@@ -210,7 +210,7 @@ export default function AdminClients() {
     if (!confirm(`Delete ${selectedIds.size} selected client(s)?`)) return;
     const ids = Array.from(selectedIds);
     try {
-      await fetch(`${API_BASE}/clients?ids=${ids.join(',')}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/clients/?ids=${ids.join(',')}`, { method: 'DELETE' });
     } catch { /* continue with local */ }
     saveClients(clients.filter(c => !selectedIds.has(c.id)));
     setSelectedIds(new Set());

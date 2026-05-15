@@ -38,7 +38,7 @@ export default function AdminLogos() {
 
   const fetchLogos = async () => {
     try {
-      const res = await fetch(`${API_BASE}/logos`);
+      const res = await fetch(`${API_BASE}/logos/`);
       const data = await res.json();
       
       if (data.logos && data.logos.length > 0) {
@@ -86,7 +86,7 @@ export default function AdminLogos() {
     const logo = logos.find(l => l.id === id);
     if (logo) {
       try {
-        const res = await fetch(`${API_BASE}/logos`, {
+        const res = await fetch(`${API_BASE}/logos/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...logo, isActive: logo.isActive ? 0 : 1 })
@@ -112,7 +112,7 @@ export default function AdminLogos() {
     }
     const finalLogo = { ...logo, imageUrl: finalImageUrl };
     try {
-      const res = await fetch(`${API_BASE}/logos`, {
+      const res = await fetch(`${API_BASE}/logos/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...finalLogo, isActive: finalLogo.isActive ? 1 : 0 })

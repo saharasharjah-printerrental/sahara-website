@@ -71,7 +71,7 @@ export default function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch(`${API_BASE}/products`);
+      const res = await fetch(`${API_BASE}/products/`);
       const data = await res.json();
       
       if (data.products && data.products.length > 0) {
@@ -116,7 +116,7 @@ export default function AdminProducts() {
     if (confirm("Are you sure you want to delete this product?")) {
       const row = products.find(p => p.id === id);
       try {
-        const res = await fetch(`${API_BASE}/products?id=${id}`, { method: 'DELETE' });
+        const res = await fetch(`${API_BASE}/products/?id=${id}`, { method: 'DELETE' });
         if (res.ok && row?.image) await deleteRemoteImage(row.image);
       } catch (e) {
         console.log('API not available, local delete only');
@@ -130,7 +130,7 @@ export default function AdminProducts() {
     const product = products.find(p => p.id === id);
     if (product) {
       try {
-        await fetch(`${API_BASE}/products`, {
+        await fetch(`${API_BASE}/products/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...product, isActive: product.isActive ? 0 : 1, isActiveNumber: product.isActive ? 0 : 1 })
@@ -146,7 +146,7 @@ export default function AdminProducts() {
     const product = products.find(p => p.id === id);
     if (product) {
       try {
-        await fetch(`${API_BASE}/products`, {
+        await fetch(`${API_BASE}/products/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...product, specs: product.specs.join('|'), isActive: product.isActive ? 1 : 0, isFeatured: product.isFeatured ? 0 : 1 })
@@ -168,7 +168,7 @@ export default function AdminProducts() {
     }
     const finalProduct = { ...product, id, image: finalImage };
     try {
-      const res = await fetch(`${API_BASE}/products`, {
+      const res = await fetch(`${API_BASE}/products/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

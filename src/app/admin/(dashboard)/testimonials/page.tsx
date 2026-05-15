@@ -19,7 +19,7 @@ interface Testimonial {
   sortOrder: number;
 }
 
-const API_BASE = '/api/';
+const API_BASE = '/api';
 
 const defaultTestimonials: Testimonial[] = [
   { id: "1", name: "Marcus Thorne", role: "Architectural Lead", text: "Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!", rating: 5, avatarUrl: "", avatarAlt: "Marcus Thorne", isActive: true, sortOrder: 1 },
@@ -43,7 +43,7 @@ export default function AdminTestimonials() {
 
   const fetchTestimonials = async () => {
     try {
-      const res = await fetch(`${API_BASE}/testimonials`);
+      const res = await fetch(`${API_BASE}/testimonials/`);
       const data = await res.json();
       if (data.testimonials && data.testimonials.length > 0) {
         const mapped = data.testimonials.map((t: any) => ({
@@ -81,7 +81,7 @@ export default function AdminTestimonials() {
     if (!confirm("Delete this testimonial?")) return;
     const row = testimonials.find(t => t.id === id);
     try {
-      const res = await fetch(`${API_BASE}/testimonials?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/testimonials/?id=${id}`, { method: 'DELETE' });
       if (res.ok && row?.avatarUrl) await deleteRemoteImage(row.avatarUrl);
     } catch (e) {
       console.error('Delete failed:', e);
@@ -98,7 +98,7 @@ export default function AdminTestimonials() {
     setTestimonials(updated);
     localStorage.setItem("sahara_testimonials", JSON.stringify(updated));
     try {
-      await fetch(`${API_BASE}/testimonials`, {
+      await fetch(`${API_BASE}/testimonials/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...t, is_active: t.isActive ? 0 : 1, isActive: t.isActive ? 0 : 1 })
@@ -119,7 +119,7 @@ export default function AdminTestimonials() {
     }
     const finalT = { ...testimonial, avatarUrl: finalAvatarUrl };
     try {
-      const res = await fetch(`${API_BASE}/testimonials`, {
+      const res = await fetch(`${API_BASE}/testimonials/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...finalT, isActive: finalT.isActive ? 1 : 0, is_active: finalT.isActive ? 1 : 0, image_url: finalAvatarUrl })

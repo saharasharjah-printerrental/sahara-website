@@ -29,7 +29,7 @@ export default function AdminBanners() {
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
-    fetch('/api/banners')
+    fetch('/api/banners/')
       .then(r => r.json())
       .then(data => {
         if (data.banners?.length) {
@@ -54,7 +54,7 @@ export default function AdminBanners() {
     if (!confirm("Delete this banner?")) return;
     const row = banners.find(b => b.id === id);
     try {
-      const res = await fetch(`/api/banners?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/banners/?id=${id}`, { method: 'DELETE' });
       if (res.ok && row?.imageUrl) await deleteRemoteImage(row.imageUrl);
     } catch (e) { console.error('Delete failed:', e); }
     saveBanners(banners.filter(b => b.id !== id));
@@ -67,7 +67,7 @@ export default function AdminBanners() {
     const updated = banners.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b);
     saveBanners(updated);
     try {
-      await fetch('/api/banners', {
+      await fetch('/api/banners/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...banner, isActive: !banner.isActive }),
@@ -87,7 +87,7 @@ export default function AdminBanners() {
     }
     const finalBanner = { ...banner, id, imageUrl: finalImageUrl };
     try {
-      const res = await fetch('/api/banners', {
+      const res = await fetch('/api/banners/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(finalBanner),
