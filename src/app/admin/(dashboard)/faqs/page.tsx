@@ -60,7 +60,7 @@ export default function AdminFAQs() {
 
   const fetchFAQs = async () => {
     try {
-      const res = await fetch('/api/faqs?all=true');
+      const res = await fetch('/api/faqs/?all=true');
       const data = await res.json();
       if (data.faqs && data.faqs.length > 0) {
         const mapped = data.faqs.map((f: any) => ({
@@ -91,7 +91,7 @@ export default function AdminFAQs() {
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this FAQ?")) return;
     try {
-      await fetch(`/api/faqs?id=${id}`, { method: 'DELETE' });
+      await fetch(`/api/faqs/?id=${id}`, { method: 'DELETE' });
     } catch (e) {
       console.error('Delete failed:', e);
     }
@@ -108,7 +108,7 @@ export default function AdminFAQs() {
     setFAQs(updated);
     localStorage.setItem("sahara_faqs", JSON.stringify(updated));
     try {
-      await fetch('/api/faqs', {
+      await fetch('/api/faqs/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...faq, isActive: faq.isActive ? 0 : 1 }),
@@ -121,7 +121,7 @@ export default function AdminFAQs() {
   const handleSave = async (faq: FAQ) => {
     const id = faq.id || Date.now().toString();
     try {
-      const res = await fetch('/api/faqs', {
+      const res = await fetch('/api/faqs/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...faq, id, isActive: faq.isActive ? 1 : 0 }),

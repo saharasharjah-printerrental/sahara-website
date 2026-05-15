@@ -44,7 +44,7 @@ export default function BlogEditorPage() {
       // Try D1 first when editing an existing post
       if (postId) {
         try {
-          const res = await fetch(`/api/blogs?id=${postId}&includeDrafts=1`);
+          const res = await fetch(`/api/blogs/?id=${postId}&includeDrafts=1`);
           const data = await res.json();
           if (data.blog) {
             const b = data.blog;
