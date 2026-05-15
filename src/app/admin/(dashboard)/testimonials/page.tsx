@@ -5,6 +5,7 @@ export const runtime = 'edge';
 import { useState, useEffect } from "react";
 import { Star, StarBorder } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface Testimonial {
   id: string;
@@ -18,7 +19,7 @@ interface Testimonial {
   sortOrder: number;
 }
 
-const API_BASE = '/api/';
+const API_BASE = '/api';
 
 const defaultTestimonials: Testimonial[] = [
   { id: "1", name: "Marcus Thorne", role: "Architectural Lead", text: "Exceptional service. They repaired our office plotter within 4 hours. Absolute lifesavers!", rating: 5, avatarUrl: "", avatarAlt: "Marcus Thorne", isActive: true, sortOrder: 1 },
@@ -42,7 +43,7 @@ export default function AdminTestimonials() {
 
   const fetchTestimonials = async () => {
     try {
-      const res = await fetch(`${API_BASE}/testimonials`);
+      const res = await fetch(`${API_BASE}/testimonials/`);
       const data = await res.json();
       if (data.testimonials && data.testimonials.length > 0) {
         const mapped = data.testimonials.map((t: any) => ({
@@ -78,14 +79,15 @@ export default function AdminTestimonials() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this testimonial?")) return;
+    const row = testimonials.find(t => t.id === id);
     try {
-      await fetch(`${API_BASE}/testimonials?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/testimonials/?id=${id}`, { method: 'DELETE' });
+      if (res.ok && row?.avatarUrl) await deleteRemoteImage(row.avatarUrl);
     } catch (e) {
       console.error('Delete failed:', e);
     }
     const updated = testimonials.filter(t => t.id !== id);
     setTestimonials(updated);
-    localStorage.setItem("sahara_testimonials", JSON.stringify(updated));
     showToast('success', 'Testimonial deleted');
   };
 
@@ -96,7 +98,7 @@ export default function AdminTestimonials() {
     setTestimonials(updated);
     localStorage.setItem("sahara_testimonials", JSON.stringify(updated));
     try {
-      await fetch(`${API_BASE}/testimonials`, {
+      await fetch(`${API_BASE}/testimonials/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...t, is_active: t.isActive ? 0 : 1, isActive: t.isActive ? 0 : 1 })
@@ -107,26 +109,33 @@ export default function AdminTestimonials() {
   };
 
   const handleSave = async (testimonial: Testimonial) => {
+    const oldAvatarUrl = editingTestimonial?.avatarUrl ?? '';
+    let finalAvatarUrl: string;
     try {
-      const res = await fetch(`${API_BASE}/testimonials`, {
+      finalAvatarUrl = await persistImageIfStaged(testimonial.avatarUrl);
+    } catch {
+      showToast('error', 'Image upload failed — try again');
+      return;
+    }
+    const finalT = { ...testimonial, avatarUrl: finalAvatarUrl };
+    try {
+      const res = await fetch(`${API_BASE}/testimonials/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...testimonial,
-          isActive: testimonial.isActive ? 1 : 0,
-          is_active: testimonial.isActive ? 1 : 0,
-          image_url: testimonial.avatarUrl,
-        })
+        body: JSON.stringify({ ...finalT, isActive: finalT.isActive ? 1 : 0, is_active: finalT.isActive ? 1 : 0, image_url: finalAvatarUrl })
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
+        if (finalAvatarUrl !== oldAvatarUrl) await deleteRemoteImage(finalAvatarUrl);
         showToast('error', data.error || 'Failed to save to database');
         return;
       }
-    } catch (e) {
+    } catch {
+      if (finalAvatarUrl !== oldAvatarUrl) await deleteRemoteImage(finalAvatarUrl);
       showToast('error', 'Network error. Please try again.');
       return;
     }
+    if (oldAvatarUrl && oldAvatarUrl !== finalAvatarUrl) await deleteRemoteImage(oldAvatarUrl);
     setShowModal(false);
     setEditingTestimonial(null);
     showToast('success', editingTestimonial ? 'Testimonial updated' : 'Testimonial created');
@@ -202,28 +211,9 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
   const [form, setForm] = useState<Testimonial>(testimonial || {
     id: "", name: "", role: "", text: "", rating: 5, avatarUrl: "", avatarAlt: "", isActive: true, sortOrder: 0
   });
-  const [uploading, setUploading] = useState(false);
-
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      // Testimonials → R2 (no conversion needed, R2 serves directly)
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        setForm(prev => ({ ...prev, avatarUrl: data.url, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }));
-        return;
-      }
-    } catch {
-      // fall through to local preview
-    } finally {
-      setUploading(false);
-    }
-    // R2 not configured — show local preview so admin can see the image
     const reader = new FileReader();
     reader.onloadend = () => {
       setForm(prev => ({ ...prev, avatarUrl: reader.result as string, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }));
@@ -270,7 +260,7 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
             <label className="flex-1 cursor-pointer">
               <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
               <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                {uploading ? "Uploading..." : form.avatarUrl ? "Change Avatar" : "Upload Avatar"}
+                {form.avatarUrl ? "Change Avatar" : "Upload Avatar"}
               </div>
             </label>
           </div>

@@ -5,6 +5,7 @@ export const runtime = 'edge';
 import { useState, useEffect } from "react";
 import { Image as ImageIcon } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface Logo {
   id: string;
@@ -37,7 +38,7 @@ export default function AdminLogos() {
 
   const fetchLogos = async () => {
     try {
-      const res = await fetch(`${API_BASE}/logos`);
+      const res = await fetch(`${API_BASE}/logos/`);
       const data = await res.json();
       
       if (data.logos && data.logos.length > 0) {
@@ -70,13 +71,13 @@ export default function AdminLogos() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this logo?")) return;
-    
+    const row = logos.find(l => l.id === id);
     try {
-      await fetch(`${API_BASE}/logos?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/logos?id=${id}`, { method: 'DELETE' });
+      if (res.ok && row?.imageUrl) await deleteRemoteImage(row.imageUrl);
     } catch (e) {
       console.error('Delete failed:', e);
     }
-    
     saveLogos(logos.filter(l => l.id !== id));
     showNotification('success', 'Logo deleted');
   };
@@ -85,7 +86,7 @@ export default function AdminLogos() {
     const logo = logos.find(l => l.id === id);
     if (logo) {
       try {
-        const res = await fetch(`${API_BASE}/logos`, {
+        const res = await fetch(`${API_BASE}/logos/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...logo, isActive: logo.isActive ? 0 : 1 })
@@ -101,29 +102,37 @@ export default function AdminLogos() {
   };
 
   const handleSave = async (logo: Logo) => {
+    const oldImageUrl = editingLogo?.imageUrl ?? '';
+    let finalImageUrl: string;
     try {
-      const res = await fetch(`${API_BASE}/logos`, {
+      finalImageUrl = await persistImageIfStaged(logo.imageUrl);
+    } catch {
+      showNotification('error', 'Image upload failed — try again');
+      return;
+    }
+    const finalLogo = { ...logo, imageUrl: finalImageUrl };
+    try {
+      const res = await fetch(`${API_BASE}/logos/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...logo,
-          isActive: logo.isActive ? 1 : 0
-        })
+        body: JSON.stringify({ ...finalLogo, isActive: finalLogo.isActive ? 1 : 0 })
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
+        if (finalImageUrl !== oldImageUrl) await deleteRemoteImage(finalImageUrl);
         showNotification('error', data.error || 'Failed to save logo');
         return;
       }
-    } catch (e) {
+    } catch {
+      if (finalImageUrl !== oldImageUrl) await deleteRemoteImage(finalImageUrl);
       showNotification('error', 'Network error. Please try again.');
       return;
     }
-
+    if (oldImageUrl && oldImageUrl !== finalImageUrl) await deleteRemoteImage(oldImageUrl);
     if (editingLogo) {
-      saveLogos(logos.map(l => l.id === logo.id ? logo : l));
+      saveLogos(logos.map(l => l.id === logo.id ? finalLogo : l));
     } else {
-      saveLogos([...logos, { ...logo, id: Date.now().toString() }]);
+      saveLogos([...logos, { ...finalLogo, id: Date.now().toString() }]);
     }
     setShowModal(false);
     setEditingLogo(null);
@@ -210,28 +219,10 @@ function LogoModal({ logo, onSave, onClose }: { logo: Logo | null; onSave: (l: L
   const [form, setForm] = useState<Logo>(logo || {
     id: "", name: "", imageUrl: "", imageAlt: "", link: "", isActive: true, sortOrder: 0
   });
-  const [uploading, setUploading] = useState(false);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      // Logos → R2 (no conversion needed, R2 serves directly)
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        setForm(prev => ({ ...prev, imageUrl: data.url, imageAlt: prev.imageAlt || `${prev.name} logo` }));
-        return;
-      }
-    } catch {
-      // fall through to local preview
-    } finally {
-      setUploading(false);
-    }
-    // R2 not configured — show local preview
     const reader = new FileReader();
     reader.onloadend = () => {
       setForm(prev => ({ ...prev, imageUrl: reader.result as string, imageAlt: prev.imageAlt || `${prev.name} logo` }));
@@ -263,7 +254,7 @@ function LogoModal({ logo, onSave, onClose }: { logo: Logo | null; onSave: (l: L
             <label className="flex-1 cursor-pointer">
               <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
               <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                {uploading ? "Uploading..." : form.imageUrl ? "Change Image" : "Upload Image"}
+                {form.imageUrl ? "Change Image" : "Upload Image"}
               </div>
             </label>
           </div>

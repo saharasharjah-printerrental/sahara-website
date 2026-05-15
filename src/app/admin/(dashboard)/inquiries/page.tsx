@@ -64,7 +64,7 @@ export default function AdminInquiries() {
   const updateStatus = async (id: string, status: string) => {
     saveInquiries(inquiries.map(i => i.id === id ? { ...i, status } : i));
     try {
-      await fetch('/api/inquiries', {
+      await fetch('/api/inquiries/', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, status }),
@@ -78,7 +78,7 @@ export default function AdminInquiries() {
 
   const saveNotes = async (id: string, notes: string) => {
     try {
-      await fetch('/api/inquiries', {
+      await fetch('/api/inquiries/', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, notes }),

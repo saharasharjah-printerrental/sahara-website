@@ -53,7 +53,7 @@ export default function AdminSEO() {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch("/api/settings?key=seo_config");
+        const res = await fetch("/api/settings/?key=seo_config");
         const data = await res.json();
         if (data.setting?.value) {
           const parsed = JSON.parse(data.setting.value);

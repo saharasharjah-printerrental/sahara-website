@@ -180,6 +180,50 @@ export async function GET() {
     message: 'Image Upload API (Cloudinary)',
     methods: {
       POST: 'Upload image. Send either: 1) FormData with file, 2) JSON with url, or 3) JSON with base64',
+      DELETE: 'Delete image by ?url=<encoded>. Handles R2 and Cloudinary URLs.',
     },
   });
+}
+
+export async function DELETE(request: NextRequest) {
+  const url = new URL(request.url).searchParams.get('url');
+  if (!url) return NextResponse.json({ error: 'url required' }, { status: 400 });
+
+  const env = getRequestContext().env as any;
+  const r2PublicBase = (env.R2_PUBLIC_URL || 'https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev').replace(/\/$/, '');
+
+  // R2: URL starts with our public base
+  if (url.startsWith(r2PublicBase + '/')) {
+    const key = url.slice(r2PublicBase.length + 1);
+    try {
+      const r2 = env.SAHARA_ASSETS as any;
+      if (r2) await r2.delete(key);
+      return NextResponse.json({ success: true, source: 'r2', key });
+    } catch (e) {
+      return NextResponse.json({ error: 'R2 delete failed', details: String(e) }, { status: 500 });
+    }
+  }
+
+  // Cloudinary: URL like https://res.cloudinary.com/{cloud}/image/upload/{maybe-version}/{publicId}.ext
+  const cm = url.match(/res\.cloudinary\.com\/([^/]+)\/image\/upload\/(?:v\d+\/)?(.+)\.\w+$/);
+  if (cm) {
+    const config = getCloudinaryConfig();
+    if (!config) return NextResponse.json({ error: 'Cloudinary not configured for delete' }, { status: 500 });
+    const publicId = cm[2];
+    const timestamp = Math.floor(Date.now() / 1000);
+    const sigString = `public_id=${publicId}&timestamp=${timestamp}${config.apiSecret}`;
+    const hashBuffer = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(sigString));
+    const signature = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    const form = new FormData();
+    form.append('public_id', publicId);
+    form.append('timestamp', String(timestamp));
+    form.append('signature', signature);
+    form.append('api_key', config.apiKey);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${config.cloudName}/image/destroy`, { method: 'POST', body: form });
+    if (!res.ok) return NextResponse.json({ error: 'Cloudinary destroy failed', details: await res.text() }, { status: 500 });
+    return NextResponse.json({ success: true, source: 'cloudinary', publicId });
+  }
+
+  // Foreign URL (wikimedia, etc.) — no-op, we don't own it
+  return NextResponse.json({ success: true, source: 'foreign', noop: true });
 }

@@ -148,7 +148,7 @@ export default function AdminBlog() {
   const handleDelete = async (id: string) => {
     if (confirm("Delete this blog post?")) {
       try {
-        await fetch(`/api/blogs?id=${id}`, { method: 'DELETE' });
+        await fetch(`/api/blogs/?id=${id}`, { method: 'DELETE' });
       } catch { /* continue with local */ }
       savePosts(posts.filter(p => p.id !== id));
     }
@@ -159,7 +159,7 @@ export default function AdminBlog() {
     const post = updated.find(p => p.id === id);
     if (post) {
       try {
-        await fetch('/api/blogs', {
+        await fetch('/api/blogs/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

@@ -4,6 +4,7 @@ export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface Banner {
   id: string;
@@ -28,7 +29,7 @@ export default function AdminBanners() {
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
-    fetch('/api/banners')
+    fetch('/api/banners/')
       .then(r => r.json())
       .then(data => {
         if (data.banners?.length) {
@@ -51,8 +52,10 @@ export default function AdminBanners() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this banner?")) return;
+    const row = banners.find(b => b.id === id);
     try {
-      await fetch(`/api/banners?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/banners/?id=${id}`, { method: 'DELETE' });
+      if (res.ok && row?.imageUrl) await deleteRemoteImage(row.imageUrl);
     } catch (e) { console.error('Delete failed:', e); }
     saveBanners(banners.filter(b => b.id !== id));
     showToast('success', 'Banner deleted');
@@ -64,7 +67,7 @@ export default function AdminBanners() {
     const updated = banners.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b);
     saveBanners(updated);
     try {
-      await fetch('/api/banners', {
+      await fetch('/api/banners/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...banner, isActive: !banner.isActive }),
@@ -74,22 +77,32 @@ export default function AdminBanners() {
 
   const handleSave = async (banner: Banner) => {
     const id = editingBanner ? banner.id : Date.now().toString();
-    const finalBanner = { ...banner, id };
+    const oldImageUrl = editingBanner?.imageUrl ?? '';
+    let finalImageUrl: string;
     try {
-      const res = await fetch('/api/banners', {
+      finalImageUrl = await persistImageIfStaged(banner.imageUrl);
+    } catch {
+      showToast('error', 'Image upload failed — try again');
+      return;
+    }
+    const finalBanner = { ...banner, id, imageUrl: finalImageUrl };
+    try {
+      const res = await fetch('/api/banners/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(finalBanner),
       });
       if (!res.ok) {
+        if (finalImageUrl !== oldImageUrl) await deleteRemoteImage(finalImageUrl);
         showToast('error', 'Failed to save banner to database');
         return;
       }
-    } catch (e) {
-      console.error('Save failed:', e);
+    } catch {
+      if (finalImageUrl !== oldImageUrl) await deleteRemoteImage(finalImageUrl);
       showToast('error', 'Network error. Please try again.');
       return;
     }
+    if (oldImageUrl && oldImageUrl !== finalImageUrl) await deleteRemoteImage(oldImageUrl);
     if (editingBanner) {
       saveBanners(banners.map(b => b.id === banner.id ? finalBanner : b));
     } else {
@@ -174,7 +187,6 @@ function BannerModal({ banner, onSave, onClose }: { banner: Banner | null; onSav
   const [form, setForm] = useState<Banner>(banner || {
     id: "", title: "", subtitle: "", ctaText: "Get Quote", ctaLink: "/get-quote", imageUrl: "", position: "hero", isActive: true, sortOrder: 0
   });
-  const [uploading, setUploading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [convertToWebp, setConvertToWebp] = useState(true);
@@ -185,44 +197,19 @@ function BannerModal({ banner, onSave, onClose }: { banner: Banner | null; onSav
     { value: "footer_cta", label: "Footer CTA" },
   ];
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setUploading(true);
-    try {
-      if (convertToWebp) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
-        const data = await res.json();
-        if (data.url) {
-          setForm(prev => ({ ...prev, imageUrl: data.url }));
-        } else {
-          const reader = new FileReader();
-          reader.onloadend = () => setForm(prev => ({ ...prev, imageUrl: reader.result as string }));
-          reader.readAsDataURL(file);
-        }
-      } else {
-        const reader = new FileReader();
-        reader.onloadend = () => setForm(prev => ({ ...prev, imageUrl: reader.result as string }));
-        reader.readAsDataURL(file);
-      }
-    } catch (error) {
-      console.error("Upload failed:", error);
-      const reader = new FileReader();
-      reader.onloadend = () => setForm(prev => ({ ...prev, imageUrl: reader.result as string }));
-      reader.readAsDataURL(file);
-    } finally {
-      setUploading(false);
-    }
+    const reader = new FileReader();
+    reader.onloadend = () => setForm(prev => ({ ...prev, imageUrl: reader.result as string }));
+    reader.readAsDataURL(file);
   };
 
   const handleUrlFetch = async () => {
     if (!imageUrl) return;
     setConverting(true);
     try {
-      const res = await fetch("/api/convert-image", {
+      const res = await fetch("/api/convert-image/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: imageUrl })
@@ -291,7 +278,7 @@ function BannerModal({ banner, onSave, onClose }: { banner: Banner | null; onSav
               <label className="flex-1 cursor-pointer">
                 <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                 <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                  {uploading ? "Uploading..." : form.imageUrl ? "Change Image" : "Upload Image"}
+                  {form.imageUrl ? "Change Image" : "Upload Image"}
                 </div>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">

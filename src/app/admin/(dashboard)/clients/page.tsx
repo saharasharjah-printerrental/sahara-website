@@ -5,6 +5,7 @@ export const runtime = 'edge';
 import { useState, useEffect } from "react";
 import { CloudUpload, Delete, Edit, Link as LinkIcon, Add } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface Client {
   id: string;
@@ -15,7 +16,7 @@ interface Client {
   sortOrder: number;
 }
 
-const API_BASE = '/api/';
+const API_BASE = '/api';
 
 const defaultClients: Client[] = [
   { id: "1", name: "Emirates Global Aluminium", logoUrl: "", website: "https://www.ega.com", isActive: true, sortOrder: 1 },
@@ -127,7 +128,7 @@ export default function AdminClients() {
 
   const fetchClients = async () => {
     try {
-      const res = await fetch(`${API_BASE}/clients`);
+      const res = await fetch(`${API_BASE}/clients/`);
       const data = await res.json();
       if (data.clients && data.clients.length > 0) {
         const mapped = data.clients.map((l: any) => ({
@@ -160,7 +161,7 @@ export default function AdminClients() {
     for (let i = 0; i < list.length; i += batchSize) {
       const batch = list.slice(i, i + batchSize);
       await Promise.allSettled(batch.map((c, j) =>
-        fetch(`${API_BASE}/clients`, {
+        fetch(`${API_BASE}/clients/`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: c.id, name: c.name, logoUrl: c.logoUrl, website: c.website, isActive: c.isActive ? 1 : 0, sortOrder: i + j + 1 }),
         })
@@ -187,8 +188,10 @@ export default function AdminClients() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this client?")) return;
+    const row = clients.find(c => c.id === id);
     try {
-      await fetch(`${API_BASE}/clients?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/clients/?id=${id}`, { method: 'DELETE' });
+      if (res.ok && row?.logoUrl) await deleteRemoteImage(row.logoUrl);
     } catch { /* continue with local */ }
     saveClients(clients.filter(c => c.id !== id));
     showToast('success', 'Client deleted');
@@ -207,7 +210,7 @@ export default function AdminClients() {
     if (!confirm(`Delete ${selectedIds.size} selected client(s)?`)) return;
     const ids = Array.from(selectedIds);
     try {
-      await fetch(`${API_BASE}/clients?ids=${ids.join(',')}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/clients/?ids=${ids.join(',')}`, { method: 'DELETE' });
     } catch { /* continue with local */ }
     saveClients(clients.filter(c => !selectedIds.has(c.id)));
     setSelectedIds(new Set());
@@ -232,11 +235,28 @@ export default function AdminClients() {
 
   const handleSave = async (client: Client) => {
     const id = editingClient ? client.id : Date.now().toString();
-    const finalClient = { ...client, id };
+    const oldLogoUrl = editingClient?.logoUrl ?? '';
+    let finalLogoUrl: string;
+    try {
+      finalLogoUrl = await persistImageIfStaged(client.logoUrl);
+    } catch {
+      showToast('error', 'Image upload failed — try again');
+      return;
+    }
+    const finalClient = { ...client, id, logoUrl: finalLogoUrl };
     try {
       const ok = await syncToAPI(finalClient);
-      if (!ok) { showToast('error', 'Failed to save to database'); return; }
-    } catch { showToast('error', 'Network error. Please try again.'); return; }
+      if (!ok) {
+        if (finalLogoUrl !== oldLogoUrl) await deleteRemoteImage(finalLogoUrl);
+        showToast('error', 'Failed to save to database');
+        return;
+      }
+    } catch {
+      if (finalLogoUrl !== oldLogoUrl) await deleteRemoteImage(finalLogoUrl);
+      showToast('error', 'Network error. Please try again.');
+      return;
+    }
+    if (oldLogoUrl && oldLogoUrl !== finalLogoUrl) await deleteRemoteImage(oldLogoUrl);
     if (editingClient) {
       saveClients(clients.map(c => c.id === client.id ? finalClient : c));
     } else {
@@ -426,40 +446,22 @@ function ClientModal({ client, onSave, onClose }: { client: Client | null; onSav
     isActive: true,
     sortOrder: 0
   });
-  const [uploading, setUploading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [fetchUrl, setFetchUrl] = useState("");
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        setForm(prev => ({ ...prev, logoUrl: data.url }));
-      } else {
-        // Fallback to local preview if Cloudinary not configured
-        const reader = new FileReader();
-        reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
-        reader.readAsDataURL(file);
-      }
-    } catch (error) {
-      console.error("Upload failed:", error);
-    } finally {
-      setUploading(false);
-    }
+    const reader = new FileReader();
+    reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
+    reader.readAsDataURL(file);
   };
 
   const handleUrlFetch = async () => {
     if (!fetchUrl) return;
     setConverting(true);
     try {
-      const res = await fetch("/api/convert-image", {
+      const res = await fetch("/api/convert-image/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: fetchUrl })
@@ -516,7 +518,7 @@ function ClientModal({ client, onSave, onClose }: { client: Client | null; onSav
                 <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                 <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors flex items-center justify-center gap-2">
                   <CloudUpload />
-                  {uploading ? "Uploading..." : form.logoUrl ? "Change Logo" : "Upload Logo"}
+                  {form.logoUrl ? "Change Logo" : "Upload Logo"}
                 </div>
               </label>
             </div>

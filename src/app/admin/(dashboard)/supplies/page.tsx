@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface Supply {
   id: string;
@@ -70,7 +71,7 @@ export default function AdminSupplies() {
 
   const fetchSupplies = async () => {
     try {
-      const res = await fetch('/api/supplies?all=true');
+      const res = await fetch('/api/supplies/?all=true');
       const data = await res.json();
       if (data.supplies && data.supplies.length > 0) {
         const mapped = data.supplies.map(mapSupply);
@@ -93,14 +94,15 @@ export default function AdminSupplies() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this supply item?")) return;
+    const row = supplies.find(s => s.id === id);
     try {
-      await fetch(`/api/supplies?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/supplies/?id=${id}`, { method: 'DELETE' });
+      if (res.ok && row?.image) await deleteRemoteImage(row.image);
     } catch (e) {
       console.error('Delete failed:', e);
     }
     const updated = supplies.filter(s => s.id !== id);
     setSupplies(updated);
-    localStorage.setItem("sahara_supplies", JSON.stringify(updated));
     showToast('success', 'Supply deleted');
   };
 
@@ -111,7 +113,7 @@ export default function AdminSupplies() {
     setSupplies(updated);
     localStorage.setItem("sahara_supplies", JSON.stringify(updated));
     try {
-      await fetch('/api/supplies', {
+      await fetch('/api/supplies/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...supply, isActive: supply.isActive ? 0 : 1 }),
@@ -123,21 +125,33 @@ export default function AdminSupplies() {
 
   const handleSave = async (supply: Supply) => {
     const id = supply.id || Date.now().toString();
+    const oldImage = editingSupply?.image ?? '';
+    let finalImage: string;
     try {
-      const res = await fetch('/api/supplies', {
+      finalImage = await persistImageIfStaged(supply.image);
+    } catch {
+      showToast('error', 'Image upload failed — try again');
+      return;
+    }
+    const finalSupply = { ...supply, id, image: finalImage };
+    try {
+      const res = await fetch('/api/supplies/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...supply, id, isActive: supply.isActive ? 1 : 0 }),
+        body: JSON.stringify({ ...finalSupply, isActive: finalSupply.isActive ? 1 : 0 }),
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
+        if (finalImage !== oldImage) await deleteRemoteImage(finalImage);
         showToast('error', data.error || 'Failed to save to database');
         return;
       }
     } catch {
+      if (finalImage !== oldImage) await deleteRemoteImage(finalImage);
       showToast('error', 'Network error. Please try again.');
       return;
     }
+    if (oldImage && oldImage !== finalImage) await deleteRemoteImage(oldImage);
     setShowModal(false);
     setEditingSupply(null);
     showToast('success', editingSupply ? 'Supply updated' : 'Supply created');
@@ -329,7 +343,6 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
     id: "", name: "", brand: "Canon", category: "Toner", compatibleModels: "", color: "",
     yield: "", price: "Contact for Pricing", stock: 0, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true,
   });
-  const [uploading, setUploading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [convertToWebp, setConvertToWebp] = useState(true);
   const [imageUrl, setImageUrl] = useState("");
@@ -343,32 +356,15 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
       img.src = src;
     });
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true);
-    const fallback = async (base64: string) => {
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64 = reader.result as string;
       const dims = await getImageDimensions(base64);
       setForm(prev => ({ ...prev, image: base64, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.brand} ${prev.name} image` }));
-      setUploading(false);
     };
-    if (convertToWebp) {
-      const formData = new FormData();
-      formData.append("file", file);
-      try {
-        const res = await fetch("/api/convert-image", { method: "POST", body: formData });
-        const data = await res.json();
-        if (data.url) {
-          const dims = await getImageDimensions(data.url);
-          setForm(prev => ({ ...prev, image: data.url, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.brand} ${prev.name} image` }));
-          setUploading(false);
-          return;
-        }
-      } catch {}
-    }
-    const reader = new FileReader();
-    reader.onloadend = async () => fallback(reader.result as string);
-    reader.onerror = () => setUploading(false);
     reader.readAsDataURL(file);
   };
 
@@ -376,7 +372,7 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
     if (!imageUrl) return;
     setConverting(true);
     try {
-      const res = await fetch("/api/convert-image", {
+      const res = await fetch("/api/convert-image/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: imageUrl }),
@@ -446,9 +442,9 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
             <label className="block text-sm font-medium text-slate-300 mb-2">Product Image</label>
             <div className="flex items-center gap-3 mb-3">
               <label className="flex-1 cursor-pointer">
-                <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploading} />
+                <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                 <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                  {uploading ? "Uploading..." : form.image ? "Change Image" : "Upload Image"}
+                  {form.image ? "Change Image" : "Upload Image"}
                 </div>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
