@@ -1,7 +1,22 @@
 "use client";
 
-import { useInView, useMotionValue, useSpring } from "framer-motion";
-import { useCallback, useEffect, useRef } from "react";
+import { useMotionValue, useSpring } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+function useIsInView(ref: React.RefObject<HTMLSpanElement | null>): boolean {
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+  return inView;
+}
 
 interface CountUpProps {
   to: number;
@@ -39,7 +54,7 @@ export default function CountUp({
     stiffness,
   });
 
-  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const isInView = useIsInView(ref);
 
   const getDecimalPlaces = (num: number) => {
     const str = num.toString();
