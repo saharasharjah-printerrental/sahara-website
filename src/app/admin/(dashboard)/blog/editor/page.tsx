@@ -5,8 +5,8 @@ export const runtime = 'edge';
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import RichTextEditor from "@/components/admin/RichTextEditor";
-import { BLOG_CONTENT } from "@/lib/blogContent";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface BlogPost {
   id: string;
@@ -30,7 +30,6 @@ export default function BlogEditorPage() {
     id: "", title: "", slug: "", excerpt: "", content: "", category: "Guide",
     status: "draft", coverImage: "", publishedAt: "", createdAt: ""
   });
-  const [uploading, setUploading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [convertToWebp, setConvertToWebp] = useState(true);
@@ -51,7 +50,7 @@ export default function BlogEditorPage() {
             const b = data.blog;
             setForm({
               id: String(b.id), title: b.title, slug: b.slug, excerpt: b.excerpt || '',
-              content: b.content || BLOG_CONTENT[b.slug] || '',
+              content: b.content || '',
               category: b.category || 'Guide',
               status: b.isActive === 1 ? 'published' : 'draft',
               coverImage: b.image || '', publishedAt: b.publishedAt || '', createdAt: b.createdAt || '',
@@ -66,14 +65,9 @@ export default function BlogEditorPage() {
       const stored = localStorage.getItem("sahara_blogs");
       if (stored) {
         const allPosts: BlogPost[] = JSON.parse(stored);
-        const migrated = allPosts.map(p => {
-          const isPlaceholder = !p.content || p.content.trim() === "" || p.content === "Full content here...";
-          if (isPlaceholder && BLOG_CONTENT[p.slug]) return { ...p, content: BLOG_CONTENT[p.slug] };
-          return p;
-        });
-        setPosts(migrated);
+        setPosts(allPosts);
         if (postId) {
-          const post = migrated.find(p => p.id === postId);
+          const post = allPosts.find(p => p.id === postId);
           if (post) setForm(post);
         }
       }
@@ -82,31 +76,12 @@ export default function BlogEditorPage() {
     load();
   }, [postId]);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true);
-    try {
-      if (convertToWebp) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const res = await fetch("/api/convert-image/", { method: "POST", body: formData });
-        const data = await res.json();
-        if (data.url) {
-          setForm(prev => ({ ...prev, coverImage: data.url }));
-          return;
-        }
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => setForm(prev => ({ ...prev, coverImage: reader.result as string }));
-      reader.readAsDataURL(file);
-    } catch {
-      const reader = new FileReader();
-      reader.onloadend = () => setForm(prev => ({ ...prev, coverImage: reader.result as string }));
-      reader.readAsDataURL(file);
-    } finally {
-      setUploading(false);
-    }
+    const reader = new FileReader();
+    reader.onloadend = () => setForm(prev => ({ ...prev, coverImage: reader.result as string }));
+    reader.readAsDataURL(file);
   };
 
   const handleUrlFetch = async () => {
@@ -136,17 +111,29 @@ export default function BlogEditorPage() {
   };
 
   const handleSave = async () => {
-    let newPosts: BlogPost[];
+    const isEdit = !!(form.id && posts.some(p => p.id === form.id));
+    const oldCoverImage = isEdit ? (posts.find(p => p.id === form.id)?.coverImage ?? '') : '';
+    let finalCoverImage: string;
+    try {
+      finalCoverImage = await persistImageIfStaged(form.coverImage);
+    } catch {
+      showToast('error', 'Image upload failed — try again');
+      return;
+    }
+
     let postToSave: BlogPost;
-    if (form.id && posts.some(p => p.id === form.id)) {
-      newPosts = posts.map(p => p.id === form.id
-        ? { ...form, publishedAt: form.status === "published" ? new Date().toISOString().split("T")[0] : p.publishedAt }
-        : p
-      );
-      postToSave = newPosts.find(p => p.id === form.id)!;
+    let newPosts: BlogPost[];
+    if (isEdit) {
+      postToSave = {
+        ...form,
+        coverImage: finalCoverImage,
+        publishedAt: form.status === "published" ? new Date().toISOString().split("T")[0] : (posts.find(p => p.id === form.id)?.publishedAt ?? ''),
+      };
+      newPosts = posts.map(p => p.id === form.id ? postToSave : p);
     } else {
       postToSave = {
         ...form,
+        coverImage: finalCoverImage,
         id: Date.now().toString(),
         createdAt: new Date().toISOString().split("T")[0],
         publishedAt: form.status === "published" ? new Date().toISOString().split("T")[0] : ""
@@ -154,9 +141,8 @@ export default function BlogEditorPage() {
       newPosts = [...posts, postToSave];
     }
 
-    // Sync to D1 API
     try {
-      await fetch('/api/blogs/', {
+      const res = await fetch('/api/blogs/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -165,17 +151,27 @@ export default function BlogEditorPage() {
           slug: postToSave.slug,
           excerpt: postToSave.excerpt,
           content: postToSave.content,
-          image: postToSave.coverImage,
+          image: finalCoverImage,
           author: 'Sahara Printer',
           category: postToSave.category,
           isActive: postToSave.status === 'published' ? 1 : 0,
           publishedAt: postToSave.publishedAt,
         }),
       });
-    } catch { /* continue with local */ }
+      if (!res.ok) {
+        if (finalCoverImage !== oldCoverImage) await deleteRemoteImage(finalCoverImage);
+        showToast('error', 'Failed to save post');
+        return;
+      }
+    } catch {
+      if (finalCoverImage !== oldCoverImage) await deleteRemoteImage(finalCoverImage);
+      showToast('error', 'Network error. Please try again.');
+      return;
+    }
 
+    if (oldCoverImage && oldCoverImage !== finalCoverImage) await deleteRemoteImage(oldCoverImage);
     localStorage.setItem("sahara_blogs", JSON.stringify(newPosts));
-    showToast('success', form.id ? 'Post updated' : 'Post created');
+    showToast('success', isEdit ? 'Post updated' : 'Post created');
     router.push("/admin/blog");
   };
 
@@ -236,7 +232,7 @@ export default function BlogEditorPage() {
                 <label className="flex-1 cursor-pointer">
                   <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                   <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                    {uploading ? "Uploading..." : form.coverImage ? "Change Image" : "Upload Image"}
+                    {form.coverImage ? "Change Image" : "Upload Image"}
                   </div>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer shrink-0">

@@ -4,6 +4,7 @@ export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface Product {
   id: string;
@@ -113,8 +114,10 @@ export default function AdminProducts() {
 
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this product?")) {
+      const row = products.find(p => p.id === id);
       try {
-        await fetch(`${API_BASE}/products?id=${id}`, { method: 'DELETE' });
+        const res = await fetch(`${API_BASE}/products?id=${id}`, { method: 'DELETE' });
+        if (res.ok && row?.image) await deleteRemoteImage(row.image);
       } catch (e) {
         console.log('API not available, local delete only');
       }
@@ -155,7 +158,15 @@ export default function AdminProducts() {
 
   const handleSave = async (product: Product) => {
     const id = editingProduct ? product.id : Date.now().toString();
-    const finalProduct = { ...product, id };
+    const oldImage = editingProduct?.image ?? '';
+    let finalImage: string;
+    try {
+      finalImage = await persistImageIfStaged(product.image);
+    } catch {
+      showToast('error', 'Image upload failed — try again');
+      return;
+    }
+    const finalProduct = { ...product, id, image: finalImage };
     try {
       const res = await fetch(`${API_BASE}/products`, {
         method: 'POST',
@@ -169,13 +180,16 @@ export default function AdminProducts() {
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
+        if (finalImage !== oldImage) await deleteRemoteImage(finalImage);
         showToast('error', data.error || 'Failed to save to database');
         return;
       }
-    } catch (e) {
+    } catch {
+      if (finalImage !== oldImage) await deleteRemoteImage(finalImage);
       showToast('error', 'Network error. Please try again.');
       return;
     }
+    if (oldImage && oldImage !== finalImage) await deleteRemoteImage(oldImage);
     if (editingProduct) {
       saveProducts(products.map(p => p.id === product.id ? finalProduct : p));
     } else {
@@ -358,7 +372,6 @@ function ProductModal({ product, onSave, onClose }: { product: Product | null; o
     isActive: true,
     isFeatured: false,
   });
-  const [uploading, setUploading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [convertToWebp, setConvertToWebp] = useState(true);
@@ -366,33 +379,19 @@ function ProductModal({ product, onSave, onClose }: { product: Product | null; o
   const brands = ["HP", "Canon", "Xerox", "Kyocera", "Ricoh", "Brother", "Sharp", "Epson"];
   const categories = ["MFP", "A3 Printers", "A4 Printers", "Plotters", "Color", "Monochrome"];
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        setForm(prev => ({ ...prev, image: data.url }));
-      } else {
-        alert(`Image upload failed: ${data.error || 'Unknown error'}. Please configure Cloudinary credentials in wrangler.toml.`);
-      }
-    } catch (error) {
-      alert(`Image upload failed: ${String(error)}`);
-    } finally {
-      setUploading(false);
-    }
+    const reader = new FileReader();
+    reader.onloadend = () => setForm(prev => ({ ...prev, image: reader.result as string }));
+    reader.readAsDataURL(file);
   };
 
   const handleUrlFetch = async () => {
     if (!imageUrl) return;
     setConverting(true);
     try {
-      const res = await fetch("/api/convert-image", {
+      const res = await fetch("/api/convert-image/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: imageUrl })
@@ -491,7 +490,7 @@ function ProductModal({ product, onSave, onClose }: { product: Product | null; o
               <label className="flex-1 cursor-pointer">
                 <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                 <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                  {uploading ? "Uploading..." : form.image ? "Change Image" : "Upload Image"}
+                  {form.image ? "Change Image" : "Upload Image"}
                 </div>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">

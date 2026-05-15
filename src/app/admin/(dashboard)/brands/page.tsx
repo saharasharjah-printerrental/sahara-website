@@ -4,6 +4,7 @@ export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
+import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 
 interface Brand {
   id: string;
@@ -79,8 +80,10 @@ export default function AdminBrands() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this brand?")) return;
+    const row = brands.find(b => b.id === id);
     try {
-      await fetch(`${API_BASE}/brands?id=${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/brands?id=${id}`, { method: 'DELETE' });
+      if (res.ok && row?.logoUrl) await deleteRemoteImage(row.logoUrl);
     } catch (e) {
       console.error('Delete failed:', e);
     }
@@ -106,7 +109,15 @@ export default function AdminBrands() {
 
   const handleSave = async (brand: Brand) => {
     const id = editingBrand ? brand.id : Date.now().toString();
-    const finalBrand = { ...brand, id };
+    const oldLogoUrl = editingBrand?.logoUrl ?? '';
+    let finalLogoUrl: string;
+    try {
+      finalLogoUrl = await persistImageIfStaged(brand.logoUrl);
+    } catch {
+      showToast('error', 'Image upload failed — try again');
+      return;
+    }
+    const finalBrand = { ...brand, id, logoUrl: finalLogoUrl };
     try {
       const res = await fetch(`${API_BASE}/brands`, {
         method: 'POST',
@@ -114,13 +125,16 @@ export default function AdminBrands() {
         body: JSON.stringify({ ...finalBrand, isActive: finalBrand.isActive ? 1 : 0 }),
       });
       if (!res.ok) {
+        if (finalLogoUrl !== oldLogoUrl) await deleteRemoteImage(finalLogoUrl);
         showToast('error', 'Failed to save brand to database');
         return;
       }
-    } catch (e) {
+    } catch {
+      if (finalLogoUrl !== oldLogoUrl) await deleteRemoteImage(finalLogoUrl);
       showToast('error', 'Network error. Please try again.');
       return;
     }
+    if (oldLogoUrl && oldLogoUrl !== finalLogoUrl) await deleteRemoteImage(oldLogoUrl);
     if (editingBrand) {
       saveBrands(brands.map(b => b.id === brand.id ? finalBrand : b));
     } else {
@@ -187,46 +201,22 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
   const [form, setForm] = useState<Brand>(brand || {
     id: "", name: "", slug: "", logoUrl: "", description: "", isActive: true, sortOrder: 0
   });
-  const [uploading, setUploading] = useState(false);
   const [converting, setConverting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/convert-image", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        setForm(prev => ({ ...prev, logoUrl: data.url }));
-      } else {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
-        };
-        reader.readAsDataURL(file);
-      }
-    } catch (error) {
-      console.error("Upload failed:", error);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
-      };
-      reader.readAsDataURL(file);
-    } finally {
-      setUploading(false);
-    }
+    const reader = new FileReader();
+    reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
+    reader.readAsDataURL(file);
   };
 
   const handleUrlFetch = async () => {
     if (!imageUrl) return;
     setConverting(true);
     try {
-      const res = await fetch("/api/convert-image", {
+      const res = await fetch("/api/convert-image/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: imageUrl })
@@ -261,7 +251,7 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
             <label className="flex-1 cursor-pointer block">
               <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
               <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                {uploading ? "Uploading..." : form.logoUrl ? "Change Image" : "Upload Image"}
+                {form.logoUrl ? "Change Image" : "Upload Image"}
               </div>
             </label>
           </div>
