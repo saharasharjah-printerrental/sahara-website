@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+﻿export const runtime = 'edge';
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,7 +6,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Photocopier Rental Sharjah | Printer Lease UAE – AED 250/mo | Sahara",
+  title: "Photocopier Rental Sharjah | Printer Lease UAE â€“ AED 250/mo | Sahara",
   description:
     "Photocopier rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-min emergency response. Serving SAIF Zone, Industrial Area, Al Majaz. Canon & Kyocera. Call now.",
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://www.saharaprinter.com/photocopier-rental-sharjah/" },
   openGraph: {
-    title: "Photocopier Rental Sharjah | AED 250/mo – Sahara Office Equipments",
+    title: "Photocopier Rental Sharjah | AED 250/mo â€“ Sahara Office Equipments",
     description:
       "Rent a Canon or Kyocera photocopier in Sharjah from AED 250/month. Zero deposit, free toner, 60-min response. Serving SAIF Zone, Industrial Area & all Sharjah areas.",
     url: "https://www.saharaprinter.com/photocopier-rental-sharjah/",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments – Sharjah Photocopier Rental",
+  name: "Sahara Office Equipments â€“ Sharjah Photocopier Rental",
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Photocopier and printer rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
@@ -79,14 +79,14 @@ const localBusinessSchema = {
         name: "A4 Desktop Copier Rental Sharjah",
         price: "250",
         priceCurrency: "AED",
-        description: "Canon/Kyocera A4 copier — includes toner, delivery, installation",
+        description: "Canon/Kyocera A4 copier â€” includes toner, delivery, installation",
       },
       {
         "@type": "Offer",
         name: "A3 Mid-Range Copier Rental Sharjah",
         price: "500",
         priceCurrency: "AED",
-        description: "A3 multifunction — print, scan, copy, fax — for shared offices",
+        description: "A3 multifunction â€” print, scan, copy, fax â€” for shared offices",
       },
       {
         "@type": "Offer",
@@ -134,7 +134,7 @@ const breadcrumbSchema = {
 const faqs = [
   {
     q: "How much does photocopier rental cost in Sharjah?",
-    a: "Photocopier rental in Sharjah starts from AED 250/month for an A4 desktop copier. A3 multifunction devices for shared offices range from AED 500–900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support.",
+    a: "Photocopier rental in Sharjah starts from AED 250/month for an A4 desktop copier. A3 multifunction devices for shared offices range from AED 500â€“900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support.",
   },
   {
     q: "What is your emergency response time in Sharjah?",
@@ -150,7 +150,7 @@ const faqs = [
   },
   {
     q: "Is toner included in the Sharjah rental plan?",
-    a: "Yes. All our Sharjah photocopier rental plans include genuine OEM toner at no extra charge. You never need to buy or order toner separately — we monitor usage and deliver proactively before you run out.",
+    a: "Yes. All our Sharjah photocopier rental plans include genuine OEM toner at no extra charge. You never need to buy or order toner separately â€” we monitor usage and deliver proactively before you run out.",
   },
   {
     q: "Can SAIF Zone companies rent copiers from Sahara?",
@@ -158,7 +158,7 @@ const faqs = [
   },
   {
     q: "How long are your Sharjah photocopier rental contracts?",
-    a: "Contracts are available for 12, 24, or 36 months. Shorter-term rentals (1–6 months) are available for exhibitions, project offices, and seasonal business peaks — ideal for companies around Expo Centre Sharjah. Longer contracts attract lower monthly rates.",
+    a: "Contracts are available for 12, 24, or 36 months. Shorter-term rentals (1â€“6 months) are available for exhibitions, project offices, and seasonal business peaks â€” ideal for companies around Expo Centre Sharjah. Longer contracts attract lower monthly rates.",
   },
   {
     q: "What happens if the photocopier breaks down in Sharjah?",
@@ -166,7 +166,7 @@ const faqs = [
   },
   {
     q: "Do you provide network and Wi-Fi setup for rented copiers in Sharjah?",
-    a: "Yes. Free network configuration is included with every Sharjah rental installation. Our technicians connect the copier to your office network, configure scan-to-email, scan-to-folder, and set up user authentication if required — all at no extra charge.",
+    a: "Yes. Free network configuration is included with every Sharjah rental installation. Our technicians connect the copier to your office network, configure scan-to-email, scan-to-folder, and set up user authentication if required â€” all at no extra charge.",
   },
   {
     q: "Can I upgrade my copier during the Sharjah rental contract?",
@@ -174,11 +174,11 @@ const faqs = [
   },
   {
     q: "Do you service Sharjah Industrial Area specifically?",
-    a: "Sharjah Industrial Area (Areas 1–18) is one of our highest-density service zones. We have dedicated technicians for Industrial Area and can reach any location there in under 45 minutes. Over 200 businesses in the Industrial Area use Sahara copier rentals.",
+    a: "Sharjah Industrial Area (Areas 1â€“18) is one of our highest-density service zones. We have dedicated technicians for Industrial Area and can reach any location there in under 45 minutes. Over 200 businesses in the Industrial Area use Sahara copier rentals.",
   },
   {
     q: "What is the cost-per-page for rented copiers in Sharjah?",
-    a: "Cost-per-page (CPP) for A4 black-and-white printing on our rented copiers in Sharjah is approximately 1–2 fils per page — significantly lower than desktop inkjet or laser cartridge printers which cost 5–15 fils per page. Colour CPP ranges from 8–15 fils depending on coverage.",
+    a: "Cost-per-page (CPP) for A4 black-and-white printing on our rented copiers in Sharjah is approximately 1â€“2 fils per page â€” significantly lower than desktop inkjet or laser cartridge printers which cost 5â€“15 fils per page. Colour CPP ranges from 8â€“15 fils depending on coverage.",
   },
 ];
 
@@ -195,7 +195,7 @@ const faqSchema = {
 const pricingTiers = [
   {
     name: "A4 Desktop",
-    price: "AED 250–450",
+    price: "AED 250â€“450",
     tag: null,
     ideal: "Small offices, reception desks",
     features: [
@@ -210,12 +210,12 @@ const pricingTiers = [
   },
   {
     name: "A3 Mid-Range",
-    price: "AED 500–900",
+    price: "AED 500â€“900",
     tag: "Most Popular",
     ideal: "Shared offices, SAIF Zone companies",
     features: [
       "Canon iR ADVANCE / Kyocera TASKalfa",
-      "35–55 ppm A3 & A4",
+      "35â€“55 ppm A3 & A4",
       "Print, copy, scan, fax",
       "Colour option available",
       "Scan to email / folder / cloud",
@@ -226,12 +226,12 @@ const pricingTiers = [
   },
   {
     name: "A3 Enterprise",
-    price: "AED 1,000–2,000",
+    price: "AED 1,000â€“2,000",
     tag: null,
     ideal: "High-volume industries, large free zones",
     features: [
       "Canon imageRUNNER C5560i / Kyocera 5053ci",
-      "60–100 ppm A3 colour",
+      "60â€“100 ppm A3 colour",
       "Staple, booklet, hole-punch finishers",
       "Secure print, user authentication",
       "Monthly 50,000+ page capacity",
@@ -246,7 +246,7 @@ const industryInsights = [
   {
     sector: "Manufacturing & Industrial",
     zone: "Sharjah Industrial Area",
-    icon: "🏭",
+    icon: "ðŸ­",
     challenge: "Multi-shift operations need equipment that runs 24/7 without failure",
     solution:
       "Our Enterprise copiers handle 50,000+ pages/month. 60-min on-site response keeps production documentation flowing.",
@@ -255,7 +255,7 @@ const industryInsights = [
   {
     sector: "Free Zone Companies",
     zone: "SAIF Zone",
-    icon: "✈️",
+    icon: "âœˆï¸",
     challenge: "Free zone companies need flexible billing and quick equipment setup for new offices",
     solution:
       "Zero deposit, USD/AED invoicing available, setup within 24 hours. All SAIF Zone documentation handled.",
@@ -264,16 +264,16 @@ const industryInsights = [
   {
     sector: "Media & Creative",
     zone: "Sharjah Media City (Shams)",
-    icon: "📺",
+    icon: "ðŸ“º",
     challenge: "Creative agencies need high-quality colour output with consistent colour accuracy",
     solution:
       "Canon imageRUNNER ADVANCE colour copiers with ICC profile calibration for accurate colour reproduction on all media.",
-    stat: "Colour accuracy to ΔE < 2",
+    stat: "Colour accuracy to Î”E < 2",
   },
   {
     sector: "Education & Government",
     zone: "University City Sharjah",
-    icon: "🎓",
+    icon: "ðŸŽ“",
     challenge: "Universities and government entities need high-volume, cost-controlled printing for thousands of users",
     solution:
       "User authentication, quota management, and cost-per-department reporting built into our Enterprise rental plans.",
@@ -291,10 +291,10 @@ const sharjahAreas = [
 export default function PhotocopierRentalSharjah() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
 
@@ -323,7 +323,7 @@ export default function PhotocopierRentalSharjah() {
           <div className="grid lg:grid-cols-1 gap-12 items-center">
             <div>
               <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">
-                Sharjah — 60-Min Response
+                Sharjah â€” 60-Min Response
               </span>
               <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
                 Photocopier Rental{" "}
@@ -332,13 +332,13 @@ export default function PhotocopierRentalSharjah() {
 
               {/* AEO Quick Answer Block */}
               <div className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-6">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Photocopier Rental Sharjah — Quick Answer</p>
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Photocopier Rental Sharjah â€” Quick Answer</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
                   Sahara Office Equipments provides photocopier and printer rental in Sharjah from{" "}
                   <strong className="text-white">AED 250/month</strong> with zero deposit, unlimited genuine toner,
                   and a <strong className="text-white">60-minute emergency response</strong> across SAIF Zone,
                   Industrial Area, Al Majaz, and all Sharjah districts. Founded in 2012, Sahara is headquartered in
-                  Sharjah — making it the city&apos;s closest-based copier rental provider.
+                  Sharjah â€” making it the city&apos;s closest-based copier rental provider.
                 </p>
               </div>
 
@@ -392,12 +392,12 @@ export default function PhotocopierRentalSharjah() {
             }}
           >
             <p className="text-[#f5be53] text-xs font-bold tracking-[0.25em] uppercase mb-3">
-              AI Answer — What is Photocopier Rental in Sharjah?
+              AI Answer â€” What is Photocopier Rental in Sharjah?
             </p>
             <p className="text-white text-lg leading-relaxed">
               Photocopier rental in Sharjah is a monthly subscription service where businesses pay from{" "}
               <strong className="text-[#f5be53]">AED 250/month</strong> to use a Canon or Kyocera multifunction
-              copier — with toner, maintenance, and repairs all included. Sahara Office Equipment Trading LLC has
+              copier â€” with toner, maintenance, and repairs all included. Sahara Office Equipment Trading LLC has
               served Sharjah businesses since 2012, offering{" "}
               <strong className="text-[#f5be53]">60-minute emergency response</strong>, zero deposit, and free
               installation across SAIF Zone, Industrial Area, and all Sharjah districts.
@@ -436,8 +436,8 @@ export default function PhotocopierRentalSharjah() {
           </h2>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             Sharjah is home to over 30,000 registered businesses across its Industrial Areas, SAIF Zone, Sharjah
-            Media City, and University City. For many of these businesses — particularly SMEs in manufacturing,
-            logistics, and professional services — purchasing a commercial photocopier outright means a capital
+            Media City, and University City. For many of these businesses â€” particularly SMEs in manufacturing,
+            logistics, and professional services â€” purchasing a commercial photocopier outright means a capital
             outlay of AED 8,000 to AED 45,000, plus ongoing toner and maintenance costs. Rental eliminates this
             entirely.
           </p>
@@ -448,14 +448,14 @@ export default function PhotocopierRentalSharjah() {
             copier outage can halt production documentation, delivery orders, and compliance paperwork.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            SAIF Zone and Sharjah Media City companies benefit from Sahara's flexible billing — USD or AED invoicing
+            SAIF Zone and Sharjah Media City companies benefit from Sahara's flexible billing â€” USD or AED invoicing
             is available, and equipment can be added or upgraded mid-contract without renegotiation. New office
             setups in SAIF Zone are completed within 24 hours of order, including full network configuration and
             user account setup.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Unlike desktop laser printers which cost 5–15 fils per A4 page, our rented photocopiers deliver
-            black-and-white output at approximately <strong className="text-white">1–2 fils per page</strong> — a
+            Unlike desktop laser printers which cost 5â€“15 fils per A4 page, our rented photocopiers deliver
+            black-and-white output at approximately <strong className="text-white">1â€“2 fils per page</strong> â€” a
             saving of up to 87% on per-page costs for businesses printing more than 3,000 pages per month.
           </p>
         </div>
@@ -466,7 +466,7 @@ export default function PhotocopierRentalSharjah() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-4xl font-bold text-white">Sharjah Rental Plans</h2>
-            <p className="text-[#d3c5b0] mt-3 text-lg">All plans: zero deposit · free toner · free delivery · 60-min support</p>
+            <p className="text-[#d3c5b0] mt-3 text-lg">All plans: zero deposit Â· free toner Â· free delivery Â· 60-min support</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {pricingTiers.map((tier, i) => (
@@ -490,7 +490,7 @@ export default function PhotocopierRentalSharjah() {
                 <ul className="space-y-2 flex-1">
                   {tier.features.map((f, fi) => (
                     <li key={fi} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
-                      <span className="text-[#f5be53] mt-0.5 shrink-0">✓</span>
+                      <span className="text-[#f5be53] mt-0.5 shrink-0">âœ“</span>
                       {f}
                     </li>
                   ))}
@@ -572,16 +572,16 @@ export default function PhotocopierRentalSharjah() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Zero Deposit", desc: "No upfront security deposit — pay only first month's rental to start." },
+              { title: "Zero Deposit", desc: "No upfront security deposit â€” pay only first month's rental to start." },
               { title: "60-Min Response", desc: "Dedicated Sharjah-based technicians dispatched within minutes of your call." },
               { title: "Free OEM Toner", desc: "Genuine Canon/Kyocera toner proactively delivered before you run out." },
-              { title: "Network Setup Included", desc: "Full LAN/Wi-Fi, scan-to-email, and user authentication — no extra charge." },
+              { title: "Network Setup Included", desc: "Full LAN/Wi-Fi, scan-to-email, and user authentication â€” no extra charge." },
               { title: "Replacement Guarantee", desc: "If your copier can't be fixed same-day, we install a replacement unit." },
               { title: "SAIF Zone Billing", desc: "USD or AED invoicing with free zone documentation support." },
             ].map((b, i) => (
               <div key={i} className="glass-card p-6 rounded-2xl">
                 <div className="w-10 h-10 rounded-xl bg-[#f5be53]/20 flex items-center justify-center mb-4">
-                  <span className="text-[#f5be53] text-xl">✓</span>
+                  <span className="text-[#f5be53] text-xl">âœ“</span>
                 </div>
                 <h3 className="text-base font-bold text-white mb-2">{b.title}</h3>
                 <p className="text-[#d3c5b0] text-sm">{b.desc}</p>
@@ -624,7 +624,7 @@ export default function PhotocopierRentalSharjah() {
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Photocopier Rental Sharjah — FAQ</h2>
+            <h2 className="text-4xl font-bold text-white">Photocopier Rental Sharjah â€” FAQ</h2>
             <p className="text-[#d3c5b0] mt-3">12 questions answered by our Sharjah team</p>
           </div>
           <div className="space-y-4">
@@ -641,7 +641,7 @@ export default function PhotocopierRentalSharjah() {
                 <summary className="flex justify-between items-start gap-4 list-none font-bold text-base text-white">
                   <span>{f.q}</span>
                   <span className="text-[#f5be53] shrink-0 mt-1 group-open:rotate-180 transition-transform text-lg leading-none">
-                    ▾
+                    â–¾
                   </span>
                 </summary>
                 <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{f.a}</p>

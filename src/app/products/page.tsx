@@ -37,7 +37,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productListSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(productListSchema)}</script>
       <ProductsClient />
     </>
   );

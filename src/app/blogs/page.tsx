@@ -50,7 +50,7 @@ export default async function BlogPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(blogSchema)}</script>
       <BlogsClient initialPosts={initialPosts.length > 0 ? initialPosts : undefined} />
     </>
   );

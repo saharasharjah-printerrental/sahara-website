@@ -312,46 +312,47 @@ export default async function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
         />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchema) }} />
+        {/* ⚠️ React 19 removed dangerouslySetInnerHTML on <script> — use JSX children instead */}
+        <script type="application/ld+json">{cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchema)}</script>
 
         {/* Google Tag Manager */}
         {cfg?.googleTagManagerId && (
-          <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId.trim()}');` }} />
+          <script>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId.trim()}');`}</script>
         )}
 
         {/* Google Analytics (UA + GA4) */}
         {cfg?.googleAnalyticsId && (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${cfg.googleAnalyticsId}`} />
-            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalyticsId}');${cfg.googleAnalytics4Id ? `gtag('config','${cfg.googleAnalytics4Id}');` : ""}` }} />
+            <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalyticsId}');${cfg.googleAnalytics4Id ? `gtag('config','${cfg.googleAnalytics4Id}');` : ""}`}</script>
           </>
         )}
         {/* GA4 standalone — only when no UA ID is set */}
         {cfg?.googleAnalytics4Id && !cfg?.googleAnalyticsId && (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${cfg.googleAnalytics4Id}`} />
-            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalytics4Id}');` }} />
+            <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalytics4Id}');`}</script>
           </>
         )}
 
         {/* Meta Pixel */}
         {cfg?.metaPixelId && (
-          <script dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${cfg.metaPixelId}'${cfg.metaPixelAdvancedMatching ? ",{'advanced_matching':true}" : ""});fbq('track','PageView');` }} />
+          <script>{`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${cfg.metaPixelId}'${cfg.metaPixelAdvancedMatching ? ",{'advanced_matching':true}" : ""});fbq('track','PageView');`}</script>
         )}
 
         {/* Microsoft Clarity */}
         {cfg?.microsoftClarityId && (
-          <script dangerouslySetInnerHTML={{ __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${cfg.microsoftClarityId}");` }} />
+          <script>{`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${cfg.microsoftClarityId}");`}</script>
         )}
 
         {/* Hotjar */}
         {cfg?.hotjarId && (
-          <script dangerouslySetInnerHTML={{ __html: `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${cfg.hotjarId},hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');` }} />
+          <script>{`(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${cfg.hotjarId},hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}</script>
         )}
 
         {/* Custom schema markup */}
         {cfg?.schemaMarkup && (
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: cfg.schemaMarkup }} />
+          <script type="application/ld+json">{cfg.schemaMarkup}</script>
         )}
 
         {/* Custom head scripts — handles raw JS or full <script> HTML snippets */}
@@ -359,7 +360,7 @@ export default async function RootLayout({
           parseScripts(cfg.customHeadScripts).map((s, i) =>
             "src" in s
               ? <script key={i} async={s.isAsync} src={s.src} />
-              : <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
+              : <script key={i}>{s.inline}</script>
           )}
       </head>
       <body className="bg-[#071325] text-[#d7e3fc]" suppressHydrationWarning>
@@ -374,7 +375,7 @@ export default async function RootLayout({
           parseScripts(cfg.customBodyScripts).map((s, i) =>
             "src" in s
               ? <script key={i} async={s.isAsync} src={s.src} />
-              : <script key={i} dangerouslySetInnerHTML={{ __html: s.inline }} />
+              : <script key={i}>{s.inline}</script>
           )}
         <VisitorTracker />
         {children}

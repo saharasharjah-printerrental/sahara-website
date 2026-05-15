@@ -140,12 +140,11 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
 
-      <link rel="preload" as="image" href="/images/hero-bg.webp" fetchPriority="high" />
 
       <Header />
       <HomepageClient initialLogos={initialLogos} initialTestimonials={initialTestimonials} />

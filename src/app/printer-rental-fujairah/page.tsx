@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+﻿export const runtime = 'edge';
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,7 +6,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Printer Rental Fujairah | Photocopier Lease UAE – AED 250/mo | Sahara",
+  title: "Printer Rental Fujairah | Photocopier Lease UAE â€“ AED 250/mo | Sahara",
   description:
     "Printer and photocopier rental in Fujairah from AED 250/month. Zero deposit, free toner. Serving Fujairah City, Dibba, Kalba, Fujairah Free Trade Zone. Canon & Kyocera.",
   keywords: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://www.saharaprinter.com/printer-rental-fujairah/" },
   openGraph: {
-    title: "Printer Rental Fujairah | AED 250/mo – Sahara Office Equipments",
+    title: "Printer Rental Fujairah | AED 250/mo â€“ Sahara Office Equipments",
     description:
       "Rent Canon or Kyocera printers in Fujairah from AED 250/month. Zero deposit, free toner. Fujairah City, Dibba, Kalba, Free Trade Zone.",
     url: "https://www.saharaprinter.com/printer-rental-fujairah/",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments – Fujairah Printer Rental",
+  name: "Sahara Office Equipments â€“ Fujairah Printer Rental",
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Printer and photocopier rental in Fujairah from AED 250/month. Zero deposit, free OEM toner, and on-site support across Fujairah City, Dibba, Kalba, and Free Trade Zone.",
@@ -83,11 +83,11 @@ const localBusinessSchema = {
 const faqsData = [
   {
     q: "How much does printer rental cost in Fujairah?",
-    a: "Printer rental in Fujairah starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise high-volume devices start at AED 1,000/month. All Fujairah plans include zero deposit, free toner, free delivery, and on-site support.",
+    a: "Printer rental in Fujairah starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500â€“900/month. Enterprise high-volume devices start at AED 1,000/month. All Fujairah plans include zero deposit, free toner, free delivery, and on-site support.",
   },
   {
     q: "What is your response time for Fujairah clients?",
-    a: "We provide weekly scheduled service visits for Fujairah rental clients. For emergency breakdowns, we dispatch a technician within 4–6 hours to Fujairah City, Dibba, Kalba, and the Fujairah Free Trade Zone. If same-day repair is not possible, a replacement unit is delivered.",
+    a: "We provide weekly scheduled service visits for Fujairah rental clients. For emergency breakdowns, we dispatch a technician within 4â€“6 hours to Fujairah City, Dibba, Kalba, and the Fujairah Free Trade Zone. If same-day repair is not possible, a replacement unit is delivered.",
   },
   {
     q: "Do you serve the Fujairah Free Trade Zone?",
@@ -95,7 +95,7 @@ const faqsData = [
   },
   {
     q: "Is there a deposit for printer rental in Fujairah?",
-    a: "No deposit required. All Fujairah printer rental plans are zero-deposit. You only pay your first month to start — ideal for new businesses in Fujairah's growing industrial and free zone sectors.",
+    a: "No deposit required. All Fujairah printer rental plans are zero-deposit. You only pay your first month to start â€” ideal for new businesses in Fujairah's growing industrial and free zone sectors.",
   },
   {
     q: "Which brands do you rent in Fujairah?",
@@ -103,7 +103,7 @@ const faqsData = [
   },
   {
     q: "Is toner included in the Fujairah rental plan?",
-    a: "Yes. All Fujairah plans include unlimited genuine Canon or Kyocera OEM toner at no extra charge. We monitor toner remotely and deliver replacements proactively — no emergency orders needed.",
+    a: "Yes. All Fujairah plans include unlimited genuine Canon or Kyocera OEM toner at no extra charge. We monitor toner remotely and deliver replacements proactively â€” no emergency orders needed.",
   },
   {
     q: "Do you serve Dibba and Kalba?",
@@ -111,11 +111,11 @@ const faqsData = [
   },
   {
     q: "How long are your Fujairah rental contracts?",
-    a: "Contracts are available for 12, 24, or 36 months. Short-term 1–6 month rentals are available for construction site offices, temporary events, and seasonal businesses near Fujairah Port. Longer contracts attract lower monthly rates.",
+    a: "Contracts are available for 12, 24, or 36 months. Short-term 1â€“6 month rentals are available for construction site offices, temporary events, and seasonal businesses near Fujairah Port. Longer contracts attract lower monthly rates.",
   },
   {
     q: "Do you provide network setup in Fujairah?",
-    a: "Yes. Free network and Wi-Fi configuration is included with every Fujairah installation. Our technician connects the printer to your office network and sets up scan-to-email, mobile printing, and user authentication — all included.",
+    a: "Yes. Free network and Wi-Fi configuration is included with every Fujairah installation. Our technician connects the printer to your office network and sets up scan-to-email, mobile printing, and user authentication â€” all included.",
   },
   {
     q: "Can I upgrade my printer during the Fujairah contract?",
@@ -123,11 +123,11 @@ const faqsData = [
   },
   {
     q: "Do you offer short-term printer rental in Fujairah for construction sites?",
-    a: "Yes. Construction site offices and project-based businesses near Fujairah can rent printers from 1 month upward. We deliver, install, and collect — making it suitable for time-limited projects. All equipment includes free toner.",
+    a: "Yes. Construction site offices and project-based businesses near Fujairah can rent printers from 1 month upward. We deliver, install, and collect â€” making it suitable for time-limited projects. All equipment includes free toner.",
   },
   {
     q: "What is the cost-per-page for rented printers in Fujairah?",
-    a: "Black-and-white A4 printing on our rented Kyocera/Canon devices in Fujairah costs approximately 1–2 fils per page. Desktop consumer printers cost 8–15 fils per page. For an office printing 3,000 pages/month, that saves AED 180–390/month in consumables.",
+    a: "Black-and-white A4 printing on our rented Kyocera/Canon devices in Fujairah costs approximately 1â€“2 fils per page. Desktop consumer printers cost 8â€“15 fils per page. For an office printing 3,000 pages/month, that saves AED 180â€“390/month in consumables.",
   },
 ];
 
@@ -153,7 +153,7 @@ const breadcrumbSchema = {
 const pricingTiers = [
   {
     name: "A4 Desktop",
-    price: "AED 250–450",
+    price: "AED 250â€“450",
     tag: null,
     ideal: "Small offices, site offices, reception",
     features: [
@@ -162,17 +162,17 @@ const pricingTiers = [
       "Print, copy, scan",
       "Free genuine OEM toner",
       "On-site support included",
-      "4–6hr emergency response",
+      "4â€“6hr emergency response",
     ],
   },
   {
     name: "A3 Mid-Range",
-    price: "AED 500–900",
+    price: "AED 500â€“900",
     tag: "Most Popular",
     ideal: "Shared offices & FFTZ companies",
     features: [
       "Canon iR ADVANCE / Kyocera TASKalfa",
-      "35–55 ppm A3 & A4 mono",
+      "35â€“55 ppm A3 & A4 mono",
       "Print, copy, scan, fax",
       "Colour option available",
       "Scan to email / folder",
@@ -182,12 +182,12 @@ const pricingTiers = [
   },
   {
     name: "A3 Enterprise",
-    price: "AED 1,000–2,000",
+    price: "AED 1,000â€“2,000",
     tag: null,
     ideal: "Port logistics, large organisations",
     features: [
       "Canon imageRUNNER C5560i",
-      "60–100 ppm A3 colour",
+      "60â€“100 ppm A3 colour",
       "Staple, booklet finishers",
       "Secure print, user auth",
       "50,000+ pages/month capacity",
@@ -205,9 +205,9 @@ const fujairahAreas = [
 export default function PrinterRentalFujairah() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
 
@@ -236,7 +236,7 @@ export default function PrinterRentalFujairah() {
           <div className="grid lg:grid-cols-1 gap-12 items-center">
             <div>
               <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">
-                Fujairah — Eastern Emirates
+                Fujairah â€” Eastern Emirates
               </span>
               <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
                 Printer Rental{" "}
@@ -289,7 +289,7 @@ export default function PrinterRentalFujairah() {
             }}
           >
             <p className="text-[#f5be53] text-xs font-bold tracking-[0.25em] uppercase mb-3">
-              AI Answer — What is Printer Rental in Fujairah?
+              AI Answer â€” What is Printer Rental in Fujairah?
             </p>
             <p className="text-white text-lg leading-relaxed">
               Printer rental in Fujairah is a monthly service from{" "}
@@ -308,7 +308,7 @@ export default function PrinterRentalFujairah() {
         <div className="max-w-5xl mx-auto">
           <div className="glass-card rounded-2xl py-8 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { number: "4–6", suffix: " hrs", label: "Emergency Response" },
+              { number: "4â€“6", suffix: " hrs", label: "Emergency Response" },
               { number: "1,500", suffix: "+", label: "UAE Clients" },
               { number: "13", suffix: "+", label: "Years in UAE" },
               { number: "AED 250", suffix: "/mo", label: "Starting Price" },
@@ -328,28 +328,28 @@ export default function PrinterRentalFujairah() {
       <section className="py-16 px-8 bg-[#101c2e]">
         <div className="max-w-4xl mx-auto space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Printer Rental in Fujairah — Serving the East Coast
+            Printer Rental in Fujairah â€” Serving the East Coast
           </h2>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Fujairah's economy is centred around Fujairah Port — one of the world's largest bunkering hubs —
+            Fujairah's economy is centred around Fujairah Port â€” one of the world's largest bunkering hubs â€”
             along with oil storage, logistics, fishing, and a growing tourism sector in Dibba and Khor Fakkan.
             These industries generate significant documentation requirements: shipping manifests, logistics forms,
             compliance certificates, and administrative paperwork.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             Sahara's printer rental in Fujairah provides these businesses with reliable Canon and Kyocera equipment
-            delivered and installed within 24–48 hours. The zero-deposit model is particularly valuable for new
+            delivered and installed within 24â€“48 hours. The zero-deposit model is particularly valuable for new
             Fujairah Free Trade Zone setups and construction project offices that need documentation infrastructure
             immediately without capital commitment.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Dibba Al Fujairah and Kalba — on the East Coast — are included in our weekly scheduled service
-            coverage. Emergency response to these more remote locations is within 4–6 hours. For businesses in
+            Dibba Al Fujairah and Kalba â€” on the East Coast â€” are included in our weekly scheduled service
+            coverage. Emergency response to these more remote locations is within 4â€“6 hours. For businesses in
             these areas that previously had no local service provider, Sahara fills an important gap.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             Our rented devices deliver A4 black-and-white output at{" "}
-            <strong className="text-white">1–2 fils per page</strong> — compared to 8–15 fils for desktop consumer
+            <strong className="text-white">1â€“2 fils per page</strong> â€” compared to 8â€“15 fils for desktop consumer
             printers. For Fujairah logistics businesses printing shipping and port documentation daily, this
             difference is substantial over a 12-month contract.
           </p>
@@ -361,7 +361,7 @@ export default function PrinterRentalFujairah() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-4xl font-bold text-white">Fujairah Rental Plans</h2>
-            <p className="text-[#d3c5b0] mt-3 text-lg">Zero deposit · free toner · free delivery · on-site support</p>
+            <p className="text-[#d3c5b0] mt-3 text-lg">Zero deposit Â· free toner Â· free delivery Â· on-site support</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {pricingTiers.map((tier, i) => (
@@ -387,7 +387,7 @@ export default function PrinterRentalFujairah() {
                 <ul className="space-y-2 flex-1">
                   {tier.features.map((f, fi) => (
                     <li key={fi} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
-                      <span className="text-[#f5be53] mt-0.5 shrink-0">✓</span>
+                      <span className="text-[#f5be53] mt-0.5 shrink-0">âœ“</span>
                       {f}
                     </li>
                   ))}
@@ -414,7 +414,7 @@ export default function PrinterRentalFujairah() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Areas We Serve in Fujairah</h2>
           <p className="text-[#d3c5b0] mb-8">
-            Weekly scheduled visits. Emergency response within 4–6 hours across the Emirate.
+            Weekly scheduled visits. Emergency response within 4â€“6 hours across the Emirate.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {fujairahAreas.map((area, i) => (
@@ -436,7 +436,7 @@ export default function PrinterRentalFujairah() {
           <div className="relative z-10">
             <h2 className="text-4xl md:text-5xl font-bold text-[#412d00] mb-4">Need a Printer in Fujairah?</h2>
             <p className="text-[#483200] text-lg mb-8">
-              Quote in 2 hours. Free site visit. Setup within 24–48 hours.
+              Quote in 2 hours. Free site visit. Setup within 24â€“48 hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -460,7 +460,7 @@ export default function PrinterRentalFujairah() {
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Printer Rental Fujairah — FAQ</h2>
+            <h2 className="text-4xl font-bold text-white">Printer Rental Fujairah â€” FAQ</h2>
             <p className="text-[#d3c5b0] mt-3">12 questions answered</p>
           </div>
           <div className="space-y-4">
@@ -477,7 +477,7 @@ export default function PrinterRentalFujairah() {
                 <summary className="flex justify-between items-start gap-4 list-none font-bold text-base text-white">
                   <span>{f.q}</span>
                   <span className="text-[#f5be53] shrink-0 mt-1 group-open:rotate-180 transition-transform text-lg leading-none">
-                    ▾
+                    â–¾
                   </span>
                 </summary>
                 <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{f.a}</p>

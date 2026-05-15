@@ -51,7 +51,7 @@ const defaultSupplies = [
 export default function PrinterSparePartsPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <link rel="canonical" href="https://www.saharaprinter.com/services/printer-spare-parts/" />
       <main className="min-h-screen bg-[#071325]">
         <Header />

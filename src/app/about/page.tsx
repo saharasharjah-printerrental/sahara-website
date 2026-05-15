@@ -53,7 +53,7 @@ const aboutSchema = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#071325]">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
       <Header />
       
       {/* Hero Section */}

@@ -42,7 +42,7 @@ const schema = {
 export default function OurClientsPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <link rel="canonical" href="https://www.saharaprinter.com/our-clients/" />
       <main className="min-h-screen bg-[#030e20]">
         <Header />

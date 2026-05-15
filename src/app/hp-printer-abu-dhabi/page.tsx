@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 export const runtime = 'edge';
 
@@ -84,8 +84,8 @@ export default function HPPrinterAbuDhabi() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <link rel="canonical" href="https://www.saharaprinter.com/hp-printer-abu-dhabi/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />

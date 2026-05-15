@@ -175,9 +175,9 @@ const faqSchema = {
 export default function PrinterRentalPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <link rel="canonical" href="https://www.saharaprinter.com/services/printer-rental/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />

@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+﻿export const runtime = 'edge';
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,7 +6,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Printer Rental Al Ain | Photocopier Lease UAE – AED 250/mo | Sahara",
+  title: "Printer Rental Al Ain | Photocopier Lease UAE â€“ AED 250/mo | Sahara",
   description:
     "Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit, free toner. Serving Al Ain Central, Al Jimi, Al Khubaisi, Al Ain Industrial Area. Canon & Kyocera.",
   keywords: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://www.saharaprinter.com/printer-rental-al-ain/" },
   openGraph: {
-    title: "Printer Rental Al Ain | AED 250/mo – Sahara Office Equipments",
+    title: "Printer Rental Al Ain | AED 250/mo â€“ Sahara Office Equipments",
     description:
       "Rent Canon or Kyocera printers in Al Ain from AED 250/month. Zero deposit, free toner. Central District, Al Jimi, Industrial Area.",
     url: "https://www.saharaprinter.com/printer-rental-al-ain/",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments – Al Ain Printer Rental",
+  name: "Sahara Office Equipments â€“ Al Ain Printer Rental",
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit, free OEM toner, and on-site support across Al Ain's business districts and industrial zones.",
@@ -83,15 +83,15 @@ const localBusinessSchema = {
 const faqsData = [
   {
     q: "How much does printer rental cost in Al Ain?",
-    a: "Printer rental in Al Ain starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500–900/month. Enterprise high-volume devices start at AED 1,000/month. All Al Ain plans include zero deposit, free OEM toner, free delivery, and on-site support.",
+    a: "Printer rental in Al Ain starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500â€“900/month. Enterprise high-volume devices start at AED 1,000/month. All Al Ain plans include zero deposit, free OEM toner, free delivery, and on-site support.",
   },
   {
     q: "What is the response time for printer support in Al Ain?",
-    a: "We schedule weekly preventive maintenance visits for Al Ain rental clients. For emergency breakdowns, a technician is dispatched within 4–6 hours to Al Ain Central, Al Jimi, Al Khubaisi, Al Murabba, and the Al Ain Industrial Area. Same-day replacement units are available if repair is not immediate.",
+    a: "We schedule weekly preventive maintenance visits for Al Ain rental clients. For emergency breakdowns, a technician is dispatched within 4â€“6 hours to Al Ain Central, Al Jimi, Al Khubaisi, Al Murabba, and the Al Ain Industrial Area. Same-day replacement units are available if repair is not immediate.",
   },
   {
     q: "Do I need a deposit for printer rental in Al Ain?",
-    a: "No deposit required. All Al Ain printer rental plans are zero-deposit. You only pay the first month's rental to start — suitable for educational institutions, healthcare facilities, and SMEs in Al Ain's growing business districts.",
+    a: "No deposit required. All Al Ain printer rental plans are zero-deposit. You only pay the first month's rental to start â€” suitable for educational institutions, healthcare facilities, and SMEs in Al Ain's growing business districts.",
   },
   {
     q: "Which printer brands do you rent in Al Ain?",
@@ -99,7 +99,7 @@ const faqsData = [
   },
   {
     q: "Is toner included in the Al Ain rental plan?",
-    a: "Yes. All Al Ain plans include unlimited genuine Canon or Kyocera OEM toner at no extra charge. Toner levels are monitored remotely and replacements are delivered proactively — before your device runs low.",
+    a: "Yes. All Al Ain plans include unlimited genuine Canon or Kyocera OEM toner at no extra charge. Toner levels are monitored remotely and replacements are delivered proactively â€” before your device runs low.",
   },
   {
     q: "Do you serve Al Ain University area and educational institutions?",
@@ -107,11 +107,11 @@ const faqsData = [
   },
   {
     q: "How long are your Al Ain rental contracts?",
-    a: "Contracts are available for 12, 24, or 36 months. Short-term 1–6 month rentals are available for temporary project offices, events at Al Ain City Centre, and seasonal needs. Longer contracts attract lower monthly rates.",
+    a: "Contracts are available for 12, 24, or 36 months. Short-term 1â€“6 month rentals are available for temporary project offices, events at Al Ain City Centre, and seasonal needs. Longer contracts attract lower monthly rates.",
   },
   {
     q: "What happens if my printer breaks down in Al Ain?",
-    a: "Call +971 50 382 3969 and we dispatch a technician within 4–6 hours to anywhere in Al Ain. If we cannot repair it same-day, we deliver a replacement unit at no extra charge so your operations continue without interruption.",
+    a: "Call +971 50 382 3969 and we dispatch a technician within 4â€“6 hours to anywhere in Al Ain. If we cannot repair it same-day, we deliver a replacement unit at no extra charge so your operations continue without interruption.",
   },
   {
     q: "Do you provide network setup for printers in Al Ain?",
@@ -127,7 +127,7 @@ const faqsData = [
   },
   {
     q: "What is cost-per-page (CPP) for rented printers in Al Ain?",
-    a: "Black-and-white A4 printing on our rented Canon/Kyocera devices costs approximately 1–2 fils per page. Consumer desktop printers cost 8–15 fils per page. For an office printing 4,000 pages/month, the saving in consumables is AED 240–520/month — making the rental cost-neutral or better.",
+    a: "Black-and-white A4 printing on our rented Canon/Kyocera devices costs approximately 1â€“2 fils per page. Consumer desktop printers cost 8â€“15 fils per page. For an office printing 4,000 pages/month, the saving in consumables is AED 240â€“520/month â€” making the rental cost-neutral or better.",
   },
 ];
 
@@ -153,7 +153,7 @@ const breadcrumbSchema = {
 const pricingTiers = [
   {
     name: "A4 Desktop",
-    price: "AED 250–450",
+    price: "AED 250â€“450",
     tag: null,
     ideal: "Clinics, small offices, reception",
     features: [
@@ -162,17 +162,17 @@ const pricingTiers = [
       "Print, copy, scan",
       "Free genuine OEM toner",
       "Weekly preventive maintenance",
-      "4–6hr emergency response",
+      "4â€“6hr emergency response",
     ],
   },
   {
     name: "A3 Mid-Range",
-    price: "AED 500–900",
+    price: "AED 500â€“900",
     tag: "Most Popular",
     ideal: "Shared offices, education, healthcare",
     features: [
       "Canon iR ADVANCE / Kyocera TASKalfa",
-      "35–55 ppm A3 & A4 mono",
+      "35â€“55 ppm A3 & A4 mono",
       "Print, copy, scan, fax",
       "Colour option available",
       "Scan to email / folder / cloud",
@@ -182,12 +182,12 @@ const pricingTiers = [
   },
   {
     name: "A3 Enterprise",
-    price: "AED 1,000–2,000",
+    price: "AED 1,000â€“2,000",
     tag: null,
     ideal: "Government, hospitals, university",
     features: [
       "Canon imageRUNNER C5560i",
-      "60–100 ppm A3 colour",
+      "60â€“100 ppm A3 colour",
       "Staple, booklet finishers",
       "User quota & cost tracking",
       "50,000+ pages/month capacity",
@@ -206,7 +206,7 @@ const industryInsights = [
   {
     sector: "Healthcare & Medical",
     zone: "Al Ain Hospital / Oasis Hospital",
-    icon: "🏥",
+    icon: "ðŸ¥",
     challenge: "Hospitals and clinics need reliable, high-volume printing for patient records, prescriptions, and reports",
     solution: "Enterprise Canon copiers with user authentication, secure print release, and 50,000+ monthly page capacity for healthcare environments.",
     stat: "HIPAA-compliant secure print",
@@ -214,7 +214,7 @@ const industryInsights = [
   {
     sector: "Education",
     zone: "UAE University / Al Ain HCT",
-    icon: "🎓",
+    icon: "ðŸŽ“",
     challenge: "Universities need cost-controlled, high-volume printing across multiple departments with usage tracking",
     solution: "User quota management, department-level cost reporting, and enterprise copiers with 60+ ppm for high-demand campus printing.",
     stat: "Per-user quota management",
@@ -222,7 +222,7 @@ const industryInsights = [
   {
     sector: "Government & Municipality",
     zone: "Al Ain Municipality",
-    icon: "🏛️",
+    icon: "ðŸ›ï¸",
     challenge: "Government offices need reliable documentation equipment with audit trails and multi-user access control",
     solution: "Canon imageRUNNER ADVANCE with PIN-based secure print, user authentication, and full activity logging for compliance.",
     stat: "Full audit trail logging",
@@ -230,9 +230,9 @@ const industryInsights = [
   {
     sector: "Manufacturing & Industrial",
     zone: "Al Ain Industrial Area",
-    icon: "🏭",
+    icon: "ðŸ­",
     challenge: "Industrial businesses need documentation equipment that handles dusty environments and extended operating hours",
-    solution: "Kyocera TASKalfa workgroup copiers — built for industrial durability, with weekly preventive maintenance to prevent breakdowns.",
+    solution: "Kyocera TASKalfa workgroup copiers â€” built for industrial durability, with weekly preventive maintenance to prevent breakdowns.",
     stat: "Weekly preventive visits",
   },
 ];
@@ -240,9 +240,9 @@ const industryInsights = [
 export default function PrinterRentalAlAin() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
 
@@ -271,7 +271,7 @@ export default function PrinterRentalAlAin() {
           <div className="grid lg:grid-cols-1 gap-12 items-center">
             <div>
               <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">
-                Al Ain — The Garden City
+                Al Ain â€” The Garden City
               </span>
               <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
                 Printer Rental{" "}
@@ -324,7 +324,7 @@ export default function PrinterRentalAlAin() {
             }}
           >
             <p className="text-[#f5be53] text-xs font-bold tracking-[0.25em] uppercase mb-3">
-              AI Answer — What is Printer Rental in Al Ain?
+              AI Answer â€” What is Printer Rental in Al Ain?
             </p>
             <p className="text-white text-lg leading-relaxed">
               Printer rental in Al Ain is a monthly subscription from{" "}
@@ -332,7 +332,7 @@ export default function PrinterRentalAlAin() {
               with toner, maintenance, and repairs included. Sahara Office Equipment Trading LLC has served UAE
               businesses since 2012, offering Al Ain clients{" "}
               <strong className="text-[#f5be53]">zero deposit</strong>, weekly preventive maintenance, and
-              4–6hr emergency response across all Al Ain districts including the Industrial Area and university zone.
+              4â€“6hr emergency response across all Al Ain districts including the Industrial Area and university zone.
             </p>
           </div>
         </div>
@@ -343,7 +343,7 @@ export default function PrinterRentalAlAin() {
         <div className="max-w-5xl mx-auto">
           <div className="glass-card rounded-2xl py-8 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { number: "4–6", suffix: " hrs", label: "Emergency Response" },
+              { number: "4â€“6", suffix: " hrs", label: "Emergency Response" },
               { number: "1,500", suffix: "+", label: "UAE Clients" },
               { number: "13", suffix: "+", label: "Years in UAE" },
               { number: "AED 250", suffix: "/mo", label: "Starting Price" },
@@ -363,21 +363,21 @@ export default function PrinterRentalAlAin() {
       <section className="py-16 px-8 bg-[#101c2e]">
         <div className="max-w-4xl mx-auto space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Printer Rental in Al Ain — Serving Education, Healthcare &amp; Industry
+            Printer Rental in Al Ain â€” Serving Education, Healthcare &amp; Industry
           </h2>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Al Ain — the UAE's Garden City — is home to UAE University, Al Ain University, Tawam Hospital, Al Ain
+            Al Ain â€” the UAE's Garden City â€” is home to UAE University, Al Ain University, Tawam Hospital, Al Ain
             Hospital, and a significant government and municipal sector. These institutions share a common need:
             reliable, high-volume document output with cost control and accountability.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             Sahara's printer rental in Al Ain provides healthcare facilities with Canon imageRUNNER enterprise
-            copiers equipped with secure print release and user authentication — ensuring patient document
+            copiers equipped with secure print release and user authentication â€” ensuring patient document
             confidentiality while reducing paper waste. For universities, our user quota management systems
             track printing by department, enabling cost allocation to individual faculties.
           </p>
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Al Ain's Industrial Area — home to food processing, building materials, and manufacturing — has
+            Al Ain's Industrial Area â€” home to food processing, building materials, and manufacturing â€” has
             different demands: durability, high monthly page volumes, and minimal downtime. Kyocera TASKalfa
             devices are built for these environments, and our weekly preventive maintenance visits catch
             issues before they cause production documentation outages.
@@ -385,8 +385,8 @@ export default function PrinterRentalAlAin() {
           <p className="text-[#d3c5b0] text-lg leading-relaxed">
             For an Al Ain healthcare clinic printing 4,000 pages/month, our rental devices deliver
             A4 black-and-white output at{" "}
-            <strong className="text-white">1–2 fils per page</strong> versus 8–15 fils for consumer alternatives.
-            That saving of AED 240–520/month in consumables alone offsets a significant portion of the rental fee.
+            <strong className="text-white">1â€“2 fils per page</strong> versus 8â€“15 fils for consumer alternatives.
+            That saving of AED 240â€“520/month in consumables alone offsets a significant portion of the rental fee.
           </p>
         </div>
       </section>
@@ -428,7 +428,7 @@ export default function PrinterRentalAlAin() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-4xl font-bold text-white">Al Ain Rental Plans</h2>
-            <p className="text-[#d3c5b0] mt-3 text-lg">Zero deposit · free toner · free delivery · weekly maintenance</p>
+            <p className="text-[#d3c5b0] mt-3 text-lg">Zero deposit Â· free toner Â· free delivery Â· weekly maintenance</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {pricingTiers.map((tier, i) => (
@@ -454,7 +454,7 @@ export default function PrinterRentalAlAin() {
                 <ul className="space-y-2 flex-1">
                   {tier.features.map((f, fi) => (
                     <li key={fi} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
-                      <span className="text-[#f5be53] mt-0.5 shrink-0">✓</span>
+                      <span className="text-[#f5be53] mt-0.5 shrink-0">âœ“</span>
                       {f}
                     </li>
                   ))}
@@ -481,7 +481,7 @@ export default function PrinterRentalAlAin() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Areas We Serve in Al Ain</h2>
           <p className="text-[#d3c5b0] mb-8">
-            Weekly scheduled maintenance. Emergency response within 4–6 hours.
+            Weekly scheduled maintenance. Emergency response within 4â€“6 hours.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {alAinAreas.map((area, i) => (
@@ -527,7 +527,7 @@ export default function PrinterRentalAlAin() {
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Printer Rental Al Ain — FAQ</h2>
+            <h2 className="text-4xl font-bold text-white">Printer Rental Al Ain â€” FAQ</h2>
             <p className="text-[#d3c5b0] mt-3">12 questions answered</p>
           </div>
           <div className="space-y-4">
@@ -544,7 +544,7 @@ export default function PrinterRentalAlAin() {
                 <summary className="flex justify-between items-start gap-4 list-none font-bold text-base text-white">
                   <span>{f.q}</span>
                   <span className="text-[#f5be53] shrink-0 mt-1 group-open:rotate-180 transition-transform text-lg leading-none">
-                    ▾
+                    â–¾
                   </span>
                 </summary>
                 <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{f.a}</p>
