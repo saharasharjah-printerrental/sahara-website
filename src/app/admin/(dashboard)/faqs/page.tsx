@@ -31,62 +31,105 @@ const pageOptions: PageOption[] = [
   { value: "contact", label: "Contact" },
   { value: "products", label: "Products" },
   { value: "blog", label: "Blog" },
+  { value: "printer-rental", label: "Printer Rental (legacy)" },
 ];
 
 const defaultFAQs: FAQ[] = [
   { id: "1", question: "What is the duration of your printer rental plans?", answer: "We offer flexible rental periods starting from short-term event hire (1-7 days) to long-term corporate leases (12-36 months), all with included maintenance.", pageSlug: "homepage", isActive: true, sortOrder: 1 },
   { id: "2", question: "Do you provide on-site repair services?", answer: "Yes, our factory-certified technicians provide on-site repairs across all major service areas. We aim for a 4-hour response time for critical failures.", pageSlug: "homepage", isActive: true, sortOrder: 2 },
-  { id: "3", question: "Are the spare parts and toners original?", answer: "Exclusively. Sahara only supplies OEM (Original Equipment Manufacturer) consumables and parts to ensure the longevity of your hardware.", pageSlug: "homepage", isActive: true, sortOrder: 3 },
-  { id: "4", question: "Can I upgrade my rented equipment during the contract?", answer: "Absolutely. Our 'Growth Guard' policy allows you to upgrade your fleet as your office printing demands increase without hefty termination fees.", pageSlug: "homepage", isActive: true, sortOrder: 4 },
-  { id: "5", question: "How much does printer rental cost in Dubai?", answer: "Our printer rental in Dubai starts from AED 250/month for basic A4 printers, with enterprise A3 copiers available from AED 500-2000/month. All plans include free toner and maintenance.", pageSlug: "printer-rental-dubai", isActive: true, sortOrder: 1 },
-  { id: "6", question: "Do you offer zero deposit printer rental in Dubai?", answer: "Yes! We offer zero deposit printer rental options in Dubai. Pay only for your monthly rental with no upfront security deposit required.", pageSlug: "printer-rental-dubai", isActive: true, sortOrder: 2 },
-  { id: "7", question: "How much does printer rental cost in Abu Dhabi?", answer: "Our printer rental in Abu Dhabi starts from AED 250/month for basic printers, with enterprise copiers from AED 500-2000/month. All plans include free toner and maintenance.", pageSlug: "printer-rental-abu-dhabi", isActive: true, sortOrder: 1 },
-  { id: "8", question: "Do you offer photocopier rental in Abu Dhabi?", answer: "Yes! We provide comprehensive photocopier rental services across Abu Dhabi including Mussafah, Al Reem Island, Khalifa City, and all other areas.", pageSlug: "printer-rental-abu-dhabi", isActive: true, sortOrder: 2 },
-  { id: "9", question: "How much does photocopier rental cost in Sharjah?", answer: "Our photocopier rental in Sharjah starts from AED 250/month. We offer competitive rates with zero deposit and free toner included in all plans.", pageSlug: "photocopier-rental-sharjah", isActive: true, sortOrder: 1 },
-  { id: "10", question: "Do you offer printer rental in Sharjah?", answer: "Yes! We provide full printer and photocopier rental services across Sharjah including Industrial Area, Al Majaz, and SAIF Zone.", pageSlug: "photocopier-rental-sharjah", isActive: true, sortOrder: 2 },
 ];
 
 export default function AdminFAQs() {
   const [faqs, setFAQs] = useState<FAQ[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingFAQ, setEditingFAQ] = useState<FAQ | null>(null);
   const [filterPage, setFilterPage] = useState<string>("all");
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => {
-    const stored = localStorage.getItem("sahara_faqs");
-    if (stored) {
-      setFAQs(JSON.parse(stored));
-    } else {
-      setFAQs(defaultFAQs);
-      localStorage.setItem("sahara_faqs", JSON.stringify(defaultFAQs));
-    }
+    fetchFAQs();
   }, []);
 
-  const saveFAQs = (newFAQs: FAQ[]) => {
-    setFAQs(newFAQs);
-    localStorage.setItem("sahara_faqs", JSON.stringify(newFAQs));
-  };
+  async function fetchFAQs() {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/faqs/');
+      if (res.ok) {
+        const data = await res.json() as { faqs: any[] };
+        const rows = (data.faqs || []).map((r: any) => ({
+          ...r,
+          isActive: Boolean(r.isActive),
+          sortOrder: r.sortOrder ?? 0,
+        }));
+        setFAQs(rows.length > 0 ? rows : defaultFAQs);
+      } else {
+        setFAQs(defaultFAQs);
+      }
+    } catch {
+      setFAQs(defaultFAQs);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-  const handleDelete = (id: string) => {
-    if (confirm("Delete this FAQ?")) {
-      saveFAQs(faqs.filter(f => f.id !== id));
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this FAQ?")) return;
+    try {
+      const res = await fetch(`/api/faqs/?id=${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setFAQs(prev => prev.filter(f => f.id !== id));
+        showToast('success', 'FAQ deleted');
+      } else {
+        showToast('error', 'Failed to delete FAQ');
+      }
+    } catch {
+      showToast('error', 'Failed to delete FAQ');
     }
   };
 
-  const handleToggle = (id: string) => {
-    saveFAQs(faqs.map(f => f.id === id ? { ...f, isActive: !f.isActive } : f));
+  const handleToggle = async (faq: FAQ) => {
+    const updated = { ...faq, isActive: !faq.isActive };
+    try {
+      const res = await fetch('/api/faqs/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated),
+      });
+      if (res.ok) {
+        setFAQs(prev => prev.map(f => f.id === faq.id ? updated : f));
+      } else {
+        showToast('error', 'Failed to update FAQ');
+      }
+    } catch {
+      showToast('error', 'Failed to update FAQ');
+    }
   };
 
-  const handleSave = (faq: FAQ) => {
-    if (editingFAQ) {
-      saveFAQs(faqs.map(f => f.id === faq.id ? faq : f));
-    } else {
-      saveFAQs([...faqs, { ...faq, id: Date.now().toString() }]);
+  const handleSave = async (faq: FAQ) => {
+    const isNew = !editingFAQ;
+    const id = isNew ? Date.now().toString() : faq.id;
+    try {
+      const res = await fetch('/api/faqs/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...faq, id }),
+      });
+      if (res.ok) {
+        if (isNew) {
+          setFAQs(prev => [...prev, { ...faq, id }]);
+        } else {
+          setFAQs(prev => prev.map(f => f.id === faq.id ? faq : f));
+        }
+        showToast('success', isNew ? 'FAQ created' : 'FAQ updated');
+      } else {
+        showToast('error', 'Failed to save FAQ');
+      }
+    } catch {
+      showToast('error', 'Failed to save FAQ');
     }
     setShowModal(false);
     setEditingFAQ(null);
-    showToast('success', editingFAQ ? 'FAQ updated' : 'FAQ created');
   };
 
   const filteredFAQs = filterPage === "all" ? faqs : faqs.filter(f => f.pageSlug === filterPage);
@@ -101,12 +144,10 @@ export default function AdminFAQs() {
               <h1 className="text-3xl font-bold text-white">FAQs</h1>
               <p className="text-slate-400 mt-1">Manage frequently asked questions for each page</p>
             </div>
-            <div className="flex items-center gap-4">
-              <button onClick={() => { setEditingFAQ(null); setShowModal(true); }} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-3 rounded-xl font-bold hover:scale-[1.02] transition-transform flex items-center gap-2">
-                <span className="material-symbols-outlined">add</span>
-                Add FAQ
-              </button>
-            </div>
+            <button onClick={() => { setEditingFAQ(null); setShowModal(true); }} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-3 rounded-xl font-bold hover:scale-[1.02] transition-transform flex items-center gap-2">
+              <span className="material-symbols-outlined">add</span>
+              Add FAQ
+            </button>
           </div>
 
           <div className="mb-6">
@@ -118,49 +159,56 @@ export default function AdminFAQs() {
           </div>
 
           <div className="glass-card rounded-2xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Question</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Page</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Status</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Order</th>
-                    <th className="text-left text-sm font-medium text-slate-400 p-4">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredFAQs.map((faq) => (
-                    <tr key={faq.id} className="border-b border-white/5">
-                      <td className="p-4">
-                        <p className="font-medium text-white">{faq.question}</p>
-                      </td>
-                      <td className="p-4 text-slate-300">
-                        <span className="px-3 py-1 rounded-full bg-[#101c2e] text-xs">
-                          {pageOptions.find(p => p.value === faq.pageSlug)?.label || faq.pageSlug}
-                        </span>
-                      </td>
-                      <td className="p-4">
-                        <button onClick={() => handleToggle(faq.id)} className={`px-3 py-1 rounded-full text-xs font-medium ${faq.isActive ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
-                          {faq.isActive ? "Active" : "Inactive"}
-                        </button>
-                      </td>
-                      <td className="p-4 text-slate-400">{faq.sortOrder}</td>
-                      <td className="p-4">
-                        <div className="flex gap-2">
-                          <button onClick={() => { setEditingFAQ(faq); setShowModal(true); }} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white">
-                            <span className="material-symbols-outlined text-sm">edit</span>
-                          </button>
-                          <button onClick={() => handleDelete(faq.id)} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-red-400">
-                            <span className="material-symbols-outlined text-sm">delete</span>
-                          </button>
-                        </div>
-                      </td>
+            {loading ? (
+              <div className="p-8 text-center text-slate-400">Loading FAQs from database…</div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-white/10">
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Question</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Page</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Status</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Order</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {filteredFAQs.map((faq) => (
+                      <tr key={faq.id} className="border-b border-white/5">
+                        <td className="p-4">
+                          <p className="font-medium text-white">{faq.question}</p>
+                        </td>
+                        <td className="p-4 text-slate-300">
+                          <span className="px-3 py-1 rounded-full bg-[#101c2e] text-xs">
+                            {pageOptions.find(p => p.value === faq.pageSlug)?.label || faq.pageSlug}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <button onClick={() => handleToggle(faq)} className={`px-3 py-1 rounded-full text-xs font-medium ${faq.isActive ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
+                            {faq.isActive ? "Active" : "Inactive"}
+                          </button>
+                        </td>
+                        <td className="p-4 text-slate-400">{faq.sortOrder}</td>
+                        <td className="p-4">
+                          <div className="flex gap-2">
+                            <button onClick={() => { setEditingFAQ(faq); setShowModal(true); }} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white">
+                              <span className="material-symbols-outlined text-sm">edit</span>
+                            </button>
+                            <button onClick={() => handleDelete(faq.id)} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-red-400">
+                              <span className="material-symbols-outlined text-sm">delete</span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {filteredFAQs.length === 0 && (
+                      <tr><td colSpan={5} className="p-8 text-center text-slate-400">No FAQs found</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </main>
@@ -193,16 +241,16 @@ function FAQModal({ faq, pageOptions, onSave, onClose }: { faq: FAQ | null; page
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Question</label>
-            <input type="text" value={form.question} onChange={(e) => setForm({ ...form, question: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" placeholder="Enter the question..." />
+            <input type="text" value={form.question} onChange={(e) => setForm({ ...form, question: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" placeholder="Enter the question…" />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Answer</label>
-            <textarea value={form.answer} onChange={(e) => setForm({ ...form, answer: e.target.value })} rows={4} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white resize-none" placeholder="Enter the answer..." />
+            <textarea value={form.answer} onChange={(e) => setForm({ ...form, answer: e.target.value })} rows={4} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white resize-none" placeholder="Enter the answer…" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Sort Order</label>
-              <input type="number" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: parseInt(e.target.value) })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+              <input type="number" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: parseInt(e.target.value) || 0 })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
             </div>
             <div className="flex items-center gap-4 pt-6">
               <label className="flex items-center gap-2 cursor-pointer">
