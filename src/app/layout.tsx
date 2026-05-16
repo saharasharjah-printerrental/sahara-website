@@ -11,9 +11,13 @@ export const metadata: Metadata = {
   keywords: "printer rental dubai, photocopier rental sharjah, copier lease uae, printer amc dubai, printer rental from AED 250, zero deposit printer rental uae, free toner printer rental, printer repair uae, photocopier rental abu dhabi, corporate printer rental uae",
   alternates: { canonical: "https://www.saharaprinter.com/" },
   icons: {
-    icon: "/images/sahara-navbar-logo.webp",
-    shortcut: "/images/sahara-navbar-logo.webp",
-    apple: "/images/sahara-navbar-logo.webp",
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "70x70", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Printer Rental UAE | AED 250/mo | Free Toner | Sahara",
@@ -306,6 +310,11 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
