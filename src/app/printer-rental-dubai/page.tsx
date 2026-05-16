@@ -193,7 +193,7 @@ export default async function PrinterRentalDubai() {
                   Get Dubai Quote
                 </a>
                 <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors flex items-center gap-2">
-                  ðŸ"ž +971 50 382 3969
+                  📞 +971 50 382 3969
                 </a>
               </div>
             </div>
@@ -227,7 +227,7 @@ export default async function PrinterRentalDubai() {
                 </div>
                 <div className="text-center mb-6 space-y-1">
                   <p className="text-slate-400 text-xs">ðŸ‘¥ {tier.users}</p>
-                  <p className="text-slate-400 text-xs">ðŸ"„ {tier.volume}</p>
+                  <p className="text-slate-400 text-xs">🔄 {tier.volume}</p>
                 </div>
                 <ul className="space-y-2 mb-8 flex-1">
                   {tier.includes.map((item, j) => (
@@ -291,7 +291,7 @@ export default async function PrinterRentalDubai() {
           <div className="flex flex-wrap justify-center gap-3">
             {dubaiAreas.map((area, i) => (
               <span key={i} className="px-4 py-2 rounded-full text-sm text-[#d3c5b0] font-medium border border-white/8 bg-white/3 hover:border-[#f5be53]/30 hover:text-white transition-all">
-                ðŸ" {area}
+                📍 {area}
               </span>
             ))}
           </div>
@@ -493,7 +493,7 @@ export default async function PrinterRentalDubai() {
                 Get Free Dubai Quote
               </a>
               <a href="tel:+971503823969" className="bg-white/20 border border-[#412d00]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:bg-white/30 transition-colors">
-                ðŸ"ž Call Now
+                📞 Call Now
               </a>
             </div>
           </div>
