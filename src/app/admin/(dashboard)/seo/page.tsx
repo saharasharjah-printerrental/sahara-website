@@ -50,6 +50,53 @@ export default function AdminSEO() {
   const [error, setError] = useState("");
   const { showToast, ToastElement } = useToast();
 
+  // Schema Inspector state
+  const [schemaUrl, setSchemaUrl] = useState("https://www.saharaprinter.com/");
+  const [fetchedSchemas, setFetchedSchemas] = useState<object[]>([]);
+  const [schemaFetching, setSchemaFetching] = useState(false);
+  const [schemaFetchedAt, setSchemaFetchedAt] = useState("");
+  const [schemaFetchError, setSchemaFetchError] = useState("");
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+
+  const handleFetchSchema = async () => {
+    setSchemaFetching(true);
+    setSchemaFetchError("");
+    setFetchedSchemas([]);
+    setExpandedIdx(null);
+    try {
+      const res = await fetch(`/api/admin/fetch-schema/?url=${encodeURIComponent(schemaUrl)}`);
+      const data = await res.json() as { schemas?: object[]; fetchedAt?: string; error?: string };
+      if (data.error) throw new Error(data.error);
+      setFetchedSchemas(data.schemas ?? []);
+      setSchemaFetchedAt(data.fetchedAt ? new Date(data.fetchedAt).toLocaleString() : "");
+      if ((data.schemas ?? []).length === 0) setSchemaFetchError("No JSON-LD schemas found on this page.");
+    } catch (e) {
+      setSchemaFetchError(e instanceof Error ? e.message : "Fetch failed");
+    } finally {
+      setSchemaFetching(false);
+    }
+  };
+
+  const loadIntoOrgEditor = (schema: object) => {
+    set("organizationSchema", JSON.stringify(schema, null, 2));
+    document.getElementById("org-schema-editor")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const schemaTypeLabel = (s: object): string => {
+    const t = (s as any)["@type"];
+    if (!t) return "Unknown type";
+    if (t === "FAQPage") return `FAQPage — ${((s as any).mainEntity?.length ?? 0)} questions`;
+    if (Array.isArray(t)) return t.join(", ");
+    return t;
+  };
+
+  const isOrgSchema = (s: object): boolean => {
+    const t = (s as any)["@type"];
+    const orgTypes = ["Organization", "LocalBusiness", "ProfessionalService"];
+    if (Array.isArray(t)) return t.some((x: string) => orgTypes.includes(x));
+    return orgTypes.includes(t);
+  };
+
   useEffect(() => {
     const load = async () => {
       try {
@@ -339,8 +386,84 @@ export default function AdminSEO() {
               </div>
             </section>
 
+            {/* Schema Inspector */}
+            <section className="glass-card rounded-2xl p-6 space-y-4">
+              <div>
+                <h2 className="text-lg font-bold text-white">Live Schema Inspector</h2>
+                <p className="text-sm text-slate-400 mt-1">
+                  Fetch and inspect the JSON-LD schemas currently on any saharaprinter.com page
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={schemaUrl}
+                  onChange={(e) => setSchemaUrl(e.target.value)}
+                  placeholder="https://www.saharaprinter.com/"
+                  className={`${inputClass} flex-1`}
+                />
+                <button
+                  type="button"
+                  onClick={handleFetchSchema}
+                  disabled={schemaFetching}
+                  className="px-4 py-2 bg-[#f5be53] text-[#412d00] font-bold rounded-xl hover:bg-[#c8962e] transition-colors disabled:opacity-50 whitespace-nowrap"
+                >
+                  {schemaFetching ? "Fetching..." : "Fetch Schema"}
+                </button>
+              </div>
+
+              {schemaFetchError && (
+                <p className="text-red-400 text-sm">{schemaFetchError}</p>
+              )}
+
+              {fetchedSchemas.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-xs text-slate-500">
+                    Found {fetchedSchemas.length} schema{fetchedSchemas.length !== 1 ? "s" : ""} — fetched at {schemaFetchedAt}
+                  </p>
+                  {fetchedSchemas.map((schema, i) => (
+                    <div key={i} className="bg-[#101c2e] rounded-xl border border-white/10 overflow-hidden">
+                      <div className="flex items-center justify-between px-4 py-3">
+                        <span className="text-white font-medium text-sm">{schemaTypeLabel(schema)}</span>
+                        <div className="flex items-center gap-2">
+                          {isOrgSchema(schema) && (
+                            <button
+                              type="button"
+                              onClick={() => loadIntoOrgEditor(schema)}
+                              className="text-xs px-2 py-1 rounded bg-[#f5be53]/20 text-[#f5be53] hover:bg-[#f5be53]/40 transition-colors"
+                            >
+                              Load into Org Editor
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => navigator.clipboard.writeText(JSON.stringify(schema, null, 2))}
+                            className="text-xs px-2 py-1 rounded bg-white/10 text-slate-300 hover:text-white transition-colors"
+                          >
+                            Copy
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}
+                            className="text-xs px-2 py-1 rounded bg-white/10 text-slate-300 hover:text-white transition-colors"
+                          >
+                            {expandedIdx === i ? "Collapse" : "Expand"}
+                          </button>
+                        </div>
+                      </div>
+                      {expandedIdx === i && (
+                        <pre className="px-4 pb-4 text-xs text-slate-300 font-mono overflow-x-auto max-h-64 overflow-y-auto">
+                          {JSON.stringify(schema, null, 2)}
+                        </pre>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
             {/* Site-Wide Organization Schema */}
-            <section className="glass-card rounded-2xl p-6">
+            <section id="org-schema-editor" className="glass-card rounded-2xl p-6">
               <div className="mb-4">
                 <h2 className="text-lg font-bold text-white">Site-Wide Organization Schema</h2>
                 <p className="text-sm text-slate-400 mt-1">
