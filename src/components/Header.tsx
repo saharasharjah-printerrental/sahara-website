@@ -88,7 +88,7 @@ export default function Header() {
 
   useEffect(() => {
     // Load settings from D1 API first
-    fetch('/api/settings')
+    fetch('/api/settings/')
       .then(res => res.json())
       .then(data => {
         if (data.settings && Object.keys(data.settings).length > 0) {

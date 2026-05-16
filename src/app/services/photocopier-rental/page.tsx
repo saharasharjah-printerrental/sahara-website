@@ -1,12 +1,42 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import MobileNav from "@/components/MobileNav";
 
-export const metadata: Metadata = {
+interface FAQItem { q: string; a: string; }
+
+async function getFaqsFromD1(): Promise<FAQItem[]> {
+  try {
+    const env = getRequestContext().env as any;
+    if (!env?.DB) return DEFAULT_FAQS;
+    const result = await env.DB.prepare(
+      "SELECT question, answer FROM faqs WHERE pageSlug = ? AND isActive = 1 ORDER BY sortOrder ASC"
+    ).bind("services/photocopier-rental").all();
+    if (result?.results?.length > 0) {
+      return result.results.map((r: any) => ({ q: r.question, a: r.answer }));
+    }
+    return DEFAULT_FAQS;
+  } catch {
+    return DEFAULT_FAQS;
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const faqs = await getFaqsFromD1();
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(f => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+  return {
   title: "Photocopier Rental UAE | A3 Copier Lease Dubai Sharjah | Sahara",
   description: "Rent A3 multifunction photocopiers in Dubai, Sharjah, Abu Dhabi. Canon imageRUNNER, Kyocera TASKalfa — print, copy, scan, fax in one device. From AED 500/month. Zero deposit. Call +971503823969.",
   keywords: "photocopier rental dubai, copier rental sharjah, A3 photocopier lease uae, multifunction copier rental dubai, canon imagerunner rental uae, kyocera copier rental dubai, photocopier lease abu dhabi",
@@ -19,8 +49,10 @@ export const metadata: Metadata = {
     locale: "en_AE",
     type: "website",
   },
-  alternates: { canonical: "https://www.saharaprinter.com/services/photocopier-rental/" },
-};
+    alternates: { canonical: "https://www.saharaprinter.com/services/photocopier-rental/" },
+    other: { "script:ld+json": JSON.stringify(faqSchema) },
+  };
+}
 
 const serviceSchema = {
   "@context": "https://schema.org",
@@ -67,7 +99,7 @@ const howToSchema = {
   ]
 };
 
-const faqData = [
+const DEFAULT_FAQS: FAQItem[] = [
   {
     q: "What is the difference between photocopier rental and printer rental?",
     a: "A photocopier (multifunction device / MFP) combines high-volume copying, printing, scanning, and faxing in a single A3-capable device — designed for shared office use by 10–50+ people. A desktop printer is typically A4-only and serves 1–5 users. Photocopiers process thousands of pages daily at a lower cost-per-page (CPP) than desktop printers, making them more cost-effective for document-intensive offices."
@@ -117,16 +149,6 @@ const faqData = [
     a: "Cost-per-page (CPP) is the total monthly cost divided by your print/copy volume. With Sahara's all-inclusive rental, your effective CPP includes the machine, toner, maintenance, and parts — typically AED 0.02–0.05 per black-and-white page and AED 0.15–0.25 per color page, depending on volume and model. This is 30–50% lower than the total cost of owning and maintaining your own copier."
   }
 ];
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqData.map(f => ({
-    "@type": "Question",
-    "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
-  }))
-};
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -205,12 +227,12 @@ const workflowFeatures = [
   { title: "Mobile Printing", desc: "AirPrint, Google Cloud Print, and manufacturer apps for printing directly from phones and tablets." },
 ];
 
-export default function PhotocopierRentalPage() {
+export default async function PhotocopierRentalPage() {
+  const faqs = await getFaqsFromD1();
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
@@ -469,7 +491,7 @@ export default function PhotocopierRentalPage() {
           <p className="text-[#7a94ad] text-sm mt-3 max-w-md mx-auto">12 questions covering cost, contracts, connectivity, and everything in between.</p>
         </div>
         <div className="space-y-4">
-          {faqData.map((faq, i) => (
+          {faqs.map((faq, i) => (
             <details
               key={i}
               className="rounded-2xl p-6 group cursor-pointer"

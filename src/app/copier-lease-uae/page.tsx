@@ -18,17 +18,14 @@ export default function CopierLeaseUAE() {
     if (stored) {
       setSettings(JSON.parse(stored));
     }
-    
-    const faqStored = localStorage.getItem("sahara_faqs");
-    if (faqStored) {
-      const allFaqs = JSON.parse(faqStored);
-      const pageFaqs = allFaqs.filter((f: any) => f.pageSlug === "copier-lease-uae" && f.isActive)
-        .sort((a: any, b: any) => a.sortOrder - b.sortOrder)
-        .map((f: any) => ({ q: f.question, a: f.answer }));
-      setFaqs(pageFaqs.length > 0 ? pageFaqs : defaultFaqs);
-    } else {
-      setFaqs(defaultFaqs);
-    }
+
+    fetch(`/api/faqs/?pageSlug=${encodeURIComponent("copier-lease-uae")}`)
+      .then(r => r.json())
+      .then(data => {
+        const rows: any[] = data.faqs ?? [];
+        setFaqs(rows.length > 0 ? rows.map((f: any) => ({ q: f.question, a: f.answer })) : defaultFaqs);
+      })
+      .catch(() => setFaqs(defaultFaqs));
   }, []);
 
   const defaultFaqs = [

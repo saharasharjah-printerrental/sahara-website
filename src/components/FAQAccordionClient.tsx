@@ -15,23 +15,16 @@ export default function FAQAccordionClient({
   const [faqs, setFaqs] = useState<{ q: string; a: string }[]>(defaultFaqs);
 
   useEffect(() => {
-    const faqStored = localStorage.getItem("sahara_faqs");
-    if (faqStored) {
-      try {
-        const allFaqs = JSON.parse(faqStored);
-        const pageFaqs = allFaqs.filter(
-          (f: any) => f.pageSlug === pageSlug && f.isActive
-        );
-        const sorted = pageFaqs.sort(
-          (a: any, b: any) => a.sortOrder - b.sortOrder
-        );
-        if (sorted.length > 0) {
-          setFaqs(sorted.map((f: any) => ({ q: f.question, a: f.answer })));
+    if (!pageSlug) return;
+    fetch(`/api/faqs/?pageSlug=${encodeURIComponent(pageSlug)}`)
+      .then(r => r.json())
+      .then(data => {
+        const rows: any[] = data.faqs ?? [];
+        if (rows.length > 0) {
+          setFaqs(rows.map((f: any) => ({ q: f.question, a: f.answer })));
         }
-      } catch {
-        // Use default
-      }
-    }
+      })
+      .catch(() => {});
   }, [pageSlug]);
 
   if (faqs.length === 0) return null;
