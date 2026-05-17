@@ -49,7 +49,7 @@ const organizationSchema = {
   "alternateName": ["Sahara Printer", "Sahara Printers UAE", "Sahara Office Equipment Trading LLC"],
   "slogan": "Rent, Buy, or Repair — All Under One Roof",
   "disambiguatingDescription": "Sahara Office Equipment Trading LLC (saharaprinter.com) is a printer rental and copier leasing company in Sharjah, UAE — not to be confused with Sahara Gulf Printing Press LLC (saharagulf.com), a commercial print shop in Al Quoz, Dubai.",
-  "url": "https://saharaprinter.com",
+  "url": "https://www.saharaprinter.com",
   "logo": {
     "@type": "ImageObject",
     "url": "https://www.saharaprinter.com/images/sahara-navbar-logo.webp",
@@ -275,7 +275,7 @@ function parseScripts(html: string): ParsedScript[] {
     hasTag = true;
     const srcMatch = m[1].match(/src=["']([^"']+)["']/i);
     const body = m[2].trim();
-    if (srcMatch) out.push({ src: srcMatch[1], isAsync: /\basync\b/i.test(m[1]) });
+    if (srcMatch) out.push({ src: srcMatch[1].trim(), isAsync: /\basync\b/i.test(m[1]) });
     else if (body) out.push({ inline: body });
   }
   if (!hasTag && html.trim()) out.push({ inline: html.trim() });

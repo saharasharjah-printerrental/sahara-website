@@ -74,9 +74,11 @@ const defaultHomeFaqs = [
 export default function HomepageClient({
   initialLogos = [],
   initialTestimonials = [],
+  initialFaqs = [],
 }: {
   initialLogos?: any[];
   initialTestimonials?: any[];
+  initialFaqs?: { q: string; a: string }[];
 }) {
   return (
     <>
@@ -89,7 +91,7 @@ export default function HomepageClient({
       <FeaturedProductsSection />
       <ReviewsSectionContent initialTestimonials={initialTestimonials} />
       <CTASection />
-      <FAQSectionContent />
+      <FAQSectionContent initialFaqs={initialFaqs} />
     </>
   );
 }
@@ -110,7 +112,7 @@ function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#071325] to-transparent z-0" />
 
       <div className="w-full max-w-3xl relative z-10 space-y-8">
-        <h1 className="sr-only">Printer Rental Dubai & UAE | Photocopier Leasing Services</h1>
+        <h1 className="sr-only">Printer Rental Dubai &amp; UAE | Photocopier Leasing Services</h1>
         <CipherText
           text="Rent, Buy, or Repair"
           textSize="text-2xl sm:text-3xl md:text-7xl"
@@ -124,6 +126,10 @@ function HeroSection() {
           className="mb-4 drop-shadow-[0_2px_24px_rgba(0,0,0,0.8)]"
           delay={1500}
         />
+        <div className="aeo-block bg-[#0d1b2e]/80 border border-[#f5be53]/20 rounded-xl p-4 max-w-lg">
+          <span className="text-[#f5be53] font-bold text-xs uppercase tracking-widest block mb-1">Printer Rental UAE — Quick Answer</span>
+          <p className="text-[#d3c5b0] text-sm leading-relaxed">Sahara Office Equipments provides printer and photocopier rental across UAE from <strong>AED 250/month</strong> with zero deposit, free toner, and 4-hour emergency support since 2012.</p>
+        </div>
         <p className="text-lg md:text-xl text-white/90 max-w-xl leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
           Premium office equipment solutions for the modern executive. From high-speed printing to expert technical support, we power your productivity with precision.
         </p>
@@ -206,6 +212,13 @@ function BrandCarouselSection({ initialLogos = [] }: { initialLogos?: any[] }) {
       <div className="text-center mb-8">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
       </div>
+      <noscript>
+        <div className="flex gap-8 flex-wrap justify-center px-4 py-2">
+          {FALLBACK_LOGOS.map((logo) => (
+            <img key={logo.id} src={logo.imageUrl} alt={logo.name} height="40" className="max-h-10 object-contain opacity-70" />
+          ))}
+        </div>
+      </noscript>
       <div
         className="relative overflow-hidden"
         onMouseEnter={() => (pausedRef.current = true)}
@@ -549,12 +562,12 @@ function CTASection() {
   );
 }
 
-function FAQSectionContent() {
-  const [faqs, setFaqs] = useState<{ q: string; a: string }[]>(defaultHomeFaqs);
-  const [loading, setLoading] = useState(true);
+function FAQSectionContent({ initialFaqs = [] }: { initialFaqs?: { q: string; a: string }[] }) {
+  const [faqs, setFaqs] = useState<{ q: string; a: string }[]>(
+    initialFaqs.length > 0 ? initialFaqs : defaultHomeFaqs
+  );
 
   useEffect(() => {
-    // Fetch fresh FAQs from API - no localStorage caching for real-time updates
     fetch("/api/faqs?pageSlug=homepage")
       .then((res) => res.json())
       .then((data) => {
@@ -564,14 +577,9 @@ function FAQSectionContent() {
             a: f.answer,
           }));
           setFaqs(mapped);
-        } else {
-          setFaqs(defaultHomeFaqs);
         }
       })
-      .catch(() => {
-        setFaqs(defaultHomeFaqs);
-      })
-      .finally(() => setLoading(false));
+      .catch(() => {});
   }, []);
 
   return (

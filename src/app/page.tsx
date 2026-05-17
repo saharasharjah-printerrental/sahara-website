@@ -27,15 +27,18 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   let initialLogos: any[] = [];
   let initialTestimonials: any[] = [];
+  let initialFaqs: { q: string; a: string }[] = [];
   try {
     const db = (getRequestContext().env as any).DB;
     if (db) {
-      const [lr, tr] = await Promise.all([
+      const [lr, tr, fr] = await Promise.all([
         db.prepare('SELECT * FROM logos WHERE isActive = 1 ORDER BY sortOrder ASC').all(),
         db.prepare('SELECT * FROM testimonials WHERE is_active = 1 ORDER BY sort_order ASC').all(),
+        db.prepare("SELECT question, answer FROM faqs WHERE pageSlug = 'homepage' AND isActive = 1 ORDER BY sortOrder ASC").all(),
       ]);
       if (lr?.results?.length > 0) initialLogos = lr.results;
       if (tr?.results?.length > 0) initialTestimonials = tr.results;
+      if (fr?.results?.length > 0) initialFaqs = (fr.results as any[]).map((f) => ({ q: f.question, a: f.answer }));
     }
   } catch { /* D1 unavailable in dev — components fall back to hardcoded defaults */ }
 
@@ -147,7 +150,7 @@ export default async function HomePage() {
 
 
       <Header />
-      <HomepageClient initialLogos={initialLogos} initialTestimonials={initialTestimonials} />
+      <HomepageClient initialLogos={initialLogos} initialTestimonials={initialTestimonials} initialFaqs={initialFaqs} />
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

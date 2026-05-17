@@ -153,8 +153,11 @@ const StatsClay = ({
                   className="text-4xl md:text-5xl font-bold mb-2"
                   style={{ color: accentColor }}
                 >
-                  <CountUp to={number} duration={2} separator="," />
-                  {suffix}
+                  <span aria-hidden="true">
+                    <CountUp to={number} duration={2} separator="," />
+                    {suffix}
+                  </span>
+                  <span className="sr-only">{stat.value}</span>
                 </div>
 
                 <div className="text-sm font-medium text-[#8a8a8a]">
