@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const db = getDB();
-  if (!db) return NextResponse.json({ error: 'Database not configured', faqs: [] }, { status: 200, headers: CACHE_CONTROL });
+  if (!db) return NextResponse.json({ error: 'Database not configured', faqs: [] }, { status: 500, headers: CACHE_CONTROL });
 
   try {
     const body = await request.json() as any;
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     await db.prepare(`
       INSERT OR REPLACE INTO faqs (id, pageSlug, question, answer, sortOrder, isActive, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?)
-    `).run(id, body.pageSlug, body.question, body.answer, body.sortOrder || 0, body.isActive ?? 1, now);
+    `).bind(id, body.pageSlug, body.question, body.answer, body.sortOrder || 0, body.isActive ?? 1, now).run();
 
     return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
   } catch (error) {
@@ -61,13 +61,13 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const db = getDB();
-  if (!db) return NextResponse.json({ error: 'Database not configured', faqs: [] }, { status: 200, headers: CACHE_CONTROL });
+  if (!db) return NextResponse.json({ error: 'Database not configured', faqs: [] }, { status: 500, headers: CACHE_CONTROL });
 
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'FAQ ID required' }, { status: 400 });
-    await db.prepare('DELETE FROM faqs WHERE id = ?').run(id);
+    await db.prepare('DELETE FROM faqs WHERE id = ?').bind(id).run();
     return NextResponse.json({ success: true }, { headers: CACHE_CONTROL });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete FAQ', details: String(error) }, { status: 500 });

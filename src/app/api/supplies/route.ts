@@ -66,7 +66,7 @@ export async function DELETE(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Supply ID required' }, { status: 400 });
-    await db.prepare('DELETE FROM supplies WHERE id = ?').run(id);
+    await db.prepare('DELETE FROM supplies WHERE id = ?').bind(id).run();
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete supply', details: String(error) }, { status: 500 });

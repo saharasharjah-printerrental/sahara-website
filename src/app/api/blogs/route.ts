@@ -122,7 +122,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Blog ID required' }, { status: 400 });
     }
 
-    await db.prepare('DELETE FROM blogs WHERE id = ?').run(id);
+    await db.prepare('DELETE FROM blogs WHERE id = ?').bind(id).run();
     return NextResponse.json({ success: true }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Blogs DELETE Error:', error);

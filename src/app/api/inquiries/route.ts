@@ -61,11 +61,11 @@ export async function PATCH(request: NextRequest) {
     if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
 
     if (status !== undefined && notes !== undefined) {
-      await db.prepare('UPDATE inquiries SET status = ?, notes = ? WHERE id = ?').run(status, notes, id);
+      await db.prepare('UPDATE inquiries SET status = ?, notes = ? WHERE id = ?').bind(status, notes, id).run();
     } else if (status !== undefined) {
-      await db.prepare('UPDATE inquiries SET status = ? WHERE id = ?').run(status, id);
+      await db.prepare('UPDATE inquiries SET status = ? WHERE id = ?').bind(status, id).run();
     } else if (notes !== undefined) {
-      await db.prepare('UPDATE inquiries SET notes = ? WHERE id = ?').run(notes, id);
+      await db.prepare('UPDATE inquiries SET notes = ? WHERE id = ?').bind(notes, id).run();
     }
 
     return NextResponse.json({ success: true });

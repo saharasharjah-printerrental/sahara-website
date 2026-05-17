@@ -187,12 +187,8 @@ function BrandCarouselSection({ initialLogos = [] }: { initialLogos?: any[] }) {
     posRef.current = 0;
     track.style.transform = "translateX(0px)";
     const SPEED = 0.5;
-    // Calculate total width of original items (first set)
-    let totalWidth = 0;
-    for (let i = 0; i < logos.length; i++) {
-      const el = track.children[i] as HTMLElement;
-      if (el) totalWidth += el.offsetWidth + 48; // 48 = gap-12
-    }
+    // Fixed pitch: w-32 (128px) + gap-12 (48px) = 176px per item — avoids lazy-image width=0 bug
+    const totalWidth = logos.length * 176;
     const step = () => {
       if (!pausedRef.current) {
         posRef.current += SPEED;
@@ -490,12 +486,8 @@ function ReviewsSectionContent({ initialTestimonials = [] }: { initialTestimonia
     posRef.current = 0;
     track.style.transform = "translateX(0px)";
     const SPEED = 0.6;
-    // Calculate total width of original items (first set)
-    let totalWidth = 0;
-    for (let i = 0; i < testimonials.length; i++) {
-      const el = track.children[i] as HTMLElement;
-      if (el) totalWidth += el.offsetWidth + 24; // 24 = gap-6
-    }
+    // Fixed pitch: w-[350px] (350px) + gap-6 (24px) = 374px per card — avoids measurement timing issues
+    const totalWidth = testimonials.length * 374;
     const step = () => {
       if (!pausedRef.current) {
         posRef.current += SPEED;

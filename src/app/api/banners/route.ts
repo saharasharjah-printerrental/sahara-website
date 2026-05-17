@@ -70,7 +70,7 @@ export async function DELETE(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Banner ID required' }, { status: 400 });
-    await db.prepare('DELETE FROM banners WHERE id = ?').run(id);
+    await db.prepare('DELETE FROM banners WHERE id = ?').bind(id).run();
     return NextResponse.json({ success: true }, { headers: CACHE_CONTROL });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete banner', details: String(error) }, { status: 500 });

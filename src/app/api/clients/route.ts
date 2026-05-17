@@ -78,7 +78,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     if (!id) return NextResponse.json({ error: 'Client ID required' }, { status: 400 });
-    await db.prepare('DELETE FROM clients WHERE id = ?').run(id);
+    await db.prepare('DELETE FROM clients WHERE id = ?').bind(id).run();
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Clients DELETE Error:', error);

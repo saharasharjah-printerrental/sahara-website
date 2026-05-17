@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     await db.prepare(`
       INSERT OR REPLACE INTO testimonials (id, name, role, company, text, rating, image_url, is_active, sort_order, created_at, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id,
       body.name,
       body.role || '',
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
       body.is_active ?? body.isActive ?? 1,
       body.sort_order ?? body.sortOrder ?? 0,
       now, now
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
   } catch (error) {
@@ -74,7 +74,7 @@ export async function DELETE(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Testimonial ID required' }, { status: 400 });
-    await db.prepare('DELETE FROM testimonials WHERE id = ?').run(id);
+    await db.prepare('DELETE FROM testimonials WHERE id = ?').bind(id).run();
     return NextResponse.json({ success: true }, { headers: CACHE_CONTROL });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete testimonial', details: String(error) }, { status: 500 });

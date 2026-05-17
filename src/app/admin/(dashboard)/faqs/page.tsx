@@ -263,7 +263,7 @@ function FAQModal({ faq, pageOptions, onSave, onClose }: { faq: FAQ | null; page
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Sort Order</label>
-              <input type="number" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: parseInt(e.target.value) })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+              <input type="number" value={form.sortOrder} onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) || 0 })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
             </div>
             <div className="flex items-center gap-4 pt-6">
               <label className="flex items-center gap-2 cursor-pointer">

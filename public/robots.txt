@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /api/
+Disallow: /api/admin/
+Disallow: /api/auth/
+Disallow: /api/analytics/ping
 
 Sitemap: https://www.saharaprinter.com/sitemap.xml
