@@ -18,7 +18,7 @@ export async function GET() {
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({ error: 'Database not configured', logos: [] }, { headers: CACHE_CONTROL });
+    return NextResponse.json({ error: 'Database not configured', logos: [] }, { status: 200, headers: CACHE_CONTROL });
   }
 
   try {

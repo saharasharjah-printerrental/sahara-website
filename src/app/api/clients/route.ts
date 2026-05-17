@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+    return NextResponse.json({ error: 'Database not configured', clients: [] }, { status: 200 });
   }
 
   try {
@@ -61,7 +61,7 @@ export async function DELETE(request: NextRequest) {
   const db = getDB();
 
   if (!db) {
-    return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+    return NextResponse.json({ error: 'Database not configured', clients: [] }, { status: 200 });
   }
 
   try {

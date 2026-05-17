@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const db = getDB();
-  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+  if (!db) return NextResponse.json({ error: 'Database not configured', faqs: [] }, { status: 200, headers: CACHE_CONTROL });
 
   try {
     const body = await request.json() as any;
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const db = getDB();
-  if (!db) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+  if (!db) return NextResponse.json({ error: 'Database not configured', faqs: [] }, { status: 200, headers: CACHE_CONTROL });
 
   try {
     const { searchParams } = new URL(request.url);
