@@ -30,7 +30,7 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Testimonials GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch testimonials', testimonials: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch testimonials', testimonials: [] }, { status: 200 });
   }
 }
 

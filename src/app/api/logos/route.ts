@@ -26,7 +26,7 @@ export async function GET() {
     return NextResponse.json({ logos: result?.results ?? [] }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Logos GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch logos', logos: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch logos', logos: [] }, { status: 200 });
   }
 }
 

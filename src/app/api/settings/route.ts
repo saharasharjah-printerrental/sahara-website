@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
     console.error('[/api/settings] Error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch settings', settings: {} },
-      { status: 500, headers: CACHE_CONTROL }
+      { status: 200, headers: CACHE_CONTROL }
     );
   }
 }

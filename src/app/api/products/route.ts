@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ products: (result?.results ?? []).map(dbRowToProduct) }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Products GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch products', products: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch products', products: [] }, { status: 200 });
   }
 }
 

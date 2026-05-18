@@ -23,7 +23,7 @@ export async function GET() {
     return NextResponse.json({ clients: result?.results ?? [] });
   } catch (error) {
     console.error('Clients GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch clients', clients: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch clients', clients: [] }, { status: 200 });
   }
 }
 

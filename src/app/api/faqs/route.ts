@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ faqs: result?.results ?? [] }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('FAQs GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch FAQs', faqs: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch FAQs', faqs: [] }, { status: 200 });
   }
 }
 

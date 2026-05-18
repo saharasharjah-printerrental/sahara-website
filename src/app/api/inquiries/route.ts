@@ -47,7 +47,7 @@ export async function GET() {
     return NextResponse.json({ inquiries: result?.results ?? [] });
   } catch (error) {
     console.error('Inquiries GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch inquiries', inquiries: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch inquiries', inquiries: [] }, { status: 200 });
   }
 }
 

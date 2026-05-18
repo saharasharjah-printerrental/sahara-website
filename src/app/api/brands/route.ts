@@ -30,7 +30,7 @@ export async function GET() {
     return NextResponse.json({ brands: mapped });
   } catch (error) {
     console.error('Brands GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch brands', brands: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch brands', brands: [] }, { status: 200 });
   }
 }
 

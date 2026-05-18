@@ -62,3 +62,7 @@ video-frames/
 
 # Claude
 .claude/worktrees/
+.claude/settings.local.json
+
+# External tools / subproject clones
+claude-seo/

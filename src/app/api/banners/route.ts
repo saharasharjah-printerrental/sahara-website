@@ -33,7 +33,7 @@ export async function GET() {
     return NextResponse.json({ banners: mapped }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Banners GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch banners', banners: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch banners', banners: [] }, { status: 200 });
   }
 }
 

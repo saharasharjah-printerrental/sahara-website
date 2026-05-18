@@ -36,6 +36,6 @@ export async function GET() {
     return NextResponse.json({
       error: 'Failed to fetch CMS data',
       data: []
-    }, { status: 500 });
+    }, { status: 200 });
   }
 }

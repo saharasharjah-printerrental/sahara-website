@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ supplies: result?.results ?? [] });
   } catch (error) {
     console.error('Supplies GET Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch supplies', supplies: [] }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch supplies', supplies: [] }, { status: 200 });
   }
 }
 
