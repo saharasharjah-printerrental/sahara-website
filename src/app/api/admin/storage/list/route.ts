@@ -2,9 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  const env = getRequestContext().env as any;
+  let env: any;
+  try {
+    env = getRequestContext().env;
+  } catch {
+    return NextResponse.json({ images: [], nextCursor: null });
+  }
   const { searchParams } = new URL(request.url);
   const cursor = searchParams.get('cursor') || undefined;
   const limit = 48;

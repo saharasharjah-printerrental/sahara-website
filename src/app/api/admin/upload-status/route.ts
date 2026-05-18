@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 async function getCloudinaryCreds(env: any): Promise<{ cn: string; ak: string; as: string }> {
   let cn = env.CLOUDINARY_CLOUD_NAME || '';
@@ -27,7 +28,15 @@ async function getCloudinaryCreds(env: any): Promise<{ cn: string; ak: string; a
 }
 
 export async function GET() {
-  const env = getRequestContext().env as any;
+  let env: any;
+  try {
+    env = getRequestContext().env;
+  } catch {
+    return NextResponse.json({
+      cloudinary: { status: 'missing', reason: 'CF environment not available' },
+      r2: { status: 'missing', reason: 'CF environment not available' },
+    });
+  }
   const { cn, ak, as } = await getCloudinaryCreds(env);
 
   // --- Cloudinary ---

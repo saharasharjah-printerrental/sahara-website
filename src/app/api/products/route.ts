@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { normalizeR2Url } from '@/lib/r2url';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 function getDB() {
   try {
@@ -62,7 +64,7 @@ function dbRowToProduct(p: any) {
     priceSale: p.price_sale ? formatPrice(p.price_sale) : (p.price_sale === 0 ? 'Contact for Pricing' : 'Contact for Pricing'),
     priceRental: p.price_rental ? formatPrice(p.price_rental, '/mo') : 'Contact for Pricing',
     specs,
-    image,
+    image: normalizeR2Url(image),
     isActive: p.is_active,
     isFeatured: p.is_featured,
     description: p.description,

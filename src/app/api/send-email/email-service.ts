@@ -52,7 +52,7 @@ export async function getSmtpConfig(): Promise<SmtpConfig | null> {
       .bind(...keys)
       .all();
 
-    const rows: any[] = result?.results ?? result ?? [];
+    const rows: any[] = result?.results ?? [];
     const map: Record<string, string> = {};
     rows.forEach((r: any) => { map[r.key] = r.value; });
 
@@ -186,7 +186,10 @@ async function sendViaSmtpSocket(
     ].join('\r\n');
 
     await session.send(mime);
-    await session.readResponse(); // 250 OK
+    const dataResp = await session.readResponse();
+    if (dataResp.code !== 250) {
+      throw new Error(`Email rejected by server: ${dataResp.code} ${dataResp.lines[0]}`);
+    }
 
     await session.send('QUIT');
     await writer.close().catch(() => {});

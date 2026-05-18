@@ -3,6 +3,7 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 import { getSmtpConfig, sendSimpleEmail } from '@/app/api/send-email/email-service';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 function getDB() {
   try {
@@ -43,10 +44,10 @@ export async function GET() {
           'SELECT * FROM brands WHERE is_active = 1 ORDER BY sort_order ASC'
         ).all();
         
-        lastCount = result.length;
+        lastCount = (result?.results ?? []).length;
         lastModified = new Date().toISOString();
-        
-        const initData = `data: ${JSON.stringify({ type: 'init', data: result })}\n\n`;
+
+        const initData = `data: ${JSON.stringify({ type: 'init', data: result?.results ?? [] })}\n\n`;
         controller.enqueue(initData);
       } catch (error) {
         console.error('SSE init error:', error);
@@ -59,15 +60,15 @@ export async function GET() {
             'SELECT * FROM brands WHERE is_active = 1 ORDER BY sort_order ASC'
           ).all();
           
-          const currentCount = result.length;
+          const currentCount = (result?.results ?? []).length;
           const now = new Date().toISOString();
-          
+
           // Check if data changed
           if (currentCount !== lastCount || now !== lastModified) {
             lastCount = currentCount;
             lastModified = now;
-            
-            const updateData = `data: ${JSON.stringify({ type: 'update', data: result })}\n\n`;
+
+            const updateData = `data: ${JSON.stringify({ type: 'update', data: result?.results ?? [] })}\n\n`;
             controller.enqueue(updateData);
           }
           

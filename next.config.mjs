@@ -14,6 +14,7 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     remotePatterns: [
+      { protocol: "https", hostname: "pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev" },
       { protocol: "https", hostname: "assets.saharaprinter.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
       { protocol: "https", hostname: "www.saharaprinter.com" },
