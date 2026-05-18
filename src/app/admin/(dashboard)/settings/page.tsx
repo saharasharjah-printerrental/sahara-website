@@ -16,6 +16,12 @@ interface SmtpSettings {
   smtpToEmail: string;
 }
 
+interface CloudinarySettings {
+  cloudName: string;
+  apiKey: string;
+  apiSecret: string;
+}
+
 interface Settings {
   companyName: string;
   companyEmail: string;
@@ -123,11 +129,15 @@ interface StorageHealth {
   r2: StorageProviderStatus;
 }
 
+const defaultCloudinary: CloudinarySettings = { cloudName: '', apiKey: '', apiSecret: '' };
+
 export default function AdminSettings() {
   const [settings, setSettings] = useState<Settings>(defaultSettings);
   const { showToast, ToastElement } = useToast();
   const [storageHealth, setStorageHealth] = useState<StorageHealth | null>(null);
   const [storageLoading, setStorageLoading] = useState(false);
+  const [cloudinarySettings, setCloudinarySettings] = useState<CloudinarySettings>(defaultCloudinary);
+  const [cloudinaryTesting, setCloudinaryTesting] = useState(false);
 
   const mergeWithDefaults = (stored: Partial<Settings>): Settings => {
     return {
@@ -182,6 +192,21 @@ export default function AdminSettings() {
         console.error("Error loading settings:", e);
       }
     })();
+
+    // Load Cloudinary credentials from D1
+    (async () => {
+      try {
+        const keys = ['cloudinary_cloud_name', 'cloudinary_api_key', 'cloudinary_api_secret'];
+        const results = await Promise.all(
+          keys.map(k => fetch(`/api/settings/?key=${k}`).then(r => r.json()))
+        );
+        setCloudinarySettings({
+          cloudName: results[0]?.setting?.value || '',
+          apiKey: results[1]?.setting?.value || '',
+          apiSecret: results[2]?.setting?.value || '',
+        });
+      } catch { /* silent */ }
+    })();
   }, []);
 
   const handleSave = async () => {
@@ -200,6 +225,9 @@ export default function AdminSettings() {
       { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
       { key: "notification_email", value: settings.smtp.smtpToEmail },
       { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
+      { key: "cloudinary_cloud_name", value: cloudinarySettings.cloudName },
+      { key: "cloudinary_api_key", value: cloudinarySettings.apiKey },
+      { key: "cloudinary_api_secret", value: cloudinarySettings.apiSecret },
     ];
 
     try {
@@ -396,6 +424,66 @@ export default function AdminSettings() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 pt-6">
+              <h2 className="text-lg font-bold text-white mb-1">Cloudinary Image Storage</h2>
+              <p className="text-xs text-slate-400 mb-4">Credentials saved here override Cloudflare environment variables — no redeploy needed.</p>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Cloud Name</label>
+                  <input
+                    type="text"
+                    value={cloudinarySettings.cloudName}
+                    onChange={(e) => setCloudinarySettings({ ...cloudinarySettings, cloudName: e.target.value })}
+                    placeholder="e.g. my-cloud"
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">API Key</label>
+                  <input
+                    type="text"
+                    value={cloudinarySettings.apiKey}
+                    onChange={(e) => setCloudinarySettings({ ...cloudinarySettings, apiKey: e.target.value })}
+                    placeholder="123456789012345"
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white font-mono"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">API Secret</label>
+                  <input
+                    type="password"
+                    value={cloudinarySettings.apiSecret}
+                    onChange={(e) => setCloudinarySettings({ ...cloudinarySettings, apiSecret: e.target.value })}
+                    placeholder="••••••••••••••••••••••••"
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white font-mono"
+                  />
+                </div>
+                <button
+                  type="button"
+                  disabled={cloudinaryTesting}
+                  onClick={async () => {
+                    setCloudinaryTesting(true);
+                    try {
+                      const res = await fetch('/api/admin/upload-status');
+                      const data = await res.json();
+                      const s = data?.cloudinary?.status;
+                      if (s === 'ok') showToast('success', `Cloudinary connected — cloud: ${data.cloudinary.cloudName}`);
+                      else if (s === 'missing') showToast('error', `Not configured: ${data.cloudinary.reason}`);
+                      else showToast('error', `Connection error: ${data.cloudinary.reason}`);
+                    } catch { showToast('error', 'Health check failed'); }
+                    finally { setCloudinaryTesting(false); }
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 bg-[#101c2e] border border-white/10 rounded-xl text-sm text-slate-300 hover:text-white hover:border-[#f5be53]/40 transition-colors disabled:opacity-50"
+                >
+                  <span className={`material-symbols-outlined text-base ${cloudinaryTesting ? 'animate-spin' : ''}`}>
+                    {cloudinaryTesting ? 'progress_activity' : 'cloud_done'}
+                  </span>
+                  {cloudinaryTesting ? 'Testing…' : 'Test Connection'}
+                </button>
+                <p className="text-xs text-slate-500">Save settings first, then test. Credentials are stored encrypted in D1.</p>
               </div>
             </div>
 

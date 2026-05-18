@@ -3,12 +3,29 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
-function getCloudinaryConfig() {
+async function getCloudinaryConfig() {
   const ctx = getRequestContext() as any;
   const env = ctx?.env || {};
-  const cloudName = env.CLOUDINARY_CLOUD_NAME || '';
-  const apiKey = env.CLOUDINARY_API_KEY || '';
-  const apiSecret = env.CLOUDINARY_API_SECRET || '';
+  let cloudName = env.CLOUDINARY_CLOUD_NAME || '';
+  let apiKey = env.CLOUDINARY_API_KEY || '';
+  let apiSecret = env.CLOUDINARY_API_SECRET || '';
+
+  // Fall back to D1-stored credentials
+  if ((!cloudName || !apiKey || !apiSecret) && env.DB) {
+    try {
+      const keys = ['cloudinary_cloud_name', 'cloudinary_api_key', 'cloudinary_api_secret'];
+      const placeholders = keys.map(() => '?').join(',');
+      const result = await env.DB.prepare(
+        `SELECT key, value FROM settings WHERE key IN (${placeholders})`
+      ).bind(...keys).all();
+      const map: Record<string, string> = {};
+      for (const r of result?.results ?? []) map[r.key] = r.value;
+      if (!cloudName) cloudName = map['cloudinary_cloud_name'] || '';
+      if (!apiKey) apiKey = map['cloudinary_api_key'] || '';
+      if (!apiSecret) apiSecret = map['cloudinary_api_secret'] || '';
+    } catch { /* D1 unavailable */ }
+  }
+
   if (!cloudName || !apiKey || !apiSecret || cloudName.startsWith('YOUR_')) {
     return null;
   }
@@ -96,7 +113,7 @@ async function uploadToCloudinary(
 }
 
 export async function POST(request: NextRequest) {
-  const config = getCloudinaryConfig();
+  const config = await getCloudinaryConfig();
 
   try {
     const contentType = request.headers.get('content-type') || '';
@@ -207,7 +224,7 @@ export async function DELETE(request: NextRequest) {
   // Cloudinary: URL like https://res.cloudinary.com/{cloud}/image/upload/{maybe-version}/{publicId}.ext
   const cm = url.match(/res\.cloudinary\.com\/([^/]+)\/image\/upload\/(?:v\d+\/)?(.+)\.\w+$/);
   if (cm) {
-    const config = getCloudinaryConfig();
+    const config = await getCloudinaryConfig();
     if (!config) return NextResponse.json({ error: 'Cloudinary not configured for delete' }, { status: 500 });
     const publicId = cm[2];
     const timestamp = Math.floor(Date.now() / 1000);

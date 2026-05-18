@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   if (env.SAHARA_ASSETS) {
     try {
       const r2PublicUrl = (env.R2_PUBLIC_URL || 'https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev').replace(/\/$/, '');
-      const listed = await (env.SAHARA_ASSETS as any).list({ prefix: 'uploads/', limit, cursor });
+      const listed = await (env.SAHARA_ASSETS as any).list({ limit, cursor });
       for (const obj of listed.objects ?? []) {
         images.push({
           url: `${r2PublicUrl}/${obj.key}`,
@@ -33,9 +33,23 @@ export async function GET(request: NextRequest) {
   }
 
   // --- Cloudinary ---
-  const cn = env.CLOUDINARY_CLOUD_NAME;
-  const ak = env.CLOUDINARY_API_KEY;
-  const as = env.CLOUDINARY_API_SECRET;
+  let cn = env.CLOUDINARY_CLOUD_NAME || '';
+  let ak = env.CLOUDINARY_API_KEY || '';
+  let as = env.CLOUDINARY_API_SECRET || '';
+  if ((!cn || !ak || !as) && env.DB) {
+    try {
+      const keys = ['cloudinary_cloud_name', 'cloudinary_api_key', 'cloudinary_api_secret'];
+      const placeholders = keys.map(() => '?').join(',');
+      const result = await env.DB.prepare(
+        `SELECT key, value FROM settings WHERE key IN (${placeholders})`
+      ).bind(...keys).all();
+      const map: Record<string, string> = {};
+      for (const r of result?.results ?? []) map[r.key] = r.value;
+      if (!cn) cn = map['cloudinary_cloud_name'] || '';
+      if (!ak) ak = map['cloudinary_api_key'] || '';
+      if (!as) as = map['cloudinary_api_secret'] || '';
+    } catch { /* D1 unavailable */ }
+  }
   if (cn && ak && as && !cn.startsWith('YOUR_')) {
     try {
       const params = new URLSearchParams({

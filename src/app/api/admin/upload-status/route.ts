@@ -3,11 +3,32 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
+async function getCloudinaryCreds(env: any): Promise<{ cn: string; ak: string; as: string }> {
+  let cn = env.CLOUDINARY_CLOUD_NAME || '';
+  let ak = env.CLOUDINARY_API_KEY || '';
+  let as = env.CLOUDINARY_API_SECRET || '';
+
+  // Fall back to D1-stored credentials if env vars are missing
+  if ((!cn || !ak || !as) && env.DB) {
+    try {
+      const keys = ['cloudinary_cloud_name', 'cloudinary_api_key', 'cloudinary_api_secret'];
+      const placeholders = keys.map(() => '?').join(',');
+      const result = await env.DB.prepare(
+        `SELECT key, value FROM settings WHERE key IN (${placeholders})`
+      ).bind(...keys).all();
+      const map: Record<string, string> = {};
+      for (const r of result?.results ?? []) map[r.key] = r.value;
+      if (!cn) cn = map['cloudinary_cloud_name'] || '';
+      if (!ak) ak = map['cloudinary_api_key'] || '';
+      if (!as) as = map['cloudinary_api_secret'] || '';
+    } catch { /* D1 unavailable */ }
+  }
+  return { cn, ak, as };
+}
+
 export async function GET() {
   const env = getRequestContext().env as any;
-  const cn = env.CLOUDINARY_CLOUD_NAME;
-  const ak = env.CLOUDINARY_API_KEY;
-  const as = env.CLOUDINARY_API_SECRET;
+  const { cn, ak, as } = await getCloudinaryCreds(env);
 
   // --- Cloudinary ---
   let cloudinaryStatus: 'ok' | 'error' | 'missing' = 'missing';

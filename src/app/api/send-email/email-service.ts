@@ -9,6 +9,17 @@ export interface QuoteEmailData {
   message: string;
   estimatedRange: string;
   notificationEmail: string;
+  // Calculator breakdown (optional — only sent from rental calculator)
+  baseRent?: string;
+  extraBwCost?: string;
+  extraColorCost?: string;
+  a3Surcharge?: string;
+  durationDiscount?: string;
+  totalContractValue?: string;
+  printType?: string;
+  paperFormat?: string;
+  bwVolume?: string;
+  colorVolume?: string;
 }
 
 export interface SmtpConfig {
@@ -240,11 +251,30 @@ async function sendOne(
 // ── HTML builders ─────────────────────────────────────────────────────────────
 
 function buildAdminHtml(data: QuoteEmailData): string {
+  const hasCalcBreakdown = !!(data.baseRent || data.totalContractValue);
+  const calcBreakdown = hasCalcBreakdown ? `
+  <div style="margin-top:24px">
+    <p style="margin:0 0 10px;color:#9ca3af;font-size:11px;text-transform:uppercase;letter-spacing:0.1em">Calculator Breakdown</p>
+    <table style="width:100%;border-collapse:collapse;background:#101c2e;border-radius:8px;overflow:hidden">
+      ${data.printType ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px;width:52%">Print Type</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.printType}</td></tr>` : ''}
+      ${data.paperFormat ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Paper Format</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.paperFormat}</td></tr>` : ''}
+      ${data.bwVolume ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">B&W Volume</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.bwVolume}</td></tr>` : ''}
+      ${data.colorVolume ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Colour Volume</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.colorVolume}</td></tr>` : ''}
+      ${data.baseRent ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Base Rent</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.baseRent}/mo</td></tr>` : ''}
+      ${data.extraBwCost ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Extra B&W Cost</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.extraBwCost}/mo</td></tr>` : ''}
+      ${data.extraColorCost ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Extra Colour Cost</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.extraColorCost}/mo</td></tr>` : ''}
+      ${data.a3Surcharge ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">A3 Surcharge</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.a3Surcharge}/mo</td></tr>` : ''}
+      ${data.durationDiscount ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Duration Discount</td><td style="padding:7px 12px;color:#d4f8d4;font-size:13px">-${data.durationDiscount}</td></tr>` : ''}
+      <tr style="background:#162236;border-top:1px solid #f5be53/30"><td style="padding:9px 12px;color:#f5be53;font-size:13px;font-weight:700">Monthly Total</td><td style="padding:9px 12px;color:#f5be53;font-size:16px;font-weight:700">${data.estimatedRange}/mo</td></tr>
+      ${data.totalContractValue ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:12px">Total Contract Value</td><td style="padding:7px 12px;color:#d7e3fc;font-size:12px">${data.totalContractValue}</td></tr>` : ''}
+    </table>
+  </div>` : '';
+
   return `<!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,sans-serif">
 <div style="max-width:600px;margin:24px auto;background:#071325;color:#d7e3fc;padding:32px;border-radius:12px">
-  <h2 style="color:#f5be53;margin-top:0;font-size:20px">📋 New Quote Request — Sahara Printers</h2>
+  <h2 style="color:#f5be53;margin-top:0;font-size:20px">New Quote Request — Sahara Printers</h2>
   <table style="width:100%;border-collapse:collapse;margin-top:16px">
     <tr><td style="padding:8px 0;color:#9ca3af;width:140px;vertical-align:top">Name</td><td style="padding:8px 0;color:#fff;font-weight:700">${data.customerName}</td></tr>
     <tr><td style="padding:8px 0;color:#9ca3af;vertical-align:top">Company</td><td style="padding:8px 0;color:#fff">${data.customerCompany || '—'}</td></tr>
@@ -253,6 +283,7 @@ function buildAdminHtml(data: QuoteEmailData): string {
     <tr><td style="padding:8px 0;color:#9ca3af;vertical-align:top">Configuration</td><td style="padding:8px 0;color:#fff">${data.configuration}</td></tr>
     <tr><td style="padding:8px 0;color:#9ca3af;vertical-align:top">Estimate</td><td style="padding:8px 0;color:#f5be53;font-weight:700;font-size:18px">${data.estimatedRange}/mo</td></tr>
   </table>
+  ${calcBreakdown}
   ${data.message ? `<div style="margin-top:20px;padding:16px;background:#101c2e;border-radius:8px;border-left:3px solid #f5be53"><p style="margin:0;color:#d3c5b0;font-style:italic">"${data.message}"</p></div>` : ''}
   <p style="margin-top:24px;font-size:11px;color:#4b5563;border-top:1px solid #1e2d42;padding-top:16px">Submitted via saharaprinter.com • ${new Date().toUTCString()}</p>
 </div>

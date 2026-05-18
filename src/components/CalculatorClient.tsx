@@ -358,6 +358,10 @@ export default function CalculatorClient() {
       setFormError(emailCheck.error ?? "Invalid email address");
       return;
     }
+    if (!formData.phone || !/^\d{9}$/.test(formData.phone)) {
+      setFormError("Enter a valid UAE mobile number (9 digits after +971)");
+      return;
+    }
     setSubmitting(true);
     const config = [
       `Print: ${printType.toUpperCase()}`,
@@ -373,12 +377,22 @@ export default function CalculatorClient() {
         body: JSON.stringify({
           customerName: formData.name,
           customerEmail: formData.email,
-          customerPhone: formData.phone,
+          customerPhone: `+971 ${formData.phone}`,
           customerCompany: formData.company,
           configuration: config,
           message: "",
-          estimatedRange: `AED ${monthlyPrice}`,
+          estimatedRange: `AED ${monthlyPrice.toLocaleString()}`,
           notificationEmail: "",
+          baseRent: `AED ${BASE_RENT.toLocaleString()}`,
+          extraBwCost: extraBwCost > 0 ? `AED ${extraBwCost.toLocaleString()}` : undefined,
+          extraColorCost: extraColorCost > 0 ? `AED ${extraColorCost.toLocaleString()}` : undefined,
+          a3Surcharge: a3Surcharge > 0 ? `AED ${a3Surcharge}` : undefined,
+          durationDiscount: duration === 36 ? '10%' : duration === 24 ? '5%' : undefined,
+          totalContractValue: `AED ${totalCost.toLocaleString()}`,
+          printType: printType.toUpperCase(),
+          paperFormat: paperFormat.toUpperCase(),
+          bwVolume: `${bwVolume.toLocaleString()} pages/mo`,
+          colorVolume: colorVolume > 0 ? `${colorVolume.toLocaleString()} pages/mo` : undefined,
         }),
       });
     } catch {
@@ -747,13 +761,18 @@ export default function CalculatorClient() {
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className="w-full bg-[#030d1a]/80 border border-white/10 focus:border-[#f5be53]/40 rounded-xl py-3 px-4 text-white text-sm placeholder-[#4a5a6a] outline-none transition-colors"
                         />
-                        <input
-                          type="tel"
-                          placeholder="Phone Number (optional)"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full bg-[#030d1a]/80 border border-white/10 focus:border-[#f5be53]/40 rounded-xl py-3 px-4 text-white text-sm placeholder-[#4a5a6a] outline-none transition-colors"
-                        />
+                        <div className="flex rounded-xl overflow-hidden border border-white/10 focus-within:border-[#f5be53]/40 transition-colors bg-[#030d1a]/80">
+                          <span className="flex items-center px-3 text-[#f5be53] text-sm font-bold bg-[#071325]/60 border-r border-white/10 select-none whitespace-nowrap">+971</span>
+                          <input
+                            required
+                            type="tel"
+                            placeholder="5X XXX XXXX *"
+                            value={formData.phone}
+                            maxLength={9}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 9) })}
+                            className="flex-1 bg-transparent py-3 px-3 text-white text-sm placeholder-[#4a5a6a] outline-none"
+                          />
+                        </div>
 
                         {formError && (
                           <p className="text-red-400 text-xs px-1">{formError}</p>

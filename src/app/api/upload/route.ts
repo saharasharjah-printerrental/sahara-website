@@ -29,10 +29,11 @@ export async function POST(request: NextRequest) {
     }
 
     const bytes = await file.arrayBuffer();
-    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+    const baseName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+    const key = `uploads/${baseName}`;
     const contentType = file.type || 'application/octet-stream';
 
-    await r2.put(fileName, bytes, {
+    await r2.put(key, bytes, {
       httpMetadata: { contentType },
     });
 
@@ -40,12 +41,12 @@ export async function POST(request: NextRequest) {
     const r2PublicUrl = env.R2_PUBLIC_URL?.replace(/\/$/, '');
     const accountId = env.CLOUDFLARE_ACCOUNT_ID as string;
     const url = r2PublicUrl
-      ? `${r2PublicUrl}/${fileName}`
+      ? `${r2PublicUrl}/${key}`
       : accountId
-        ? `https://sahara-printer-files.${accountId}.r2.cloudflarestorage.com/${fileName}`
-        : `/${fileName}`;
+        ? `https://sahara-printer-files.${accountId}.r2.cloudflarestorage.com/${key}`
+        : `/${key}`;
 
-    return NextResponse.json({ success: true, url, fileName });
+    return NextResponse.json({ success: true, url, fileName: key });
   } catch (error) {
     console.error('R2 Upload Error:', error);
     return NextResponse.json({
