@@ -75,8 +75,13 @@ async function uploadToCloudinary(
   const webpFileName = alreadyWebP ? fileName : `${baseName}.webp`;
   const publicId = `${folder}/${baseName}-${timestamp}`;
 
-  // Params must be sorted alphabetically for signature
-  const signatureString = `public_id=${publicId}&timestamp=${timestamp}${config.apiSecret}`;
+  // Params must be sorted alphabetically for signature (include all non-file params)
+  const paramParts: string[] = [
+    `public_id=${publicId}`,
+    `timestamp=${timestamp}`,
+    ...(!alreadyWebP ? [`transformation=f_webp,q_auto`] : []),
+  ];
+  const signatureString = paramParts.join('&') + config.apiSecret;
   const msgBuffer = new TextEncoder().encode(signatureString);
   const hashBuffer = await crypto.subtle.digest('SHA-1', msgBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));

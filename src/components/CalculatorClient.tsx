@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/Header";
-import { validateEmail } from "@/lib/emailValidation";
+import { validateEmail, validateUAEPhone } from "@/lib/emailValidation";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
@@ -358,8 +358,9 @@ export default function CalculatorClient() {
       setFormError(emailCheck.error ?? "Invalid email address");
       return;
     }
-    if (!formData.phone || !/^\d{9}$/.test(formData.phone)) {
-      setFormError("Enter a valid UAE mobile number (9 digits after +971)");
+    const phoneCheck = validateUAEPhone(formData.phone || '');
+    if (!phoneCheck.valid) {
+      setFormError(phoneCheck.error ?? "Enter a valid UAE mobile number");
       return;
     }
     setSubmitting(true);

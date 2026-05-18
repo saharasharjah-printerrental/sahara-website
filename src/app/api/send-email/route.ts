@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendQuoteNotification, QuoteEmailData } from './email-service';
-import { validateEmail } from '@/lib/emailValidation';
+import { validateEmail, validateUAEPhone } from '@/lib/emailValidation';
 
 export const runtime = 'edge';
 
@@ -15,6 +15,13 @@ export async function POST(request: NextRequest) {
     const emailCheck = validateEmail(data.customerEmail);
     if (!emailCheck.valid) {
       return NextResponse.json({ error: emailCheck.error }, { status: 400 });
+    }
+
+    if (data.customerPhone) {
+      const phoneCheck = validateUAEPhone(data.customerPhone);
+      if (!phoneCheck.valid) {
+        return NextResponse.json({ error: phoneCheck.error }, { status: 400 });
+      }
     }
 
     const sent = await sendQuoteNotification(data);

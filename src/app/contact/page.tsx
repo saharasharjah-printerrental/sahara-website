@@ -148,9 +148,9 @@ export default function ContactPage() {
     { city: "Sharjah", phone: settings?.locationSharjahPhone || "+971 6 542 6169", address: settings?.locationSharjahAddress || "Al Arabi Building, Industrial Area 11" },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const inquiry = {
       id: Date.now().toString(),
       ...formData,
@@ -161,7 +161,24 @@ export default function ContactPage() {
 
     const existing = JSON.parse(localStorage.getItem("sahara_inquiries") || "[]");
     localStorage.setItem("sahara_inquiries", JSON.stringify([inquiry, ...existing]));
-    
+
+    try {
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName: formData.name,
+          customerEmail: formData.email,
+          customerPhone: formData.phone,
+          customerCompany: formData.company || '',
+          configuration: formData.service || 'General Inquiry',
+          message: formData.message,
+          estimatedRange: '',
+          notificationEmail: '',
+        }),
+      });
+    } catch { /* email delivery non-blocking — inquiry already saved locally */ }
+
     setSubmitted(true);
     setFormData({ name: "", company: "", email: "", phone: "", service: "", message: "" });
   };

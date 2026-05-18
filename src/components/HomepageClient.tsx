@@ -468,8 +468,9 @@ function ReviewsSectionContent({ initialTestimonials = [] }: { initialTestimonia
   useEffect(() => {
     setMounted(true);
 
+    const normalizeT = (t: any) => ({ ...t, avatarUrl: t.avatarUrl || t.image_url || '' });
     if (initialTestimonials.length > 0) {
-      setTestimonials(initialTestimonials.filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true));
+      setTestimonials(initialTestimonials.filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true).map(normalizeT));
       setReady(true);
       return;
     }
@@ -477,7 +478,7 @@ function ReviewsSectionContent({ initialTestimonials = [] }: { initialTestimonia
       .then((res) => res.json())
       .then((data) => {
         if (data.testimonials && data.testimonials.length > 0) {
-          setTestimonials(data.testimonials.filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true));
+          setTestimonials(data.testimonials.filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true).map(normalizeT));
         } else {
           setTestimonials(defaultTestimonials);
         }

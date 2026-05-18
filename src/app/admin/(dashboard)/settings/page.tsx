@@ -225,9 +225,13 @@ export default function AdminSettings() {
       { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
       { key: "notification_email", value: settings.smtp.smtpToEmail },
       { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
-      { key: "cloudinary_cloud_name", value: cloudinarySettings.cloudName },
-      { key: "cloudinary_api_key", value: cloudinarySettings.apiKey },
-      { key: "cloudinary_api_secret", value: cloudinarySettings.apiSecret },
+      // Only save cloudinary creds if they have actual values — prevents wiping stored
+      // credentials if the D1 fetch silently failed on page load
+      ...(cloudinarySettings.cloudName ? [
+        { key: "cloudinary_cloud_name", value: cloudinarySettings.cloudName },
+        { key: "cloudinary_api_key", value: cloudinarySettings.apiKey },
+        { key: "cloudinary_api_secret", value: cloudinarySettings.apiSecret },
+      ] : []),
     ];
 
     try {
