@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     })),
   };
   return {
-  title: "Printer Rental Fujairah | Photocopier Lease UAE — AED 250/mo | Sahara",
+  title: "Printer Rental Fujairah | AED 250/mo | Sahara",
   description:
     "Printer and photocopier rental in Fujairah from AED 250/month. Zero deposit, free toner. Serving Fujairah City, Dibba, Kalba, Fujairah Free Trade Zone. Canon & Kyocera.",
   keywords: [

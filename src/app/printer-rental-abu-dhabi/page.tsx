@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
     })),
   };
   return {
-  title: "Printer Rental Abu Dhabi | Photocopier Lease UAE — AED 250/mo | Sahara",
+  title: "Printer Rental Abu Dhabi | AED 250/mo | Sahara",
   description:
     "Printer rental in Abu Dhabi from AED 250/month. Zero deposit, free toner, weekly service visits. Serving Mussafah, Al Reem Island, Khalifa City, Masdar City. Canon & Kyocera. Call now.",
   keywords: [

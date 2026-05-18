@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     })),
   };
   return {
-  title: "Photocopier Rental Sharjah | Printer Lease UAE — AED 250/mo | Sahara",
+  title: "Photocopier Rental Sharjah | AED 250/mo | Sahara",
   description:
     "Photocopier rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-min emergency response. Serving SAIF Zone, Industrial Area, Al Majaz. Canon & Kyocera. Call now.",
   keywords: [

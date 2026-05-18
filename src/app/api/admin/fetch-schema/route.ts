@@ -31,6 +31,6 @@ export async function GET(request: Request) {
     return Response.json({ schemas, url, fetchedAt: new Date().toISOString() });
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Fetch failed';
-    return Response.json({ error: msg }, { status: 502 });
+    return Response.json({ schemas: [], error: msg, url, fetchedAt: new Date().toISOString() });
   }
 }

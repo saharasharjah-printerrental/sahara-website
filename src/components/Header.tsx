@@ -36,12 +36,11 @@ const services = [
   { name: "Corporate Sales", href: "/services/sales", icon: ShoppingCart },
 ];
 
-// Mobile bottom nav - direct link items
+// Mobile bottom nav - direct link items (3 icons keeps bar uncluttered)
 const bottomNavItems = [
   { name: "Home", href: "/", icon: Home },
   { name: "Services", href: "/services/printer-rental", icon: SettingsSuggest },
   { name: "Products", href: "/products", icon: Inventory2 },
-  { name: "Get Quote", href: "/get-quote", icon: RequestQuote },
 ];
 
 // Mobile "More" dropdown items
@@ -270,7 +269,7 @@ export default function Header() {
           </div>
 
           {/* CTA Button - Desktop */}
-          <Link href="/get-quote" className="hidden lg:block bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
+          <Link href="/rental-calculator" className="hidden lg:block bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
             Get a Quote
           </Link>
 
@@ -384,6 +383,7 @@ export default function Header() {
                   {/* ── Pages ── */}
                   <p className="text-[9px] font-bold text-slate-600 uppercase tracking-[0.2em] px-2 pb-1">Pages</p>
                   {[
+                    { name: "Get Quote", href: "/rental-calculator",    icon: RequestQuote },
                     { name: "About Us",  href: "/about",                icon: InfoOutlined },
                     { name: "Blogs",     href: "/blogs",                icon: Article      },
                     { name: "Locations", href: "/printer-rental-dubai", icon: LocationOn   },
@@ -414,7 +414,7 @@ export default function Header() {
                 {/* ── CTA footer ── */}
                 <div className="px-3 pb-3">
                   <Link
-                    href="/get-quote"
+                    href="/rental-calculator"
                     onClick={() => setIsMoreOpen(false)}
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] font-bold text-sm active:scale-[0.98] transition-transform"
                   >

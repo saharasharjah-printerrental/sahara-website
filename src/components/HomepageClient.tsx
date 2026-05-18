@@ -167,7 +167,12 @@ function BrandCarouselSection({ initialLogos = [] }: { initialLogos?: any[] }) {
   useEffect(() => {
     setMounted(true);
 
-    fetch("/api/logos")
+    if (initialLogos.length > 0) {
+      setLogos(initialLogos.filter((l: any) => l.isActive));
+      setReady(true);
+      return;
+    }
+    fetch("/api/logos/")
       .then((res) => res.json())
       .then((data) => {
         if (data.logos && data.logos.length > 0) {
@@ -463,7 +468,11 @@ function ReviewsSectionContent({ initialTestimonials = [] }: { initialTestimonia
   useEffect(() => {
     setMounted(true);
 
-    // Fetch fresh testimonials from API - no localStorage caching for real-time updates
+    if (initialTestimonials.length > 0) {
+      setTestimonials(initialTestimonials.filter((t: any) => t.is_active === 1 || t.is_active === true || t.isActive === 1 || t.isActive === true));
+      setReady(true);
+      return;
+    }
     fetch("/api/testimonials/")
       .then((res) => res.json())
       .then((data) => {
@@ -545,7 +554,7 @@ function CTASection() {
             <p className="text-[#483200] text-lg md:text-xl font-medium">Get a customized proposal for your office equipment within 24 hours.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/get-quote" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">Get Your Quote</Link>
+            <Link href="/rental-calculator" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">Get Your Quote</Link>
             <Link href="/contact" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</Link>
           </div>
         </div>
@@ -560,7 +569,11 @@ function FAQSectionContent({ initialFaqs = [] }: { initialFaqs?: { q: string; a:
   );
 
   useEffect(() => {
-    fetch("/api/faqs?pageSlug=homepage")
+    if (initialFaqs.length > 0) {
+      setFaqs(initialFaqs);
+      return;
+    }
+    fetch("/api/faqs/?pageSlug=homepage")
       .then((res) => res.json())
       .then((data) => {
         if (data.faqs && data.faqs.length > 0) {

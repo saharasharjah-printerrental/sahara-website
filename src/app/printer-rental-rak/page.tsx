@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     })),
   };
   return {
-  title: "Printer Rental Ras Al Khaimah | Photocopier Lease RAK — AED 250/mo | Sahara",
+  title: "Printer Rental RAK | Ras Al Khaimah | Sahara",
   description:
     "Printer and photocopier rental in Ras Al Khaimah (RAK) from AED 250/month. Zero deposit, free toner. Serving Al Hamra, RAK Free Trade Zone, Al Marjan Island. Canon & Kyocera.",
   keywords: [

@@ -8,7 +8,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Printer Rental Dubai & UAE | Photocopier Leasing | Sahara Office Equipments",
+  title: "Printer Rental Dubai & UAE | Sahara Office Equipments",
   description: "Premium printer rental in Dubai, Abu Dhabi & UAE. Canon, HP, Kyocera photocopiers from AED 250/month. Zero deposit, free delivery, unlimited toner, 24/7 support.",
   keywords: "printer rental dubai, photocopier rental uae, printer lease abu dhabi, office printing solutions, canon printer rental, hp printer lease",
   openGraph: {

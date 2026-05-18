@@ -56,7 +56,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 
   return {
-    title: "Printer Rental UAE | AED 250/mo | Zero Deposit | Free Toner | Sahara",
+    title: "Printer Rental UAE | AED 250/mo | Zero Deposit | Sahara",
     description: "Printer rental in the UAE from AED 250/month. Zero deposit, unlimited OEM toner, full maintenance. Canon, Kyocera, HP. Serving Dubai, Abu Dhabi, Sharjah, RAK, Fujairah & Al Ain. ☎ +971503823969",
     keywords: "printer rental uae, photocopier rental dubai, copier lease uae, printer rental sharjah, zero deposit printer rental uae, canon printer uae, kyocera photocopier uae",
     openGraph: {

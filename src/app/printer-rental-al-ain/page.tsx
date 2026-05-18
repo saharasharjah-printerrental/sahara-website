@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     })),
   };
   return {
-  title: "Printer Rental Al Ain | Photocopier Lease UAE — AED 250/mo | Sahara",
+  title: "Printer Rental Al Ain | AED 250/mo | Sahara",
   description:
     "Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit, free toner. Serving Al Ain Central, Al Jimi, Al Khubaisi, Al Ain Industrial Area. Canon & Kyocera.",
   keywords: [

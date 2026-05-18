@@ -13,8 +13,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email required' }, { status: 400 });
     }
 
-    const env = (getRequestContext() as any)?.env || {};
-    const adminEmail = env.ADMIN_EMAIL || '';
+    let adminEmail = '';
+    try {
+      adminEmail = (getRequestContext().env as any).ADMIN_EMAIL || '';
+    } catch {
+      try { adminEmail = (globalThis as any).process?.env?.ADMIN_EMAIL || ''; } catch {}
+    }
 
     // Always return success — do not reveal whether the email matched
     if (adminEmail && email.toLowerCase() === adminEmail.toLowerCase()) {

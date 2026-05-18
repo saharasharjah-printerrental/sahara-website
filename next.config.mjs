@@ -28,6 +28,19 @@ const nextConfig = {
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/get-quote', destination: '/rental-calculator', permanent: true },
+      { source: '/get-quote/', destination: '/rental-calculator/', permanent: true },
+      // Fix 404 pages found in Ubersuggest audit
+      { source: '/brands', destination: '/products', permanent: true },
+      { source: '/brands/', destination: '/products/', permanent: true },
+      { source: '/products/canon-imageclass-mf644cdw', destination: '/products', permanent: true },
+      { source: '/products/canon-imageclass-mf644cdw/', destination: '/products/', permanent: true },
+      { source: '/products/hp-laserjet-pro-m404dn', destination: '/products', permanent: true },
+      { source: '/products/hp-laserjet-pro-m404dn/', destination: '/products/', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

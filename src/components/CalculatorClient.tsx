@@ -361,17 +361,18 @@ export default function CalculatorClient() {
       `Duration: ${duration} months`,
     ].join(" | ");
     try {
-      await fetch("/api/inquiries", {
+      await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          company: formData.company,
-          service: "Rental Calculator Quote",
-          message: `${config} | Est: AED ${monthlyPrice}/mo`,
+          customerName: formData.name,
+          customerEmail: formData.email,
+          customerPhone: formData.phone,
+          customerCompany: formData.company,
+          configuration: config,
+          message: "",
           estimatedRange: `AED ${monthlyPrice}`,
+          notificationEmail: "",
         }),
       });
     } catch {
@@ -574,7 +575,7 @@ export default function CalculatorClient() {
                   {/* REVEALED — shown after form submission */}
                   <div
                     className={`transition-all duration-700 ease-out ${
-                      unlocked ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
+                      unlocked ? "block opacity-100 translate-y-0" : "hidden"
                     }`}
                   >
                     {/* Circular indicator */}
@@ -661,11 +662,11 @@ export default function CalculatorClient() {
 
                     <div className="px-6 pb-6 pt-2 space-y-3">
                       <a
-                        href="/get-quote"
+                        href="/contact"
                         className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#030d1a] py-4 rounded-xl font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(245,190,83,0.3)]"
                       >
                         <span className="material-symbols-outlined text-base">send</span>
-                        Submit Quote Request
+                        Talk to an Expert
                       </a>
                       <a
                         href="/contact"
@@ -680,28 +681,14 @@ export default function CalculatorClient() {
                     </div>
                   </div>
 
-                  {/* LOCKED — blurred glass overlay */}
+                  {/* LOCKED — contact form overlay */}
                   <div
                     className={`transition-all duration-700 ease-out ${
-                      unlocked
-                        ? "opacity-0 pointer-events-none absolute inset-0"
-                        : "opacity-100 relative"
+                      unlocked ? "hidden" : "block"
                     }`}
                   >
-                    {/* Blurred placeholder content (behind glass) */}
-                    <div className="px-6 py-6 space-y-3 select-none pointer-events-none blur-sm opacity-20" aria-hidden>
-                      <div className="flex justify-center py-2">
-                        <div className="w-32 h-32 rounded-full bg-[#f5be53]/20 border-8 border-[#071325]" />
-                      </div>
-                      <div className="h-4 w-36 bg-white/10 rounded-lg" />
-                      <div className="h-4 w-44 bg-white/10 rounded-lg" />
-                      <div className="h-4 w-28 bg-white/10 rounded-lg" />
-                      <div className="h-4 w-40 bg-white/10 rounded-lg" />
-                      <div className="h-6 w-full bg-[#f5be53]/20 rounded-lg mt-2" />
-                    </div>
-
                     {/* Frosted glass overlay */}
-                    <div className="absolute inset-0 backdrop-blur-[18px] bg-[#030d1a]/82 flex flex-col items-center justify-start pt-6 pb-6 px-5 gap-4">
+                    <div className="relative w-full bg-[#030d1a]/60 flex flex-col items-center justify-start pt-6 pb-6 px-5 gap-4">
 
                       <div className="w-16 h-16 rounded-full bg-[#f5be53]/8 border border-[#f5be53]/30 flex items-center justify-center shadow-[0_0_30px_rgba(245,190,83,0.15)]">
                         <span className="material-symbols-outlined text-[#f5be53] text-3xl">lock</span>

@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
 const BASE = 'https://www.saharaprinter.com';
 
@@ -41,36 +42,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/blogs/`,                        lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.7 },
     { url: `${BASE}/about/`,                        lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/contact/`,                      lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
-    { url: `${BASE}/get-quote/`,                    lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/our-clients/`,                  lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/rental-calculator/`,            lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
   ];
 
-  // Dynamic: blog posts
+  // Dynamic: blog posts + products — query D1 directly (no HTTP fetch, no redirect issues)
   let blogRoutes: MetadataRoute.Sitemap = [];
-  try {
-    const res = await fetch(`${BASE}/api/blogs/`, { next: { revalidate: 3600 } });
-    const data = await res.json();
-    blogRoutes = (data.blogs || []).map((b: any) => ({
-      url: `${BASE}/blogs/${b.slug}`,
-      lastModified: thisWeek,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
-  } catch { /* ignore */ }
-
-  // Dynamic: products
   let productRoutes: MetadataRoute.Sitemap = [];
   try {
-    const res = await fetch(`${BASE}/api/products/`, { next: { revalidate: 3600 } });
-    const data = await res.json();
-    productRoutes = (data.products || []).map((p: any) => ({
-      url: `${BASE}/products/${p.slug || p.id}`,
-      lastModified: thisWeek,
-      changeFrequency: 'weekly' as const,
-      priority: 0.75,
-    }));
-  } catch { /* ignore */ }
+    const db = (getRequestContext().env as any).DB;
+    if (db) {
+      const [br, pr] = await Promise.all([
+        db.prepare("SELECT slug FROM blog_posts WHERE status = 'published'").all(),
+        db.prepare("SELECT id, slug FROM products WHERE isActive = 1").all(),
+      ]);
+      blogRoutes = ((br?.results ?? []) as any[])
+        .map((r) => r.slug)
+        .filter(Boolean)
+        .map((slug: string) => ({
+          url: `${BASE}/blogs/${slug}/`,
+          lastModified: thisWeek,
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+        }));
+      productRoutes = ((pr?.results ?? []) as any[])
+        .map((r) => r.slug || String(r.id))
+        .filter(Boolean)
+        .map((id: string) => ({
+          url: `${BASE}/products/${id}/`,
+          lastModified: thisWeek,
+          changeFrequency: 'weekly' as const,
+          priority: 0.75,
+        }));
+    }
+  } catch { /* D1 unavailable — sitemap generates without dynamic entries */ }
 
   return [...staticRoutes, ...blogRoutes, ...productRoutes];
 }

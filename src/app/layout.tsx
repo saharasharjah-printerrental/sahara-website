@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import VisitorTracker from "@/components/VisitorTracker";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const runtime = 'edge';
@@ -385,7 +384,6 @@ export default async function RootLayout({
               ? <script key={i} async={s.isAsync} src={s.src} />
               : <script key={i}>{s.inline}</script>
           )}
-        <VisitorTracker />
         {children}
       </body>
     </html>
