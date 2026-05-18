@@ -42,55 +42,6 @@ export default async function HomePage() {
     }
   } catch { /* D1 unavailable in dev — components fall back to hardcoded defaults */ }
 
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Sahara Office Equipments",
-    url: "https://www.saharaprinter.com",
-    logo: "https://www.saharaprinter.com/images/sahara-navbar-logo.webp",
-    description: "Premium printer rental and office equipment services in Dubai and across the UAE.",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Industrial Area 13, Near National Paint roundabout",
-      addressLocality: "Sharjah",
-      addressCountry: "AE",
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+971503823969",
-      contactType: "sales",
-      availableHours: "24/7",
-    },
-    areaServed: {
-      "@type": "State",
-      name: "UAE",
-    },
-    sameAs: [
-      "https://www.facebook.com/saharaoffice",
-      "https://www.instagram.com/saharaoffice",
-      "https://www.linkedin.com/company/saharaoffice",
-    ],
-  };
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    image: "https://www.saharaprinter.com/images/hero-bg.webp",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Industrial Area 13, Near National Paint roundabout",
-      addressLocality: "Sharjah",
-      addressRegion: "SH",
-      postalCode: "",
-      addressCountry: "AE",
-    },
-    telephone: "+971503823969",
-    priceRange: "AED",
-    openingHours: "Mo-Su 00:00-24:00",
-    serviceType: ["Printer Rental", "Photocopier Leasing", "Printer Repair", "Toner Supplies"],
-  };
-
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -143,8 +94,6 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
-      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
 

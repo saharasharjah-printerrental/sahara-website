@@ -22,7 +22,9 @@ export async function GET() {
   }
 
   try {
-    const result = await db.prepare('SELECT * FROM logos ORDER BY sortOrder ASC').all();
+    const result = await db.prepare(
+      'SELECT id, name, imageUrl, imageAlt, link, COALESCE(isActive,1) AS isActive, COALESCE(sortOrder,0) AS sortOrder FROM logos ORDER BY sortOrder ASC'
+    ).all();
     return NextResponse.json({ logos: result?.results ?? [] }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Logos GET Error:', error);
@@ -39,6 +41,9 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json() as any;
+    if (!body.name) {
+      return NextResponse.json({ error: 'Logo name is required' }, { status: 400 });
+    }
     const id = body.id || Date.now().toString();
 
     await db.prepare(`
