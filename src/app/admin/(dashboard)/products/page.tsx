@@ -5,6 +5,7 @@ export const runtime = 'edge';
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
+import CloudImagePicker from "@/components/admin/CloudImagePicker";
 
 interface Product {
   id: string;
@@ -379,14 +380,6 @@ function ProductModal({ product, onSave, onClose }: { product: Product | null; o
   const brands = ["HP", "Canon", "Xerox", "Kyocera", "Ricoh", "Brother", "Sharp", "Epson"];
   const categories = ["MFP", "A3 Printers", "A4 Printers", "Plotters", "Color", "Monochrome"];
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => setForm(prev => ({ ...prev, image: reader.result as string }));
-    reader.readAsDataURL(file);
-  };
-
   const handleUrlFetch = async () => {
     if (!imageUrl) return;
     setConverting(true);
@@ -484,21 +477,11 @@ function ProductModal({ product, onSave, onClose }: { product: Product | null; o
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Product Image</label>
-            <div className="flex items-center gap-3 mb-3">
-              <label className="flex-1 cursor-pointer">
-                <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-                <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                  {form.image ? "Change Image" : "Upload Image"}
-                </div>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={convertToWebp} onChange={(e) => setConvertToWebp(e.target.checked)} className="w-4 h-4 rounded" />
-                <span className="text-sm text-slate-400">Convert to WebP</span>
-              </label>
-            </div>
-          </div>
+          <CloudImagePicker
+            label="Product Image"
+            value={form.image}
+            onChange={(url) => setForm(prev => ({ ...prev, image: url }))}
+          />
 
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Or fetch from URL</label>
@@ -521,16 +504,6 @@ function ProductModal({ product, onSave, onClose }: { product: Product | null; o
             <p className="text-xs text-slate-500 mt-1">Fetches image and automatically converts to WebP</p>
           </div>
 
-          {form.image && (
-            <div className="flex items-center gap-3">
-              <div className="w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
-                <img src={form.image} alt="Preview" className="w-full h-full object-cover" />
-              </div>
-              <button onClick={() => setForm(prev => ({ ...prev, image: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
-                Remove
-              </button>
-            </div>
-          )}
 
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Specs (comma separated)</label>

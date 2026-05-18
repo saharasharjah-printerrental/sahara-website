@@ -2,8 +2,9 @@
 
 export const runtime = 'edge';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useToast } from "@/components/admin/Toast";
+import { CheckCircle, Error as ErrorIcon, HelpOutlined, Refresh } from "@mui/icons-material";
 
 interface SmtpSettings {
   smtpHost: string;
@@ -111,9 +112,22 @@ const defaultSettings: Settings = {
   },
 };
 
+interface StorageProviderStatus {
+  status: 'ok' | 'error' | 'missing';
+  reason?: string;
+  cloudName?: string | null;
+  publicUrl?: string | null;
+}
+interface StorageHealth {
+  cloudinary: StorageProviderStatus;
+  r2: StorageProviderStatus;
+}
+
 export default function AdminSettings() {
   const [settings, setSettings] = useState<Settings>(defaultSettings);
   const { showToast, ToastElement } = useToast();
+  const [storageHealth, setStorageHealth] = useState<StorageHealth | null>(null);
+  const [storageLoading, setStorageLoading] = useState(false);
 
   const mergeWithDefaults = (stored: Partial<Settings>): Settings => {
     return {
@@ -129,6 +143,20 @@ export default function AdminSettings() {
       },
     };
   };
+
+  const checkStorageHealth = useCallback(async () => {
+    setStorageLoading(true);
+    try {
+      const res = await fetch('/api/admin/upload-status');
+      if (res.ok) setStorageHealth(await res.json());
+    } catch { /* silent */ } finally {
+      setStorageLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    checkStorageHealth();
+  }, [checkStorageHealth]);
 
   useEffect(() => {
     (async () => {
@@ -570,6 +598,61 @@ export default function AdminSettings() {
                   <p className="text-xs text-slate-500 mt-1">Get from Google Maps → Share → Copy link. This is injected into the Organization schema as <code className="text-amber-400">hasMap</code>.</p>
                 </div>
               </div>
+            </div>
+
+            <div className="border-t border-white/10 pt-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-white">Storage Health</h2>
+                <button
+                  type="button"
+                  onClick={checkStorageHealth}
+                  disabled={storageLoading}
+                  className="flex items-center gap-1 text-sm text-slate-400 hover:text-[#f5be53] transition-colors"
+                >
+                  <Refresh fontSize="small" className={storageLoading ? "animate-spin" : ""} />
+                  Re-check
+                </button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  {
+                    name: "Cloudinary",
+                    detail: storageHealth?.cloudinary.cloudName ? `Cloud: ${storageHealth.cloudinary.cloudName}` : "Not configured",
+                    status: storageHealth?.cloudinary.status,
+                    reason: storageHealth?.cloudinary.reason,
+                  },
+                  {
+                    name: "Cloudflare R2",
+                    detail: storageHealth?.r2.publicUrl ? `CDN: ${storageHealth.r2.publicUrl.replace('https://', '')}` : "No public URL set",
+                    status: storageHealth?.r2.status,
+                    reason: storageHealth?.r2.reason,
+                  },
+                ].map(({ name, detail, status, reason }) => (
+                  <div key={name} className="bg-[#101c2e] border border-white/10 rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-medium text-white text-sm">{name}</span>
+                      {!status || storageLoading ? (
+                        <HelpOutlined fontSize="small" className="text-slate-500 animate-pulse" />
+                      ) : status === 'ok' ? (
+                        <span className="flex items-center gap-1 text-green-400 text-xs font-medium">
+                          <CheckCircle fontSize="small" /> Connected
+                        </span>
+                      ) : status === 'missing' ? (
+                        <span className="flex items-center gap-1 text-yellow-400 text-xs font-medium">
+                          <HelpOutlined fontSize="small" /> Not configured
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-1 text-red-400 text-xs font-medium">
+                          <ErrorIcon fontSize="small" /> Error
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-slate-500 text-xs">{detail}</p>
+                    {reason && <p className="text-red-400 text-xs mt-1 break-all">{reason}</p>}
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-slate-500 mt-2">Upload failures are usually caused by missing environment variables in Cloudflare Pages settings.</p>
             </div>
 
             <div className="border-t border-white/10 pt-6">

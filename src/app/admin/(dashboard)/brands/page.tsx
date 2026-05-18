@@ -5,6 +5,7 @@ export const runtime = 'edge';
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
+import CloudImagePicker from "@/components/admin/CloudImagePicker";
 
 interface Brand {
   id: string;
@@ -204,14 +205,6 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
   const [converting, setConverting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
-    reader.readAsDataURL(file);
-  };
-
   const handleUrlFetch = async () => {
     if (!imageUrl) return;
     setConverting(true);
@@ -246,15 +239,11 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
             <label className="block text-sm font-medium text-slate-300 mb-2">Brand Name</label>
             <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value, slug: e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, "-") })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Logo</label>
-            <label className="flex-1 cursor-pointer block">
-              <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-              <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                {form.logoUrl ? "Change Image" : "Upload Image"}
-              </div>
-            </label>
-          </div>
+          <CloudImagePicker
+            label="Logo"
+            value={form.logoUrl}
+            onChange={(url) => setForm(prev => ({ ...prev, logoUrl: url }))}
+          />
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Or fetch from URL</label>
             <div className="flex gap-2">
@@ -275,16 +264,6 @@ function BrandModal({ brand, onSave, onClose }: { brand: Brand | null; onSave: (
             </div>
             <p className="text-xs text-slate-500 mt-1">Fetches image and automatically converts to WebP</p>
           </div>
-          {form.logoUrl && (
-            <div className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
-                <img src={form.logoUrl} alt="Preview" className="w-full h-full object-contain" />
-              </div>
-              <button onClick={() => setForm(prev => ({ ...prev, logoUrl: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
-                Remove
-              </button>
-            </div>
-          )}
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Description</label>
             <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white h-20" />

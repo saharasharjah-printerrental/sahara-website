@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Star, StarBorder } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
+import CloudImagePicker from "@/components/admin/CloudImagePicker";
 
 interface Testimonial {
   id: string;
@@ -211,16 +212,6 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
   const [form, setForm] = useState<Testimonial>(testimonial || {
     id: "", name: "", role: "", text: "", rating: 5, avatarUrl: "", avatarAlt: "", isActive: true, sortOrder: 0
   });
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setForm(prev => ({ ...prev, avatarUrl: reader.result as string, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }));
-    };
-    reader.readAsDataURL(file);
-  };
-
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-6">
       <div className="glass-card rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
@@ -255,25 +246,11 @@ function TestimonialModal({ testimonial, onSave, onClose }: { testimonial: Testi
               ))}
             </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Avatar</label>
-            <label className="flex-1 cursor-pointer">
-              <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-              <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                {form.avatarUrl ? "Change Avatar" : "Upload Avatar"}
-              </div>
-            </label>
-          </div>
-          {form.avatarUrl && (
-            <div className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-white/10 overflow-hidden">
-                <img src={form.avatarUrl} alt={form.name} className="w-full h-full object-cover" />
-              </div>
-              <button onClick={() => setForm(prev => ({ ...prev, avatarUrl: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
-                Remove
-              </button>
-            </div>
-          )}
+          <CloudImagePicker
+            label="Avatar"
+            value={form.avatarUrl}
+            onChange={(url) => setForm(prev => ({ ...prev, avatarUrl: url, avatarAlt: prev.avatarAlt || `${prev.name} avatar` }))}
+          />
           <div className="flex items-center gap-2 pt-4">
             <input type="checkbox" checked={form.isActive} onChange={(e) => setForm({ ...form, isActive: e.target.checked })} className="w-5 h-5 rounded" />
             <span className="text-white">Active</span>

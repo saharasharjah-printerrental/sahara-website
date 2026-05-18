@@ -3,9 +3,10 @@
 export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
-import { CloudUpload, Delete, Edit, Link as LinkIcon, Add } from "@mui/icons-material";
+import { Delete, Edit, Link as LinkIcon, Add } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
+import CloudImagePicker from "@/components/admin/CloudImagePicker";
 
 interface Client {
   id: string;
@@ -449,14 +450,6 @@ function ClientModal({ client, onSave, onClose }: { client: Client | null; onSav
   const [converting, setConverting] = useState(false);
   const [fetchUrl, setFetchUrl] = useState("");
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => setForm(prev => ({ ...prev, logoUrl: reader.result as string }));
-    reader.readAsDataURL(file);
-  };
-
   const handleUrlFetch = async () => {
     if (!fetchUrl) return;
     setConverting(true);
@@ -511,18 +504,11 @@ function ClientModal({ client, onSave, onClose }: { client: Client | null; onSav
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Logo Image</label>
-            <div className="flex items-center gap-3 mb-3">
-              <label className="flex-1 cursor-pointer">
-                <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-                <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors flex items-center justify-center gap-2">
-                  <CloudUpload />
-                  {form.logoUrl ? "Change Logo" : "Upload Logo"}
-                </div>
-              </label>
-            </div>
-          </div>
+          <CloudImagePicker
+            label="Logo Image"
+            value={form.logoUrl}
+            onChange={(url) => setForm(prev => ({ ...prev, logoUrl: url }))}
+          />
 
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Or fetch from URL</label>
@@ -543,17 +529,6 @@ function ClientModal({ client, onSave, onClose }: { client: Client | null; onSav
               </button>
             </div>
           </div>
-
-          {form.logoUrl && (
-            <div className="flex items-center gap-3">
-              <div className="w-24 h-24 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
-                <img src={form.logoUrl} alt="Preview" className="w-full h-full object-contain p-1" />
-              </div>
-              <button onClick={() => setForm(prev => ({ ...prev, logoUrl: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
-                Remove
-              </button>
-            </div>
-          )}
 
           <div className="flex gap-4 pt-4">
             <button onClick={onClose} className="flex-1 py-3 rounded-xl bg-[#101c2e] text-slate-300 hover:text-white">Cancel</button>

@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
+import CloudImagePicker from "@/components/admin/CloudImagePicker";
 
 interface BlogPost {
   id: string;
@@ -75,14 +76,6 @@ export default function BlogEditorPage() {
     };
     load();
   }, [postId]);
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => setForm(prev => ({ ...prev, coverImage: reader.result as string }));
-    reader.readAsDataURL(file);
-  };
 
   const handleUrlFetch = async () => {
     if (!imageUrl) return;
@@ -227,34 +220,17 @@ export default function BlogEditorPage() {
 
             {/* Cover image */}
             <div className="glass-card rounded-2xl p-6">
-              <label className="block text-sm font-medium text-slate-300 mb-3">Cover Image</label>
-              <div className="flex items-center gap-3 mb-3">
-                <label className="flex-1 cursor-pointer">
-                  <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-                  <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                    {form.coverImage ? "Change Image" : "Upload Image"}
-                  </div>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer shrink-0">
-                  <input type="checkbox" checked={convertToWebp} onChange={(e) => setConvertToWebp(e.target.checked)} className="w-4 h-4 rounded" />
-                  <span className="text-sm text-slate-400">Convert to WebP</span>
-                </label>
-              </div>
-              <div className="flex gap-2 mb-3">
-                <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className={`${input} flex-1`} placeholder="https://example.com/image.jpg" />
+              <CloudImagePicker
+                label="Cover Image"
+                value={form.coverImage}
+                onChange={(url) => setForm(prev => ({ ...prev, coverImage: url }))}
+              />
+              <div className="flex gap-2 mt-3">
+                <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className={`${input} flex-1`} placeholder="Or paste a URL to fetch & convert to WebP" />
                 <button onClick={handleUrlFetch} disabled={converting || !imageUrl} className="px-4 py-2 rounded-xl bg-[#f5be53] text-[#412d00] font-medium hover:bg-[#c8962e] disabled:opacity-50 shrink-0">
                   {converting ? "..." : "Fetch"}
                 </button>
               </div>
-              <p className="text-xs text-slate-500 mb-3">Paste an image URL to auto-fetch and convert to WebP</p>
-              {form.coverImage && (
-                <div className="flex items-center gap-3">
-                  <div className="w-48 h-28 rounded-xl bg-white/10 overflow-hidden">
-                    <img src={form.coverImage} alt="Preview" className="w-full h-full object-cover" />
-                  </div>
-                  <button onClick={() => setForm(prev => ({ ...prev, coverImage: "" }))} className="text-slate-400 hover:text-red-400 text-sm transition-colors">Remove</button>
-                </div>
-              )}
             </div>
 
             {/* Excerpt */}

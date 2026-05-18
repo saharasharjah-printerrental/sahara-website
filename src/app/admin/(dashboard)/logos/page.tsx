@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Image as ImageIcon } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
+import CloudImagePicker from "@/components/admin/CloudImagePicker";
 
 interface Logo {
   id: string;
@@ -220,16 +221,6 @@ function LogoModal({ logo, onSave, onClose }: { logo: Logo | null; onSave: (l: L
     id: "", name: "", imageUrl: "", imageAlt: "", link: "", isActive: true, sortOrder: 0
   });
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setForm(prev => ({ ...prev, imageUrl: reader.result as string, imageAlt: prev.imageAlt || `${prev.name} logo` }));
-    };
-    reader.readAsDataURL(file);
-  };
-
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-6">
       <div className="glass-card rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
@@ -249,25 +240,11 @@ function LogoModal({ logo, onSave, onClose }: { logo: Logo | null; onSave: (l: L
               className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Logo Image</label>
-            <label className="flex-1 cursor-pointer">
-              <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-              <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                {form.imageUrl ? "Change Image" : "Upload Image"}
-              </div>
-            </label>
-          </div>
-          {form.imageUrl && (
-            <div className="flex items-center gap-3">
-              <div className="w-20 h-12 bg-white/5 rounded flex items-center justify-center p-2">
-                <img src={form.imageUrl} alt={form.name} className="max-h-full max-w-full object-contain" />
-              </div>
-              <button onClick={() => setForm(prev => ({ ...prev, imageUrl: "" }))} className="text-slate-400 hover:text-red-400 text-sm">
-                Remove
-              </button>
-            </div>
-          )}
+          <CloudImagePicker
+            label="Logo Image"
+            value={form.imageUrl}
+            onChange={(url) => setForm(prev => ({ ...prev, imageUrl: url, imageAlt: prev.imageAlt || `${prev.name} logo` }))}
+          />
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Alt Text</label>
             <input
