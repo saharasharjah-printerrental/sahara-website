@@ -138,6 +138,7 @@ export default function AdminSettings() {
   const [storageLoading, setStorageLoading] = useState(false);
   const [cloudinarySettings, setCloudinarySettings] = useState<CloudinarySettings>(defaultCloudinary);
   const [cloudinaryTesting, setCloudinaryTesting] = useState(false);
+  const [smtpTesting, setSmtpTesting] = useState(false);
 
   const mergeWithDefaults = (stored: Partial<Settings>): Settings => {
     return {
@@ -428,6 +429,34 @@ export default function AdminSettings() {
                     </div>
                   </div>
                 </div>
+
+                <button
+                  type="button"
+                  disabled={smtpTesting}
+                  onClick={async () => {
+                    setSmtpTesting(true);
+                    try {
+                      const res = await fetch('/api/admin/test-smtp');
+                      const data = await res.json();
+                      if (!data.configured) {
+                        showToast('error', 'SMTP not configured — fill in host, user and password first');
+                      } else if (data.connectionTest === 'ok') {
+                        showToast('success', `SMTP connected — ${data.portMode} · ${(data.greeting || data.host).slice(0, 60)}`);
+                      } else {
+                        const msg = data.connectionTest?.replace('failed: ', '') ?? 'connection failed';
+                        showToast('error', `${msg}${data.hint ? ` · ${data.hint}` : ''}`);
+                      }
+                    } catch { showToast('error', 'SMTP test failed — check console'); }
+                    finally { setSmtpTesting(false); }
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 bg-[#101c2e] border border-white/10 rounded-xl text-sm text-slate-300 hover:text-white hover:border-[#f5be53]/40 transition-colors disabled:opacity-50"
+                >
+                  <span className={`material-symbols-outlined text-base ${smtpTesting ? 'animate-spin' : ''}`}>
+                    {smtpTesting ? 'progress_activity' : 'mail'}
+                  </span>
+                  {smtpTesting ? 'Testing…' : 'Test Connection'}
+                </button>
+                <p className="text-xs text-slate-500">Save settings first, then test. Checks TCP reachability of your SMTP host.</p>
               </div>
             </div>
 

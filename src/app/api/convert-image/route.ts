@@ -5,8 +5,8 @@ export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 async function getCloudinaryConfig() {
-  const ctx = getRequestContext() as any;
-  const env = ctx?.env || {};
+  let env: any = {};
+  try { env = getRequestContext().env; } catch { /* local dev */ }
   let cloudName = env.CLOUDINARY_CLOUD_NAME || '';
   let apiKey = env.CLOUDINARY_API_KEY || '';
   let apiSecret = env.CLOUDINARY_API_SECRET || '';
@@ -33,23 +33,23 @@ async function getCloudinaryConfig() {
   return { cloudName, apiKey, apiSecret };
 }
 
-function getR2() {
+function getR2Env() {
   try {
-    return getRequestContext().env.SAHARA_ASSETS as any;
+    return getRequestContext().env as any;
   } catch {
     return null;
   }
 }
 
 async function uploadToR2(buffer: ArrayBuffer, fileName: string, contentType: string): Promise<string> {
-  const r2 = getR2();
+  const env = getR2Env();
+  const r2 = env?.SAHARA_ASSETS;
   if (!r2) {
     throw new Error('R2 storage not configured. Add SAHARA_ASSETS binding in wrangler.toml');
   }
   const key = `uploads/${Date.now()}-${fileName.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
   await r2.put(key, buffer, { httpMetadata: { contentType } });
-  const env = getRequestContext().env as any;
-  const r2PublicUrl = env.R2_PUBLIC_URL?.replace(/\/$/, '') || 'https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev';
+  const r2PublicUrl = (env.R2_PUBLIC_URL || 'https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev').replace(/\/$/, '');
   return `${r2PublicUrl}/${key}`;
 }
 
@@ -88,11 +88,10 @@ async function uploadToCloudinary(
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const signature = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-  // Build multipart form
+  // Build multipart form — always send with original content-type so Cloudinary
+  // can detect the actual format; conversion to WebP is handled by the transformation param.
   const form = new FormData();
-  // If already WebP, use the original content type, otherwise force WebP
-  const uploadContentType = alreadyWebP ? contentType : 'image/webp';
-  const blob = new Blob([buffer], { type: uploadContentType });
+  const blob = new Blob([buffer], { type: contentType });
   form.append('file', blob, webpFileName);
   form.append('api_key', config.apiKey);
   form.append('timestamp', String(timestamp));
@@ -119,9 +118,8 @@ async function uploadToCloudinary(
 }
 
 export async function POST(request: NextRequest) {
-  const config = await getCloudinaryConfig();
-
   try {
+    const config = await getCloudinaryConfig();
     const contentType = request.headers.get('content-type') || '';
     let imageBuffer: ArrayBuffer;
     let originalName = 'image';
