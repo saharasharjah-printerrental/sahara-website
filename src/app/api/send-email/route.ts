@@ -3,6 +3,7 @@ import { sendQuoteNotification, QuoteEmailData } from './email-service';
 import { validateEmail, validateUAEPhone } from '@/lib/emailValidation';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {

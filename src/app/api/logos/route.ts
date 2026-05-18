@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { normalizeR2Url } from '@/lib/r2url';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -25,7 +26,8 @@ export async function GET() {
     const result = await db.prepare(
       'SELECT id, name, imageUrl, imageAlt, link, COALESCE(isActive,1) AS isActive, COALESCE(sortOrder,0) AS sortOrder FROM logos ORDER BY sortOrder ASC'
     ).all();
-    return NextResponse.json({ logos: result?.results ?? [] }, { headers: CACHE_CONTROL });
+    const logos = (result?.results ?? []).map((l: any) => ({ ...l, imageUrl: normalizeR2Url(l.imageUrl) }));
+    return NextResponse.json({ logos }, { headers: CACHE_CONTROL });
   } catch (error) {
     console.error('Logos GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch logos', logos: [] }, { status: 200 });

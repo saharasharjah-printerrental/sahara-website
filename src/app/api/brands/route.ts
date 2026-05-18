@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { normalizeR2Url } from '@/lib/r2url';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 function getDB() {
   try {
@@ -21,7 +23,7 @@ export async function GET() {
       id: b.id,
       name: b.name,
       slug: b.slug,
-      logoUrl: b.logo_url,
+      logoUrl: normalizeR2Url(b.logo_url),
       description: b.description,
       isActive: b.is_active,
       sortOrder: b.sort_order,

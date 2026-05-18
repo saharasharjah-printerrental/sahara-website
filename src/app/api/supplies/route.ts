@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { normalizeR2Url } from '@/lib/r2url';
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 function getDB() {
   try {
@@ -22,7 +24,8 @@ export async function GET(request: NextRequest) {
       ? 'SELECT * FROM supplies ORDER BY name ASC'
       : 'SELECT * FROM supplies WHERE isActive = 1 ORDER BY name ASC';
     const result = await db.prepare(sql).all();
-    return NextResponse.json({ supplies: result?.results ?? [] });
+    const supplies = (result?.results ?? []).map((s: any) => ({ ...s, image: normalizeR2Url(s.image) }));
+    return NextResponse.json({ supplies });
   } catch (error) {
     console.error('Supplies GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch supplies', supplies: [] }, { status: 200 });
