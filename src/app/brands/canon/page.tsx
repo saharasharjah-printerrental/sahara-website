@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import MobileNav from "@/components/MobileNav";
 import Image from "next/image";
 import { Hub, DeveloperBoard, Nature, Palette, Print, Security } from "@mui/icons-material";
 
@@ -172,7 +171,6 @@ export default function CanonBrandPage() {
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
-      <MobileNav />
     </main>
   );
 }

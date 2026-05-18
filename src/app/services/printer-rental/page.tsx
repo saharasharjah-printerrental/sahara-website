@@ -6,7 +6,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import MobileNav from "@/components/MobileNav";
 import CountUp from "@/components/CountUp";
 import FAQAccordionClient from "@/components/FAQAccordionClient";
 import { Savings, Inventory2, BuildCircle, Emergency, Upgrade, Cancel, SupportAgent, Sync, Build, Verified, ExpandMore, Print, CheckCircle, LocationOn, HeadsetMic } from "@mui/icons-material";
@@ -701,7 +700,6 @@ export default function PrinterRentalPage() {
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
-      <MobileNav />
     </main>
     </>
   );

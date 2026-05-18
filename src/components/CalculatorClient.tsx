@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Header from "@/components/Header";
+import { validateEmail } from "@/lib/emailValidation";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import MobileNav from "@/components/MobileNav";
 
 // ── Pricing constants ──────────────────────────────────────────────────────────
 const BASE_RENT = 350;
@@ -299,12 +299,12 @@ export default function CalculatorClient() {
   const [duration, setDuration] = useState(12);
   const [unlocked, setUnlocked] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     company: "",
     email: "",
     phone: "",
-    contactMethod: "email",
   });
 
   // ── Derived free allowances (value-balanced) ──────────────────────────────
@@ -352,6 +352,12 @@ export default function CalculatorClient() {
   // ── Form submission ────────────────────────────────────────────────────────
   const handleUnlock = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError("");
+    const emailCheck = validateEmail(formData.email);
+    if (!emailCheck.valid) {
+      setFormError(emailCheck.error ?? "Invalid email address");
+      return;
+    }
     setSubmitting(true);
     const config = [
       `Print: ${printType.toUpperCase()}`,
@@ -376,7 +382,9 @@ export default function CalculatorClient() {
         }),
       });
     } catch {
-      // non-blocking — unlock regardless
+      setFormError("Something went wrong. Please try again.");
+      setSubmitting(false);
+      return;
     }
     setSubmitting(false);
     setUnlocked(true);
@@ -740,33 +748,16 @@ export default function CalculatorClient() {
                           className="w-full bg-[#030d1a]/80 border border-white/10 focus:border-[#f5be53]/40 rounded-xl py-3 px-4 text-white text-sm placeholder-[#4a5a6a] outline-none transition-colors"
                         />
                         <input
-                          required
                           type="tel"
-                          placeholder="Phone Number *"
+                          placeholder="Phone Number (optional)"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           className="w-full bg-[#030d1a]/80 border border-white/10 focus:border-[#f5be53]/40 rounded-xl py-3 px-4 text-white text-sm placeholder-[#4a5a6a] outline-none transition-colors"
                         />
 
-                        <div>
-                          <p className="text-[11px] text-[#94a3b8] mb-2">Preferred Contact</p>
-                          <div className="flex gap-2">
-                            {["email", "phone", "whatsapp"].map((m) => (
-                              <button
-                                key={m}
-                                type="button"
-                                onClick={() => setFormData({ ...formData, contactMethod: m })}
-                                className={`flex-1 py-2 rounded-lg text-[11px] font-semibold capitalize transition-all ${
-                                  formData.contactMethod === m
-                                    ? "bg-[#f5be53]/15 border border-[#f5be53]/45 text-[#f5be53]"
-                                    : "bg-white/3 border border-white/8 text-[#94a3b8] hover:text-white"
-                                }`}
-                              >
-                                {m}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
+                        {formError && (
+                          <p className="text-red-400 text-xs px-1">{formError}</p>
+                        )}
 
                         <button
                           type="submit"
@@ -813,7 +804,6 @@ export default function CalculatorClient() {
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
-      <MobileNav />
     </main>
   );
 }

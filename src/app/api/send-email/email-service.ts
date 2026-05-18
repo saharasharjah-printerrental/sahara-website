@@ -217,7 +217,8 @@ async function sendViaNodemailer(
     });
 
     return true;
-  } catch {
+  } catch (err) {
+    console.error('[email-service] nodemailer failed:', err);
     return false;
   }
 }
@@ -233,7 +234,7 @@ async function sendOne(
   if (await sendViaSmtpSocket(config, to, subject, html)) return;
   // Fall back to nodemailer (local Node.js dev)
   if (await sendViaNodemailer(config, to, subject, html)) return;
-  console.warn('[email-service] Could not send email to', to);
+  throw new Error(`Email delivery failed to ${to} — both cloudflare:sockets and nodemailer failed`);
 }
 
 // ── HTML builders ─────────────────────────────────────────────────────────────
@@ -286,9 +287,17 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<boole
   const config = await getSmtpConfig();
 
   if (!config) {
-    console.log('[email-service] SMTP not configured. Set smtp_user and smtp_pass in Admin → Settings.');
-    return true;
+    console.error('[email-service] SMTP not configured — set smtp_user and smtp_pass in Admin → Settings.');
+    return false;
   }
+
+  console.log('[email-service] Attempting SMTP:', {
+    host: config.host,
+    port: config.port,
+    user: config.user ? 'set' : 'MISSING',
+    pass: config.pass ? 'set' : 'MISSING',
+    to: config.toEmail,
+  });
 
   try {
     const toEmail = data.notificationEmail || config.toEmail;

@@ -6,7 +6,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import MobileNav from "@/components/MobileNav";
 
 const brandData: Record<string, any> = {
   kyocera: { name: "Kyocera", tagline: "Document Solutions", color: "#E3000E", heroImg: "/images/printer-kyocera.webp", description: "Kyocera ECOSYS technology delivers industry-leading reliability with long-life components that reduce waste and total cost of ownership.", features: [{ icon: "settings_suggest", title: "ECOSYS Technology", desc: "Long-life components reduce waste and total cost of ownership." }, { icon: "savings", title: "Cost Efficiency", desc: "Industry-low cost per page with exceptional durability." }, { icon: "eco", title: "Eco-Friendly", desc: "Zero waste laser technology with minimal environmental footprint." }, { icon: "precision_manufacturing", title: "Japanese Engineering", desc: "Decades of reliability built into every component." }], products: [{ name: "ECOSYS P6230cdn", specs: ["30 PPM", "1200 DPI"], desc: "Color laser for demanding workgroups." }, { name: "ECOSYS M6235cidn", specs: ["35 PPM", "1200 DPI"], desc: "Advanced color MFP with dual scanning." }, { name: "TASKalfa 3253ci", specs: ["32 PPM", "1200 DPI"], desc: "High-performance color MFP for professionals." }] },
@@ -162,7 +161,6 @@ export default function BrandContentClient({ slug }: { slug: string }) {
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
-      <MobileNav />
     </main>
   );
 }

@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import MobileNav from "@/components/MobileNav";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle, Smartphone, Phone, Headphones, Email, LocationOn, AccessTime } from "@mui/icons-material";
@@ -378,7 +377,6 @@ export default function ContactPage() {
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
-      <MobileNav />
     </main>
   );
 }

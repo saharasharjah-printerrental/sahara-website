@@ -320,7 +320,7 @@ export default function Header() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+                className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
                 onClick={() => setIsMoreOpen(false)}
               />
 
@@ -330,7 +330,7 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 32 }}
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                className="fixed bottom-[72px] left-2 right-2 z-50 rounded-2xl overflow-hidden max-h-[calc(100vh-180px)] overflow-y-auto"
+                className="fixed bottom-[72px] left-2 right-2 z-50 rounded-2xl overflow-hidden max-h-[calc(100vh-180px)] overflow-y-auto lg:hidden"
                 style={{
                   background: "linear-gradient(145deg, #0f1e30 0%, #091524 100%)",
                   border: "1px solid rgba(255,255,255,0.08)",
