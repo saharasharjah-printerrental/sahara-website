@@ -24,18 +24,17 @@
     "@reduxjs/toolkit": "^2.11.2",
     "framer-motion": "^11.18.2",
     "next": "^15",
-    "nodemailer": "^8.0.7",
     "react": "^19",
     "react-dom": "^19",
     "react-redux": "^9.2.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "worker-mailer": "^1.2.1"
   },
   "devDependencies": {
     "@agent-browser-io/browser": "^0.3.0",
     "@cloudflare/next-on-pages": "^1",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@types/node": "^20",
-    "@types/nodemailer": "^8.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "agent-browser": "^0.27.0",

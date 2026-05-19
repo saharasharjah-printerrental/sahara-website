@@ -42,14 +42,14 @@ export async function POST(request: NextRequest) {
     await db.prepare(`
       INSERT OR REPLACE INTO clients (id, name, logoUrl, website, isActive, sortOrder)
       VALUES (?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id,
       body.name,
       body.logoUrl || '',
       body.website || '',
       body.isActive ?? 1,
       body.sortOrder || 0
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id });
   } catch (error) {

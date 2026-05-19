@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@mui/material", "@mui/icons-material", "@mui/system", "@mui/utils"],
+  serverExternalPackages: ['cloudflare:sockets'],
+  webpack(config) {
+    config.externals = config.externals || [];
+    config.externals.push({ 'cloudflare:sockets': 'commonjs cloudflare:sockets' });
+    return config;
+  },
   reactStrictMode: true,
   devIndicators: false,
   logging: {

@@ -73,182 +73,36 @@ export async function getSmtpConfig(): Promise<SmtpConfig | null> {
   }
 }
 
-// ── Minimal SMTP state machine ────────────────────────────────────────────────
-
-class SmtpSession {
-  private buffer = '';
-  private dec = new TextDecoder();
-  private enc = new TextEncoder();
-
-  constructor(
-    private reader: ReadableStreamDefaultReader<Uint8Array>,
-    private writer: WritableStreamDefaultWriter<Uint8Array>,
-  ) {}
-
-  async readResponse(): Promise<{ code: number; lines: string[] }> {
-    const lines: string[] = [];
-    while (true) {
-      while (!this.buffer.includes('\r\n')) {
-        const { value, done } = await this.reader.read();
-        if (done) throw new Error('SMTP connection closed unexpectedly');
-        this.buffer += this.dec.decode(value, { stream: true });
-      }
-      const idx = this.buffer.indexOf('\r\n');
-      const line = this.buffer.slice(0, idx);
-      this.buffer = this.buffer.slice(idx + 2);
-      lines.push(line);
-      const code = parseInt(line.slice(0, 3), 10);
-      const sep = line[3];
-      if (sep === ' ' || !sep) return { code, lines };
-      if (sep !== '-') throw new Error(`Unexpected SMTP line: ${line}`);
-      // sep === '-' means multi-line, keep reading
-    }
-  }
-
-  async send(data: string) {
-    await this.writer.write(this.enc.encode(data + '\r\n'));
-  }
-
-  async cmd(command: string, expectedCode: number): Promise<{ code: number; lines: string[] }> {
-    await this.send(command);
-    const resp = await this.readResponse();
-    if (resp.code !== expectedCode) {
-      throw new Error(`SMTP ${command.split(' ')[0]} failed ${resp.code}: ${resp.lines.join(' ')}`);
-    }
-    return resp;
-  }
-}
-
-// ── Send via cloudflare:sockets (TCP SMTP) ────────────────────────────────────
-// Uses new Function() to bypass webpack module resolution — cloudflare:sockets
-// is a native Cloudflare Workers module resolved only at runtime, not at build time.
-async function sendViaSmtpSocket(
-  config: SmtpConfig,
-  to: string,
-  subject: string,
-  html: string,
-): Promise<boolean> {
-  try {
-    // Dynamic import bypassing webpack — cloudflare:sockets is a CF Workers native
-    const importCF = new Function('m', 'return import(m)');
-    const { connect } = await importCF('cloudflare:sockets');
-
-    const useSSL = config.port === 465;
-    const connectOptions = useSSL ? { secureTransport: 'on' as const } : undefined;
-    const socket = connect({ hostname: config.host, port: config.port }, connectOptions);
-
-    let reader = socket.readable.getReader() as ReadableStreamDefaultReader<Uint8Array>;
-    let writer = socket.writable.getWriter() as WritableStreamDefaultWriter<Uint8Array>;
-    let session = new SmtpSession(reader, writer);
-
-    // Greeting
-    const greeting = await session.readResponse();
-    if (greeting.code !== 220) throw new Error(`Bad greeting: ${greeting.lines[0]}`);
-
-    // EHLO
-    const ehlo = await session.cmd('EHLO saharaprinter.com', 250);
-    const capabilities = ehlo.lines.join('\n').toUpperCase();
-
-    // STARTTLS for port 587
-    if (!useSSL) {
-      if (!capabilities.includes('STARTTLS')) throw new Error('Server does not support STARTTLS');
-      await session.cmd('STARTTLS', 220);
-      // Upgrade to TLS
-      const tlsSocket = socket.startTls();
-      reader = tlsSocket.readable.getReader() as ReadableStreamDefaultReader<Uint8Array>;
-      writer = tlsSocket.writable.getWriter() as WritableStreamDefaultWriter<Uint8Array>;
-      session = new SmtpSession(reader, writer);
-      // Re-EHLO on TLS channel
-      await session.cmd('EHLO saharaprinter.com', 250);
-    }
-
-    // AUTH LOGIN
-    await session.cmd('AUTH LOGIN', 334);
-    await session.cmd(btoa(config.user), 334);
-    await session.cmd(btoa(config.pass), 235);
-
-    // Envelope
-    await session.cmd(`MAIL FROM:<${config.fromEmail}>`, 250);
-    await session.cmd(`RCPT TO:<${to}>`, 250);
-    await session.cmd('DATA', 354);
-
-    // Build MIME message — escape lines starting with a dot
-    const body = html.replace(/^\./gm, '..');
-    const mime = [
-      `From: "${config.fromName}" <${config.fromEmail}>`,
-      `To: ${to}`,
-      `Subject: ${subject}`,
-      `MIME-Version: 1.0`,
-      `Content-Type: text/html; charset=utf-8`,
-      ``,
-      body,
-      `.`,
-    ].join('\r\n');
-
-    await session.send(mime);
-    const dataResp = await session.readResponse();
-    if (dataResp.code !== 250) {
-      throw new Error(`Email rejected by server: ${dataResp.code} ${dataResp.lines[0]}`);
-    }
-
-    await session.send('QUIT');
-    await writer.close().catch(() => {});
-
-    return true;
-  } catch (err) {
-    console.error('[email-service] cloudflare:sockets SMTP failed:', err);
-    return false;
-  }
-}
-
-// ── Fallback: nodemailer (Node.js dev runtime only) ───────────────────────────
-// Also uses new Function() to prevent webpack from bundling it.
-// This will succeed in local `npm run dev` (Node.js) and fail gracefully on CF Workers.
-async function sendViaNodemailer(
-  config: SmtpConfig,
-  to: string,
-  subject: string,
-  html: string,
-): Promise<boolean> {
-  try {
-    const importFn = new Function('m', 'return import(m)');
-    const nm = await importFn('nodemailer');
-    const nodemailer = nm.default ?? nm;
-
-    const transporter = nodemailer.createTransport({
-      host: config.host,
-      port: config.port,
-      secure: config.port === 465,
-      auth: { user: config.user, pass: config.pass },
-      tls: { rejectUnauthorized: false },
-    });
-
-    await transporter.sendMail({
-      from: `"${config.fromName}" <${config.fromEmail}>`,
-      to,
-      subject,
-      html,
-    });
-
-    return true;
-  } catch (err) {
-    console.error('[email-service] nodemailer failed:', err);
-    return false;
-  }
-}
-
-// ── Unified send ──────────────────────────────────────────────────────────────
+// ── Send via worker-mailer (cloudflare:sockets, no eval/new Function) ─────────
+// Uses lazy require() so the cloudflare:sockets module is only loaded at
+// request time in CF Workers, not at build-time during Next.js page collection.
 async function sendOne(
   config: SmtpConfig,
   to: string,
   subject: string,
   html: string,
 ): Promise<void> {
-  // Try cloudflare:sockets first (production CF Workers)
-  if (await sendViaSmtpSocket(config, to, subject, html)) return;
-  // Fall back to nodemailer (local Node.js dev)
-  if (await sendViaNodemailer(config, to, subject, html)) return;
-  throw new Error(`Email delivery failed to ${to} — both cloudflare:sockets and nodemailer failed`);
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { WorkerMailer } = require('worker-mailer') as typeof import('worker-mailer');
+
+  const mailer = await WorkerMailer.connect({
+    credentials: {
+      username: config.user,
+      password: config.pass,
+    },
+    authType: 'plain',
+    host: config.host,
+    port: config.port,
+    secure: config.port === 465,
+    startTls: config.port === 587,
+  });
+
+  await mailer.send({
+    from: { name: config.fromName, email: config.fromEmail },
+    to,
+    subject,
+    html,
+  });
 }
 
 // ── HTML builders ─────────────────────────────────────────────────────────────
@@ -325,7 +179,7 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<boole
     return false;
   }
 
-  console.log('[email-service] Attempting SMTP:', {
+  console.log('[email-service] Attempting SMTP via worker-mailer:', {
     host: config.host,
     port: config.port,
     user: config.user ? 'set' : 'MISSING',

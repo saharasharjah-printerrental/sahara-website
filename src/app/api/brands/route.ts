@@ -48,12 +48,12 @@ export async function POST(request: NextRequest) {
     await db.prepare(`
       INSERT OR REPLACE INTO brands (id, name, slug, logo_url, description, is_active, sort_order)
       VALUES (?, ?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id, body.name,
       body.slug || body.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       body.logoUrl || '', body.description || '',
       body.isActive ?? 1, body.sortOrder || 0
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id });
   } catch (error) {

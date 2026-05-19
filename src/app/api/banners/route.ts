@@ -49,12 +49,12 @@ export async function POST(request: NextRequest) {
     await db.prepare(`
       INSERT OR REPLACE INTO banners (id, title, subtitle, cta_text, cta_link, image_url, position, is_active, sort_order)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id, body.title || '', body.subtitle || '',
       body.ctaText || 'Learn More', body.ctaLink || '#',
       body.imageUrl || '', body.position || 'hero',
       body.isActive ?? 1, body.sortOrder || 0
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
   } catch (error) {

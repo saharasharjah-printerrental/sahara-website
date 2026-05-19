@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
     await db.prepare(`
       INSERT OR REPLACE INTO blogs (id, title, slug, excerpt, content, image, author, category, isActive, publishedAt, createdAt, meta_title, meta_description, meta_keywords, internal_links, schema_jsonld)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id,
       body.title,
       body.slug || body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
       body.meta_keywords || '',
       body.internal_links || '',
       body.schema_jsonld || ''
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
   } catch (error) {

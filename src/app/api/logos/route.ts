@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     await db.prepare(`
       INSERT OR REPLACE INTO logos (id, name, imageUrl, imageAlt, link, isActive, sortOrder)
       VALUES (?, ?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id,
       body.name,
       body.imageUrl || '',
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       body.link || '',
       body.isActive ?? 1,
       body.sortOrder || 0
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id }, { headers: CACHE_CONTROL });
   } catch (error) {

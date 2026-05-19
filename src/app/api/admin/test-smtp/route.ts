@@ -31,40 +31,36 @@ export async function GET(_request: NextRequest) {
     portMode: config.port === 465 ? 'SMTPS (implicit TLS)' : config.port === 587 ? 'STARTTLS' : 'unknown',
   };
 
-  // Attempt TCP connection test via cloudflare:sockets
+  // Attempt a live SMTP connection test via worker-mailer (cloudflare:sockets under the hood).
+  // Uses lazy require() so the cloudflare:sockets module is not loaded at build time.
   try {
-    const importCF = new Function('m', 'return import(m)');
-    const { connect } = await importCF('cloudflare:sockets');
-    const useSSL = config.port === 465;
-    const socket = connect(
-      { hostname: config.host, port: config.port },
-      useSSL ? { secureTransport: 'on' as const } : undefined,
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { WorkerMailer } = require('worker-mailer') as typeof import('worker-mailer');
+
+    const testHtml = `<p>SMTP test from Sahara Printers admin panel — ${new Date().toUTCString()}</p>`;
+    await WorkerMailer.send(
+      {
+        credentials: { username: config.user, password: config.pass },
+        authType: 'plain',
+        host: config.host,
+        port: config.port,
+        secure: config.port === 465,
+        startTls: config.port === 587,
+      },
+      {
+        from: { name: config.fromName, email: config.fromEmail },
+        to: config.toEmail,
+        subject: 'Sahara Printers — SMTP Test',
+        html: testHtml,
+      },
     );
-    const reader = socket.readable.getReader() as ReadableStreamDefaultReader<Uint8Array>;
-    const dec = new TextDecoder();
-
-    // Try to read the SMTP greeting (220 ...) within 5 seconds
-    const timeout = new Promise<null>((_, reject) =>
-      setTimeout(() => reject(new Error('Connection timed out after 5s')), 5000),
-    );
-    const read = reader.read();
-    const result = await Promise.race([read, timeout]) as ReadableStreamReadResult<Uint8Array> | null;
-
-    if (result && !result.done && result.value) {
-      const greeting = dec.decode(result.value);
-      diagnosis.connectionTest = 'ok';
-      diagnosis.greeting = greeting.trim().slice(0, 100);
-    } else {
-      diagnosis.connectionTest = 'failed: empty response';
-    }
-
-    reader.releaseLock();
-    await socket.close().catch(() => {});
+    diagnosis.connectionTest = 'ok';
+    diagnosis.testEmailSent = `Sent to ${config.toEmail}`;
   } catch (err) {
     diagnosis.connectionTest = `failed: ${String(err)}`;
     diagnosis.hint = config.port === 465
       ? 'Try switching to port 587 (STARTTLS) in Admin → Settings'
-      : 'Check if smtp.gmail.com is reachable from Cloudflare Workers';
+      : 'Check if smtp.gmail.com is reachable from Cloudflare Workers and that your app password is correct';
   }
 
   return NextResponse.json(diagnosis);

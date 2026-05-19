@@ -45,14 +45,14 @@ export async function POST(request: NextRequest) {
       INSERT OR REPLACE INTO supplies
         (id, name, brand, category, compatibleModels, color, yield, price, stock, image, alt_text, image_width, image_height, isActive, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id, body.name, body.brand || '', body.category || '',
       body.compatibleModels || '', body.color || '',
       body.yield || '', body.price || '',
       body.stock || 0, body.image || '',
       body.altText || '', body.imageWidth || 800, body.imageHeight || 800,
       body.isActive ?? 1, now
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id });
   } catch (error) {

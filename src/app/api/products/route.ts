@@ -123,13 +123,13 @@ export async function POST(request: NextRequest) {
       INSERT OR REPLACE INTO products
         (id, slug, name, brand, category, condition, price_sale, price_rental, specifications, image_urls, is_active, is_featured)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(
+    `).bind(
       id, slug, body.name, body.brand || '', body.category || '',
       body.condition || 'New',
       parsePrice(body.priceSale), parsePrice(body.priceRental),
       specifications, imageUrls,
       body.isActive ?? 1, body.isFeatured ?? 0
-    );
+    ).run();
 
     return NextResponse.json({ success: true, id });
   } catch (error) {
