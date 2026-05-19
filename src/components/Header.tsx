@@ -30,6 +30,8 @@ const brands = [
 const services = [
   { name: "Printer Rental", href: "/services/printer-rental", icon: Print },
   { name: "Photocopier Rental", href: "/services/photocopier-rental", icon: CopyAll },
+  { name: "Paper Shredder Rental", href: "/services/paper-shredder-rental", icon: Article },
+  { name: "PaperCut Print Management", href: "/services/papercut-print-management", icon: SettingsSuggest },
   { name: "Annual Maintenance (AMC)", href: "/services/amc", icon: Handyman },
   { name: "Printer Repair", href: "/services/repair", icon: Build },
   { name: "Toner & Spare Parts", href: "/services/printer-spare-parts", icon: Inventory },
@@ -246,12 +248,21 @@ export default function Header() {
                 </button>
                 <AnimatePresence>
                   {isBrandsOpen && (
-                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-[#142032]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
                       {brands.map((brand) => (
                         <Link key={brand.name} href={brand.href} className="block px-4 py-3 text-slate-300 hover:bg-[#1f2a3d] hover:text-[#f5be53] transition-colors" onClick={() => setIsBrandsOpen(false)}>
                           {brand.name}
                         </Link>
                       ))}
+                      <div className="border-t border-white/8 mx-3 my-1" />
+                      <Link
+                        href="/bravo-card-printers-uae"
+                        className="flex items-center gap-2 px-4 py-3 text-[#f5be53] hover:bg-[#1f2a3d] transition-colors font-semibold text-sm"
+                        onClick={() => setIsBrandsOpen(false)}
+                      >
+                        <span className="text-xs bg-[#f5be53]/20 px-1.5 py-0.5 rounded text-[#f5be53] font-bold">★</span>
+                        Bravo Card Printers
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>

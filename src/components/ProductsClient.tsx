@@ -162,6 +162,26 @@ export default function ProductsClient() {
           </header>
         </section>
 
+        {/* Exclusive Distributor Callout */}
+        <div className="max-w-7xl mx-auto px-8 lg:px-0 mb-4">
+          <a
+            href="/bravo-card-printers-uae"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gradient-to-r from-[#0d1a2e] to-[#091524] border border-[#f5be53]/25 rounded-2xl p-5 hover:border-[#f5be53]/50 transition-colors group"
+          >
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="text-2xl">🏅</span>
+              <div>
+                <p className="text-[9px] font-bold text-[#f5be53] uppercase tracking-[0.2em]">Exclusive UAE Distributor</p>
+                <p className="text-white font-bold text-base leading-tight">Bravo Card Printers — RTAI & DC 3300</p>
+              </div>
+            </div>
+            <p className="text-[#8fa3bc] text-sm sm:ml-auto max-w-sm">
+              Sole authorized Bravo Global partner in the UAE. 600 dpi retransfer &amp; direct-to-card ID printers for enterprise, government &amp; education.
+            </p>
+            <span className="text-[#f5be53] text-sm font-semibold group-hover:translate-x-1 transition-transform shrink-0">View →</span>
+          </a>
+        </div>
+
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-12">
           <aside className="space-y-10">
             <div className="relative">

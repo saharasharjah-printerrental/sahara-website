@@ -37,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/brands/samsung/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/printer-repair-dubai/`,          lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
     { url: `${BASE}/canon-printer-dubai/`,          lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/bravo-card-printers-uae/`,      lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/hp-printer-abu-dhabi/`,         lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/products/`,                     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },
     { url: `${BASE}/blogs/`,                        lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.7 },

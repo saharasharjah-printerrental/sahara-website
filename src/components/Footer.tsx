@@ -225,6 +225,8 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link href="/services/printer-rental" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
               <li><Link href="/services/photocopier-rental" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
+              <li><Link href="/services/paper-shredder-rental" className="hover:text-[#f5be53] transition-colors">Paper Shredder Rental</Link></li>
+              <li><Link href="/services/papercut-print-management" className="hover:text-[#f5be53] transition-colors">PaperCut Print Management</Link></li>
               <li><Link href="/services/amc" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
               <li><Link href="/services/repair" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
               <li><Link href="/services/toner" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
@@ -293,6 +295,10 @@ export default function Footer() {
             <Link href="/printer-rental-abu-dhabi" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Copier Abu Dhabi</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/copier-lease-uae" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Lease UAE</Link>
+            <span className="text-slate-700 text-xs">|</span>
+            <Link href="/services/paper-shredder-rental" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Paper Shredder Rental UAE</Link>
+            <span className="text-slate-700 text-xs">|</span>
+            <Link href="/services/papercut-print-management" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">PaperCut Print Management UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/services/toner" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Toner Suppliers Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
