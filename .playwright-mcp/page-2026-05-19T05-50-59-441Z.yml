@@ -1,0 +1,1512 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "Sahara Admin" [ref=e5] [cursor=pointer]:
+        - /url: /admin/
+      - navigation [ref=e6]:
+        - link "Dashboard" [ref=e7] [cursor=pointer]:
+          - /url: /admin/
+          - img [ref=e8]
+          - generic [ref=e10]: Dashboard
+        - link "Products" [ref=e11] [cursor=pointer]:
+          - /url: /admin/products/
+          - img [ref=e12]
+          - generic [ref=e14]: Products
+        - link "Supplies & Parts" [ref=e15] [cursor=pointer]:
+          - /url: /admin/supplies/
+          - img [ref=e16]
+          - generic [ref=e18]: Supplies & Parts
+        - link "Blog Posts" [ref=e19] [cursor=pointer]:
+          - /url: /admin/blog/
+          - img [ref=e20]
+          - generic [ref=e22]: Blog Posts
+        - link "Clients" [ref=e23] [cursor=pointer]:
+          - /url: /admin/clients/
+          - img [ref=e24]
+          - generic [ref=e26]: Clients
+        - link "FAQs" [ref=e27] [cursor=pointer]:
+          - /url: /admin/faqs/
+          - img [ref=e28]
+          - generic [ref=e31]: FAQs
+        - link "Brands" [ref=e32] [cursor=pointer]:
+          - /url: /admin/brands/
+          - img [ref=e33]
+          - generic [ref=e35]: Brands
+        - link "Testimonials" [ref=e36] [cursor=pointer]:
+          - /url: /admin/testimonials/
+          - img [ref=e37]
+          - generic [ref=e39]: Testimonials
+        - link "Logo & Branding" [ref=e40] [cursor=pointer]:
+          - /url: /admin/logos/
+          - img [ref=e41]
+          - generic [ref=e43]: Logo & Branding
+        - link "SEO & Analytics" [ref=e44] [cursor=pointer]:
+          - /url: /admin/seo/
+          - img [ref=e45]
+          - generic [ref=e47]: SEO & Analytics
+        - link "Settings" [ref=e48] [cursor=pointer]:
+          - /url: /admin/settings/
+          - img [ref=e49]
+          - generic [ref=e51]: Settings
+      - generic [ref=e52]:
+        - link "View Site" [ref=e53] [cursor=pointer]:
+          - /url: /
+          - img [ref=e54]
+          - generic [ref=e56]: View Site
+        - button "Logout" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+          - generic [ref=e60]: Logout
+    - main [ref=e61]:
+      - main [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - heading "Clients" [level=1] [ref=e67]
+              - paragraph [ref=e68]: Manage client logos — 93 companies (93 active)
+            - button "Add Client" [ref=e69] [cursor=pointer]:
+              - img [ref=e70]
+              - text: Add Client
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - textbox "Search clients..." [ref=e74]
+              - generic [ref=e75]: search
+            - generic [ref=e76] [cursor=pointer]:
+              - checkbox "Active only" [ref=e77]
+              - generic [ref=e78]: Active only
+            - generic [ref=e79] [cursor=pointer]:
+              - checkbox "Select all" [ref=e80]
+              - generic [ref=e81]: Select all
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - checkbox [ref=e84] [cursor=pointer]
+              - generic [ref=e86]: business
+              - heading "Emirates Global Aluminium" [level=3] [ref=e87]
+              - link "Visit" [ref=e88] [cursor=pointer]:
+                - /url: https://www.ega.com
+                - img [ref=e89]
+                - text: Visit
+              - generic [ref=e91]:
+                - button "Edit" [ref=e92] [cursor=pointer]:
+                  - img [ref=e93]
+                  - text: Edit
+                - button "Delete" [ref=e95] [cursor=pointer]:
+                  - img [ref=e96]
+                  - text: Delete
+              - button "Active" [ref=e98] [cursor=pointer]
+            - generic [ref=e99]:
+              - checkbox [ref=e100] [cursor=pointer]
+              - generic [ref=e102]: business
+              - heading "Emirates Dubai" [level=3] [ref=e103]
+              - link "Visit" [ref=e104] [cursor=pointer]:
+                - /url: https://www.emirates.com
+                - img [ref=e105]
+                - text: Visit
+              - generic [ref=e107]:
+                - button "Edit" [ref=e108] [cursor=pointer]:
+                  - img [ref=e109]
+                  - text: Edit
+                - button "Delete" [ref=e111] [cursor=pointer]:
+                  - img [ref=e112]
+                  - text: Delete
+              - button "Active" [ref=e114] [cursor=pointer]
+            - generic [ref=e115]:
+              - checkbox [ref=e116] [cursor=pointer]
+              - generic [ref=e118]: business
+              - heading "Flydubai" [level=3] [ref=e119]
+              - link "Visit" [ref=e120] [cursor=pointer]:
+                - /url: https://www.flydubai.com
+                - img [ref=e121]
+                - text: Visit
+              - generic [ref=e123]:
+                - button "Edit" [ref=e124] [cursor=pointer]:
+                  - img [ref=e125]
+                  - text: Edit
+                - button "Delete" [ref=e127] [cursor=pointer]:
+                  - img [ref=e128]
+                  - text: Delete
+              - button "Active" [ref=e130] [cursor=pointer]
+            - generic [ref=e131]:
+              - checkbox [ref=e132] [cursor=pointer]
+              - generic [ref=e134]: business
+              - heading "Abu Dhabi National Oil Company" [level=3] [ref=e135]
+              - link "Visit" [ref=e136] [cursor=pointer]:
+                - /url: https://www.adnoc.ae
+                - img [ref=e137]
+                - text: Visit
+              - generic [ref=e139]:
+                - button "Edit" [ref=e140] [cursor=pointer]:
+                  - img [ref=e141]
+                  - text: Edit
+                - button "Delete" [ref=e143] [cursor=pointer]:
+                  - img [ref=e144]
+                  - text: Delete
+              - button "Active" [ref=e146] [cursor=pointer]
+            - generic [ref=e147]:
+              - checkbox [ref=e148] [cursor=pointer]
+              - generic [ref=e150]: business
+              - heading "Mubadala" [level=3] [ref=e151]
+              - link "Visit" [ref=e152] [cursor=pointer]:
+                - /url: https://www.mubadala.com
+                - img [ref=e153]
+                - text: Visit
+              - generic [ref=e155]:
+                - button "Edit" [ref=e156] [cursor=pointer]:
+                  - img [ref=e157]
+                  - text: Edit
+                - button "Delete" [ref=e159] [cursor=pointer]:
+                  - img [ref=e160]
+                  - text: Delete
+              - button "Active" [ref=e162] [cursor=pointer]
+            - generic [ref=e163]:
+              - checkbox [ref=e164] [cursor=pointer]
+              - generic [ref=e166]: business
+              - heading "Abu Dhabi Commercial Bank" [level=3] [ref=e167]
+              - link "Visit" [ref=e168] [cursor=pointer]:
+                - /url: https://www.adcb.com
+                - img [ref=e169]
+                - text: Visit
+              - generic [ref=e171]:
+                - button "Edit" [ref=e172] [cursor=pointer]:
+                  - img [ref=e173]
+                  - text: Edit
+                - button "Delete" [ref=e175] [cursor=pointer]:
+                  - img [ref=e176]
+                  - text: Delete
+              - button "Active" [ref=e178] [cursor=pointer]
+            - generic [ref=e179]:
+              - checkbox [ref=e180] [cursor=pointer]
+              - generic [ref=e182]: business
+              - heading "First Abu Dhabi Bank" [level=3] [ref=e183]
+              - link "Visit" [ref=e184] [cursor=pointer]:
+                - /url: https://www.fabbank.com
+                - img [ref=e185]
+                - text: Visit
+              - generic [ref=e187]:
+                - button "Edit" [ref=e188] [cursor=pointer]:
+                  - img [ref=e189]
+                  - text: Edit
+                - button "Delete" [ref=e191] [cursor=pointer]:
+                  - img [ref=e192]
+                  - text: Delete
+              - button "Active" [ref=e194] [cursor=pointer]
+            - generic [ref=e195]:
+              - checkbox [ref=e196] [cursor=pointer]
+              - generic [ref=e198]: business
+              - heading "Abu Dhabi Islamic Bank" [level=3] [ref=e199]
+              - link "Visit" [ref=e200] [cursor=pointer]:
+                - /url: https://www.adib.ae
+                - img [ref=e201]
+                - text: Visit
+              - generic [ref=e203]:
+                - button "Edit" [ref=e204] [cursor=pointer]:
+                  - img [ref=e205]
+                  - text: Edit
+                - button "Delete" [ref=e207] [cursor=pointer]:
+                  - img [ref=e208]
+                  - text: Delete
+              - button "Active" [ref=e210] [cursor=pointer]
+            - generic [ref=e211]:
+              - checkbox [ref=e212] [cursor=pointer]
+              - generic [ref=e214]: business
+              - heading "Aldar Properties" [level=3] [ref=e215]
+              - link "Visit" [ref=e216] [cursor=pointer]:
+                - /url: https://www.aldar.com
+                - img [ref=e217]
+                - text: Visit
+              - generic [ref=e219]:
+                - button "Edit" [ref=e220] [cursor=pointer]:
+                  - img [ref=e221]
+                  - text: Edit
+                - button "Delete" [ref=e223] [cursor=pointer]:
+                  - img [ref=e224]
+                  - text: Delete
+              - button "Active" [ref=e226] [cursor=pointer]
+            - generic [ref=e227]:
+              - checkbox [ref=e228] [cursor=pointer]
+              - generic [ref=e230]: business
+              - heading "Sharaf Group" [level=3] [ref=e231]
+              - link "Visit" [ref=e232] [cursor=pointer]:
+                - /url: https://www.sharafgroup.com
+                - img [ref=e233]
+                - text: Visit
+              - generic [ref=e235]:
+                - button "Edit" [ref=e236] [cursor=pointer]:
+                  - img [ref=e237]
+                  - text: Edit
+                - button "Delete" [ref=e239] [cursor=pointer]:
+                  - img [ref=e240]
+                  - text: Delete
+              - button "Active" [ref=e242] [cursor=pointer]
+            - generic [ref=e243]:
+              - checkbox [ref=e244] [cursor=pointer]
+              - generic [ref=e246]: business
+              - heading "Al-Futtaim Group" [level=3] [ref=e247]
+              - link "Visit" [ref=e248] [cursor=pointer]:
+                - /url: https://www.alfuttaim.com
+                - img [ref=e249]
+                - text: Visit
+              - generic [ref=e251]:
+                - button "Edit" [ref=e252] [cursor=pointer]:
+                  - img [ref=e253]
+                  - text: Edit
+                - button "Delete" [ref=e255] [cursor=pointer]:
+                  - img [ref=e256]
+                  - text: Delete
+              - button "Active" [ref=e258] [cursor=pointer]
+            - generic [ref=e259]:
+              - checkbox [ref=e260] [cursor=pointer]
+              - generic [ref=e262]: business
+              - heading "Almarai" [level=3] [ref=e263]
+              - link "Visit" [ref=e264] [cursor=pointer]:
+                - /url: https://www.almarai.com
+                - img [ref=e265]
+                - text: Visit
+              - generic [ref=e267]:
+                - button "Edit" [ref=e268] [cursor=pointer]:
+                  - img [ref=e269]
+                  - text: Edit
+                - button "Delete" [ref=e271] [cursor=pointer]:
+                  - img [ref=e272]
+                  - text: Delete
+              - button "Active" [ref=e274] [cursor=pointer]
+            - generic [ref=e275]:
+              - checkbox [ref=e276] [cursor=pointer]
+              - generic [ref=e278]: business
+              - heading "Alshaya Group" [level=3] [ref=e279]
+              - link "Visit" [ref=e280] [cursor=pointer]:
+                - /url: https://www.alshaya.com
+                - img [ref=e281]
+                - text: Visit
+              - generic [ref=e283]:
+                - button "Edit" [ref=e284] [cursor=pointer]:
+                  - img [ref=e285]
+                  - text: Edit
+                - button "Delete" [ref=e287] [cursor=pointer]:
+                  - img [ref=e288]
+                  - text: Delete
+              - button "Active" [ref=e290] [cursor=pointer]
+            - generic [ref=e291]:
+              - checkbox [ref=e292] [cursor=pointer]
+              - generic [ref=e294]: business
+              - heading "Aramco" [level=3] [ref=e295]
+              - link "Visit" [ref=e296] [cursor=pointer]:
+                - /url: https://www.aramco.com
+                - img [ref=e297]
+                - text: Visit
+              - generic [ref=e299]:
+                - button "Edit" [ref=e300] [cursor=pointer]:
+                  - img [ref=e301]
+                  - text: Edit
+                - button "Delete" [ref=e303] [cursor=pointer]:
+                  - img [ref=e304]
+                  - text: Delete
+              - button "Active" [ref=e306] [cursor=pointer]
+            - generic [ref=e307]:
+              - checkbox [ref=e308] [cursor=pointer]
+              - generic [ref=e310]: business
+              - heading "Saudi Arabian Airlines" [level=3] [ref=e311]
+              - link "Visit" [ref=e312] [cursor=pointer]:
+                - /url: https://www.saudia.com
+                - img [ref=e313]
+                - text: Visit
+              - generic [ref=e315]:
+                - button "Edit" [ref=e316] [cursor=pointer]:
+                  - img [ref=e317]
+                  - text: Edit
+                - button "Delete" [ref=e319] [cursor=pointer]:
+                  - img [ref=e320]
+                  - text: Delete
+              - button "Active" [ref=e322] [cursor=pointer]
+            - generic [ref=e323]:
+              - checkbox [ref=e324] [cursor=pointer]
+              - generic [ref=e326]: business
+              - heading "Qatar Airways" [level=3] [ref=e327]
+              - link "Visit" [ref=e328] [cursor=pointer]:
+                - /url: https://www.qatarairways.com
+                - img [ref=e329]
+                - text: Visit
+              - generic [ref=e331]:
+                - button "Edit" [ref=e332] [cursor=pointer]:
+                  - img [ref=e333]
+                  - text: Edit
+                - button "Delete" [ref=e335] [cursor=pointer]:
+                  - img [ref=e336]
+                  - text: Delete
+              - button "Active" [ref=e338] [cursor=pointer]
+            - generic [ref=e339]:
+              - checkbox [ref=e340] [cursor=pointer]
+              - generic [ref=e342]: business
+              - heading "Qatar National Bank" [level=3] [ref=e343]
+              - link "Visit" [ref=e344] [cursor=pointer]:
+                - /url: https://www.qnb.com
+                - img [ref=e345]
+                - text: Visit
+              - generic [ref=e347]:
+                - button "Edit" [ref=e348] [cursor=pointer]:
+                  - img [ref=e349]
+                  - text: Edit
+                - button "Delete" [ref=e351] [cursor=pointer]:
+                  - img [ref=e352]
+                  - text: Delete
+              - button "Active" [ref=e354] [cursor=pointer]
+            - generic [ref=e355]:
+              - checkbox [ref=e356] [cursor=pointer]
+              - generic [ref=e358]: business
+              - heading "Ooredoo" [level=3] [ref=e359]
+              - link "Visit" [ref=e360] [cursor=pointer]:
+                - /url: https://www.ooredoo.com
+                - img [ref=e361]
+                - text: Visit
+              - generic [ref=e363]:
+                - button "Edit" [ref=e364] [cursor=pointer]:
+                  - img [ref=e365]
+                  - text: Edit
+                - button "Delete" [ref=e367] [cursor=pointer]:
+                  - img [ref=e368]
+                  - text: Delete
+              - button "Active" [ref=e370] [cursor=pointer]
+            - generic [ref=e371]:
+              - checkbox [ref=e372] [cursor=pointer]
+              - generic [ref=e374]: business
+              - heading "Vodafone Qatar" [level=3] [ref=e375]
+              - link "Visit" [ref=e376] [cursor=pointer]:
+                - /url: https://www.vodafone.qa
+                - img [ref=e377]
+                - text: Visit
+              - generic [ref=e379]:
+                - button "Edit" [ref=e380] [cursor=pointer]:
+                  - img [ref=e381]
+                  - text: Edit
+                - button "Delete" [ref=e383] [cursor=pointer]:
+                  - img [ref=e384]
+                  - text: Delete
+              - button "Active" [ref=e386] [cursor=pointer]
+            - generic [ref=e387]:
+              - checkbox [ref=e388] [cursor=pointer]
+              - generic [ref=e390]: business
+              - heading "Kuwait Airways" [level=3] [ref=e391]
+              - link "Visit" [ref=e392] [cursor=pointer]:
+                - /url: https://www.kuwaitairways.com
+                - img [ref=e393]
+                - text: Visit
+              - generic [ref=e395]:
+                - button "Edit" [ref=e396] [cursor=pointer]:
+                  - img [ref=e397]
+                  - text: Edit
+                - button "Delete" [ref=e399] [cursor=pointer]:
+                  - img [ref=e400]
+                  - text: Delete
+              - button "Active" [ref=e402] [cursor=pointer]
+            - generic [ref=e403]:
+              - checkbox [ref=e404] [cursor=pointer]
+              - generic [ref=e406]: business
+              - heading "National Bank of Kuwait" [level=3] [ref=e407]
+              - link "Visit" [ref=e408] [cursor=pointer]:
+                - /url: https://www.nbk.com
+                - img [ref=e409]
+                - text: Visit
+              - generic [ref=e411]:
+                - button "Edit" [ref=e412] [cursor=pointer]:
+                  - img [ref=e413]
+                  - text: Edit
+                - button "Delete" [ref=e415] [cursor=pointer]:
+                  - img [ref=e416]
+                  - text: Delete
+              - button "Active" [ref=e418] [cursor=pointer]
+            - generic [ref=e419]:
+              - checkbox [ref=e420] [cursor=pointer]
+              - generic [ref=e422]: business
+              - heading "Kuwait Finance House" [level=3] [ref=e423]
+              - link "Visit" [ref=e424] [cursor=pointer]:
+                - /url: https://www.kfh.com
+                - img [ref=e425]
+                - text: Visit
+              - generic [ref=e427]:
+                - button "Edit" [ref=e428] [cursor=pointer]:
+                  - img [ref=e429]
+                  - text: Edit
+                - button "Delete" [ref=e431] [cursor=pointer]:
+                  - img [ref=e432]
+                  - text: Delete
+              - button "Active" [ref=e434] [cursor=pointer]
+            - generic [ref=e435]:
+              - checkbox [ref=e436] [cursor=pointer]
+              - generic [ref=e438]: business
+              - heading "Zain Kuwait" [level=3] [ref=e439]
+              - link "Visit" [ref=e440] [cursor=pointer]:
+                - /url: https://www.zain.com
+                - img [ref=e441]
+                - text: Visit
+              - generic [ref=e443]:
+                - button "Edit" [ref=e444] [cursor=pointer]:
+                  - img [ref=e445]
+                  - text: Edit
+                - button "Delete" [ref=e447] [cursor=pointer]:
+                  - img [ref=e448]
+                  - text: Delete
+              - button "Active" [ref=e450] [cursor=pointer]
+            - generic [ref=e451]:
+              - checkbox [ref=e452] [cursor=pointer]
+              - generic [ref=e454]: business
+              - heading "Oman Airways" [level=3] [ref=e455]
+              - link "Visit" [ref=e456] [cursor=pointer]:
+                - /url: https://www.omanair.com
+                - img [ref=e457]
+                - text: Visit
+              - generic [ref=e459]:
+                - button "Edit" [ref=e460] [cursor=pointer]:
+                  - img [ref=e461]
+                  - text: Edit
+                - button "Delete" [ref=e463] [cursor=pointer]:
+                  - img [ref=e464]
+                  - text: Delete
+              - button "Active" [ref=e466] [cursor=pointer]
+            - generic [ref=e467]:
+              - checkbox [ref=e468] [cursor=pointer]
+              - generic [ref=e470]: business
+              - heading "Bank Muscat" [level=3] [ref=e471]
+              - link "Visit" [ref=e472] [cursor=pointer]:
+                - /url: https://www.bankmuscat.com
+                - img [ref=e473]
+                - text: Visit
+              - generic [ref=e475]:
+                - button "Edit" [ref=e476] [cursor=pointer]:
+                  - img [ref=e477]
+                  - text: Edit
+                - button "Delete" [ref=e479] [cursor=pointer]:
+                  - img [ref=e480]
+                  - text: Delete
+              - button "Active" [ref=e482] [cursor=pointer]
+            - generic [ref=e483]:
+              - checkbox [ref=e484] [cursor=pointer]
+              - generic [ref=e486]: business
+              - heading "OQ" [level=3] [ref=e487]
+              - link "Visit" [ref=e488] [cursor=pointer]:
+                - /url: https://www.oq.com
+                - img [ref=e489]
+                - text: Visit
+              - generic [ref=e491]:
+                - button "Edit" [ref=e492] [cursor=pointer]:
+                  - img [ref=e493]
+                  - text: Edit
+                - button "Delete" [ref=e495] [cursor=pointer]:
+                  - img [ref=e496]
+                  - text: Delete
+              - button "Active" [ref=e498] [cursor=pointer]
+            - generic [ref=e499]:
+              - checkbox [ref=e500] [cursor=pointer]
+              - generic [ref=e502]: business
+              - heading "Omantel" [level=3] [ref=e503]
+              - link "Visit" [ref=e504] [cursor=pointer]:
+                - /url: https://www.omantel.com
+                - img [ref=e505]
+                - text: Visit
+              - generic [ref=e507]:
+                - button "Edit" [ref=e508] [cursor=pointer]:
+                  - img [ref=e509]
+                  - text: Edit
+                - button "Delete" [ref=e511] [cursor=pointer]:
+                  - img [ref=e512]
+                  - text: Delete
+              - button "Active" [ref=e514] [cursor=pointer]
+            - generic [ref=e515]:
+              - checkbox [ref=e516] [cursor=pointer]
+              - generic [ref=e518]: business
+              - heading "Bahrain National Gas" [level=3] [ref=e519]
+              - link "Visit" [ref=e520] [cursor=pointer]:
+                - /url: https://www.bngc.com
+                - img [ref=e521]
+                - text: Visit
+              - generic [ref=e523]:
+                - button "Edit" [ref=e524] [cursor=pointer]:
+                  - img [ref=e525]
+                  - text: Edit
+                - button "Delete" [ref=e527] [cursor=pointer]:
+                  - img [ref=e528]
+                  - text: Delete
+              - button "Active" [ref=e530] [cursor=pointer]
+            - generic [ref=e531]:
+              - checkbox [ref=e532] [cursor=pointer]
+              - generic [ref=e534]: business
+              - heading "Bapco" [level=3] [ref=e535]
+              - link "Visit" [ref=e536] [cursor=pointer]:
+                - /url: https://www.bapco.gov.bh
+                - img [ref=e537]
+                - text: Visit
+              - generic [ref=e539]:
+                - button "Edit" [ref=e540] [cursor=pointer]:
+                  - img [ref=e541]
+                  - text: Edit
+                - button "Delete" [ref=e543] [cursor=pointer]:
+                  - img [ref=e544]
+                  - text: Delete
+              - button "Active" [ref=e546] [cursor=pointer]
+            - generic [ref=e547]:
+              - checkbox [ref=e548] [cursor=pointer]
+              - generic [ref=e550]: business
+              - heading "Batelco" [level=3] [ref=e551]
+              - link "Visit" [ref=e552] [cursor=pointer]:
+                - /url: https://www.batelco.com
+                - img [ref=e553]
+                - text: Visit
+              - generic [ref=e555]:
+                - button "Edit" [ref=e556] [cursor=pointer]:
+                  - img [ref=e557]
+                  - text: Edit
+                - button "Delete" [ref=e559] [cursor=pointer]:
+                  - img [ref=e560]
+                  - text: Delete
+              - button "Active" [ref=e562] [cursor=pointer]
+            - generic [ref=e563]:
+              - checkbox [ref=e564] [cursor=pointer]
+              - generic [ref=e566]: business
+              - heading "National Bank of Bahrain" [level=3] [ref=e567]
+              - link "Visit" [ref=e568] [cursor=pointer]:
+                - /url: https://www.nbb.com
+                - img [ref=e569]
+                - text: Visit
+              - generic [ref=e571]:
+                - button "Edit" [ref=e572] [cursor=pointer]:
+                  - img [ref=e573]
+                  - text: Edit
+                - button "Delete" [ref=e575] [cursor=pointer]:
+                  - img [ref=e576]
+                  - text: Delete
+              - button "Active" [ref=e578] [cursor=pointer]
+            - generic [ref=e579]:
+              - checkbox [ref=e580] [cursor=pointer]
+              - generic [ref=e582]: business
+              - heading "Aluminum Bahrain" [level=3] [ref=e583]
+              - link "Visit" [ref=e584] [cursor=pointer]:
+                - /url: https://www.aluminium.com
+                - img [ref=e585]
+                - text: Visit
+              - generic [ref=e587]:
+                - button "Edit" [ref=e588] [cursor=pointer]:
+                  - img [ref=e589]
+                  - text: Edit
+                - button "Delete" [ref=e591] [cursor=pointer]:
+                  - img [ref=e592]
+                  - text: Delete
+              - button "Active" [ref=e594] [cursor=pointer]
+            - generic [ref=e595]:
+              - checkbox [ref=e596] [cursor=pointer]
+              - generic [ref=e598]: business
+              - heading "Dubai Police" [level=3] [ref=e599]
+              - link "Visit" [ref=e600] [cursor=pointer]:
+                - /url: https://www.dubaipolice.gov.ae
+                - img [ref=e601]
+                - text: Visit
+              - generic [ref=e603]:
+                - button "Edit" [ref=e604] [cursor=pointer]:
+                  - img [ref=e605]
+                  - text: Edit
+                - button "Delete" [ref=e607] [cursor=pointer]:
+                  - img [ref=e608]
+                  - text: Delete
+              - button "Active" [ref=e610] [cursor=pointer]
+            - generic [ref=e611]:
+              - checkbox [ref=e612] [cursor=pointer]
+              - generic [ref=e614]: business
+              - heading "Dubai Municipality" [level=3] [ref=e615]
+              - link "Visit" [ref=e616] [cursor=pointer]:
+                - /url: https://www.dm.gov.ae
+                - img [ref=e617]
+                - text: Visit
+              - generic [ref=e619]:
+                - button "Edit" [ref=e620] [cursor=pointer]:
+                  - img [ref=e621]
+                  - text: Edit
+                - button "Delete" [ref=e623] [cursor=pointer]:
+                  - img [ref=e624]
+                  - text: Delete
+              - button "Active" [ref=e626] [cursor=pointer]
+            - generic [ref=e627]:
+              - checkbox [ref=e628] [cursor=pointer]
+              - generic [ref=e630]: business
+              - heading "RTA Dubai" [level=3] [ref=e631]
+              - link "Visit" [ref=e632] [cursor=pointer]:
+                - /url: https://www.rta.ae
+                - img [ref=e633]
+                - text: Visit
+              - generic [ref=e635]:
+                - button "Edit" [ref=e636] [cursor=pointer]:
+                  - img [ref=e637]
+                  - text: Edit
+                - button "Delete" [ref=e639] [cursor=pointer]:
+                  - img [ref=e640]
+                  - text: Delete
+              - button "Active" [ref=e642] [cursor=pointer]
+            - generic [ref=e643]:
+              - checkbox [ref=e644] [cursor=pointer]
+              - generic [ref=e646]: business
+              - heading "DEWA" [level=3] [ref=e647]
+              - link "Visit" [ref=e648] [cursor=pointer]:
+                - /url: https://www.dewa.gov.ae
+                - img [ref=e649]
+                - text: Visit
+              - generic [ref=e651]:
+                - button "Edit" [ref=e652] [cursor=pointer]:
+                  - img [ref=e653]
+                  - text: Edit
+                - button "Delete" [ref=e655] [cursor=pointer]:
+                  - img [ref=e656]
+                  - text: Delete
+              - button "Active" [ref=e658] [cursor=pointer]
+            - generic [ref=e659]:
+              - checkbox [ref=e660] [cursor=pointer]
+              - generic [ref=e662]: business
+              - heading "ADNOC Distribution" [level=3] [ref=e663]
+              - link "Visit" [ref=e664] [cursor=pointer]:
+                - /url: https://www.adnocdistribution.ae
+                - img [ref=e665]
+                - text: Visit
+              - generic [ref=e667]:
+                - button "Edit" [ref=e668] [cursor=pointer]:
+                  - img [ref=e669]
+                  - text: Edit
+                - button "Delete" [ref=e671] [cursor=pointer]:
+                  - img [ref=e672]
+                  - text: Delete
+              - button "Active" [ref=e674] [cursor=pointer]
+            - generic [ref=e675]:
+              - checkbox [ref=e676] [cursor=pointer]
+              - generic [ref=e678]: business
+              - heading "Sharjah Electricity Authority" [level=3] [ref=e679]
+              - link "Visit" [ref=e680] [cursor=pointer]:
+                - /url: https://www.sea.gov.ae
+                - img [ref=e681]
+                - text: Visit
+              - generic [ref=e683]:
+                - button "Edit" [ref=e684] [cursor=pointer]:
+                  - img [ref=e685]
+                  - text: Edit
+                - button "Delete" [ref=e687] [cursor=pointer]:
+                  - img [ref=e688]
+                  - text: Delete
+              - button "Active" [ref=e690] [cursor=pointer]
+            - generic [ref=e691]:
+              - checkbox [ref=e692] [cursor=pointer]
+              - generic [ref=e694]: business
+              - heading "Ajman Municipality" [level=3] [ref=e695]
+              - link "Visit" [ref=e696] [cursor=pointer]:
+                - /url: https://www.ajman.gov.ae
+                - img [ref=e697]
+                - text: Visit
+              - generic [ref=e699]:
+                - button "Edit" [ref=e700] [cursor=pointer]:
+                  - img [ref=e701]
+                  - text: Edit
+                - button "Delete" [ref=e703] [cursor=pointer]:
+                  - img [ref=e704]
+                  - text: Delete
+              - button "Active" [ref=e706] [cursor=pointer]
+            - generic [ref=e707]:
+              - checkbox [ref=e708] [cursor=pointer]
+              - generic [ref=e710]: business
+              - heading "UAE Ministry of Interior" [level=3] [ref=e711]
+              - link "Visit" [ref=e712] [cursor=pointer]:
+                - /url: https://www.moi.gov.ae
+                - img [ref=e713]
+                - text: Visit
+              - generic [ref=e715]:
+                - button "Edit" [ref=e716] [cursor=pointer]:
+                  - img [ref=e717]
+                  - text: Edit
+                - button "Delete" [ref=e719] [cursor=pointer]:
+                  - img [ref=e720]
+                  - text: Delete
+              - button "Active" [ref=e722] [cursor=pointer]
+            - generic [ref=e723]:
+              - checkbox [ref=e724] [cursor=pointer]
+              - generic [ref=e726]: business
+              - heading "UAE Ministry of Finance" [level=3] [ref=e727]
+              - link "Visit" [ref=e728] [cursor=pointer]:
+                - /url: https://www.mof.gov.ae
+                - img [ref=e729]
+                - text: Visit
+              - generic [ref=e731]:
+                - button "Edit" [ref=e732] [cursor=pointer]:
+                  - img [ref=e733]
+                  - text: Edit
+                - button "Delete" [ref=e735] [cursor=pointer]:
+                  - img [ref=e736]
+                  - text: Delete
+              - button "Active" [ref=e738] [cursor=pointer]
+            - generic [ref=e739]:
+              - checkbox [ref=e740] [cursor=pointer]
+              - generic [ref=e742]: business
+              - heading "Dubai Health Authority" [level=3] [ref=e743]
+              - link "Visit" [ref=e744] [cursor=pointer]:
+                - /url: https://www.dha.gov.ae
+                - img [ref=e745]
+                - text: Visit
+              - generic [ref=e747]:
+                - button "Edit" [ref=e748] [cursor=pointer]:
+                  - img [ref=e749]
+                  - text: Edit
+                - button "Delete" [ref=e751] [cursor=pointer]:
+                  - img [ref=e752]
+                  - text: Delete
+              - button "Active" [ref=e754] [cursor=pointer]
+            - generic [ref=e755]:
+              - checkbox [ref=e756] [cursor=pointer]
+              - generic [ref=e758]: business
+              - heading "SEHA" [level=3] [ref=e759]
+              - link "Visit" [ref=e760] [cursor=pointer]:
+                - /url: https://www.seha.ae
+                - img [ref=e761]
+                - text: Visit
+              - generic [ref=e763]:
+                - button "Edit" [ref=e764] [cursor=pointer]:
+                  - img [ref=e765]
+                  - text: Edit
+                - button "Delete" [ref=e767] [cursor=pointer]:
+                  - img [ref=e768]
+                  - text: Delete
+              - button "Active" [ref=e770] [cursor=pointer]
+            - generic [ref=e771]:
+              - checkbox [ref=e772] [cursor=pointer]
+              - generic [ref=e774]: business
+              - heading "Mubadala Healthcare" [level=3] [ref=e775]
+              - link "Visit" [ref=e776] [cursor=pointer]:
+                - /url: https://www.mubadalahealthcare.com
+                - img [ref=e777]
+                - text: Visit
+              - generic [ref=e779]:
+                - button "Edit" [ref=e780] [cursor=pointer]:
+                  - img [ref=e781]
+                  - text: Edit
+                - button "Delete" [ref=e783] [cursor=pointer]:
+                  - img [ref=e784]
+                  - text: Delete
+              - button "Active" [ref=e786] [cursor=pointer]
+            - generic [ref=e787]:
+              - checkbox [ref=e788] [cursor=pointer]
+              - generic [ref=e790]: business
+              - heading "American Hospital" [level=3] [ref=e791]
+              - link "Visit" [ref=e792] [cursor=pointer]:
+                - /url: https://www.american-hospital.org
+                - img [ref=e793]
+                - text: Visit
+              - generic [ref=e795]:
+                - button "Edit" [ref=e796] [cursor=pointer]:
+                  - img [ref=e797]
+                  - text: Edit
+                - button "Delete" [ref=e799] [cursor=pointer]:
+                  - img [ref=e800]
+                  - text: Delete
+              - button "Active" [ref=e802] [cursor=pointer]
+            - generic [ref=e803]:
+              - checkbox [ref=e804] [cursor=pointer]
+              - generic [ref=e806]: business
+              - heading "Cleveland Clinic Abu Dhabi" [level=3] [ref=e807]
+              - link "Visit" [ref=e808] [cursor=pointer]:
+                - /url: https://www.clevelandclinicabudhabi.ae
+                - img [ref=e809]
+                - text: Visit
+              - generic [ref=e811]:
+                - button "Edit" [ref=e812] [cursor=pointer]:
+                  - img [ref=e813]
+                  - text: Edit
+                - button "Delete" [ref=e815] [cursor=pointer]:
+                  - img [ref=e816]
+                  - text: Delete
+              - button "Active" [ref=e818] [cursor=pointer]
+            - generic [ref=e819]:
+              - checkbox [ref=e820] [cursor=pointer]
+              - generic [ref=e822]: business
+              - heading "Burjeel Hospital" [level=3] [ref=e823]
+              - link "Visit" [ref=e824] [cursor=pointer]:
+                - /url: https://www.burjeel.com
+                - img [ref=e825]
+                - text: Visit
+              - generic [ref=e827]:
+                - button "Edit" [ref=e828] [cursor=pointer]:
+                  - img [ref=e829]
+                  - text: Edit
+                - button "Delete" [ref=e831] [cursor=pointer]:
+                  - img [ref=e832]
+                  - text: Delete
+              - button "Active" [ref=e834] [cursor=pointer]
+            - generic [ref=e835]:
+              - checkbox [ref=e836] [cursor=pointer]
+              - generic [ref=e838]: business
+              - heading "Aster DM Healthcare" [level=3] [ref=e839]
+              - link "Visit" [ref=e840] [cursor=pointer]:
+                - /url: https://www.asterdmhealthcare.com
+                - img [ref=e841]
+                - text: Visit
+              - generic [ref=e843]:
+                - button "Edit" [ref=e844] [cursor=pointer]:
+                  - img [ref=e845]
+                  - text: Edit
+                - button "Delete" [ref=e847] [cursor=pointer]:
+                  - img [ref=e848]
+                  - text: Delete
+              - button "Active" [ref=e850] [cursor=pointer]
+            - generic [ref=e851]:
+              - checkbox [ref=e852] [cursor=pointer]
+              - generic [ref=e854]: business
+              - heading "NMC Healthcare" [level=3] [ref=e855]
+              - link "Visit" [ref=e856] [cursor=pointer]:
+                - /url: https://www.nmchealth.com
+                - img [ref=e857]
+                - text: Visit
+              - generic [ref=e859]:
+                - button "Edit" [ref=e860] [cursor=pointer]:
+                  - img [ref=e861]
+                  - text: Edit
+                - button "Delete" [ref=e863] [cursor=pointer]:
+                  - img [ref=e864]
+                  - text: Delete
+              - button "Active" [ref=e866] [cursor=pointer]
+            - generic [ref=e867]:
+              - checkbox [ref=e868] [cursor=pointer]
+              - generic [ref=e870]: business
+              - heading "Mediclinic Middle East" [level=3] [ref=e871]
+              - link "Visit" [ref=e872] [cursor=pointer]:
+                - /url: https://www.mediclinic.ae
+                - img [ref=e873]
+                - text: Visit
+              - generic [ref=e875]:
+                - button "Edit" [ref=e876] [cursor=pointer]:
+                  - img [ref=e877]
+                  - text: Edit
+                - button "Delete" [ref=e879] [cursor=pointer]:
+                  - img [ref=e880]
+                  - text: Delete
+              - button "Active" [ref=e882] [cursor=pointer]
+            - generic [ref=e883]:
+              - checkbox [ref=e884] [cursor=pointer]
+              - generic [ref=e886]: business
+              - heading "Abu Dhabi University" [level=3] [ref=e887]
+              - link "Visit" [ref=e888] [cursor=pointer]:
+                - /url: https://www.adu.ac.ae
+                - img [ref=e889]
+                - text: Visit
+              - generic [ref=e891]:
+                - button "Edit" [ref=e892] [cursor=pointer]:
+                  - img [ref=e893]
+                  - text: Edit
+                - button "Delete" [ref=e895] [cursor=pointer]:
+                  - img [ref=e896]
+                  - text: Delete
+              - button "Active" [ref=e898] [cursor=pointer]
+            - generic [ref=e899]:
+              - checkbox [ref=e900] [cursor=pointer]
+              - generic [ref=e902]: business
+              - heading "American University of Sharjah" [level=3] [ref=e903]
+              - link "Visit" [ref=e904] [cursor=pointer]:
+                - /url: https://www.aus.edu
+                - img [ref=e905]
+                - text: Visit
+              - generic [ref=e907]:
+                - button "Edit" [ref=e908] [cursor=pointer]:
+                  - img [ref=e909]
+                  - text: Edit
+                - button "Delete" [ref=e911] [cursor=pointer]:
+                  - img [ref=e912]
+                  - text: Delete
+              - button "Active" [ref=e914] [cursor=pointer]
+            - generic [ref=e915]:
+              - checkbox [ref=e916] [cursor=pointer]
+              - generic [ref=e918]: business
+              - heading "Khalifa University" [level=3] [ref=e919]
+              - link "Visit" [ref=e920] [cursor=pointer]:
+                - /url: https://www.ku.ac.ae
+                - img [ref=e921]
+                - text: Visit
+              - generic [ref=e923]:
+                - button "Edit" [ref=e924] [cursor=pointer]:
+                  - img [ref=e925]
+                  - text: Edit
+                - button "Delete" [ref=e927] [cursor=pointer]:
+                  - img [ref=e928]
+                  - text: Delete
+              - button "Active" [ref=e930] [cursor=pointer]
+            - generic [ref=e931]:
+              - checkbox [ref=e932] [cursor=pointer]
+              - generic [ref=e934]: business
+              - heading "University of Dubai" [level=3] [ref=e935]
+              - link "Visit" [ref=e936] [cursor=pointer]:
+                - /url: https://www.ud.edu.ae
+                - img [ref=e937]
+                - text: Visit
+              - generic [ref=e939]:
+                - button "Edit" [ref=e940] [cursor=pointer]:
+                  - img [ref=e941]
+                  - text: Edit
+                - button "Delete" [ref=e943] [cursor=pointer]:
+                  - img [ref=e944]
+                  - text: Delete
+              - button "Active" [ref=e946] [cursor=pointer]
+            - generic [ref=e947]:
+              - checkbox [ref=e948] [cursor=pointer]
+              - generic [ref=e950]: business
+              - heading "Higher Colleges of Technology" [level=3] [ref=e951]
+              - link "Visit" [ref=e952] [cursor=pointer]:
+                - /url: https://www.hct.ac.ae
+                - img [ref=e953]
+                - text: Visit
+              - generic [ref=e955]:
+                - button "Edit" [ref=e956] [cursor=pointer]:
+                  - img [ref=e957]
+                  - text: Edit
+                - button "Delete" [ref=e959] [cursor=pointer]:
+                  - img [ref=e960]
+                  - text: Delete
+              - button "Active" [ref=e962] [cursor=pointer]
+            - generic [ref=e963]:
+              - checkbox [ref=e964] [cursor=pointer]
+              - generic [ref=e966]: business
+              - heading "Zayed University" [level=3] [ref=e967]
+              - link "Visit" [ref=e968] [cursor=pointer]:
+                - /url: https://www.zu.ac.ae
+                - img [ref=e969]
+                - text: Visit
+              - generic [ref=e971]:
+                - button "Edit" [ref=e972] [cursor=pointer]:
+                  - img [ref=e973]
+                  - text: Edit
+                - button "Delete" [ref=e975] [cursor=pointer]:
+                  - img [ref=e976]
+                  - text: Delete
+              - button "Active" [ref=e978] [cursor=pointer]
+            - generic [ref=e979]:
+              - checkbox [ref=e980] [cursor=pointer]
+              - generic [ref=e982]: business
+              - heading "UAE University" [level=3] [ref=e983]
+              - link "Visit" [ref=e984] [cursor=pointer]:
+                - /url: https://www.uaeu.ac.ae
+                - img [ref=e985]
+                - text: Visit
+              - generic [ref=e987]:
+                - button "Edit" [ref=e988] [cursor=pointer]:
+                  - img [ref=e989]
+                  - text: Edit
+                - button "Delete" [ref=e991] [cursor=pointer]:
+                  - img [ref=e992]
+                  - text: Delete
+              - button "Active" [ref=e994] [cursor=pointer]
+            - generic [ref=e995]:
+              - checkbox [ref=e996] [cursor=pointer]
+              - generic [ref=e998]: business
+              - heading "Emirates Academy of Hospitality" [level=3] [ref=e999]
+              - link "Visit" [ref=e1000] [cursor=pointer]:
+                - /url: https://www.eah.edu.ae
+                - img [ref=e1001]
+                - text: Visit
+              - generic [ref=e1003]:
+                - button "Edit" [ref=e1004] [cursor=pointer]:
+                  - img [ref=e1005]
+                  - text: Edit
+                - button "Delete" [ref=e1007] [cursor=pointer]:
+                  - img [ref=e1008]
+                  - text: Delete
+              - button "Active" [ref=e1010] [cursor=pointer]
+            - generic [ref=e1011]:
+              - checkbox [ref=e1012] [cursor=pointer]
+              - generic [ref=e1014]: business
+              - heading "Emaar Properties" [level=3] [ref=e1015]
+              - link "Visit" [ref=e1016] [cursor=pointer]:
+                - /url: https://www.emaar.com
+                - img [ref=e1017]
+                - text: Visit
+              - generic [ref=e1019]:
+                - button "Edit" [ref=e1020] [cursor=pointer]:
+                  - img [ref=e1021]
+                  - text: Edit
+                - button "Delete" [ref=e1023] [cursor=pointer]:
+                  - img [ref=e1024]
+                  - text: Delete
+              - button "Active" [ref=e1026] [cursor=pointer]
+            - generic [ref=e1027]:
+              - checkbox [ref=e1028] [cursor=pointer]
+              - generic [ref=e1030]: business
+              - heading "Nakheel Properties" [level=3] [ref=e1031]
+              - link "Visit" [ref=e1032] [cursor=pointer]:
+                - /url: https://www.nakheel.com
+                - img [ref=e1033]
+                - text: Visit
+              - generic [ref=e1035]:
+                - button "Edit" [ref=e1036] [cursor=pointer]:
+                  - img [ref=e1037]
+                  - text: Edit
+                - button "Delete" [ref=e1039] [cursor=pointer]:
+                  - img [ref=e1040]
+                  - text: Delete
+              - button "Active" [ref=e1042] [cursor=pointer]
+            - generic [ref=e1043]:
+              - checkbox [ref=e1044] [cursor=pointer]
+              - generic [ref=e1046]: business
+              - heading "Dubai Properties" [level=3] [ref=e1047]
+              - link "Visit" [ref=e1048] [cursor=pointer]:
+                - /url: https://www.dubaiproperties.com
+                - img [ref=e1049]
+                - text: Visit
+              - generic [ref=e1051]:
+                - button "Edit" [ref=e1052] [cursor=pointer]:
+                  - img [ref=e1053]
+                  - text: Edit
+                - button "Delete" [ref=e1055] [cursor=pointer]:
+                  - img [ref=e1056]
+                  - text: Delete
+              - button "Active" [ref=e1058] [cursor=pointer]
+            - generic [ref=e1059]:
+              - checkbox [ref=e1060] [cursor=pointer]
+              - generic [ref=e1062]: business
+              - heading "Meydan" [level=3] [ref=e1063]
+              - link "Visit" [ref=e1064] [cursor=pointer]:
+                - /url: https://www.meydan.ae
+                - img [ref=e1065]
+                - text: Visit
+              - generic [ref=e1067]:
+                - button "Edit" [ref=e1068] [cursor=pointer]:
+                  - img [ref=e1069]
+                  - text: Edit
+                - button "Delete" [ref=e1071] [cursor=pointer]:
+                  - img [ref=e1072]
+                  - text: Delete
+              - button "Active" [ref=e1074] [cursor=pointer]
+            - generic [ref=e1075]:
+              - checkbox [ref=e1076] [cursor=pointer]
+              - generic [ref=e1078]: business
+              - heading "Dubai Sports City" [level=3] [ref=e1079]
+              - link "Visit" [ref=e1080] [cursor=pointer]:
+                - /url: https://www.dubaisportscity.com
+                - img [ref=e1081]
+                - text: Visit
+              - generic [ref=e1083]:
+                - button "Edit" [ref=e1084] [cursor=pointer]:
+                  - img [ref=e1085]
+                  - text: Edit
+                - button "Delete" [ref=e1087] [cursor=pointer]:
+                  - img [ref=e1088]
+                  - text: Delete
+              - button "Active" [ref=e1090] [cursor=pointer]
+            - generic [ref=e1091]:
+              - checkbox [ref=e1092] [cursor=pointer]
+              - generic [ref=e1094]: business
+              - heading "Dubai Silicon Oasis" [level=3] [ref=e1095]
+              - link "Visit" [ref=e1096] [cursor=pointer]:
+                - /url: https://www.dsio.gov.ae
+                - img [ref=e1097]
+                - text: Visit
+              - generic [ref=e1099]:
+                - button "Edit" [ref=e1100] [cursor=pointer]:
+                  - img [ref=e1101]
+                  - text: Edit
+                - button "Delete" [ref=e1103] [cursor=pointer]:
+                  - img [ref=e1104]
+                  - text: Delete
+              - button "Active" [ref=e1106] [cursor=pointer]
+            - generic [ref=e1107]:
+              - checkbox [ref=e1108] [cursor=pointer]
+              - generic [ref=e1110]: business
+              - heading "Dubai Multi Commodities Centre" [level=3] [ref=e1111]
+              - link "Visit" [ref=e1112] [cursor=pointer]:
+                - /url: https://www.dmcc.ae
+                - img [ref=e1113]
+                - text: Visit
+              - generic [ref=e1115]:
+                - button "Edit" [ref=e1116] [cursor=pointer]:
+                  - img [ref=e1117]
+                  - text: Edit
+                - button "Delete" [ref=e1119] [cursor=pointer]:
+                  - img [ref=e1120]
+                  - text: Delete
+              - button "Active" [ref=e1122] [cursor=pointer]
+            - generic [ref=e1123]:
+              - checkbox [ref=e1124] [cursor=pointer]
+              - generic [ref=e1126]: business
+              - heading "Dubai International Financial Centre" [level=3] [ref=e1127]
+              - link "Visit" [ref=e1128] [cursor=pointer]:
+                - /url: https://www.difc.ae
+                - img [ref=e1129]
+                - text: Visit
+              - generic [ref=e1131]:
+                - button "Edit" [ref=e1132] [cursor=pointer]:
+                  - img [ref=e1133]
+                  - text: Edit
+                - button "Delete" [ref=e1135] [cursor=pointer]:
+                  - img [ref=e1136]
+                  - text: Delete
+              - button "Active" [ref=e1138] [cursor=pointer]
+            - generic [ref=e1139]:
+              - checkbox [ref=e1140] [cursor=pointer]
+              - generic [ref=e1142]: business
+              - heading "Abu Dhabi Global Market" [level=3] [ref=e1143]
+              - link "Visit" [ref=e1144] [cursor=pointer]:
+                - /url: https://www.adgm.com
+                - img [ref=e1145]
+                - text: Visit
+              - generic [ref=e1147]:
+                - button "Edit" [ref=e1148] [cursor=pointer]:
+                  - img [ref=e1149]
+                  - text: Edit
+                - button "Delete" [ref=e1151] [cursor=pointer]:
+                  - img [ref=e1152]
+                  - text: Delete
+              - button "Active" [ref=e1154] [cursor=pointer]
+            - generic [ref=e1155]:
+              - checkbox [ref=e1156] [cursor=pointer]
+              - generic [ref=e1158]: business
+              - heading "Dubai Chamber of Commerce" [level=3] [ref=e1159]
+              - link "Visit" [ref=e1160] [cursor=pointer]:
+                - /url: https://www.dubaichamber.com
+                - img [ref=e1161]
+                - text: Visit
+              - generic [ref=e1163]:
+                - button "Edit" [ref=e1164] [cursor=pointer]:
+                  - img [ref=e1165]
+                  - text: Edit
+                - button "Delete" [ref=e1167] [cursor=pointer]:
+                  - img [ref=e1168]
+                  - text: Delete
+              - button "Active" [ref=e1170] [cursor=pointer]
+            - generic [ref=e1171]:
+              - checkbox [ref=e1172] [cursor=pointer]
+              - generic [ref=e1174]: business
+              - heading "Abu Dhabi Chamber of Commerce" [level=3] [ref=e1175]
+              - link "Visit" [ref=e1176] [cursor=pointer]:
+                - /url: https://www.adchamber.com
+                - img [ref=e1177]
+                - text: Visit
+              - generic [ref=e1179]:
+                - button "Edit" [ref=e1180] [cursor=pointer]:
+                  - img [ref=e1181]
+                  - text: Edit
+                - button "Delete" [ref=e1183] [cursor=pointer]:
+                  - img [ref=e1184]
+                  - text: Delete
+              - button "Active" [ref=e1186] [cursor=pointer]
+            - generic [ref=e1187]:
+              - checkbox [ref=e1188] [cursor=pointer]
+              - generic [ref=e1190]: business
+              - heading "Dubai Customs" [level=3] [ref=e1191]
+              - link "Visit" [ref=e1192] [cursor=pointer]:
+                - /url: https://www.dubaicustoms.gov.ae
+                - img [ref=e1193]
+                - text: Visit
+              - generic [ref=e1195]:
+                - button "Edit" [ref=e1196] [cursor=pointer]:
+                  - img [ref=e1197]
+                  - text: Edit
+                - button "Delete" [ref=e1199] [cursor=pointer]:
+                  - img [ref=e1200]
+                  - text: Delete
+              - button "Active" [ref=e1202] [cursor=pointer]
+            - generic [ref=e1203]:
+              - checkbox [ref=e1204] [cursor=pointer]
+              - generic [ref=e1206]: business
+              - heading "Federal Customs Authority" [level=3] [ref=e1207]
+              - link "Visit" [ref=e1208] [cursor=pointer]:
+                - /url: https://www.fca.gov.ae
+                - img [ref=e1209]
+                - text: Visit
+              - generic [ref=e1211]:
+                - button "Edit" [ref=e1212] [cursor=pointer]:
+                  - img [ref=e1213]
+                  - text: Edit
+                - button "Delete" [ref=e1215] [cursor=pointer]:
+                  - img [ref=e1216]
+                  - text: Delete
+              - button "Active" [ref=e1218] [cursor=pointer]
+            - generic [ref=e1219]:
+              - checkbox [ref=e1220] [cursor=pointer]
+              - generic [ref=e1222]: business
+              - heading "Trivago" [level=3] [ref=e1223]
+              - link "Visit" [ref=e1224] [cursor=pointer]:
+                - /url: https://www.trivago.com
+                - img [ref=e1225]
+                - text: Visit
+              - generic [ref=e1227]:
+                - button "Edit" [ref=e1228] [cursor=pointer]:
+                  - img [ref=e1229]
+                  - text: Edit
+                - button "Delete" [ref=e1231] [cursor=pointer]:
+                  - img [ref=e1232]
+                  - text: Delete
+              - button "Active" [ref=e1234] [cursor=pointer]
+            - generic [ref=e1235]:
+              - checkbox [ref=e1236] [cursor=pointer]
+              - generic [ref=e1238]: business
+              - heading "Booking.com" [level=3] [ref=e1239]
+              - link "Visit" [ref=e1240] [cursor=pointer]:
+                - /url: https://www.booking.com
+                - img [ref=e1241]
+                - text: Visit
+              - generic [ref=e1243]:
+                - button "Edit" [ref=e1244] [cursor=pointer]:
+                  - img [ref=e1245]
+                  - text: Edit
+                - button "Delete" [ref=e1247] [cursor=pointer]:
+                  - img [ref=e1248]
+                  - text: Delete
+              - button "Active" [ref=e1250] [cursor=pointer]
+            - generic [ref=e1251]:
+              - checkbox [ref=e1252] [cursor=pointer]
+              - generic [ref=e1254]: business
+              - heading "Ctrip" [level=3] [ref=e1255]
+              - link "Visit" [ref=e1256] [cursor=pointer]:
+                - /url: https://www.ctrip.com
+                - img [ref=e1257]
+                - text: Visit
+              - generic [ref=e1259]:
+                - button "Edit" [ref=e1260] [cursor=pointer]:
+                  - img [ref=e1261]
+                  - text: Edit
+                - button "Delete" [ref=e1263] [cursor=pointer]:
+                  - img [ref=e1264]
+                  - text: Delete
+              - button "Active" [ref=e1266] [cursor=pointer]
+            - generic [ref=e1267]:
+              - checkbox [ref=e1268] [cursor=pointer]
+              - generic [ref=e1270]: business
+              - heading "MakeMyTrip" [level=3] [ref=e1271]
+              - link "Visit" [ref=e1272] [cursor=pointer]:
+                - /url: https://www.makemytrip.com
+                - img [ref=e1273]
+                - text: Visit
+              - generic [ref=e1275]:
+                - button "Edit" [ref=e1276] [cursor=pointer]:
+                  - img [ref=e1277]
+                  - text: Edit
+                - button "Delete" [ref=e1279] [cursor=pointer]:
+                  - img [ref=e1280]
+                  - text: Delete
+              - button "Active" [ref=e1282] [cursor=pointer]
+            - generic [ref=e1283]:
+              - checkbox [ref=e1284] [cursor=pointer]
+              - generic [ref=e1286]: business
+              - heading "Serco" [level=3] [ref=e1287]
+              - link "Visit" [ref=e1288] [cursor=pointer]:
+                - /url: https://www.serco.com
+                - img [ref=e1289]
+                - text: Visit
+              - generic [ref=e1291]:
+                - button "Edit" [ref=e1292] [cursor=pointer]:
+                  - img [ref=e1293]
+                  - text: Edit
+                - button "Delete" [ref=e1295] [cursor=pointer]:
+                  - img [ref=e1296]
+                  - text: Delete
+              - button "Active" [ref=e1298] [cursor=pointer]
+            - generic [ref=e1299]:
+              - checkbox [ref=e1300] [cursor=pointer]
+              - generic [ref=e1302]: business
+              - heading "Al Khaja" [level=3] [ref=e1303]
+              - generic [ref=e1304]:
+                - button "Edit" [ref=e1305] [cursor=pointer]:
+                  - img [ref=e1306]
+                  - text: Edit
+                - button "Delete" [ref=e1308] [cursor=pointer]:
+                  - img [ref=e1309]
+                  - text: Delete
+              - button "Active" [ref=e1311] [cursor=pointer]
+            - generic [ref=e1312]:
+              - checkbox [ref=e1313] [cursor=pointer]
+              - generic [ref=e1315]: business
+              - heading "Gargash" [level=3] [ref=e1316]
+              - generic [ref=e1317]:
+                - button "Edit" [ref=e1318] [cursor=pointer]:
+                  - img [ref=e1319]
+                  - text: Edit
+                - button "Delete" [ref=e1321] [cursor=pointer]:
+                  - img [ref=e1322]
+                  - text: Delete
+              - button "Active" [ref=e1324] [cursor=pointer]
+            - generic [ref=e1325]:
+              - checkbox [ref=e1326] [cursor=pointer]
+              - generic [ref=e1328]: business
+              - heading "Juma Al Majid" [level=3] [ref=e1329]
+              - link "Visit" [ref=e1330] [cursor=pointer]:
+                - /url: https://www.jumaalmajid.com
+                - img [ref=e1331]
+                - text: Visit
+              - generic [ref=e1333]:
+                - button "Edit" [ref=e1334] [cursor=pointer]:
+                  - img [ref=e1335]
+                  - text: Edit
+                - button "Delete" [ref=e1337] [cursor=pointer]:
+                  - img [ref=e1338]
+                  - text: Delete
+              - button "Active" [ref=e1340] [cursor=pointer]
+            - generic [ref=e1341]:
+              - checkbox [ref=e1342] [cursor=pointer]
+              - generic [ref=e1344]: business
+              - heading "Al Fareej" [level=3] [ref=e1345]
+              - generic [ref=e1346]:
+                - button "Edit" [ref=e1347] [cursor=pointer]:
+                  - img [ref=e1348]
+                  - text: Edit
+                - button "Delete" [ref=e1350] [cursor=pointer]:
+                  - img [ref=e1351]
+                  - text: Delete
+              - button "Active" [ref=e1353] [cursor=pointer]
+            - generic [ref=e1354]:
+              - checkbox [ref=e1355] [cursor=pointer]
+              - generic [ref=e1357]: business
+              - heading "Al Mulla" [level=3] [ref=e1358]
+              - generic [ref=e1359]:
+                - button "Edit" [ref=e1360] [cursor=pointer]:
+                  - img [ref=e1361]
+                  - text: Edit
+                - button "Delete" [ref=e1363] [cursor=pointer]:
+                  - img [ref=e1364]
+                  - text: Delete
+              - button "Active" [ref=e1366] [cursor=pointer]
+            - generic [ref=e1367]:
+              - checkbox [ref=e1368] [cursor=pointer]
+              - generic [ref=e1370]: business
+              - heading "Yousif Al Mulla" [level=3] [ref=e1371]
+              - generic [ref=e1372]:
+                - button "Edit" [ref=e1373] [cursor=pointer]:
+                  - img [ref=e1374]
+                  - text: Edit
+                - button "Delete" [ref=e1376] [cursor=pointer]:
+                  - img [ref=e1377]
+                  - text: Delete
+              - button "Active" [ref=e1379] [cursor=pointer]
+            - generic [ref=e1380]:
+              - checkbox [ref=e1381] [cursor=pointer]
+              - generic [ref=e1383]: business
+              - heading "Khazan" [level=3] [ref=e1384]
+              - link "Visit" [ref=e1385] [cursor=pointer]:
+                - /url: https://www.khazan.com
+                - img [ref=e1386]
+                - text: Visit
+              - generic [ref=e1388]:
+                - button "Edit" [ref=e1389] [cursor=pointer]:
+                  - img [ref=e1390]
+                  - text: Edit
+                - button "Delete" [ref=e1392] [cursor=pointer]:
+                  - img [ref=e1393]
+                  - text: Delete
+              - button "Active" [ref=e1395] [cursor=pointer]
+            - generic [ref=e1396]:
+              - checkbox [ref=e1397] [cursor=pointer]
+              - generic [ref=e1399]: business
+              - heading "Jimared" [level=3] [ref=e1400]
+              - generic [ref=e1401]:
+                - button "Edit" [ref=e1402] [cursor=pointer]:
+                  - img [ref=e1403]
+                  - text: Edit
+                - button "Delete" [ref=e1405] [cursor=pointer]:
+                  - img [ref=e1406]
+                  - text: Delete
+              - button "Active" [ref=e1408] [cursor=pointer]
+            - generic [ref=e1409]:
+              - checkbox [ref=e1410] [cursor=pointer]
+              - generic [ref=e1412]: business
+              - heading "Sahara" [level=3] [ref=e1413]
+              - generic [ref=e1414]:
+                - button "Edit" [ref=e1415] [cursor=pointer]:
+                  - img [ref=e1416]
+                  - text: Edit
+                - button "Delete" [ref=e1418] [cursor=pointer]:
+                  - img [ref=e1419]
+                  - text: Delete
+              - button "Active" [ref=e1421] [cursor=pointer]
+            - generic [ref=e1422]:
+              - checkbox [ref=e1423] [cursor=pointer]
+              - generic [ref=e1425]: business
+              - heading "National Electronics" [level=3] [ref=e1426]
+              - generic [ref=e1427]:
+                - button "Edit" [ref=e1428] [cursor=pointer]:
+                  - img [ref=e1429]
+                  - text: Edit
+                - button "Delete" [ref=e1431] [cursor=pointer]:
+                  - img [ref=e1432]
+                  - text: Delete
+              - button "Active" [ref=e1434] [cursor=pointer]
+            - generic [ref=e1435]:
+              - checkbox [ref=e1436] [cursor=pointer]
+              - generic [ref=e1438]: business
+              - heading "Al Safeer" [level=3] [ref=e1439]
+              - generic [ref=e1440]:
+                - button "Edit" [ref=e1441] [cursor=pointer]:
+                  - img [ref=e1442]
+                  - text: Edit
+                - button "Delete" [ref=e1444] [cursor=pointer]:
+                  - img [ref=e1445]
+                  - text: Delete
+              - button "Active" [ref=e1447] [cursor=pointer]
+            - generic [ref=e1448]:
+              - checkbox [ref=e1449] [cursor=pointer]
+              - generic [ref=e1451]: business
+              - heading "Al Labeeb" [level=3] [ref=e1452]
+              - generic [ref=e1453]:
+                - button "Edit" [ref=e1454] [cursor=pointer]:
+                  - img [ref=e1455]
+                  - text: Edit
+                - button "Delete" [ref=e1457] [cursor=pointer]:
+                  - img [ref=e1458]
+                  - text: Delete
+              - button "Active" [ref=e1460] [cursor=pointer]
+            - generic [ref=e1461]:
+              - checkbox [ref=e1462] [cursor=pointer]
+              - generic [ref=e1464]: business
+              - heading "Dubai Global" [level=3] [ref=e1465]
+              - generic [ref=e1466]:
+                - button "Edit" [ref=e1467] [cursor=pointer]:
+                  - img [ref=e1468]
+                  - text: Edit
+                - button "Delete" [ref=e1470] [cursor=pointer]:
+                  - img [ref=e1471]
+                  - text: Delete
+              - button "Active" [ref=e1473] [cursor=pointer]
+            - generic [ref=e1474]:
+              - checkbox [ref=e1475] [cursor=pointer]
+              - generic [ref=e1477]: business
+              - heading "Al Ghaff" [level=3] [ref=e1478]
+              - generic [ref=e1479]:
+                - button "Edit" [ref=e1480] [cursor=pointer]:
+                  - img [ref=e1481]
+                  - text: Edit
+                - button "Delete" [ref=e1483] [cursor=pointer]:
+                  - img [ref=e1484]
+                  - text: Delete
+              - button "Active" [ref=e1486] [cursor=pointer]
+            - generic [ref=e1487]:
+              - checkbox [ref=e1488] [cursor=pointer]
+              - generic [ref=e1490]: business
+              - heading "Al Hashmi" [level=3] [ref=e1491]
+              - generic [ref=e1492]:
+                - button "Edit" [ref=e1493] [cursor=pointer]:
+                  - img [ref=e1494]
+                  - text: Edit
+                - button "Delete" [ref=e1496] [cursor=pointer]:
+                  - img [ref=e1497]
+                  - text: Delete
+              - button "Active" [ref=e1499] [cursor=pointer]
+            - generic [ref=e1500]:
+              - checkbox [ref=e1501] [cursor=pointer]
+              - generic [ref=e1503]: business
+              - heading "Al Mazroui" [level=3] [ref=e1504]
+              - link "Visit" [ref=e1505] [cursor=pointer]:
+                - /url: https://www.almazroui.com
+                - img [ref=e1506]
+                - text: Visit
+              - generic [ref=e1508]:
+                - button "Edit" [ref=e1509] [cursor=pointer]:
+                  - img [ref=e1510]
+                  - text: Edit
+                - button "Delete" [ref=e1512] [cursor=pointer]:
+                  - img [ref=e1513]
+                  - text: Delete
+              - button "Active" [ref=e1515] [cursor=pointer]
+            - generic [ref=e1516]:
+              - checkbox [ref=e1517] [cursor=pointer]
+              - generic [ref=e1519]: business
+              - heading "Bin Brothers" [level=3] [ref=e1520]
+              - generic [ref=e1521]:
+                - button "Edit" [ref=e1522] [cursor=pointer]:
+                  - img [ref=e1523]
+                  - text: Edit
+                - button "Delete" [ref=e1525] [cursor=pointer]:
+                  - img [ref=e1526]
+                  - text: Delete
+              - button "Active" [ref=e1528] [cursor=pointer]
+  - alert [ref=e1529]

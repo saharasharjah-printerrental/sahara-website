@@ -1,0 +1,4 @@
+- generic [active] [ref=e1]:
+  - text: "Warning: session_start(): open(/tmp/php-sessions/sess_37dff45d1d58daba4f0507278efac2f3, O_RDWR) failed: No space left on device (28) in /var/www/2findlocal/2findlocal.com/CodeBase/Classes/Actions/ActionBase.class on line 78"
+  - text: "Warning: session_start(): Failed to read session data: files (path: /tmp/php-sessions) in /var/www/2findlocal/2findlocal.com/CodeBase/Classes/Actions/ActionBase.class on line 78"
+  - text: Page not found.

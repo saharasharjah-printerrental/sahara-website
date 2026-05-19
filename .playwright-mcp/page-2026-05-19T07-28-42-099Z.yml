@@ -1,0 +1,387 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - link "Cybo The Global Business Directory" [ref=e5] [cursor=pointer]:
+        - /url: https://www.cybo.com/
+        - img "Cybo The Global Business Directory" [ref=e6]
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - heading "The Online Global Business Directory" [level=1] [ref=e9]
+          - paragraph [ref=e10]: Search for businesses and services from across the globe on Cybo.
+        - generic [ref=e11]:
+          - combobox "Select a Search Method" [ref=e12] [cursor=pointer]:
+            - option "Business" [selected]
+            - option "People"
+            - option "Postal Code"
+            - option "Address"
+            - option "Phone"
+            - option "Website"
+            - option "Email"
+          - generic [ref=e13]:
+            - generic [ref=e14]:
+              - combobox "Business or category" [ref=e15]
+              - combobox "City Name" [ref=e16]: Current Location
+            - button [ref=e18] [cursor=pointer]:
+              - img [ref=e19]
+      - link "Open Navigation" [ref=e22] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e23]
+    - img "Hero image" [ref=e26]
+  - generic [ref=e28]:
+    - text: "BROWSE:"
+    - link "Countries" [ref=e29] [cursor=pointer]:
+      - /url: https://www.cybo.com/world_yellow_pages/
+    - link "Area Codes" [ref=e30] [cursor=pointer]:
+      - /url: https://area-codes.cybo.com/
+    - link "Postal Codes" [ref=e31] [cursor=pointer]:
+      - /url: https://postal-codes.cybo.com/
+    - link "Categories" [ref=e32] [cursor=pointer]:
+      - /url: https://www.cybo.com/world_categories/
+    - link "Add a Business" [ref=e33] [cursor=pointer]:
+      - /url: https://www.cybo.com/add-business/
+  - generic [ref=e34]:
+    - generic [ref=e36]:
+      - img "City Graphic" [ref=e38]
+      - generic [ref=e40]:
+        - heading "Business & Location Intelligence" [level=2] [ref=e41]
+        - paragraph [ref=e42]: Access millions of verified business listings, postal codes, and city data worldwide. Your trusted source for location intelligence.
+        - paragraph [ref=e43]: Empowering business professionals and researchers with accurate, up-to-date information.
+    - generic [ref=e45]:
+      - img "Proud Owners" [ref=e48]
+      - generic [ref=e49]:
+        - heading "Manage Your Free Listing!" [level=2] [ref=e50]
+        - paragraph [ref=e51]: Take control of your business profile today.
+        - paragraph [ref=e52]: Connect with more customers and ensure they can find accurate information about your services.
+        - link "Claim Your Business" [ref=e53] [cursor=pointer]:
+          - /url: https://www.cybo.com/claim
+          - img [ref=e54]
+          - text: Claim Your Business
+    - generic [ref=e57]:
+      - img "Logo" [ref=e59]
+      - generic [ref=e61]:
+        - heading "About Cybo" [level=2] [ref=e62]
+        - paragraph [ref=e63]: Our mission is to make business and location data accessible, accurate, and actionable.
+        - paragraph [ref=e64]: We combine global coverage with local insights to help you make better decisions.
+        - link "Meet the Team" [ref=e65] [cursor=pointer]:
+          - /url: https://www.cybo.com/team
+          - img [ref=e66]
+          - text: Meet the Team
+    - generic [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - img [ref=e72]
+          - generic [ref=e74]: Major Cities
+        - generic [ref=e75]:
+          - link "Flag of South Africa Cape Town South Africa" [ref=e76] [cursor=pointer]:
+            - /url: https://www.cybo.com/ZA/cape-town/
+            - img "Flag of South Africa" [ref=e77]
+            - generic [ref=e78]:
+              - generic [ref=e79]: Cape Town
+              - generic [ref=e80]: South Africa
+          - link "Flag of United States New York City United States" [ref=e81] [cursor=pointer]:
+            - /url: https://www.cybo.com/US/new-york-city/
+            - img "Flag of United States" [ref=e82]
+            - generic [ref=e83]:
+              - generic [ref=e84]: New York City
+              - generic [ref=e85]: United States
+          - link "Flag of Canada Toronto Canada" [ref=e86] [cursor=pointer]:
+            - /url: https://www.cybo.com/CA/toronto/
+            - img "Flag of Canada" [ref=e87]
+            - generic [ref=e88]:
+              - generic [ref=e89]: Toronto
+              - generic [ref=e90]: Canada
+          - link "Flag of Philippines Manila Philippines" [ref=e91] [cursor=pointer]:
+            - /url: https://www.cybo.com/PH/manila/
+            - img "Flag of Philippines" [ref=e92]
+            - generic [ref=e93]:
+              - generic [ref=e94]: Manila
+              - generic [ref=e95]: Philippines
+          - link "Flag of United Kingdom London United Kingdom" [ref=e96] [cursor=pointer]:
+            - /url: https://www.cybo.com/GB/london/
+            - img "Flag of United Kingdom" [ref=e97]
+            - generic [ref=e98]:
+              - generic [ref=e99]: London
+              - generic [ref=e100]: United Kingdom
+          - link "Flag of Argentina Buenos Aires Argentina" [ref=e101] [cursor=pointer]:
+            - /url: https://www.cybo.com/AR/buenos-aires-buenos-aires/
+            - img "Flag of Argentina" [ref=e102]
+            - generic [ref=e103]:
+              - generic [ref=e104]: Buenos Aires
+              - generic [ref=e105]: Argentina
+          - link "Flag of United States Los Angeles United States" [ref=e106] [cursor=pointer]:
+            - /url: https://www.cybo.com/US/los-angeles/
+            - img "Flag of United States" [ref=e107]
+            - generic [ref=e108]:
+              - generic [ref=e109]: Los Angeles
+              - generic [ref=e110]: United States
+          - link "Flag of India Mumbai India" [ref=e111] [cursor=pointer]:
+            - /url: https://www.cybo.com/IN/mumbai/
+            - img "Flag of India" [ref=e112]
+            - generic [ref=e113]:
+              - generic [ref=e114]: Mumbai
+              - generic [ref=e115]: India
+          - link "Flag of South Africa Durban South Africa" [ref=e116] [cursor=pointer]:
+            - /url: https://www.cybo.com/ZA/durban/
+            - img "Flag of South Africa" [ref=e117]
+            - generic [ref=e118]:
+              - generic [ref=e119]: Durban
+              - generic [ref=e120]: South Africa
+          - link "Flag of Pakistan Karachi Pakistan" [ref=e121] [cursor=pointer]:
+            - /url: https://www.cybo.com/PK/karachi/
+            - img "Flag of Pakistan" [ref=e122]
+            - generic [ref=e123]:
+              - generic [ref=e124]: Karachi
+              - generic [ref=e125]: Pakistan
+          - link "Flag of United States Chicago United States" [ref=e126] [cursor=pointer]:
+            - /url: https://www.cybo.com/US/chicago/
+            - img "Flag of United States" [ref=e127]
+            - generic [ref=e128]:
+              - generic [ref=e129]: Chicago
+              - generic [ref=e130]: United States
+          - link "Flag of Turkey Istanbul Turkey" [ref=e131] [cursor=pointer]:
+            - /url: https://www.cybo.com/TR/istanbul/
+            - img "Flag of Turkey" [ref=e132]
+            - generic [ref=e133]:
+              - generic [ref=e134]: Istanbul
+              - generic [ref=e135]: Turkey
+          - link "Flag of South Africa Johannesburg South Africa" [ref=e136] [cursor=pointer]:
+            - /url: https://www.cybo.com/ZA/johannesburg/
+            - img "Flag of South Africa" [ref=e137]
+            - generic [ref=e138]:
+              - generic [ref=e139]: Johannesburg
+              - generic [ref=e140]: South Africa
+          - link "Flag of South Korea Seoul South Korea" [ref=e141] [cursor=pointer]:
+            - /url: https://www.cybo.com/KR/seoul-seoul/
+            - img "Flag of South Korea" [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e144]: Seoul
+              - generic [ref=e145]: South Korea
+          - link "Flag of Canada Montreal Canada" [ref=e146] [cursor=pointer]:
+            - /url: https://www.cybo.com/CA/montreal/
+            - img "Flag of Canada" [ref=e147]
+            - generic [ref=e148]:
+              - generic [ref=e149]: Montreal
+              - generic [ref=e150]: Canada
+          - link "Flag of Nigeria Lagos Nigeria" [ref=e151] [cursor=pointer]:
+            - /url: https://www.cybo.com/NG/lagos/
+            - img "Flag of Nigeria" [ref=e152]
+            - generic [ref=e153]:
+              - generic [ref=e154]: Lagos
+              - generic [ref=e155]: Nigeria
+          - link "Flag of South Africa Soweto South Africa" [ref=e156] [cursor=pointer]:
+            - /url: https://www.cybo.com/ZA/soweto/
+            - img "Flag of South Africa" [ref=e157]
+            - generic [ref=e158]:
+              - generic [ref=e159]: Soweto
+              - generic [ref=e160]: South Africa
+          - link "Flag of Japan Tokyo Japan" [ref=e161] [cursor=pointer]:
+            - /url: https://www.cybo.com/JP/tokyo/
+            - img "Flag of Japan" [ref=e162]
+            - generic [ref=e163]:
+              - generic [ref=e164]: Tokyo
+              - generic [ref=e165]: Japan
+          - link "Flag of Taiwan Taipei Taiwan" [ref=e166] [cursor=pointer]:
+            - /url: https://www.cybo.com/TW/taipei-taipei/
+            - img "Flag of Taiwan" [ref=e167]
+            - generic [ref=e168]:
+              - generic [ref=e169]: Taipei
+              - generic [ref=e170]: Taiwan
+          - link "Flag of Democratic Republic of the Congo Kinshasa Democratic Republic of the Congo" [ref=e171] [cursor=pointer]:
+            - /url: https://www.cybo.com/CD/kinshasa/
+            - img "Flag of Democratic Republic of the Congo" [ref=e172]
+            - generic [ref=e173]:
+              - generic [ref=e174]: Kinshasa
+              - generic [ref=e175]: Democratic Republic of the Congo
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - img [ref=e178]
+          - generic [ref=e180]: Countries
+        - link "Browse More..." [ref=e181] [cursor=pointer]:
+          - /url: https://www.cybo.com/world_yellow_pages/
+          - img [ref=e182]
+          - text: Browse More...
+        - generic [ref=e184]:
+          - link "Flag of South Africa South Africa" [ref=e185] [cursor=pointer]:
+            - /url: https://www.cybo.com/south-africa/
+            - img "Flag of South Africa" [ref=e186]
+            - generic [ref=e188]: South Africa
+          - link "Flag of United States United States" [ref=e189] [cursor=pointer]:
+            - /url: https://www.cybo.com/united-states/
+            - img "Flag of United States" [ref=e190]
+            - generic [ref=e192]: United States
+          - link "Flag of Canada Canada" [ref=e193] [cursor=pointer]:
+            - /url: https://www.cybo.com/canada/
+            - img "Flag of Canada" [ref=e194]
+            - generic [ref=e196]: Canada
+          - link "Flag of Philippines Philippines" [ref=e197] [cursor=pointer]:
+            - /url: https://www.cybo.com/philippines/
+            - img "Flag of Philippines" [ref=e198]
+            - generic [ref=e200]: Philippines
+          - link "Flag of United Kingdom United Kingdom" [ref=e201] [cursor=pointer]:
+            - /url: https://www.cybo.com/united-kingdom/
+            - img "Flag of United Kingdom" [ref=e202]
+            - generic [ref=e204]: United Kingdom
+          - link "Flag of India India" [ref=e205] [cursor=pointer]:
+            - /url: https://www.cybo.com/india/
+            - img "Flag of India" [ref=e206]
+            - generic [ref=e208]: India
+          - link "Flag of Pakistan Pakistan" [ref=e209] [cursor=pointer]:
+            - /url: https://www.cybo.com/pakistan/
+            - img "Flag of Pakistan" [ref=e210]
+            - generic [ref=e212]: Pakistan
+          - link "Flag of Nigeria Nigeria" [ref=e213] [cursor=pointer]:
+            - /url: https://www.cybo.com/nigeria/
+            - img "Flag of Nigeria" [ref=e214]
+            - generic [ref=e216]: Nigeria
+          - link "Flag of Ethiopia Ethiopia" [ref=e217] [cursor=pointer]:
+            - /url: https://www.cybo.com/ethiopia/
+            - img "Flag of Ethiopia" [ref=e218]
+            - generic [ref=e220]: Ethiopia
+          - link "Flag of Myanmar Myanmar" [ref=e221] [cursor=pointer]:
+            - /url: https://www.cybo.com/myanmar/
+            - img "Flag of Myanmar" [ref=e222]
+            - generic [ref=e224]: Myanmar
+          - link "Flag of China China" [ref=e225] [cursor=pointer]:
+            - /url: https://www.cybo.com/china/
+            - img "Flag of China" [ref=e226]
+            - generic [ref=e228]: China
+          - link "Flag of Indonesia Indonesia" [ref=e229] [cursor=pointer]:
+            - /url: https://www.cybo.com/indonesia/
+            - img "Flag of Indonesia" [ref=e230]
+            - generic [ref=e232]: Indonesia
+          - link "Flag of Brazil Brazil" [ref=e233] [cursor=pointer]:
+            - /url: https://www.cybo.com/brazil/
+            - img "Flag of Brazil" [ref=e234]
+            - generic [ref=e236]: Brazil
+          - link "Flag of Bangladesh Bangladesh" [ref=e237] [cursor=pointer]:
+            - /url: https://www.cybo.com/bangladesh/
+            - img "Flag of Bangladesh" [ref=e238]
+            - generic [ref=e240]: Bangladesh
+          - link "Flag of Russia Russia" [ref=e241] [cursor=pointer]:
+            - /url: https://www.cybo.com/russia/
+            - img "Flag of Russia" [ref=e242]
+            - generic [ref=e244]: Russia
+          - link "Flag of Japan Japan" [ref=e245] [cursor=pointer]:
+            - /url: https://www.cybo.com/japan/
+            - img "Flag of Japan" [ref=e246]
+            - generic [ref=e248]: Japan
+          - link "Flag of Mexico Mexico" [ref=e249] [cursor=pointer]:
+            - /url: https://www.cybo.com/mexico/
+            - img "Flag of Mexico" [ref=e250]
+            - generic [ref=e252]: Mexico
+          - link "Flag of Kenya Kenya" [ref=e253] [cursor=pointer]:
+            - /url: https://www.cybo.com/kenya/
+            - img "Flag of Kenya" [ref=e254]
+            - generic [ref=e256]: Kenya
+          - link "Flag of Uganda Uganda" [ref=e257] [cursor=pointer]:
+            - /url: https://www.cybo.com/uganda/
+            - img "Flag of Uganda" [ref=e258]
+            - generic [ref=e260]: Uganda
+          - link "Flag of Nepal Nepal" [ref=e261] [cursor=pointer]:
+            - /url: https://www.cybo.com/nepal/
+            - img "Flag of Nepal" [ref=e262]
+            - generic [ref=e264]: Nepal
+  - contentinfo [ref=e265]:
+    - generic [ref=e266]:
+      - generic [ref=e267]:
+        - generic [ref=e268]:
+          - link "Think Global Cybo The Global Business Directory" [ref=e269] [cursor=pointer]:
+            - /url: https://www.cybo.com/
+            - generic [ref=e270]: Think Global
+            - img "Cybo The Global Business Directory" [ref=e271]
+          - generic [ref=e272]:
+            - generic [ref=e273]: PO Box 1081
+            - generic [ref=e274]: Eugene, OR 97440
+            - generic [ref=e275]: United States
+        - generic [ref=e276]:
+          - generic [ref=e277]:
+            - generic [ref=e278]: BROWSE
+            - link "Reverse Search" [ref=e279] [cursor=pointer]:
+              - /url: https://www.cybo.com/psearch/
+            - link "Yellow Pages" [ref=e280] [cursor=pointer]:
+              - /url: https://www.cybo.com/world_yellow_pages/
+            - link "Postal Codes" [ref=e281] [cursor=pointer]:
+              - /url: https://postal-codes.cybo.com/
+            - link "Phone Codes" [ref=e282] [cursor=pointer]:
+              - /url: https://area-codes.cybo.com/
+            - link "Categories" [ref=e283] [cursor=pointer]:
+              - /url: https://www.cybo.com/world_categories/
+          - generic [ref=e284]:
+            - generic [ref=e285]: OTHER
+            - link "About" [ref=e286] [cursor=pointer]:
+              - /url: https://www.cybo.com/about/
+            - link "Team" [ref=e287] [cursor=pointer]:
+              - /url: https://www.cybo.com/team
+            - link "Friends" [ref=e288] [cursor=pointer]:
+              - /url: https://www.cybo.com/friends/
+            - link "Contact Us" [ref=e289] [cursor=pointer]:
+              - /url: https://www.cybo.com/contact/
+            - link "Help Center" [ref=e290] [cursor=pointer]:
+              - /url: https://support.cybo.com/hc/en-us?hl=en
+        - generic [ref=e292]:
+          - generic [ref=e293]: TOP
+          - button "Back to top" [ref=e294]:
+            - img [ref=e295]
+      - separator [ref=e297]
+      - generic [ref=e298]:
+        - generic [ref=e299]:
+          - link "Terms|" [ref=e300] [cursor=pointer]:
+            - /url: https://www.cybo.com/terms/
+          - link "Removal Tool|" [ref=e301] [cursor=pointer]:
+            - /url: https://www.cybo.com/removal
+          - link "Privacy" [ref=e302] [cursor=pointer]:
+            - /url: https://www.cybo.com/privacy/
+        - generic [ref=e304]:
+          - combobox "Select a Language" [ref=e305] [cursor=pointer]:
+            - option "English" [selected]
+            - option "العربية"
+            - option "فارسی"
+            - option "हिनदी"
+            - option "Español"
+            - option "日本語"
+            - option "Português"
+            - option "Deutsch"
+            - option "Français"
+            - option "Русский"
+            - option "中文 (简体)"
+            - option "한국어"
+            - option "Bahasa Indonesia"
+            - option "Polski"
+            - option "Italiano"
+            - option "Türkçe"
+            - option "Nederlands"
+            - option "Bahasa Melayu"
+            - option "中文 (繁體)"
+            - option "Tiếng Việt"
+            - option "Dansk"
+            - option "Svenska"
+            - option "Norsk"
+            - option "Română"
+            - option "Česky"
+            - option "Magyar"
+            - option "Suomi"
+            - option "Tagalog"
+            - option "ไทย"
+            - option "Українська"
+            - option "Afrikaans"
+            - option "Shqip"
+            - option "Srpski"
+            - option "Kiswahili"
+            - option "Български"
+            - option "Ελληνικά"
+            - option "Eesti"
+            - option "Galego"
+            - option "עברית"
+            - option "Hrvatski"
+            - option "Íslenska"
+            - option "Lietuvių"
+            - option "Latviešu"
+            - option "தமிழ்"
+            - option "Slovenčina"
+            - option "Slovenščina"
+            - option "Català"
+            - option "Makedonski"
+            - option "বাংলা"
+            - option "Azərbaycanca"
+          - img [ref=e307]
+    - generic [ref=e309]: "Copyright © Cybo Company :: 2005-2026 :: All Rights Reserved"

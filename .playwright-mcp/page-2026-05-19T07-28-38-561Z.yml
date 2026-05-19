@@ -1,0 +1,140 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "Cybo The Global Business Directory" [ref=e4] [cursor=pointer]:
+      - /url: https://www.cybo.com/
+      - img "Cybo The Global Business Directory" [ref=e5]
+    - generic [ref=e6]:
+      - combobox [ref=e7] [cursor=pointer]:
+        - option "Business" [selected]
+        - option "People"
+        - option "Postal Code"
+        - option "Address"
+        - option "Phone"
+        - option "Website"
+        - option "Email"
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - combobox "Business or category" [ref=e10]
+          - combobox "City Name" [ref=e11]: Current Location
+        - button [ref=e12] [cursor=pointer]:
+          - img [ref=e13]
+    - link "Open Navigation" [ref=e16] [cursor=pointer]:
+      - /url: "#"
+      - img [ref=e17]
+  - generic [ref=e20]:
+    - text: "BROWSE:"
+    - link "Countries" [ref=e21] [cursor=pointer]:
+      - /url: https://www.cybo.com/world_yellow_pages/
+    - link "Area Codes" [ref=e22] [cursor=pointer]:
+      - /url: https://area-codes.cybo.com/
+    - link "Postal Codes" [ref=e23] [cursor=pointer]:
+      - /url: https://postal-codes.cybo.com/
+    - link "Categories" [ref=e24] [cursor=pointer]:
+      - /url: https://www.cybo.com/world_categories/
+    - link "Add a Business" [ref=e25] [cursor=pointer]:
+      - /url: https://www.cybo.com/add-business/
+  - paragraph [ref=e27]: This is a 404 error page. The page you requested does not exist.
+  - contentinfo [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - link "Think Global Cybo The Global Business Directory" [ref=e32] [cursor=pointer]:
+            - /url: https://www.cybo.com/
+            - generic [ref=e33]: Think Global
+            - img "Cybo The Global Business Directory" [ref=e34]
+          - generic [ref=e35]:
+            - generic [ref=e36]: PO Box 1081
+            - generic [ref=e37]: Eugene, OR 97440
+            - generic [ref=e38]: United States
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: BROWSE
+            - link "Reverse Search" [ref=e42] [cursor=pointer]:
+              - /url: https://www.cybo.com/psearch/
+            - link "Yellow Pages" [ref=e43] [cursor=pointer]:
+              - /url: https://www.cybo.com/world_yellow_pages/
+            - link "Postal Codes" [ref=e44] [cursor=pointer]:
+              - /url: https://postal-codes.cybo.com/
+            - link "Phone Codes" [ref=e45] [cursor=pointer]:
+              - /url: https://area-codes.cybo.com/
+            - link "Categories" [ref=e46] [cursor=pointer]:
+              - /url: https://www.cybo.com/world_categories/
+          - generic [ref=e47]:
+            - generic [ref=e48]: OTHER
+            - link "About" [ref=e49] [cursor=pointer]:
+              - /url: https://www.cybo.com/about/
+            - link "Team" [ref=e50] [cursor=pointer]:
+              - /url: https://www.cybo.com/team
+            - link "Friends" [ref=e51] [cursor=pointer]:
+              - /url: https://www.cybo.com/friends/
+            - link "Contact Us" [ref=e52] [cursor=pointer]:
+              - /url: https://www.cybo.com/contact/
+            - link "Help Center" [ref=e53] [cursor=pointer]:
+              - /url: https://support.cybo.com/hc/en-us?hl=en
+        - generic [ref=e55]:
+          - generic [ref=e56]: TOP
+          - button "Back to top" [ref=e57]:
+            - img [ref=e58]
+      - separator [ref=e60]
+      - generic [ref=e61]:
+        - generic [ref=e62]:
+          - link "Terms|" [ref=e63] [cursor=pointer]:
+            - /url: https://www.cybo.com/terms/
+          - link "Removal Tool|" [ref=e64] [cursor=pointer]:
+            - /url: https://www.cybo.com/removal
+          - link "Privacy" [ref=e65] [cursor=pointer]:
+            - /url: https://www.cybo.com/privacy/
+        - generic [ref=e67]:
+          - combobox "Select a Language" [ref=e68] [cursor=pointer]:
+            - option "English" [selected]
+            - option "Español"
+            - option "日本語"
+            - option "Português"
+            - option "Deutsch"
+            - option "Français"
+            - option "العربية"
+            - option "Русский"
+            - option "中文 (简体)"
+            - option "한국어"
+            - option "Bahasa Indonesia"
+            - option "Polski"
+            - option "Italiano"
+            - option "Türkçe"
+            - option "Nederlands"
+            - option "Bahasa Melayu"
+            - option "中文 (繁體)"
+            - option "Tiếng Việt"
+            - option "Dansk"
+            - option "Svenska"
+            - option "Norsk"
+            - option "Română"
+            - option "Česky"
+            - option "Magyar"
+            - option "Suomi"
+            - option "فارسی"
+            - option "Tagalog"
+            - option "ไทย"
+            - option "Українська"
+            - option "Afrikaans"
+            - option "Shqip"
+            - option "Srpski"
+            - option "Kiswahili"
+            - option "Български"
+            - option "Ελληνικά"
+            - option "Eesti"
+            - option "Galego"
+            - option "עברית"
+            - option "हिनदी"
+            - option "Hrvatski"
+            - option "Íslenska"
+            - option "Lietuvių"
+            - option "Latviešu"
+            - option "தமிழ்"
+            - option "Slovenčina"
+            - option "Slovenščina"
+            - option "Català"
+            - option "Makedonski"
+            - option "বাংলা"
+            - option "Azərbaycanca"
+          - img [ref=e70]
+    - generic [ref=e72]: "Copyright © Cybo Company :: 2005-2026 :: All Rights Reserved"

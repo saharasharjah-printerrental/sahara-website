@@ -1,0 +1,7 @@
+- generic [active] [ref=e1]:
+  - text: 404 - Page Not Found!
+  - generic [ref=e2]:
+    - text: You've stumbled on a page that has either been removed or you've incorrectly typed the URL.
+    - link "Click here" [ref=e3] [cursor=pointer]:
+      - /url: https://www.b2blistings.org/
+    - text: to go to the home page of b2blistings.org.

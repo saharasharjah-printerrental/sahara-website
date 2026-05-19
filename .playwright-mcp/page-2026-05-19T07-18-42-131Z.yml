@@ -1,0 +1,69 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "Open navigation menu" [ref=e5] [cursor=pointer]
+      - link "Site Logo" [ref=e7] [cursor=pointer]:
+        - /url: /california/
+        - img "Site Logo" [ref=e8]
+      - generic [ref=e9]:
+        - link:
+          - /url: javascript:void(0);
+      - link "Change location" [ref=e11] [cursor=pointer]:
+        - /url: /profile/ChangeLocation.asp?iframe=1&Setvalue=1
+        - img "Change location" [ref=e12]
+    - generic [ref=e13]:
+      - link "Sign Up" [ref=e15] [cursor=pointer]:
+        - /url: /sign-up
+      - link "Sign In" [ref=e17] [cursor=pointer]:
+        - /url: /log-in/
+  - generic [ref=e18]:
+    - link "Storeboard - Search for Businesses and Products in Your Neighborhoods and Beyond" [ref=e20] [cursor=pointer]:
+      - /url: /
+      - img "Storeboard - Search for Businesses and Products in Your Neighborhoods and Beyond" [ref=e21]
+    - generic [ref=e22]:
+      - heading "404" [level=1] [ref=e23]
+      - heading "Page not found" [level=2] [ref=e24]
+      - paragraph [ref=e25]: The page you're looking for may have moved, been renamed, or no longer exists. Let's get you back on track.
+      - generic [ref=e26]:
+        - link "Back to Home" [ref=e27] [cursor=pointer]:
+          - /url: /
+        - link "Go Back" [ref=e28] [cursor=pointer]:
+          - /url: javascript:history.back()
+        - link "Browse Feed" [ref=e29] [cursor=pointer]:
+          - /url: /all/network/feed/
+      - generic [ref=e31]:
+        - link "Local Businesses" [ref=e32] [cursor=pointer]:
+          - /url: /all/network/businesses/
+          - img [ref=e33]
+          - text: Local Businesses
+        - link "Marketplace" [ref=e36] [cursor=pointer]:
+          - /url: /products/all/
+          - img [ref=e37]
+          - text: Marketplace
+        - link "Classifieds" [ref=e41] [cursor=pointer]:
+          - /url: /ads/all/
+          - img [ref=e42]
+          - text: Classifieds
+        - link "Sign Up" [ref=e45] [cursor=pointer]:
+          - /url: /sign-up
+          - img [ref=e46]
+          - text: Sign Up
+  - list [ref=e50]:
+    - listitem [ref=e51]:
+      - link "About" [ref=e52] [cursor=pointer]:
+        - /url: /about/
+    - listitem [ref=e53]:
+      - link "Premium Packages" [ref=e54] [cursor=pointer]:
+        - /url: /premiumpackages/
+    - listitem [ref=e55]:
+      - link "Contact Storeboard" [ref=e56] [cursor=pointer]:
+        - /url: /contact-us/
+    - listitem [ref=e57]:
+      - link "Privacy Policy" [ref=e58] [cursor=pointer]:
+        - /url: /privacy/
+    - listitem [ref=e59]:
+      - link "Press" [ref=e60] [cursor=pointer]:
+        - /url: /press/
+  - generic [ref=e62]:
+    - img "Site Logo" [ref=e63]
+    - text: Copyright © 2019-2026 Storeboard - All Rights Reserved

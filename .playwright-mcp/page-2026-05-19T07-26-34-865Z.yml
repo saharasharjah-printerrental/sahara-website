@@ -1,0 +1,35 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - navigation [ref=e5]:
+      - generic [ref=e6]:
+        - text: 
+        - link [ref=e7] [cursor=pointer]:
+          - /url: /
+  - generic [ref=e10]:
+    - heading "Get started" [level=1] [ref=e11]
+    - generic [ref=e14]:
+      - heading "Please provide your details below" [level=4] [ref=e15]
+      - generic [ref=e16]:
+        - textbox "First name" [ref=e18]: Sahara
+        - textbox "Last name" [ref=e20]: Office Equipments
+        - textbox "Email" [ref=e22]: saharasharjah@gmail.com
+        - button "Get started" [active] [ref=e24] [cursor=pointer]
+      - alert [ref=e39]: Thank you. An email has been sent to you. Please click the link inside to confirm your email address.
+  - contentinfo [ref=e25]:
+    - link "Support" [ref=e31] [cursor=pointer]:
+      - /url: https://support.hotfrog.com/
+    - generic [ref=e33]:
+      - link [ref=e34] [cursor=pointer]:
+        - /url: "#"
+      - text: ©
+      - link "Locafy Ltd" [ref=e35] [cursor=pointer]:
+        - /url: https://locafy.com
+      - text: "2021"
+      - generic [ref=e36]:
+        - text: Powered by ©
+        - link "Newfold digital" [ref=e37] [cursor=pointer]:
+          - /url: https://newfold.com
+        - text: . Business data ©
+        - link "Locafy Ltd" [ref=e38] [cursor=pointer]:
+          - /url: https://locafy.com
+        - text: . All rights reserved.

@@ -1,0 +1,210 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - navigation [ref=e5]:
+        - generic [ref=e7]:
+          - link "APSense Digital Marketing Hub Logo" [ref=e9] [cursor=pointer]:
+            - /url: /
+            - img "APSense Digital Marketing Hub Logo" [ref=e10]
+          - text:            
+          - navigation [ref=e11]:
+            - link "Join APSense" [ref=e12] [cursor=pointer]:
+              - /url: /register.html
+            - link "Sign In" [ref=e13] [cursor=pointer]:
+              - /url: /
+      - navigation "breadcrumb" [ref=e14]:
+        - list [ref=e15]:
+          - listitem [ref=e16]:
+            - link "Home" [ref=e17] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e18]: / Kerri -
+      - generic [ref=e21]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - img "profile-bg" [ref=e27]
+            - list [ref=e28]:
+              - listitem [ref=e29]:
+                - link "" [ref=e30] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e31]: 
+          - generic [ref=e32]:
+            - link "avatar" [ref=e34] [cursor=pointer]:
+              - /url: /user/register
+              - img "avatar" [ref=e36]
+            - generic [ref=e37]:
+              - heading "Kerri  3" [level=1] [ref=e38]:
+                - link "Kerri" [ref=e39] [cursor=pointer]:
+                  - /url: /user/register
+                - generic [ref=e40]:
+                  - generic [ref=e41]: 
+                  - generic [ref=e42]: "3"
+              - generic [ref=e43]: "Last online: 1 month ago"
+          - generic [ref=e44]:
+            - generic:
+              - list
+            - list [ref=e46]:
+              - listitem [ref=e47]:
+                - paragraph [ref=e48]:
+                  - link "8" [ref=e49] [cursor=pointer]:
+                    - /url: /user/register/followers
+                - heading "Followers" [level=6] [ref=e50]
+              - listitem [ref=e51]:
+                - paragraph [ref=e52]: "1"
+                - heading "Posts" [level=6] [ref=e53]
+              - listitem [ref=e54]:
+                - paragraph [ref=e55]: "0"
+                - heading "Likes" [level=6] [ref=e56]
+          - generic [ref=e57]:
+            - link " Follow" [ref=e58] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e59]: 
+              - text: Follow
+            - link " Message" [ref=e60] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e61]: 
+              - text: Message
+        - generic [ref=e62]:
+          - generic [ref=e64]:
+            - heading "More from Kerri" [level=6] [ref=e67]
+            - list [ref=e69]:
+              - listitem [ref=e70]:
+                - link " Articles" [ref=e71] [cursor=pointer]:
+                  - /url: /user/register/articles
+                  - generic [ref=e72]: 
+                  - generic [ref=e73]: Articles
+              - listitem [ref=e74]:
+                - link " Products" [ref=e75] [cursor=pointer]:
+                  - /url: /user/register/products
+                  - generic [ref=e76]: 
+                  - generic [ref=e77]: Products
+              - listitem [ref=e78]:
+                - link " Questions" [ref=e79] [cursor=pointer]:
+                  - /url: /user/register/questions
+                  - generic [ref=e80]: 
+                  - generic [ref=e81]: Questions
+              - listitem [ref=e82]:
+                - link " Joined NicheHub" [ref=e83] [cursor=pointer]:
+                  - /url: /user/register/nichehub
+                  - generic [ref=e84]: 
+                  - generic [ref=e85]: Joined NicheHub
+          - generic [ref=e87]:
+            - heading "Contact Info" [level=4] [ref=e90]
+            - generic [ref=e91]:
+              - generic:
+                - list
+        - generic [ref=e93]:
+          - list [ref=e95]:
+            - listitem [ref=e96]:
+              - link " Overview" [ref=e97] [cursor=pointer]:
+                - /url: /user/register
+                - generic [ref=e98]: 
+                - text: Overview
+            - listitem [ref=e99]:
+              - link " Newsfeed" [ref=e100] [cursor=pointer]:
+                - /url: /user/register/newsfeed
+                - generic [ref=e101]: 
+                - text: Newsfeed
+            - listitem [ref=e102]:
+              - link " Testimonials" [ref=e103] [cursor=pointer]:
+                - /url: /user/register/testimonials
+                - generic [ref=e104]: 
+                - text: Testimonials
+          - generic [ref=e105]:
+            - heading "Experience" [level=4] [ref=e106]
+            - list [ref=e107]:
+              - listitem [ref=e108]:
+                - generic [ref=e110]:
+                  - heading "Joined APSense.com" [level=6] [ref=e111]
+                  - generic [ref=e112]: May 2007
+            - button " Like it" [ref=e115] [cursor=pointer]:
+              - generic [ref=e116]: 
+              - text: Like it
+        - generic [ref=e119]:
+          - heading "Recent Following" [level=6] [ref=e121]
+          - list [ref=e123]:
+            - listitem [ref=e124]:
+              - link "avatar" [ref=e125] [cursor=pointer]:
+                - /url: /user/arlene
+                - img "avatar" [ref=e127]
+              - heading "Turbo Tycoon  11" [level=6] [ref=e130]:
+                - link "Turbo Tycoon" [ref=e131] [cursor=pointer]:
+                  - /url: /user/arlene
+                - generic [ref=e132]:
+                  - generic [ref=e133]: 
+                  - generic [ref=e134]: "11"
+            - listitem [ref=e135]:
+              - link "avatar" [ref=e136] [cursor=pointer]:
+                - /url: /user/johnmoton
+                - img "avatar" [ref=e138]
+              - heading "John Moton  7" [level=6] [ref=e141]:
+                - link "John Moton" [ref=e142] [cursor=pointer]:
+                  - /url: /user/johnmoton
+                - generic [ref=e143]:
+                  - generic [ref=e144]: 
+                  - generic [ref=e145]: "7"
+            - listitem [ref=e146]:
+              - link "avatar" [ref=e147] [cursor=pointer]:
+                - /url: /user/christmasintheberkshires
+                - img "avatar" [ref=e149]
+              - generic [ref=e151]:
+                - heading "Robert Huculak  11" [level=6] [ref=e152]:
+                  - link "Robert Huculak" [ref=e153] [cursor=pointer]:
+                    - /url: /user/christmasintheberkshires
+                  - generic [ref=e154]:
+                    - generic [ref=e155]: 
+                    - generic [ref=e156]: "11"
+                - text: Producer/Writer
+            - listitem [ref=e157]:
+              - link "avatar" [ref=e158] [cursor=pointer]:
+                - /url: /user/jotgroup
+                - img "avatar" [ref=e160]
+              - heading "JOT Group  3" [level=6] [ref=e163]:
+                - link "JOT Group" [ref=e164] [cursor=pointer]:
+                  - /url: /user/jotgroup
+                - generic [ref=e165]:
+                  - generic [ref=e166]: 
+                  - generic [ref=e167]: "3"
+            - listitem [ref=e168]:
+              - link "avatar" [ref=e169] [cursor=pointer]:
+                - /url: /user/pafreshcoln
+                - img "avatar" [ref=e171]
+              - heading "Patty Freshcoln  14" [level=6] [ref=e174]:
+                - link "Patty Freshcoln" [ref=e175] [cursor=pointer]:
+                  - /url: /user/pafreshcoln
+                - generic [ref=e176]:
+                  - generic [ref=e177]: 
+                  - generic [ref=e178]: "14"
+            - listitem [ref=e179]:
+              - link "avatar" [ref=e180] [cursor=pointer]:
+                - /url: /user/yankey
+                - img "avatar" [ref=e182]
+              - generic [ref=e184]:
+                - heading "Jan Kaptein  10" [level=6] [ref=e185]:
+                  - link "Jan Kaptein" [ref=e186] [cursor=pointer]:
+                    - /url: /user/yankey
+                  - generic [ref=e187]:
+                    - generic [ref=e188]: 
+                    - generic [ref=e189]: "10"
+                - text: Owner TrafficKnight.com
+            - listitem [ref=e190]:
+              - link "avatar" [ref=e191] [cursor=pointer]:
+                - /url: /user/sitemap
+                - img "avatar" [ref=e193]
+              - generic [ref=e195]:
+                - heading "John Amber  5" [level=6] [ref=e196]:
+                  - link "John Amber" [ref=e197] [cursor=pointer]:
+                    - /url: /user/sitemap
+                  - generic [ref=e198]:
+                    - generic [ref=e199]: 
+                    - generic [ref=e200]: "5"
+                - text: Welcome
+  - text:   ?   
+  - contentinfo [ref=e201]:
+    - generic [ref=e204]:
+      - link "About" [ref=e205] [cursor=pointer]:
+        - /url: /site/about
+      - link "How It Works" [ref=e206] [cursor=pointer]:
+        - /url: /site/howitworks
+      - link "Contact Us" [ref=e207] [cursor=pointer]:
+        - /url: /site/contact
+      - generic [ref=e208]: © 2026 APSense LTD. All Rights Reserved.

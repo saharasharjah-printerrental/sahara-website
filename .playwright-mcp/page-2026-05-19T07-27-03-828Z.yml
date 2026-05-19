@@ -1,0 +1,860 @@
+- generic [active] [ref=e1]:
+  - table [ref=e2]:
+    - rowgroup [ref=e3]:
+      - row "b2blistings.org THE most thorough website review service for B2B companies ★ Get your own unique FAQ + Selling Points on your profile page ★ be seen by 1000s of daily visitors and win new business" [ref=e4]:
+        - cell "b2blistings.org THE most thorough website review service for B2B companies ★ Get your own unique FAQ + Selling Points on your profile page ★ be seen by 1000s of daily visitors and win new business" [ref=e5]:
+          - generic [ref=e6]:
+            - text: b2blistings.org
+            - text: THE most thorough website review service for B2B companies
+            - text: ★ Get your own unique FAQ + Selling Points on your profile page
+            - text: ★ be seen by 1000s of daily visitors and win new business
+      - row [ref=e8]:
+        - cell [ref=e9]:
+          - table [ref=e10]:
+            - rowgroup [ref=e11]:
+              - row "Home About ▼ Latest Listings Spider Insights Freshness! Submit Website Articles Login Contact" [ref=e12]:
+                - cell "Home About ▼ Latest Listings Spider Insights Freshness! Submit Website Articles Login Contact" [ref=e13]:
+                  - table [ref=e14]:
+                    - rowgroup [ref=e15]:
+                      - row "Home About ▼ Latest Listings Spider Insights Freshness! Submit Website Articles Login Contact" [ref=e16]:
+                        - cell "Home" [ref=e17]:
+                          - link "Home" [ref=e19] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/
+                        - cell "About ▼" [ref=e20]:
+                          - button "About ▼" [ref=e22]
+                        - cell "Latest Listings" [ref=e23]:
+                          - link "Latest Listings" [ref=e25] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/latest_listings.asp
+                        - cell "Spider Insights" [ref=e26]:
+                          - link "Spider Insights" [ref=e28] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/spider_insights.asp
+                        - cell "Freshness!" [ref=e29]:
+                          - link "Freshness!" [ref=e31] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/curation.asp
+                        - cell "Submit Website" [ref=e32]:
+                          - link "Submit Website" [ref=e34] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/new_listing.asp
+                        - cell "Articles" [ref=e35]:
+                          - link "Articles" [ref=e37] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/article_list.asp
+                        - cell "Login" [ref=e38]:
+                          - link "Login" [ref=e40] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/login.asp
+                        - cell "Contact" [ref=e41]:
+                          - link "Contact" [ref=e43] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/contact.asp
+              - row [ref=e44]:
+                - cell [ref=e45]
+          - table [ref=e46]:
+            - rowgroup [ref=e47]:
+              - row [ref=e48]:
+                - cell [ref=e49]:
+                  - table [ref=e50]:
+                    - rowgroup [ref=e51]:
+                      - row "AI search Search Restyle the desktop version directory age This directory is 14 years old ▲ Upgrade a listing niche directories | article sites Gold Listings' Content All content automatically fetched by our spider Articles Products YouTube videos Most recently edited listings new! Sentiment analysis of Gold listings" [ref=e52]:
+                        - cell "AI search Search Restyle the desktop version directory age This directory is 14 years old ▲ Upgrade a listing niche directories | article sites Gold Listings' Content All content automatically fetched by our spider Articles Products YouTube videos Most recently edited listings new! Sentiment analysis of Gold listings" [ref=e53]:
+                          - generic [ref=e54]:
+                            - img "AI search" [ref=e55]
+                            - link "Search" [ref=e56] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/search.asp
+                            - link "Restyle the desktop version" [ref=e57] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/restyle.asp
+                          - generic [ref=e58]:
+                            - img "directory age" [ref=e59]
+                            - link "This directory is 14 years old" [ref=e60] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/directory_age.asp
+                            - text: ▲
+                            - link "Upgrade a listing" [ref=e61] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/upgrade.asp
+                            - generic [ref=e62]:
+                              - link "niche directories" [ref=e63] [cursor=pointer]:
+                                - /url: https://www.b2blistings.org/list.asp
+                              - text: "|"
+                              - link "article sites" [ref=e64] [cursor=pointer]:
+                                - /url: https://www.b2blistings.org/list_articles.asp
+                            - table [ref=e65]:
+                              - rowgroup [ref=e66]:
+                                - row "Gold Listings' Content" [ref=e67]:
+                                  - cell "Gold Listings' Content" [ref=e68]
+                                - row "All content automatically fetched by our spider Articles Products YouTube videos Most recently edited listings new! Sentiment analysis of Gold listings" [ref=e69]:
+                                  - cell "All content automatically fetched by our spider Articles Products YouTube videos Most recently edited listings new! Sentiment analysis of Gold listings" [ref=e70]:
+                                    - generic [ref=e71]: All content automatically fetched by our spider
+                                    - list [ref=e72]:
+                                      - listitem [ref=e73]:
+                                        - link "Articles" [ref=e74] [cursor=pointer]:
+                                          - /url: https://www.b2blistings.org/articles.asp
+                                      - listitem [ref=e75]:
+                                        - link "Products" [ref=e76] [cursor=pointer]:
+                                          - /url: https://www.b2blistings.org/ecommerce.asp
+                                      - listitem [ref=e77]:
+                                        - link "YouTube videos" [ref=e78] [cursor=pointer]:
+                                          - /url: https://www.b2blistings.org/videos.asp
+                                      - listitem [ref=e79]:
+                                        - link "Most recently edited listings" [ref=e80] [cursor=pointer]:
+                                          - /url: https://www.b2blistings.org/latestedits.asp
+                                        - text: new!
+                                      - listitem [ref=e81]:
+                                        - link "Sentiment analysis of Gold listings" [ref=e82] [cursor=pointer]:
+                                          - /url: https://www.b2blistings.org/reviews.asp
+                      - row [ref=e83]:
+                        - cell [ref=e84]:
+                          - table [ref=e85]:
+                            - rowgroup [ref=e86]:
+                              - row "Categories New listings" [ref=e87]:
+                                - cell "Categories New listings" [ref=e88]:
+                                  - text: Categories
+                                  - link "New listings" [ref=e89] [cursor=pointer]:
+                                    - /url: https://www.b2blistings.org/latest_listings.asp
+                              - row [ref=e90]:
+                                - cell [ref=e91]:
+                                  - table [ref=e92]:
+                                    - rowgroup [ref=e93]:
+                                      - row "Accounting and Finance Services (379)" [ref=e94]:
+                                        - cell "Accounting and Finance Services (379)" [ref=e95]:
+                                          - link "Accounting and Finance Services" [ref=e96] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Accounting-and-Finance-Services/C1-1-0.htm
+                                          - text: (379)
+                                      - row "Advertising and Marketing (716)" [ref=e97]:
+                                        - cell "Advertising and Marketing (716)" [ref=e98]:
+                                          - link "Advertising and Marketing" [ref=e99] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Advertising-and-Marketing/C2-1-0.htm
+                                          - text: (716)
+                                      - row "B2B in General (203)" [ref=e100]:
+                                        - cell "B2B in General (203)" [ref=e101]:
+                                          - link "B2B in General" [ref=e102] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/B2B-in-General/C48-1-0.htm
+                                          - text: (203)
+                                      - row "Building and Construction (1682)" [ref=e103]:
+                                        - cell "Building and Construction (1682)" [ref=e104]:
+                                          - link "Building and Construction" [ref=e105] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Building-and-Construction/C3-1-0.htm
+                                          - text: (1682)
+                                      - row "Business Consultants (111)" [ref=e106]:
+                                        - cell "Business Consultants (111)" [ref=e107]:
+                                          - link "Business Consultants" [ref=e108] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Business-Consultants/C32-1-0.htm
+                                          - text: (111)
+                                      - row "Business Facilities and Accommodation Hire (49)" [ref=e109]:
+                                        - cell "Business Facilities and Accommodation Hire (49)" [ref=e110]:
+                                          - link "Business Facilities and Accommodation Hire" [ref=e111] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Business-Facilities-and-Accommodation-Hire/C25-1-0.htm
+                                          - text: (49)
+                                      - row "Business Insurance (54)" [ref=e112]:
+                                        - cell "Business Insurance (54)" [ref=e113]:
+                                          - link "Business Insurance" [ref=e114] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Business-Insurance/C33-1-0.htm
+                                          - text: (54)
+                                      - row "Business Supplies (60)" [ref=e115]:
+                                        - cell "Business Supplies (60)" [ref=e116]:
+                                          - link "Business Supplies" [ref=e117] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Business-Supplies/C40-1-0.htm
+                                          - text: (60)
+                                      - row "Catering (94)" [ref=e118]:
+                                        - cell "Catering (94)" [ref=e119]:
+                                          - link "Catering" [ref=e120] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Catering/C12-1-0.htm
+                                          - text: (94)
+                                      - row "Cleaning Services (343)" [ref=e121]:
+                                        - cell "Cleaning Services (343)" [ref=e122]:
+                                          - link "Cleaning Services" [ref=e123] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Cleaning-Services/C44-1-0.htm
+                                          - text: (343)
+                                      - row "Clothing and Workwear (68)" [ref=e124]:
+                                        - cell "Clothing and Workwear (68)" [ref=e125]:
+                                          - link "Clothing and Workwear" [ref=e126] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Clothing-and-Workwear/C13-1-0.htm
+                                          - text: (68)
+                                      - row "Communications (45)" [ref=e127]:
+                                        - cell "Communications (45)" [ref=e128]:
+                                          - link "Communications" [ref=e129] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Communications/C30-1-0.htm
+                                          - text: (45)
+                                      - row "Corporate Entertainment (61)" [ref=e130]:
+                                        - cell "Corporate Entertainment (61)" [ref=e131]:
+                                          - link "Corporate Entertainment" [ref=e132] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Corporate-Entertainment/C26-1-0.htm
+                                          - text: (61)
+                                      - row "Design and Print (340)" [ref=e133]:
+                                        - cell "Design and Print (340)" [ref=e134]:
+                                          - link "Design and Print" [ref=e135] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Design-and-Print/C4-1-0.htm
+                                          - text: (340)
+                                      - row "Education Supplies (30)" [ref=e136]:
+                                        - cell "Education Supplies (30)" [ref=e137]:
+                                          - link "Education Supplies" [ref=e138] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Education-Supplies/C43-1-0.htm
+                                          - text: (30)
+                                      - row "Exhibitions and Events (150)" [ref=e139]:
+                                        - cell "Exhibitions and Events (150)" [ref=e140]:
+                                          - link "Exhibitions and Events" [ref=e141] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Exhibitions-and-Events/C14-1-0.htm
+                                          - text: (150)
+                                      - row "Factory Related (26)" [ref=e142]:
+                                        - cell "Factory Related (26)" [ref=e143]:
+                                          - link "Factory Related" [ref=e144] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Factory-Related/C41-1-0.htm
+                                          - text: (26)
+                                      - row "Finance and Investment (74)" [ref=e145]:
+                                        - cell "Finance and Investment (74)" [ref=e146]:
+                                          - link "Finance and Investment" [ref=e147] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Finance-and-Investment/C23-1-0.htm
+                                          - text: (74)
+                                      - row "Human Resources and Recruitment (154)" [ref=e148]:
+                                        - cell "Human Resources and Recruitment (154)" [ref=e149]:
+                                          - link "Human Resources and Recruitment" [ref=e150] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Human-Resources-and-Recruitment/C6-1-0.htm
+                                          - text: (154)
+                                      - row "Import and Export (26)" [ref=e151]:
+                                        - cell "Import and Export (26)" [ref=e152]:
+                                          - link "Import and Export" [ref=e153] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Import-and-Export/C15-1-0.htm
+                                          - text: (26)
+                                      - row "Industrial Services (140)" [ref=e154]:
+                                        - cell "Industrial Services (140)" [ref=e155]:
+                                          - link "Industrial Services" [ref=e156] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Industrial-Services/C29-1-0.htm
+                                          - text: (140)
+                                      - row "Industrial Supplies (92)" [ref=e157]:
+                                        - cell "Industrial Supplies (92)" [ref=e158]:
+                                          - link "Industrial Supplies" [ref=e159] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Industrial-Supplies/C37-1-0.htm
+                                          - text: (92)
+                                      - row "Information Technology (613)" [ref=e160]:
+                                        - cell "Information Technology (613)" [ref=e161]:
+                                          - link "Information Technology" [ref=e162] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Information-Technology/C7-1-0.htm
+                                          - text: (613)
+                                      - row "Interior Design and Furnishings (293)" [ref=e163]:
+                                        - cell "Interior Design and Furnishings (293)" [ref=e164]:
+                                          - link "Interior Design and Furnishings" [ref=e165] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Interior-Design-and-Furnishings/C47-1-0.htm
+                                          - text: (293)
+                                      - row "Landscaping (222)" [ref=e166]:
+                                        - cell "Landscaping (222)" [ref=e167]:
+                                          - link "Landscaping" [ref=e168] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Landscaping/C45-1-0.htm
+                                          - text: (222)
+                                      - row "Legal Services (419)" [ref=e169]:
+                                        - cell "Legal Services (419)" [ref=e170]:
+                                          - link "Legal Services" [ref=e171] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Legal-Services/C8-1-0.htm
+                                          - text: (419)
+                                      - row "Logistics and Transport (267)" [ref=e172]:
+                                        - cell "Logistics and Transport (267)" [ref=e173]:
+                                          - link "Logistics and Transport" [ref=e174] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Logistics-and-Transport/C9-1-0.htm
+                                          - text: (267)
+                                      - row "Management Consultants (31)" [ref=e175]:
+                                        - cell "Management Consultants (31)" [ref=e176]:
+                                          - link "Management Consultants" [ref=e177] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Management-Consultants/C16-1-0.htm
+                                          - text: (31)
+                                      - row "Manufacturing (210)" [ref=e178]:
+                                        - cell "Manufacturing (210)" [ref=e179]:
+                                          - link "Manufacturing" [ref=e180] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Manufacturing/C36-1-0.htm
+                                          - text: (210)
+                                      - row "Medical Products and Services (157)" [ref=e181]:
+                                        - cell "Medical Products and Services (157)" [ref=e182]:
+                                          - link "Medical Products and Services" [ref=e183] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Medical-Products-and-Services/C27-1-0.htm
+                                          - text: (157)
+                                      - row "Office Supplies (95)" [ref=e184]:
+                                        - cell "Office Supplies (95)" [ref=e185]:
+                                          - link "Office Supplies" [ref=e186] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Office-Supplies/C17-1-0.htm
+                                          - text: (95)
+                                      - row "Outsourcing (48)" [ref=e187]:
+                                        - cell "Outsourcing (48)" [ref=e188]:
+                                          - link "Outsourcing" [ref=e189] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Outsourcing/C18-1-0.htm
+                                          - text: (48)
+                                      - row "Packaging Companies (102)" [ref=e190]:
+                                        - cell "Packaging Companies (102)" [ref=e191]:
+                                          - link "Packaging Companies" [ref=e192] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Packaging-Companies/C19-1-0.htm
+                                          - text: (102)
+                                      - row "Pest Control (87)" [ref=e193]:
+                                        - cell "Pest Control (87)" [ref=e194]:
+                                          - link "Pest Control" [ref=e195] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Pest-Control/C46-1-0.htm
+                                          - text: (87)
+                                      - row "Quality Assurance (9)" [ref=e196]:
+                                        - cell "Quality Assurance (9)" [ref=e197]:
+                                          - link "Quality Assurance" [ref=e198] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Quality-Assurance/C20-1-0.htm
+                                          - text: (9)
+                                      - row "Relocation Services (82)" [ref=e199]:
+                                        - cell "Relocation Services (82)" [ref=e200]:
+                                          - link "Relocation Services" [ref=e201] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Relocation-Services/C42-1-0.htm
+                                          - text: (82)
+                                      - row "Safety and Security (189)" [ref=e202]:
+                                        - cell "Safety and Security (189)" [ref=e203]:
+                                          - link "Safety and Security" [ref=e204] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Safety-and-Security/C21-1-0.htm
+                                          - text: (189)
+                                      - row "Signage (37)" [ref=e205]:
+                                        - cell "Signage (37)" [ref=e206]:
+                                          - link "Signage" [ref=e207] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Signage/C35-1-0.htm
+                                          - text: (37)
+                                      - row "Start-up Related (7)" [ref=e208]:
+                                        - cell "Start-up Related (7)" [ref=e209]:
+                                          - link "Start-up Related" [ref=e210] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Start-up-Related/C38-1-0.htm
+                                          - text: (7)
+                                      - row "Technical Support (32)" [ref=e211]:
+                                        - cell "Technical Support (32)" [ref=e212]:
+                                          - link "Technical Support" [ref=e213] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Technical-Support/C34-1-0.htm
+                                          - text: (32)
+                                      - row "Training Services (257)" [ref=e214]:
+                                        - cell "Training Services (257)" [ref=e215]:
+                                          - link "Training Services" [ref=e216] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Training-Services/C10-1-0.htm
+                                          - text: (257)
+                                      - row "Translation Services (59)" [ref=e217]:
+                                        - cell "Translation Services (59)" [ref=e218]:
+                                          - link "Translation Services" [ref=e219] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Translation-Services/C39-1-0.htm
+                                          - text: (59)
+                                      - row "Utilities (13)" [ref=e220]:
+                                        - cell "Utilities (13)" [ref=e221]:
+                                          - link "Utilities" [ref=e222] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Utilities/C31-1-0.htm
+                                          - text: (13)
+                                      - row "Vehicles (245)" [ref=e223]:
+                                        - cell "Vehicles (245)" [ref=e224]:
+                                          - link "Vehicles" [ref=e225] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Vehicles/C28-1-0.htm
+                                          - text: (245)
+                                      - row "Web Design and Development (875)" [ref=e226]:
+                                        - cell "Web Design and Development (875)" [ref=e227]:
+                                          - link "Web Design and Development" [ref=e228] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Web-Design-and-Development/C11-1-0.htm
+                                          - text: (875)
+                                      - row "Wholesale (197)" [ref=e229]:
+                                        - cell "Wholesale (197)" [ref=e230]:
+                                          - link "Wholesale" [ref=e231] [cursor=pointer]:
+                                            - /url: https://www.b2blistings.org/Wholesale/C22-1-0.htm
+                                          - text: (197)
+                          - link "Editor's pick of articles and listings" [ref=e233] [cursor=pointer]:
+                            - /url: https://www.b2blistings.org/selected_articles_listings.asp
+                          - table [ref=e234]:
+                            - rowgroup [ref=e235]:
+                              - row "b2blistings.org articles" [ref=e236]:
+                                - cell "b2blistings.org articles" [ref=e237]
+                              - 'row "What Emergency Locksmith Callouts Reveal About Business Operations What Emergency Locksmith Callouts Reveal About Business Operations How to Select the Best EMS Provider: a Strategic Decision Framework How to Select the Best EMS Provider: a Strategic Decision Framework Effective Post-Trade Show Follow-up: How to Organise Data, Contacts and Team Actions Effective Post Trade Show Follow up: How to Organise Data, Contacts and Team Actions Designing Kitchen Circulation That Matches Work Rhythms Designing Kitchen Circulation That Matches Work Rhythms Smart Printing Strategies: How Managed Print Solutions Drive Business Efficiency Smart Printing Strategies: How Managed Print Solutions Drive Business Efficiency How to Scale an MVP Into a Full Product Successfully Facilities Required for Long-distance Moves" [ref=e238]':
+                                - 'cell "What Emergency Locksmith Callouts Reveal About Business Operations What Emergency Locksmith Callouts Reveal About Business Operations How to Select the Best EMS Provider: a Strategic Decision Framework How to Select the Best EMS Provider: a Strategic Decision Framework Effective Post-Trade Show Follow-up: How to Organise Data, Contacts and Team Actions Effective Post Trade Show Follow up: How to Organise Data, Contacts and Team Actions Designing Kitchen Circulation That Matches Work Rhythms Designing Kitchen Circulation That Matches Work Rhythms Smart Printing Strategies: How Managed Print Solutions Drive Business Efficiency Smart Printing Strategies: How Managed Print Solutions Drive Business Efficiency How to Scale an MVP Into a Full Product Successfully Facilities Required for Long-distance Moves" [ref=e239]':
+                                  - link "What Emergency Locksmith Callouts Reveal About Business Operations" [ref=e240] [cursor=pointer]:
+                                    - /url: https://www.b2blistings.org/What-Emergency-Locksmith-Callouts-Reveal-About-Business-Operations/B527.htm
+                                    - strong [ref=e241]: What Emergency Locksmith Callouts Reveal About Business Operations
+                                  - img "What Emergency Locksmith Callouts Reveal About Business Operations" [ref=e242]
+                                  - 'link "How to Select the Best EMS Provider: a Strategic Decision Framework" [ref=e243] [cursor=pointer]':
+                                    - /url: https://www.b2blistings.org/How-to-Select-the-Best-EMS-Provider:-a-Strategic-Decision-Framework/B526.htm
+                                    - strong [ref=e244]: "How to Select the Best EMS Provider: a Strategic Decision Framework"
+                                  - 'img "How to Select the Best EMS Provider: a Strategic Decision Framework" [ref=e245]'
+                                  - 'link "Effective Post-Trade Show Follow-up: How to Organise Data, Contacts and Team Actions" [ref=e246] [cursor=pointer]':
+                                    - /url: https://www.b2blistings.org/Effective-Post-Trade-Show-Follow-up:-How-to-Organise-Data,-Contacts-and-Team-Actions/B525.htm
+                                    - strong [ref=e247]: "Effective Post-Trade Show Follow-up: How to Organise Data, Contacts and Team Actions"
+                                  - 'img "Effective Post Trade Show Follow up: How to Organise Data, Contacts and Team Actions" [ref=e248]'
+                                  - link "Designing Kitchen Circulation That Matches Work Rhythms" [ref=e249] [cursor=pointer]:
+                                    - /url: https://www.b2blistings.org/Designing-Kitchen-Circulation-That-Matches-Work-Rhythms/B523.htm
+                                    - strong [ref=e250]: Designing Kitchen Circulation That Matches Work Rhythms
+                                  - img "Designing Kitchen Circulation That Matches Work Rhythms" [ref=e251]
+                                  - 'link "Smart Printing Strategies: How Managed Print Solutions Drive Business Efficiency" [ref=e252] [cursor=pointer]':
+                                    - /url: https://www.b2blistings.org/Smart-Printing-Strategies:-How-Managed-Print-Solutions-Drive-Business-Efficiency/B522.htm
+                                    - strong [ref=e253]: "Smart Printing Strategies: How Managed Print Solutions Drive Business Efficiency"
+                                  - 'img "Smart Printing Strategies: How Managed Print Solutions Drive Business Efficiency" [ref=e254]'
+                                  - link "How to Scale an MVP Into a Full Product Successfully" [ref=e255] [cursor=pointer]:
+                                    - /url: https://www.b2blistings.org/How-to-Scale-an-MVP-Into-a-Full-Product-Successfully/B521.htm
+                                    - strong [ref=e256]: How to Scale an MVP Into a Full Product Successfully
+                                  - link "Facilities Required for Long-distance Moves" [ref=e257] [cursor=pointer]:
+                                    - /url: https://www.b2blistings.org/Facilities-Required-for-Long-distance-Moves/B520.htm
+                                    - strong [ref=e258]: Facilities Required for Long-distance Moves
+                  - generic [ref=e259]:
+                    - text: Number of listings removed from our directory since 1st November 2019 =
+                    - link "2831" [ref=e260] [cursor=pointer]:
+                      - /url: https://www.b2blistings.org/graveyard.asp
+                  - link "Get some B2B advice from our new articles section" [ref=e262] [cursor=pointer]:
+                    - /url: https://www.b2blistings.org/article_list.asp?paging=1
+                - cell [ref=e263]:
+                  - link "Get up to 50% off directory submission costs - more details here" [ref=e265] [cursor=pointer]:
+                    - /url: http://www.b2blistings.org/bulksubmit.asp
+                  - heading "A Marketing Platform for B2B Businesses" [level=1] [ref=e266]
+                  - img [ref=e267]
+                  - text: Our directory is a human-reviewed, niche business directory dedicated only to business to business related websites. Perfect for related sites to help them get direct exposure to their website and also boost their search engine rankings -
+                  - link "click here" [ref=e268] [cursor=pointer]:
+                    - /url: benefits.asp
+                  - text: for more information on the benefits of listing your website in our directory.
+                  - generic [ref=e270]:
+                    - text: LATEST ARTICLE
+                    - link "What Emergency Locksmith Callouts Reveal About Business Operations" [ref=e271] [cursor=pointer]:
+                      - /url: https://www.b2blistings.org/What-Emergency-Locksmith-Callouts-Reveal-About-Business-Operations/B527.htm
+                    - img [ref=e272]
+                    - text: One failed lock can halt an entire working day. Staff wait outside. Deliveries pile up. Customers arrive to find handwritten apologies taped to the glass with whatever sticky tape survived the stationery cupboard purge. What looks like a simple mechanical issue often exposes a wider operational p...
+                    - link "read more" [ref=e273] [cursor=pointer]:
+                      - /url: https://www.b2blistings.org/What-Emergency-Locksmith-Callouts-Reveal-About-Business-Operations/B527.htm
+                    - generic [ref=e274]:
+                      - text: submitted by
+                      - link "locksmith-in-wolverhampton.co.uk" [ref=e275] [cursor=pointer]:
+                        - /url: https://www.locksmith-in-wolverhampton.co.uk/
+                  - heading "Interested in Adding Your Website to Our Directory?" [level=2] [ref=e277]
+                  - text: Get your own B2B related company profile page where you can link out to as many as 10 external web pages - and add up to 20 hi-res images too. This is all very easy to do with a friendly WYSIWYG editor -
+                  - link "see here for more details" [ref=e278] [cursor=pointer]:
+                    - /url: seo_goodness.asp
+                  - text: "|"
+                  - link "Submit your listing here" [ref=e279] [cursor=pointer]:
+                    - /url: new_listing.asp
+                  - text: Try our new business blog -
+                  - link "bizblog.org" [ref=e280] [cursor=pointer]:
+                    - /url: https://bizblog.org/
+                  - heading "Latest B2B Websites Reviewed" [level=2] [ref=e281]
+                  - table [ref=e282]:
+                    - rowgroup [ref=e283]:
+                      - row "https://www.graftingardeners.co.uk/ website GraftinGardeners Ltd SSL graftingardeners.co.uk GraftinGardeners is a professional tree surgery company and specialises in all aspects of tree surgery. We provide a full range of arborist services including tree felling, pruning, and stump removal for both residential and commercial clients. UK (London) based business - established in 2009 - providing tree surgery and other gardening services. Website includes details of services provided, work examples, testimonials, portfolio, associations belonged to, blog, full company contact details. Company website has been onlince since 2011 according to web.archive.org. reviewb2blistings.org review View Profile »" [ref=e284]:
+                        - cell "https://www.graftingardeners.co.uk/ website" [ref=e285]:
+                          - img "https://www.graftingardeners.co.uk/ website" [ref=e286]
+                        - cell "GraftinGardeners Ltd SSL graftingardeners.co.uk GraftinGardeners is a professional tree surgery company and specialises in all aspects of tree surgery. We provide a full range of arborist services including tree felling, pruning, and stump removal for both residential and commercial clients. UK (London) based business - established in 2009 - providing tree surgery and other gardening services. Website includes details of services provided, work examples, testimonials, portfolio, associations belonged to, blog, full company contact details. Company website has been onlince since 2011 according to web.archive.org. reviewb2blistings.org review View Profile »" [ref=e287]:
+                          - link "GraftinGardeners Ltd" [ref=e288] [cursor=pointer]:
+                            - /url: https://www.graftingardeners.co.uk/
+                          - img "SSL" [ref=e289]
+                          - text: graftingardeners.co.uk
+                          - text: GraftinGardeners is a professional tree surgery company and specialises in all aspects of tree surgery. We provide a full range of arborist services including tree felling, pruning, and stump removal for both residential and commercial clients.
+                          - generic [ref=e290]: UK (London) based business - established in 2009 - providing tree surgery and other gardening services. Website includes details of services provided, work examples, testimonials, portfolio, associations belonged to, blog, full company contact details. Company website has been onlince since 2011 according to web.archive.org.
+                          - img "review" [ref=e293]
+                          - generic [ref=e294]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e295] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/GraftinGardeners-Ltd/D2365.htm
+                      - row [ref=e296]:
+                        - cell [ref=e297]
+                      - row "https://www.maddisonscaffolding.co.uk/ website Scaffolding Company in London | Scaffold Erectors | Scaffolders London SSL maddisonscaffolding.co.uk Scaffolders in London. Maddison Scaffolding ltd are scaffolding experts operating in London and provide a full range of scaffolding services from design to erection for domestic & residential clients. We are professional scaffolding design and erectors. UK (Epsom) based business - established in 2017 - providing scaffolding services. Website includes details of services provided, work examples, testimonials, \"meet the team\" information, full contact details. reviewb2blistings.org review View Profile »" [ref=e299]:
+                        - cell "https://www.maddisonscaffolding.co.uk/ website" [ref=e300]:
+                          - img "https://www.maddisonscaffolding.co.uk/ website" [ref=e301]
+                        - cell "Scaffolding Company in London | Scaffold Erectors | Scaffolders London SSL maddisonscaffolding.co.uk Scaffolders in London. Maddison Scaffolding ltd are scaffolding experts operating in London and provide a full range of scaffolding services from design to erection for domestic & residential clients. We are professional scaffolding design and erectors. UK (Epsom) based business - established in 2017 - providing scaffolding services. Website includes details of services provided, work examples, testimonials, \"meet the team\" information, full contact details. reviewb2blistings.org review View Profile »" [ref=e302]:
+                          - link "Scaffolding Company in London | Scaffold Erectors | Scaffolders London" [ref=e303] [cursor=pointer]:
+                            - /url: https://www.maddisonscaffolding.co.uk/
+                          - img "SSL" [ref=e304]
+                          - text: maddisonscaffolding.co.uk
+                          - text: Scaffolders in London. Maddison Scaffolding ltd are scaffolding experts operating in London and provide a full range of scaffolding services from design to erection for domestic & residential clients. We are professional scaffolding design and erectors.
+                          - generic [ref=e305]: UK (Epsom) based business - established in 2017 - providing scaffolding services. Website includes details of services provided, work examples, testimonials, "meet the team" information, full contact details.
+                          - img "review" [ref=e308]
+                          - generic [ref=e309]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e310] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Scaffolding-Company-in-London-|-Scaffold-Erectors-|-Scaffolders-London/D21375.htm
+                      - row [ref=e311]:
+                        - cell [ref=e312]
+                      - row "https://sparkbyte.co.uk/ website SparkByte , Smart Websites, AI Automation & Business Systems for UK SMEs SSL sparkbyte.co.uk We provide practical B2B consultancy, custom business software, website design, SEO, and AI automation services tailored for ambitious UK companies looking to improve efficiency and support sustainable growth. UK (Birmingham, West Midlands) based business providing web design, SEO, AI automation, workflow design, consultancy, and custom business software services. Website includes details of services provided, work examples and case studies, blog, FAQs, geographical areas covered, terms and conditions, contact form. reviewb2blistings.org review View Profile »" [ref=e314]:
+                        - cell "https://sparkbyte.co.uk/ website" [ref=e315]:
+                          - img "https://sparkbyte.co.uk/ website" [ref=e316]
+                        - cell "SparkByte , Smart Websites, AI Automation & Business Systems for UK SMEs SSL sparkbyte.co.uk We provide practical B2B consultancy, custom business software, website design, SEO, and AI automation services tailored for ambitious UK companies looking to improve efficiency and support sustainable growth. UK (Birmingham, West Midlands) based business providing web design, SEO, AI automation, workflow design, consultancy, and custom business software services. Website includes details of services provided, work examples and case studies, blog, FAQs, geographical areas covered, terms and conditions, contact form. reviewb2blistings.org review View Profile »" [ref=e317]:
+                          - link "SparkByte , Smart Websites, AI Automation & Business Systems for UK SMEs" [ref=e318] [cursor=pointer]:
+                            - /url: https://sparkbyte.co.uk/
+                          - img "SSL" [ref=e319]
+                          - text: sparkbyte.co.uk
+                          - text: We provide practical B2B consultancy, custom business software, website design, SEO, and AI automation services tailored for ambitious UK companies looking to improve efficiency and support sustainable growth.
+                          - generic [ref=e320]: UK (Birmingham, West Midlands) based business providing web design, SEO, AI automation, workflow design, consultancy, and custom business software services. Website includes details of services provided, work examples and case studies, blog, FAQs, geographical areas covered, terms and conditions, contact form.
+                          - img "review" [ref=e323]
+                          - generic [ref=e324]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e325] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/SparkByte-,-Smart-Websites,-AI-Automation-&-Business-Systems-for-UK-SMEs/D24195.htm
+                      - row [ref=e326]:
+                        - cell [ref=e327]
+                      - row [ref=e329]:
+                        - cell "https://www.solutions4it.co.uk/ website" [ref=e330]:
+                          - img "https://www.solutions4it.co.uk/ website" [ref=e331]
+                        - cell "Solutions 4 IT SSL solutions4it.co.uk Solutions 4 IT empowers businesses in the West Midlands with tailored IT support and innovative technology solutions. Specializing in Microsoft systems, cloud services, and cybersecurity, they enhance efficiency and protect against cyber threats. With a commitment to plain English support and high customer satisfaction, they truly stand out as a trusted partner. UK (Halesowen, West Midlands) based business - with over 27 years' experience - providing IT support, cybersecurity, cloud services, connectivity, managed print, and workplace technology solutions. Website includes details of services provided, work examples and case studies, \"meet the team\" information, testimonials, blog, accreditations, certifications, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e332]:
+                          - link "Solutions 4 IT" [ref=e333] [cursor=pointer]:
+                            - /url: https://www.solutions4it.co.uk/
+                          - img "SSL" [ref=e334]
+                          - text: solutions4it.co.uk
+                          - text: Solutions 4 IT empowers businesses in the West Midlands with tailored IT support and innovative technology solutions. Specializing in Microsoft systems, cloud services, and cybersecurity, they enhance efficiency and protect against cyber threats. With a commitment to plain English support and high customer satisfaction, they truly stand out as a trusted partner.
+                          - generic [ref=e335]: UK (Halesowen, West Midlands) based business - with over 27 years' experience - providing IT support, cybersecurity, cloud services, connectivity, managed print, and workplace technology solutions. Website includes details of services provided, work examples and case studies, "meet the team" information, testimonials, blog, accreditations, certifications, terms and conditions, geographical areas covered, full contact details.
+                          - img "review" [ref=e338]
+                          - generic [ref=e339]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e340] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Solutions-4-IT/D24192.htm
+                      - row [ref=e341]:
+                        - cell [ref=e342]
+                      - row "https://www.gardenrubbishcollectors.co.uk/ website gardenrubbishcollectors.co.uk SSL gardenrubbishcollectors.co.uk Garden Rubbish Collectors provide dependable and efficient garden waste clearance services across London, supporting both domestic clients and commercial landscaping projects with tailored solutions. Our team specialises in removing large volumes of landscaping waste, including soil, rubble, timber, and debris, ensuring sites are cleared quickly and professionally. UK (London, Greater London) based business - with over 14 years' experience - providing garden waste clearance services. Website includes details of services provided, blog, testimonials, FAQs, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e344]:
+                        - cell "https://www.gardenrubbishcollectors.co.uk/ website" [ref=e345]:
+                          - img "https://www.gardenrubbishcollectors.co.uk/ website" [ref=e346]
+                        - cell "gardenrubbishcollectors.co.uk SSL gardenrubbishcollectors.co.uk Garden Rubbish Collectors provide dependable and efficient garden waste clearance services across London, supporting both domestic clients and commercial landscaping projects with tailored solutions. Our team specialises in removing large volumes of landscaping waste, including soil, rubble, timber, and debris, ensuring sites are cleared quickly and professionally. UK (London, Greater London) based business - with over 14 years' experience - providing garden waste clearance services. Website includes details of services provided, blog, testimonials, FAQs, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e347]:
+                          - link "gardenrubbishcollectors.co.uk" [ref=e348] [cursor=pointer]:
+                            - /url: https://www.gardenrubbishcollectors.co.uk/
+                          - img "SSL" [ref=e349]
+                          - text: gardenrubbishcollectors.co.uk
+                          - text: Garden Rubbish Collectors provide dependable and efficient garden waste clearance services across London, supporting both domestic clients and commercial landscaping projects with tailored solutions. Our team specialises in removing large volumes of landscaping waste, including soil, rubble, timber, and debris, ensuring sites are cleared quickly and professionally.
+                          - generic [ref=e350]: UK (London, Greater London) based business - with over 14 years' experience - providing garden waste clearance services. Website includes details of services provided, blog, testimonials, FAQs, geographical areas covered, full contact details.
+                          - img "review" [ref=e353]
+                          - generic [ref=e354]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e355] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/gardenrubbishcollectors.co.uk/D24185.htm
+                      - row [ref=e356]:
+                        - cell [ref=e357]
+                      - row "https://austinskylinecleaning.com/service-areas/williamson-county/cedar-park-cleaning-services website Austin Skyline Cleaning SSL austinskylinecleaning.com Skyline Cleaning serve Cedar Park, TX with reliable and detail-oriented cleaning services designed to support busy homes and professional spaces. Our team delivers consistent office cleaning services that help businesses maintain a clean, organized, and welcoming environment for employees and clients alike. US (Cedar Park, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e359]:
+                        - cell "https://austinskylinecleaning.com/service-areas/williamson-county/cedar-park-cleaning-services website" [ref=e360]:
+                          - img "https://austinskylinecleaning.com/service-areas/williamson-county/cedar-park-cleaning-services website" [ref=e361]
+                        - cell "Austin Skyline Cleaning SSL austinskylinecleaning.com Skyline Cleaning serve Cedar Park, TX with reliable and detail-oriented cleaning services designed to support busy homes and professional spaces. Our team delivers consistent office cleaning services that help businesses maintain a clean, organized, and welcoming environment for employees and clients alike. US (Cedar Park, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e362]:
+                          - link "Austin Skyline Cleaning" [ref=e363] [cursor=pointer]:
+                            - /url: https://austinskylinecleaning.com/service-areas/williamson-county/cedar-park-cleaning-services
+                          - img "SSL" [ref=e364]
+                          - text: austinskylinecleaning.com
+                          - text: Skyline Cleaning serve Cedar Park, TX with reliable and detail-oriented cleaning services designed to support busy homes and professional spaces. Our team delivers consistent office cleaning services that help businesses maintain a clean, organized, and welcoming environment for employees and clients alike.
+                          - generic [ref=e365]: US (Cedar Park, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details.
+                          - img "review" [ref=e368]
+                          - generic [ref=e369]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e370] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Austin-Skyline-Cleaning/D24184.htm
+                      - row [ref=e371]:
+                        - cell [ref=e372]
+                      - row "https://austinskylinecleaning.com/service-areas/williamson-county/round-rock-cleaning-services website Austin Skyline Cleaning SSL austinskylinecleaning.com We proudly deliver high-quality cleaning services throughout Round Rock, TX, serving communities such as Brushy Creek, Teravista, and Forest Creek with care and precision. Our team specializes in post-construction cleaning, removing fine dust, debris, and buildup to reveal a spotless, finished space ready for use. US (Round Rock, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e374]:
+                        - cell "https://austinskylinecleaning.com/service-areas/williamson-county/round-rock-cleaning-services website" [ref=e375]:
+                          - img "https://austinskylinecleaning.com/service-areas/williamson-county/round-rock-cleaning-services website" [ref=e376]
+                        - cell "Austin Skyline Cleaning SSL austinskylinecleaning.com We proudly deliver high-quality cleaning services throughout Round Rock, TX, serving communities such as Brushy Creek, Teravista, and Forest Creek with care and precision. Our team specializes in post-construction cleaning, removing fine dust, debris, and buildup to reveal a spotless, finished space ready for use. US (Round Rock, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e377]:
+                          - link "Austin Skyline Cleaning" [ref=e378] [cursor=pointer]:
+                            - /url: https://austinskylinecleaning.com/service-areas/williamson-county/round-rock-cleaning-services
+                          - img "SSL" [ref=e379]
+                          - text: austinskylinecleaning.com
+                          - text: We proudly deliver high-quality cleaning services throughout Round Rock, TX, serving communities such as Brushy Creek, Teravista, and Forest Creek with care and precision. Our team specializes in post-construction cleaning, removing fine dust, debris, and buildup to reveal a spotless, finished space ready for use.
+                          - generic [ref=e380]: US (Round Rock, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details.
+                          - img "review" [ref=e383]
+                          - generic [ref=e384]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e385] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Austin-Skyline-Cleaning/D24183.htm
+                      - row [ref=e386]:
+                        - cell [ref=e387]
+                      - row "https://austinskylinecleaning.com/service-areas/williamson-county/georgetown-cleaning-services website Austin Skyline Cleaning SSL austinskylinecleaning.com Austin Skyline Cleaning provide professional cleaning services throughout Georgetown, TX, supporting surrounding communities such as Sun City, Berry Creek, and historic downtown Georgetown. Our team delivers dependable office cleaning services designed to keep workplaces clean, organized, and productive. US (South Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e389]:
+                        - cell "https://austinskylinecleaning.com/service-areas/williamson-county/georgetown-cleaning-services website" [ref=e390]:
+                          - img "https://austinskylinecleaning.com/service-areas/williamson-county/georgetown-cleaning-services website" [ref=e391]
+                        - cell "Austin Skyline Cleaning SSL austinskylinecleaning.com Austin Skyline Cleaning provide professional cleaning services throughout Georgetown, TX, supporting surrounding communities such as Sun City, Berry Creek, and historic downtown Georgetown. Our team delivers dependable office cleaning services designed to keep workplaces clean, organized, and productive. US (South Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e392]:
+                          - link "Austin Skyline Cleaning" [ref=e393] [cursor=pointer]:
+                            - /url: https://austinskylinecleaning.com/service-areas/williamson-county/georgetown-cleaning-services
+                          - img "SSL" [ref=e394]
+                          - text: austinskylinecleaning.com
+                          - text: Austin Skyline Cleaning provide professional cleaning services throughout Georgetown, TX, supporting surrounding communities such as Sun City, Berry Creek, and historic downtown Georgetown. Our team delivers dependable office cleaning services designed to keep workplaces clean, organized, and productive.
+                          - generic [ref=e395]: US (South Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details.
+                          - img "review" [ref=e398]
+                          - generic [ref=e399]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e400] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Austin-Skyline-Cleaning/D24182.htm
+                      - row [ref=e401]:
+                        - cell [ref=e402]
+                      - row "https://austinskylinecleaning.com/service-areas/travis-county/south-austin-cleaning-services website Austin Skyline Cleaning SSL austinskylinecleaning.com We proudly deliver dependable cleaning services throughout Travis County, with a strong focus on South Austin communities such as Barton Hills, Zilker, and East Riverside–Oltorf. Our team provides tailored solutions for homes and businesses, including thorough post-construction cleaning that removes debris and fine dust with precision. US (South Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e404]:
+                        - cell "https://austinskylinecleaning.com/service-areas/travis-county/south-austin-cleaning-services website" [ref=e405]:
+                          - img "https://austinskylinecleaning.com/service-areas/travis-county/south-austin-cleaning-services website" [ref=e406]
+                        - cell "Austin Skyline Cleaning SSL austinskylinecleaning.com We proudly deliver dependable cleaning services throughout Travis County, with a strong focus on South Austin communities such as Barton Hills, Zilker, and East Riverside–Oltorf. Our team provides tailored solutions for homes and businesses, including thorough post-construction cleaning that removes debris and fine dust with precision. US (South Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e407]:
+                          - link "Austin Skyline Cleaning" [ref=e408] [cursor=pointer]:
+                            - /url: https://austinskylinecleaning.com/service-areas/travis-county/south-austin-cleaning-services
+                          - img "SSL" [ref=e409]
+                          - text: austinskylinecleaning.com
+                          - text: We proudly deliver dependable cleaning services throughout Travis County, with a strong focus on South Austin communities such as Barton Hills, Zilker, and East Riverside–Oltorf. Our team provides tailored solutions for homes and businesses, including thorough post-construction cleaning that removes debris and fine dust with precision.
+                          - generic [ref=e410]: US (South Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details.
+                          - img "review" [ref=e413]
+                          - generic [ref=e414]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e415] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Austin-Skyline-Cleaning/D24181.htm
+                      - row [ref=e416]:
+                        - cell [ref=e417]
+                      - row "https://austinskylinecleaning.com/ website Austin Skyline Cleaning SSL austinskylinecleaning.com We provide professional cleaning services across Austin, delivering reliable, detail-focused results tailored to every client. Our team specializes in post-construction cleaning, efficiently removing debris and fine dust to reveal a polished, move-in-ready space. We also offer dependable office cleaning services that maintain a clean, organized, and productive work environment. US (Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e419]:
+                        - cell "https://austinskylinecleaning.com/ website" [ref=e420]:
+                          - img "https://austinskylinecleaning.com/ website" [ref=e421]
+                        - cell "Austin Skyline Cleaning SSL austinskylinecleaning.com We provide professional cleaning services across Austin, delivering reliable, detail-focused results tailored to every client. Our team specializes in post-construction cleaning, efficiently removing debris and fine dust to reveal a polished, move-in-ready space. We also offer dependable office cleaning services that maintain a clean, organized, and productive work environment. US (Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e422]:
+                          - link "Austin Skyline Cleaning" [ref=e423] [cursor=pointer]:
+                            - /url: https://austinskylinecleaning.com/
+                          - img "SSL" [ref=e424]
+                          - text: austinskylinecleaning.com
+                          - text: We provide professional cleaning services across Austin, delivering reliable, detail-focused results tailored to every client. Our team specializes in post-construction cleaning, efficiently removing debris and fine dust to reveal a polished, move-in-ready space. We also offer dependable office cleaning services that maintain a clean, organized, and productive work environment.
+                          - generic [ref=e425]: US (Austin, TX) based business providing residential and commercial cleaning services. Website includes details of services provided, work examples, testimonials, terms and conditions, geographical areas covered, full contact details.
+                          - img "review" [ref=e428]
+                          - generic [ref=e429]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e430] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Austin-Skyline-Cleaning/D24180.htm
+                      - row [ref=e431]:
+                        - cell [ref=e432]
+                      - row "https://www.surveyworks.com/ website SurveyWorks SSL surveyworks.com We are a specialist land surveying firm delivering precise, reliable solutions for commercial development and infrastructure projects. We support engineers, developers, and telecom providers with advanced surveying services tailored to complex environments. US (Austin and San Antonio, TX) based business - with over 15 years' experience - providing land surveying services for commercial, civil, and infrastructure projects. Website includes details of services provided, \"meet the team\" information, full contact details. reviewb2blistings.org review View Profile »" [ref=e434]:
+                        - cell "https://www.surveyworks.com/ website" [ref=e435]:
+                          - img "https://www.surveyworks.com/ website" [ref=e436]
+                        - cell "SurveyWorks SSL surveyworks.com We are a specialist land surveying firm delivering precise, reliable solutions for commercial development and infrastructure projects. We support engineers, developers, and telecom providers with advanced surveying services tailored to complex environments. US (Austin and San Antonio, TX) based business - with over 15 years' experience - providing land surveying services for commercial, civil, and infrastructure projects. Website includes details of services provided, \"meet the team\" information, full contact details. reviewb2blistings.org review View Profile »" [ref=e437]:
+                          - link "SurveyWorks" [ref=e438] [cursor=pointer]:
+                            - /url: https://www.surveyworks.com/
+                          - img "SSL" [ref=e439]
+                          - text: surveyworks.com
+                          - text: We are a specialist land surveying firm delivering precise, reliable solutions for commercial development and infrastructure projects. We support engineers, developers, and telecom providers with advanced surveying services tailored to complex environments.
+                          - generic [ref=e440]: US (Austin and San Antonio, TX) based business - with over 15 years' experience - providing land surveying services for commercial, civil, and infrastructure projects. Website includes details of services provided, "meet the team" information, full contact details.
+                          - img "review" [ref=e443]
+                          - generic [ref=e444]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e445] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/SurveyWorks/D24179.htm
+                      - row [ref=e446]:
+                        - cell [ref=e447]
+                      - row "https://mooregroup.net/ website The Moore Group SSL mooregroup.net We specialise in delivering high-quality civil engineering solutions tailored to commercial development across Central Texas. Our focus is on supporting business-driven projects through expert site development, strategic land planning, streamlined permitting, and robust infrastructure design. US (Austin, TX) based business - with over 25 years' experience - providing civil engineering and development services. Website includes details of services provided, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e449]:
+                        - cell "https://mooregroup.net/ website" [ref=e450]:
+                          - img "https://mooregroup.net/ website" [ref=e451]
+                        - cell "The Moore Group SSL mooregroup.net We specialise in delivering high-quality civil engineering solutions tailored to commercial development across Central Texas. Our focus is on supporting business-driven projects through expert site development, strategic land planning, streamlined permitting, and robust infrastructure design. US (Austin, TX) based business - with over 25 years' experience - providing civil engineering and development services. Website includes details of services provided, geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e452]:
+                          - link "The Moore Group" [ref=e453] [cursor=pointer]:
+                            - /url: https://mooregroup.net/
+                          - img "SSL" [ref=e454]
+                          - text: mooregroup.net
+                          - text: We specialise in delivering high-quality civil engineering solutions tailored to commercial development across Central Texas. Our focus is on supporting business-driven projects through expert site development, strategic land planning, streamlined permitting, and robust infrastructure design.
+                          - generic [ref=e455]: US (Austin, TX) based business - with over 25 years' experience - providing civil engineering and development services. Website includes details of services provided, geographical areas covered, full contact details.
+                          - img "review" [ref=e458]
+                          - generic [ref=e459]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e460] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/The-Moore-Group/D24178.htm
+                      - row [ref=e461]:
+                        - cell [ref=e462]
+                      - row "https://catalystaustin.com/ website Catalyst Construction & General Contractors SSL catalystaustin.com We are a trusted Austin-based construction company delivering comprehensive commercial and residential building services tailored to a wide range of project needs. US (Austin, TX) based business - with over 15 years' experience - providing home remodeling and construction services. Website includes details of services provided, work examples, \"meet the team\" information, testimonials, blog, FAQs, and geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e464]:
+                        - cell "https://catalystaustin.com/ website" [ref=e465]:
+                          - img "https://catalystaustin.com/ website" [ref=e466]
+                        - cell "Catalyst Construction & General Contractors SSL catalystaustin.com We are a trusted Austin-based construction company delivering comprehensive commercial and residential building services tailored to a wide range of project needs. US (Austin, TX) based business - with over 15 years' experience - providing home remodeling and construction services. Website includes details of services provided, work examples, \"meet the team\" information, testimonials, blog, FAQs, and geographical areas covered, full contact details. reviewb2blistings.org review View Profile »" [ref=e467]:
+                          - link "Catalyst Construction & General Contractors" [ref=e468] [cursor=pointer]:
+                            - /url: https://catalystaustin.com/
+                          - img "SSL" [ref=e469]
+                          - text: catalystaustin.com
+                          - text: We are a trusted Austin-based construction company delivering comprehensive commercial and residential building services tailored to a wide range of project needs.
+                          - generic [ref=e470]: US (Austin, TX) based business - with over 15 years' experience - providing home remodeling and construction services. Website includes details of services provided, work examples, "meet the team" information, testimonials, blog, FAQs, and geographical areas covered, full contact details.
+                          - img "review" [ref=e473]
+                          - generic [ref=e474]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e475] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Catalyst-Construction-&-General-Contractors/D24177.htm
+                      - row [ref=e476]:
+                        - cell [ref=e477]
+                      - row "https://www.redboxplus.com/greater-austin/ website RedBox+ Dumpster Rentals of Greater Austin SSL redboxplus.com We provide dependable dumpster rental solutions across Greater Austin, with a strong focus on supporting commercial construction, industrial operations, and large-scale projects. US (Austin, TX) based business - established in 2006 - providing dumpster rental and portable restroom solutions. Website includes details of services provided, testimonials, geographical areas covered, blog, FAQs, and full contact details. reviewb2blistings.org review View Profile »" [ref=e479]:
+                        - cell "https://www.redboxplus.com/greater-austin/ website" [ref=e480]:
+                          - img "https://www.redboxplus.com/greater-austin/ website" [ref=e481]
+                        - cell "RedBox+ Dumpster Rentals of Greater Austin SSL redboxplus.com We provide dependable dumpster rental solutions across Greater Austin, with a strong focus on supporting commercial construction, industrial operations, and large-scale projects. US (Austin, TX) based business - established in 2006 - providing dumpster rental and portable restroom solutions. Website includes details of services provided, testimonials, geographical areas covered, blog, FAQs, and full contact details. reviewb2blistings.org review View Profile »" [ref=e482]:
+                          - link "RedBox+ Dumpster Rentals of Greater Austin" [ref=e483] [cursor=pointer]:
+                            - /url: https://www.redboxplus.com/greater-austin/
+                          - img "SSL" [ref=e484]
+                          - text: redboxplus.com
+                          - text: We provide dependable dumpster rental solutions across Greater Austin, with a strong focus on supporting commercial construction, industrial operations, and large-scale projects.
+                          - generic [ref=e485]: US (Austin, TX) based business - established in 2006 - providing dumpster rental and portable restroom solutions. Website includes details of services provided, testimonials, geographical areas covered, blog, FAQs, and full contact details.
+                          - img "review" [ref=e488]
+                          - generic [ref=e489]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e490] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/RedBox+-Dumpster-Rentals-of-Greater-Austin/D24176.htm
+                      - row [ref=e491]:
+                        - cell [ref=e492]
+                      - row "https://www.twistleaf.com/ website Twistleaf Landscape Design & Construction SSL twistleaf.com We deliver distinctive outdoor environments tailored to commercial settings across Central Texas. Our studio integrates design expertise with construction delivery to create cohesive landscapes for campuses, public spaces and commercial developments. United States (Austin, TX) based business providing residential and commercial landscape design and construction services. Website includes details of services provided, work examples and case studies, \"meet the team\" information, testimonials, portfolio, community involvement information, full contact details. reviewb2blistings.org review View Profile »" [ref=e494]:
+                        - cell "https://www.twistleaf.com/ website" [ref=e495]:
+                          - img "https://www.twistleaf.com/ website" [ref=e496]
+                        - cell "Twistleaf Landscape Design & Construction SSL twistleaf.com We deliver distinctive outdoor environments tailored to commercial settings across Central Texas. Our studio integrates design expertise with construction delivery to create cohesive landscapes for campuses, public spaces and commercial developments. United States (Austin, TX) based business providing residential and commercial landscape design and construction services. Website includes details of services provided, work examples and case studies, \"meet the team\" information, testimonials, portfolio, community involvement information, full contact details. reviewb2blistings.org review View Profile »" [ref=e497]:
+                          - link "Twistleaf Landscape Design & Construction" [ref=e498] [cursor=pointer]:
+                            - /url: https://www.twistleaf.com/
+                          - img "SSL" [ref=e499]
+                          - text: twistleaf.com
+                          - text: We deliver distinctive outdoor environments tailored to commercial settings across Central Texas. Our studio integrates design expertise with construction delivery to create cohesive landscapes for campuses, public spaces and commercial developments.
+                          - generic [ref=e500]: United States (Austin, TX) based business providing residential and commercial landscape design and construction services. Website includes details of services provided, work examples and case studies, "meet the team" information, testimonials, portfolio, community involvement information, full contact details.
+                          - img "review" [ref=e503]
+                          - generic [ref=e504]:
+                            - text: b2blistings.org review
+                            - link "View Profile »" [ref=e505] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Twistleaf-Landscape-Design-&-Construction/D24175.htm
+                      - row [ref=e506]:
+                        - cell [ref=e507]
+                  - generic [ref=e509]:
+                    - heading "Business-to-Business Related Articles" [level=2] [ref=e510]
+                    - generic [ref=e511]: This is the place to read and share your own B2B related articles. If you are looking to add your own article, you can write about anything that relates to B2B; be it accounting, web design, marketing, print design, packaging - any B2B related service is a relevant topic for this article archive.
+                    - generic [ref=e512]:
+                      - text: If you want to add your own article,
+                      - link "click here" [ref=e513] [cursor=pointer]:
+                        - /url: submit_article.asp
+                    - table [ref=e514]:
+                      - rowgroup [ref=e515]:
+                        - row "What Emergency Locksmith Callouts Reveal About Business Operations article thumbnail image One failed lock can halt an entire working day. Staff wait outside. Deliveries pile up. Customers arrive to find handwritten apologies taped to the glass with whatever sticky tape survived the station...read more submitted by locksmith-in-wolverhampton.co.uk" [ref=e516]:
+                          - cell "What Emergency Locksmith Callouts Reveal About Business Operations article thumbnail image One failed lock can halt an entire working day. Staff wait outside. Deliveries pile up. Customers arrive to find handwritten apologies taped to the glass with whatever sticky tape survived the station...read more submitted by locksmith-in-wolverhampton.co.uk" [ref=e517]:
+                            - link "What Emergency Locksmith Callouts Reveal About Business Operations" [ref=e518] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/What-Emergency-Locksmith-Callouts-Reveal-About-Business-Operations/B527.htm
+                            - img "article thumbnail image" [ref=e519]
+                            - text: One failed lock can halt an entire working day. Staff wait outside. Deliveries pile up. Customers arrive to find handwritten apologies taped to the glass with whatever sticky tape survived the station...
+                            - link "read more" [ref=e520] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/What-Emergency-Locksmith-Callouts-Reveal-About-Business-Operations/B527.htm
+                            - generic [ref=e521]:
+                              - text: submitted by
+                              - link "locksmith-in-wolverhampton.co.uk" [ref=e522] [cursor=pointer]:
+                                - /url: https://www.locksmith-in-wolverhampton.co.uk/
+                        - row [ref=e523]:
+                          - cell [ref=e524]
+                        - 'row "Effective Post-Trade Show Follow-up: How to Organise Data, Contacts and Team Actions article thumbnail image Marketing teams emphasise that the biggest difficulty after a trade show is synchronising the knowledge gained during conversations. Every short consultation, every demo and every exchange of busine...read more" [ref=e526]':
+                          - 'cell "Effective Post-Trade Show Follow-up: How to Organise Data, Contacts and Team Actions article thumbnail image Marketing teams emphasise that the biggest difficulty after a trade show is synchronising the knowledge gained during conversations. Every short consultation, every demo and every exchange of busine...read more" [ref=e527]':
+                            - 'link "Effective Post-Trade Show Follow-up: How to Organise Data, Contacts and Team Actions" [ref=e528] [cursor=pointer]':
+                              - /url: https://www.b2blistings.org/Effective-Post-Trade-Show-Follow-up:-How-to-Organise-Data,-Contacts-and-Team-Actions/B525.htm
+                            - img "article thumbnail image" [ref=e529]
+                            - text: Marketing teams emphasise that the biggest difficulty after a trade show is synchronising the knowledge gained during conversations. Every short consultation, every demo and every exchange of busine...
+                            - link "read more" [ref=e530] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/Effective-Post-Trade-Show-Follow-up:-How-to-Organise-Data,-Contacts-and-Team-Actions/B525.htm
+                        - row [ref=e531]:
+                          - cell [ref=e532]
+                        - 'row "How to Select the Best EMS Provider: a Strategic Decision Framework article thumbnail image Choosing an electronics manufacturing services provider ranks among the most consequential decisions hardware companies make. This partnership affects product quality, time-to-market, production c...read more" [ref=e534]':
+                          - 'cell "How to Select the Best EMS Provider: a Strategic Decision Framework article thumbnail image Choosing an electronics manufacturing services provider ranks among the most consequential decisions hardware companies make. This partnership affects product quality, time-to-market, production c...read more" [ref=e535]':
+                            - 'link "How to Select the Best EMS Provider: a Strategic Decision Framework" [ref=e536] [cursor=pointer]':
+                              - /url: https://www.b2blistings.org/How-to-Select-the-Best-EMS-Provider:-a-Strategic-Decision-Framework/B526.htm
+                            - img "article thumbnail image" [ref=e537]
+                            - text: Choosing an electronics manufacturing services provider ranks among the most consequential decisions hardware companies make. This partnership affects product quality, time-to-market, production c...
+                            - link "read more" [ref=e538] [cursor=pointer]:
+                              - /url: https://www.b2blistings.org/How-to-Select-the-Best-EMS-Provider:-a-Strategic-Decision-Framework/B526.htm
+                        - row [ref=e539]:
+                          - cell [ref=e540]
+                  - heading "Latest website audit from our spider" [level=2] [ref=e542]
+                  - img "spider" [ref=e543]
+                  - text: Our web spider - powered with AI - can identify good and bad points of each site it visits. Below you'll find a random selection of sites our spider has recently visited, along with its notes on what it has found. The reason we show you these spider audits is to help give you ideas on how you can improve your own website.
+                  - heading "lawyerhawaii.com" [level=2] [ref=e544]:
+                    - link "lawyerhawaii.com" [ref=e545] [cursor=pointer]:
+                      - /url: https://www.lawyerhawaii.com/
+                  - text: analysed on 19 May 2026
+                  - heading "Website Analysis for Law Office of Georgia K. McMillen" [level=2] [ref=e546]
+                  - heading "1. Purpose of the Site" [level=2] [ref=e547]
+                  - text: The website for the Law Office of Georgia K. McMillen serves as an online presence for an attorney specializing in appeals, post-judgment litigation, family law, and divorce mediation. Its primary purpose is to provide information about the legal services offered by Georgia McMillen, facilitate client inquiries, and establish trust through transparency and accessibility. The site aims to attract potential clients seeking legal representation or mediation services in Hawaii, particularly in Honolulu and Maui.
+                  - heading "2. Good Points of the Site" [level=2] [ref=e548]
+                  - list [ref=e549]:
+                    - listitem [ref=e550]:
+                      - strong [ref=e551]: "Contact Information:"
+                      - text: The site prominently displays multiple contact numbers (808-242-4343 and 808-280-5197) for easy access, which is crucial for potential clients needing immediate legal assistance.
+                    - listitem [ref=e552]:
+                      - strong [ref=e553]: "Physical Addresses:"
+                      - text: The inclusion of physical addresses in both Honolulu and Wailuku adds credibility and allows clients to know where they can meet the attorney in person.
+                    - listitem [ref=e554]:
+                      - strong [ref=e555]: "Personal Attention:"
+                      - text: The text emphasizes that every client receives individual attention, which can help build trust and rapport with potential clients looking for personalized legal services.
+                    - listitem [ref=e556]:
+                      - strong [ref=e557]: "Specialization:"
+                      - text: The site clearly outlines the specific areas of law that Georgia McMillen specializes in, such as appeals, family law, and mediation, helping visitors quickly determine if her services meet their needs.
+                    - listitem [ref=e558]:
+                      - strong [ref=e559]: "Attorney Advertising Disclaimer:"
+                      - text: The presence of a disclaimer regarding attorney advertising indicates a level of professionalism and compliance with legal advertising standards.
+                  - heading "3. Improvements They Can Make" [level=2] [ref=e560]
+                  - list [ref=e561]:
+                    - listitem [ref=e562]:
+                      - strong [ref=e563]: "Client Testimonials:"
+                      - text: Adding testimonials from previous clients can enhance credibility and provide social proof of the attorney's effectiveness and the quality of her services.
+                    - listitem [ref=e564]:
+                      - strong [ref=e565]: "FAQs Section:"
+                      - text: Including a frequently asked questions (FAQs) section could address common concerns and queries potential clients might have, thus providing additional value and information.
+                    - listitem [ref=e566]:
+                      - strong [ref=e567]: "Blog or Resource Section:"
+                      - text: Implementing a blog or resource section with articles on relevant legal topics could position Georgia McMillen as an authority in her field and improve engagement with visitors.
+                    - listitem [ref=e568]:
+                      - strong [ref=e569]: "Clear Call-to-Action:"
+                      - text: Incorporating clear calls-to-action (CTAs) throughout the site, such as 'Schedule a Consultation' or 'Contact Us Today,' could encourage visitors to reach out for services.
+                    - listitem [ref=e570]:
+                      - strong [ref=e571]: "Detailed Service Descriptions:"
+                      - text: Providing more detailed descriptions of each legal service offered can help potential clients understand what to expect and how the services can benefit them.
+                  - heading "What's new? A spider's view!" [level=2] [ref=e573]
+                  - img "spider" [ref=e574]
+                  - heading "19 May 2026" [level=2] [ref=e575]
+                  - text: "Our web spider is visiting our listings 24/7. It's on the lookout for any new shiny info from the sites it spiders, and has highlighted just some sites it's found on its journey around the web below. Warning: our spider has a quirky sense of humour."
+                  - heading "scrapcarsremoval.com.au" [level=3] [ref=e576]:
+                    - link "scrapcarsremoval.com.au" [ref=e577] [cursor=pointer]:
+                      - /url: https://www.scrapcarsremoval.com.au/
+                  - generic [ref=e578]: WHAT'S NEW?
+                  - text: Scrap Cars Removal is revving up its services, offering up to $8,999 for unwanted vehicles in any condition—yes, even that clunker in your driveway! They promise quick, hassle-free transactions with guaranteed cash before pickup, making selling your car easier than finding a parking spot in Sydney. With a solid customer rating and years of expertise, they’re the go-to for scrap car removal. Plus, they provide free towing and same-day service, ensuring you’re not left waiting. So, if you’ve got a car that’s more rust than ride, Scrap Cars Removal is your ticket to cash and space!
+                  - text: "Discovered: 10 hours, 43 mins ago"
+                  - heading "wirralplumbers.com" [level=3] [ref=e579]:
+                    - link "wirralplumbers.com" [ref=e580] [cursor=pointer]:
+                      - /url: https://wirralplumbers.com/
+                  - generic [ref=e581]: WHAT'S NEW?
+                  - text: Wirral Plumbers is buzzing with energy, showcasing their top-notch services in boiler installations, servicing, and repairs, plus plumbing and central heating solutions. Their blog is a treasure trove of insights, featuring handy guides like 'Signs You Need a New Boiler' and the scoop on gas safety certificates. While no new awards or team changes were spotted, their commitment to stellar service shines bright. They’ve also beefed up their offerings with professional electric boiler installations and commercial power flushing. So, if your boiler’s feeling under the weather, these experts are just a call away, ready to save the day!
+                  - text: "Discovered: 22 hours, 58 mins ago"
+                  - generic [ref=e582]:
+                    - heading "Content updates from Silver and Gold listings" [level=2] [ref=e583]
+                    - img "spider" [ref=e584]
+                    - heading "vectormotors.ie" [level=4] [ref=e585]:
+                      - link "vectormotors.ie" [ref=e586] [cursor=pointer]:
+                        - /url: https://www.vectormotors.ie/
+                    - generic [ref=e587]: CONTENT UPDATE
+                    - text: Vector Motors has upgraded its website with some shiny new features! The car of the week now boasts a 2024 Volvo XC90 with a price drop to €67,995, showcasing a sleek black leather interior—perfect for those who want to feel like royalty while stuck in traffic. They've also added a 2025 Mercedes-Benz EQB, which is practically begging to be taken for a spin at only €48,995. Plus, the finance section has had a makeover, making it easier for customers to crunch numbers and find their dream car without needing a PhD in mathematics. Who knew buying a car could be this glamorous?
+                    - heading "tjcservices.com.au" [level=4] [ref=e588]:
+                      - link "tjcservices.com.au" [ref=e589] [cursor=pointer]:
+                        - /url: https://tjcservices.com.au/
+                    - generic [ref=e590]: CONTENT UPDATE
+                    - text: TJC Services has undergone a delightful makeover that would make even a caterpillar jealous! The new version now boasts a 'Demolition' service, adding a touch of demolition dynamism to their repertoire. They've also jazzed up their offerings with 'Epoxy Flooring,' 'Line Marking Removal,' 'Tile Removal,' and 'Carpet Removal,' making it a one-stop-shop for all things strip-out and floor-related. Plus, the text is now more concise, ensuring that potential clients can find what they need faster than you can say “renovation.” With these updates, TJC is ready to tackle your project with style and flair!
+                    - link "See more content updates here" [ref=e591] [cursor=pointer]:
+                      - /url: listing_updates.asp
+                  - heading "pptssolutions.com" [level=3] [ref=e592]:
+                    - link "pptssolutions.com" [ref=e593] [cursor=pointer]:
+                      - /url: https://www.pptssolutions.com/
+                  - generic [ref=e594]: WHAT'S NEW?
+                  - text: PPTS Solutions is buzzing with excitement, offering a buffet of services from cybersecurity certification to snazzy web and mobile app development. They’ve recently expanded their portfolio with innovative eCommerce solutions and user-friendly HRMS applications. Clients rave about their transformative results, and the team has snagged a shiny new award this year, proving they’re not just good, but award-winning! With fresh resources and tools available for free, they’re making it easier for businesses to thrive. So, whether you need a digital makeover or a data science wizard, PPTS Solutions is your go-to partner in crime for all things tech!
+                  - text: "Discovered: 1 days, 11 hours, 33 mins ago"
+                  - heading "firstinternet.co.uk" [level=3] [ref=e595]:
+                    - link "firstinternet.co.uk" [ref=e596] [cursor=pointer]:
+                      - /url: https://www.firstinternet.co.uk/services/web-design/
+                  - generic [ref=e597]: WHAT'S NEW?
+                  - text: The web design agency in Manchester continues to shine brightly in the digital universe with an impressive 27-year legacy of crafting exceptional online experiences. Recently, they’ve emphasized a holistic approach to web development, seamlessly blending creativity and engineering to ensure every pixel serves a purpose. Their process involves thorough discovery, strategic wireframing, and collaborative design and development, all aimed at creating frictionless user journeys. Notably, they’ve garnered new accolades this year, showcasing their commitment to excellence. With a focus on user experience and performance, this agency is not just building websites; they're creating digital masterpieces that convert curious visitors into loyal customers!
+                  - text: "Discovered: 2 days, 6 hours, 7 mins ago"
+                  - heading "aucklandconventions.co.nz" [level=3] [ref=e598]:
+                    - link "aucklandconventions.co.nz" [ref=e599] [cursor=pointer]:
+                      - /url: https://www.aucklandconventions.co.nz/
+                  - generic [ref=e600]: WHAT'S NEW?
+                  - text: Auckland Conventions, Venues & Events is shining brighter than a disco ball at a wedding, having just been recognized as one of the inaugural Sustainable Suppliers by Sustainable Events New Zealand! This accolade showcases their commitment to eco-friendly practices in the events sector, joining 16 other like-minded organizations. With a whopping sixty versatile venues, they cater to every event type from intimate meetings to grand conferences. Their dedicated team ensures a seamless experience, leaving clients and attendees raving. So, whether it’s a cocktail function or a gala dinner, this company is all about creating memorable moments while keeping it green!
+                  - text: "Discovered: 3 days, 12 hours, 48 mins ago"
+                  - link "Want to see more of what our spider has just found? Click here!" [ref=e601] [cursor=pointer]:
+                    - /url: listing_offers.asp
+                  - heading "Listings bringing recent traffic to b2blistings.org" [level=2] [ref=e602]
+                  - generic [ref=e603]:
+                    - link "flexremoval.com" [ref=e604] [cursor=pointer]:
+                      - /url: https://flexremoval.com
+                    - text: Your go-to solution for hassle-free moving, Flex Removal specializes in house and office relocations across London and the UK. With a dedicated team, we ensure your belongings are handled with care and efficiency. Offering services like packing, logistics, and waste removal, we guarantee a smooth transition to your new space. Get your free quote today!
+                    - generic [ref=e605]:
+                      - text: featured in Logistics and Transport >
+                      - link "Commercial Removals" [ref=e606] [cursor=pointer]:
+                        - /url: https://www.b2blistings.org/Logistics-and-Transport/Commercial-Removals/C9-49-1-0.htm
+                    - text: They brought a visitor here 2 hours, 46 mins ago!
+                  - generic [ref=e607]:
+                    - link "liliananistorcoaching.com" [ref=e608] [cursor=pointer]:
+                      - /url: https://liliananistorcoaching.com
+                    - text: Transforming your life is possible with expert guidance. Liliana Nistor, a professional Life Coach in Brescia, helps you break free from mental barriers and self-imposed limits. Through personalized coaching, you’ll learn to navigate your fears and leverage your strengths to achieve your dreams. Start your journey towards a fulfilling future today!
+                    - generic [ref=e609]:
+                      - text: featured in
+                      - link "Human Resources and Recruitment" [ref=e610] [cursor=pointer]:
+                        - /url: https://www.b2blistings.org/Human-Resources-and-Recruitment/C6-1-0.htm
+                  - generic [ref=e611]:
+                    - link "smartwaywindowcleaning.co.uk" [ref=e612] [cursor=pointer]:
+                      - /url: https://smartwaywindowcleaning.co.uk
+                    - text: Providing top-notch cleaning services, this company focuses on maintaining the cleanliness of both residential and commercial properties. With over a decade of experience and a commitment to safety, they utilize advanced technology for window and gutter cleaning. Their dedication ensures that every client enjoys sparkling results without the hassle. Trustworthy and efficient, they aim for complete customer satisfaction.
+                    - generic [ref=e613]:
+                      - text: featured in
+                      - link "Cleaning Services" [ref=e614] [cursor=pointer]:
+                        - /url: https://www.b2blistings.org/Cleaning-Services/C44-1-0.htm
+  - generic [ref=e616]:
+    - table [ref=e617]:
+      - rowgroup [ref=e618]:
+        - row "Home FAQ + Submit a Website Edit Your Listings Benefits Privacy Policy Contact Us" [ref=e619]:
+          - cell "Home" [ref=e620]:
+            - link "Home" [ref=e622] [cursor=pointer]:
+              - /url: https://www.b2blistings.org/
+          - cell "FAQ" [ref=e623]:
+            - link "FAQ" [ref=e625] [cursor=pointer]:
+              - /url: https://www.b2blistings.org/faq.asp
+          - cell "+ Submit a Website" [ref=e626]:
+            - link "+ Submit a Website" [ref=e628] [cursor=pointer]:
+              - /url: https://www.b2blistings.org/new_listing.asp
+          - cell "Edit Your Listings" [ref=e629]:
+            - link "Edit Your Listings" [ref=e631] [cursor=pointer]:
+              - /url: https://www.b2blistings.org/login.asp
+          - cell "Benefits" [ref=e632]:
+            - link "Benefits" [ref=e634] [cursor=pointer]:
+              - /url: https://www.b2blistings.org/benefits.asp
+          - cell "Privacy Policy" [ref=e635]:
+            - link "Privacy Policy" [ref=e637] [cursor=pointer]:
+              - /url: https://www.b2blistings.org/privacy-policy.asp
+          - cell "Contact Us" [ref=e638]:
+            - link "Contact Us" [ref=e640] [cursor=pointer]:
+              - /url: https://www.b2blistings.org/contact.asp
+    - generic [ref=e641]: b2blistings.org (c)2009 - 2026

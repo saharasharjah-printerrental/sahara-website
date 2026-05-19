@@ -1,0 +1,806 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - list [ref=e3]:
+      - listitem [ref=e4]:
+        - link " Marketing Tools" [ref=e5] [cursor=pointer]:
+          - /url: "#"
+        - text:      
+      - listitem [ref=e6]:
+        - link " Appointment Scheduling" [ref=e7] [cursor=pointer]:
+          - /url: "#"
+        - text:    
+      - listitem [ref=e8]:
+        - link " Sales CRM" [ref=e9] [cursor=pointer]:
+          - /url: "#"
+        - text:      
+      - listitem [ref=e10]:
+        - link " Site Builder" [ref=e11] [cursor=pointer]:
+          - /url: "#"
+        - text:    
+      - listitem [ref=e12]:
+        - link "AI ChatBot" [ref=e13] [cursor=pointer]:
+          - /url: https://zumvu.chat
+      - listitem [ref=e14]:
+        - link "Marketplace" [ref=e15] [cursor=pointer]:
+          - /url: https://zumvu.com/marketplace/
+      - listitem [ref=e16]:
+        - link "Login" [ref=e17] [cursor=pointer]:
+          - /url: https://zumvu.com/login.zvx
+      - listitem [ref=e18]:
+        - link "Signup" [ref=e19] [cursor=pointer]:
+          - /url: https://zumvu.com/signup.zvx
+      - listitem [ref=e20]:
+        - link "Blog" [ref=e21] [cursor=pointer]:
+          - /url: https://blog.zumvu.com/
+      - listitem [ref=e22]:
+        - link "About" [ref=e23] [cursor=pointer]:
+          - /url: /info/about-us/
+      - listitem [ref=e24]:
+        - link "Contact" [ref=e25] [cursor=pointer]:
+          - /url: /info/contact-us/
+      - listitem [ref=e26]:
+        - link "Terms" [ref=e27] [cursor=pointer]:
+          - /url: /info/terms-of-service/
+      - listitem [ref=e28]:
+        - link "Privacy" [ref=e29] [cursor=pointer]:
+          - /url: /info/privacy-policy/
+    - list [ref=e31]:
+      - listitem [ref=e32]:
+        - link "" [ref=e33] [cursor=pointer]:
+          - /url: https://facebook.com/zumvu
+          - generic [ref=e34]: 
+      - listitem [ref=e35]:
+        - link "" [ref=e36] [cursor=pointer]:
+          - /url: https://twitter.com/zumvu
+          - generic [ref=e37]: 
+      - listitem [ref=e38]:
+        - link "" [ref=e39] [cursor=pointer]:
+          - /url: https://linkedin.com/company/zumvu
+          - generic [ref=e40]: 
+      - listitem [ref=e41]:
+        - link "" [ref=e42] [cursor=pointer]:
+          - /url: https://instagram.com/zumvu_com/
+          - generic [ref=e43]: 
+      - listitem [ref=e44]:
+        - link "" [ref=e45] [cursor=pointer]:
+          - /url: " https://pinterest.com/zumvu"
+          - generic [ref=e46]: 
+      - listitem [ref=e47]:
+        - link "zumvu" [ref=e48] [cursor=pointer]:
+          - /url: https://zumvu.com/digitalmarketing/
+          - img "zumvu" [ref=e49]
+  - generic [ref=e53]:
+    - link "zumvu" [ref=e55] [cursor=pointer]:
+      - /url: /
+      - img "zumvu" [ref=e56]
+    - generic [ref=e59]:
+      - textbox "Search..." [ref=e60]
+      - button "s" [ref=e61] [cursor=pointer]:
+        - generic [ref=e62]: s
+    - generic [ref=e63]:
+      - generic:
+        - list:
+          - listitem [ref=e64]:
+            - link "Login" [ref=e65] [cursor=pointer]:
+              - /url: "#modal"
+              - generic [ref=e66]: 
+          - listitem:
+            - link "menu" [ref=e67] [cursor=pointer]:
+              - /url: javascript:void(0);
+              - img "menu" [ref=e68]
+          - listitem:
+            - link "" [ref=e69] [cursor=pointer]:
+              - /url: javascript:void(0);
+              - generic [ref=e70]: 
+            - text:      
+          - listitem: s
+  - generic [ref=e71]:
+    - banner [ref=e72]:
+      - generic [ref=e82]:
+        - heading "Unlock Your Online Growth Potential" [level=1] [ref=e83]
+        - heading "From powerful digital products to smart marketing tools, Zumvu offers everything you need to drive traffic, generate leads, enhance SEO, engage users, and increase sales." [level=2] [ref=e84]
+        - generic [ref=e85]:
+          - link "Get Started " [ref=e86] [cursor=pointer]:
+            - /url: /digital-hub.zvx
+            - text: Get Started
+            - generic [ref=e87]: 
+          - link "Request Demo " [ref=e88] [cursor=pointer]:
+            - /url: /info/know-more/
+            - text: Request Demo
+            - generic [ref=e89]: 
+        - generic [ref=e91]:
+          - generic [ref=e92]: 
+          - text: Trusted by 700K+ Businesses Worldwide
+    - text:   
+    - generic [ref=e95]:
+      - heading "Your all-in-one platform to create 🎨 and grow online 🚀" [level=2] [ref=e96]:
+        - text: Your all-in-one platform to
+        - text: create 🎨 and grow online 🚀
+      - heading "Increase your digital footprint to promote yourself or your business, engage audience, convert more users, and stand out from the crowd." [level=4] [ref=e97]:
+        - text: Increase your digital footprint to promote yourself or your business,
+        - text: engage audience, convert more users, and stand out from the crowd.
+      - list [ref=e99]:
+        - listitem [ref=e100] [cursor=pointer]:
+          - link " Listings Boost your online visibility and SEO" [ref=e101]:
+            - /url: https://zumvu.com/digital-hub.zvx
+            - generic [ref=e102]: 
+            - heading "Listings" [level=4] [ref=e103]
+            - paragraph [ref=e104]: Boost your online visibility and SEO
+        - listitem [ref=e105] [cursor=pointer]:
+          - link " Pages Enhance brand awareness & engagement" [ref=e106]:
+            - /url: /digital-hub.zvx
+            - generic [ref=e107]: 
+            - heading "Pages" [level=4] [ref=e108]
+            - paragraph [ref=e109]: Enhance brand awareness & engagement
+        - listitem [ref=e110] [cursor=pointer]:
+          - link " Profile Express who you are and what you do" [ref=e111]:
+            - /url: /digital-hub.zvx
+            - generic [ref=e112]: 
+            - heading "Profile" [level=4] [ref=e113]
+            - paragraph [ref=e114]: Express who you are and what you do
+        - listitem [ref=e115] [cursor=pointer]:
+          - link " Digital Business Card Make your first impression count" [ref=e116]:
+            - /url: https://zumvu.com/digital-business-card/
+            - generic [ref=e117]: 
+            - heading "Digital Business Card" [level=4] [ref=e118]
+            - paragraph [ref=e119]: Make your first impression count
+        - listitem [ref=e120] [cursor=pointer]:
+          - link " Digital Catalog Showcase your products or services" [ref=e121]:
+            - /url: https://zumvu.com/digital-catalog
+            - generic [ref=e122]: 
+            - heading "Digital Catalog" [level=4] [ref=e123]
+            - paragraph [ref=e124]: Showcase your products or services
+        - listitem [ref=e125] [cursor=pointer]:
+          - link " Portfolio Display your stunning work online" [ref=e126]:
+            - /url: /digital-hub.zvx
+            - generic [ref=e127]: 
+            - heading "Portfolio" [level=4] [ref=e128]
+            - paragraph [ref=e129]: Display your stunning work online
+        - listitem [ref=e130] [cursor=pointer]:
+          - link " Link in Bio Turn social media followers to customers" [ref=e131]:
+            - /url: /digital-hub.zvx
+            - generic [ref=e132]: 
+            - heading "Link in Bio" [level=4] [ref=e133]
+            - paragraph [ref=e134]: Turn social media followers to customers
+        - listitem [ref=e135] [cursor=pointer]:
+          - link " Content Hub Curate your valuable content in one place" [ref=e136]:
+            - /url: /digital-hub.zvx
+            - generic [ref=e137]: 
+            - heading "Content Hub" [level=4] [ref=e138]
+            - paragraph [ref=e139]: Curate your valuable content in one place
+        - listitem [ref=e140] [cursor=pointer]:
+          - link " Feed Increase blog traffic with RSS Feed" [ref=e141]:
+            - /url: /digital-hub.zvx
+            - generic [ref=e142]: 
+            - heading "Feed" [level=4] [ref=e143]
+            - paragraph [ref=e144]: Increase blog traffic with RSS Feed
+      - link "Get Started" [ref=e146] [cursor=pointer]:
+        - /url: /digital-hub.zvx
+    - generic [ref=e148]:
+      - heading "Appointment Scheduling Software" [level=2] [ref=e149]
+      - paragraph [ref=e150]: Simple, flexible and powerful booking software for you or your business
+      - generic [ref=e151]:
+        - generic [ref=e153]:
+          - generic [ref=e154]:
+            - link " Organise your schedule" [ref=e156] [cursor=pointer]:
+              - /url: /appointment-scheduling.zvx
+              - generic [ref=e157]: 
+              - text: Organise your schedule
+            - paragraph [ref=e159]:
+              - link "let clients easily book & reschedule" [ref=e160] [cursor=pointer]:
+                - /url: /appointment-scheduling.zvx
+          - generic [ref=e161]:
+            - link " Customize everything" [ref=e163] [cursor=pointer]:
+              - /url: /appointment-scheduling.zvx
+              - generic [ref=e164]: 
+              - text: Customize everything
+            - paragraph [ref=e166]:
+              - link "to match your brand experience" [ref=e167] [cursor=pointer]:
+                - /url: /appointment-scheduling.zvx
+          - generic [ref=e168]:
+            - link " Meet clients anywhere" [ref=e170] [cursor=pointer]:
+              - /url: /appointment-scheduling.zvx
+              - generic [ref=e171]: 
+              - text: Meet clients anywhere
+            - paragraph [ref=e173]:
+              - link "through video conferencing integrations" [ref=e174] [cursor=pointer]:
+                - /url: /appointment-scheduling.zvx
+          - generic [ref=e175]:
+            - link " Easily share your calendar" [ref=e177] [cursor=pointer]:
+              - /url: /appointment-scheduling.zvx
+              - generic [ref=e178]: 
+              - text: Easily share your calendar
+            - paragraph [ref=e180]:
+              - link "via Facebook, Instagram, email or website" [ref=e181] [cursor=pointer]:
+                - /url: /appointment-scheduling.zvx
+          - link "Know More" [ref=e183] [cursor=pointer]:
+            - /url: https://www.zumvu.com/appointment-scheduling/
+        - link [ref=e185] [cursor=pointer]:
+          - /url: https://www.zumvu.com/appointment-scheduling/
+    - generic [ref=e187]:
+      - heading "Chatbot" [level=2] [ref=e188]
+      - paragraph [ref=e189]: Turn Your Website into a Lead Generation Machine
+      - generic [ref=e190]:
+        - link [ref=e192] [cursor=pointer]:
+          - /url: https://zumvu.chat
+        - generic [ref=e194]:
+          - generic [ref=e195]:
+            - link " Power-up Your Marketing" [ref=e197] [cursor=pointer]:
+              - /url: https://zumvu.chat
+              - generic [ref=e198]: 
+              - text: Power-up Your Marketing
+            - paragraph [ref=e200]:
+              - link "Generate more qualified leads" [ref=e201] [cursor=pointer]:
+                - /url: https://zumvu.chat
+          - generic [ref=e202]:
+            - link " Supercharge Sales" [ref=e204] [cursor=pointer]:
+              - /url: https://zumvu.chat
+              - generic [ref=e205]: 
+              - text: Supercharge Sales
+            - paragraph [ref=e207]:
+              - link "Turn visitors into customers" [ref=e208] [cursor=pointer]:
+                - /url: https://zumvu.chat
+          - generic [ref=e209]:
+            - link " Optimize Support" [ref=e211] [cursor=pointer]:
+              - /url: https://zumvu.chat
+              - generic [ref=e212]: 
+              - text: Optimize Support
+            - paragraph [ref=e214]:
+              - link "Help your customers 24/7" [ref=e215] [cursor=pointer]:
+                - /url: https://zumvu.chat
+          - generic [ref=e216]:
+            - link " Build Relationship & Trust" [ref=e218] [cursor=pointer]:
+              - /url: https://zumvu.chat
+              - generic [ref=e219]: 
+              - text: Build Relationship & Trust
+            - paragraph [ref=e221]:
+              - link "Simulate human like conversations" [ref=e222] [cursor=pointer]:
+                - /url: https://zumvu.chat
+          - link "Know More" [ref=e224] [cursor=pointer]:
+            - /url: https://zumvu.chat
+    - generic [ref=e226]:
+      - heading "Online Marketplace" [level=2] [ref=e227]
+      - heading "Sell Anything Anytime Anywhere!" [level=4] [ref=e228]
+      - generic [ref=e230]:
+        - list [ref=e231]:
+          - listitem [ref=e232]:
+            - link "Australia" [ref=e233] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/au/
+          - listitem [ref=e234]:
+            - link "India" [ref=e235] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/in/
+          - listitem [ref=e236]:
+            - link "Singapore" [ref=e237] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/sg/
+          - listitem [ref=e238]:
+            - link "United Kingdom" [ref=e239] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/uk/
+          - listitem [ref=e240]:
+            - link "United States" [ref=e241] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/us/
+          - listitem [ref=e242]:
+            - link "Germany" [ref=e243] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/de/
+          - listitem [ref=e244]:
+            - link "South Africa" [ref=e245] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/za/
+          - listitem [ref=e246]:
+            - link "New Zealand" [ref=e247] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/nz/
+        - list [ref=e249]:
+          - listitem [ref=e250]:
+            - link "Nigeria" [ref=e251] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/ng/
+          - listitem [ref=e252]:
+            - link "Canada" [ref=e253] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/ca/
+          - listitem [ref=e254]:
+            - link "France" [ref=e255] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/fr/
+          - listitem [ref=e256]:
+            - link "Spain" [ref=e257] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/es/
+          - listitem [ref=e258]:
+            - link "Italy" [ref=e259] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/it/
+          - listitem [ref=e260]:
+            - link "Ireland" [ref=e261] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/ie/
+          - listitem [ref=e262]:
+            - link "UAE" [ref=e263] [cursor=pointer]:
+              - /url: https://zumvu.com/marketplace/ae/
+      - link "Start Selling" [ref=e265] [cursor=pointer]:
+        - /url: https://zumvu.com/marketplace/
+    - generic [ref=e267]:
+      - heading "A sales platform designed with revenue growth in mind" [level=2] [ref=e268]:
+        - text: A sales platform designed
+        - text: with revenue growth in mind
+      - heading "Increase your sales teams' efficiency and accelerate the revenue." [level=4] [ref=e269]
+      - generic [ref=e270]:
+        - list [ref=e272]:
+          - listitem [ref=e273]:
+            - heading " Customer Management" [level=4]:
+              - generic: 
+              - text: Customer Management
+            - paragraph [ref=e274]: Organize and track customer interactions seamlessly for stronger relationships.
+            - link " Organize your Contacts and Prospects  Manage tasks, meetings, notes and more  Get 360° view of your customer Learn more " [ref=e275] [cursor=pointer]:
+              - /url: https://www.zumvu.com/crm/
+              - list [ref=e276]:
+                - listitem [ref=e277]:
+                  - generic [ref=e278]: 
+                  - text: Organize your Contacts and Prospects
+                - listitem [ref=e279]:
+                  - generic [ref=e280]: 
+                  - text: Manage tasks, meetings, notes and more
+                - listitem [ref=e281]:
+                  - generic [ref=e282]: 
+                  - text: Get 360° view of your customer
+              - generic [ref=e283]:
+                - text: Learn more
+                - generic [ref=e284]: 
+        - list [ref=e286]:
+          - listitem [ref=e287]:
+            - heading " Lead Management" [level=4]:
+              - generic: 
+              - text: Lead Management
+            - paragraph [ref=e288]: Capture, nurture, and convert leads efficiently with automated tracking.
+            - link " Organize the Sales Process with Ease  Convert promising leads to deals faster  Measure the effectiveness of marketing Learn more " [ref=e289] [cursor=pointer]:
+              - /url: https://www.zumvu.com/crm/
+              - list [ref=e290]:
+                - listitem [ref=e291]:
+                  - generic [ref=e292]: 
+                  - text: Organize the Sales Process with Ease
+                - listitem [ref=e293]:
+                  - generic [ref=e294]: 
+                  - text: Convert promising leads to deals faster
+                - listitem [ref=e295]:
+                  - generic [ref=e296]: 
+                  - text: Measure the effectiveness of marketing
+              - generic [ref=e297]:
+                - text: Learn more
+                - generic [ref=e298]: 
+        - list [ref=e300]:
+          - listitem [ref=e301]:
+            - heading " Sales Pipeline" [level=4]:
+              - generic: 
+              - text: Sales Pipeline
+            - paragraph [ref=e302]: Visualize your deals in progress, and close more sales with a clear pipeline strategy.
+            - link " Create multiple sales pipeline  Organise, track and win more deals  Never lose a deal due to missed followup Learn more " [ref=e303] [cursor=pointer]:
+              - /url: https://www.zumvu.com/crm/
+              - list [ref=e304]:
+                - listitem [ref=e305]:
+                  - generic [ref=e306]: 
+                  - text: Create multiple sales pipeline
+                - listitem [ref=e307]:
+                  - generic [ref=e308]: 
+                  - text: Organise, track and win more deals
+                - listitem [ref=e309]:
+                  - generic [ref=e310]: 
+                  - text: Never lose a deal due to missed followup
+              - generic [ref=e311]:
+                - text: Learn more
+                - generic [ref=e312]: 
+        - list [ref=e314]:
+          - listitem [ref=e315]:
+            - heading " Task Management" [level=4]:
+              - generic: 
+              - text: Task Management
+            - paragraph [ref=e316]: Stay organized with automated task assignments, deadline reminders, and team collaboration tools.
+            - link " Keep track of your tasks in real time  Monitor who's doing what at a glance  Centralize communication in one place Learn more " [ref=e317] [cursor=pointer]:
+              - /url: https://www.zumvu.com/crm/
+              - list [ref=e318]:
+                - listitem [ref=e319]:
+                  - generic [ref=e320]: 
+                  - text: Keep track of your tasks in real time
+                - listitem [ref=e321]:
+                  - generic [ref=e322]: 
+                  - text: Monitor who's doing what at a glance
+                - listitem [ref=e323]:
+                  - generic [ref=e324]: 
+                  - text: Centralize communication in one place
+              - generic [ref=e325]:
+                - text: Learn more
+                - generic [ref=e326]: 
+        - list [ref=e328]:
+          - listitem [ref=e329]:
+            - heading " Email Marketing" [level=4]:
+              - generic: 
+              - text: Email Marketing
+            - paragraph [ref=e330]: Design automated, personalized emails that drive engagement and sales.
+            - link " Upload contacts to create lists  Save time with automation  Send emails instantly or schedule later Learn more " [ref=e331] [cursor=pointer]:
+              - /url: https://www.zumvu.com/crm/
+              - list [ref=e332]:
+                - listitem [ref=e333]:
+                  - generic [ref=e334]: 
+                  - text: Upload contacts to create lists
+                - listitem [ref=e335]:
+                  - generic [ref=e336]: 
+                  - text: Save time with automation
+                - listitem [ref=e337]:
+                  - generic [ref=e338]: 
+                  - text: Send emails instantly or schedule later
+              - generic [ref=e339]:
+                - text: Learn more
+                - generic [ref=e340]: 
+        - list [ref=e342]:
+          - listitem [ref=e343]:
+            - heading " SMS Marketing" [level=4]:
+              - generic: 
+              - text: SMS Marketing
+            - paragraph [ref=e344]: Reach customers with targeted text messages that deliver high open rates and quick responses.
+            - link " Schedule and send personalized SMS  Upload contacts, organise them with lists  Save time by creating SMS templates Learn more " [ref=e345] [cursor=pointer]:
+              - /url: https://www.zumvu.com/crm/
+              - list [ref=e346]:
+                - listitem [ref=e347]:
+                  - generic [ref=e348]: 
+                  - text: Schedule and send personalized SMS
+                - listitem [ref=e349]:
+                  - generic [ref=e350]: 
+                  - text: Upload contacts, organise them with lists
+                - listitem [ref=e351]:
+                  - generic [ref=e352]: 
+                  - text: Save time by creating SMS templates
+              - generic [ref=e353]:
+                - text: Learn more
+                - generic [ref=e354]: 
+      - link "Know More" [ref=e356] [cursor=pointer]:
+        - /url: /apps.zvx
+    - generic [ref=e358]:
+      - heading "Site Builder" [level=2] [ref=e359]
+      - heading "Create your own mobile-friendly website or blog in minutes with your own domain name" [level=4] [ref=e360]
+      - generic [ref=e364]:
+        - generic [ref=e365]:
+          - link " Blog Start publishing your articles or stories." [ref=e368] [cursor=pointer]:
+            - /url: /select-type.zvx
+            - generic [ref=e369]: 
+            - heading "Blog" [level=3] [ref=e370]
+            - text: Start publishing your articles or stories.
+          - link " Website Create a website to attract more customers." [ref=e373] [cursor=pointer]:
+            - /url: https://zumvu.com/website-builder/
+            - generic [ref=e374]: 
+            - heading "Website" [level=3] [ref=e375]
+            - text: Create a website to attract more customers.
+        - generic [ref=e376]:
+          - link " Social Hub Curate all your social content in one place." [ref=e379] [cursor=pointer]:
+            - /url: https://zumvu.com/social-hub/
+            - generic [ref=e380]: 
+            - heading "Social Hub" [level=3] [ref=e381]
+            - text: Curate all your social content in one place.
+          - link " Resume/CV Create an Interactive Resume/CV." [ref=e384] [cursor=pointer]:
+            - /url: https://zumvu.com/resume-builder
+            - generic [ref=e385]: 
+            - heading "Resume/CV" [level=3] [ref=e386]
+            - text: Create an Interactive Resume/CV.
+    - generic [ref=e388]:
+      - heading "Global Web Directory" [level=2] [ref=e389]
+      - heading "Browse the Internet's fastest growing directory. Category based and cross-referenced!" [level=4] [ref=e390]
+      - generic [ref=e392]:
+        - textbox "Search..." [ref=e393]
+        - button "Find" [ref=e394] [cursor=pointer]: s Find
+      - generic [ref=e395]:
+        - generic [ref=e397]:
+          - heading " Software Directory" [level=5] [ref=e398]:
+            - generic [ref=e399]: 
+            - link "Software Directory" [ref=e400] [cursor=pointer]:
+              - /url: https://zumvu.com/directory/software/
+          - list [ref=e401]:
+            - listitem [ref=e402]:
+              - link "Marketing & Sales " [ref=e403] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/marketing-sales/
+                - text: Marketing & Sales
+                - generic [ref=e404]: 
+            - listitem [ref=e405]:
+              - link "Work & Productivity " [ref=e406] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/work-productivity/
+                - text: Work & Productivity
+                - generic [ref=e407]: 
+            - listitem [ref=e408]:
+              - link "eCommerce " [ref=e409] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/ecommerce/
+                - text: eCommerce
+                - generic [ref=e410]: 
+            - listitem [ref=e411]:
+              - link "Finance & Accounting " [ref=e412] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/finance/
+                - text: Finance & Accounting
+                - generic [ref=e413]: 
+            - listitem [ref=e414]:
+              - link "Social & Community " [ref=e415] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/social-community/
+                - text: Social & Community
+                - generic [ref=e416]: 
+          - link "Explore All" [ref=e418] [cursor=pointer]:
+            - /url: https://zumvu.com/directory/software/
+        - generic [ref=e420]:
+          - heading " AI Tools Directory" [level=5] [ref=e421]:
+            - generic [ref=e422]: 
+            - link "AI Tools Directory" [ref=e423] [cursor=pointer]:
+              - /url: https://zumvu.com/directory/software/ai-tools/
+          - list [ref=e424]:
+            - listitem [ref=e425]:
+              - link "AI Agents " [ref=e426] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/ai-tools/ai-agents/
+                - text: AI Agents
+                - generic [ref=e427]: 
+            - listitem [ref=e428]:
+              - link "AI Assistant " [ref=e429] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/ai-tools/ai-assistant/
+                - text: AI Assistant
+                - generic [ref=e430]: 
+            - listitem [ref=e431]:
+              - link "AI Detection " [ref=e432] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/ai-tools/ai-agents/
+                - text: AI Detection
+                - generic [ref=e433]: 
+            - listitem [ref=e434]:
+              - link "Prompt Generators " [ref=e435] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/ai-tools/ai-prompt-generators/
+                - text: Prompt Generators
+                - generic [ref=e436]: 
+            - listitem [ref=e437]:
+              - link "Video Editing " [ref=e438] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/software/ai-tools/video/
+                - text: Video Editing
+                - generic [ref=e439]: 
+          - link "Explore All" [ref=e441] [cursor=pointer]:
+            - /url: https://zumvu.com/directory/software/ai-tools/
+        - generic [ref=e443]:
+          - heading " Local Directory" [level=5] [ref=e444]:
+            - generic [ref=e445]: 
+            - link "Local Directory" [ref=e446] [cursor=pointer]:
+              - /url: https://zumvu.com/directory/
+          - list [ref=e447]:
+            - listitem [ref=e448]:
+              - link "India" [ref=e449] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/in/
+                - text: India
+            - listitem [ref=e451]:
+              - link "United States" [ref=e452] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/us/
+                - text: United States
+            - listitem [ref=e454]:
+              - link "United Kingdom" [ref=e455] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/uk/
+                - text: United Kingdom
+            - listitem [ref=e457]:
+              - link "Australia" [ref=e458] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/au/
+                - text: Australia
+            - listitem [ref=e460]:
+              - link "Canada" [ref=e461] [cursor=pointer]:
+                - /url: https://zumvu.com/directory/ca/
+                - text: Canada
+          - link "Explore All" [ref=e464] [cursor=pointer]:
+            - /url: https://zumvu.com/directory/
+      - generic [ref=e465]:
+        - link "Get Listed" [ref=e466] [cursor=pointer]:
+          - /url: https://zumvu.com/directory/submit-listing.zvx
+        - link "Browse" [ref=e467] [cursor=pointer]:
+          - /url: https://zumvu.com/directory/
+    - generic [ref=e469]:
+      - heading "Are you Selling Products?" [level=2] [ref=e470]
+      - heading "Create an Online Catalog to showcase your Product or Services and attract customers." [level=4] [ref=e471]
+      - generic [ref=e475]:
+        - link "Tableware" [ref=e479] [cursor=pointer]:
+          - /url: https://zumvu.com/pitterplatter
+          - generic [ref=e480]: 
+          - heading "Tableware" [level=5] [ref=e481]
+        - link " Luggage" [ref=e485] [cursor=pointer]:
+          - /url: https://zumvu.com/thefly
+          - generic [ref=e486]: 
+          - heading "Luggage" [level=5] [ref=e487]
+        - link " Furniture" [ref=e491] [cursor=pointer]:
+          - /url: https://zumvu.com/omacme
+          - generic [ref=e492]: 
+          - heading "Furniture" [level=5] [ref=e493]
+        - link "Bags" [ref=e497] [cursor=pointer]:
+          - /url: https://zumvu.com/gear
+          - generic [ref=e498]: 
+          - heading "Bags" [level=5] [ref=e499]
+        - link " Jewelry" [ref=e503] [cursor=pointer]:
+          - /url: https://zumvu.com/purple
+          - generic [ref=e504]: 
+          - heading "Jewelry" [level=5] [ref=e505]
+        - link "Gifts" [ref=e509] [cursor=pointer]:
+          - /url: https://zumvu.com/elegance
+          - generic [ref=e510]: 
+          - heading "Gifts" [level=5] [ref=e511]
+      - link "Create your Catalog" [ref=e513] [cursor=pointer]:
+        - /url: https://zumvu.com/digital-hub.zvx
+    - generic [ref=e515]:
+      - heading "Content Marketing Platform" [level=2] [ref=e516]
+      - heading "Publish high-quality articles, news or blogs that aligns with your niche and audience interests, demonstrate expertise in the topic, and actively promote your post on your own channels once published." [level=4] [ref=e517]:
+        - text: Publish high-quality articles, news or blogs that aligns with your niche and audience interests,
+        - text: demonstrate expertise in the topic, and actively promote your post on your own channels once published.
+      - generic [ref=e518]:
+        - generic [ref=e519]:
+          - link " BLOGS" [ref=e520] [cursor=pointer]:
+            - /url: https://zumvu.com/blogs
+            - generic [ref=e521]: 
+            - generic [ref=e522]: BLOGS
+          - paragraph [ref=e523]: Craft engaging blog posts that boost SEO, foster audience loyalty, and position your brand as an industry thought leader.
+        - generic [ref=e524]:
+          - link " ARTICLES" [ref=e525] [cursor=pointer]:
+            - /url: https://zumvu.com/articles/
+            - generic [ref=e526]: 
+            - generic [ref=e527]: ARTICLES
+          - paragraph [ref=e528]: Write expert articles to drive organic traffic, showcase authority, and position your business as a trusted resource.
+          - link "Explore " [ref=e529] [cursor=pointer]:
+            - /url: https://zumvu.com/articles/
+            - text: Explore
+            - generic [ref=e530]: 
+        - generic [ref=e531]:
+          - link " PRESS RELEASES" [ref=e532] [cursor=pointer]:
+            - /url: https://zumvu.com/pr
+            - generic [ref=e533]: 
+            - generic [ref=e534]: PRESS RELEASES
+          - paragraph [ref=e535]: Share impactful press releases, maximizing visibility for product launches, milestones, and key announcements.
+        - generic [ref=e536]:
+          - link " NEWS" [ref=e537] [cursor=pointer]:
+            - /url: https://zumvu.com/news
+            - generic [ref=e538]: 
+            - generic [ref=e539]: NEWS
+          - paragraph [ref=e540]: Share real-time updates to keep your audience informed and strengthen their connection to your brand's ongoing story.
+        - generic [ref=e541]:
+          - link " REVIEWS" [ref=e542] [cursor=pointer]:
+            - /url: https://zumvu.com/reviews
+            - generic [ref=e543]: 
+            - generic [ref=e544]: REVIEWS
+          - paragraph [ref=e545]: Harness the power of reviews to boost trust, shape purchasing decisions and elevate your brand's online reputation.
+      - generic [ref=e546]:
+        - link "WRITE FOR US" [ref=e547] [cursor=pointer]:
+          - /url: https://zumvu.com/write-for-us
+        - link "GET FEATURED" [ref=e548] [cursor=pointer]:
+          - /url: https://zumvu.com/info/contact-us/
+    - list [ref=e551]:
+      - listitem [ref=e552]:
+        - strong [ref=e553]: We Are
+        - text: Featured on
+      - listitem [ref=e554]:
+        - link [ref=e555] [cursor=pointer]:
+          - /url: https://www.softwaresuggest.com/zumvu
+      - listitem [ref=e556]:
+        - link [ref=e557] [cursor=pointer]:
+          - /url: https://www.startupranking.com/zumvu
+      - listitem [ref=e558]:
+        - link [ref=e559] [cursor=pointer]:
+          - /url: https://www.producthunt.com/tech/zumvu
+      - listitem [ref=e560]:
+        - link [ref=e561] [cursor=pointer]:
+          - /url: https://www.prnewswire.com/in/news-releases/zumvu-to-launch-its-all-in-one-digital-marketing-platform-on-the-70th-independence-day-589694441.html
+      - listitem [ref=e562]:
+        - link [ref=e563] [cursor=pointer]:
+          - /url: https://alternativeto.net/software/zumvu/
+    - generic [ref=e566]:
+      - generic [ref=e567]:
+        - heading "Latest News & Insights" [level=2] [ref=e568]
+        - paragraph [ref=e569]: Get all digital marketing essentials from this site. Read our blogs to learn more about digital marketing.
+      - link "Visit Our Blog" [ref=e571] [cursor=pointer]:
+        - /url: https://blog.zumvu.com/
+    - generic [ref=e573]:
+      - heading "A Platform You Can Count On" [level=2] [ref=e574]
+      - generic [ref=e575]:
+        - generic [ref=e576]:
+          - strong [ref=e577]: 703,274
+          - paragraph [ref=e578]: Registered Users
+        - generic [ref=e579]:
+          - strong [ref=e580]: 140,706
+          - paragraph [ref=e581]: Sites/Blogs
+        - generic [ref=e582]:
+          - strong [ref=e583]: 527,569
+          - paragraph [ref=e584]: Profile/Pages
+        - generic [ref=e585]:
+          - strong [ref=e586]: 372,870
+          - paragraph [ref=e587]: Posts/Articles
+    - generic [ref=e589]:
+      - heading "Business Growth Network" [level=2] [ref=e590]
+      - generic [ref=e591]: Bringing People and Business Together!
+      - paragraph [ref=e592]: Zumvu offers an exclusive invite-only trusted community to help you expand your network and achieve your professional goals.
+      - link "Apply for Membership!" [ref=e593] [cursor=pointer]:
+        - /url: https://zumvu.com/network/#contact
+    - contentinfo [ref=e594]:
+      - generic [ref=e596]:
+        - generic [ref=e597]:
+          - heading "About" [level=3] [ref=e598]: About 
+          - paragraph [ref=e599]: With Zumvu - all your marketing, sales, lead generation, scheduling, automation and customer management tools are integrated into one digital platform for greater results.
+          - list [ref=e600]:
+            - listitem [ref=e601]:
+              - link "" [ref=e602] [cursor=pointer]:
+                - /url: https://www.facebook.com/zumvu
+                - generic [ref=e603]: 
+            - listitem [ref=e604]:
+              - link "" [ref=e605] [cursor=pointer]:
+                - /url: https://twitter.com/zumvu
+                - generic [ref=e606]: 
+            - listitem [ref=e607]:
+              - link "Z" [ref=e608] [cursor=pointer]:
+                - /url: https://zumvu.com/digitalmarketing/
+        - generic [ref=e609]:
+          - heading "Tools" [level=3] [ref=e610]: Tools 
+          - list [ref=e611]:
+            - listitem [ref=e612]:
+              - link "Digital Business Cards" [ref=e613] [cursor=pointer]:
+                - /url: https://zumvu.com/digital-business-card/
+            - listitem [ref=e614]:
+              - link "Digital Catalog" [ref=e615] [cursor=pointer]:
+                - /url: https://zumvu.com/digital-catalog
+            - listitem [ref=e616]:
+              - link "Portfolio" [ref=e617] [cursor=pointer]:
+                - /url: https://zumvu.com/digital-hub.zvx
+            - listitem [ref=e618]:
+              - link "Content Hub" [ref=e619] [cursor=pointer]:
+                - /url: https://zumvu.com/digital-hub.zvx
+            - listitem [ref=e620]:
+              - link "Page" [ref=e621] [cursor=pointer]:
+                - /url: https://zumvu.com/digital-hub.zvx
+            - listitem [ref=e622]:
+              - link "Digital Profile" [ref=e623] [cursor=pointer]:
+                - /url: https://zumvu.com/digital-hub.zvx
+          - list [ref=e624]:
+            - listitem [ref=e625]:
+              - link "Appointment Scheduling" [ref=e626] [cursor=pointer]:
+                - /url: https://zumvu.com/appointment-scheduling.zvx
+            - listitem [ref=e627]:
+              - link "Sales CRM" [ref=e628] [cursor=pointer]:
+                - /url: https://zumvu.com/apps.zvx
+            - listitem [ref=e629]:
+              - link "Site Builder" [ref=e630] [cursor=pointer]:
+                - /url: https://zumvu.com/select-type.zvx
+            - listitem [ref=e631]:
+              - link "AI ChatBot" [ref=e632] [cursor=pointer]:
+                - /url: https://zumvu.chat
+            - listitem [ref=e633]:
+              - link "Email Signature" [ref=e634] [cursor=pointer]:
+                - /url: https://zumvu.com/email-signature-generator/
+            - listitem [ref=e635]:
+              - link "Marketplace" [ref=e636] [cursor=pointer]:
+                - /url: https://zumvu.com/marketplace/
+        - generic [ref=e637]:
+          - heading "Resources" [level=3] [ref=e638]: Resources 
+          - list [ref=e639]:
+            - listitem [ref=e640]:
+              - link "Blog" [ref=e641] [cursor=pointer]:
+                - /url: https://blog.zumvu.com
+            - listitem [ref=e642]:
+              - link "Articles" [ref=e643] [cursor=pointer]:
+                - /url: https://zumvu.com/articles
+            - listitem [ref=e644]:
+              - link "News" [ref=e645] [cursor=pointer]:
+                - /url: https://zumvu.com/news
+            - listitem [ref=e646]:
+              - link "Discover" [ref=e647] [cursor=pointer]:
+                - /url: https://zumvu.com/explore
+            - listitem [ref=e648]:
+              - link "Business Listings" [ref=e649] [cursor=pointer]:
+                - /url: https://zumvu.com/connect
+            - listitem [ref=e650]:
+              - link "SaaS Directory" [ref=e651] [cursor=pointer]:
+                - /url: https://zumvu.com/saas/
+        - generic [ref=e652]:
+          - heading "Info" [level=3] [ref=e653]: Info 
+          - list [ref=e654]:
+            - listitem [ref=e655]:
+              - link "Login" [ref=e656] [cursor=pointer]:
+                - /url: /login.zvx
+            - listitem [ref=e657]:
+              - link "Sign Up" [ref=e658] [cursor=pointer]:
+                - /url: /signup.zvx
+            - listitem [ref=e659]:
+              - link "About Us" [ref=e660] [cursor=pointer]:
+                - /url: /info/about-us/
+            - listitem [ref=e661]:
+              - link "Contact Us" [ref=e662] [cursor=pointer]:
+                - /url: /info/contact-us/
+      - separator [ref=e663]
+      - generic [ref=e664]:
+        - text:  
+        - list [ref=e665]:
+          - listitem [ref=e666]:
+            - link "Terms" [ref=e667] [cursor=pointer]:
+              - /url: /info/terms-of-service/
+          - listitem [ref=e668]: "|"
+          - listitem [ref=e669]:
+            - link "Privacy" [ref=e670] [cursor=pointer]:
+              - /url: /info/privacy-policy/
+        - generic [ref=e671]: © Copyright 2026 Zumvu Digital. All Rights Reserved.
+  - generic [ref=e673] [cursor=pointer]: Need Help?

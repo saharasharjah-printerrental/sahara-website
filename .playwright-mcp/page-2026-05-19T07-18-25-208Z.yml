@@ -1,0 +1,51 @@
+- generic [ref=e5]:
+  - generic [ref=e6]:
+    - link [ref=e8] [cursor=pointer]:
+      - /url: /
+    - paragraph [ref=e9]: "Join APSense Free Today: Connect with 800K+ digital marketing professionals and grow your business with premium tools, expert networking, and cutting-edge technology."
+  - generic [ref=e11]:
+    - heading "Create a Free Account" [level=1] [ref=e14]
+    - generic [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link " Social Authentication" [ref=e18] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e19]: 
+            - text: Social Authentication
+        - listitem [ref=e20]:
+          - link " Account Setup" [ref=e21] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e22]: 
+            - text: Account Setup
+        - listitem [ref=e23]:
+          - link " Profile Basics" [ref=e24] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e25]: 
+            - text: Profile Basics
+      - group [ref=e26]:
+        - generic [ref=e28]:
+          - 'heading "Step 1: Join APSense with Social Login" [level=2] [ref=e29]'
+          - paragraph [ref=e30]: "Simplify your registration process by using your existing social media accounts. This allows us to:"
+          - list [ref=e31]:
+            - listitem [ref=e32]: Quickly verify your identity
+            - listitem [ref=e33]: Securely obtain your primary email
+            - listitem [ref=e34]: Streamline your account creation
+          - paragraph [ref=e35]: "Choose your preferred method to get started:"
+          - generic [ref=e36]:
+            - generic [ref=e39]:
+              - button "المواصلة باستخدام Googleيفتح الرابط في علامة تبويب جديدة" [ref=e41] [cursor=pointer]:
+                - generic [ref=e43]:
+                  - img [ref=e46]
+                  - generic [ref=e53]: المواصلة باستخدام Google
+              - iframe
+            - link "Continue with Microsoft" [ref=e55] [cursor=pointer]:
+              - /url: https://login.microsoftonline.com/common/oauth2/v2.0/authorize?state=990b1504d5f4962aea138a71de600960&scope=openid%20profile%20email%20User.Read&response_type=code&approval_prompt=auto&redirect_uri=https%3A%2F%2Fwww.apsense.com%2Fapi%2Fmicrosoft&client_id=8b2ba61c-feca-4b97-8f73-80043cf7ee16
+              - text: Continue with Microsoft
+          - paragraph [ref=e61]:
+            - text: By continuing, you agree to APSense's
+            - link "Terms of Use" [ref=e62] [cursor=pointer]:
+              - /url: /terms.html
+            - text: and
+            - link "Privacy Policy" [ref=e63] [cursor=pointer]:
+              - /url: /privacy.html
+            - text: .

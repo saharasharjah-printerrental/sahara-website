@@ -1,0 +1,303 @@
+- generic [active] [ref=e1]:
+  - text: https://www.effectivegatecpm.com/b76p7g98?key=ac7898e077731b93eebe4218e4cf9615
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - link "Get Listed UAE FREE Business Listing site in UAE Dubai Abu Dhabi Sharjah RAK Ajman" [ref=e8] [cursor=pointer]:
+          - /url: https://getlistedae.com/
+          - img "Get Listed UAE FREE Business Listing site in UAE Dubai Abu Dhabi Sharjah RAK Ajman" [ref=e9]
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - textbox "What are you looking for?"
+              - generic:
+                - generic:
+                  - generic:
+                    - textbox "Location"
+                  - link "":
+                    - /url: "#"
+                    - generic: 
+                  - generic: type and hit enter
+              - generic:
+                - generic:
+                  - generic:
+                    - button "All Categories ":
+                      - generic: All Categories
+                      - generic:
+                        - generic: 
+                    - combobox "All Categories":
+                      - option "All Categories" [selected]
+                      - option "All Categories"
+                      - option "Advertising Companies"
+                      - option "Automobile Services"
+                      - option "Auto Garages"
+                      - option "Auto Repair Workshops"
+                      - option "Body & Paint Shops"
+                      - option "Bus Rental Companies"
+                      - option "Car Dealerships"
+                      - option "Car Detailing Services"
+                      - option "Car Insurance & Finance Companies"
+                      - option "Car Rental Companies"
+                      - option "Forklift Rental"
+                      - option "Leasing Companies"
+                      - option "Other Automobile Services"
+                      - option "Recovery Services"
+                      - option "Tire & Battery Shops"
+                      - option "Used Car Dealers"
+                      - option "Beauty & Spa"
+                      - option "Beauty Parlours"
+                      - option "Salons"
+                      - option "Spa & Massage Centers"
+                      - option "Businesses"
+                      - option "Cleaning Companies"
+                      - option "Construction Companies"
+                      - option "Digital Media & Ads"
+                      - option "Digital Media Marketing"
+                      - option "Digital Marketing Agencies"
+                      - option "Mobile Apps Development Companies"
+                      - option "SEO Agencies"
+                      - option "Website Designers"
+                      - option "Website Development Companies"
+                      - option "Education & Training Institutes"
+                      - option "Employment/Recruitment Agencies"
+                      - option "Energy Suppliers"
+                      - option "Entertainment"
+                      - option "Events"
+                      - option "Fashion"
+                      - option "Finance & Legal"
+                      - option "Accounting & Auditing Firms"
+                      - option "Business management consultant"
+                      - option "Document Attestation & Clearance Agencies"
+                      - option "Insurance Companies"
+                      - option "Investment & Wealth Management"
+                      - option "Law Firms"
+                      - option "Risk Management Consultants"
+                      - option "Taxation & VAT Consultants"
+                      - option "Visa Services"
+                      - option "Food & Beverages"
+                      - option "Cafes"
+                      - option "Cloud Kitchens"
+                      - option "Frozen Food Suppliers"
+                      - option "Hair & Style"
+                      - option "Health & Fitness"
+                      - option "Healthcare Centers"
+                      - option "Ayurvedic Clinics Doctors & Hospitals"
+                      - option "Dental Clinics"
+                      - option "Dermatology Clinics"
+                      - option "Eye Care Clinics"
+                      - option "Home & Decors"
+                      - option "Home & Personal Services"
+                      - option "Air Conditioning Repair Shops"
+                      - option "Appliance Repair Services"
+                      - option "Baby Sitters & Nannies"
+                      - option "Dry Cleaning & Laundry"
+                      - option "Electricians"
+                      - option "Home Cleaning Services"
+                      - option "Home Makeup & Styling"
+                      - option "Home Repair"
+                      - option "HVAC Technicians"
+                      - option "Moving & Relocation Services"
+                      - option "Outdoor & Landscaping Companies"
+                      - option "Pest Control"
+                      - option "Plumbers"
+                      - option "Refrigerator Repair Services"
+                      - option "Tailoring & Alterations"
+                      - option "Water Tank Cleaner Services"
+                      - option "Hotel & Resorts"
+                      - option "Insurance"
+                      - option "Internet Marketing"
+                      - option "IT & Telecom"
+                      - option "IT Services"
+                      - option "Cloud services"
+                      - option "Software Maintenance Services"
+                      - option "Jewellery"
+                      - option "Laboratories"
+                      - option "Maintenance"
+                      - option "Manufacturing"
+                      - option "Manufacturing & Industrial Supplies"
+                      - option "Apparel & Garments Manufacturing"
+                      - option "Automotive Parts Manufacturing"
+                      - option "Building Materials Production"
+                      - option "Construction"
+                      - option "Building Materials Suppliers"
+                      - option "Commercial Construction"
+                      - option "Elevator & Escalator Installation"
+                      - option "Painting & Decoration Contractors"
+                      - option "Food Processing & Packaged Foods"
+                      - option "Furniture Manufacturers"
+                      - option "Metal Processing & Fabrication"
+                      - option "Packaging Industry"
+                      - option "Paints, Coatings, Adhesives"
+                      - option "Plastic Products Manufacturing"
+                      - option "Plastics Recycling"
+                      - option "Printing & Publication"
+                      - option "Steel & Metal Fabrication"
+                      - option "Markets"
+                      - option "Media & Publications"
+                      - option "Other"
+                      - option "Pets & Animals"
+                      - option "Property"
+                      - option "Real Estate Agencies"
+                      - option "Real Estate Developers"
+                      - option "Repair & Fixing"
+                      - option "Computer repair service"
+                      - option "Mobile phone repair shops"
+                      - option "Restaurants"
+                      - option "Robotics & Automation"
+                      - option "Safety & Security"
+                      - option "Services"
+                      - option "Event Management Companies"
+                      - option "House keeping Services"
+                      - option "Interior Designers"
+                      - option "Packers & Movers"
+                      - option "Photographers"
+                      - option "Printing & Publishing Services"
+                      - option "Security System"
+                      - option "Shipping & Delivery"
+                      - option "Shopping"
+                      - option "Shopping & Retail"
+                      - option "Beauty & Cosmetic Stores"
+                      - option "Blinds Shops"
+                      - option "Bookstores & Stationery"
+                      - option "Carpets Stores"
+                      - option "Electronics Stores"
+                      - option "Fashion & Apparel Retail"
+                      - option "Flowers & Gift Shops"
+                      - option "Furniture & Home Décor"
+                      - option "Grocery Stores"
+                      - option "Home Appliances Retail"
+                      - option "Mobile Phones & Gadgets Retail"
+                      - option "Optical & Eyewear Stores"
+                      - option "Perfume & Fragrances Shops"
+                      - option "Sports & Fitness"
+                      - option "Trading Companies"
+                      - option "Transportation Companies"
+                      - option "Travel & Tourism Companies"
+                      - option "Adventure Tourism"
+                      - option "Safari & Desert Tour Operators"
+                      - option "Tour Operators"
+                      - option "Travel Agencies"
+                      - option "Vacation Rentals"
+                      - option "Video Production Companies"
+                      - option "Warehouses & Stores"
+                      - option "Wholesalers"
+              - button "Search"
+            - text: 
+        - generic [ref=e10]:
+          - generic [ref=e12]:
+            - generic [ref=e13]: 
+            - generic [ref=e14]: "0"
+          - link " Sign In" [ref=e16] [cursor=pointer]:
+            - /url: https://getlistedae.com/my-profile/
+            - generic [ref=e17]: 
+            - text: Sign In
+          - text: 
+    - generic [ref=e27]:
+      - heading "Add Listing" [level=1] [ref=e28]
+      - navigation [ref=e29]:
+        - list [ref=e30]:
+          - listitem [ref=e31]:
+            - link "Get Listed UAE FREE Business Listing site in UAE Dubai Abu Dhabi Sharjah RAK Ajman" [ref=e33] [cursor=pointer]:
+              - /url: https://getlistedae.com
+              - generic [ref=e34]: Get Listed UAE FREE Business Listing site in UAE Dubai Abu Dhabi Sharjah RAK Ajman
+          - listitem [ref=e35]:
+            - text: 
+            - generic [ref=e37]: Add Listing
+    - article [ref=e40]:
+      - generic [ref=e41]:
+        - list:
+          - listitem [ref=e42]:
+            - link "Log In" [ref=e43] [cursor=pointer]:
+              - /url: "#tab1"
+          - listitem [ref=e44]:
+            - link "Register" [ref=e45] [cursor=pointer]:
+              - /url: "#tab2"
+        - generic [ref=e46]:
+          - generic [ref=e48]:
+            - paragraph [ref=e49]:
+              - generic [ref=e50]:
+                - generic [ref=e51]: 
+                - textbox "" [ref=e52]:
+                  - /placeholder: Username/Email
+            - paragraph [ref=e53]:
+              - generic [ref=e54]:
+                - generic [ref=e55]: 
+                - generic [ref=e56]:
+                  - textbox "" [ref=e57]:
+                    - /placeholder: Password
+                  - generic [ref=e58] [cursor=pointer]: 
+              - link "Lost Your Password?" [ref=e60] [cursor=pointer]:
+                - /url: https://getlistedae.com/wp-login.php?action=lostpassword
+            - generic [ref=e61]:
+              - button "Login" [ref=e62] [cursor=pointer]
+              - generic [ref=e64] [cursor=pointer]:  Remember Me
+          - text:           
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - complementary [ref=e69]:
+          - generic [ref=e70]:
+            - paragraph [ref=e71]:
+              - img "Getlistedlogow" [ref=e72]
+            - paragraph [ref=e73]: Get Listed UAE Top FREE Business Listing Site in Dubai Abu Dhabi Sharjah Ajman Ras al Khaimah Fujairah & Umm al Quwain – Get Your Business Listed on Getlistedae.com Instant Approval FREE Business Listing in Dubai. Best Local Business Directory to List your Business Publish Classified Ads for FREE.
+        - generic [ref=e74]:
+          - complementary [ref=e75]:
+            - heading "Helpful Links" [level=4] [ref=e76]
+            - list [ref=e77]:
+              - listitem [ref=e78]:
+                - text: 
+                - link "Reviews" [ref=e79] [cursor=pointer]:
+                  - /url: https://getlistedae.com/reviews/
+              - listitem [ref=e80]:
+                - text: 
+                - link "Bookmarks" [ref=e81] [cursor=pointer]:
+                  - /url: https://getlistedae.com/bookmarks/
+              - listitem [ref=e82]:
+                - text: 
+                - link "Bookings" [ref=e83] [cursor=pointer]:
+                  - /url: https://getlistedae.com/bookings/
+          - complementary:
+            - list [ref=e84]:
+              - listitem [ref=e85]:
+                - text: 
+                - link "My Profile" [ref=e86] [cursor=pointer]:
+                  - /url: https://getlistedae.com/my-profile/
+              - listitem [ref=e87]:
+                - text: 
+                - link "My Listings" [ref=e88] [cursor=pointer]:
+                  - /url: https://getlistedae.com/my-listings/
+              - listitem [ref=e89]:
+                - text: 
+                - link "Bookmarks" [ref=e90] [cursor=pointer]:
+                  - /url: https://getlistedae.com/bookmarks/
+              - listitem [ref=e91]:
+                - text: 
+                - link "Add Listing" [ref=e92] [cursor=pointer]:
+                  - /url: https://getlistedae.com/add-listing/
+        - complementary [ref=e94]:
+          - link "Pyament" [ref=e95] [cursor=pointer]:
+            - /url: https://wa.me/+971563035506
+            - img "Pyament" [ref=e96]
+      - generic [ref=e99]:
+        - generic [ref=e100]: © All Rights Reserved by GetListedAE.com.
+        - list [ref=e102]:
+          - listitem [ref=e103]:
+            - link "" [ref=e104] [cursor=pointer]:
+              - /url: https://x.com/getlistedae
+              - generic [ref=e105]: 
+          - listitem [ref=e106]:
+            - link "" [ref=e107] [cursor=pointer]:
+              - /url: https://linkedin.com/company/getlistedae
+              - generic [ref=e108]: 
+          - listitem [ref=e109]:
+            - link "" [ref=e110] [cursor=pointer]:
+              - /url: https://faceboook.com/getlistedae
+              - generic [ref=e111]: 
+          - listitem [ref=e112]:
+            - link "" [ref=e113] [cursor=pointer]:
+              - /url: https://instagram.com/getlistedae
+              - generic [ref=e114]: 
+  - generic [ref=e115]: desktop
+  - status
+  - img [ref=e118]

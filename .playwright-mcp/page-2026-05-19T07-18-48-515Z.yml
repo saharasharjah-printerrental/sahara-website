@@ -1,0 +1,159 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - link "Site Logo" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img "Site Logo" [ref=e7]
+    - generic [ref=e8]:
+      - link "Sign In" [ref=e10] [cursor=pointer]:
+        - /url: javascript:void()
+      - text: 
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - generic [ref=e14]:
+        - heading "Welcome to Storeboard! Sign Up!" [level=2] [ref=e15]:
+          - text: Welcome to Storeboard!
+          - generic [ref=e16]: Sign Up!
+        - generic [ref=e18]:
+          - generic [ref=e19]:
+            - textbox "First Name" [ref=e21]
+            - textbox "Last Name" [ref=e23]
+          - textbox "E-mail Address" [ref=e26]
+          - generic [ref=e28]:
+            - textbox "Password" [ref=e29]
+            - generic [ref=e30] [cursor=pointer]: 
+          - generic [ref=e31]:
+            - generic [ref=e32]:
+              - textbox "Confirm Password" [ref=e33]
+              - generic [ref=e34] [cursor=pointer]: 
+            - generic [ref=e35]:
+              - text: "Password Requirements:"
+              - list [ref=e36]:
+                - listitem [ref=e37]: Password must be between 8 and 16 characters in length.
+                - listitem [ref=e38]: Password must only contain alphanumeric characters (A-Z, a-z, 0-9).
+                - listitem [ref=e39]: Password may contain only one of these special characters (@, !, $).
+                - listitem [ref=e40]: Password must contain at least one capital letter.
+                - listitem [ref=e41]: Password must contain at least one number.
+                - listitem [ref=e42]: Password can't contain spaces.
+          - generic [ref=e45] [cursor=pointer]:
+            - checkbox "I have read and agree to Storeboard's Terms & Conditions, Posting Guidelines and Privacy Policy.Star" [ref=e46]
+            - text: I have read and agree to
+            - link "Storeboard's Terms & Conditions" [ref=e47]:
+              - /url: https://storeboard.com/terms/
+            - text: ","
+            - link "Posting Guidelines" [ref=e48]:
+              - /url: /Storeboard-Posting-Guidelines.asp
+            - text: and
+            - link "Privacy Policy" [ref=e49]:
+              - /url: https://storeboard.com/privacy/
+            - text: .
+            - img "Star" [ref=e51]
+          - generic [ref=e54] [cursor=pointer]:
+            - checkbox "By checking this box I agree to receive text messages from Storeboard LLC. Msg/data rates may apply. Msg frequency varies. Reply STOP to unsubscribe. Privacy Policy & Terms of Service" [ref=e55]
+            - text: By checking this box I agree to receive text messages from Storeboard LLC. Msg/data rates may apply. Msg frequency varies. Reply STOP to unsubscribe.
+            - link "Privacy Policy" [ref=e56]:
+              - /url: /privacy/
+            - text: "&"
+            - link "Terms of Service" [ref=e57]:
+              - /url: /terms/
+          - iframe [ref=e62]:
+            - generic [ref=f14e2]:
+              - generic [ref=f14e3]:
+                - checkbox "I'm not a robot" [ref=f14e7]
+                - generic [ref=f14e11]: I'm not a robot
+              - generic [ref=f14e17]: reCAPTCHA
+          - button "Let's go!" [ref=e66] [cursor=pointer]
+      - generic [ref=e67]:
+        - heading "Ready to Get the Word Out? Discover Products and Services In Your Neighborhood and Beyond!" [level=2] [ref=e68]:
+          - text: Ready to Get the Word Out?
+          - generic [ref=e69]: Discover Products and Services In Your Neighborhood and Beyond!
+        - iframe [ref=e71]:
+          - generic [active] [ref=f10e1]:
+            - generic "YouTube Video Player" [ref=f10e3]
+            - generic [ref=f10e5]:
+              - generic:
+                - generic:
+                  - button "Play video" [ref=f10e10] [cursor=pointer]:
+                    - generic [ref=f10e13]:
+                      - img
+                  - button "Hide player controls" [ref=f10e14] [cursor=pointer]
+                  - generic [ref=f10e16]:
+                    - generic [ref=f10e21]:
+                      - generic [ref=f10e22]:
+                        - link "Storeboard Helps You Share \"It\"!" [ref=f10e23] [cursor=pointer]:
+                          - /url: https://www.youtube.com/watch?v=-PuBaedQ83o
+                        - link "Storeboard.com" [ref=f10e24] [cursor=pointer]:
+                          - /url: /channel/UCdavEvAJzyqN95t-bLV-O5g
+                          - generic [ref=f10e25]: Storeboard.com
+                      - generic [ref=f10e26]:
+                        - button "thumbnail-image" [ref=f10e27] [cursor=pointer]:
+                          - img "thumbnail-image" [ref=f10e28]
+                        - generic [ref=f10e30]:
+                          - generic: Storeboard.com
+                          - generic: 118 subscribers
+                    - generic [ref=f10e31]:
+                      - button "Share" [ref=f10e34] [cursor=pointer]:
+                        - generic [ref=f10e38]:
+                          - img
+                      - link "Watch on YouTube" [ref=f10e45] [cursor=pointer]:
+                        - /url: https://www.youtube.com/watch?v=-PuBaedQ83o
+                        - generic [ref=f10e48]:
+                          - text: Watch on
+                          - img [ref=f10e50]:
+                            - generic [ref=f10e52]:
+                              - img
+        - paragraph [ref=e72]: Storeboard is a social media site which allows you to share and discover products and services.
+    - generic [ref=e73]:
+      - heading "Join These Companies and Millions More on Storeboard!" [level=2] [ref=e74]
+      - generic [ref=e75]:
+        - img "outback-stake-house" [ref=e77]
+        - img "coldwellbanker" [ref=e79]
+        - img "children-international" [ref=e81]
+        - img "best-bue-logo" [ref=e83]
+        - img "bbb" [ref=e85]
+        - img "holidayInn-express" [ref=e87]
+      - paragraph [ref=e88]:
+        - link "Storeboard Helps Connect The World!" [ref=e89] [cursor=pointer]:
+          - /url: /storeboardcom/videos/the-internet-has-broken-down-walls-storeboard-helps-connect-it/46430
+        - text: •
+        - link "Best Website To Promote Your Business" [ref=e90] [cursor=pointer]:
+          - /url: https://website-submissions.blogspot.com/2013/12/best-website-to-promote-your-business.html
+        - text: •
+        - link "Storeboard In The News!" [ref=e91] [cursor=pointer]:
+          - /url: /press
+        - text: •
+        - link "Storeboard Helps You Share \"It!\"" [ref=e92] [cursor=pointer]:
+          - /url: /storeboardcom/videos/storeboard-helps-you-share-it/46490
+  - generic [ref=e94]:
+    - generic [ref=e95]:
+      - img "Site Logo" [ref=e97]
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]: "Language:"
+          - link "اختيار اللغة" [ref=e105] [cursor=pointer]:
+            - /url: "#"
+            - text: اختيار اللغة▼
+        - generic [ref=e106]:
+          - generic [ref=e107]: "Country:"
+          - link "Worldwide" [ref=e109] [cursor=pointer]:
+            - /url: /locations/international/
+    - generic [ref=e110]:
+      - generic [ref=e111]:
+        - link "About" [ref=e112] [cursor=pointer]:
+          - /url: /about/
+        - text: "|"
+        - link "Premium Packages" [ref=e113] [cursor=pointer]:
+          - /url: /premiumpackages/
+        - text: "|"
+        - link "Contact Us" [ref=e114] [cursor=pointer]:
+          - /url: /contact-us/
+        - text: "|"
+        - link "Terms and Conditions" [ref=e115] [cursor=pointer]:
+          - /url: /terms/
+        - text: "|"
+        - link "Privacy Policy" [ref=e116] [cursor=pointer]:
+          - /url: /privacy/
+        - text: "|"
+        - link "Press" [ref=e117] [cursor=pointer]:
+          - /url: /press/
+      - generic [ref=e118]: Copyright © 2016-2026 Storeboard - All Rights Reserved
+  - img [ref=e121]

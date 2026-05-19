@@ -1,0 +1,261 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e3]:
+    - generic [ref=e5]:
+      - link "APSense Digital Marketing Hub Logo" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img "APSense Digital Marketing Hub Logo" [ref=e8]
+      - text:            
+      - navigation [ref=e9]:
+        - link "Join APSense" [ref=e10] [cursor=pointer]:
+          - /url: /register.html
+  - generic [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: The All-in-One Digital Marketing Hub
+      - heading "Built for Digital Marketers. Powered by Community." [level=1] [ref=e16]:
+        - text: Built for Digital Marketers.
+        - text: Powered by Community.
+      - paragraph [ref=e17]: APSense is the platform for digital marketers, agencies, and businesses who want to grow smarter. Whether you work in digital marketing or need it to grow your business — APSense gives you the tools, the content reach, and the community to make it happen.
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - generic [ref=e21]: 
+            - generic [ref=e22]: Marketing Tools & Services for Members
+          - generic [ref=e23]:
+            - generic [ref=e24]: 
+            - generic [ref=e25]: High-DA Article Directory (Boost SEO)
+          - generic [ref=e26]:
+            - generic [ref=e27]: 
+            - generic [ref=e28]: AI & AR Cutting-Edge Marketing Tech
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: 
+            - generic [ref=e32]: Joint Ventures & Business Cooperation
+          - generic [ref=e33]:
+            - generic [ref=e34]: 
+            - generic [ref=e35]: Traffic Exchange & Resource Sharing
+          - generic [ref=e36]:
+            - generic [ref=e37]: 
+            - generic [ref=e38]: 1M+ Active Professional Community
+    - generic [ref=e41]:
+      - heading "Member Login" [level=6] [ref=e42]
+      - generic [ref=e43]:
+        - heading "Username" [level=6] [ref=e44]
+        - textbox [ref=e45]
+      - generic [ref=e46]:
+        - heading "Password" [level=6] [ref=e47]
+        - textbox "Password" [ref=e48]
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - checkbox [ref=e51]
+          - heading "Remember me" [level=6] [ref=e52]
+        - link "Forgot password?" [ref=e53] [cursor=pointer]:
+          - /url: /site/forgot_password
+      - button "Sign in" [ref=e54] [cursor=pointer]
+      - heading "Or" [level=6] [ref=e56]
+      - generic [ref=e59]:
+        - generic "Facebook Login" [ref=e60] [cursor=pointer]:
+          - generic [ref=e61]: 
+        - generic "Google Login" [ref=e62]:
+          - generic [ref=e63]:
+            - button "تسجيل الدخول باستخدام Googleيفتح الرابط في علامة تبويب جديدة" [ref=e65] [cursor=pointer]:
+              - img [ref=e70]
+            - iframe
+        - generic "Microsoft Login" [ref=e77] [cursor=pointer]:
+          - generic [ref=e78]: 
+      - paragraph [ref=e79]:
+        - text: Don't have an account?
+        - link "Create a Free Account" [ref=e80] [cursor=pointer]:
+          - /url: /register.html
+  - generic [ref=e84]:
+    - generic [ref=e85]:
+      - heading "Join These Marketing Professionals" [level=6] [ref=e86]
+      - generic [ref=e87]: Recent Online
+    - generic [ref=e89]:
+      - link "avatar" [ref=e92] [cursor=pointer]:
+        - /url: /user/kiravely
+        - img "avatar" [ref=e94]
+      - link "avatar" [ref=e97] [cursor=pointer]:
+        - /url: /user/sonachauhan
+        - img "avatar" [ref=e99]
+      - link "avatar" [ref=e102] [cursor=pointer]:
+        - /url: /user/gentsdenim
+        - img "avatar" [ref=e104]
+      - link "avatar" [ref=e107] [cursor=pointer]:
+        - /url: /user/lyreign
+        - img "avatar" [ref=e109]
+      - link "avatar" [ref=e112] [cursor=pointer]:
+        - /url: /user/acornsales
+        - img "avatar" [ref=e114]
+      - link "avatar" [ref=e117] [cursor=pointer]:
+        - /url: /user/cosmeticobesity
+        - img "avatar" [ref=e119]
+      - link "avatar" [ref=e122] [cursor=pointer]:
+        - /url: /user/jamesrt
+        - img "avatar" [ref=e124]
+      - link "avatar" [ref=e127] [cursor=pointer]:
+        - /url: /user/sathyafibernet
+        - img "avatar" [ref=e129]
+      - link "avatar" [ref=e132] [cursor=pointer]:
+        - /url: /user/fifa2026tickets
+        - img "avatar" [ref=e134]
+      - link "avatar" [ref=e137] [cursor=pointer]:
+        - /url: /user/codexoxo
+        - img "avatar" [ref=e139]
+      - link "avatar" [ref=e142] [cursor=pointer]:
+        - /url: /user/permitdivision
+        - img "avatar" [ref=e144]
+      - link "avatar" [ref=e147] [cursor=pointer]:
+        - /url: /user/impactmaker
+        - img "avatar" [ref=e149]
+      - link "avatar" [ref=e152] [cursor=pointer]:
+        - /url: /user/pomonabailbonds
+        - img "avatar" [ref=e154]
+      - link "avatar" [ref=e157] [cursor=pointer]:
+        - /url: /user/tridevambulance
+        - img "avatar" [ref=e159]
+      - link "avatar" [ref=e162] [cursor=pointer]:
+        - /url: /user/playhousebyramagya
+        - img "avatar" [ref=e164]
+      - link "avatar" [ref=e167] [cursor=pointer]:
+        - /url: /user/jaswantnayak532
+        - img "avatar" [ref=e169]
+      - link "avatar" [ref=e172] [cursor=pointer]:
+        - /url: /user/ramagyainstitute
+        - img "avatar" [ref=e174]
+      - link "avatar" [ref=e177] [cursor=pointer]:
+        - /url: /user/kahyagil
+        - img "avatar" [ref=e179]
+      - link "avatar" [ref=e182] [cursor=pointer]:
+        - /url: /user/ramagyasportsacademy
+        - img "avatar" [ref=e184]
+      - link "avatar" [ref=e187] [cursor=pointer]:
+        - /url: /user/medicareco
+        - img "avatar" [ref=e189]
+  - generic [ref=e192]:
+    - generic [ref=e193]:
+      - heading "Everything a Digital Marketer Needs, in One Place" [level=2] [ref=e194]
+      - paragraph [ref=e195]: Tools to enhance your marketing, a high-authority platform to amplify your content, and a thriving community to grow your business through real collaboration.
+    - generic [ref=e196]:
+      - generic [ref=e198]:
+        - generic [ref=e200]: 
+        - heading "Community-Powered Business Growth" [level=3] [ref=e201]
+        - paragraph [ref=e202]: APSense is home to 1M+ digital marketers, agencies, and business owners. Find the right partners for joint ventures, exchange traffic, share resources, and build real business relationships — not just a follower count.
+        - generic [ref=e203]:
+          - text: ✓ Joint ventures & business cooperation
+          - text: ✓ Traffic exchange & resource sharing
+          - text: ✓ Help and learn from fellow marketers
+      - generic [ref=e205]:
+        - generic [ref=e207]: 
+        - heading "Marketing Tools Built for Members" [level=3] [ref=e208]
+        - paragraph [ref=e209]: Access a suite of practical marketing tools at an affordable member price — SEO analyzer, Business vCard, reward programs, and more. Run and scale your digital marketing without the enterprise price tag.
+        - generic [ref=e210]:
+          - text: ✓ SEO, vCard, rewards & more
+          - text: ✓ Affordable member pricing
+          - text: ✓ All tools in one platform
+      - generic [ref=e212]:
+        - generic [ref=e214]: 
+        - heading "High-DA Article Directory" [level=3] [ref=e215]
+        - paragraph [ref=e216]: Publish articles, reviews, and business content on APSense's high domain-authority platform. Earn valuable SEO backlinks, reach a targeted marketing audience, and build your reputation as an industry voice.
+        - generic [ref=e217]:
+          - text: ✓ High-DA backlinks for SEO
+          - text: ✓ Targeted marketing audience
+          - text: ✓ Build authority & visibility
+      - generic [ref=e219]:
+        - generic [ref=e221]: 
+        - heading "Niche Hubs & Industry Groups" [level=3] [ref=e222]
+        - paragraph [ref=e223]: Join groups tailored to your industry — from eCommerce and finance to healthcare and local trade. Engage with peers who understand your market, discover niche opportunities, and stay ahead in your specific field.
+        - generic [ref=e224]:
+          - text: ✓ Industry-specific communities
+          - text: ✓ Niche business opportunities
+          - text: ✓ Targeted peer connections
+      - generic [ref=e226]:
+        - generic [ref=e228]: 
+        - heading "AI & AR Marketing Technology" [level=3] [ref=e229]
+        - paragraph [ref=e230]: Stay ahead with cutting-edge tools — use AI for content optimization and audience insights, and WebAR technology to create immersive, interactive marketing experiences that stand out from the crowd.
+        - generic [ref=e231]:
+          - text: ✓ AI-powered content & insights
+          - text: ✓ WebAR interactive campaigns
+          - text: ✓ Next-generation marketing tools
+      - generic [ref=e233]:
+        - generic [ref=e235]: 
+        - heading "Add-on Services for Members" [level=3] [ref=e236]
+        - paragraph [ref=e237]: Unlock a growing suite of specialized services designed to enhance every aspect of your digital marketing — from your online presence to lead conversion and customer retention.
+        - generic [ref=e238]:
+          - text: ✓ Business vCard & Website Builder
+          - text: ✓ WebAR Marketing & Web Toolbox
+          - text: ✓ SEO Analyzer & SEO Report
+          - text: ✓ FOMO Popups & Coupon Service
+          - text: ✓ Reward Royalty & Website Review
+          - text: ✓ DealTicket.app & more — always growing
+  - generic [ref=e241]:
+    - heading "Join APSense — It's Free" [level=2] [ref=e242]
+    - paragraph [ref=e243]:
+      - text: Your next business partner, your next marketing tool, your next big opportunity — they're already here.
+      - text: Over one million digital marketers have made APSense their home. Come build with them.
+    - generic [ref=e246]:
+      - generic [ref=e248]:
+        - strong [ref=e249]: 1M+ Members
+        - text: Active global community
+      - generic [ref=e251]:
+        - strong [ref=e252]: Practical Tools
+        - text: Built for digital marketers
+      - generic [ref=e254]:
+        - strong [ref=e255]: High-DA Platform
+        - text: Publish & boost your SEO
+      - generic [ref=e257]:
+        - strong [ref=e258]: Real Collaboration
+        - text: JVs, referrals & partnerships
+    - link " Create Your Free Account Now" [ref=e259] [cursor=pointer]:
+      - /url: /register.html
+      - generic [ref=e260]: 
+      - text: Create Your Free Account Now
+    - paragraph [ref=e261]: Free to join • No credit card required • Takes less than a minute
+  - contentinfo [ref=e262]:
+    - generic [ref=e263]:
+      - generic [ref=e264]:
+        - generic [ref=e265]:
+          - img "APSense.com" [ref=e266]
+          - paragraph [ref=e267]: Digital Marketing Hub Connect, Learn & Grow Your Business. All-in-One Tools & Community.
+        - generic [ref=e268]:
+          - heading "Platform" [level=5] [ref=e269]
+          - link "How It Works" [ref=e270] [cursor=pointer]:
+            - /url: /site/howitworks
+          - link "WebAR Marketing" [ref=e271] [cursor=pointer]:
+            - /url: https://lookii.com
+          - link "Business vCard" [ref=e272] [cursor=pointer]:
+            - /url: https://vcard.apsense.com
+          - link "DealTicket.app" [ref=e273] [cursor=pointer]:
+            - /url: https://dealticket.app
+        - generic [ref=e274]:
+          - heading "Sitemaps" [level=5] [ref=e275]
+          - link "Articles" [ref=e276] [cursor=pointer]:
+            - /url: /sitemap/articles
+          - link "Products" [ref=e277] [cursor=pointer]:
+            - /url: /sitemap/products
+          - link "Questions" [ref=e278] [cursor=pointer]:
+            - /url: /sitemap/questions
+          - link "NicheHubs" [ref=e279] [cursor=pointer]:
+            - /url: /sitemap/nichehubs
+        - generic [ref=e280]:
+          - heading "Company" [level=5] [ref=e281]
+          - link "About APSense" [ref=e282] [cursor=pointer]:
+            - /url: /site/about
+          - link "Support Forum" [ref=e283] [cursor=pointer]:
+            - /url: /forum/apsense
+          - link "Contact Us" [ref=e284] [cursor=pointer]:
+            - /url: /site/contact
+        - generic [ref=e285]:
+          - heading "Others" [level=5] [ref=e286]
+          - link "Privacy Policy" [ref=e287] [cursor=pointer]:
+            - /url: /privacy.html
+          - link "Terms of Use" [ref=e288] [cursor=pointer]:
+            - /url: /terms.html
+          - link "Archived" [ref=e289] [cursor=pointer]:
+            - /url: /story
+      - paragraph [ref=e291]: © 2026 APSense LTD. All Rights Reserved.
+  - generic [ref=e292]:
+    - paragraph [ref=e293]: This website uses cookies to ensure you get the best experience on our website. By continuing to use this site, you accept our use of cookies.
+    - link "Accept" [ref=e294] [cursor=pointer]:
+      - /url: "#"
+    - link "Reject" [ref=e295] [cursor=pointer]:
+      - /url: "#"

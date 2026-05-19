@@ -1,0 +1,366 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - link "bizify Business Directory Logo" [ref=e6] [cursor=pointer]:
+      - /url: https://www.bizify.co.uk/
+      - img "bizify Business Directory Logo" [ref=e7]
+    - text:  
+    - navigation [ref=e9]:
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - link "My Account / Sign Up" [ref=e12] [cursor=pointer]:
+            - /url: "#login-popup"
+    - generic [ref=e14]:
+      - generic [ref=e15]: FIND
+      - textbox "Business or Category" [ref=e16]:
+        - /placeholder: I need a...
+        - text: search
+      - generic [ref=e17]: IN
+      - textbox "Location" [ref=e19]:
+        - /placeholder: Location..
+        - text: add-business-in
+      - button "Search" [ref=e20] [cursor=pointer]
+  - generic [ref=e22]:
+    - heading "Outrank SEO Agency In Middlesbrough, Cleveland" [level=1] [ref=e25]
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - img "Logo of Outrank SEO Agency In Middlesbrough, Cleveland" [ref=e30]
+          - generic [ref=e32]:
+            - generic "Rated 4.9 / 5 Stars" [ref=e33]:
+              - link "    " [ref=e35] [cursor=pointer]:
+                - /url: https://www.bizify.co.uk/seo-agency/middlesbrough/TS2-1RH/outrank#reviews_a
+                - generic [ref=e36]: 
+                - generic [ref=e37]: 
+                - generic [ref=e38]: 
+                - generic [ref=e39]: 
+                - generic [ref=e40]: 
+            - generic [ref=e41]: 30 Reviews
+          - generic [ref=e42] [cursor=pointer]:
+            - generic [ref=e43]: 
+            - text: Verified
+        - generic [ref=e44]:
+          - heading "Outrank" [level=2] [ref=e45]
+          - 'link "Tel: 01642 931380" [ref=e47] [cursor=pointer]':
+            - /url: tel:+441642931380
+            - text: "Tel: 01642 931380"
+          - link "www.outrank.co.uk" [ref=e48] [cursor=pointer]:
+            - /url: http://www.outrank.co.uk?utm_source=bizify
+          - paragraph [ref=e49]: Serving the entire UK
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - text: Unit 18
+              - text: Riverside House
+              - text: High Force Road
+            - text: Middlesbrough
+            - text: Cleveland
+            - text: TS2 1RH
+        - generic [ref=e53]:
+          - link "Visit Website" [ref=e54] [cursor=pointer]:
+            - /url: http://www.outrank.co.uk?utm_source=bizify
+          - link "Call Now" [ref=e55] [cursor=pointer]:
+            - /url: tel:+441642931380
+          - list [ref=e56]:
+            - listitem [ref=e57]:
+              - link "Follow on Facebook" [ref=e58] [cursor=pointer]:
+                - /url: https://www.facebook.com/outrankagency
+                - generic [ref=e59]: 
+            - listitem [ref=e60]:
+              - link "Follow on X" [ref=e61] [cursor=pointer]:
+                - /url: https://x.com/OutrankAgency
+                - generic [ref=e62]: 𝕏
+            - listitem [ref=e63]:
+              - link "Follow on Instagram" [ref=e64] [cursor=pointer]:
+                - /url: https://www.instagram.com/outrankagency
+                - generic [ref=e65]: 
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - heading "Key SEO Agency In Middlesbrough, Cleveland Services from Outrank" [level=2] [ref=e69]
+            - list [ref=e70]:
+              - listitem [ref=e71]: Conversion Rate Optimisation
+              - listitem [ref=e72]: CRO
+              - listitem [ref=e73]: Digital Marketing
+              - listitem [ref=e74]: E-commerce
+              - listitem [ref=e75]: Email Marketing
+              - listitem [ref=e76]: Paid Social
+              - listitem [ref=e77]: PPC
+              - listitem [ref=e78]: Responsive Websites
+            - list [ref=e79]:
+              - listitem [ref=e80]: Search Engine Optimisation
+              - listitem [ref=e81]: SEO
+              - listitem [ref=e82]: SEO Agency
+              - listitem [ref=e83]: SEO Company
+              - listitem [ref=e84]: Video Marketing
+              - listitem [ref=e85]: Website Design
+              - listitem [ref=e86]: Websites
+          - generic [ref=e87]:
+            - heading "Key Information on Outrank" [level=4] [ref=e88]
+            - generic [ref=e89]:
+              - strong [ref=e91]: Opening Times
+              - generic [ref=e92]:
+                - generic [ref=e93]: Monday
+                - generic [ref=e94]: 8:30 - 16:30
+              - generic [ref=e95]:
+                - generic [ref=e96]: Tuesday
+                - generic [ref=e97]: 8:30 - 16:30
+              - generic [ref=e98]:
+                - generic [ref=e99]: Wednesday
+                - generic [ref=e100]: 8:30 - 16:30
+              - generic [ref=e101]:
+                - generic [ref=e102]: Thursday
+                - generic [ref=e103]: 8:30 - 16:30
+              - generic [ref=e104]:
+                - generic [ref=e105]: Friday
+                - generic [ref=e106]: 8:30 - 16:30
+              - generic [ref=e107]:
+                - generic [ref=e108]: Saturday
+                - generic [ref=e109]: Closed - Closed
+              - generic [ref=e110]:
+                - generic [ref=e111]: Sunday
+                - generic [ref=e112]: Closed - Closed
+          - generic [ref=e113]:
+            - heading "Find Outrank in Middlesbrough" [level=4] [ref=e114]
+            - link "Localised map of Outrank" [ref=e115] [cursor=pointer]:
+              - /url: https://www.google.com/maps/dir//TS2%2B1RH
+              - img "Localised map of Outrank" [ref=e116]
+          - generic [ref=e117]:
+            - heading "Outrank's Gallery" [level=4] [ref=e118]
+            - generic [ref=e120]:
+              - link "Examples of work and services from Outrank" [ref=e122] [cursor=pointer]:
+                - /url: https://www.bizify.co.uk/media_upload/79FE84/gallery/gallery_20375_1692862460_79fe84_1692863026.png
+                - img "Examples of work and services from Outrank" [ref=e123]
+              - link "Examples of work and services from Outrank" [ref=e125] [cursor=pointer]:
+                - /url: https://www.bizify.co.uk/media_upload/79FE84/gallery/gallery_20375_1692862460_79fe84_1692863026_1.png
+                - img "Examples of work and services from Outrank" [ref=e126]
+              - link "Examples of work and services from Outrank" [ref=e128] [cursor=pointer]:
+                - /url: https://www.bizify.co.uk/media_upload/79FE84/gallery/gallery_20375_1692862460_79fe84_1692863027.png
+                - img "Examples of work and services from Outrank" [ref=e129]
+              - link "Examples of work and services from Outrank" [ref=e131] [cursor=pointer]:
+                - /url: https://www.bizify.co.uk/media_upload/79FE84/gallery/gallery_20375_1692862460_79fe84_1692863027_1.png
+                - img "Examples of work and services from Outrank" [ref=e132]
+              - link "Examples of work and services from Outrank" [ref=e134] [cursor=pointer]:
+                - /url: https://www.bizify.co.uk/media_upload/79FE84/gallery/gallery_20375_1692862460_79fe84_1692863027_2.png
+                - img "Examples of work and services from Outrank" [ref=e135]
+              - link "Examples of work and services from Outrank" [ref=e137] [cursor=pointer]:
+                - /url: https://www.bizify.co.uk/media_upload/79FE84/gallery/gallery_20375_1692862460_79fe84_1692863027_3.png
+                - img "Examples of work and services from Outrank" [ref=e138]
+        - generic [ref=e140]:
+          - generic [ref=e141]:
+            - heading "About Outrank in Middlesbrough" [level=3] [ref=e142]
+            - paragraph [ref=e143]:
+              - text: Here at
+              - strong [ref=e144]: Outrank
+              - text: ", we are a professional"
+              - strong [ref=e145]: SEO agency
+              - text: providing
+              - strong [ref=e146]: digital marketing
+              - text: services such as
+              - strong [ref=e147]: website design, SEO (search engine optimisation), CRO (conversion rate optimisation), marketing, website re-design, responsive websites, custom website design, e-commerce, social media, PPC, paid social, email marketing, local SEO, and video marketing
+              - text: to clients throughout
+              - strong [ref=e148]: Middlesbrough
+              - text: and the surrounding areas of
+              - strong [ref=e149]: Cleveland
+              - text: . If you want more information on the
+              - strong [ref=e150]: web design, SEO, and CRO services
+              - text: we offer, contact our experienced team today; we are always here to help.
+            - paragraph [ref=e151]:
+              - text: At
+              - strong [ref=e152]: Outrank
+              - text: ", we don't just follow trends - we set them. By combining cutting-edge strategies and ingenious creativity, we drive organic growth for your brand. From optimising website architecture to igniting social media buzz, we craft bespoke solutions tailored to your unique goals. Get ready to rewrite the rules of the digital game and outshine the competition with"
+              - strong [ref=e153]: Outrank
+              - text: by your side.
+            - heading "Why Choose Outrank?" [level=3] [ref=e154]
+            - paragraph [ref=e155]:
+              - strong [ref=e156]: Outrank's
+              - text: experienced team brings a wealth of expertise and knowledge, enabling them to craft effective and customised
+              - strong [ref=e157]: SEO
+              - text: plans for each client. By understanding our client's unique requirements, goals, and target audience, we tailor our strategies accordingly, ensuring that the
+              - strong [ref=e158]: SEO
+              - text: efforts align precisely with the client's specific business objectives. The result of this personalised approach is the ability to propel businesses past their competitors.
+              - strong [ref=e159]: Outrank
+              - text: empowers businesses to enhance online visibility and gain an edge over competitors by using data-driven
+              - strong [ref=e160]: SEO
+              - text: strategies and staying abreast of the latest industry trends. A key factor that sets
+              - strong [ref=e161]: Outrank
+              - text: apart is its experienced team that goes above and beyond to cater to its client's needs.
+            - heading "Web Design and SEO Services" [level=3] [ref=e162]
+            - paragraph [ref=e163]:
+              - text: When you choose our
+              - strong [ref=e164]: Middlesbrough
+              - text: "-based team for our"
+              - strong [ref=e165]: SEO
+              - text: services, remember that the aesthetic of your website could also benefit from a bit of work. This may mean changing the appearance of your website by freshening up its look with up-to-date images or making your website easier for customers to use (Conversions are everything! If consumers are finding your website but it's too hard to use, you are never going to convert them into paying customers). Whatever our team chooses to do is always in the customer's best interest, ensuring that your website is designed will attract as many consumers as possible and prove a success for both yourself and your business. Of course, all decisions will only ever be made with your permission; we advise what should be done, but it's your business at the end of the day, and the decision lies with you.
+            - heading "What Our Team Do" [level=3] [ref=e166]
+            - paragraph [ref=e167]:
+              - strong [ref=e168]: SEO
+              - text: is a service that we provide customers as an
+              - strong [ref=e169]: SEO company
+              - text: in
+              - strong [ref=e170]: Middlesbrough
+              - text: ", allowing them to increase the amount of traffic they receive to their website."
+              - strong [ref=e171]: Search engine optimisation
+              - text: could be one of the most important investments you will ever make for your business. This powerful tool could bring your online business community to life. The key to
+              - strong [ref=e172]: SEO
+              - text: is using various methods to help improve your visibility across search engines such as Google and Bing; this will increase the organic traffic driven to your website. By analysing your website, we will indicate what needs to be done to improve your online presence and generate as much business as possible. The importance of being found online is growing daily as more and more people rely on the internet to search for specific businesses, products, and services. Your business must rank well for the terms, phrases, products, and/or services you offer.
+            - heading "Get In Touch With Us Today" [level=4] [ref=e173]
+            - paragraph [ref=e174]:
+              - text: As an
+              - strong [ref=e175]: SEO agency
+              - text: in
+              - strong [ref=e176]: Middlesbrough
+              - text: ","
+              - strong [ref=e177]: Outrank
+              - text: is a force for businesses seeking to create an online presence. Our
+              - strong [ref=e178]: digital marketing
+              - text: services include
+              - strong [ref=e179]: website design, SEO (search engine optimisation), CRO (conversion rate optimisation), digital marketing, website re-design, responsive websites, custom website design, e-commerce, social media, PPC, paid social, email marketing, local SEO, and video marketing.
+              - strong [ref=e180]: Outrank
+              - text: delivers tailored and data-driven
+              - strong [ref=e181]: SEO
+              - text: strategies that propel businesses toward online success. We elevate online visibility, engage target audiences, and drive meaningful conversions by harnessing cutting-edge marketing strategies. As a result, all businesses that partner with
+              - strong [ref=e182]: Outrank
+              - text: experience their online presence soar to new heights, paving the way for sustainable growth. Contact
+              - strong [ref=e183]: Outrank
+              - text: today!!
+            - paragraph
+          - generic [ref=e184]:
+            - heading "Outrank in Middlesbrough Reviews" [level=4] [ref=e188]
+            - generic [ref=e190]:
+              - generic [ref=e191]:
+                - generic [ref=e192]:
+                  - generic [ref=e193]: Good service
+                  - generic [ref=e194]:
+                    - time [ref=e195]: Thu 26th Jun 2025
+                    - text: by fun
+                  - generic "Rated 5 / 5 Stars" [ref=e199]:
+                    - generic [ref=e200]:
+                      - generic [ref=e201]: 
+                      - generic [ref=e202]: 
+                      - generic [ref=e203]: 
+                      - generic [ref=e204]: 
+                      - generic [ref=e205]: 
+                  - paragraph [ref=e206]: Great Experience the team was good and delivered the work on time.
+                  - separator [ref=e207]
+                - generic [ref=e208]:
+                  - generic [ref=e209]: 5*
+                  - generic [ref=e210]:
+                    - time [ref=e211]: Thu 24th Aug 2023
+                    - text: by Darron Palmer Photography
+                  - generic "Rated 5 / 5 Stars" [ref=e215]:
+                    - generic [ref=e216]:
+                      - generic [ref=e217]: 
+                      - generic [ref=e218]: 
+                      - generic [ref=e219]: 
+                      - generic [ref=e220]: 
+                      - generic [ref=e221]: 
+                  - paragraph [ref=e222]:
+                    - text: Been Working with Adeel Saleem since July, very professional and polite, seen a major increase in my Seo ranking, Outrank is very transparent no hidden fees. show you results and how we are continuously progressing
+                    - text: I have been stung by many companies that claim to do on page and off page SEO but can’t fault Outrank at all.
+                    - text: Looking forward to continuing to work with them, and achieving great results.
+                  - separator [ref=e223]
+                - generic [ref=e224]:
+                  - generic [ref=e225]: 5*
+                  - generic [ref=e226]:
+                    - time [ref=e227]: Thu 24th Aug 2023
+                    - text: by Mathew
+                  - generic "Rated 5 / 5 Stars" [ref=e231]:
+                    - generic [ref=e232]:
+                      - generic [ref=e233]: 
+                      - generic [ref=e234]: 
+                      - generic [ref=e235]: 
+                      - generic [ref=e236]: 
+                      - generic [ref=e237]: 
+                  - paragraph [ref=e238]: Antony Grimley at Outrank has been great and very supportive of improving my business's online presence. I recently moved my SEO & web design over to Outrank (3 months), and so far, I’m impressed with the results. I look forward to seeing how they help my business grow over the coming months. Initially, I was a skeptic as there are plenty of so called SEO Companies who want your money. Still, Antony has been so helpful with explaining how SEO works and translating all the tech jargon for me. I would recommend Antony/Outrank to anyone needing help.
+                  - separator [ref=e239]
+              - generic [ref=e241]:
+                - link "Leave a Review" [ref=e244] [cursor=pointer]:
+                  - /url: "javascript: void(0);"
+                - link "Show more reviews" [ref=e246] [cursor=pointer]:
+                  - /url: "#reviews_more_anchor"
+              - generic:     
+  - generic [ref=e249]:
+    - strong [ref=e251]: Sign up to receive updates from bizify.
+    - generic [ref=e255]:
+      - textbox "Email Address" [ref=e256]
+      - textbox [ref=e258]
+      - button "Subscribe" [ref=e260] [cursor=pointer]
+  - generic [ref=e262]:
+    - generic [ref=e263]:
+      - generic [ref=e264]:
+        - img "bizify Business Directory" [ref=e265]
+        - heading "Join the fastest growing free UK business directory" [level=4] [ref=e266]:
+          - text: Join the fastest growing
+          - text: free UK business directory
+        - link "Add my business" [ref=e267] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/add-new-company
+      - generic [ref=e269]:
+        - img "Bizify Business Directory" [ref=e271]
+        - generic [ref=e272]:
+          - text: Unit 18 Riverside House
+          - text: High Force Road
+          - text: Middlesbrough
+          - text: North Yorkshire
+          - text: TS2 1RH
+          - text: "Telephone:"
+          - link "0333 014 8550" [ref=e274] [cursor=pointer]:
+            - /url: tel:03330148550
+      - generic [ref=e275]:
+        - strong [ref=e276]: Useful Links
+        - link "Home" [ref=e277] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/
+        - link "Create My Business Listing" [ref=e278] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/add-new-company
+        - link "My Account" [ref=e279] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/user-account
+        - link "Free SEO report" [ref=e280] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/seo-report
+        - link "About Us" [ref=e281] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/about-us
+        - link "Recent Updates" [ref=e282] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/recent-updates
+        - link "Blog" [ref=e283] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/blog
+        - link "Contact Us" [ref=e284] [cursor=pointer]:
+          - /url: https://www.bizify.co.uk/contact
+        - list [ref=e285]:
+          - listitem [ref=e286]:
+            - link "Like bizify On Facebook" [ref=e287] [cursor=pointer]:
+              - /url: https://www.facebook.com/bizifyuk/
+              - generic [ref=e288]: 
+          - listitem [ref=e289]:
+            - link "Like bizify On Instagram" [ref=e290] [cursor=pointer]:
+              - /url: https://www.instagram.com/bizifyuk/
+              - generic [ref=e291]: 
+          - listitem [ref=e292]:
+            - link "Follow bizify On Twitter" [ref=e293] [cursor=pointer]:
+              - /url: https://x.com/bizify_uk
+              - generic [ref=e294]: 𝕏
+          - listitem [ref=e295]:
+            - link "Follow us on Linkedin" [ref=e296] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/bizify-ltd
+              - generic [ref=e297]: 
+          - listitem [ref=e298]:
+            - link "Follow us on Youtube" [ref=e299] [cursor=pointer]:
+              - /url: https://www.youtube.com/channel/UC_6IVl5GnwvqCGE2iXbXYqg/featured
+              - generic [ref=e300]: 
+    - generic [ref=e302]:
+      - list [ref=e304]:
+        - listitem [ref=e305]:
+          - link "Cookie Policy" [ref=e306] [cursor=pointer]:
+            - /url: https://www.bizify.co.uk/cookies
+        - listitem [ref=e307]:
+          - link "Privacy Policy" [ref=e308] [cursor=pointer]:
+            - /url: https://www.bizify.co.uk/privacy
+        - listitem [ref=e309]:
+          - link "Terms & Conditions" [ref=e310] [cursor=pointer]:
+            - /url: https://www.bizify.co.uk/terms-conditions
+        - listitem [ref=e311]:
+          - link "Terms Of Use" [ref=e312] [cursor=pointer]:
+            - /url: https://www.bizify.co.uk/terms-of-use
+        - listitem [ref=e313]:
+          - link "FAQ's" [ref=e314] [cursor=pointer]:
+            - /url: https://www.bizify.co.uk/faq
+        - listitem [ref=e315]:
+          - link "Categories & HTML Sitemap" [ref=e316] [cursor=pointer]:
+            - /url: https://www.bizify.co.uk/category-list
+      - paragraph [ref=e318]: Copyright © 2026 bizify® All Rights Reserved. bizify® is a registered trademark.

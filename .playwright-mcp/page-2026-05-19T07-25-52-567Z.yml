@@ -1,0 +1,364 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "Hotfrog US" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e7]: Hotfrog US
+        - text: 
+        - list [ref=e9]:
+          - listitem [ref=e10]:
+            - link " Add Business" [ref=e11] [cursor=pointer]:
+              - /url: /add
+              - generic [ref=e12]: 
+              - text: Add Business
+          - listitem [ref=e13]:
+            - link " Log in" [ref=e14] [cursor=pointer]:
+              - /url: /login
+              - generic [ref=e15]: 
+              - text: Log in
+          - listitem [ref=e16]:
+            - button "" [ref=e17] [cursor=pointer]:
+              - generic [ref=e18]: 
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - heading "Hotfrog - Get found online" [level=1] [ref=e22]
+        - generic [ref=e23]:
+          - heading "Find." [level=2] [ref=e25]
+          - heading "Book." [level=2] [ref=e28]
+          - heading "Review." [level=2] [ref=e30]
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: I'm Looking For
+          - generic [ref=e36]: 
+          - textbox "I'm Looking For" [ref=e37]:
+            - /placeholder: Look for...
+        - generic [ref=e38]:
+          - generic [ref=e39]: FIND
+          - generic [ref=e40]: 
+          - textbox "FIND" [ref=e41]:
+            - /placeholder: in this area...
+        - button "Find" [ref=e42] [cursor=pointer]
+      - text:  
+    - generic [ref=e45]:
+      - generic [ref=e47]:
+        - generic [ref=e49]: 
+        - generic [ref=e50]: United States's Freshest Local Business Directory
+      - generic [ref=e52]:
+        - generic [ref=e54]: 
+        - generic [ref=e55]: Find & book the right business the first time
+      - generic [ref=e57]:
+        - generic [ref=e59]: 
+        - generic [ref=e60]: Join the growing community, write business reviews
+  - main [ref=e61]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - heading [level=2]
+        - generic [ref=e65]:
+          - link "Abbeville" [ref=e67] [cursor=pointer]:
+            - /url: /search/abbeville
+          - link "Abbeville" [ref=e69] [cursor=pointer]:
+            - /url: /search/abbeville
+          - link "Aberdeen" [ref=e71] [cursor=pointer]:
+            - /url: /search/aberdeen
+          - link "Aberdeen" [ref=e73] [cursor=pointer]:
+            - /url: /search/aberdeen
+          - link "Aberdeen" [ref=e75] [cursor=pointer]:
+            - /url: /search/aberdeen
+          - link "Abilene" [ref=e77] [cursor=pointer]:
+            - /url: /search/abilene
+          - link "Abilene" [ref=e79] [cursor=pointer]:
+            - /url: /search/abilene
+          - link "Abingdon" [ref=e81] [cursor=pointer]:
+            - /url: /search/abingdon
+          - link "Abington" [ref=e83] [cursor=pointer]:
+            - /url: /search/abington
+          - link "Abington" [ref=e85] [cursor=pointer]:
+            - /url: /search/abington
+          - link "Acoma" [ref=e87] [cursor=pointer]:
+            - /url: /search/acoma
+          - link "Ada" [ref=e89] [cursor=pointer]:
+            - /url: /search/ada
+          - link "Adams" [ref=e91] [cursor=pointer]:
+            - /url: /search/adams
+          - link "Adrian" [ref=e93] [cursor=pointer]:
+            - /url: /search/adrian
+          - link "Aiken" [ref=e95] [cursor=pointer]:
+            - /url: /search/aiken
+          - link "Ajo" [ref=e97] [cursor=pointer]:
+            - /url: /search/ajo
+          - link "Akron" [ref=e99] [cursor=pointer]:
+            - /url: /search/akron
+          - link "Alabama" [ref=e101] [cursor=pointer]:
+            - /url: /search/alabama
+          - link "Alameda" [ref=e103] [cursor=pointer]:
+            - /url: /search/alameda
+          - link "Alamogordo" [ref=e105] [cursor=pointer]:
+            - /url: /search/alamogordo
+          - link "Alamosa" [ref=e107] [cursor=pointer]:
+            - /url: /search/alamosa
+          - link "Alaska" [ref=e109] [cursor=pointer]:
+            - /url: /search/alaska
+          - link "Albany" [ref=e111] [cursor=pointer]:
+            - /url: /search/albany
+          - link "Albany" [ref=e113] [cursor=pointer]:
+            - /url: /search/albany
+          - link "Albany" [ref=e115] [cursor=pointer]:
+            - /url: /search/albany
+          - link "Albert Lea" [ref=e117] [cursor=pointer]:
+            - /url: /search/albert-lea
+          - link "Albuquerque" [ref=e119] [cursor=pointer]:
+            - /url: /search/albuquerque
+          - link "Alcoa" [ref=e121] [cursor=pointer]:
+            - /url: /search/alcoa
+          - link "Alexander City" [ref=e123] [cursor=pointer]:
+            - /url: /search/alexander-city
+          - link "Alexandria" [ref=e125] [cursor=pointer]:
+            - /url: /search/alexandria
+          - link "Alexandria" [ref=e127] [cursor=pointer]:
+            - /url: /search/alexandria
+          - link "Alexandria" [ref=e129] [cursor=pointer]:
+            - /url: /search/alexandria
+          - link "Alhambra" [ref=e131] [cursor=pointer]:
+            - /url: /search/alhambra
+          - link "Aliquippa" [ref=e133] [cursor=pointer]:
+            - /url: /search/aliquippa
+          - link "Allentown" [ref=e135] [cursor=pointer]:
+            - /url: /search/allentown
+          - link "Alliance" [ref=e137] [cursor=pointer]:
+            - /url: /search/alliance
+          - link "Alma" [ref=e139] [cursor=pointer]:
+            - /url: /search/alma
+          - link "Alpine" [ref=e141] [cursor=pointer]:
+            - /url: /search/alpine
+          - link "Alta" [ref=e143] [cursor=pointer]:
+            - /url: /search/alta
+          - link "Alton" [ref=e145] [cursor=pointer]:
+            - /url: /search/alton
+        - link " Load More" [ref=e147] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e148]: 
+          - text: Load More
+      - generic [ref=e149]:
+        - heading "Recent Activity" [level=2] [ref=e150]
+        - list [ref=e151]:
+          - listitem [ref=e152]:
+            - paragraph [ref=e153]:
+              - link "Bright Network Llc" [ref=e154] [cursor=pointer]:
+                - /url: //www.hotfrog.com/company/87111e57996c14a3fbb9278d60b235c0
+            - paragraph [ref=e155]:
+              - emphasis [ref=e156]: claimed their business
+            - paragraph [ref=e157]: Today at 07:13
+          - listitem [ref=e158]:
+            - paragraph [ref=e159]:
+              - link "Spartan Law" [ref=e160] [cursor=pointer]:
+                - /url: //www.hotfrog.com/company/4a520ba2f70061912ddbb0f262f9a30b
+            - paragraph [ref=e161]:
+              - emphasis [ref=e162]: claimed their business
+            - paragraph [ref=e163]: Today at 07:11
+          - listitem [ref=e164]:
+            - paragraph [ref=e165]:
+              - link "New Life Laser" [ref=e166] [cursor=pointer]:
+                - /url: //www.hotfrog.com/company/0b7f5611a388f3a7496ea6c723fbc422
+            - paragraph [ref=e167]:
+              - emphasis [ref=e168]: claimed their business
+            - paragraph [ref=e169]: Today at 07:10
+  - contentinfo [ref=e171]:
+    - link " Add Business" [ref=e173] [cursor=pointer]:
+      - /url: /add
+      - generic [ref=e174]: 
+      - text: Add Business
+    - generic [ref=e176]:
+      - generic [ref=e178]:
+        - heading "Popular Searches" [level=3] [ref=e179]
+        - generic [ref=e180]:
+          - link "Accommodation" [ref=e182] [cursor=pointer]:
+            - /url: /search/us/accommodation
+          - link "Advertising" [ref=e184] [cursor=pointer]:
+            - /url: /search/us/advertising
+          - link "Art" [ref=e186] [cursor=pointer]:
+            - /url: /search/us/art
+          - link "Books" [ref=e188] [cursor=pointer]:
+            - /url: /search/us/books
+          - link "Building Materials" [ref=e190] [cursor=pointer]:
+            - /url: /search/us/building-materials
+          - link "Business Consulting" [ref=e192] [cursor=pointer]:
+            - /url: /search/us/business-consulting
+          - link "Calendar" [ref=e194] [cursor=pointer]:
+            - /url: /search/us/calendar
+          - link "Car Repair" [ref=e196] [cursor=pointer]:
+            - /url: /search/us/car-repair
+          - link "Child Care" [ref=e198] [cursor=pointer]:
+            - /url: /search/us/child-care
+          - link "Chiropractors" [ref=e200] [cursor=pointer]:
+            - /url: /search/us/chiropractors
+          - link "Computer Services" [ref=e202] [cursor=pointer]:
+            - /url: /search/us/computer-services
+          - link "Dentists" [ref=e204] [cursor=pointer]:
+            - /url: /search/us/dentists
+          - link "Film" [ref=e206] [cursor=pointer]:
+            - /url: /search/us/film
+          - link "Financial Services" [ref=e208] [cursor=pointer]:
+            - /url: /search/us/financial-services
+          - link "Florists" [ref=e210] [cursor=pointer]:
+            - /url: /search/us/florists
+          - link "Furniture" [ref=e212] [cursor=pointer]:
+            - /url: /search/us/furniture
+          - link "Gift Shops" [ref=e214] [cursor=pointer]:
+            - /url: /search/us/gift-shops
+          - link "Graphic Design" [ref=e216] [cursor=pointer]:
+            - /url: /search/us/graphic-design
+          - link "Grocery Stores" [ref=e218] [cursor=pointer]:
+            - /url: /search/us/grocery-stores
+          - link "Health Care" [ref=e220] [cursor=pointer]:
+            - /url: /search/us/health-care
+          - link "Insurance Carriers" [ref=e222] [cursor=pointer]:
+            - /url: /search/us/insurance-carriers
+          - link "Insurance Services" [ref=e224] [cursor=pointer]:
+            - /url: /search/us/insurance-services
+          - link "Internet Marketing" [ref=e226] [cursor=pointer]:
+            - /url: /search/us/internet-marketing
+          - link "Investing" [ref=e228] [cursor=pointer]:
+            - /url: /search/us/investing
+          - link "Jewelry" [ref=e230] [cursor=pointer]:
+            - /url: /search/us/jewelry
+          - link "Landscape" [ref=e232] [cursor=pointer]:
+            - /url: /search/us/landscape
+          - link "Landscaping Services" [ref=e234] [cursor=pointer]:
+            - /url: /search/us/landscaping-services
+          - link "Legal Services" [ref=e236] [cursor=pointer]:
+            - /url: /search/us/legal-services
+          - link "Lighting" [ref=e238] [cursor=pointer]:
+            - /url: /search/us/lighting
+          - link "Locksmith" [ref=e240] [cursor=pointer]:
+            - /url: /search/us/locksmith
+          - link "Locksmiths" [ref=e242] [cursor=pointer]:
+            - /url: /search/us/locksmiths
+          - link "Lodging" [ref=e244] [cursor=pointer]:
+            - /url: /search/us/lodging
+          - link "Networking" [ref=e246] [cursor=pointer]:
+            - /url: /search/us/networking
+          - link "Osteopaths" [ref=e248] [cursor=pointer]:
+            - /url: /search/us/osteopaths
+          - link "Personal Injury" [ref=e250] [cursor=pointer]:
+            - /url: /search/us/personal-injury
+          - link "Photographer" [ref=e252] [cursor=pointer]:
+            - /url: /search/us/photographer
+          - link "Photography" [ref=e254] [cursor=pointer]:
+            - /url: /search/us/photography
+          - link "Plumbing" [ref=e256] [cursor=pointer]:
+            - /url: /search/us/plumbing
+          - link "Printing" [ref=e258] [cursor=pointer]:
+            - /url: /search/us/printing
+          - link "Professional Services" [ref=e260] [cursor=pointer]:
+            - /url: /search/us/professional-services
+          - link "Project Management" [ref=e262] [cursor=pointer]:
+            - /url: /search/us/project-management
+          - link "Real Estate" [ref=e264] [cursor=pointer]:
+            - /url: /search/us/real-estate
+          - link "Restaurants" [ref=e266] [cursor=pointer]:
+            - /url: /search/us/restaurants
+          - link "Roofing" [ref=e268] [cursor=pointer]:
+            - /url: /search/us/roofing
+          - link "Schools" [ref=e270] [cursor=pointer]:
+            - /url: /search/us/schools
+          - link "Security" [ref=e272] [cursor=pointer]:
+            - /url: /search/us/security
+          - link "Seo" [ref=e274] [cursor=pointer]:
+            - /url: /search/us/seo
+          - link "Shipping" [ref=e276] [cursor=pointer]:
+            - /url: /search/us/shipping
+          - link "Web Development" [ref=e278] [cursor=pointer]:
+            - /url: /search/us/web-development
+          - link "Web Hosting" [ref=e280] [cursor=pointer]:
+            - /url: /search/us/web-hosting
+      - generic [ref=e282]:
+        - heading "Business Owners" [level=3] [ref=e283]
+        - list [ref=e284]:
+          - listitem [ref=e285]:
+            - link "Add Business" [ref=e286] [cursor=pointer]:
+              - /url: /add
+          - listitem
+          - listitem [ref=e287]:
+            - link "Small Business Hub" [ref=e288] [cursor=pointer]:
+              - /url: https://blog.hotfrog.com/us/
+          - listitem
+          - listitem [ref=e289]:
+            - link "Hotfrog Support" [ref=e290] [cursor=pointer]:
+              - /url: https://support.hotfrog.com/
+          - listitem
+          - listitem [ref=e291]:
+            - link "Jooble" [ref=e292] [cursor=pointer]:
+              - /url: https://jooble.org
+      - generic [ref=e294]:
+        - heading "Hotfrog Links" [level=3] [ref=e295]
+        - list [ref=e296]:
+          - listitem [ref=e297]:
+            - link "Listing Owner Login" [ref=e298] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e299]:
+            - link "Privacy Policy" [ref=e300] [cursor=pointer]:
+              - /url: https://legal.hotfrog.com/privacy-policy/
+          - listitem [ref=e301]:
+            - link "Content Policy" [ref=e302] [cursor=pointer]:
+              - /url: https://legal.hotfrog.com/content-policy/
+          - listitem [ref=e303]:
+            - link "Terms of Use" [ref=e304] [cursor=pointer]:
+              - /url: https://legal.hotfrog.com/terms-of-use/
+          - listitem [ref=e305]:
+            - link "About Us" [ref=e306] [cursor=pointer]:
+              - /url: https://legal.hotfrog.com/about-us/
+    - navigation [ref=e307]:
+      - generic [ref=e308]:
+        - link [ref=e309] [cursor=pointer]:
+          - /url: "#"
+        - list [ref=e310]:
+          - listitem [ref=e311]:
+            - link "" [ref=e312] [cursor=pointer]:
+              - /url: https://www.facebook.com/HotfrogUSA
+              - generic [ref=e313]: 
+          - listitem [ref=e314]:
+            - link "" [ref=e315] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/locafy/
+              - generic [ref=e316]: 
+        - list [ref=e317]:
+          - listitem [ref=e318]:
+            - generic [ref=e319]:
+              - text: Powered by ©
+              - link "Newfold digital" [ref=e320] [cursor=pointer]:
+                - /url: https://newfold.com
+              - text: . Business data ©
+              - link "Locafy Ltd" [ref=e321] [cursor=pointer]:
+                - /url: https://locafy.com
+              - text: . All rights reserved.
+  - dialog "Cookie consent dialog" [ref=e322]:
+    - button "Close" [ref=e325] [cursor=pointer]: ×
+    - generic [ref=e326]: This website uses cookies
+    - generic [ref=e327]:
+      - text: We use cookies to personalise content, ads and to analyse our traffic. We also share information about your use of our site with our advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.
+      - link "Privacy Policy, opens a new window" [ref=e328] [cursor=pointer]:
+        - /url: https://legal.hotfrog.com/privacy-policy/
+        - text: Privacy Policy
+    - button "Show all partners () →" [ref=e329] [cursor=pointer]
+    - generic [ref=e330]:
+      - button "Accept all" [ref=e331] [cursor=pointer]
+      - button "Decline all" [ref=e332] [cursor=pointer]
+    - button "Show details" [ref=e333]:
+      - generic [ref=e334] [cursor=pointer]: Show details
+  - generic [ref=e338]:
+    - img [ref=e339]
+    - img [ref=e340]
+    - img [ref=e341]
+    - img [ref=e342]
+    - img [ref=e343]
+    - img [ref=e344]
+    - img [ref=e345]
+    - img [ref=e346]
+    - img [ref=e347]
+  - generic [ref=e348]:
+    - img [ref=e353] [cursor=pointer]
+    - generic [ref=e358] [cursor=pointer]:
+      - generic [ref=e360]: Process Safety Solutions Leader
+      - generic [ref=e361]: visit princetonsafetysolutions.com/ to learn more
+      - generic [ref=e362]: www.princetonsafetysolutions.com
+      - generic [ref=e365]: ">"

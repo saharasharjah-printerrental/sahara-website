@@ -1,0 +1,167 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "Cybo The Global Business Directory" [ref=e4] [cursor=pointer]:
+      - /url: https://www.cybo.com/
+      - img "Cybo The Global Business Directory" [ref=e5]
+    - generic [ref=e6]:
+      - combobox [ref=e7] [cursor=pointer]:
+        - option "Business" [selected]
+        - option "People"
+        - option "Postal Code"
+        - option "Address"
+        - option "Phone"
+        - option "Website"
+        - option "Email"
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - combobox "Business or category" [ref=e10]
+          - combobox "City Name" [ref=e11]: Current Location
+        - button [ref=e12] [cursor=pointer]:
+          - img [ref=e13]
+    - link "Open Navigation" [ref=e16] [cursor=pointer]:
+      - /url: "#"
+      - img [ref=e17]
+  - generic [ref=e20]:
+    - text: "BROWSE:"
+    - link "Countries" [ref=e21] [cursor=pointer]:
+      - /url: https://www.cybo.com/world_yellow_pages/
+    - link "Area Codes" [ref=e22] [cursor=pointer]:
+      - /url: https://area-codes.cybo.com/
+    - link "Postal Codes" [ref=e23] [cursor=pointer]:
+      - /url: https://postal-codes.cybo.com/
+    - link "Categories" [ref=e24] [cursor=pointer]:
+      - /url: https://www.cybo.com/world_categories/
+    - link "Add a Business" [ref=e25] [cursor=pointer]:
+      - /url: https://www.cybo.com/add-business/
+  - generic [ref=e27]:
+    - generic [ref=e28]: Social Login
+    - generic [ref=e31]:
+      - link "Google" [ref=e32] [cursor=pointer]:
+        - /url: https://cybo.com/login/google-oauth2/?l=en&next=%2Fadd-business%2F
+      - link "Foursquare" [ref=e34] [cursor=pointer]:
+        - /url: https://cybo.com/login/foursquare/?l=en&next=%2Fadd-business%2F
+      - link "Microsoft Live" [ref=e36] [cursor=pointer]:
+        - /url: https://cybo.com/login/live/?l=en&next=%2Fadd-business%2F
+      - link "Vkontakte" [ref=e38] [cursor=pointer]:
+        - /url: https://cybo.com/login/vk-oauth2/?l=en&next=%2Fadd-business%2F
+    - generic [ref=e40]:
+      - generic [ref=e41]: Log In with a Cybo Account
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - textbox "Email" [ref=e45]
+          - generic [ref=e47]: ✉︎
+        - generic [ref=e48]:
+          - textbox "Password" [ref=e50]
+          - generic [ref=e52]: "*"
+      - button "Log In" [ref=e55] [cursor=pointer]
+    - generic [ref=e56]:
+      - text: Don't have an account?
+      - link "Sign up here" [ref=e57] [cursor=pointer]:
+        - /url: https://www.cybo.com/register/
+      - text: .
+    - link "Forgot your password?" [ref=e59] [cursor=pointer]:
+      - /url: https://www.cybo.com/password-reset/
+  - contentinfo [ref=e60]:
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - link "Think Global Cybo The Global Business Directory" [ref=e64] [cursor=pointer]:
+            - /url: https://www.cybo.com/
+            - generic [ref=e65]: Think Global
+            - img "Cybo The Global Business Directory" [ref=e66]
+          - generic [ref=e67]:
+            - generic [ref=e68]: PO Box 1081
+            - generic [ref=e69]: Eugene, OR 97440
+            - generic [ref=e70]: United States
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - generic [ref=e73]: BROWSE
+            - link "Reverse Search" [ref=e74] [cursor=pointer]:
+              - /url: https://www.cybo.com/psearch/
+            - link "Yellow Pages" [ref=e75] [cursor=pointer]:
+              - /url: https://www.cybo.com/world_yellow_pages/
+            - link "Postal Codes" [ref=e76] [cursor=pointer]:
+              - /url: https://postal-codes.cybo.com/
+            - link "Phone Codes" [ref=e77] [cursor=pointer]:
+              - /url: https://area-codes.cybo.com/
+            - link "Categories" [ref=e78] [cursor=pointer]:
+              - /url: https://www.cybo.com/world_categories/
+          - generic [ref=e79]:
+            - generic [ref=e80]: OTHER
+            - link "About" [ref=e81] [cursor=pointer]:
+              - /url: https://www.cybo.com/about/
+            - link "Team" [ref=e82] [cursor=pointer]:
+              - /url: https://www.cybo.com/team
+            - link "Friends" [ref=e83] [cursor=pointer]:
+              - /url: https://www.cybo.com/friends/
+            - link "Contact Us" [ref=e84] [cursor=pointer]:
+              - /url: https://www.cybo.com/contact/
+            - link "Help Center" [ref=e85] [cursor=pointer]:
+              - /url: https://support.cybo.com/hc/en-us?hl=en
+        - generic [ref=e87]:
+          - generic [ref=e88]: TOP
+          - button "Back to top" [ref=e89]:
+            - img [ref=e90]
+      - separator [ref=e92]
+      - generic [ref=e93]:
+        - generic [ref=e94]:
+          - link "Terms|" [ref=e95] [cursor=pointer]:
+            - /url: https://www.cybo.com/terms/
+          - link "Removal Tool|" [ref=e96] [cursor=pointer]:
+            - /url: https://www.cybo.com/removal
+          - link "Privacy" [ref=e97] [cursor=pointer]:
+            - /url: https://www.cybo.com/privacy/
+        - generic [ref=e99]:
+          - combobox "Select a Language" [ref=e100] [cursor=pointer]:
+            - option "English" [selected]
+            - option "العربية"
+            - option "فارسی"
+            - option "हिनदी"
+            - option "Español"
+            - option "日本語"
+            - option "Português"
+            - option "Deutsch"
+            - option "Français"
+            - option "Русский"
+            - option "中文 (简体)"
+            - option "한국어"
+            - option "Bahasa Indonesia"
+            - option "Polski"
+            - option "Italiano"
+            - option "Türkçe"
+            - option "Nederlands"
+            - option "Bahasa Melayu"
+            - option "中文 (繁體)"
+            - option "Tiếng Việt"
+            - option "Dansk"
+            - option "Svenska"
+            - option "Norsk"
+            - option "Română"
+            - option "Česky"
+            - option "Magyar"
+            - option "Suomi"
+            - option "Tagalog"
+            - option "ไทย"
+            - option "Українська"
+            - option "Afrikaans"
+            - option "Shqip"
+            - option "Srpski"
+            - option "Kiswahili"
+            - option "Български"
+            - option "Ελληνικά"
+            - option "Eesti"
+            - option "Galego"
+            - option "עברית"
+            - option "Hrvatski"
+            - option "Íslenska"
+            - option "Lietuvių"
+            - option "Latviešu"
+            - option "தமிழ்"
+            - option "Slovenčina"
+            - option "Slovenščina"
+            - option "Català"
+            - option "Makedonski"
+            - option "বাংলা"
+            - option "Azərbaycanca"
+          - img [ref=e102]
+    - generic [ref=e104]: "Copyright © Cybo Company :: 2005-2026 :: All Rights Reserved"
