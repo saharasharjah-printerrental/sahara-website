@@ -26,6 +26,7 @@ const initialBrands: Brand[] = [
   { id: "6", name: "Brother", slug: "brother", logoUrl: "/brands/brother.webp", description: "Brother laser and inkjet", isActive: true, sortOrder: 6 },
   { id: "7", name: "Samsung", slug: "samsung", logoUrl: "/brands/samsung.webp", description: "Samsung office printers", isActive: true, sortOrder: 7 },
   { id: "8", name: "Lexmark", slug: "lexmark", logoUrl: "/brands/lexmark.webp", description: "Lexmark enterprise printers", isActive: true, sortOrder: 8 },
+  { id: "9", name: "Bravo", slug: "bravo", logoUrl: "/brands/bravo/bravo-rtai-hero.webp", description: "Bravo Global card printers — exclusive UAE distributor", isActive: true, sortOrder: 9 },
 ];
 
 const API_BASE = '/api';

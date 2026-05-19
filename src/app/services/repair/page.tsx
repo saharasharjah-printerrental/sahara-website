@@ -72,10 +72,12 @@ const howToSchema = {
 
 const faqSchema = {
   "@context": "https://schema.org",
+  "@id": "https://www.saharaprinter.com/services/repair/#faq",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/repair/#faq-1",
       "name": "How quickly can a printer repair technician reach my office in Dubai?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -84,6 +86,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/repair/#faq-2",
       "name": "Do you use original OEM parts for printer repairs?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -92,6 +95,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/repair/#faq-3",
       "name": "Which printer brands do you repair in UAE?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -100,6 +104,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/repair/#faq-4",
       "name": "What is the cost of printer repair service in Dubai?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -108,6 +113,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/repair/#faq-5",
       "name": "Do you offer emergency printer repair service on weekends?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -116,6 +122,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/repair/#faq-6",
       "name": "What warranty do you provide on printer repairs?",
       "acceptedAnswer": {
         "@type": "Answer",

@@ -71,10 +71,12 @@ const amcServiceSchema = {
 
 const faqSchema = {
   "@context": "https://schema.org",
+  "@id": "https://www.saharaprinter.com/services/amc/#faq",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-1",
       "name": "What is an Annual Maintenance Contract (AMC) for printers in UAE?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -83,6 +85,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-2",
       "name": "How is a Printer AMC different from a rental plan?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -91,6 +94,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-3",
       "name": "What does the Sahara Professional AMC plan include?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -99,6 +103,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-4",
       "name": "How many printers can be covered under one AMC contract?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -107,6 +112,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-5",
       "name": "Is toner included in the printer AMC?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -115,6 +121,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-6",
       "name": "Do you offer AMC for all printer brands?",
       "acceptedAnswer": {
         "@type": "Answer",

@@ -31,3 +31,6 @@ Disallow: /cart/
 Disallow: /my-account/
 
 Sitemap: https://www.saharaprinter.com/sitemap.xml
+
+# LLM-friendly index
+# llms.txt: https://www.saharaprinter.com/llms.txt

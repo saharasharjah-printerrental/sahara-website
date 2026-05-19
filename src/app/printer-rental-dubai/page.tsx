@@ -29,9 +29,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const faqs = await getFaqsFromD1();
   const faqSchema = {
     "@context": "https://schema.org",
+    "@id": "https://www.saharaprinter.com/printer-rental-dubai/#faq",
     "@type": "FAQPage",
-    mainEntity: faqs.map(f => ({
+    mainEntity: faqs.map((f, i) => ({
       "@type": "Question",
+      "@id": `https://www.saharaprinter.com/printer-rental-dubai/#faq-${i + 1}`,
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
