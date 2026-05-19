@@ -66,3 +66,16 @@ video-frames/
 
 # External tools / subproject clones
 claude-seo/
+
+# Playwright MCP session snapshots
+.playwright-mcp/
+
+# Temporary HTML debug files
+tmp*.html
+tmp_*.html
+
+# npm config (may contain registry tokens)
+.npmrc
+
+# Auto-generated SEO docs (rebuilt by tooling)
+docs/seo/BACKLINKS-AUTO.md
