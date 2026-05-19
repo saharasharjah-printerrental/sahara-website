@@ -1,6 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { getRequestContext } from "@cloudflare/next-on-pages";
+import { Sora, Manrope } from "next/font/google";
+import Script from "next/script";
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-sora",
+  display: "swap",
+  preload: true,
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-manrope",
+  display: "swap",
+  preload: true,
+});
 
 export const runtime = 'edge';
 
@@ -307,19 +325,17 @@ export default async function RootLayout({
   const cfg = await getSEOConfig();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Sora & Manrope are now self-hosted via next/font/google — no external request */}
+        {/* Material Symbols loaded async to avoid render-blocking */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap"
-        />
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
         <script type="application/ld+json">{cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchema)}</script>
 
         {/* Google Tag Manager */}
@@ -369,6 +385,8 @@ export default async function RootLayout({
               ? <script key={i} async={s.isAsync} src={s.src} />
               : <script key={i}>{s.inline}</script>
           )}
+        {/* Async Material Symbols load — eliminates render-blocking */}
+        <Script id="mat-sym-load" strategy="afterInteractive">{`(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap';document.head.appendChild(l);})()`}</Script>
       </head>
       <body className="bg-[#071325] text-[#d7e3fc]" suppressHydrationWarning>
         {/* GTM noscript — must be immediately after opening body tag */}

@@ -11,6 +11,10 @@ module.exports = {
         surface: "#071325",
         primary: "#f5be53",
       },
+      fontFamily: {
+        sora: ["var(--font-sora)", "sans-serif"],
+        manrope: ["var(--font-manrope)", "sans-serif"],
+      },
     },
   },
   plugins: [],

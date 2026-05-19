@@ -29,7 +29,7 @@ const defaultBrand = (slug: string) => ({
   products: [],
 });
 
-export default function BrandContentClient({ slug }: { slug: string }) {
+export default function BrandContentClient({ slug, brandFaqs }: { slug: string; brandFaqs?: { q: string; a: string }[] }) {
   const router = useRouter();
   const [brand, setBrand] = useState<any>(null);
 
@@ -78,8 +78,16 @@ export default function BrandContentClient({ slug }: { slug: string }) {
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
                 {data.name} <span className="text-[#f5be53]">Partner</span>
               </h1>
+              {/* AEO Answer Block */}
+              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-4 mb-6">
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-1">Authorized {data.name} Dealer in UAE</p>
+                <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                  Sahara Office Equipments is an authorized {data.name} dealer in UAE — sales, rental from AED 250/month,
+                  AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
+                </p>
+              </div>
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
-                As an authorized Sahara partner, we deliver {data.name}'s enterprise solutions with expert support, competitive pricing, and full warranty coverage.
+                As an authorized Sahara partner, we deliver {data.name}&apos;s enterprise solutions with expert support, competitive pricing, and full warranty coverage.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href={`/get-quote?brand=${slug}`} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
@@ -140,6 +148,22 @@ export default function BrandContentClient({ slug }: { slug: string }) {
                       <span key={j} className="px-2 py-1 rounded-full bg-[#142032] text-xs text-[#f5be53]">{s}</span>
                     ))}
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {brandFaqs && brandFaqs.length > 0 && (
+        <section className="py-16 px-8 lg:px-24" style={{ background: '#050d1a' }}>
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">{data.name} Printers — FAQ</h2>
+            <div className="space-y-4">
+              {brandFaqs.map((faq, i) => (
+                <div key={i} className="glass-card rounded-2xl p-6">
+                  <h3 className="text-white font-semibold mb-2">{faq.q}</h3>
+                  <p className="text-[#d3c5b0] text-sm leading-relaxed">{faq.a}</p>
                 </div>
               ))}
             </div>

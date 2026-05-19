@@ -249,6 +249,10 @@ export default async function PrinterRentalFujairah() {
             src="/images/location-fujairah.webp"
             alt="Fujairah corporate office"
             className="w-full h-full object-cover"
+            fetchPriority="high"
+            loading="eager"
+            width={1920}
+            height={1080}
           />
           <div className="absolute inset-0 bg-[#071325]/70" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#071325]/80 via-[#071325]/60 to-[#101c2e]" />

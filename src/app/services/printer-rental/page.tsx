@@ -242,6 +242,9 @@ export default function PrinterRentalPage() {
                   alt="Sahara printer technician servicing photocopier in Dubai UAE"
                   className="w-full h-[440px] object-contain bg-[#0a1628]"
                   loading="eager"
+                  fetchPriority="high"
+                  width={800}
+                  height={440}
                 />
                 {/* COP28 badge */}
                 <div className="absolute top-4 left-4 bg-[#071325]/90 backdrop-blur-sm border border-[#f5be53]/30 rounded-xl px-3 py-2">

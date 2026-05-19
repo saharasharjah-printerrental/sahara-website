@@ -172,16 +172,19 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
 export const SERVICE_BLOG_MAP: Record<string, string[]> = {
   "printer-rental": [
     "how-to-choose-the-best-printer-rental-dubai-service",
+    "printer-rental-vs-buying-uae-2026-cost-breakdown",
     "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
     "rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business",
     "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
   ],
   "photocopier-rental": [
     "what-a-copier-rental-service-must-deliver-to-a-client",
+    "how-to-choose-photocopier-small-office-sharjah",
     "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
     "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
   ],
   "amc": [
+    "printer-amc-dubai-whats-included",
     "total-cost-of-printer-ownership",
     "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits",
     "the-hidden-cost-of-your-office-copier",
@@ -191,6 +194,69 @@ export const SERVICE_BLOG_MAP: Record<string, string[]> = {
     "the-problem-we-solve",
     "what-a-copier-rental-service-must-deliver-to-a-client",
   ],
+  "printer-spare-parts": [
+    "toner-vs-ink-cartridge-uae-buyers-guide",
+  ],
+  "paper-shredder-rental": [
+    "paper-shredder-rental-uae-when-it-beats-buying",
+  ],
+  "papercut-print-management": [
+    "papercut-print-management-uae-offices",
+  ],
+};
+
+// Brand to related content mapping — for brand page link sections
+export const RELATED_BRAND_MAP: Record<string, { services: string[]; blogs: string[]; locations: string[] }> = {
+  canon: {
+    services: ["/services/printer-rental", "/services/repair"],
+    blogs: ["how-to-choose-the-best-printer-rental-dubai-service", "printer-amc-dubai-whats-included"],
+    locations: ["/printer-rental-dubai", "/printer-rental-abu-dhabi"],
+  },
+  hp: {
+    services: ["/services/repair", "/services/printer-rental"],
+    blogs: ["printer-amc-dubai-whats-included", "printer-rental-vs-buying-uae-2026-cost-breakdown"],
+    locations: ["/printer-rental-dubai", "/photocopier-rental-sharjah"],
+  },
+  kyocera: {
+    services: ["/services/printer-rental", "/services/amc"],
+    blogs: ["printer-rental-vs-buying-uae-2026-cost-breakdown", "total-cost-of-printer-ownership"],
+    locations: ["/printer-rental-dubai", "/printer-rental-abu-dhabi"],
+  },
+  ricoh: {
+    services: ["/services/amc", "/services/printer-rental"],
+    blogs: ["printer-amc-dubai-whats-included", "how-to-choose-photocopier-small-office-sharjah"],
+    locations: ["/photocopier-rental-sharjah", "/printer-rental-abu-dhabi"],
+  },
+  xerox: {
+    services: ["/services/printer-rental", "/services/repair"],
+    blogs: ["printer-rental-vs-buying-uae-2026-cost-breakdown", "how-to-choose-photocopier-small-office-sharjah"],
+    locations: ["/printer-rental-dubai", "/copier-lease-uae"],
+  },
+  brother: {
+    services: ["/services/printer-rental", "/services/repair"],
+    blogs: ["how-to-choose-the-best-printer-rental-dubai-service"],
+    locations: ["/printer-rental-dubai", "/photocopier-rental-sharjah"],
+  },
+  sharp: {
+    services: ["/services/printer-rental", "/services/amc"],
+    blogs: ["how-to-choose-photocopier-small-office-sharjah"],
+    locations: ["/photocopier-rental-sharjah", "/printer-rental-dubai"],
+  },
+  epson: {
+    services: ["/services/printer-rental", "/services/repair"],
+    blogs: ["toner-vs-ink-cartridge-uae-buyers-guide"],
+    locations: ["/printer-rental-dubai", "/printer-rental-abu-dhabi"],
+  },
+  samsung: {
+    services: ["/services/printer-rental", "/services/repair"],
+    blogs: ["printer-rental-vs-buying-uae-2026-cost-breakdown"],
+    locations: ["/printer-rental-dubai", "/photocopier-rental-sharjah"],
+  },
+  lexmark: {
+    services: ["/services/printer-rental", "/services/amc"],
+    blogs: ["papercut-print-management-uae-offices", "printer-amc-dubai-whats-included"],
+    locations: ["/printer-rental-dubai", "/printer-rental-abu-dhabi"],
+  },
 };
 
 // Anchor text map for inline contextual links (used in blog content)

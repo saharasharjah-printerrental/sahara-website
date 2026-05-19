@@ -8,9 +8,9 @@ import SparePartsCartClient from "@/components/SparePartsCartClient";
 import { VerifiedUser, LocalShipping, Inventory } from "@mui/icons-material";
 
 export const metadata: Metadata = {
-  title: "Printer Spare Parts & Toner UAE | OEM Supplies | Sahara",
-  description: "Buy genuine printer spare parts, toners, and consumables in UAE. Canon, HP, Ricoh toners, OPC drums, maintenance kits. Same-day delivery across Dubai, Abu Dhabi, Sharjah. ☎ +971503823969",
-  keywords: "printer spare parts uae, toner cartridge uae, canon toner uae, hp toner uae, printer consumables dubai, opc drum uae, maintenance kit uae",
+  title: "Printer Toner & Spare Parts UAE | Toner Cartridges Dubai | Sahara",
+  description: "Buy genuine toner cartridges, ink cartridges & printer spare parts in UAE. Canon, HP, Ricoh, Kyocera toners and ink. Same-day delivery Dubai, Abu Dhabi, Sharjah. ☎ +971503823969",
+  keywords: "toner cartridges uae, printer toner ink dubai, toners and ink cartridges, cartridge and toner, toner for printer, ink cartridge near me, printer ink cartridges near me, printer spare parts uae, canon toner uae, hp toner uae, printer consumables dubai, opc drum uae, maintenance kit uae",
   openGraph: {
     title: "Printer Spare Parts & Toner UAE | Sahara Office Equipments",
     description: "Genuine OEM printer supplies: toners, drums, maintenance kits, and spare parts for Canon, HP, Ricoh, Kyocera. Same-day UAE delivery.",

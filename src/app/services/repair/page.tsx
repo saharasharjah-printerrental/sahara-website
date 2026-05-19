@@ -6,9 +6,9 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Printer Repair Dubai | 4-Hr Response | All Brands | Sahara",
-  description: "On-site printer repair in Dubai, Sharjah & Abu Dhabi. 4-hr emergency response, OEM parts. Canon, HP, Kyocera, Xerox, Ricoh. Same-day service. ☎ +971503823969",
-  keywords: "printer repair dubai, photocopier repair sharjah, canon printer repair uae, hp printer repair dubai, kyocera service uae, printer technician dubai, on-site printer repair",
+  title: "Printer Repair Dubai | Fix Printer Near Me | HP Service Center | Sahara",
+  description: "On-site printer repair near you in Dubai, Sharjah & Abu Dhabi. Fix printer fast — 4-hr emergency response, OEM parts. Canon, HP, Kyocera, Xerox, Ricoh. HP Service Center Dubai. ☎ +971503823969",
+  keywords: "printer repair dubai, printer services near me, fix printer near me, printer repairing near me, hp service center dubai, hp service center in dubai, printer fixing near me, printer fix services, photocopier repair sharjah, canon printer repair uae, kyocera service uae, printer technician dubai, printer service and repair",
   openGraph: {
     title: "Printer Repair Service Dubai & UAE | Sahara Office Equipments",
     description: "On-site printer repair with 4-hour emergency response across UAE. Certified technicians for Canon, HP, Kyocera, Xerox, Ricoh and all major brands.",
@@ -203,11 +203,12 @@ export default function RepairPage() {
 
               {/* AEO Answer Block */}
               <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is Printer Repair Service in UAE?</p>
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Fix Printer Near Me — What is Printer Repair Service in UAE?</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
                   On-site printer repair is a professional service where factory-certified technicians visit your office,
                   diagnose the fault, and fix it using genuine OEM parts — with a 4-hour response time across Dubai, Sharjah,
-                  Abu Dhabi, and all UAE emirates. Sahara has completed 50,000+ repairs since 2012.
+                  Abu Dhabi, and all UAE emirates. As an HP Service Center in Dubai and authorized partner for Canon, Kyocera,
+                  Ricoh, and Xerox, Sahara has completed 50,000+ repairs since 2012.
                 </p>
               </div>
 
