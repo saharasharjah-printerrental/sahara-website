@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendQuoteNotification, QuoteEmailData } from './email-service';
 import { validateEmail, validateUAEPhone } from '@/lib/emailValidation';
+import { getRequestContext } from '@cloudflare/next-on-pages';
+
+function getDB() {
+  try { return getRequestContext().env.DB as any; } catch { return null; }
+}
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -29,6 +34,27 @@ export async function POST(request: NextRequest) {
     if (!sent) {
       return NextResponse.json({ error: 'Email delivery failed — check SMTP settings in Admin' }, { status: 500 });
     }
+
+    // Persist inquiry to D1 (non-blocking — don't fail the response if DB unavailable)
+    const db = getDB();
+    if (db) {
+      const id = `inq-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      const now = new Date().toISOString();
+      db.prepare(`
+        INSERT INTO inquiries (id, name, email, phone, company, service, message, status, createdAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, 'new', ?)
+      `).bind(
+        id,
+        data.customerName || '',
+        data.customerEmail || '',
+        data.customerPhone || '',
+        data.customerCompany || '',
+        data.configuration || '',
+        data.message || '',
+        now,
+      ).run().catch((e: unknown) => console.error('[send-email] inquiry insert failed:', e));
+    }
+
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('[send-email route] Error:', err);
