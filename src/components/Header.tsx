@@ -25,6 +25,8 @@ const brands = [
   { name: "Brother", href: "/brands/brother" },
   { name: "Samsung", href: "/brands/samsung" },
   { name: "Lexmark", href: "/brands/lexmark" },
+  { name: "Sharp", href: "/brands/sharp" },
+  { name: "Epson", href: "/brands/epson" },
 ];
 
 const services = [
@@ -67,6 +69,8 @@ export default function Header() {
   { name: "Brother", href: "/brands/brother" },
   { name: "Samsung", href: "/brands/samsung" },
   { name: "Lexmark", href: "/brands/lexmark" },
+  { name: "Sharp", href: "/brands/sharp" },
+  { name: "Epson", href: "/brands/epson" },
 ]);
   const [settings, setSettings] = useState<any>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
