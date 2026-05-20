@@ -35,12 +35,16 @@ export default function CheckoutClient() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [placedOrder, setPlacedOrder] = useState<ReceiptOrder | null>(null);
+  const [payNotice, setPayNotice] = useState("");
 
   useEffect(() => {
     try {
       const stored = localStorage.getItem("sahara_cart");
       if (stored) setCart(JSON.parse(stored));
     } catch { /* ignore corrupt cart */ }
+    const p = new URLSearchParams(window.location.search).get("payment");
+    if (p === "failed") setPayNotice("Your payment could not be completed. Your cart is saved — please review and try again.");
+    else if (p === "cancelled") setPayNotice("Payment was cancelled. Your cart is still here whenever you're ready.");
     setLoaded(true);
   }, []);
 
@@ -82,6 +86,23 @@ export default function CheckoutClient() {
         setSubmitting(false);
         return;
       }
+
+      // Hand off to an online payment gateway if one is configured.
+      try {
+        const payRes = await fetch("/api/payments/create/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ref: data.order.ref }),
+        });
+        const pay = await payRes.json();
+        if (pay.online && pay.redirectUrl) {
+          // Keep the cart until payment succeeds — restored if the customer cancels.
+          window.location.href = pay.redirectUrl;
+          return;
+        }
+      } catch { /* gateway unavailable — finalise without online payment */ }
+
+      // No online payment: finalise the order inline and show the receipt.
       localStorage.removeItem("sahara_cart");
       window.dispatchEvent(new Event("sahara-cart-updated"));
       setPlacedOrder(data.order as ReceiptOrder);
@@ -124,7 +145,12 @@ export default function CheckoutClient() {
             </div>
           ) : (
             <>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">Checkout</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Checkout</h1>
+              {payNotice && (
+                <div className="mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm">
+                  {payNotice}
+                </div>
+              )}
               <div className="grid lg:grid-cols-3 gap-8">
                 {/* Delivery form */}
                 <div className="lg:col-span-2 glass-card rounded-2xl p-6 md:p-8">

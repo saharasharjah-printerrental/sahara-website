@@ -23,10 +23,9 @@ const BRAND_IMAGES: Record<string, string> = {
 };
 const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/printer-canon-2.webp"]);
 function localImg(image: string, brand: string): string {
-  if (!image || !image.startsWith("/") || (CANON_ONLY.has(image) && brand !== "Canon")) {
-    return BRAND_IMAGES[brand] || "/images/printer-canon-1.webp";
-  }
-  return image;
+  if (image && image.startsWith("http")) return image;
+  if (image && image.startsWith("/") && !(CANON_ONLY.has(image) && brand !== "Canon")) return image;
+  return BRAND_IMAGES[brand] || "/images/printer-canon-1.webp";
 }
 
 const defaultProducts = [

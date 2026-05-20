@@ -56,54 +56,30 @@ export default async function HomePage() {
   };
 
 
+  const faqsForSchema = initialFaqs.length > 0 ? initialFaqs : [
+    { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." },
+    { q: "What are the benefits of printer rental in UAE?", a: "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options." },
+    { q: "Do you offer printer rental in Abu Dhabi?", a: "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD with same-day delivery and 24/7 support." },
+    { q: "What printer brands do you rent?", a: "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother." },
+    { q: "Is toner included in printer rental?", a: "Yes — unlimited genuine OEM toner is included in all rental plans. We monitor levels remotely and replenish proactively." },
+    { q: "Do you provide on-site repair services?", a: "Yes, our factory-certified technicians provide on-site repairs across all major service areas with a 4-hour response time for critical failures." },
+  ];
   const faqSchema = {
     "@context": "https://schema.org",
     "@id": "https://www.saharaprinter.com/#faq",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "@id": "https://www.saharaprinter.com/#faq-1",
-        "name": "How much does printer rental cost in Dubai?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." }
-      },
-      {
-        "@type": "Question",
-        "@id": "https://www.saharaprinter.com/#faq-2",
-        "name": "What are the benefits of printer rental in UAE?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options." }
-      },
-      {
-        "@type": "Question",
-        "@id": "https://www.saharaprinter.com/#faq-3",
-        "name": "Do you offer printer rental in Abu Dhabi?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD with same-day delivery and 24/7 support." }
-      },
-      {
-        "@type": "Question",
-        "@id": "https://www.saharaprinter.com/#faq-4",
-        "name": "What printer brands do you rent?",
-        "acceptedAnswer": { "@type": "Answer", "text": "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother." }
-      },
-      {
-        "@type": "Question",
-        "@id": "https://www.saharaprinter.com/#faq-5",
-        "name": "Is toner included in printer rental?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — unlimited genuine OEM toner is included in all rental plans. We monitor levels remotely and replenish proactively." }
-      },
-      {
-        "@type": "Question",
-        "@id": "https://www.saharaprinter.com/#faq-6",
-        "name": "Do you provide on-site repair services?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, our factory-certified technicians provide on-site repairs across all major service areas with a 4-hour response time for critical failures." }
-      }
-    ]
+    mainEntity: faqsForSchema.map((f, i) => ({
+      "@type": "Question",
+      "@id": `https://www.saharaprinter.com/#faq-${i + 1}`,
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 
   return (
     <main className="min-h-screen bg-[#071325]">
       <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
 
       <Header />

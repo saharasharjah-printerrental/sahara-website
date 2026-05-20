@@ -17,8 +17,15 @@ export default function ReceiptClient() {
     fetch(`/api/orders/?ref=${encodeURIComponent(ref)}`)
       .then((r) => r.json())
       .then((d) => {
-        if (d.order) { setOrder(d.order); setState("found"); }
-        else setState("missing");
+        if (d.order) {
+          setOrder(d.order);
+          setState("found");
+          // Order is complete — clear the cart so it isn't reused.
+          try { localStorage.removeItem("sahara_cart"); } catch { /* ignore */ }
+          window.dispatchEvent(new Event("sahara-cart-updated"));
+        } else {
+          setState("missing");
+        }
       })
       .catch(() => setState("missing"));
   }, [ref]);

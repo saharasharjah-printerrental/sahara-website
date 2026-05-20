@@ -22,6 +22,11 @@ function getDB() {
   }
 }
 
+// Secret credentials must never appear in the public bulk settings response.
+function isSecretKey(key: string): boolean {
+  return /secret|server_key|(^|_)pass$|_pass_/i.test(key);
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const key = searchParams.get('key');
@@ -48,6 +53,7 @@ export async function GET(request: NextRequest) {
     const settings: Record<string, string> = {};
     const rows: any[] = result?.results ?? result ?? [];
     rows.forEach((s: any) => {
+      if (isSecretKey(s.key)) return; // redact secrets from the bulk response
       settings[s.key] = s.value;
     });
     return NextResponse.json(

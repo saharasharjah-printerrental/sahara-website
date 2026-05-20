@@ -49,7 +49,6 @@ export async function generateMetadata(): Promise<Metadata> {
     type: "website",
   },
     alternates: { canonical: "https://www.saharaprinter.com/services/photocopier-rental/" },
-    other: { "script:ld+json": JSON.stringify(faqSchema) },
   };
 }
 
@@ -228,11 +227,17 @@ const workflowFeatures = [
 
 export default async function PhotocopierRentalPage() {
   const faqs = await getFaqsFromD1();
+  const faqSchema = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  } : null;
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
     <main className="min-h-screen bg-[#071325]">
       <Header />
 

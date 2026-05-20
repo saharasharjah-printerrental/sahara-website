@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const runtime = 'edge';
 import Header from "@/components/Header";
@@ -7,8 +6,8 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import CountUp from "@/components/CountUp";
-import FAQAccordionClient from "@/components/FAQAccordionClient";
-import { Savings, Inventory2, BuildCircle, Emergency, Upgrade, Cancel, SupportAgent, Sync, Build, Verified, ExpandMore, Print, CheckCircle, LocationOn, HeadsetMic } from "@mui/icons-material";
+import FaqSection from "@/components/FaqSection";
+import { Savings, Inventory2, BuildCircle, Emergency, Upgrade, Cancel, SupportAgent, Sync, Build, Verified, Print, CheckCircle, LocationOn, HeadsetMic } from "@mui/icons-material";
 import Link from "next/link";
 
 interface FAQItem { q: string; a: string; }
@@ -26,34 +25,7 @@ const DEFAULT_FAQS: FAQItem[] = [
   { q: "What areas do you serve?", a: "We serve all across UAE including Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah, and Al Ain." },
 ];
 
-async function getFaqsFromD1(): Promise<FAQItem[]> {
-  try {
-    const env = getRequestContext().env as any;
-    if (!env?.DB) return DEFAULT_FAQS;
-    const result = await env.DB.prepare(
-      "SELECT question, answer FROM faqs WHERE pageSlug = ? AND isActive = 1 ORDER BY sortOrder ASC"
-    ).bind("services/printer-rental").all();
-    if (result?.results?.length > 0) {
-      return result.results.map((r: any) => ({ q: r.question, a: r.answer }));
-    }
-    return DEFAULT_FAQS;
-  } catch {
-    return DEFAULT_FAQS;
-  }
-}
-
 export async function generateMetadata(): Promise<Metadata> {
-  const faqs = await getFaqsFromD1();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
-  };
-
   return {
     title: "Printer Rental UAE | AED 250/mo | Zero Deposit | Sahara",
     description: "Printer rental in the UAE from AED 250/month. Zero deposit, unlimited OEM toner, full maintenance. Canon, Kyocera, HP. Serving Dubai, Abu Dhabi, Sharjah, RAK, Fujairah & Al Ain. ☎ +971503823969",
@@ -68,9 +40,6 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
     },
     alternates: { canonical: "https://www.saharaprinter.com/services/printer-rental/" },
-    other: {
-      "script:ld+json": JSON.stringify(faqSchema),
-    },
 };
 }
 
@@ -158,25 +127,11 @@ const howToSchema = {
   ]
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": DEFAULT_FAQS.map(faq => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a
-    }
-  }))
-};
-
 export default function PrinterRentalPage() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <link rel="canonical" href="https://www.saharaprinter.com/services/printer-rental/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
@@ -597,7 +552,9 @@ export default function PrinterRentalPage() {
       </section>
 
       {/* FAQ */}
-      <FAQAccordionClient defaultFaqs={DEFAULT_FAQS} pageSlug="services/printer-rental" />
+      <section className="py-24 px-8 max-w-4xl mx-auto">
+        <FaqSection pageSlug="services/printer-rental" defaultFaqs={DEFAULT_FAQS} />
+      </section>
 
       {/* From Our Blog — Internal Link Cluster */}
       <section className="py-16 px-4 lg:px-12 bg-[#0a1628]">

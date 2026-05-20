@@ -299,24 +299,38 @@ export default function AdminClients() {
     setBulkProgress({ done: 0, total: files.length });
     const baseSort = clients.reduce((max, c) => Math.max(max, c.sortOrder), 0);
     let created = 0;
+    let done = 0;
+    const CONCURRENCY = 6;
 
-    for (let i = 0; i < files.length; i++) {
+    const uploadOne = async (file: File, index: number): Promise<void> => {
       try {
-        const base64 = await readFileAsDataURL(files[i]);
-        const logoUrl = await persistImageIfStaged(base64);
+        const fd = new FormData();
+        fd.append("file", file);
+        const res = await fetch("/api/convert-image/", { method: "POST", body: fd });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json() as { url?: string };
+        const logoUrl = data.url || "";
         const newClient: Client = {
-          id: `${Date.now()}-${i}`,
-          name: filenameToClientName(files[i].name),
+          id: `${Date.now()}-${index}`,
+          name: filenameToClientName(file.name),
           logoUrl,
           website: "",
           isActive: true,
-          sortOrder: baseSort + i + 1,
+          sortOrder: baseSort + index + 1,
         };
         if (await syncToAPI(newClient)) created++;
       } catch {
         /* skip this file, continue with the rest */
+      } finally {
+        done++;
+        setBulkProgress({ done, total: files.length });
       }
-      setBulkProgress({ done: i + 1, total: files.length });
+    };
+
+    // Run with concurrency pool of CONCURRENCY
+    for (let i = 0; i < files.length; i += CONCURRENCY) {
+      const batch = files.slice(i, i + CONCURRENCY).map((f, j) => uploadOne(f, i + j));
+      await Promise.allSettled(batch);
     }
 
     setBulkProgress(null);

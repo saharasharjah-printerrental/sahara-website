@@ -52,7 +52,6 @@ export async function generateMetadata(): Promise<Metadata> {
     type: "website",
   },
     alternates: { canonical: "https://www.saharaprinter.com/printer-rental-dubai/" },
-    other: { "script:ld+json": JSON.stringify(faqSchema) },
   };
 }
 
@@ -139,10 +138,22 @@ const dubaiIndustries = [
 
 export default async function PrinterRentalDubai() {
   const faqs = await getFaqsFromD1();
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.saharaprinter.com/printer-rental-dubai/#faq",
+    mainEntity: faqs.map((f, i) => ({
+      "@type": "Question",
+      "@id": `https://www.saharaprinter.com/printer-rental-dubai/#faq-${i + 1}`,
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
     <main className="min-h-screen bg-[#071325]">
       <Header />
 

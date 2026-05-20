@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
+import CloudImagePicker from "@/components/admin/CloudImagePicker";
 
 interface Supply {
   id: string;
@@ -343,48 +344,7 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
     id: "", name: "", brand: "Canon", category: "Toner", compatibleModels: "", color: "",
     yield: "", price: "Contact for Pricing", stock: 0, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true,
   });
-  const [converting, setConverting] = useState(false);
-  const [convertToWebp, setConvertToWebp] = useState(true);
-  const [imageUrl, setImageUrl] = useState("");
   const colors = ["Black", "Cyan", "Yellow", "Magenta", "N/A"];
-
-  const getImageDimensions = (src: string): Promise<{ width: number; height: number }> =>
-    new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve({ width: img.width, height: img.height });
-      img.onerror = () => resolve({ width: 800, height: 800 });
-      img.src = src;
-    });
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = async () => {
-      const base64 = reader.result as string;
-      const dims = await getImageDimensions(base64);
-      setForm(prev => ({ ...prev, image: base64, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.brand} ${prev.name} image` }));
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleUrlFetch = async () => {
-    if (!imageUrl) return;
-    setConverting(true);
-    try {
-      const res = await fetch("/api/convert-image/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: imageUrl }),
-      });
-      const data = await res.json();
-      const src = data.url || imageUrl;
-      const dims = await getImageDimensions(src);
-      setForm(prev => ({ ...prev, image: src, imageWidth: dims.width, imageHeight: dims.height, altText: prev.altText || `${prev.brand} ${prev.name} image` }));
-    } catch {}
-    setImageUrl("");
-    setConverting(false);
-  };
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-6">
@@ -439,47 +399,15 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
             <input type="text" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" placeholder="Contact for Pricing" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Product Image</label>
-            <div className="flex items-center gap-3 mb-3">
-              <label className="flex-1 cursor-pointer">
-                <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-                <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-                  {form.image ? "Change Image" : "Upload Image"}
-                </div>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={convertToWebp} onChange={(e) => setConvertToWebp(e.target.checked)} className="w-4 h-4 rounded" />
-                <span className="text-sm text-slate-400">Convert to WebP</span>
-              </label>
-            </div>
-            <div className="flex gap-2 mb-3">
-              <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className="flex-1 bg-[#101c2e] border border-white/10 rounded-xl py-2 px-4 text-white text-sm" placeholder="Or paste image URL" />
-              <button onClick={handleUrlFetch} disabled={converting || !imageUrl} className="px-4 py-2 rounded-xl bg-[#f5be53] text-[#412d00] font-medium hover:bg-[#c8962e] disabled:opacity-50 text-sm">
-                {converting ? "..." : "Fetch"}
-              </button>
-            </div>
+            <CloudImagePicker
+              label="Product Image"
+              value={form.image}
+              onChange={(url) => setForm(prev => ({ ...prev, image: url, altText: prev.altText || `${prev.brand} ${prev.name} image` }))}
+            />
             {form.image && (
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden">
-                  <img src={form.image} alt={form.altText || "Preview"} className="w-full h-full object-contain" />
-                </div>
-                <button onClick={() => setForm({ ...form, image: "", imageWidth: 800, imageHeight: 800 })} className="text-slate-400 hover:text-red-400 text-sm">Remove</button>
-              </div>
-            )}
-            {form.image && (
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Alt Text (SEO)</label>
-                  <input type="text" value={form.altText} onChange={(e) => setForm({ ...form, altText: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" placeholder="Product image for SEO" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Width</label>
-                  <input type="number" value={form.imageWidth} onChange={(e) => setForm({ ...form, imageWidth: parseInt(e.target.value) || 800 })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Height</label>
-                  <input type="number" value={form.imageHeight} onChange={(e) => setForm({ ...form, imageHeight: parseInt(e.target.value) || 800 })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" />
-                </div>
+              <div className="mt-3">
+                <label className="block text-sm font-medium text-slate-300 mb-2">Alt Text (SEO)</label>
+                <input type="text" value={form.altText} onChange={(e) => setForm({ ...form, altText: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-2 px-3 text-white text-sm" placeholder="Product image for SEO" />
               </div>
             )}
           </div>

@@ -49,6 +49,7 @@ interface Settings {
   paymentGatewayEnabled: boolean;
   paymentGatewayUrl: string;
   paymentGatewayLabel: string;
+  paymentProvider: string;
   calculatorPrices: {
     a4BasePrice: number;
     a3BasePrice: number;
@@ -102,6 +103,7 @@ const defaultSettings: Settings = {
   paymentGatewayEnabled: false,
   paymentGatewayUrl: "",
   paymentGatewayLabel: "Buy Now",
+  paymentProvider: "none",
   calculatorPrices: {
     a4BasePrice: 600,
     a3BasePrice: 1200,
@@ -131,6 +133,16 @@ interface StorageHealth {
 
 const defaultCloudinary: CloudinarySettings = { cloudName: '', apiKey: '', apiSecret: '' };
 
+interface PaymentCreds {
+  stripeSecretKey: string;
+  paytabsProfileId: string;
+  paytabsServerKey: string;
+  paytabsRegion: string;
+}
+const defaultPaymentCreds: PaymentCreds = {
+  stripeSecretKey: '', paytabsProfileId: '', paytabsServerKey: '', paytabsRegion: 'ARE',
+};
+
 export default function AdminSettings() {
   const [settings, setSettings] = useState<Settings>(defaultSettings);
   const { showToast, ToastElement } = useToast();
@@ -139,6 +151,7 @@ export default function AdminSettings() {
   const [cloudinarySettings, setCloudinarySettings] = useState<CloudinarySettings>(defaultCloudinary);
   const [cloudinaryTesting, setCloudinaryTesting] = useState(false);
   const [smtpTesting, setSmtpTesting] = useState(false);
+  const [paymentCreds, setPaymentCreds] = useState<PaymentCreds>(defaultPaymentCreds);
 
   const mergeWithDefaults = (stored: Partial<Settings>): Settings => {
     return {
@@ -208,6 +221,20 @@ export default function AdminSettings() {
         });
       } catch { /* silent */ }
     })();
+
+    // Load payment gateway credentials from D1
+    (async () => {
+      try {
+        const keys = ['stripe_secret_key', 'paytabs_profile_id', 'paytabs_server_key', 'paytabs_region'];
+        const r = await Promise.all(keys.map(k => fetch(`/api/settings/?key=${k}`).then(x => x.json())));
+        setPaymentCreds({
+          stripeSecretKey: r[0]?.setting?.value || '',
+          paytabsProfileId: r[1]?.setting?.value || '',
+          paytabsServerKey: r[2]?.setting?.value || '',
+          paytabsRegion: r[3]?.setting?.value || 'ARE',
+        });
+      } catch { /* silent */ }
+    })();
   }, []);
 
   const handleSave = async () => {
@@ -232,6 +259,15 @@ export default function AdminSettings() {
         { key: "cloudinary_cloud_name", value: cloudinarySettings.cloudName },
         { key: "cloudinary_api_key", value: cloudinarySettings.apiKey },
         { key: "cloudinary_api_secret", value: cloudinarySettings.apiSecret },
+      ] : []),
+      // Payment credentials — only saved when present, so a failed load can't wipe them
+      ...(paymentCreds.stripeSecretKey ? [
+        { key: "stripe_secret_key", value: paymentCreds.stripeSecretKey },
+      ] : []),
+      ...(paymentCreds.paytabsProfileId || paymentCreds.paytabsServerKey ? [
+        { key: "paytabs_profile_id", value: paymentCreds.paytabsProfileId },
+        { key: "paytabs_server_key", value: paymentCreds.paytabsServerKey },
+        { key: "paytabs_region", value: paymentCreds.paytabsRegion },
       ] : []),
     ];
 
@@ -597,6 +633,84 @@ export default function AdminSettings() {
                     </div>
                   </>
                 )}
+
+                {/* Checkout payment provider */}
+                <div className="border-t border-white/10 pt-4 mt-2">
+                  <h3 className="text-white font-medium mb-1">Checkout Payment Provider</h3>
+                  <p className="text-sm text-slate-400 mb-3">Online payment for the spare-parts checkout page.</p>
+                  <select
+                    value={settings.paymentProvider}
+                    onChange={(e) => setSettings({ ...settings, paymentProvider: e.target.value })}
+                    className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                  >
+                    <option value="none">None — record orders, sales collects payment</option>
+                    <option value="external">External payment link (uses the link above)</option>
+                    <option value="stripe">Stripe</option>
+                    <option value="paytabs">PayTabs</option>
+                  </select>
+
+                  {settings.paymentProvider === "stripe" && (
+                    <div className="mt-3">
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Stripe Secret Key</label>
+                      <input
+                        type="password"
+                        value={paymentCreds.stripeSecretKey}
+                        onChange={(e) => setPaymentCreds({ ...paymentCreds, stripeSecretKey: e.target.value })}
+                        placeholder="sk_live_…"
+                        autoComplete="off"
+                        className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                      />
+                      <p className="text-xs text-slate-500 mt-1">Stripe Dashboard → Developers → API keys. Stored server-side only.</p>
+                    </div>
+                  )}
+
+                  {settings.paymentProvider === "paytabs" && (
+                    <div className="mt-3 space-y-3">
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">PayTabs Profile ID</label>
+                        <input
+                          type="text"
+                          value={paymentCreds.paytabsProfileId}
+                          onChange={(e) => setPaymentCreds({ ...paymentCreds, paytabsProfileId: e.target.value })}
+                          placeholder="e.g. 123456"
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">PayTabs Server Key</label>
+                        <input
+                          type="password"
+                          value={paymentCreds.paytabsServerKey}
+                          onChange={(e) => setPaymentCreds({ ...paymentCreds, paytabsServerKey: e.target.value })}
+                          placeholder="SxJ…"
+                          autoComplete="off"
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">PayTabs Region</label>
+                        <select
+                          value={paymentCreds.paytabsRegion}
+                          onChange={(e) => setPaymentCreds({ ...paymentCreds, paytabsRegion: e.target.value })}
+                          className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                        >
+                          <option value="ARE">United Arab Emirates</option>
+                          <option value="SAU">Saudi Arabia</option>
+                          <option value="EGY">Egypt</option>
+                          <option value="OMN">Oman</option>
+                          <option value="JOR">Jordan</option>
+                          <option value="GLOBAL">Global</option>
+                        </select>
+                      </div>
+                      <p className="text-xs text-slate-500">PayTabs Dashboard → Developers → Key management. Stored server-side only.</p>
+                    </div>
+                  )}
+
+                  <div className="mt-3 bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 text-xs text-slate-400">
+                    With <strong>None</strong>, checkout records the order and emails it — your team arranges payment.
+                    Stripe / PayTabs send the customer to the gateway&apos;s secure page; on success the order is marked <strong>paid</strong>.
+                  </div>
+                </div>
               </div>
             </div>
 

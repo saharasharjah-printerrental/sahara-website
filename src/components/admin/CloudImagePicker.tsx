@@ -23,6 +23,8 @@ export default function CloudImagePicker({ value, onChange, label = "Image" }: P
   const [cloudError, setCloudError] = useState<string | null>(null);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [selectedUrl, setSelectedUrl] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const loadCloudImages = useCallback(async (cursor?: string) => {
@@ -49,13 +51,25 @@ export default function CloudImagePicker({ value, onChange, label = "Image" }: P
     if (t === "cloud" && cloudImages.length === 0) loadCloudImages();
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => onChange(reader.result as string);
-    reader.readAsDataURL(file);
     e.target.value = "";
+    setUploading(true);
+    setUploadError(null);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/convert-image/", { method: "POST", body: fd });
+      if (!res.ok) throw new Error(`Upload failed: HTTP ${res.status}`);
+      const data = await res.json() as { url?: string; error?: string };
+      if (!data.url) throw new Error(data.error || "No URL returned");
+      onChange(data.url);
+    } catch (err) {
+      setUploadError(String(err));
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSelect = (url: string) => {
@@ -97,11 +111,21 @@ export default function CloudImagePicker({ value, onChange, label = "Image" }: P
 
       {/* Upload tab */}
       {tab === "upload" && (
-        <label className="cursor-pointer block">
-          <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-          <div className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-center text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30 transition-colors">
-            {value && !value.startsWith("http") ? "Change Image" : "Choose a file to upload"}
+        <label className={`block ${uploading ? "cursor-wait" : "cursor-pointer"}`}>
+          <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" disabled={uploading} />
+          <div className={`w-full bg-[#101c2e] border rounded-xl py-3 px-4 text-center transition-colors ${
+            uploading
+              ? "border-[#f5be53]/30 text-[#f5be53]"
+              : "border-white/10 text-slate-400 hover:text-[#f5be53] hover:border-[#f5be53]/30"
+          }`}>
+            {uploading ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="inline-block w-4 h-4 border-2 border-[#f5be53] border-t-transparent rounded-full animate-spin" />
+                Uploading…
+              </span>
+            ) : value ? "Change Image" : "Choose a file to upload"}
           </div>
+          {uploadError && <p className="text-red-400 text-xs mt-1">{uploadError}</p>}
         </label>
       )}
 

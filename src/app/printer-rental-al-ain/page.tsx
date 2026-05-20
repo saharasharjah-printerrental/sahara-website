@@ -60,7 +60,6 @@ export async function generateMetadata(): Promise<Metadata> {
     locale: "en_AE",
     type: "website",
   },
-    other: { "script:ld+json": JSON.stringify(faqSchema) },
   };
 }
 
@@ -261,10 +260,16 @@ const industryInsights = [
 
 export default async function PrinterRentalAlAin() {
   const faqs = await getFaqsFromD1();
+  const faqSchema = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  } : null;
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
     <main className="min-h-screen bg-[#071325]">
       <Header />
 
