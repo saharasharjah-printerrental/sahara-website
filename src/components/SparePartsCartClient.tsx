@@ -48,25 +48,36 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
     }
     const storedCart = localStorage.getItem("sahara_cart");
     if (storedCart) setCart(JSON.parse(storedCart));
-    const storedSettings = localStorage.getItem("sahara_settings");
-    if (storedSettings) {
-      const parsed = JSON.parse(storedSettings);
+
+    const applyPayment = (parsed: Record<string, unknown>) => {
       setPaymentSettings({
-        paymentGatewayEnabled: parsed.paymentGatewayEnabled || false,
-        paymentGatewayUrl: parsed.paymentGatewayUrl || "",
-        paymentGatewayLabel: parsed.paymentGatewayLabel || "Buy Now",
+        paymentGatewayEnabled: Boolean(parsed.paymentGatewayEnabled),
+        paymentGatewayUrl: String(parsed.paymentGatewayUrl || ""),
+        paymentGatewayLabel: String(parsed.paymentGatewayLabel || "Buy Now"),
       });
-    }
+    };
+
+    // Fetch from D1 first (real visitors won't have localStorage populated)
+    fetch('/api/settings/?key=site_settings')
+      .then(r => r.json())
+      .then(data => {
+        if (data.setting?.value) {
+          const parsed = JSON.parse(data.setting.value);
+          applyPayment(parsed);
+          localStorage.setItem("sahara_settings", JSON.stringify(parsed));
+        } else {
+          const storedSettings = localStorage.getItem("sahara_settings");
+          if (storedSettings) applyPayment(JSON.parse(storedSettings));
+        }
+      })
+      .catch(() => {
+        const storedSettings = localStorage.getItem("sahara_settings");
+        if (storedSettings) applyPayment(JSON.parse(storedSettings));
+      });
+
     const handleSettingsChange = () => {
       const updated = localStorage.getItem("sahara_settings");
-      if (updated) {
-        const parsed = JSON.parse(updated);
-        setPaymentSettings({
-          paymentGatewayEnabled: parsed.paymentGatewayEnabled || false,
-          paymentGatewayUrl: parsed.paymentGatewayUrl || "",
-          paymentGatewayLabel: parsed.paymentGatewayLabel || "Buy Now",
-        });
-      }
+      if (updated) applyPayment(JSON.parse(updated));
     };
     window.addEventListener("sahara-settings-updated", handleSettingsChange);
     return () => window.removeEventListener("sahara-settings-updated", handleSettingsChange);

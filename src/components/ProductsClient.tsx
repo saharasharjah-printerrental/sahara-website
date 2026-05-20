@@ -49,6 +49,11 @@ export default function ProductsClient() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [paymentSettings, setPaymentSettings] = useState<{
+    paymentGatewayEnabled: boolean;
+    paymentGatewayUrl: string;
+    paymentGatewayLabel: string;
+  }>({ paymentGatewayEnabled: false, paymentGatewayUrl: "", paymentGatewayLabel: "Buy Now" });
 
   const searchQuery = searchParams.get("search") || "";
   const selectedBrands = useMemo(() => searchParams.get("brands")?.split(",").filter(Boolean) || [], [searchParams]);
@@ -57,6 +62,41 @@ export default function ProductsClient() {
   const page = parseInt(searchParams.get("page") || "1", 10);
 
   useEffect(() => {
+    // Fetch payment settings from D1
+    fetch('/api/settings/?key=site_settings')
+      .then(r => r.json())
+      .then(data => {
+        if (data.setting?.value) {
+          const parsed = JSON.parse(data.setting.value);
+          setPaymentSettings({
+            paymentGatewayEnabled: Boolean(parsed.paymentGatewayEnabled),
+            paymentGatewayUrl: String(parsed.paymentGatewayUrl || ""),
+            paymentGatewayLabel: String(parsed.paymentGatewayLabel || "Buy Now"),
+          });
+        } else {
+          const s = localStorage.getItem("sahara_settings");
+          if (s) {
+            const parsed = JSON.parse(s);
+            setPaymentSettings({
+              paymentGatewayEnabled: Boolean(parsed.paymentGatewayEnabled),
+              paymentGatewayUrl: String(parsed.paymentGatewayUrl || ""),
+              paymentGatewayLabel: String(parsed.paymentGatewayLabel || "Buy Now"),
+            });
+          }
+        }
+      })
+      .catch(() => {
+        const s = localStorage.getItem("sahara_settings");
+        if (s) {
+          const parsed = JSON.parse(s);
+          setPaymentSettings({
+            paymentGatewayEnabled: Boolean(parsed.paymentGatewayEnabled),
+            paymentGatewayUrl: String(parsed.paymentGatewayUrl || ""),
+            paymentGatewayLabel: String(parsed.paymentGatewayLabel || "Buy Now"),
+          });
+        }
+      });
+
     (async () => {
       try {
         const res = await fetch("/api/products");
@@ -265,6 +305,16 @@ export default function ProductsClient() {
                         <span className="text-[#f5be53] font-bold text-lg">{p.priceRental}</span>
                         <span className="text-white text-sm">{p.condition === "New" ? "Brand New" : p.condition}</span>
                       </div>
+                      {paymentSettings.paymentGatewayEnabled && paymentSettings.paymentGatewayUrl && (
+                        <a
+                          href={paymentSettings.paymentGatewayUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 block w-full text-center bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-4 py-2 rounded-xl font-bold text-sm hover:scale-105 transition-transform"
+                        >
+                          {paymentSettings.paymentGatewayLabel || "Buy Now"}
+                        </a>
+                      )}
                     </div>
                   </div>
                 ))}
