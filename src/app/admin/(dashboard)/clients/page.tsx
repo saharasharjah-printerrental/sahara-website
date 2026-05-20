@@ -3,7 +3,7 @@
 export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
-import { Delete, Edit, Link as LinkIcon, Add } from "@mui/icons-material";
+import { Delete, Edit, Link as LinkIcon, Add, CloudUpload } from "@mui/icons-material";
 import { useToast } from "@/components/admin/Toast";
 import { persistImageIfStaged, deleteRemoteImage } from "@/lib/imageUpload";
 import CloudImagePicker from "@/components/admin/CloudImagePicker";
@@ -115,6 +115,27 @@ const defaultClients: Client[] = [
   { id: "93", name: "Bin Brothers", logoUrl: "", website: "", isActive: true, sortOrder: 93 },
 ];
 
+function readFileAsDataURL(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = () => reject(new Error("file read failed"));
+    reader.readAsDataURL(file);
+  });
+}
+
+// Derive a readable placeholder name from an uploaded logo's filename,
+// so each bulk-uploaded client is identifiable before the admin edits it.
+function filenameToClientName(filename: string): string {
+  const base = filename
+    .replace(/\.[^/.]+$/, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!base) return "New Client";
+  return base.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 export default function AdminClients() {
   const [clients, setClients] = useState<Client[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -123,6 +144,7 @@ export default function AdminClients() {
   const [showActiveOnly, setShowActiveOnly] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null);
   const { showToast, ToastElement } = useToast();
 
   useEffect(() => { fetchClients(); }, []);
@@ -269,6 +291,42 @@ export default function AdminClients() {
     await fetchClients();
   };
 
+  const handleBulkUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    e.target.value = "";
+    if (files.length === 0) return;
+
+    setBulkProgress({ done: 0, total: files.length });
+    const baseSort = clients.reduce((max, c) => Math.max(max, c.sortOrder), 0);
+    let created = 0;
+
+    for (let i = 0; i < files.length; i++) {
+      try {
+        const base64 = await readFileAsDataURL(files[i]);
+        const logoUrl = await persistImageIfStaged(base64);
+        const newClient: Client = {
+          id: `${Date.now()}-${i}`,
+          name: filenameToClientName(files[i].name),
+          logoUrl,
+          website: "",
+          isActive: true,
+          sortOrder: baseSort + i + 1,
+        };
+        if (await syncToAPI(newClient)) created++;
+      } catch {
+        /* skip this file, continue with the rest */
+      }
+      setBulkProgress({ done: i + 1, total: files.length });
+    }
+
+    setBulkProgress(null);
+    await fetchClients();
+    showToast(
+      created === files.length ? "success" : "error",
+      `${created} of ${files.length} logo(s) uploaded — edit each client to set its name & website`
+    );
+  };
+
   const handleReorder = (fromIndex: number, toIndex: number) => {
     const newClients = [...clients];
     const [removed] = newClients.splice(fromIndex, 1);
@@ -294,14 +352,44 @@ export default function AdminClients() {
               <h1 className="text-3xl font-bold text-white">Clients</h1>
               <p className="text-slate-400 mt-1">Manage client logos — {clients.length} companies ({activeCount} active)</p>
             </div>
-            <button 
-              onClick={() => { setEditingClient(null); setShowModal(true); }} 
-              className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-3 rounded-xl font-bold hover:scale-[1.02] transition-transform flex items-center gap-2"
-            >
-              <Add />
-              Add Client
-            </button>
+            <div className="flex items-center gap-3">
+              <label className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold border border-[#f5be53]/30 text-[#f5be53] transition-colors ${bulkProgress ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-[#f5be53]/10'}`}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  disabled={!!bulkProgress}
+                  onChange={handleBulkUpload}
+                  className="hidden"
+                />
+                <CloudUpload />
+                {bulkProgress ? `Uploading ${bulkProgress.done}/${bulkProgress.total}…` : 'Bulk Upload Logos'}
+              </label>
+              <button
+                onClick={() => { setEditingClient(null); setShowModal(true); }}
+                className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-3 rounded-xl font-bold hover:scale-[1.02] transition-transform flex items-center gap-2"
+              >
+                <Add />
+                Add Client
+              </button>
+            </div>
           </div>
+
+          {bulkProgress && (
+            <div className="mb-6 p-4 bg-[#f5be53]/10 border border-[#f5be53]/20 rounded-xl">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[#f5be53] text-sm font-medium">
+                  Uploading logos — {bulkProgress.done} of {bulkProgress.total}
+                </span>
+              </div>
+              <div className="w-full h-2 bg-[#101c2e] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#f5be53] transition-all"
+                  style={{ width: `${bulkProgress.total ? (bulkProgress.done / bulkProgress.total) * 100 : 0}%` }}
+                />
+              </div>
+            </div>
+          )}
 
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 relative">

@@ -105,6 +105,16 @@ const brandMeta: Record<string, { name: string; description: string; keywords: s
       { q: "Can I rent a Lexmark printer in Dubai?", a: "Yes. Lexmark enterprise laser printers are available on monthly rental from AED 250/month with zero deposit, OEM supplies, and full maintenance." },
     ],
   },
+  "konica-minolta": {
+    name: "Konica Minolta",
+    description: "Authorized Konica Minolta printer and photocopier dealer in UAE. bizhub A3/A4 MFPs for high-volume offices. Sales, rental, and AMC. Dubai, Abu Dhabi, Sharjah. ☎ +971503823969",
+    keywords: "konica minolta uae, konica minolta printer dubai, bizhub uae, konica minolta photocopier uae, konica minolta dealer uae, konica minolta copier sharjah",
+    faqs: [
+      { q: "Is Sahara an authorized Konica Minolta dealer in UAE?", a: "Yes. Sahara Office Equipments supplies Konica Minolta bizhub MFPs to businesses across Dubai, Sharjah, and Abu Dhabi, with sales, rental, and AMC support." },
+      { q: "Can I rent a Konica Minolta photocopier in Dubai?", a: "Yes. Konica Minolta bizhub A3 colour and mono MFPs are available on monthly rental from AED 250/month — zero deposit, free toner, and full on-site maintenance included." },
+      { q: "Is Konica Minolta bizhub good for high-volume printing in UAE?", a: "Yes. Konica Minolta bizhub series MFPs are built for 20,000–50,000 pages/month, making them ideal for large corporate offices and print rooms across UAE." },
+    ],
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

@@ -14,6 +14,8 @@ interface Inquiry {
   service: string;
   message: string;
   status: string;
+  email_sent?: number;
+  email_sent_at?: string;
   createdAt: string;
 }
 
@@ -116,7 +118,12 @@ export default function InquiriesPage() {
                 </div>
                 <p className="text-slate-400 text-xs truncate">{inq.email}</p>
                 <p className="text-slate-500 text-xs mt-1">{inq.service || 'General enquiry'}</p>
-                <p className="text-slate-600 text-[10px] mt-1">{inq.createdAt ? new Date(inq.createdAt).toLocaleDateString('en-AE') : ''}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-slate-600 text-[10px]">{inq.createdAt ? new Date(inq.createdAt).toLocaleDateString('en-AE') : ''}</p>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${inq.email_sent ? 'bg-green-500/15 text-green-300 border-green-500/30' : 'bg-red-500/15 text-red-300 border-red-500/30'}`}>
+                    {inq.email_sent ? '✓ Email sent' : '✕ Email not sent'}
+                  </span>
+                </div>
               </button>
             ))}
           </div>
@@ -148,9 +155,21 @@ export default function InquiriesPage() {
                   <p className="text-[#d3c5b0] text-sm leading-relaxed whitespace-pre-wrap">{selected.message || 'No message provided.'}</p>
                 </div>
 
-                <div className="mb-6">
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Received</p>
-                  <p className="text-slate-400 text-sm">{selected.createdAt ? new Date(selected.createdAt).toLocaleString('en-AE') : '—'}</p>
+                <div className="mb-6 flex flex-wrap gap-8">
+                  <div>
+                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Received</p>
+                    <p className="text-slate-400 text-sm">{selected.createdAt ? new Date(selected.createdAt).toLocaleString('en-AE') : '—'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email Notification</p>
+                    {selected.email_sent ? (
+                      <p className="text-green-300 text-sm font-semibold">
+                        ✓ Sent{selected.email_sent_at ? ` · ${new Date(selected.email_sent_at).toLocaleString('en-AE')}` : ''}
+                      </p>
+                    ) : (
+                      <p className="text-red-300 text-sm font-semibold">✕ Not sent</p>
+                    )}
+                  </div>
                 </div>
 
                 <div>

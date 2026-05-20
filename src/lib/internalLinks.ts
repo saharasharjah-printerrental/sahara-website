@@ -166,6 +166,62 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
     ],
   },
+  "kyocera-vs-canon-vs-ricoh-best-copier-uae-2025": {
+    primaryService: { href: "/services/photocopier-rental", label: "Photocopier Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/brands/kyocera", label: "Kyocera Printers UAE", type: "brand" },
+      { href: "/brands/canon", label: "Canon Printers UAE", type: "brand" },
+      { href: "/brands/ricoh", label: "Ricoh Printers UAE", type: "brand" },
+      { href: "/get-quote", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "what-a-copier-rental-service-must-deliver-to-a-client",
+      "total-cost-of-printer-ownership",
+      "what-is-printer-amc-uae-guide-2025",
+    ],
+  },
+  "what-is-printer-amc-uae-guide-2025": {
+    primaryService: { href: "/services/amc", label: "Annual Maintenance Contract (AMC)", type: "service" },
+    relatedLinks: [
+      { href: "/services/repair", label: "Printer Repair Services", type: "service" },
+      { href: "/services/toner", label: "Toner & Spare Parts", type: "service" },
+      { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
+      { href: "/get-quote", label: "Request an AMC Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "the-hidden-cost-of-your-office-copier",
+      "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits",
+      "printer-repair-vs-replacement-dubai-guide-2025",
+    ],
+  },
+  "printer-rental-real-estate-offices-dubai-2025": {
+    primaryService: { href: "/printer-rental-dubai", label: "Printer Rental Dubai", type: "location" },
+    relatedLinks: [
+      { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
+      { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" },
+      { href: "/rental-calculator", label: "Rental Price Calculator", type: "tool" },
+      { href: "/get-quote", label: "Get a Custom Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+      "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
+      "how-to-choose-the-best-printer-rental-dubai-service",
+    ],
+  },
+  "printer-repair-vs-replacement-dubai-guide-2025": {
+    primaryService: { href: "/services/repair", label: "Printer Repair Services", type: "service" },
+    relatedLinks: [
+      { href: "/printer-repair-dubai", label: "Printer Repair Dubai", type: "location" },
+      { href: "/services/amc", label: "Annual Maintenance (AMC)", type: "service" },
+      { href: "/services/sales", label: "Buy a Printer (Corporate Sales)", type: "service" },
+      { href: "/get-quote", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "the-problem-we-solve",
+      "total-cost-of-printer-ownership",
+      "what-is-printer-amc-uae-guide-2025",
+    ],
+  },
 };
 
 // Service page to blog post mapping — for "From Our Blog" sections

@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Dashboard, Print, ShoppingCart, Article, Groups, Quiz, Business, Storage, Settings, Public, Logout, FormatQuote, Image } from "@mui/icons-material";
+import { Dashboard, Print, ShoppingCart, Article, Groups, Quiz, Business, Storage, Settings, Public, Logout, FormatQuote, Image, ReceiptLong } from "@mui/icons-material";
 
 const menuItems = [
   { icon: Dashboard, label: "Dashboard", href: "/admin" },
   { icon: Print, label: "Products", href: "/admin/products" },
   { icon: ShoppingCart, label: "Supplies & Parts", href: "/admin/supplies" },
+  { icon: ReceiptLong, label: "Orders", href: "/admin/orders" },
   { icon: Article, label: "Blog Posts", href: "/admin/blog" },
   { icon: Groups, label: "Clients", href: "/admin/clients" },
   { icon: Quiz, label: "FAQs", href: "/admin/faqs" },

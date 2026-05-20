@@ -31,18 +31,16 @@ export async function POST(request: NextRequest) {
     }
 
     const sent = await sendQuoteNotification(data);
-    if (!sent) {
-      return NextResponse.json({ error: 'Email delivery failed — check SMTP settings in Admin' }, { status: 500 });
-    }
 
-    // Persist inquiry to D1 (non-blocking — don't fail the response if DB unavailable)
+    // Persist inquiry to D1 regardless of email outcome, so the enquiry is
+    // never lost and the admin panel can show delivery status accurately.
     const db = getDB();
     if (db) {
       const id = `inq-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
       const now = new Date().toISOString();
       db.prepare(`
-        INSERT INTO inquiries (id, name, email, phone, company, service, message, status, createdAt)
-        VALUES (?, ?, ?, ?, ?, ?, ?, 'new', ?)
+        INSERT INTO inquiries (id, name, email, phone, company, service, message, status, email_sent, email_sent_at, createdAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, 'new', ?, ?, ?)
       `).bind(
         id,
         data.customerName || '',
@@ -51,8 +49,14 @@ export async function POST(request: NextRequest) {
         data.customerCompany || '',
         data.configuration || '',
         data.message || '',
+        sent ? 1 : 0,
+        sent ? now : '',
         now,
       ).run().catch((e: unknown) => console.error('[send-email] inquiry insert failed:', e));
+    }
+
+    if (!sent) {
+      return NextResponse.json({ error: 'Email delivery failed — check SMTP settings in Admin' }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });

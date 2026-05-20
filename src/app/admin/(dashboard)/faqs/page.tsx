@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, Fragment } from "react";
 import { useToast } from "@/components/admin/Toast";
 
 interface FAQ {
@@ -32,6 +32,11 @@ const pageOptions: PageOption[] = [
   { value: "products", label: "Products" },
   { value: "blog", label: "Blog" },
 ];
+
+function pageLabel(slug: string): string {
+  if (!slug) return "Unassigned";
+  return pageOptions.find(p => p.value === slug)?.label || slug;
+}
 
 const defaultFAQs: FAQ[] = [
   { id: "1", question: "What is the duration of your printer rental plans?", answer: "We offer flexible rental periods starting from short-term event hire (1-7 days) to long-term corporate leases (12-36 months), all with included maintenance.", pageSlug: "homepage", isActive: true, sortOrder: 1 },
@@ -141,7 +146,28 @@ export default function AdminFAQs() {
     fetchFAQs();
   };
 
-  const filteredFAQs = filterPage === "all" ? faqs : faqs.filter(f => f.pageSlug === filterPage);
+  // FAQ count per page — drives the filter dropdown and group headers
+  const pageCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    faqs.forEach(f => { counts[f.pageSlug || ""] = (counts[f.pageSlug || ""] || 0) + 1; });
+    return counts;
+  }, [faqs]);
+
+  // Every page that actually has FAQs, sorted by display label
+  const pagesInUse = useMemo(
+    () => Object.keys(pageCounts).sort((a, b) => pageLabel(a).localeCompare(pageLabel(b))),
+    [pageCounts]
+  );
+
+  // Group FAQs by page, then order by sortOrder within each page
+  const filteredFAQs = useMemo(() => {
+    const list = filterPage === "all" ? faqs : faqs.filter(f => f.pageSlug === filterPage);
+    return [...list].sort((a, b) =>
+      pageLabel(a.pageSlug).localeCompare(pageLabel(b.pageSlug)) ||
+      (a.sortOrder - b.sortOrder) ||
+      a.question.localeCompare(b.question)
+    );
+  }, [faqs, filterPage]);
 
   return (
     <div className="min-h-screen bg-[#071325]">
@@ -163,10 +189,15 @@ export default function AdminFAQs() {
 
           <div className="mb-6">
             <label className="block text-sm font-medium text-slate-300 mb-2">Filter by Page</label>
-            <select value={filterPage} onChange={(e) => setFilterPage(e.target.value)} className="bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white w-64">
-              <option value="all">All Pages</option>
-              {pageOptions.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
+            <select value={filterPage} onChange={(e) => setFilterPage(e.target.value)} className="bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white w-72">
+              <option value="all">All Pages ({faqs.length})</option>
+              {pagesInUse.map(slug => (
+                <option key={slug} value={slug}>{pageLabel(slug)} ({pageCounts[slug]})</option>
+              ))}
             </select>
+            <p className="text-xs text-slate-500 mt-2">
+              {pagesInUse.length} page{pagesInUse.length === 1 ? '' : 's'} have FAQs · {faqs.length} FAQ{faqs.length === 1 ? '' : 's'} total
+            </p>
           </div>
 
           <div className="glass-card rounded-2xl overflow-hidden">
@@ -185,34 +216,53 @@ export default function AdminFAQs() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredFAQs.map((faq) => (
-                      <tr key={faq.id} className="border-b border-white/5">
-                        <td className="p-4">
-                          <p className="font-medium text-white">{faq.question}</p>
-                        </td>
-                        <td className="p-4 text-slate-300">
-                          <span className="px-3 py-1 rounded-full bg-[#101c2e] text-xs">
-                            {pageOptions.find(p => p.value === faq.pageSlug)?.label || faq.pageSlug}
-                          </span>
-                        </td>
-                        <td className="p-4">
-                          <button onClick={() => handleToggle(faq.id)} className={`px-3 py-1 rounded-full text-xs font-medium ${faq.isActive ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
-                            {faq.isActive ? "Active" : "Inactive"}
-                          </button>
-                        </td>
-                        <td className="p-4 text-slate-400">{faq.sortOrder}</td>
-                        <td className="p-4">
-                          <div className="flex gap-2">
-                            <button onClick={() => { setEditingFAQ(faq); setShowModal(true); }} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white">
-                              <span className="material-symbols-outlined text-sm">edit</span>
-                            </button>
-                            <button onClick={() => handleDelete(faq.id)} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-red-400">
-                              <span className="material-symbols-outlined text-sm">delete</span>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                    {(() => {
+                      let lastPage: string | null = null;
+                      return filteredFAQs.map((faq) => {
+                        const showHeader = faq.pageSlug !== lastPage;
+                        lastPage = faq.pageSlug;
+                        return (
+                          <Fragment key={faq.id}>
+                            {showHeader && (
+                              <tr className="bg-[#0d1726] border-b border-white/10">
+                                <td colSpan={5} className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#f5be53]">
+                                  {pageLabel(faq.pageSlug)}
+                                  <span className="ml-2 text-slate-500 normal-case tracking-normal font-normal">
+                                    {pageCounts[faq.pageSlug || ""]} FAQ{pageCounts[faq.pageSlug || ""] === 1 ? '' : 's'}
+                                  </span>
+                                </td>
+                              </tr>
+                            )}
+                            <tr className="border-b border-white/5">
+                              <td className="p-4">
+                                <p className="font-medium text-white">{faq.question}</p>
+                              </td>
+                              <td className="p-4 text-slate-300">
+                                <span className="px-3 py-1 rounded-full bg-[#101c2e] text-xs">
+                                  {pageLabel(faq.pageSlug)}
+                                </span>
+                              </td>
+                              <td className="p-4">
+                                <button onClick={() => handleToggle(faq.id)} className={`px-3 py-1 rounded-full text-xs font-medium ${faq.isActive ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
+                                  {faq.isActive ? "Active" : "Inactive"}
+                                </button>
+                              </td>
+                              <td className="p-4 text-slate-400">{faq.sortOrder}</td>
+                              <td className="p-4">
+                                <div className="flex gap-2">
+                                  <button onClick={() => { setEditingFAQ(faq); setShowModal(true); }} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-white">
+                                    <span className="material-symbols-outlined text-sm">edit</span>
+                                  </button>
+                                  <button onClick={() => handleDelete(faq.id)} className="p-2 rounded-lg bg-[#101c2e] text-slate-400 hover:text-red-400">
+                                    <span className="material-symbols-outlined text-sm">delete</span>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </Fragment>
+                        );
+                      });
+                    })()}
                     {filteredFAQs.length === 0 && (
                       <tr>
                         <td colSpan={5} className="p-8 text-center text-slate-400">No FAQs found</td>

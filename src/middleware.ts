@@ -10,6 +10,10 @@ const RATE_LIMITS = [
   { pattern: /^\/api\/inquiries/,     requests: 10, windowMs: 60_000 },
   // Email sending
   { pattern: /^\/api\/send-email/,    requests: 10, windowMs: 60_000 },
+  // Checkout order placement — prevent spam orders
+  { pattern: /^\/api\/orders/,        requests: 15, windowMs: 60_000 },
+  // Payment session / gateway callbacks
+  { pattern: /^\/api\/payments/,      requests: 30, windowMs: 60_000 },
   // Default for all other /api/* routes
   { pattern: /^\/api\//,              requests: 180, windowMs: 60_000 },
 ] as const;

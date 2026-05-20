@@ -32,6 +32,7 @@ const brands = [
   { slug: "epson", name: "Epson", tagline: "PrecisionCore & Wide-Format", desc: "Epson EcoTank and wide-format solutions for print-intensive environments.", icon: "🖨️" },
   { slug: "samsung", name: "Samsung", tagline: "ProXpress & MultiXpress", desc: "Samsung enterprise printers with smart printing apps for UAE businesses.", icon: "🖨️" },
   { slug: "lexmark", name: "Lexmark", tagline: "Managed Print Services", desc: "Lexmark enterprise laser solutions and MPS programs for UAE offices.", icon: "🖨️" },
+  { slug: "konica-minolta", name: "Konica Minolta", tagline: "bizhub A3 & A4 Series", desc: "Authorized Konica Minolta dealer in UAE. bizhub MFPs for high-volume corporate offices.", icon: "🖨️" },
 ];
 
 const breadcrumbSchema = {
@@ -67,7 +68,7 @@ const faqSchema = {
       "name": "Which printer brands does Sahara Office Equipments deal in UAE?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sahara is an authorized dealer for Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Samsung, and Lexmark in UAE. We provide sales, rental, AMC, and repair services for all these brands across Dubai, Sharjah, Abu Dhabi, and other emirates.",
+        "text": "Sahara is an authorized dealer for Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Samsung, Lexmark, and Konica Minolta in UAE. We provide sales, rental, AMC, and repair services for all these brands across Dubai, Sharjah, Abu Dhabi, and other emirates.",
       },
     },
     {
@@ -126,14 +127,14 @@ export default function BrandsPage() {
               <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8 text-left">
                 <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Which Printer Brands Are Available in UAE?</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Sahara Office Equipments is an authorized dealer for 10 major printer and photocopier brands in UAE —
-                  Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Samsung, and Lexmark. We offer
+                  Sahara Office Equipments is an authorized dealer for 11 major printer and photocopier brands in UAE —
+                  Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Samsung, Lexmark, and Konica Minolta. We offer
                   sales, rental from AED 250/month, AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi.
                 </p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-3 mb-12">
-                {["10 Brands", "Sales & Rental", "AMC & Repair", "Free Toner", "Since 2012"].map((t) => (
+                {["11 Brands", "Sales & Rental", "AMC & Repair", "Free Toner", "Since 2012"].map((t) => (
                   <span key={t} className="text-xs font-bold text-white bg-[#f5be53]/10 border border-[#f5be53]/25 px-3 py-1.5 rounded-full">
                     ✓ {t}
                   </span>

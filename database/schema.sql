@@ -118,7 +118,35 @@ CREATE TABLE IF NOT EXISTS inquiries (
   service TEXT DEFAULT '',
   message TEXT DEFAULT '',
   status TEXT DEFAULT 'new',
+  notes TEXT DEFAULT '',
+  email_sent INTEGER DEFAULT 0,
+  email_sent_at TEXT DEFAULT '',
   createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ============================================
+-- ORDERS TABLE (Spare-parts checkout)
+-- ============================================
+CREATE TABLE IF NOT EXISTS orders (
+  id TEXT PRIMARY KEY,
+  ref TEXT NOT NULL,
+  customer_name TEXT NOT NULL,
+  customer_email TEXT DEFAULT '',
+  customer_phone TEXT DEFAULT '',
+  customer_company TEXT DEFAULT '',
+  delivery_address TEXT DEFAULT '',
+  emirate TEXT DEFAULT '',
+  preferred_date TEXT DEFAULT '',
+  instructions TEXT DEFAULT '',
+  items TEXT DEFAULT '[]',
+  subtotal REAL DEFAULT 0,
+  total REAL DEFAULT 0,
+  status TEXT DEFAULT 'pending',
+  payment_provider TEXT DEFAULT '',
+  payment_ref TEXT DEFAULT '',
+  email_sent INTEGER DEFAULT 0,
+  createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ============================================
@@ -212,7 +240,8 @@ INSERT OR REPLACE INTO brands (id, name, slug, logo_url, description, is_active,
 ('5', 'Kyocera', 'kyocera', 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Kyocera_logo.svg', 'Kyocera TASKalfa series', 1, 5),
 ('6', 'Brother', 'brother', 'https://upload.wikimedia.org/wikipedia/commons/4/44/Brother_Logo.svg', 'Brother laser and inkjet', 1, 6),
 ('7', 'Sharp', 'sharp', 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Sharp_logo.svg', 'Sharp BP series', 1, 7),
-('8', 'Epson', 'epson', 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Epson_logo.svg', 'Epson business printers', 1, 8);
+('8', 'Epson', 'epson', 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Epson_logo.svg', 'Epson business printers', 1, 8),
+('9', 'Konica Minolta', 'konica-minolta', '', 'Konica Minolta bizhub A3/A4 series', 1, 9);
 
 
 -- ============================================

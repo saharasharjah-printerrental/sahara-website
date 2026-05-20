@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Close, ShoppingCart, Build, Settings } from "@mui/icons-material";
+import { parsePriceAED, formatAED, isPriced } from "@/lib/price";
 
 interface Supply {
   id: string;
@@ -105,10 +106,8 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
     localStorage.setItem("sahara_cart", JSON.stringify(newCart));
   };
 
-  const cartTotal = cart.reduce((acc, item) => {
-    const priceNum = parseInt(item.supply.price.replace(/[^0-9]/g, "") || "0");
-    return acc + (item.supply.price === "Contact for Pricing" ? 0 : priceNum * item.quantity);
-  }, 0);
+  const cartTotal = cart.reduce((acc, item) => acc + parsePriceAED(item.supply.price) * item.quantity, 0);
+  const hasUnpricedItems = cart.some((item) => !isPriced(item.supply.price));
 
   const filteredSupplies = supplies.filter((s) => {
     const matchesSearch = s.name.toLowerCase().includes(searchTerm.toLowerCase()) || s.compatibleModels.toLowerCase().includes(searchTerm.toLowerCase());
@@ -164,9 +163,18 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
               <div className="border-t border-white/10 pt-4 mb-6">
                 <div className="flex justify-between text-white font-bold text-lg mb-4">
                   <span>Total</span>
-                  <span>{cartTotal > 0 ? `AED ${cartTotal.toLocaleString()}` : "Contact for Pricing"}</span>
+                  <span>{formatAED(cartTotal)}</span>
                 </div>
-                <a href="/get-quote" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Request Quote</a>
+                {hasUnpricedItems ? (
+                  <>
+                    <div className="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
+                      Some items show &quot;Contact for Pricing&quot; and can&apos;t be checked out online yet. Please request a quote for those.
+                    </div>
+                    <a href="/contact" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Request a Quote</a>
+                  </>
+                ) : (
+                  <a href="/checkout/" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Proceed to Checkout</a>
+                )}
               </div>
             </>
           )}

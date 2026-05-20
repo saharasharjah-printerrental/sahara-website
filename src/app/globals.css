@@ -215,8 +215,30 @@ h1, h2, h3, h4, h5, h6 {
   .pt-safe {
     padding-top: calc(0rem + env(safe-area-inset-top));
   }
-  
+
   .fixed.top-0 {
     top: calc(0rem + env(safe-area-inset-top));
+  }
+}
+
+/* Order receipt — print only the receipt card, hide the rest of the page */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .receipt-printable,
+  .receipt-printable * {
+    visibility: visible;
+  }
+  .receipt-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .no-print {
+    display: none !important;
   }
 }

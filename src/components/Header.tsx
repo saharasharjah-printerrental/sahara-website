@@ -27,6 +27,7 @@ const brands = [
   { name: "Lexmark", href: "/brands/lexmark" },
   { name: "Sharp", href: "/brands/sharp" },
   { name: "Epson", href: "/brands/epson" },
+  { name: "Konica Minolta", href: "/brands/konica-minolta" },
 ];
 
 const services = [
@@ -71,6 +72,7 @@ export default function Header() {
   { name: "Lexmark", href: "/brands/lexmark" },
   { name: "Sharp", href: "/brands/sharp" },
   { name: "Epson", href: "/brands/epson" },
+  { name: "Konica Minolta", href: "/brands/konica-minolta" },
 ]);
   const [settings, setSettings] = useState<any>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
