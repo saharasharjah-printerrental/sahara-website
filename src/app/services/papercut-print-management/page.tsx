@@ -7,12 +7,12 @@ import JumpToTop from "@/components/JumpToTop";
 import PaperCutFaqClient from "@/components/PaperCutFaqClient";
 
 export const metadata: Metadata = {
-  title: "PaperCut Print Management UAE | Setup & Support | Sahara",
-  description: "PaperCut MF & NG setup, licensing, and support for UAE offices. Reduce print costs by up to 30%, enforce print policies, track usage by department. Dubai, Sharjah, Abu Dhabi. ☎ +971503823969",
-  keywords: "papercut uae, papercut print management uae, print management software uae, papercut mf dubai, papercut ng uae, print tracking uae, printer usage monitoring dubai, managed print services uae",
+  title: "PaperCut Print Management UAE | MF & NG Setup | Sahara Office Equipments",
+  description: "PaperCut MF & NG setup, licensing, and support for UAE offices. Cut printing costs by 20–30%. Secure print release, department tracking, policy enforcement. Dubai, Sharjah, Abu Dhabi. ☎ +971503823969",
+  keywords: "papercut uae, papercut print management uae, print management software uae, papercut mf dubai, papercut ng uae, print tracking uae, printer usage monitoring dubai, managed print services uae, secure print release uae",
   openGraph: {
-    title: "PaperCut Print Management UAE | Sahara Office Equipments",
-    description: "PaperCut MF & NG implementation, licensing and support for UAE offices. Track, control and reduce print costs. Dubai, Sharjah, Abu Dhabi.",
+    title: "PaperCut Print Management UAE | MF & NG | Sahara Office Equipments",
+    description: "PaperCut MF & NG implementation, licensing and support for UAE offices. Cut print costs 20–30%, enforce policies, track by department. Dubai, Sharjah, Abu Dhabi.",
     url: "https://www.saharaprinter.com/services/papercut-print-management/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
@@ -51,49 +51,42 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is PaperCut print management software?",
-      "acceptedAnswer": { "@type": "Answer", "text": "PaperCut is the world's leading print management software used by 100+ million users across 200 countries. It tracks, controls, and reduces print costs by enforcing print policies, enabling secure print release, and reporting on usage by user, department, or project. Sahara provides PaperCut MF and NG setup, licensing, and support for UAE offices." },
-    },
-    {
-      "@type": "Question",
-      "name": "How much does PaperCut cost for a UAE office?",
-      "acceptedAnswer": { "@type": "Answer", "text": "PaperCut NG (for SMEs) starts from approximately AED 1,800 per year for 10 users. PaperCut MF (for enterprise with MFP integration) is licensed per device. Sahara provides competitive UAE pricing with installation, configuration, and 1-year support included." },
-    },
-    {
-      "@type": "Question",
-      "name": "Which printers does PaperCut work with in UAE?",
-      "acceptedAnswer": { "@type": "Answer", "text": "PaperCut MF works natively with Canon, Kyocera, Ricoh, Xerox, HP, Brother, and Sharp MFPs — all brands Sahara dealers in UAE. Installation integrates directly into the printer's touch panel for secure print release and copy/scan tracking." },
-    },
-    {
-      "@type": "Question",
-      "name": "Can PaperCut reduce our office printing costs in Dubai?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Dubai and UAE businesses that implement PaperCut typically see 20–30% reduction in print volume within 3 months — driven by duplex enforcement, colour restrictions, secure print release (reduces uncollected prints), and department quota management." },
-    },
-    {
-      "@type": "Question",
-      "name": "Does Sahara provide PaperCut training and support in UAE?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Sahara's PaperCut implementation service includes on-site installation, Active Directory/LDAP integration, user training, and 12-month remote + on-site support across Dubai, Sharjah, and Abu Dhabi." },
-    },
+    { "@type": "Question", "name": "What is PaperCut print management software?", "acceptedAnswer": { "@type": "Answer", "text": "PaperCut is the world's leading print management software used by 100+ million users across 200 countries. It tracks, controls, and reduces print costs by enforcing print policies, enabling secure print release, and reporting on usage by user, department, or project. Sahara provides PaperCut MF and NG setup, licensing, and support for UAE offices." } },
+    { "@type": "Question", "name": "How much does PaperCut cost for a UAE office?", "acceptedAnswer": { "@type": "Answer", "text": "PaperCut NG (for SMEs) starts from approximately AED 1,800 per year for 10 users. PaperCut MF (for enterprise with MFP integration) is licensed per device. Sahara provides competitive UAE pricing with installation, configuration, and 1-year support included." } },
+    { "@type": "Question", "name": "Which printers does PaperCut work with in UAE?", "acceptedAnswer": { "@type": "Answer", "text": "PaperCut MF works natively with Canon, Kyocera, Ricoh, Xerox, HP, Brother, and Sharp MFPs — all brands Sahara dealers in UAE. Installation integrates directly into the printer's touch panel for secure print release and copy/scan tracking." } },
+    { "@type": "Question", "name": "Can PaperCut reduce our office printing costs in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Dubai and UAE businesses that implement PaperCut typically see 20–30% reduction in print volume within 3 months — driven by duplex enforcement, colour restrictions, secure print release (reduces uncollected prints), and department quota management." } },
+    { "@type": "Question", "name": "Does Sahara provide PaperCut training and support in UAE?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Sahara's PaperCut implementation service includes on-site installation, Active Directory/LDAP integration, user training, and 12-month remote + on-site support across Dubai, Sharjah, and Abu Dhabi." } },
   ],
 };
 
 const features = [
-  { icon: "📊", title: "Usage Tracking", desc: "Report on print, copy, and scan activity by user, department, or project — across all your office printers." },
+  { icon: "📊", title: "Usage Tracking", desc: "Report on print, copy, and scan activity by user, department, or project — across all your office printers and MFPs." },
   { icon: "🔒", title: "Secure Print Release", desc: "Jobs held at server until user authenticates at the printer — eliminates uncollected prints and sensitive document exposure." },
   { icon: "⚙️", title: "Policy Enforcement", desc: "Automatically enforce duplex, B&W, and page limits by user group. Reduce colour printing waste by up to 40%." },
   { icon: "💰", title: "Cost Allocation", desc: "Charge print costs back to departments, clients, or projects. Full integration with your billing or ERP system." },
   { icon: "🖨️", title: "MFP Integration", desc: "Embedded apps on Canon, Kyocera, Ricoh, Xerox, HP, and Sharp MFPs — no separate hardware needed." },
-  { icon: "☁️", title: "Cloud & Mobility", desc: "Print from mobile, cloud (Google Drive, OneDrive), and remote workers. Full BYOD support." },
+  { icon: "☁️", title: "Cloud & Mobility", desc: "Print from mobile, cloud (Google Drive, OneDrive), and remote workers. Full BYOD support for UAE offices." },
+];
+
+const mfVsNg = [
+  { feature: "Best for", mf: "Enterprises with MFPs (10+ devices)", ng: "SMEs and workgroups (1–50 users)" },
+  { feature: "MFP Embedded App", mf: "Yes — native touch panel integration", ng: "No (network print only)" },
+  { feature: "Secure Print Release", mf: "At the MFP touch panel", ng: "Via PIN or card swipe" },
+  { feature: "Scan & Copy Tracking", mf: "Yes — full MFP activity", ng: "Print only" },
+  { feature: "Licensing Model", mf: "Per device (MFP)", ng: "Per user/year" },
+  { feature: "Starting Price (UAE)", mf: "AED 800+ per device/year", ng: "AED 1,800/year (10 users)" },
+  { feature: "Cloud Deployment", mf: "On-premise + cloud", ng: "On-premise (NG+) or cloud" },
+  { feature: "Active Directory Integration", mf: "Yes — full AD/LDAP sync", ng: "Yes" },
+  { feature: "Mobile Print", mf: "Yes — Mobility Print included", ng: "Yes — Mobility Print included" },
+  { feature: "Sahara Setup Time", mf: "1–2 days (multi-device)", ng: "Half day (server install)" },
 ];
 
 export default function PaperCutPage() {
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main className="min-h-screen bg-[#071325]">
         <Header />
 
@@ -121,14 +114,12 @@ export default function PaperCutPage() {
               <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
                 <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is PaperCut Print Management in UAE?</p>
                 <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  PaperCut is print management software that tracks, controls, and reduces printing costs for UAE offices.
-                  Sahara Office Equipments provides PaperCut MF and NG setup, licensing, and ongoing support in Dubai, Sharjah,
-                  and Abu Dhabi — helping businesses cut print volumes by 20–30% and enforce corporate print policies.
+                  PaperCut is print management software that tracks, controls, and reduces printing costs for UAE offices. Sahara Office Equipments provides <strong className="text-white">PaperCut MF</strong> (for enterprises with MFPs) and <strong className="text-white">PaperCut NG</strong> (for SMEs) — including setup, licensing, AD integration, and 12-month support in Dubai, Sharjah, and Abu Dhabi. UAE offices typically cut print volumes by <strong className="text-white">20–30%</strong> within 3 months.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3 mb-8">
-                {["20–30% Cost Reduction", "Secure Print Release", "All Major Brands", "On-Site Setup", "12-Month Support"].map((t) => (
+                {["20–30% Cost Reduction", "Secure Print Release", "Canon, Kyocera, HP, Xerox", "On-Site Setup UAE", "12-Month Support"].map((t) => (
                   <span key={t} className="text-xs font-bold text-white bg-[#f5be53]/10 border border-[#f5be53]/25 px-3 py-1.5 rounded-full">✓ {t}</span>
                 ))}
               </div>
@@ -145,10 +136,31 @@ export default function PaperCutPage() {
           </div>
         </section>
 
-        {/* Features */}
-        <section className="py-20 px-8 lg:px-24" style={{ background: '#050d1a' }}>
+        {/* ROI Stats */}
+        <section className="py-14 px-8 lg:px-24" style={{ background: '#050d1a' }}>
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-10">PaperCut Features for UAE Offices</h2>
+            <h2 className="text-2xl font-bold text-white mb-8 text-center">What UAE Offices Achieve with PaperCut</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { stat: "20–30%", label: "Average print volume reduction in UAE offices within 90 days" },
+                { stat: "40%", label: "Reduction in colour printing waste through policy enforcement" },
+                { stat: "100M+", label: "Users worldwide trust PaperCut across 200+ countries" },
+                { stat: "< 1 day", label: "Sahara setup time for PaperCut NG in a UAE SME office" },
+              ].map((s, i) => (
+                <div key={i} className="glass-card p-6 rounded-2xl text-center">
+                  <p className="text-4xl font-bold text-[#f5be53] mb-2">{s.stat}</p>
+                  <p className="text-[#8fa3bc] text-sm leading-relaxed">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="py-20 px-8 lg:px-24">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-3">PaperCut Features for UAE Offices</h2>
+            <p className="text-[#8fa3bc] mb-10 max-w-2xl">Whether you manage 5 printers or 50 MFPs, PaperCut gives your IT team complete visibility and control.</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((f, i) => (
                 <div key={i} className="glass-card rounded-2xl p-6">
@@ -161,17 +173,72 @@ export default function PaperCutPage() {
           </div>
         </section>
 
+        {/* MF vs NG Comparison */}
+        <section className="py-20 px-8 lg:px-24" style={{ background: '#050d1a' }}>
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-3">PaperCut MF vs PaperCut NG — Which Is Right for Your UAE Office?</h2>
+            <p className="text-[#8fa3bc] mb-10 max-w-2xl">
+              The main difference: <strong className="text-white">PaperCut MF</strong> embeds directly into your MFP's touchscreen for full control. <strong className="text-white">PaperCut NG</strong> manages network printing for smaller setups without MFP embedding.
+            </p>
+            <div className="overflow-x-auto rounded-2xl border border-white/8">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-[#0d1a2e]">
+                    <th className="px-5 py-4 text-left text-[#8fa3bc] font-semibold">Feature</th>
+                    <th className="px-5 py-4 text-left text-[#f5be53] font-semibold">PaperCut MF</th>
+                    <th className="px-5 py-4 text-left text-blue-300 font-semibold">PaperCut NG</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mfVsNg.map((row, i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-[#0a1422]" : "bg-[#071325]"}>
+                      <td className="px-5 py-3 text-[#8fa3bc] font-medium">{row.feature}</td>
+                      <td className="px-5 py-3 text-white">{row.mf}</td>
+                      <td className="px-5 py-3 text-white">{row.ng}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-[#8fa3bc] text-xs mt-4">Sahara supplies and implements both PaperCut MF and NG across Dubai, Sharjah, and Abu Dhabi. <a href="/get-quote" className="text-[#f5be53] hover:underline">Contact us</a> for a recommendation based on your printer fleet size.</p>
+          </div>
+        </section>
+
+        {/* Compatible Brands */}
+        <section className="py-16 px-8 lg:px-24">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-3 text-center">PaperCut Compatible Printer Brands in UAE</h2>
+            <p className="text-[#8fa3bc] text-center mb-10 max-w-2xl mx-auto">PaperCut MF embeds natively into the touch panels of all major MFP brands. Sahara supplies and services all of them in the UAE.</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              {[
+                { brand: "Canon", href: "/brands/canon" },
+                { brand: "Kyocera", href: "/brands/kyocera" },
+                { brand: "Ricoh", href: "/brands/ricoh" },
+                { brand: "Xerox", href: "/brands/xerox" },
+                { brand: "HP", href: "/brands/hp" },
+                { brand: "Sharp", href: "/brands/sharp" },
+              ].map((b) => (
+                <a key={b.brand} href={b.href} className="glass-card p-4 rounded-xl text-center hover:border-[#f5be53]/30 border border-transparent transition-colors">
+                  <p className="text-white font-bold text-sm">{b.brand}</p>
+                  <p className="text-[#8fa3bc] text-xs mt-1">PaperCut MF Ready</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* How it works */}
-        <section className="py-20 px-8 lg:px-24">
+        <section className="py-20 px-8 lg:px-24" style={{ background: '#050d1a' }}>
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-8">How Sahara Implements PaperCut in Your UAE Office</h2>
+            <h2 className="text-3xl font-bold text-white mb-3">How Sahara Implements PaperCut in Your UAE Office</h2>
+            <p className="text-[#8fa3bc] mb-8">Typical deployment time: 1 day for NG, 1–2 days for MF across a multi-device fleet.</p>
             <ol className="space-y-4">
               {[
-                { step: "01", title: "Print Audit", desc: "We assess your current print environment — number of devices, usage volumes, network topology, and Active Directory structure." },
-                { step: "02", title: "PaperCut Installation", desc: "PaperCut MF or NG server installed on your on-premises server or cloud VM. Integrated with AD/LDAP for automatic user provisioning." },
-                { step: "03", title: "Printer MFP Embedding", desc: "PaperCut embedded app deployed on each Canon, Kyocera, Ricoh, Xerox, or HP MFP. Secure print release activated." },
-                { step: "04", title: "Policy Configuration", desc: "Duplex defaults, colour restrictions, department quotas, and cost centres configured to your company policy." },
-                { step: "05", title: "Training & Go-Live", desc: "User and admin training delivered on-site. Reporting dashboard configured for management visibility." },
+                { step: "01", title: "Print Environment Audit", desc: "We assess your current print fleet — number of devices, usage volumes, network topology, and Active Directory / LDAP structure across your UAE office locations." },
+                { step: "02", title: "PaperCut Server Installation", desc: "PaperCut MF or NG server installed on your on-premises server or cloud VM. Integrated with AD/LDAP for automatic user provisioning and group policy mapping." },
+                { step: "03", title: "MFP Embedded App Deployment", desc: "PaperCut embedded app installed on each Canon, Kyocera, Ricoh, Xerox, HP, or Sharp MFP touch panel. Secure print release and ID card authentication activated." },
+                { step: "04", title: "Policy & Cost Centre Configuration", desc: "Duplex defaults, colour restrictions, department quotas, client billing codes, and printer quotas configured to match your company policy and UAE cost structure." },
+                { step: "05", title: "Staff Training & Go-Live", desc: "User training delivered on-site in Dubai, Sharjah, or Abu Dhabi. Management reporting dashboard configured. Ongoing 12-month remote + on-site support included." },
               ].map((s, i) => (
                 <li key={i} className="flex gap-4 glass-card rounded-2xl p-5">
                   <span className="text-[#f5be53] font-bold text-2xl min-w-[2.5rem]">{s.step}</span>
@@ -186,25 +253,46 @@ export default function PaperCutPage() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 px-8 lg:px-24" style={{ background: '#050d1a' }}>
+        <section className="py-20 px-8 lg:px-24">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-10">PaperCut UAE — FAQ</h2>
+            <h2 className="text-3xl font-bold text-white mb-10">PaperCut UAE — Frequently Asked Questions</h2>
             <PaperCutFaqClient />
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 px-8 lg:px-24" style={{ background: '#050d1a' }}>
+          <div className="max-w-4xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 relative overflow-hidden text-center">
+            <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            <div className="relative z-10">
+              <p className="text-[#5a3d00] text-sm font-bold uppercase tracking-[0.18em] mb-3">PaperCut Certified Partner — UAE</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Start Cutting Your Print Costs</h2>
+              <p className="text-[#5a3d00] mb-6 max-w-xl mx-auto">Get a free print audit and PaperCut recommendation for your Dubai, Sharjah, or Abu Dhabi office. Most UAE implementations pay back within 6 months.</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/get-quote" className="bg-[#071325] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+                  Get Free Print Audit
+                </a>
+                <a href="tel:+971503823969" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-8 py-4 rounded-full font-bold">
+                  +971 50 382 3969
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Related */}
         <section className="py-12 px-8 lg:px-24 border-t border-[#f5be53]/10">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-xl font-bold text-white mb-6">Related Services</h2>
+            <h2 className="text-xl font-bold text-white mb-6">Related Services &amp; Products</h2>
             <div className="flex flex-wrap gap-3">
               {[
                 { href: "/services/printer-rental", label: "Printer Rental UAE" },
                 { href: "/services/amc", label: "Annual Maintenance (AMC)" },
                 { href: "/services/repair", label: "Printer Repair Dubai" },
-                { href: "/printer-rental-dubai", label: "Printer Rental Dubai" },
-                { href: "/brands/kyocera", label: "Kyocera Printers" },
-                { href: "/brands/canon", label: "Canon Printers" },
+                { href: "/brands/kyocera", label: "Kyocera Printers UAE" },
+                { href: "/brands/canon", label: "Canon Printers UAE" },
+                { href: "/brands/ricoh", label: "Ricoh Printers UAE" },
+                { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental" },
               ].map((l) => (
                 <a key={l.href} href={l.href} className="text-sm text-[#f5be53] bg-[#f5be53]/10 border border-[#f5be53]/20 px-4 py-2 rounded-full hover:bg-[#f5be53]/20 transition-colors">
                   {l.label}
