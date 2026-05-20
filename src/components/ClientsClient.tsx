@@ -78,7 +78,7 @@ export default function ClientsGrid() {
             <img
               src={client.logoUrl}
               alt={client.name}
-              className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all"
+              className="max-w-full max-h-full object-contain transition-all"
             />
           ) : (
             <div className="text-center">
@@ -163,7 +163,7 @@ export function ClientsList() {
             <img
               src={client.logoUrl}
               alt={client.name}
-              className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all"
+              className="max-w-full max-h-full object-contain transition-all"
             />
           ) : (
             <div className="text-center">
