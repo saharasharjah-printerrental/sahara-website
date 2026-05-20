@@ -38,7 +38,7 @@ export default function InquiriesPage() {
       const data = await res.json();
       setInquiries(data.inquiries || []);
     } catch {
-      showToast('Failed to load inquiries', 'error');
+      showToast('error', 'Failed to load inquiries');
     } finally {
       setLoading(false);
     }
@@ -55,9 +55,9 @@ export default function InquiriesPage() {
       });
       setInquiries(prev => prev.map(i => i.id === id ? { ...i, status } : i));
       if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : prev);
-      showToast('Status updated', 'success');
+      showToast('success', 'Status updated');
     } catch {
-      showToast('Failed to update status', 'error');
+      showToast('error', 'Failed to update status');
     }
   };
 
