@@ -279,6 +279,11 @@ export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/brands/kyocera": "Kyocera printers",
   "/brands/ricoh": "Ricoh printers",
   "/brands/xerox": "Xerox printers",
+  "/brands/brother": "Brother printers",
+  "/brands/sharp": "Sharp printers",
+  "/brands/epson": "Epson printers",
+  "/brands/samsung": "Samsung printers",
+  "/brands/lexmark": "Lexmark printers",
   "/get-quote": "get a free quote",
   "/rental-calculator": "rental cost calculator",
 };
