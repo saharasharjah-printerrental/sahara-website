@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import PaperCutFaqClient from "@/components/PaperCutFaqClient";
 
 export const metadata: Metadata = {
   title: "PaperCut Print Management UAE | Setup & Support | Sahara",
@@ -188,14 +189,7 @@ export default function PaperCutPage() {
         <section className="py-20 px-8 lg:px-24" style={{ background: '#050d1a' }}>
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-10">PaperCut UAE — FAQ</h2>
-            <div className="space-y-4">
-              {faqSchema.mainEntity.map((faq, i) => (
-                <div key={i} className="glass-card rounded-2xl p-6">
-                  <h3 className="text-white font-semibold mb-2">{faq.name}</h3>
-                  <p className="text-[#d3c5b0] text-sm leading-relaxed">{faq.acceptedAnswer.text}</p>
-                </div>
-              ))}
-            </div>
+            <PaperCutFaqClient />
           </div>
         </section>
 

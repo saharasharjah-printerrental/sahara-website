@@ -92,17 +92,19 @@ export default function BravoCardPrintersUAE() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sahara_faqs");
-      if (stored) {
-        const all = JSON.parse(stored);
-        const page = all
-          .filter((f: any) => f.pageSlug === "bravo-card-printers" && f.isActive)
-          .sort((a: any, b: any) => a.sortOrder - b.sortOrder)
-          .map((f: any) => ({ q: f.question, a: f.answer }));
-        if (page.length > 0) setFaqs(page);
-      }
-    } catch { /* use defaults */ }
+    fetch('/api/faqs?pageSlug=bravo-card-printers-uae')
+      .then(r => r.json())
+      .then(data => {
+        const rows = data.faqs ?? data;
+        if (Array.isArray(rows) && rows.length > 0) {
+          const page = rows
+            .filter((f: any) => f.isActive === 1 || f.isActive === true)
+            .sort((a: any, b: any) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
+            .map((f: any) => ({ q: f.question, a: f.answer }));
+          if (page.length > 0) setFaqs(page);
+        }
+      })
+      .catch(() => { /* keep defaults */ });
   }, []);
 
   const localBusinessSchema = {
