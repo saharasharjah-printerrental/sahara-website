@@ -10,8 +10,9 @@ interface Setting {
 }
 
 const CACHE_CONTROL = {
-  'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+  'Cache-Control': 'private, no-store',
   'Content-Type': 'application/json',
+  'X-Robots-Tag': 'noindex, nofollow',
 };
 
 function getDB() {
@@ -22,9 +23,105 @@ function getDB() {
   }
 }
 
-// Secret credentials must never appear in the public bulk settings response.
+async function getAdminPassword(): Promise<string> {
+  try {
+    return ((getRequestContext().env as any).ADMIN_PASSWORD || '') as string;
+  } catch {
+    try { return ((globalThis as any).process?.env?.ADMIN_PASSWORD || '') as string; } catch {}
+  }
+  return '';
+}
+
+async function isAdminRequest(request: NextRequest): Promise<boolean> {
+  const password = await getAdminPassword();
+  const session = request.cookies.get('admin_session')?.value;
+  if (!password || !session) return false;
+
+  const parts = session.split('.');
+  if (parts.length !== 3) return false;
+
+  const [issuedAt, email, signature] = parts;
+  const issuedAtMs = Number(issuedAt);
+  if (!Number.isFinite(issuedAtMs)) return false;
+  if (Date.now() - issuedAtMs > 1000 * 60 * 60 * 12) return false;
+
+  const payload = `${issuedAt}.${email}`;
+  const data = new TextEncoder().encode(`${payload}.${password}`);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  const expected = Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+
+  return signature === expected;
+}
+
+function parseJsonObject(value: unknown): Record<string, unknown> {
+  if (typeof value !== 'string') return {};
+  try {
+    const parsed = JSON.parse(value);
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+// Secret credentials must never appear in unauthenticated settings responses.
 function isSecretKey(key: string): boolean {
-  return /secret|server_key|(^|_)pass$|_pass_/i.test(key);
+  return /secret|server_key|api_key|(^|_)pass$|_pass_|smtp_|stripe_|paytabs_|cloudinary_|seo_config/i.test(key);
+}
+
+function isPublicKey(key: string): boolean {
+  return key === 'site_settings' || key === 'calculator_prices';
+}
+
+const PUBLIC_SITE_SETTING_KEYS = [
+  'companyName',
+  'companyEmail',
+  'companyPhone',
+  'companyLandline',
+  'companyCustomerService',
+  'companyAddress',
+  'companyPOBox',
+  'whatsappNumber',
+  'workingHours',
+  'emergencySupport',
+  'mapEmbedUrl',
+  'hasMapUrl',
+  'locationDubaiAddress',
+  'locationDubaiPhone',
+  'locationAbuDhabiAddress',
+  'locationAbuDhabiPhone',
+  'locationSharjahAddress',
+  'locationSharjahPhone',
+  'heroTitle',
+  'heroSubtitle',
+  'ctaText',
+  'paymentGatewayEnabled',
+  'paymentGatewayUrl',
+  'paymentGatewayLabel',
+  'paymentProvider',
+] as const;
+
+function toSafeSiteSettings(value: unknown): Record<string, unknown> {
+  const siteSettings = parseJsonObject(value);
+  const safe: Record<string, unknown> = {};
+  PUBLIC_SITE_SETTING_KEYS.forEach((key) => {
+    if (siteSettings[key] !== undefined) safe[key] = siteSettings[key];
+  });
+  return safe;
+}
+
+function toPublicSettings(rows: any[]): Record<string, unknown> {
+  const byKey: Record<string, string> = {};
+  rows.forEach((s) => {
+    if (typeof s?.key === 'string' && typeof s?.value === 'string') byKey[s.key] = s.value;
+  });
+
+  const siteSettings = toSafeSiteSettings(byKey.site_settings);
+  return {
+    ...siteSettings,
+    calculator_prices: byKey.calculator_prices,
+  };
 }
 
 export async function GET(request: NextRequest) {
@@ -34,6 +131,12 @@ export async function GET(request: NextRequest) {
   const db = getDB();
 
   if (!db) {
+    if (key && (!isPublicKey(key) || isSecretKey(key))) {
+      return NextResponse.json(
+        { setting: null },
+        { status: 200, headers: CACHE_CONTROL }
+      );
+    }
     return NextResponse.json(
       { error: 'Database not configured', settings: {} },
       { status: 200, headers: CACHE_CONTROL }
@@ -41,8 +144,22 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    const isAdmin = await isAdminRequest(request);
+
     if (key) {
+      if (!isAdmin && (!isPublicKey(key) || isSecretKey(key))) {
+        return NextResponse.json(
+          { setting: null },
+          { status: 200, headers: CACHE_CONTROL }
+        );
+      }
       const result = await db.prepare('SELECT * FROM settings WHERE key = ?').bind(key).first();
+      if (!isAdmin && result?.key === 'site_settings') {
+        return NextResponse.json(
+          { setting: { key: 'site_settings', value: JSON.stringify(toSafeSiteSettings(result.value)) } },
+          { status: 200, headers: CACHE_CONTROL }
+        );
+      }
       return NextResponse.json(
         { setting: result || null },
         { status: 200, headers: CACHE_CONTROL }
@@ -50,14 +167,21 @@ export async function GET(request: NextRequest) {
     }
 
     const result = await db.prepare('SELECT * FROM settings').all();
-    const settings: Record<string, string> = {};
     const rows: any[] = result?.results ?? result ?? [];
-    rows.forEach((s: any) => {
-      if (isSecretKey(s.key)) return; // redact secrets from the bulk response
-      settings[s.key] = s.value;
-    });
+
+    if (isAdmin) {
+      const settings: Record<string, string> = {};
+      rows.forEach((s: any) => {
+        settings[s.key] = s.value;
+      });
+      return NextResponse.json(
+        { settings },
+        { status: 200, headers: CACHE_CONTROL }
+      );
+    }
+
     return NextResponse.json(
-      { settings },
+      { settings: toPublicSettings(rows) },
       { status: 200, headers: CACHE_CONTROL }
     );
   } catch (error) {
@@ -80,6 +204,13 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    if (!(await isAdminRequest(request))) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401, headers: CACHE_CONTROL }
+      );
+    }
+
     const body: Setting = await request.json();
 
     await db.prepare(`

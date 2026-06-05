@@ -9,12 +9,11 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Printer Rental Dubai & UAE | Sahara Office Equipments",
-  description: "Premium printer rental in Dubai, Abu Dhabi & UAE. Canon, HP, Kyocera photocopiers from AED 250/month. Zero deposit, free delivery, unlimited toner, 24/7 support.",
-  keywords: "printer rental dubai, photocopier rental uae, printer lease abu dhabi, office printing solutions, canon printer rental, hp printer lease",
+  title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance | Sahara",
+  description: "UAE printer & photocopier rental from AED 250/month. Zero deposit, free toner, maintenance, delivery, and 4-hour emergency response across all 7 emirates.",
   openGraph: {
-    title: "Printer Rental Dubai & UAE | Photocopier Leasing | Sahara",
-    description: "Premium printer rental in Dubai, Abu Dhabi & UAE. Canon, HP, Kyocera photocopiers from AED 250/month. Zero deposit, free delivery, unlimited toner.",
+    title: "Printer Rental UAE | AED 250/mo | Free Toner | Sahara",
+    description: "Zero deposit printer & photocopier rental across UAE. Free toner & maintenance, 4-hour emergency response, and delivery across all 7 emirates.",
     url: "https://www.saharaprinter.com/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
@@ -43,21 +42,8 @@ export default async function HomePage() {
     }
   } catch { /* D1 unavailable in dev — components fall back to hardcoded defaults */ }
 
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Sahara Office Equipments - Printer Rental Dubai",
-    url: "https://www.saharaprinter.com",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://www.saharaprinter.com/products?search={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
-  };
-
-
   const faqsForSchema = initialFaqs.length > 0 ? initialFaqs : [
-    { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." },
+    { q: "How much does printer rental cost in the UAE?", a: "Printer rental in the UAE starts from AED 250/month for A4 desktop printers. A3 multifunction photocopiers start from AED 500/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." },
     { q: "What are the benefits of printer rental in UAE?", a: "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options." },
     { q: "Do you offer printer rental in Abu Dhabi?", a: "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD with same-day delivery and 24/7 support." },
     { q: "What printer brands do you rent?", a: "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother." },
@@ -78,7 +64,6 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
-      <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
 

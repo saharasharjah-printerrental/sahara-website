@@ -60,6 +60,7 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
   const response = NextResponse.next();
 
   // ── Security headers ──────────────────────────────────────────────────────
+  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   response.headers.set('X-Frame-Options',        'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-XSS-Protection',       '1; mode=block');
@@ -121,6 +122,7 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
               'X-RateLimit-Limit':   String(limit.requests),
               'X-RateLimit-Remaining': '0',
               'X-RateLimit-Reset':   String(Math.ceil((rec.windowStart + limit.windowMs) / 1000)),
+              'X-Robots-Tag':        'noindex, nofollow',
             },
           }
         );
@@ -141,9 +143,17 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
     if (request.method === 'POST' || request.method === 'PUT') {
       const contentLength = request.headers.get('content-length');
       if (contentLength && parseInt(contentLength) > MAX_BODY_SIZE) {
-        return NextResponse.json({ error: 'Request body too large' }, { status: 413 });
+        return NextResponse.json(
+          { error: 'Request body too large' },
+          { status: 413, headers: { 'X-Robots-Tag': 'noindex, nofollow' } }
+        );
       }
     }
+  }
+
+  if (pathname.startsWith('/api/')) {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    response.headers.set('Cache-Control', 'private, no-store');
   }
 
   return response;

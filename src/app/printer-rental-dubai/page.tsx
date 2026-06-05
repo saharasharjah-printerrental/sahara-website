@@ -40,13 +40,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
   return {
   title: "Printer Rental Dubai | AED 250/mo | Zero Deposit | Sahara",
-  description: "Dubai printer rental from AED 250/mo. Zero deposit, free toner & maintenance. 4-hr emergency response. Business Bay, JLT, DIFC, Marina, Deira & all areas. â˜Ž +971503823969",
+  description: "Printer rental Dubai from AED 250/month. Zero deposit, free toner & maintenance. 4-hr emergency response. Business Bay, JLT, DIFC, Marina, Deira & all areas. Call +971503823969",
   keywords: "printer rental dubai, photocopier rental dubai, copier lease dubai, printer rental business bay, printer rental DIFC, printer rental JLT, canon printer rental dubai, kyocera printer dubai, zero deposit printer rental dubai",
   openGraph: {
     title: "Printer Rental Dubai | Sahara Office Equipments",
     description: "Canon & Kyocera printer rental in Dubai from AED 250/month. Zero deposit, free toner, 4-hour response. Serving Business Bay, JLT, DIFC, Marina, Deira and all Dubai districts.",
     images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Printer Rental Dubai" }],
-    url: "https://www.saharaprinter.com/printer-rental-dubai",
+    url: "https://www.saharaprinter.com/printer-rental-dubai/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -61,21 +61,22 @@ const localBusinessSchema = {
   "name": "Sahara Office Equipments — Dubai Printer Rental",
   "legalName": "Sahara Office Equipment Trading LLC",
   "description": "Printer rental and photocopier lease services in Dubai. Zero deposit, unlimited free toner, 4-hour emergency response. Serving Business Bay, JLT, DIFC, Deira, Marina and all Dubai districts. Plans from AED 250/month.",
-  "url": "https://saharaprinter.com/printer-rental-dubai",
+  "url": "https://www.saharaprinter.com/printer-rental-dubai/",
   "telephone": "+971503823969",
-  "email": "info@saharaedoc.com",
-  "image": "/images/heroPrntr1.webp",
+  "email": "info@saharaprinter.com",
+  "image": "https://www.saharaprinter.com/images/heroPrntr1.webp",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Dubai",
     "addressCountry": "AE"
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 25.2048, "longitude": 55.2708 },
-  "areaServed": {
-    "@type": "City",
-    "name": "Dubai",
-    "sameAs": "https://www.wikidata.org/wiki/Q612"
-  },
+  "areaServed": [
+    { "@type": "City", "name": "Dubai", "sameAs": "https://www.wikidata.org/wiki/Q612" },
+    "Business Bay", "DIFC", "JLT", "Dubai Marina", "Downtown Dubai", "Deira",
+    "Al Quoz", "Dubai Internet City", "Dubai Silicon Oasis", "Jebel Ali",
+    "Al Barsha", "Bur Dubai"
+  ],
   "priceRange": "AED 250—2000",
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "20:00" }
@@ -85,9 +86,30 @@ const localBusinessSchema = {
     "@type": "OfferCatalog",
     "name": "Dubai Printer Rental Plans",
     "itemListElement": [
-      { "@type": "Offer", "name": "A4 Desktop Printer Rental Dubai", "price": "250", "priceCurrency": "AED" },
-      { "@type": "Offer", "name": "A3 Multifunction Photocopier Rental Dubai", "price": "500", "priceCurrency": "AED" },
-      { "@type": "Offer", "name": "Enterprise Copier Rental Dubai", "price": "1000", "priceCurrency": "AED" }
+      {
+        "@type": "Offer",
+        "name": "A4 Desktop Printer Rental Dubai",
+        "price": "250",
+        "priceCurrency": "AED",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "unitText": "MONTH", "minPrice": "250", "maxPrice": "400" },
+        "description": "A4 print, unlimited toner, quarterly maintenance, and 4-hour emergency response."
+      },
+      {
+        "@type": "Offer",
+        "name": "A3 Multifunction Photocopier Rental Dubai",
+        "price": "500",
+        "priceCurrency": "AED",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "unitText": "MONTH", "minPrice": "500", "maxPrice": "900" },
+        "description": "A3 and A4 print, copy, and scan with unlimited toner, monthly maintenance, and network setup."
+      },
+      {
+        "@type": "Offer",
+        "name": "Enterprise Copier Rental Dubai",
+        "price": "1000",
+        "priceCurrency": "AED",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "unitText": "MONTH", "minPrice": "1000", "maxPrice": "2000" },
+        "description": "High-speed A3 color MFP with unlimited toner, weekly maintenance, 2-hour priority response, and loaner guarantee."
+      }
     ]
   }
 };
@@ -111,8 +133,9 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com" },
-    { "@type": "ListItem", "position": 2, "name": "Printer Rental Dubai", "item": "https://saharaprinter.com/printer-rental-dubai" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.saharaprinter.com/services/printer-rental/" },
+    { "@type": "ListItem", "position": 3, "name": "Printer Rental Dubai", "item": "https://www.saharaprinter.com/printer-rental-dubai/" }
   ]
 };
 

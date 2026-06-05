@@ -4,6 +4,17 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
+async function createAdminSession(email: string, password: string): Promise<string> {
+  const issuedAt = Date.now().toString();
+  const payload = `${issuedAt}.${email.toLowerCase()}`;
+  const data = new TextEncoder().encode(`${payload}.${password}`);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  const signature = Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+  return `${payload}.${signature}`;
+}
+
 export async function POST(request: NextRequest) {
   let body: { email?: string; password?: string };
   try {
@@ -40,7 +51,15 @@ export async function POST(request: NextRequest) {
   const passMatch = password === adminPassword;
 
   if (emailMatch && passMatch) {
-    return NextResponse.json({ success: true });
+    const response = NextResponse.json({ success: true });
+    response.cookies.set('admin_session', await createAdminSession(adminEmail, adminPassword), {
+      httpOnly: true,
+      secure: request.nextUrl.protocol === 'https:',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 12,
+      path: '/',
+    });
+    return response;
   }
 
   return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });

@@ -112,7 +112,7 @@ function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#071325] to-transparent z-0" />
 
       <div className="w-full max-w-3xl relative z-10 space-y-8">
-        <h1 className="sr-only">Printer Rental Dubai &amp; UAE | Photocopier Leasing Services</h1>
+        <h1 className="sr-only">Printer &amp; Photocopier Rental UAE | All-Inclusive Plans</h1>
         <CipherText
           text="Rent, Buy, or Repair"
           textSize="text-2xl sm:text-3xl md:text-7xl"

@@ -24,7 +24,6 @@ export const runtime = 'edge';
 export const metadata: Metadata = {
   title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance",
   description: "UAE printer & photocopier rental from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 4.9★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
-  keywords: "printer rental dubai, photocopier rental sharjah, copier lease uae, printer amc dubai, printer rental from AED 250, zero deposit printer rental uae, free toner printer rental, printer repair uae, photocopier rental abu dhabi, corporate printer rental uae",
   alternates: { canonical: "https://www.saharaprinter.com/" },
   icons: {
     icon: [
@@ -159,7 +158,7 @@ const organizationSchema = {
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": 4.9,
-    "reviewCount": 1500,
+    "reviewCount": 150,
     "bestRating": 5,
     "worstRating": 1
   },
@@ -250,7 +249,7 @@ const organizationSchema = {
   ],
   "sameAs": [
     "https://www.wikidata.org/wiki/Q137021158",
-    "https://www.facebook.com/saharaedoc",
+    "https://www.facebook.com/share/1GM5UxFLTq/",
     "https://www.instagram.com/sahara_office_equipments/",
     "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/",
     "https://www.youtube.com/@saharaprinter",
@@ -262,6 +261,23 @@ const organizationSchema = {
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": ["h1", "h2", ".aeo-block"]
+  }
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.saharaprinter.com/#website",
+  "url": "https://www.saharaprinter.com",
+  "name": "Sahara Office Equipments",
+  "publisher": { "@id": "https://www.saharaprinter.com/#organization" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.saharaprinter.com/blogs/?search={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
   }
 };
 
@@ -298,6 +314,13 @@ function parseScripts(html: string): ParsedScript[] {
   return out;
 }
 
+function isManagedAnalyticsScript(script: ParsedScript): boolean {
+  if ("src" in script) {
+    return /googletagmanager\.com\/(gtag\/js|gtm\.js)/i.test(script.src);
+  }
+  return /gtag\s*\(\s*['"]config['"]|googletagmanager\.com\/gtm\.js|GTM-[A-Z0-9]+/i.test(script.inline);
+}
+
 async function getSEOConfig(): Promise<ServerSEOConfig | null> {
   try {
     const db = (getRequestContext().env as any).DB;
@@ -322,6 +345,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cfg = await getSEOConfig();
+  const uaId = cfg?.googleAnalyticsId?.startsWith('UA-') ? cfg.googleAnalyticsId : '';
+  const ga4Id = cfg?.googleAnalytics4Id || (cfg?.googleAnalyticsId?.startsWith('G-') ? cfg.googleAnalyticsId : '');
+  const customHeadScripts = cfg?.customHeadScripts
+    ? parseScripts(cfg.customHeadScripts).filter((s) => !isManagedAnalyticsScript(s))
+    : [];
 
   return (
     <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>
@@ -337,6 +365,7 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <script type="application/ld+json">{cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
 
         {/* Google Tag Manager */}
         {cfg?.googleTagManagerId && (
@@ -344,17 +373,17 @@ export default async function RootLayout({
         )}
 
         {/* Google Analytics (UA + GA4) */}
-        {cfg?.googleAnalyticsId && (
+        {uaId && (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${cfg.googleAnalyticsId}`} />
-            <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalyticsId}');${cfg.googleAnalytics4Id ? `gtag('config','${cfg.googleAnalytics4Id}');` : ""}`}</script>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${uaId}`} />
+            <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${uaId}');${ga4Id ? `gtag('config','${ga4Id}',{send_page_view:true,debug_mode:false});` : ""}`}</script>
           </>
         )}
         {/* GA4 standalone — only when no UA ID is set */}
-        {cfg?.googleAnalytics4Id && !cfg?.googleAnalyticsId && (
+        {ga4Id && !uaId && (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${cfg.googleAnalytics4Id}`} />
-            <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${cfg.googleAnalytics4Id}');`}</script>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} />
+            <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ga4Id}',{send_page_view:true,debug_mode:false});`}</script>
           </>
         )}
 
@@ -379,8 +408,7 @@ export default async function RootLayout({
         )}
 
         {/* Custom head scripts — handles raw JS or full <script> HTML snippets */}
-        {cfg?.customHeadScripts &&
-          parseScripts(cfg.customHeadScripts).map((s, i) =>
+        {customHeadScripts.map((s, i) =>
             "src" in s
               ? <script key={i} async={s.isAsync} src={s.src} />
               : <script key={i}>{s.inline}</script>
