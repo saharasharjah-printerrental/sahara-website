@@ -26,18 +26,6 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const faqs = await getFaqsFromD1();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@id": "https://www.saharaprinter.com/printer-rental-dubai/#faq",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f, i) => ({
-      "@type": "Question",
-      "@id": `https://www.saharaprinter.com/printer-rental-dubai/#faq-${i + 1}`,
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
   return {
   title: "Printer Rental Dubai | AED 250/mo | Zero Deposit | Sahara",
   description: "Printer rental Dubai from AED 250/month. Zero deposit, free toner & maintenance. 4-hr emergency response. Business Bay, JLT, DIFC, Marina, Deira & all areas. Call +971503823969",
@@ -81,7 +69,6 @@ const localBusinessSchema = {
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "20:00" }
   ],
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Dubai Printer Rental Plans",

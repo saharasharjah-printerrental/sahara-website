@@ -53,7 +53,7 @@ export default function HPPrinterAbuDhabi() {
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments - HP Abu Dhabi",
     "description": "HP printer rental in Abu Dhabi. LaserJet, PageWide, OfficeJet series with zero deposit and free toner.",
-    "url": "https://saharaprinter.com/hp-printer-abu-dhabi",
+    "url": "https://www.saharaprinter.com/hp-printer-abu-dhabi",
     "telephone": "+971503823969",
     "address": {
       "@type": "PostalAddress",
@@ -86,7 +86,6 @@ export default function HPPrinterAbuDhabi() {
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      <link rel="canonical" href="https://www.saharaprinter.com/hp-printer-abu-dhabi/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
 

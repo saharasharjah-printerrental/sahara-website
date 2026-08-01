@@ -25,16 +25,6 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const faqs = await getFaqsFromD1();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map(f => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
   return {
   title: "Photocopier Rental Sharjah | AED 250/mo | Sahara",
   description:
@@ -71,7 +61,7 @@ const localBusinessSchema = {
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Photocopier and printer rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
-  url: "https://saharaprinter.com/photocopier-rental-sharjah",
+  url: "https://www.saharaprinter.com/photocopier-rental-sharjah",
   telephone: "+971503823969",
   email: "info@saharaprinter.com",
   foundingDate: "2012",
@@ -152,12 +142,12 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.saharaprinter.com" },
     {
       "@type": "ListItem",
       position: 2,
       name: "Photocopier Rental Sharjah",
-      item: "https://saharaprinter.com/photocopier-rental-sharjah",
+      item: "https://www.saharaprinter.com/photocopier-rental-sharjah",
     },
   ],
 };

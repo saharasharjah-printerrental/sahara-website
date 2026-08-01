@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Sahara | UAE Printer Rental Experts Since 2012",
     description: "13 years serving UAE businesses. 1,500+ clients, 4.9★ Google rating. Printer rental from AED 250/mo. Zero deposit, free toner & maintenance.",
-    url: "https://www.saharaprinter.com/about",
+    url: "https://www.saharaprinter.com/about/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -27,7 +27,7 @@ const aboutSchema = {
   "@type": "AboutPage",
   "name": "About Sahara Office Equipments",
   "description": "Sahara Office Equipment Trading LLC — UAE's leading printer rental and photocopier leasing company since 2012. Headquartered in Sharjah, serving Dubai, Abu Dhabi, and all UAE emirates.",
-  "url": "https://saharaprinter.com/about",
+  "url": "https://www.saharaprinter.com/about/",
   "dateModified": "2026-04-15",
   "mainEntity": {
     "@type": "Organization",
@@ -44,8 +44,7 @@ const aboutSchema = {
     },
     "telephone": "+971503823969",
     "email": "info@saharaedoc.com",
-    "url": "https://saharaprinter.com",
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
+    "url": "https://www.saharaprinter.com/"
   }
 };
 

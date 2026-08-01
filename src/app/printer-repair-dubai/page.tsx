@@ -53,7 +53,7 @@ export default function PrinterRepairDubai() {
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments - Printer Repair Dubai",
     "description": "Professional printer repair services in Dubai. On-site repairs, 4-hour response, all brands serviced.",
-    "url": "https://saharaprinter.com/printer-repair-dubai",
+    "url": "https://www.saharaprinter.com/printer-repair-dubai",
     "telephone": "+971503823969",
     "address": {
       "@type": "PostalAddress",
@@ -86,7 +86,6 @@ export default function PrinterRepairDubai() {
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      <link rel="canonical" href="https://www.saharaprinter.com/printer-repair-dubai/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
       

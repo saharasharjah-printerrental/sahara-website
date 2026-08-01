@@ -26,16 +26,6 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const faqs = await getFaqsFromD1();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map(f => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
   return {
   title: "Printer Rental Abu Dhabi | AED 250/mo | Sahara",
   description:
@@ -72,7 +62,7 @@ const localBusinessSchema = {
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Printer and photocopier rental in Abu Dhabi from AED 250/month. Zero deposit, free OEM toner, weekly preventive maintenance, and emergency response.",
-  url: "https://saharaprinter.com/printer-rental-abu-dhabi",
+  url: "https://www.saharaprinter.com/printer-rental-abu-dhabi",
   telephone: "+971503823969",
   email: "info@saharaprinter.com",
   foundingDate: "2012",
@@ -154,12 +144,12 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.saharaprinter.com" },
     {
       "@type": "ListItem",
       position: 2,
       name: "Printer Rental Abu Dhabi",
-      item: "https://saharaprinter.com/printer-rental-abu-dhabi",
+      item: "https://www.saharaprinter.com/printer-rental-abu-dhabi",
     },
   ],
 };

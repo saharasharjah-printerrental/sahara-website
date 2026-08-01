@@ -25,16 +25,6 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const faqs = await getFaqsFromD1();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map(f => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
   return {
   title: "Printer Rental RAK | Ras Al Khaimah | Sahara",
   description:
@@ -85,7 +75,7 @@ const localBusinessSchema = {
   legalName: "Sahara Office Equipment Trading LLC",
   description:
     "Printer and photocopier rental in Ras Al Khaimah (RAK) from AED 250/month. Zero deposit, free OEM toner, on-site support.",
-  url: "https://saharaprinter.com/printer-rental-rak",
+  url: "https://www.saharaprinter.com/printer-rental-rak",
   telephone: "+971503823969",
   email: "info@saharaprinter.com",
   foundingDate: "2012",
@@ -130,8 +120,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://saharaprinter.com" },
-    { "@type": "ListItem", position: 2, name: "Printer Rental RAK", item: "https://saharaprinter.com/printer-rental-rak" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.saharaprinter.com" },
+    { "@type": "ListItem", position: 2, name: "Printer Rental RAK", item: "https://www.saharaprinter.com/printer-rental-rak" },
   ],
 };
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Annual Maintenance Contract (AMC) for Printers UAE | Sahara Office Equipments",
     description: "Comprehensive printer AMC plans from AED 299/month. All parts, priority response, and dedicated technician options across UAE.",
     images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Printer AMC UAE" }],
-    url: "https://www.saharaprinter.com/services/amc",
+    url: "https://www.saharaprinter.com/services/amc/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -38,8 +38,7 @@ const amcServiceSchema = {
       "addressLocality": "Sharjah",
       "addressCountry": "AE"
     },
-    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
+    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 }
   },
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain"],
   "serviceType": "Annual Maintenance Contract",
@@ -135,9 +134,9 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com" },
-    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaprinter.com/services" },
-    { "@type": "ListItem", "position": 3, "name": "Annual Maintenance Contract", "item": "https://saharaprinter.com/services/amc" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.saharaprinter.com/services" },
+    { "@type": "ListItem", "position": 3, "name": "Annual Maintenance Contract", "item": "https://www.saharaprinter.com/services/amc" }
   ]
 };
 

@@ -32,6 +32,13 @@ const fallbackPosts: BlogPost[] = [
   { id: "11", title: "Stop Wasting Money on Printing: Your Guide to Smarter Office Habits", slug: "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits", excerpt: "Does your business constantly track every penny, yet somehow printing costs just fly under the radar?", content: "", category: "Tips", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1749638040/blogs/ldevdfienoa4ibffpix0.png", publishedAt: "6/11/2025", createdAt: "2025-06-11" },
 ];
 
+function toISODate(value: string): string {
+  if (!value) return value;
+  if (/^\d{4}-\d{2}-\d{2}/.test(value)) return value;
+  const parsed = new Date(value);
+  return isNaN(parsed.getTime()) ? value : parsed.toISOString().slice(0, 10);
+}
+
 function mapDbPost(row: any): BlogPost {
   return {
     id: String(row.id),
@@ -111,25 +118,27 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     allPosts = fallbackPosts;
   }
 
+  const isoDate = toISODate(post.createdAt);
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": post.title,
     "description": post.excerpt,
     "image": post.coverImage,
-    "datePublished": post.createdAt,
-    "author": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://saharaprinter.com" },
-    "publisher": { "@type": "Organization", "name": "Sahara Office Equipments", "logo": { "@type": "ImageObject", "url": "https://saharaprinter.com/images/sahara-navbar-logo.webp" } },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://saharaprinter.com/blogs/${slug}` },
+    "datePublished": isoDate,
+    "dateModified": isoDate,
+    "author": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com/" },
+    "publisher": { "@type": "Organization", "name": "Sahara Office Equipments", "logo": { "@type": "ImageObject", "url": "https://www.saharaprinter.com/images/sahara-navbar-logo.webp" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://www.saharaprinter.com/blogs/${slug}/` },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://saharaprinter.com/blogs/" },
-      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://saharaprinter.com/blogs/${slug}/` },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.saharaprinter.com/blogs/" },
+      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://www.saharaprinter.com/blogs/${slug}/` },
     ],
   };
 

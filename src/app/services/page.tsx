@@ -1,15 +1,7 @@
-"use client";
-
 export const runtime = 'edge';
 
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { permanentRedirect } from "next/navigation";
 
 export default function ServicesPage() {
-  useEffect(() => {
-    // Redirect to printer-rental as default service
-    redirect("/services/printer-rental");
-  }, []);
-
-  return null;
+  permanentRedirect("/services/printer-rental/");
 }

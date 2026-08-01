@@ -1,7 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { SITE_URL } from '@/lib/siteUrl';
 
-const BASE = 'https://www.saharaprinter.com';
+export const runtime = 'edge';
+
+const BASE = SITE_URL;
 
 // Stagger dates: this week vs this month for SEO variety
 const thisWeek = new Date();
@@ -11,7 +14,6 @@ thisMonth.setDate(1); // First of month
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE}/`,                              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/services/`,                     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/services/printer-rental/`,      lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/services/photocopier-rental/`,  lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/services/repair/`,              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
@@ -28,7 +30,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/printer-rental-fujairah/`,      lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/printer-rental-al-ain/`,        lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/copier-lease-uae/`,             lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
-    { url: `${BASE}/brands/`,                       lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/brands/canon/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/brands/hp/`,                    lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/brands/kyocera/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
@@ -51,16 +52,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/rental-calculator/`,            lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
   ];
 
-  // Dynamic: blog posts + products — query D1 directly (no HTTP fetch, no redirect issues)
+  // Dynamic: blog posts — query D1 directly (no HTTP fetch, no redirect issues)
   let blogRoutes: MetadataRoute.Sitemap = [];
-  let productRoutes: MetadataRoute.Sitemap = [];
   try {
     const db = (getRequestContext().env as any).DB;
     if (db) {
-      const [br, pr] = await Promise.all([
-        db.prepare("SELECT slug FROM blog_posts WHERE status = 'published'").all(),
-        db.prepare("SELECT id, slug FROM products WHERE isActive = 1").all(),
-      ]);
+      const br = await db.prepare("SELECT slug FROM blogs WHERE isActive = 1").all();
       blogRoutes = ((br?.results ?? []) as any[])
         .map((r) => r.slug)
         .filter(Boolean)
@@ -70,17 +67,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           changeFrequency: 'weekly' as const,
           priority: 0.7,
         }));
-      productRoutes = ((pr?.results ?? []) as any[])
-        .map((r) => r.slug || String(r.id))
-        .filter(Boolean)
-        .map((id: string) => ({
-          url: `${BASE}/products/${id}/`,
-          lastModified: thisWeek,
-          changeFrequency: 'weekly' as const,
-          priority: 0.75,
-        }));
     }
-  } catch { /* D1 unavailable — sitemap generates without dynamic entries */ }
+  } catch (err) {
+    console.error('sitemap: failed to load blog routes from D1', err);
+  }
 
-  return [...staticRoutes, ...blogRoutes, ...productRoutes];
+  return [...staticRoutes, ...blogRoutes];
 }

@@ -185,7 +185,6 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
-      <link rel="canonical" href="https://www.saharaprinter.com/contact/" />
       <Header />
 
       {/* Hero Section */}
@@ -361,7 +360,7 @@ export default function ContactPage() {
           <div className="glass-card rounded-[2rem] overflow-hidden">
             <div className="relative w-full h-[450px] bg-[#0a1425]">
               <iframe 
-                src={settings?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57709.04655847797!2d55.37228622257977!3d25.310405175118643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin"}
+                src={settings?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1802.0!2d55.4260483!3d25.2942534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin"}
                 width="100%" 
                 height="100%"
                 style={{ border: 0, position: 'absolute', top: 0, left: 0 }} 

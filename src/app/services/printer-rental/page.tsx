@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Printer Rental UAE | Sahara Office Equipments",
       description: "Printer and photocopier rental across UAE from AED 250/month. Zero deposit, free toner, full maintenance. Canon, Kyocera, HP, Ricoh. Dubai, Sharjah, Abu Dhabi.",
       images: [{ url: "https://www.saharaprinter.com/images/og-sahara-printer-rental-dubai-uae.jpg", width: 1200, height: 630, alt: "Printer Rental UAE Dubai — Sahara Office Equipments. Professional Canon, Kyocera, HP enterprise photocopiers on flexible monthly rental with zero deposit and free toner." }],
-      url: "https://www.saharaprinter.com/services/printer-rental",
+      url: "https://www.saharaprinter.com/services/printer-rental/",
       siteName: "Sahara Office Equipments",
       locale: "en_AE",
       type: "website",
@@ -101,8 +101,7 @@ const schema = {
       "postalCode": "47373"
     },
     "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
-    "telephone": "+971503823969",
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
+    "telephone": "+971503823969"
   },
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain", "JAFZA", "SAIF Zone", "DAFZA"],
   "serviceType": "Printer Rental",
@@ -132,7 +131,6 @@ export default function PrinterRentalPage() {
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-      <link rel="canonical" href="https://www.saharaprinter.com/services/printer-rental/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
       

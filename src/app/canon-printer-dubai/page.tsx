@@ -53,7 +53,7 @@ export default function CanonPrinterDubai() {
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments - Canon Dubai",
     "description": "Canon printer rental in Dubai. imageRUNNER, i-SENSYS, imageCLASS series with zero deposit and free toner.",
-    "url": "https://saharaprinter.com/canon-printer-dubai",
+    "url": "https://www.saharaprinter.com/canon-printer-dubai",
     "telephone": "+971503823969",
     "address": {
       "@type": "PostalAddress",
@@ -86,7 +86,6 @@ export default function CanonPrinterDubai() {
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      <link rel="canonical" href="https://www.saharaprinter.com/canon-printer-dubai/" />
     <main className="min-h-screen bg-[#071325]">
       <Header />
 

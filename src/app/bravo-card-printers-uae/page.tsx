@@ -141,7 +141,6 @@ export default function BravoCardPrintersUAE() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rtaiProductSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dc3300ProductSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <link rel="canonical" href="https://www.saharaprinter.com/bravo-card-printers-uae/" />
 
       <main className="min-h-screen bg-[#071325]">
         <Header />

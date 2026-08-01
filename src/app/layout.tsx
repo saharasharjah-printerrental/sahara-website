@@ -22,9 +22,9 @@ const manrope = Manrope({
 export const runtime = 'edge';
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.saharaprinter.com"),
   title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance",
   description: "UAE printer & photocopier rental from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 4.9★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
-  alternates: { canonical: "https://www.saharaprinter.com/" },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -42,6 +42,20 @@ export const metadata: Metadata = {
     locale: "en_AE",
     alternateLocale: "ar_AE",
     siteName: "Sahara Office Equipments",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Sahara Office Equipments — Printer & Photocopier Rental UAE",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Printer Rental UAE | AED 250/mo | Free Toner | Sahara",
+    description: "Zero deposit printer & photocopier rental across UAE. Free toner & maintenance, 4-hr emergency response.",
+    images: ["/images/heroPrntr1.webp"],
   },
   robots: {
     index: true,
@@ -59,6 +73,7 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+  "@id": "https://www.saharaprinter.com/#organization",
   "name": "Sahara Office Equipments",
   "legalName": "Sahara Office Equip Tr LLC",
   "alternateName": ["Sahara Printer", "Sahara Printers UAE", "Sahara Office Equipment Trading LLC"],
@@ -89,10 +104,10 @@ const organizationSchema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 25.3187,
-    "longitude": 55.4196
+    "latitude": 25.2942534,
+    "longitude": 55.4260483
   },
-  "hasMap": "https://www.google.com/maps/place/SAHARA+office+equipments/@25.3187,55.4196,17z",
+  "hasMap": "https://maps.google.com/?cid=11820725793384191512",
   "telephone": "+971503823969",
   "email": "info@saharaprinter.com",
   "contactPoint": [

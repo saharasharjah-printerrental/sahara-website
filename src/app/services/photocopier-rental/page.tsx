@@ -25,16 +25,6 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const faqs = await getFaqsFromD1();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map(f => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
   return {
   title: "Photocopier Rental UAE | A3 Copier Lease Dubai Sharjah | Sahara",
   description: "Rent A3 multifunction photocopiers in Dubai, Sharjah, Abu Dhabi. Canon imageRUNNER, Kyocera TASKalfa — print, copy, scan, fax in one device. From AED 500/month. Zero deposit. Call +971503823969.",
@@ -43,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Photocopier Rental UAE | A3 Copier Lease Dubai Sharjah | Sahara Office Equipments",
     description: "Rent A3 multifunction photocopiers with print, copy, scan and fax. Canon & Kyocera. From AED 500/month, zero deposit, free toner. Serving all UAE.",
     images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Photocopier Rental UAE" }],
-    url: "https://www.saharaprinter.com/services/photocopier-rental",
+    url: "https://www.saharaprinter.com/services/photocopier-rental/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
@@ -70,8 +60,7 @@ const serviceSchema = {
       "addressCountry": "AE",
       "postalCode": "47373"
     },
-    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "66", "bestRating": "5" }
+    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 }
   },
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain"],
   "serviceType": "Photocopier Rental",
@@ -152,9 +141,9 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://saharaprinter.com" },
-    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://saharaprinter.com/services" },
-    { "@type": "ListItem", "position": 3, "name": "Photocopier Rental UAE", "item": "https://saharaprinter.com/services/photocopier-rental" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.saharaprinter.com/services" },
+    { "@type": "ListItem", "position": 3, "name": "Photocopier Rental UAE", "item": "https://www.saharaprinter.com/services/photocopier-rental" }
   ]
 };
 
