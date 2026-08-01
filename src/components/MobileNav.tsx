@@ -14,7 +14,7 @@ export default function MobileNav() {
     { name: "Home", href: "/", icon: Home },
     { name: "Services", href: "/services", icon: SettingsSuggest },
     { name: "Products", href: "/products", icon: Inventory2 },
-    { name: "Get Quote", href: "/get-quote", icon: RequestQuote },
+    { name: "Get Quote", href: "/rental-calculator/", icon: RequestQuote },
   ];
 
   const services = [

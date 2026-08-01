@@ -500,7 +500,7 @@ export default function BravoCardPrintersUAE() {
                 { href: "/services/printer-rental", label: "Printer Rental UAE" },
                 { href: "/services/amc", label: "Printer AMC Dubai" },
                 { href: "/services/repair", label: "Printer Repair Dubai" },
-                { href: "/get-quote", label: "Get a Quote" },
+                { href: "/rental-calculator/", label: "Get a Quote" },
               ].map((l) => (
                 <a key={l.href} href={l.href} className="text-sm text-[#f5be53] bg-[#f5be53]/10 border border-[#f5be53]/20 px-4 py-2 rounded-full hover:bg-[#f5be53]/20 transition-colors">
                   {l.label}

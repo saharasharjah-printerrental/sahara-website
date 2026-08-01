@@ -91,7 +91,7 @@ export default function BrandContentClient({ slug, brandFaqs }: { slug: string; 
                 As an authorized Sahara partner, we deliver {data.name}&apos;s enterprise solutions with expert support, competitive pricing, and full warranty coverage.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href={`/get-quote?brand=${slug}`} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
+                <a href={`/rental-calculator/?brand=${slug}`} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
                   Enquire for {data.name} Models
                 </a>
                 <a href="#products" className="glass-card text-white px-8 py-4 rounded-full font-bold hover:bg-[#2a3548] transition-all border border-[#f5be53]/20 inline-block">
@@ -177,7 +177,7 @@ export default function BrandContentClient({ slug, brandFaqs }: { slug: string; 
           <div className="absolute inset-0 bg-[#f5be53]/5 -z-10" />
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Explore {data.name} Solutions?</h2>
           <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">Contact our {data.name} specialists for a customized quote and demonstration.</p>
-          <a href={`/get-quote?brand=${slug}`} className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
+          <a href={`/rental-calculator/?brand=${slug}`} className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
             Get {data.name} Quote
           </a>
         </div>

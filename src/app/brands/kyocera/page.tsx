@@ -46,7 +46,7 @@ export default function KyoceraBrandPage() {
                 Experience the lowest total cost of ownership in the industry. Kyocera's ECOSYS technology delivers exceptional reliability and eco-friendly printing solutions.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote?brand=kyocera" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
+                <a href="/rental-calculator/?brand=kyocera" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
                   Enquire for Kyocera Models
                 </a>
                 <a href="#products" className="glass-card text-white px-8 py-4 rounded-full font-bold hover:bg-[#2a3548] transition-all border border-[#f5be53]/20 inline-block">
@@ -154,7 +154,7 @@ export default function KyoceraBrandPage() {
           <div className="absolute inset-0 bg-[#f5be53]/5 -z-10"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Save More with <span className="text-[#f5be53]">Kyocera</span></h2>
           <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">Get a custom TCO analysis for your office and see how much Kyocera can save you.</p>
-          <a href="/get-quote?brand=kyocera" className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
+          <a href="/rental-calculator/?brand=kyocera" className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
             Get Kyocera Quote
           </a>
         </div>

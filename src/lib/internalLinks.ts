@@ -19,7 +19,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     relatedLinks: [
       { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
       { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" },
-      { href: "/get-quote", label: "Get a Free Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
       { href: "/services/amc", label: "Annual Maintenance (AMC)", type: "service" },
       { href: "/rental-calculator", label: "Rental Price Calculator", type: "tool" },
     ],
@@ -48,7 +48,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/services/amc", label: "Annual Maintenance Contract", type: "service" },
       { href: "/photocopier-rental-sharjah", label: "Photocopier Rental Sharjah", type: "location" },
       { href: "/copier-lease-uae", label: "Copier Lease UAE", type: "location" },
-      { href: "/get-quote", label: "Request a Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Request a Quote", type: "tool" },
     ],
     relatedSlugs: [
       "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
@@ -76,7 +76,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" },
       { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
       { href: "/rental-calculator", label: "TCO Calculator", type: "tool" },
-      { href: "/get-quote", label: "Get Rental Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Get Rental Quote", type: "tool" },
     ],
     relatedSlugs: [
       "the-hidden-cost-of-your-office-copier",
@@ -116,7 +116,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     relatedLinks: [
       { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" },
       { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
-      { href: "/get-quote", label: "Get Dubai Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Get Dubai Quote", type: "tool" },
       { href: "/rental-calculator", label: "Calculate Savings", type: "tool" },
     ],
     relatedSlugs: [
@@ -131,7 +131,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" },
       { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
       { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah", type: "location" },
-      { href: "/get-quote", label: "Get a Custom Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Get a Custom Quote", type: "tool" },
     ],
     relatedSlugs: [
       "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
@@ -158,7 +158,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     relatedLinks: [
       { href: "/services/toner", label: "Toner & Spare Parts", type: "service" },
       { href: "/services/printer-rental", label: "All-Inclusive Printer Rental", type: "service" },
-      { href: "/get-quote", label: "Reduce Printing Costs Now", type: "tool" },
+      { href: "/rental-calculator/", label: "Reduce Printing Costs Now", type: "tool" },
     ],
     relatedSlugs: [
       "the-hidden-cost-of-your-office-copier",
@@ -172,7 +172,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/brands/kyocera", label: "Kyocera Printers UAE", type: "brand" },
       { href: "/brands/canon", label: "Canon Printers UAE", type: "brand" },
       { href: "/brands/ricoh", label: "Ricoh Printers UAE", type: "brand" },
-      { href: "/get-quote", label: "Get a Free Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
     ],
     relatedSlugs: [
       "what-a-copier-rental-service-must-deliver-to-a-client",
@@ -186,7 +186,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/services/repair", label: "Printer Repair Services", type: "service" },
       { href: "/services/toner", label: "Toner & Spare Parts", type: "service" },
       { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
-      { href: "/get-quote", label: "Request an AMC Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Request an AMC Quote", type: "tool" },
     ],
     relatedSlugs: [
       "the-hidden-cost-of-your-office-copier",
@@ -200,7 +200,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
       { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" },
       { href: "/rental-calculator", label: "Rental Price Calculator", type: "tool" },
-      { href: "/get-quote", label: "Get a Custom Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Get a Custom Quote", type: "tool" },
     ],
     relatedSlugs: [
       "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
@@ -214,7 +214,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/printer-repair-dubai", label: "Printer Repair Dubai", type: "location" },
       { href: "/services/amc", label: "Annual Maintenance (AMC)", type: "service" },
       { href: "/services/sales", label: "Buy a Printer (Corporate Sales)", type: "service" },
-      { href: "/get-quote", label: "Get a Free Quote", type: "tool" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
     ],
     relatedSlugs: [
       "the-problem-we-solve",
@@ -340,7 +340,7 @@ export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/brands/epson": "Epson printers",
   "/brands/samsung": "Samsung printers",
   "/brands/lexmark": "Lexmark printers",
-  "/get-quote": "get a free quote",
+  "/rental-calculator/": "get a free quote",
   "/rental-calculator": "rental cost calculator",
 };
 

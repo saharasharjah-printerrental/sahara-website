@@ -43,7 +43,7 @@ export default function XeroxBrandPage() {
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
                 Xerox authorized partner offering VersaLink and Altalink series with revolutionary ConnectKey technology. Transform your workplace with intelligent document solutions.
               </p>
-              <a href="/get-quote?brand=xerox" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
+              <a href="/rental-calculator/?brand=xerox" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
                 Enquire Now
               </a>
             </div>
@@ -112,7 +112,7 @@ export default function XeroxBrandPage() {
         <div className="max-w-4xl mx-auto glass-card rounded-[3rem] p-12 md:p-16 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Transform Your Workplace</h2>
           <p className="text-[#d3c5b0] mb-8">Get a customized quote for Xerox printers tailored to your business needs.</p>
-          <a href="/get-quote?brand=xerox" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform inline-block">
+          <a href="/rental-calculator/?brand=xerox" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform inline-block">
             Enquire for Xerox Models
           </a>
         </div>

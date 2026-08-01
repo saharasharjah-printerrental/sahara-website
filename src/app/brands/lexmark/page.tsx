@@ -45,7 +45,7 @@ export default function LexmarkBrandPage() {
                 Precision printing solutions designed in the USA. Lexmark combines American craftsmanship with cutting-edge technology for enterprise-grade performance.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote?brand=lexmark" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
+                <a href="/rental-calculator/?brand=lexmark" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform inline-block shadow-xl shadow-[#f5be53]/20">
                   Enquire for Lexmark Models
                 </a>
                 <a href="#products" className="glass-card text-white px-8 py-4 rounded-full font-bold hover:bg-[#2a3548] transition-all border border-[#f5be53]/20 inline-block">
@@ -153,7 +153,7 @@ export default function LexmarkBrandPage() {
           <div className="absolute inset-0 bg-[#f5be53]/5 -z-10"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Choose <span className="text-[#f5be53]">Lexmark</span> Quality</h2>
           <p className="text-[#d3c5b0] mb-10 max-w-2xl mx-auto text-lg">Get enterprise-grade printing with American innovation. Contact us for a Lexmark solution.</p>
-          <a href="/get-quote?brand=lexmark" className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
+          <a href="/rental-calculator/?brand=lexmark" className="px-12 py-5 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-[#f5be53]/30 inline-block">
             Get Lexmark Quote
           </a>
         </div>

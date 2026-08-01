@@ -62,7 +62,7 @@ export default function CanonBrandPage() {
             Sahara is a premier Canon partner in the UAE, delivering unparalleled document workflows and precision engineering for the modern executive landscape.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/get-quote?brand=canon" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg shadow-2xl shadow-[#f5be53]/30 hover:scale-105 transition-transform inline-block">
+            <a href="/rental-calculator/?brand=canon" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg shadow-2xl shadow-[#f5be53]/30 hover:scale-105 transition-transform inline-block">
               Enquire about Canon Solutions
             </a>
             <a href="#products" className="glass-card text-white px-10 py-5 rounded-full font-semibold border border-[#9c8f7c]/20 hover:bg-[#2a3548] transition-all inline-block">
@@ -162,7 +162,7 @@ export default function CanonBrandPage() {
         <div className="relative z-10 max-w-3xl mx-auto">
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">Ready for the <span className="text-[#f5be53] italic">next</span> standard?</h2>
           <p className="text-xl text-[#d3c5b0] mb-12">Consult with our executive imaging specialists to design a Canon solution tailored to your operational demands.</p>
-          <a href="/get-quote?brand=canon" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-12 py-5 rounded-full font-bold text-lg shadow-2xl shadow-[#f5be53]/30 hover:scale-105 transition-transform inline-block">
+          <a href="/rental-calculator/?brand=canon" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-12 py-5 rounded-full font-bold text-lg shadow-2xl shadow-[#f5be53]/30 hover:scale-105 transition-transform inline-block">
             Send Inquiry
           </a>
         </div>
