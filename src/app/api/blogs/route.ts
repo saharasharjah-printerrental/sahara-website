@@ -46,11 +46,11 @@ export async function GET(request: NextRequest) {
     const id = searchParams.get('id');
     if (id) {
       const filter = includeDrafts ? '' : ' AND isActive = 1';
-      const result = await db.prepare(`SELECT * FROM blogs WHERE id = ?${filter}`).first(id);
+      const result = await db.prepare(`SELECT * FROM blogs WHERE id = ?${filter}`).bind(id).first();
       return NextResponse.json({ blog: result }, { headers: CACHE_CONTROL });
     }
     if (slug) {
-      const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').first(slug);
+      const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').bind(slug).first();
       return NextResponse.json({ blog: result }, { headers: CACHE_CONTROL });
     }
     if (includeDrafts) {

@@ -87,7 +87,7 @@ export async function GET(request: NextRequest) {
 
   try {
     if (id) {
-      const result = await db.prepare('SELECT * FROM products WHERE id = ?').first(id);
+      const result = await db.prepare('SELECT * FROM products WHERE id = ?').bind(id).first();
       return NextResponse.json({ products: result ? [dbRowToProduct(result)] : [] }, { headers: CACHE_CONTROL });
     }
     let sql = 'SELECT * FROM products WHERE is_active = 1';

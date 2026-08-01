@@ -56,7 +56,7 @@ function mapDbPost(row: any): BlogPost {
 async function fetchPost(slug: string): Promise<{ post: any; allPosts: BlogPost[]; linkConfig: BlogLinkConfig | null } | null> {
   try {
     const db = getRequestContext().env.DB as any;
-    const row = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').first(slug);
+    const row = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').bind(slug).first();
     if (!row) return null;
     const allResult = await db.prepare('SELECT id, title, slug, excerpt, image, category, publishedAt, createdAt FROM blogs WHERE isActive = 1 ORDER BY publishedAt DESC').all();
     const allPosts: BlogPost[] = (allResult?.results ?? []).map(mapDbPost);
@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   try {
     const db = getRequestContext().env.DB as any;
-    const row = await db.prepare('SELECT title, excerpt, meta_title, meta_description, meta_keywords FROM blogs WHERE slug = ? AND isActive = 1').first(slug);
+    const row = await db.prepare('SELECT title, excerpt, meta_title, meta_description, meta_keywords FROM blogs WHERE slug = ? AND isActive = 1').bind(slug).first();
     if (row) {
       const title = row.meta_title || `${row.title} | Sahara`;
       const description = row.meta_description || row.excerpt;
