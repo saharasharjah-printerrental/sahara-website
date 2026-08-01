@@ -316,7 +316,7 @@ export default async function PrinterRentalAlAin() {
               </div>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="/get-quote"
+                  href="/rental-calculator/"
                   className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform"
                 >
                   Get Free Quote
@@ -481,7 +481,7 @@ export default async function PrinterRentalAlAin() {
                   ))}
                 </ul>
                 <a
-                  href="/get-quote"
+                  href="/rental-calculator/"
                   className="mt-8 block text-center py-3 rounded-full font-bold text-sm transition-all"
                   style={
                     tier.tag
@@ -528,7 +528,7 @@ export default async function PrinterRentalAlAin() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/get-quote"
+                href="/rental-calculator/"
                 className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform"
               >
                 Get Free Quote

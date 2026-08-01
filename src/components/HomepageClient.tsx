@@ -135,7 +135,7 @@ function HeroSection() {
         </p>
         <div className="flex flex-wrap gap-4 pt-2">
           <a
-            href="/get-quote"
+            href="/rental-calculator/"
             className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.4)]"
           >
             Get a Quote

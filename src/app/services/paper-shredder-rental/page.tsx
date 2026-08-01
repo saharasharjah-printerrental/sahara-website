@@ -126,7 +126,7 @@ export default function PaperShredderRentalPage() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
+                <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
                   Get Shredder Quote
                 </a>
                 <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
@@ -153,7 +153,7 @@ export default function PaperShredderRentalPage() {
                     <li>Sheet Capacity: <span className="text-white font-medium">{m.capacity}</span></li>
                     <li>Best For: <span className="text-white font-medium">{m.bestFor}</span></li>
                   </ul>
-                  <a href="/get-quote" className="block text-center bg-[#f5be53]/10 border border-[#f5be53]/30 text-[#f5be53] font-semibold py-2 rounded-full text-sm hover:bg-[#f5be53]/20 transition-colors">
+                  <a href="/rental-calculator/" className="block text-center bg-[#f5be53]/10 border border-[#f5be53]/30 text-[#f5be53] font-semibold py-2 rounded-full text-sm hover:bg-[#f5be53]/20 transition-colors">
                     Enquire Now
                   </a>
                 </div>

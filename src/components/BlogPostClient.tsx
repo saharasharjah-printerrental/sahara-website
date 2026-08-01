@@ -124,7 +124,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
           <h2 className="text-3xl font-bold text-white mb-4">Need Printer Solutions in UAE?</h2>
           <p className="text-[#d3c5b0] mb-8">Get a customized quote for <Link href="/services/printer-rental" className="text-[#f5be53] hover:underline">printer rental</Link>, <Link href="/services/repair" className="text-[#f5be53] hover:underline">repair</Link>, or <Link href="/services/amc" className="text-[#f5be53] hover:underline">maintenance</Link> — within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/get-quote" className="px-8 py-4 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold inline-block hover:scale-105 transition-transform">Get a Free Quote</Link>
+            <Link href="/rental-calculator/" className="px-8 py-4 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold inline-block hover:scale-105 transition-transform">Get a Free Quote</Link>
             <Link href="/contact" className="px-8 py-4 glass-card text-white rounded-full font-bold inline-block border border-[#f5be53]/20 hover:bg-[#2a3548] transition-colors">Contact Us</Link>
           </div>
         </div>

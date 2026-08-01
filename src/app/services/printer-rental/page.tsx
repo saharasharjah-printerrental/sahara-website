@@ -189,7 +189,7 @@ export default function PrinterRentalPage() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
+                <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
                   Get a Quote
                 </a>
                 <a href="/rental-calculator" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
@@ -481,7 +481,7 @@ export default function PrinterRentalPage() {
             </table>
           </div>
           <div className="flex justify-center mt-8">
-            <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+            <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
               Get a Rental Quote — No Commitment
             </a>
           </div>
@@ -521,7 +521,7 @@ export default function PrinterRentalPage() {
                     </div>
                   ))}
                 </div>
-                <a href="/get-quote" className="inline-block bg-green-500/20 border border-green-400/30 text-green-400 px-6 py-3 rounded-full font-bold text-sm hover:bg-green-500/30 transition-colors">
+                <a href="/rental-calculator/" className="inline-block bg-green-500/20 border border-green-400/30 text-green-400 px-6 py-3 rounded-full font-bold text-sm hover:bg-green-500/30 transition-colors">
                   Learn About Our Green Plan →
                 </a>
               </div>
@@ -660,7 +660,7 @@ export default function PrinterRentalPage() {
         <div className="max-w-4xl mx-auto rounded-[3rem] gold-gradient p-12 md:p-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Ready to Rent?</h2>
           <p className="text-[#483200] text-lg mb-8">Get a customized quote within 2 hours</p>
-          <a href="/get-quote" className="inline-block bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+          <a href="/rental-calculator/" className="inline-block bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform">
             Get Your Quote
           </a>
         </div>

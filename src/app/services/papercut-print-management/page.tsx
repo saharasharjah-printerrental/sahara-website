@@ -125,7 +125,7 @@ export default function PaperCutPage() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
+                <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
                   Get PaperCut Quote
                 </a>
                 <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
@@ -200,7 +200,7 @@ export default function PaperCutPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-[#8fa3bc] text-xs mt-4">Sahara supplies and implements both PaperCut MF and NG across Dubai, Sharjah, and Abu Dhabi. <a href="/get-quote" className="text-[#f5be53] hover:underline">Contact us</a> for a recommendation based on your printer fleet size.</p>
+            <p className="text-[#8fa3bc] text-xs mt-4">Sahara supplies and implements both PaperCut MF and NG across Dubai, Sharjah, and Abu Dhabi. <a href="/rental-calculator/" className="text-[#f5be53] hover:underline">Contact us</a> for a recommendation based on your printer fleet size.</p>
           </div>
         </section>
 
@@ -269,7 +269,7 @@ export default function PaperCutPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Start Cutting Your Print Costs</h2>
               <p className="text-[#5a3d00] mb-6 max-w-xl mx-auto">Get a free print audit and PaperCut recommendation for your Dubai, Sharjah, or Abu Dhabi office. Most UAE implementations pay back within 6 months.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/get-quote" className="bg-[#071325] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+                <a href="/rental-calculator/" className="bg-[#071325] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
                   Get Free Print Audit
                 </a>
                 <a href="tel:+971503823969" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-8 py-4 rounded-full font-bold">

@@ -181,7 +181,7 @@ export default function BravoCardPrintersUAE() {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+              <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
                 Get a Quote
               </a>
               <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
@@ -452,7 +452,7 @@ export default function BravoCardPrintersUAE() {
               ))}
             </div>
             <div className="text-center mt-8">
-              <a href="/get-quote" className="inline-block bg-[#f5be53]/10 border border-[#f5be53]/30 text-[#f5be53] px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#f5be53]/20 transition-colors">
+              <a href="/rental-calculator/" className="inline-block bg-[#f5be53]/10 border border-[#f5be53]/30 text-[#f5be53] px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#f5be53]/20 transition-colors">
                 Order Consumables →
               </a>
             </div>
@@ -470,7 +470,7 @@ export default function BravoCardPrintersUAE() {
                 As the authorised UAE retail partner for the Bravo RTAI and DC 3300, we offer on-site demonstrations, live card printing samples, and tailored pricing for your organisation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/get-quote" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+                <a href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform">
                   Request a Demo
                 </a>
                 <a href="tel:+971503823969" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg">

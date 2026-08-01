@@ -215,7 +215,7 @@ export default async function PrinterRentalDubai() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
+                <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
                   Get Dubai Quote
                 </a>
                 <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors flex items-center gap-2">
@@ -263,7 +263,7 @@ export default async function PrinterRentalDubai() {
                     </li>
                   ))}
                 </ul>
-                <a href="/get-quote" className={`block text-center py-4 rounded-full font-bold transition-all hover:scale-[1.02] ${tier.popular ? 'bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00]' : 'glass-card text-white'}`}>
+                <a href="/rental-calculator/" className={`block text-center py-4 rounded-full font-bold transition-all hover:scale-[1.02] ${tier.popular ? 'bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00]' : 'glass-card text-white'}`}>
                   Get Dubai Quote
                 </a>
               </div>
@@ -515,7 +515,7 @@ export default async function PrinterRentalDubai() {
               Get a customized Dubai quote within 2 hours. Free consultation and same-day delivery available for most Dubai districts.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/get-quote" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl">
+              <a href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl">
                 Get Free Dubai Quote
               </a>
               <a href="tel:+971503823969" className="bg-white/20 border border-[#412d00]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:bg-white/30 transition-colors">

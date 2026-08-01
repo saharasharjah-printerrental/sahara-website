@@ -107,7 +107,7 @@ export default function PrinterSparePartsPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Need Supplies?</h2>
             <p className="text-[#483200] text-lg mb-8">Same-day delivery across the UAE</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/get-quote" className="bg-[#071325] text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">Request Quote</a>
+              <a href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">Request Quote</a>
               <a href="/contact" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-4 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</a>
             </div>
           </div>

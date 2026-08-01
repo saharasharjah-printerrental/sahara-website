@@ -191,7 +191,7 @@ export default function BrandsPage() {
             <h2 className="text-3xl font-bold text-white mb-4">Need Help Choosing a Printer Brand?</h2>
             <p className="text-[#d3c5b0] mb-8">Our experts will recommend the right brand and model for your office volume, budget, and workflow.</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="/get-quote" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+              <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
                 Get a Free Quote
               </a>
               <a href="/contact" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">

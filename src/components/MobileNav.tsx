@@ -161,7 +161,7 @@ export default function MobileNav() {
 
               <div className="px-3 pb-3">
                 <Link
-                  href="/get-quote"
+                  href="/rental-calculator/"
                   onClick={() => setIsMoreOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] font-bold text-sm active:scale-[0.98] transition-transform"
                 >
