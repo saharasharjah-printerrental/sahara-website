@@ -76,13 +76,23 @@ export default function CopierLeaseUAE() {
     }))
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Copier Lease UAE", "item": "https://www.saharaprinter.com/copier-lease-uae/" },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
-      
+
       {/* Hero */}
       <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]"></div>

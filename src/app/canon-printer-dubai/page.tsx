@@ -216,6 +216,18 @@ export default function CanonPrinterDubai() {
         </div>
       </section>
 
+      {/* Related — cross-link to catalog page to signal complementary (not duplicate) intent */}
+      <section className="py-16 px-8 bg-[#101c2e]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Looking for full Canon model specs?</h2>
+          <p className="text-[#d3c5b0] mb-6">
+            This page covers Canon printer rental, pricing, and service in Dubai. For the complete Canon
+            imageRUNNER ADVANCE lineup, technology comparisons, and model specifications across the UAE, see our{" "}
+            <a href="/brands/canon/" className="text-[#f5be53] font-semibold hover:underline">Canon printer catalog</a>.
+          </p>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

@@ -35,9 +35,19 @@ export default function ProductsPage() {
     ],
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.saharaprinter.com/products/" },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(productListSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <ProductsClient />
     </>
   );

@@ -208,6 +208,18 @@ export default function PrinterRepairDubai() {
         </div>
       </section>
 
+      {/* Related — cross-link to the UAE-wide service hub to signal complementary (not duplicate) intent */}
+      <section className="py-16 px-8 bg-[#101c2e]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Outside Dubai?</h2>
+          <p className="text-[#d3c5b0] mb-6">
+            We repair printers and copiers across all seven emirates. See our{" "}
+            <a href="/services/repair/" className="text-[#f5be53] font-semibold hover:underline">full repair service page</a>{" "}
+            for brands serviced, AMC options, and UAE-wide coverage.
+          </p>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

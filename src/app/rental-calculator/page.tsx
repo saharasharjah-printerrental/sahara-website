@@ -19,6 +19,20 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Rental Calculator", "item": "https://www.saharaprinter.com/rental-calculator/" },
+  ],
+};
+
 export default function RentalCalculatorPage() {
-  return <CalculatorClient />;
+  return (
+    <>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      <CalculatorClient />
+    </>
+  );
 }

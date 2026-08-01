@@ -454,6 +454,18 @@ export default function RepairPage() {
         </div>
       </section>
 
+      {/* Related — cross-link to Dubai-specific repair page to signal complementary (not duplicate) intent */}
+      <section className="py-16 px-8 bg-[#101c2e]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Based in Dubai?</h2>
+          <p className="text-[#d3c5b0] mb-6">
+            This page covers our full UAE-wide repair process, brands serviced, and SLA terms. For Dubai
+            district coverage, local response times, and area-specific details, see{" "}
+            <a href="/printer-repair-dubai/" className="text-[#f5be53] font-semibold hover:underline">Printer Repair Dubai</a>.
+          </p>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

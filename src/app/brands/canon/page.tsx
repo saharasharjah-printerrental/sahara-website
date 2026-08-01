@@ -168,6 +168,18 @@ export default function CanonBrandPage() {
         </div>
       </section>
 
+      {/* Related — cross-link to Dubai rental page to signal complementary (not duplicate) intent */}
+      <section className="py-16 px-8 bg-[#101c2e]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Need Canon printer rental in Dubai specifically?</h2>
+          <p className="text-[#d3c5b0] mb-6">
+            This page covers the full Canon imageRUNNER ADVANCE lineup and technology. For Dubai-specific
+            pricing, delivery timelines, and local service coverage, see{" "}
+            <a href="/canon-printer-dubai/" className="text-[#f5be53] font-semibold hover:underline">Canon Printer Dubai</a>.
+          </p>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

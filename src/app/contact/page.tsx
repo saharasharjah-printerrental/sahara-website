@@ -183,8 +183,18 @@ export default function ContactPage() {
     setFormData({ name: "", company: "", email: "", phone: "", service: "", message: "" });
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.saharaprinter.com/contact/" },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[#071325]">
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <Header />
 
       {/* Hero Section */}

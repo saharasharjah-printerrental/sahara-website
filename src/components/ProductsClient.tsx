@@ -338,6 +338,22 @@ export default function ProductsClient() {
               </div>
             )}
           </div>
+
+          {/* Shop by Brand — cross-links to per-brand catalog pages */}
+          <div className="mt-20 pt-12 border-t border-[#4f4536]/30">
+            <h2 className="text-2xl font-bold text-white text-center mb-8">Shop by Brand</h2>
+            <div className="flex flex-wrap justify-center gap-3">
+              {["canon", "hp", "kyocera", "xerox", "ricoh", "brother", "sharp", "epson", "lexmark", "samsung"].map((slug) => (
+                <a
+                  key={slug}
+                  href={`/brands/${slug}/`}
+                  className="px-6 py-3 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all capitalize"
+                >
+                  {slug}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
       <Footer />

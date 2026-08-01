@@ -126,11 +126,22 @@ const howToSchema = {
   ]
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.saharaprinter.com/services/printer-rental/" },
+    { "@type": "ListItem", "position": 3, "name": "Printer Rental", "item": "https://www.saharaprinter.com/services/printer-rental/" },
+  ],
+};
+
 export default function PrinterRentalPage() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
       

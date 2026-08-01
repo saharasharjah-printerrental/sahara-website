@@ -48,9 +48,19 @@ export default async function BlogPage() {
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.saharaprinter.com/blogs/" },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(blogSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <BlogsClient initialPosts={initialPosts.length > 0 ? initialPosts : undefined} />
     </>
   );

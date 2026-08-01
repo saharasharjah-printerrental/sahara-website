@@ -47,10 +47,21 @@ const defaultSupplies = [
   { id: "13", name: "Canon iR ADVANCE Maintenance Kit", brand: "Canon", category: "Maintenance Kit" as const, compatibleModels: "C5030, C5035, C5045, C5051, C5235, C5240, C5250, C5255", yield: "300,000 pages", price: "Contact for Pricing", stock: 10, image: "", isActive: true },
 ];
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.saharaprinter.com/services/printer-rental/" },
+    { "@type": "ListItem", "position": 3, "name": "Printer Spare Parts", "item": "https://www.saharaprinter.com/services/printer-spare-parts/" },
+  ],
+};
+
 export default function PrinterSparePartsPage() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <main className="min-h-screen bg-[#071325]">
         <Header />
 
