@@ -293,12 +293,25 @@ export default function ProductsClient() {
               <div className={`grid gap-6 ${viewMode === "grid" ? "md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
                 {paginatedProducts.map((p) => (
                   <div key={p.id} className="glass-card rounded-2xl overflow-hidden group">
-                    <div className="h-48 bg-[#142032] relative overflow-hidden">
-                      {p.image && <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />}
-                      {p.brand && <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>}
-                    </div>
+                    {p.slug ? (
+                      <a href={`/products/${p.slug}/`} className="block h-48 bg-[#142032] relative overflow-hidden">
+                        {p.image && <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />}
+                        {p.brand && <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>}
+                      </a>
+                    ) : (
+                      <div className="h-48 bg-[#142032] relative overflow-hidden">
+                        {p.image && <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />}
+                        {p.brand && <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>}
+                      </div>
+                    )}
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
+                      {p.slug ? (
+                        <a href={`/products/${p.slug}/`}>
+                          <h3 className="text-xl font-bold text-white mb-2 hover:text-[#f5be53] transition-colors">{p.name}</h3>
+                        </a>
+                      ) : (
+                        <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
+                      )}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {p.specs?.slice(0, 3).map((spec: string, i: number) => (
                           <span key={i} className="px-2 py-1 bg-[#142032] rounded-full text-xs text-[#d3c5b0]">{spec}</span>
@@ -308,12 +321,20 @@ export default function ProductsClient() {
                         <span className="text-[#f5be53] font-bold text-lg">{p.priceRental}</span>
                         <span className="text-white text-sm">{p.condition === "New" ? "Brand New" : p.condition}</span>
                       </div>
+                      {p.slug && (
+                        <a
+                          href={`/products/${p.slug}/`}
+                          className="mt-4 block w-full text-center border border-[#f5be53]/40 text-[#f5be53] px-4 py-2 rounded-xl font-bold text-sm hover:bg-[#f5be53]/10 transition-colors"
+                        >
+                          View Details
+                        </a>
+                      )}
                       {paymentSettings.paymentGatewayEnabled && paymentSettings.paymentGatewayUrl && (
                         <a
                           href={paymentSettings.paymentGatewayUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-4 block w-full text-center bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-4 py-2 rounded-xl font-bold text-sm hover:scale-105 transition-transform"
+                          className="mt-2 block w-full text-center bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-4 py-2 rounded-xl font-bold text-sm hover:scale-105 transition-transform"
                         >
                           {paymentSettings.paymentGatewayLabel || "Buy Now"}
                         </a>

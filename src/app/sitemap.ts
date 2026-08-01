@@ -72,5 +72,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('sitemap: failed to load blog routes from D1', err);
   }
 
-  return [...staticRoutes, ...blogRoutes];
+  // Dynamic: product detail pages — query D1 directly
+  let productRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const db = (getRequestContext().env as any).DB;
+    if (db) {
+      const pr = await db.prepare("SELECT slug FROM products WHERE is_active = 1").all();
+      productRoutes = ((pr?.results ?? []) as any[])
+        .map((r) => r.slug)
+        .filter(Boolean)
+        .map((slug: string) => ({
+          url: `${BASE}/products/${slug}/`,
+          lastModified: thisWeek,
+          changeFrequency: 'monthly' as const,
+          priority: 0.65,
+        }));
+    }
+  } catch (err) {
+    console.error('sitemap: failed to load product routes from D1', err);
+  }
+
+  return [...staticRoutes, ...blogRoutes, ...productRoutes];
 }
