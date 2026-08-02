@@ -289,7 +289,7 @@ function DefinitionSection() {
 function ServicesSection() {
   const services = [
     { icon: Print, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental" },
-    { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/services/sales" },
+    { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/products" },
     { icon: Build, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair" },
     { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/toner" },
   ];

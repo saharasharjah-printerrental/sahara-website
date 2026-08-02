@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/services/photocopier-rental/`,  lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/services/repair/`,              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/services/amc/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/services/sales/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/services/plotter-maintenance/`, lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },
     { url: `${BASE}/services/toner/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/services/printer-spare-parts/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/services/paper-shredder-rental/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },

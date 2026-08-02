@@ -23,13 +23,14 @@ const DEFAULT_FAQS: FAQItem[] = [
   { q: "Is toner included in the rental price?", a: "Yes! All our rental plans include unlimited genuine toner. No hidden costs for consumables." },
   { q: "Do you offer short-term rentals?", a: "Yes, we offer short-term rentals for events, conferences, and temporary office needs. Contact us for daily and weekly rates." },
   { q: "What areas do you serve?", a: "We serve all across UAE including Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah, and Al Ain." },
+  { q: "Is a printer rental the same as a copier lease?", a: "Yes — in the UAE market, \"printer rental,\" \"copier rental,\" and \"copier lease\" all describe the same service from Sahara. Most of our fleet are multifunction devices that print, copy, scan, and fax, so whether you search for copier leasing, copier on rent, or printer rental, you'll get the same all-inclusive monthly plan: zero deposit, unlimited toner, and full maintenance." },
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Printer Rental UAE | AED 250/mo | Zero Deposit | Sahara",
     description: "Printer rental in the UAE from AED 250/month. Zero deposit, unlimited OEM toner, full maintenance. Canon, Kyocera, HP. Serving Dubai, Abu Dhabi, Sharjah, RAK, Fujairah & Al Ain. ☎ +971503823969",
-    keywords: "printer rental uae, photocopier rental dubai, copier lease uae, printer rental sharjah, zero deposit printer rental uae, canon printer uae, kyocera photocopier uae",
+    keywords: "printer rental uae, photocopier rental dubai, copier lease uae, copier rental dubai, copier leasing uae, copier on rent uae, printer rental sharjah, zero deposit printer rental uae, canon printer uae, kyocera photocopier uae",
     openGraph: {
       title: "Printer Rental UAE | Sahara Office Equipments",
       description: "Printer and photocopier rental across UAE from AED 250/month. Zero deposit, free toner, full maintenance. Canon, Kyocera, HP, Ricoh. Dubai, Sharjah, Abu Dhabi.",
@@ -87,7 +88,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Printer Rental Services UAE",
-  "alternateName": "Photocopier Rental Dubai",
+  "alternateName": ["Photocopier Rental Dubai", "Copier Rental UAE", "Copier Leasing Dubai"],
   "description": "Flexible printer and photocopier rental services in Dubai, Sharjah, Abu Dhabi and across UAE. Zero deposit, unlimited toner, full maintenance included. Plans from AED 250/month.",
   "provider": {
     "@type": "LocalBusiness",
@@ -218,6 +219,23 @@ export default function PrinterRentalPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Printer Rental = Copier Rental — Synonym Clarification ── */}
+      <section className="py-14 px-8 lg:px-24 bg-[#101c2e] border-y border-[#f5be53]/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Also Searching For a Copier?</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4">
+            Printer Rental, Copier Rental, Copier Lease — One Service
+          </h2>
+          <p className="text-[#d3c5b0] text-sm leading-relaxed max-w-2xl mx-auto">
+            Most of our fleet are multifunction devices, so a <strong className="text-white">printer rental</strong>{" "}
+            from Sahara is the same as a <strong className="text-white">copier rental</strong> or{" "}
+            <strong className="text-white">copier lease</strong> — one monthly plan covers print, copy, scan, and
+            fax. Whether your team searched for copier leasing, a copier on rent, or a printer lease, you land on
+            the same zero-deposit, all-inclusive plans below.
+          </p>
         </div>
       </section>
 

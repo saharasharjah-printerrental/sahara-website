@@ -18,8 +18,8 @@ const BRAND_IMAGES: Record<string, string> = {
   Ricoh: "/images/printer-ricoh.webp",
   Samsung: "/images/printer-samsung.webp",
   Lexmark: "/images/printer-lexmark.webp",
-  Sharp: "/images/printer-sharp.webp",
-  Epson: "/images/printer-epson.webp",
+  Sharp: "/brands/sharp.webp",
+  Epson: "/brands/epson.webp",
 };
 const CANON_ONLY = new Set(["/images/heroPrntr1.webp", "/images/printer-canon-2.webp"]);
 function localImg(image: string, brand: string): string {
@@ -41,8 +41,8 @@ const defaultProducts = [
   { id: "10", name: "Color LaserJet Pro M479fdw", brand: "HP", category: "MFP", condition: "New", priceRental: "AED 450/mo", specs: ["27 PPM Color", "Wi-Fi", "Fax", "Touch Display"], image: "/images/heroBnr1.webp", isActive: true },
   { id: "11", name: "imagePROGRAF PRO-4100", brand: "Canon", category: "Plotters", condition: "New", priceRental: "AED 1,200/mo", specs: ["12-Color Ink", "44-inch Roll", "2400 DPI", "Data Encrypt"], image: "/images/printer-canon-1.webp", isActive: true },
   { id: "12", name: "DesignJet Z9+ PostScript", brand: "HP", category: "Plotters", condition: "Refurbished", priceRental: "AED 600/mo", specs: ["44-inch Roll", "2400 DPI", "PostScript", "HP Stitch"], image: "/images/printer-hp.svg", isActive: true },
-  { id: "13", name: "BP-70C31 Color MFP", brand: "Sharp", category: "MFP", condition: "New", priceRental: "AED 650/mo", specs: ["31 PPM Color", "A3 Support", "Cloud Connect", "Duplex"], image: "/images/printer-sharp.webp", isActive: true },
-  { id: "14", name: "EcoTank L15150 Wide-Format", brand: "Epson", category: "A3 Printers", condition: "New", priceRental: "AED 480/mo", specs: ["25 PPM Color", "A3+ Support", "Wi-Fi Direct", "Low Cost/Page"], image: "/images/printer-epson.webp", isActive: true },
+  { id: "13", name: "BP-70C31 Color MFP", brand: "Sharp", category: "MFP", condition: "New", priceRental: "AED 650/mo", specs: ["31 PPM Color", "A3 Support", "Cloud Connect", "Duplex"], image: "/brands/sharp.webp", isActive: true },
+  { id: "14", name: "EcoTank L15150 Wide-Format", brand: "Epson", category: "A3 Printers", condition: "New", priceRental: "AED 480/mo", specs: ["25 PPM Color", "A3+ Support", "Wi-Fi Direct", "Low Cost/Page"], image: "/brands/epson.webp", isActive: true },
 ];
 
 export default function ProductsClient() {

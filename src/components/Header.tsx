@@ -38,7 +38,7 @@ const services = [
   { name: "Annual Maintenance (AMC)", href: "/services/amc", icon: Handyman },
   { name: "Printer Repair", href: "/services/repair", icon: Build },
   { name: "Toner & Spare Parts", href: "/services/printer-spare-parts", icon: Inventory },
-  { name: "Corporate Sales", href: "/services/sales", icon: ShoppingCart },
+  { name: "Plotter Maintenance", href: "/services/plotter-maintenance", icon: ShoppingCart },
 ];
 
 // Mobile bottom nav - direct link items (3 icons keeps bar uncluttered)

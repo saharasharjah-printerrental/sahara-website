@@ -26,12 +26,12 @@ export default function ProductsPage() {
     name: "Printer Products - Sahara Office Equipments",
     description: "Industrial-grade printers and photocopiers available for rent and sale in UAE.",
     url: "https://www.saharaprinter.com/products/",
-    numberOfItems: 12,
+    numberOfItems: 4,
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Canon imageRUNNER ADVANCE C5500", url: "https://www.saharaprinter.com/products/" },
-      { "@type": "ListItem", position: 2, name: "HP LaserJet Managed E82560", url: "https://www.saharaprinter.com/products/" },
-      { "@type": "ListItem", position: 3, name: "Kyocera TASKalfa 6003i", url: "https://www.saharaprinter.com/products/" },
-      { "@type": "ListItem", position: 4, name: "Xerox AltaLink C8170", url: "https://www.saharaprinter.com/products/" },
+      { "@type": "ListItem", position: 1, name: "Canon imageRUNNER ADVANCE C5500", url: "https://www.saharaprinter.com/products/imagerunner-advance-c5500/" },
+      { "@type": "ListItem", position: 2, name: "HP LaserJet Managed E82560", url: "https://www.saharaprinter.com/products/laserjet-managed-e82560/" },
+      { "@type": "ListItem", position: 3, name: "Kyocera TASKalfa 6003i", url: "https://www.saharaprinter.com/products/taskalfa-6003i-series/" },
+      { "@type": "ListItem", position: 4, name: "Xerox AltaLink C8170", url: "https://www.saharaprinter.com/products/altalink-c8170/" },
     ],
   };
 

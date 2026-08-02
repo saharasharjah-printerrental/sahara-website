@@ -230,7 +230,7 @@ export default function Footer() {
               <li><Link href="/services/amc" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
               <li><Link href="/services/repair" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
               <li><Link href="/services/toner" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
-              <li><Link href="/services/sales" className="hover:text-[#f5be53] transition-colors">Corporate Sales</Link></li>
+              <li><Link href="/services/plotter-maintenance" className="hover:text-[#f5be53] transition-colors">Plotter Maintenance</Link></li>
               <li><Link href="/copier-lease-uae" className="hover:text-[#f5be53] transition-colors">Copier Lease UAE</Link></li>
             </ul>
           </div>

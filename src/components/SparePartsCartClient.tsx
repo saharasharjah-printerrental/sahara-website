@@ -16,6 +16,9 @@ interface Supply {
   stock: number;
   image: string;
   isActive: boolean;
+  alt_text?: string;
+  image_width?: number;
+  image_height?: number;
 }
 
 interface SparePartsCartClientProps {
@@ -47,6 +50,21 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
     } else {
       setSupplies(defaultSupplies);
     }
+
+    // Fetch from D1 first (real visitors won't have localStorage populated)
+    fetch('/api/supplies/')
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data.supplies) && data.supplies.length > 0) {
+          const active = data.supplies
+            .map((s: Supply) => ({ ...s, isActive: Boolean(s.isActive) }))
+            .filter((s: Supply) => s.isActive);
+          setSupplies(active);
+          localStorage.setItem("sahara_supplies", JSON.stringify(active));
+        }
+      })
+      .catch(() => {});
+
     const storedCart = localStorage.getItem("sahara_cart");
     if (storedCart) setCart(JSON.parse(storedCart));
 
@@ -214,7 +232,21 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
             {filteredSupplies.map((supply) => (
               <div key={supply.id} className="glass-card rounded-2xl overflow-hidden group hover:scale-[1.02] transition-all duration-300">
                 <div className="h-48 bg-[#142032] relative overflow-hidden">
-                  <div className="w-full h-full flex items-center justify-center">
+                  {supply.image ? (
+                    <img
+                      src={supply.image}
+                      alt={supply.alt_text || supply.name}
+                      width={supply.image_width || 800}
+                      height={supply.image_height || 800}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-contain"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                      }}
+                    />
+                  ) : null}
+                  <div className={`w-full h-full flex items-center justify-center${supply.image ? " hidden" : ""}`}>
                     {supply.category === "Toner" && supply.color ? (
                       <div className="flex flex-col items-center gap-4">
                         <div className="w-20 h-28 rounded-lg border-2 border-white/20 flex items-center justify-center">

@@ -206,7 +206,7 @@ export default function AboutPage() {
               },
               {
                 icon: "shopping_cart",
-                title: "Corporate Sales",
+                title: "Equipment Sales",
                 desc: "New printer and photocopier sales at competitive prices",
               },
             ].map((service, i) => (

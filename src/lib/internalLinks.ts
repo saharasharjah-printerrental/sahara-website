@@ -144,7 +144,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     relatedLinks: [
       { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", type: "location" },
       { href: "/rental-calculator", label: "Rent vs Buy Calculator", type: "tool" },
-      { href: "/services/sales", label: "Buy a Printer (Corporate Sales)", type: "service" },
+      { href: "/products", label: "Buy a Printer", type: "service" },
       { href: "/copier-lease-uae", label: "Copier Lease UAE", type: "location" },
     ],
     relatedSlugs: [
@@ -213,7 +213,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     relatedLinks: [
       { href: "/printer-repair-dubai", label: "Printer Repair Dubai", type: "location" },
       { href: "/services/amc", label: "Annual Maintenance (AMC)", type: "service" },
-      { href: "/services/sales", label: "Buy a Printer (Corporate Sales)", type: "service" },
+      { href: "/products", label: "Buy a Printer", type: "service" },
       { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
     ],
     relatedSlugs: [
@@ -322,7 +322,7 @@ export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/services/amc": "annual maintenance contract",
   "/services/repair": "printer repair services",
   "/services/toner": "toner and spare parts",
-  "/services/sales": "corporate printer sales",
+  "/products": "corporate printer sales",
   "/printer-rental-dubai": "printer rental Dubai",
   "/printer-rental-abu-dhabi": "printer rental Abu Dhabi",
   "/photocopier-rental-sharjah": "photocopier rental Sharjah",
