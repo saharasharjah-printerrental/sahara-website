@@ -35,6 +35,14 @@ bucket_name = "sahara-printer-files"
 #   - CLOUDINARY_API_SECRET
 # Get credentials from: https://console.cloudinary.com → Settings → API Keys
 # ─────────────────────────────────────────────
+
+# ─────────────────────────────────────────────
+# GOOGLE REVIEWS (live rating badge + schema, src/lib/google-reviews.ts)
+# Set these in Cloudflare Dashboard → Pages → sahara-website → Settings → Environment variables:
+#   - GOOGLE_PLACES_API_KEY  (Google Cloud Console → enable "Places API (New)")
+#   - GOOGLE_PLACE_ID        (Place ID for the Sahara Office Equipments GBP listing)
+# Without these, /api/google-reviews falls back to the last D1-cached value.
+# ─────────────────────────────────────────────
 # Vars set in Cloudflare Dashboard - do not add here to avoid override
 [env.production.vars]
 

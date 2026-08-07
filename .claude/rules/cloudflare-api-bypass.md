@@ -6,7 +6,7 @@ This document describes the **Cloudflare Free Tier** configuration required to e
 
 ## Issue
 
-API routes (`/api/logos`, `/api/settings`, `/api/testimonials`) may be blocked or return empty responses because:
+API routes (`/api/logos`, `/api/settings`, `/api/testimonials`, `/api/google-reviews`) may be blocked or return empty responses because:
 1. Cloudflare Challenge (CAPTCHA) blocks Googlebot from accessing API endpoints
 2. Browser Integrity Check rejects non-browser requests
 3. Security rules are too strict for public API data routes

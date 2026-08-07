@@ -8,11 +8,11 @@ import CountUp from "@/components/CountUp";
 
 export const metadata: Metadata = {
   title: "About Sahara | UAE Printer Rental Experts Since 2012",
-  description: "Sahara Office Equipment Trading LLC — 13 years in UAE. 1,500+ clients, 4.9★ Google rating. Printer & photocopier rental from AED 250/mo. Sharjah HQ, all-UAE coverage.",
+  description: "Sahara Office Equipment Trading LLC — 13 years in UAE. 1,500+ clients, 5.0★ Google rating. Printer & photocopier rental from AED 250/mo. Sharjah HQ, all-UAE coverage.",
   keywords: "sahara office equipments, printer rental company uae, photocopier rental sharjah, printer service dubai, about sahara printer, printer amc dubai, UAE printer rental since 2012",
   openGraph: {
     title: "About Sahara | UAE Printer Rental Experts Since 2012",
-    description: "13 years serving UAE businesses. 1,500+ clients, 4.9★ Google rating. Printer rental from AED 250/mo. Zero deposit, free toner & maintenance.",
+    description: "13 years serving UAE businesses. 1,500+ clients, 5.0★ Google rating. Printer rental from AED 250/mo. Zero deposit, free toner & maintenance.",
     url: "https://www.saharaprinter.com/about/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",

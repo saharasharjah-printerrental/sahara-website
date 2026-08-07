@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { CipherText } from "@/components/CipherText";
 import StatsClay from "@/components/StatsClay";
+import GoogleReviewsBadge from "@/components/GoogleReviewsBadge";
 import {
   Layers,
   People,
@@ -75,10 +76,14 @@ export default function HomepageClient({
   initialLogos = [],
   initialTestimonials = [],
   initialFaqs = [],
+  googleReviews,
+  googlePlaceId = "",
 }: {
   initialLogos?: any[];
   initialTestimonials?: any[];
   initialFaqs?: { q: string; a: string }[];
+  googleReviews?: { rating: number; reviewCount: number };
+  googlePlaceId?: string;
 }) {
   return (
     <>
@@ -89,7 +94,7 @@ export default function HomepageClient({
       <LocationsSection />
       <StatsSectionContent />
       <FeaturedProductsSection />
-      <ReviewsSectionContent initialTestimonials={initialTestimonials} />
+      <ReviewsSectionContent initialTestimonials={initialTestimonials} googleReviews={googleReviews} googlePlaceId={googlePlaceId} />
       <CTASection />
       <FAQSectionContent initialFaqs={initialFaqs} />
     </>
@@ -453,7 +458,15 @@ function FeaturedProductsSection() {
   );
 }
 
-function ReviewsSectionContent({ initialTestimonials = [] }: { initialTestimonials?: any[] }) {
+function ReviewsSectionContent({
+  initialTestimonials = [],
+  googleReviews,
+  googlePlaceId = "",
+}: {
+  initialTestimonials?: any[];
+  googleReviews?: { rating: number; reviewCount: number };
+  googlePlaceId?: string;
+}) {
   const [mounted, setMounted] = useState(false);
   const [testimonials, setTestimonials] = useState<any[]>(
     initialTestimonials.length > 0 ? initialTestimonials : defaultTestimonials
@@ -516,7 +529,15 @@ function ReviewsSectionContent({ initialTestimonials = [] }: { initialTestimonia
     <section className="py-24 bg-[#101c2e]/50 relative">
       <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
         <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
-        <p className="text-4xl font-bold text-white">Rated 4.9/5 by Google Local Guide</p>
+        <p className="text-4xl font-bold text-white mb-4">What Our Clients Say</p>
+        {googleReviews && (
+          <GoogleReviewsBadge
+            rating={googleReviews.rating}
+            reviewCount={googleReviews.reviewCount}
+            placeId={googlePlaceId}
+            className="justify-center text-lg"
+          />
+        )}
       </div>
       <div className="overflow-hidden" onMouseEnter={() => (pausedRef.current = true)} onMouseLeave={() => (pausedRef.current = false)}>
         <div ref={trackRef} className="flex gap-6 py-4" style={{ width: "max-content" }} suppressHydrationWarning>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { Sora, Manrope } from "next/font/google";
+import { getGoogleReviewsData } from "@/lib/google-reviews";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export const runtime = 'edge';
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.saharaprinter.com"),
   title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance",
-  description: "UAE printer & photocopier rental from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 4.9★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
+  description: "UAE printer & photocopier rental from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 5.0★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Printer Rental UAE | AED 250/mo | Free Toner | Sahara",
-    description: "Zero deposit printer & photocopier rental across UAE. Free toner & maintenance, 4-hr emergency response. 4.9★ · 1,500+ clients. Since 2012.",
+    description: "Zero deposit printer & photocopier rental across UAE. Free toner & maintenance, 4-hr emergency response. 5.0★ · 1,500+ clients. Since 2012.",
     url: "https://www.saharaprinter.com/",
     type: "website",
     locale: "en_AE",
@@ -172,8 +173,8 @@ const organizationSchema = {
   "priceRange": "AED 250–2000",
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": 4.9,
-    "reviewCount": 150,
+    "ratingValue": 5.0,
+    "reviewCount": 69,
     "bestRating": 5,
     "worstRating": 1
   },
@@ -366,6 +367,20 @@ export default async function RootLayout({
     ? parseScripts(cfg.customHeadScripts).filter((s) => !isManagedAnalyticsScript(s))
     : [];
 
+  // Live Google rating — sourced from D1 cache (see src/lib/google-reviews.ts),
+  // refreshed by /api/google-reviews. Falls back to the seeded 5.0/69 if D1
+  // is unreachable. Only applies when no admin-stored organizationSchema
+  // override is set (cfg.organizationSchema), same as every other field here.
+  const googleReviews = await getGoogleReviewsData();
+  const organizationSchemaWithLiveRating = {
+    ...organizationSchema,
+    aggregateRating: {
+      ...organizationSchema.aggregateRating,
+      ratingValue: googleReviews.rating,
+      reviewCount: googleReviews.reviewCount,
+    },
+  };
+
   return (
     <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>
       <head>
@@ -379,7 +394,7 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <script type="application/ld+json">{cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchema)}</script>
+        <script type="application/ld+json">{cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchemaWithLiveRating)}</script>
         <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
 
         {/* Google Tag Manager */}

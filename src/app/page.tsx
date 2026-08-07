@@ -2,6 +2,7 @@ export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getGoogleReviewsData, getGooglePlaceId } from "@/lib/google-reviews";
 import HomepageClient from "@/components/HomepageClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -42,6 +43,9 @@ export default async function HomePage() {
     }
   } catch { /* D1 unavailable in dev — components fall back to hardcoded defaults */ }
 
+  const googleReviews = await getGoogleReviewsData();
+  const googlePlaceId = getGooglePlaceId();
+
   const faqsForSchema = initialFaqs.length > 0 ? initialFaqs : [
     { q: "How much does printer rental cost in the UAE?", a: "Printer rental in the UAE starts from AED 250/month for A4 desktop printers. A3 multifunction photocopiers start from AED 500/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." },
     { q: "What are the benefits of printer rental in UAE?", a: "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options." },
@@ -68,7 +72,13 @@ export default async function HomePage() {
 
 
       <Header />
-      <HomepageClient initialLogos={initialLogos} initialTestimonials={initialTestimonials} initialFaqs={initialFaqs} />
+      <HomepageClient
+        initialLogos={initialLogos}
+        initialTestimonials={initialTestimonials}
+        initialFaqs={initialFaqs}
+        googleReviews={googleReviews}
+        googlePlaceId={googlePlaceId}
+      />
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

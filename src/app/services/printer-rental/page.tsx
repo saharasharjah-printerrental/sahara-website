@@ -24,6 +24,17 @@ const DEFAULT_FAQS: FAQItem[] = [
   { q: "Do you offer short-term rentals?", a: "Yes, we offer short-term rentals for events, conferences, and temporary office needs. Contact us for daily and weekly rates." },
   { q: "What areas do you serve?", a: "We serve all across UAE including Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah, and Al Ain." },
   { q: "Is a printer rental the same as a copier lease?", a: "Yes — in the UAE market, \"printer rental,\" \"copier rental,\" and \"copier lease\" all describe the same service from Sahara. Most of our fleet are multifunction devices that print, copy, scan, and fax, so whether you search for copier leasing, copier on rent, or printer rental, you'll get the same all-inclusive monthly plan: zero deposit, unlimited toner, and full maintenance." },
+  { q: "Why rent a printer instead of buying one in the UAE?", a: "Buying ties up capital in hardware that depreciates and becomes obsolete within 3-4 years, and toner, maintenance contracts, spare parts, and repair callouts typically add 40-60% to the total cost of ownership. Renting from Sahara bundles all of that into one predictable AED 250/month starting fee — zero deposit, unlimited OEM toner, and maintenance included — so there's no capital outlay and no surprise repair bills." },
+  { q: "Is it cheaper to lease or buy a photocopier in the UAE?", a: "For most UAE offices, leasing is cheaper over a typical 2-4 year cycle once toner, maintenance, and repair costs are factored in. Buying only becomes cost-competitive for businesses with very high, stable print volumes over 5+ years who can self-manage servicing. Sahara's rental plans include toner and maintenance in the monthly fee, removing that variable entirely." },
+  { q: "What is printer leasing and how does it work?", a: "Printer leasing is a fixed monthly service: you pay one predictable fee that covers the printer or photocopier hardware, unlimited OEM toner, scheduled maintenance, and repairs — without ever owning the machine. Sahara's leasing plans start from AED 250/month with zero deposit, and the contract can run from 3 to 36 months depending on your needs." },
+  { q: "What are the main benefits of leasing a copier over buying one?", a: "Leasing eliminates upfront capital cost, bundles maintenance and toner into one predictable invoice, includes free upgrades as your office grows (our 'Growth Guard' policy), and removes any resale or disposal hassle at end of contract — Sahara collects the machine at no charge when you're done." },
+  { q: "Is printer leasing tied to a specific brand like HP?", a: "No — leasing is a service model, not a brand. Sahara leases Canon, Kyocera, HP, Ricoh, Xerox, Brother, Sharp, and Epson equipment under the exact same zero-deposit, all-inclusive terms, so you choose the brand that fits your office, not the other way around." },
+  { q: "What happens when a printer lease ends in the UAE?", a: "At the end of your Sahara rental contract, we collect the equipment at no charge. You can renew the same plan, upgrade to newer equipment, or simply return the machine — there are no exit fees and no disposal costs. We handle the full lifecycle of every device we lease." },
+  { q: "How do I get out of a printer lease early?", a: "Our 'Growth Guard' policy lets you upgrade to different equipment at any point in the contract with no termination penalty. If you need to end a lease early rather than upgrade, contact your account manager — Sahara's contracts are built around flexible terms and transparent exit conditions, not lock-in fees." },
+  { q: "What's included in the monthly printer leasing payment?", a: "One fixed AED fee covers the machine, unlimited genuine OEM toner, scheduled preventive maintenance, all repairs and parts, and free delivery — there are no metered per-page charges or hidden add-ons on Sahara's standard plans." },
+  { q: "Do I need to negotiate my printer lease rate in the UAE?", a: "No — Sahara publishes transparent tiered pricing from AED 250 to AED 2,000/month based on device class and volume, with automatic discounts for multi-machine fleet contracts (3+ units). Every business at the same tier gets the same rate, so there's nothing to haggle over." },
+  { q: "Does printer or copier leasing work the same way as computer/IT leasing?", a: "The underlying principle is similar — a fixed monthly fee instead of a capital purchase — but Sahara specializes specifically in printers, photocopiers, and multifunction devices rather than general IT hardware, so our plans bundle toner and print-specific maintenance that a generic computer lease wouldn't include." },
+  { q: "What is a managed print program and does Sahara offer one?", a: "A managed print program (sometimes called a 'printing enterprise' setup) consolidates multiple devices across an office or multiple sites under one contract, with unified billing, proactive toner monitoring, and quarterly usage reporting. Sahara offers this for corporate clients with 3+ machines or multi-location fleets — see our Dubai-specific coverage at /printer-rental-dubai for district-by-district delivery detail." },
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -163,9 +174,9 @@ export default function PrinterRentalPage() {
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-xs">Zero Deposit · Free Toner · Cancel Anytime</span>
+              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-xs">All 7 Emirates · Free Toner · Cancel Anytime</span>
               <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Printer Rental<br /><span className="text-[#f5be53]">Dubai & UAE</span>
+                Printer Rental Plans<br /><span className="text-[#f5be53]">Across the UAE</span>
               </h1>
 
               {/* AEO Answer Block */}
@@ -667,6 +678,30 @@ export default function PrinterRentalPage() {
                 className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
               >
                 📍 {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Related Services */}
+      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Related Services</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { href: "/services/photocopier-rental", label: "Photocopier Rental" },
+              { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental" },
+              { href: "/services/amc", label: "Annual Maintenance (AMC)" },
+              { href: "/services/repair", label: "Printer Repair" },
+              { href: "/services/toner", label: "Toner & Spare Parts" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
+              >
+                {link.label}
               </Link>
             ))}
           </div>

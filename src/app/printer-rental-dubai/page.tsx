@@ -114,6 +114,14 @@ const DEFAULT_FAQS: FAQItem[] = [
   { q: "Do you offer multi-location printer rental for companies with multiple Dubai offices?", a: "Yes. We manage corporate fleet deployments across multiple Dubai locations under one contract with consolidated billing. This is ideal for businesses with branches in Business Bay, Deira, and Jebel Ali, for example. Fleet discount pricing applies for 3+ machines." },
   { q: "What happens to the printer at the end of the Dubai rental contract?", a: "At the end of the rental term, we collect the equipment at no charge. You can renew, upgrade to newer equipment, or simply return the machine. There are no exit fees and no disposal costs — Sahara handles the full lifecycle of every machine we rent." },
   { q: "Can the rented printer connect to our Dubai office Wi-Fi and email system?", a: "Yes. Our technicians configure full network integration including: LAN and Wi-Fi connectivity, scan-to-email via your office SMTP server, scan-to-folder for your server or NAS, cloud integration (Google Drive, OneDrive, SharePoint), and secure print release. Full setup is included in delivery." },
+  { q: "Which is better for a Dubai office — laser or inkjet?", a: "Laser is the standard choice for Dubai offices: it handles heat, humidity, and dust far more reliably than inkjet, and its cost-per-page drops sharply at business print volumes. Inkjet only makes sense for very low-volume, home-style use. Every device on Sahara's Dubai rental fleet is laser-based for this reason." },
+  { q: "Is laser or inkjet cheaper for a Dubai business?", a: "Laser has a slightly higher machine cost but roughly 60-70% lower cost-per-page than inkjet at typical office volumes. For a Dubai office printing 2,000+ pages a month, a rented laser MFP from AED 250/month with unlimited toner included works out cheaper than running an owned inkjet on replacement cartridges." },
+  { q: "Which printer brand is best for offices in Dubai?", a: "Canon and Kyocera are the most requested brands among Sahara's Dubai clients, thanks to proven reliability in UAE heat and dust conditions. HP LaserJet Enterprise and Ricoh MP series are close behind for larger enterprise print environments." },
+  { q: "Desktop or multifunction printer — which is best for a Dubai office?", a: "For small Dubai teams (1-5 users), an A4 desktop laser printer is usually enough. Offices with 10+ users get better value from an A3 multifunction device (print, copy, scan) — see our A3 Mid-Range plan above, which is our most popular tier for Dubai businesses." },
+  { q: "Is an ink tank printer better than a standard inkjet for a Dubai office?", a: "Ink tank printers reduce cost-per-page versus cartridge inkjets, but neither is built for sustained office volumes or Dubai's dusty conditions the way a laser MFP is. We don't recommend ink tank devices for business use — laser rental is the standard for every Dubai office we service." },
+  { q: "Which printer is best for a Dubai home office with Wi-Fi?", a: "A compact A4 wireless laser printer covers most Dubai home-office needs. Sahara's smallest rental tier (from AED 250/month) includes free Wi-Fi and network setup, so the printer is ready to use with any laptop or phone on delivery day." },
+  { q: "Do you rent or service Epson printers in Dubai?", a: "Sahara's core Dubai rental fleet centers on Canon and Kyocera laser devices for high-volume office reliability, but our repair and AMC teams service Epson equipment too if your office already runs it — see our Repair and AMC services for details." },
+  { q: "What are the 4 toner colors used in a Dubai office color copier?", a: "Cyan, magenta, yellow, and black (CMYK) — the standard four-color toner set used across every color laser multifunction device Sahara rents in Dubai, from entry A4 models to enterprise A3 copiers." },
 ];
 
 const breadcrumbSchema = {
@@ -373,7 +381,7 @@ export default async function PrinterRentalDubai() {
         <div className="text-center mb-14">
           <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Questions</span>
           <h2 className="text-4xl font-bold text-white mt-3">Printer Rental Dubai — FAQ</h2>
-          <p className="text-[#7a94ad] text-sm mt-3 max-w-md mx-auto">12 questions covering pricing, delivery, brands, contracts and everything Dubai businesses ask.</p>
+          <p className="text-[#7a94ad] text-sm mt-3 max-w-md mx-auto">20 questions covering pricing, delivery, brands, printer types, and contracts — everything Dubai businesses ask.</p>
         </div>
         <div className="space-y-4">
           {faqs.map((faq, i) => (

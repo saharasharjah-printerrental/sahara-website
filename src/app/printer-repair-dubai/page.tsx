@@ -8,16 +8,30 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
+const defaultFaqs = [
+  { q: "Do you offer printer repair services in Dubai?", a: "Yes! We provide professional printer and photocopier repair services across Dubai. Our certified technicians can fix all major brands." },
+  { q: "What is your printer repair response time in Dubai?", a: "We offer 4-hour emergency response for critical printer failures in Dubai. Standard repairs scheduled within 24 hours." },
+  { q: "Do you repair all printer brands in Dubai?", a: "Yes! We repair Canon, HP, Kyocera, Xerox, Ricoh, Sharp, Brother, Samsung, and Lexmark printers in Dubai." },
+  { q: "How much does printer repair cost in Dubai?", a: "Our printer repair services in Dubai start from AED 150 for minor issues. Complex repairs quoted after diagnosis. Free assessment for rental clients." },
+  { q: "Do you provide on-site printer repair in Dubai?", a: "Yes! Our technicians provide on-site repair services at your office in Dubai. No need to transport the equipment." },
+  { q: "What printer issues can you repair in Dubai?", a: "We repair paper jams, printing quality issues, network connectivity, software errors, mechanical failures, and more." },
+  { q: "Do you offer printer repair contracts in Dubai?", a: "Yes! Our AMC (Annual Maintenance Contract) includes unlimited repairs, preventive maintenance, and priority response." },
+  { q: "Do you offer printer repair in other areas of Dubai?", a: "We serve all Dubai areas including Business Bay, JLT, Deira, Marina, DIFC, Sheikh Zayed Road, and all other districts." },
+];
+
 export default function PrinterRepairDubai() {
   const [settings, setSettings] = useState<any>(null);
-  const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
+  // Initialized with defaultFaqs (not []) so the server-rendered HTML — what
+  // Googlebot's first pass actually sees — already carries real FAQPage
+  // content instead of an empty mainEntity array.
+  const [faqs, setFaqs] = useState<{q: string; a: string}[]>(defaultFaqs);
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_settings");
     if (stored) {
       setSettings(JSON.parse(stored));
     }
-    
+
     const faqStored = localStorage.getItem("sahara_faqs");
     if (faqStored) {
       const allFaqs = JSON.parse(faqStored);
@@ -29,17 +43,6 @@ export default function PrinterRepairDubai() {
       setFaqs(defaultFaqs);
     }
   }, []);
-
-  const defaultFaqs = [
-    { q: "Do you offer printer repair services in Dubai?", a: "Yes! We provide professional printer and photocopier repair services across Dubai. Our certified technicians can fix all major brands." },
-    { q: "What is your printer repair response time in Dubai?", a: "We offer 4-hour emergency response for critical printer failures in Dubai. Standard repairs scheduled within 24 hours." },
-    { q: "Do you repair all printer brands in Dubai?", a: "Yes! We repair Canon, HP, Kyocera, Xerox, Ricoh, Sharp, Brother, Samsung, and Lexmark printers in Dubai." },
-    { q: "How much does printer repair cost in Dubai?", a: "Our printer repair services in Dubai start from AED 150 for minor issues. Complex repairs quoted after diagnosis. Free assessment for rental clients." },
-    { q: "Do you provide on-site printer repair in Dubai?", a: "Yes! Our technicians provide on-site repair services at your office in Dubai. No need to transport the equipment." },
-    { q: "What printer issues can you repair in Dubai?", a: "We repair paper jams, printing quality issues, network connectivity, software errors, mechanical failures, and more." },
-    { q: "Do you offer printer repair contracts in Dubai?", a: "Yes! Our AMC (Annual Maintenance Contract) includes unlimited repairs, preventive maintenance, and priority response." },
-    { q: "Do you offer printer repair in other areas of Dubai?", a: "We serve all Dubai areas including Business Bay, JLT, Deira, Marina, DIFC, Sheikh Zayed Road, and all other districts." },
-  ];
 
   const repairServices = [
     { icon: "build", title: "Hardware Repair", desc: "Mechanical repairs, component replacement, roller changes, fuser unit repairs" },
@@ -82,10 +85,21 @@ export default function PrinterRepairDubai() {
     }))
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Repair Services", "item": "https://www.saharaprinter.com/services/repair/" },
+      { "@type": "ListItem", "position": 3, "name": "Printer Repair Dubai", "item": "https://www.saharaprinter.com/printer-repair-dubai/" }
+    ]
+  };
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
       
@@ -110,6 +124,18 @@ export default function PrinterRepairDubai() {
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl">
                 Professional printer repair services in Dubai with 4-hour emergency response. All brands serviced including Canon, HP, Kyocera, Xerox.
               </p>
+
+              {/* AEO Block */}
+              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Printer Repair Dubai — Quick Answer</p>
+                <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                  Sahara dispatches certified technicians for printer and photocopier repair across Dubai with a{" "}
+                  <strong className="text-white">4-hour emergency response</strong> — under 2 hours for Business Bay, DIFC, and Downtown Dubai.
+                  Repairs start from <strong className="text-white">AED 150</strong>, use genuine OEM parts only, and carry a 30-day workmanship warranty.
+                  We service JLT, Marina, Deira, Sheikh Zayed Road, and every other Dubai district.
+                </p>
+              </div>
+
               <div className="flex flex-wrap gap-4">
                 <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
                   Request Repair

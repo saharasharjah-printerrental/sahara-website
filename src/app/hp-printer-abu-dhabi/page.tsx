@@ -8,16 +8,30 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
+const defaultFaqs = [
+  { q: "Do you rent HP printers in Abu Dhabi?", a: "Yes! We offer a wide range of HP printers and photocopiers for rent in Abu Dhabi, including LaserJet Enterprise, PageWide, and OfficeJet series." },
+  { q: "What HP models are available for rental in Abu Dhabi?", a: "We rent HP LaserJet Enterprise, PageWide Pro, OfficeJet Pro, and Neverstop series. From desktop printers to heavy-duty enterprise copiers." },
+  { q: "How much does HP printer rental cost in Abu Dhabi?", a: "HP printer rental in Abu Dhabi starts from AED 250/month for A4 models, with enterprise copiers from AED 500-2000/month. All include free toner." },
+  { q: "Do you provide HP printer repair in Abu Dhabi?", a: "Yes, our certified technicians provide on-site HP printer repair in Abu Dhabi with fast response time." },
+  { q: "Is HP toner included in the rental price?", a: "Yes! All our HP printer rentals in Abu Dhabi include unlimited genuine HP toner at no extra cost." },
+  { q: "Can I upgrade my HP printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your HP printer anytime during the contract." },
+  { q: "Do you offer HP printer AMC in Abu Dhabi?", a: "Yes, we offer Annual Maintenance Contracts for HP printers covering all repairs, toner, and preventive maintenance." },
+  { q: "What areas in Abu Dhabi do you serve for HP rentals?", a: "We serve all Abu Dhabi areas including Mussafah, Al Reem Island, Khalifa City, Yas Island, Corniche, and all other districts." },
+];
+
 export default function HPPrinterAbuDhabi() {
   const [settings, setSettings] = useState<any>(null);
-  const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
+  // Initialized with defaultFaqs (not []) so the server-rendered HTML — what
+  // Googlebot's first pass actually sees — already carries real FAQPage
+  // content instead of an empty mainEntity array.
+  const [faqs, setFaqs] = useState<{q: string; a: string}[]>(defaultFaqs);
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_settings");
     if (stored) {
       setSettings(JSON.parse(stored));
     }
-    
+
     const faqStored = localStorage.getItem("sahara_faqs");
     if (faqStored) {
       const allFaqs = JSON.parse(faqStored);
@@ -29,17 +43,6 @@ export default function HPPrinterAbuDhabi() {
       setFaqs(defaultFaqs);
     }
   }, []);
-
-  const defaultFaqs = [
-    { q: "Do you rent HP printers in Abu Dhabi?", a: "Yes! We offer a wide range of HP printers and photocopiers for rent in Abu Dhabi, including LaserJet Enterprise, PageWide, and OfficeJet series." },
-    { q: "What HP models are available for rental in Abu Dhabi?", a: "We rent HP LaserJet Enterprise, PageWide Pro, OfficeJet Pro, and Neverstop series. From desktop printers to heavy-duty enterprise copiers." },
-    { q: "How much does HP printer rental cost in Abu Dhabi?", a: "HP printer rental in Abu Dhabi starts from AED 250/month for A4 models, with enterprise copiers from AED 500-2000/month. All include free toner." },
-    { q: "Do you provide HP printer repair in Abu Dhabi?", a: "Yes, our certified technicians provide on-site HP printer repair in Abu Dhabi with fast response time." },
-    { q: "Is HP toner included in the rental price?", a: "Yes! All our HP printer rentals in Abu Dhabi include unlimited genuine HP toner at no extra cost." },
-    { q: "Can I upgrade my HP printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your HP printer anytime during the contract." },
-    { q: "Do you offer HP printer AMC in Abu Dhabi?", a: "Yes, we offer Annual Maintenance Contracts for HP printers covering all repairs, toner, and preventive maintenance." },
-    { q: "What areas in Abu Dhabi do you serve for HP rentals?", a: "We serve all Abu Dhabi areas including Mussafah, Al Reem Island, Khalifa City, Yas Island, Corniche, and all other districts." },
-  ];
 
   const hpModels = [
     { name: "HP LaserJet Enterprise M608", type: "B&W Enterprise", speed: "61 ppm", features: "High-volume, Security" },
@@ -82,10 +85,21 @@ export default function HPPrinterAbuDhabi() {
     }))
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Brands", "item": "https://www.saharaprinter.com/brands/" },
+      { "@type": "ListItem", "position": 3, "name": "HP Printer Abu Dhabi", "item": "https://www.saharaprinter.com/hp-printer-abu-dhabi/" }
+    ]
+  };
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
     <main className="min-h-screen bg-[#071325]">
       <Header />
 
@@ -110,6 +124,17 @@ export default function HPPrinterAbuDhabi() {
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl">
                 Premium HP printer and photocopier rental in Abu Dhabi. LaserJet, PageWide, and OfficeJet series with zero deposit and free toner.
               </p>
+
+              {/* AEO Block */}
+              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">HP Printer Rental Abu Dhabi — Quick Answer</p>
+                <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                  Sahara Office Equipments rents HP LaserJet Enterprise, PageWide Pro, and OfficeJet Pro printers and photocopiers in Abu Dhabi
+                  from <strong className="text-white">AED 250/month</strong> with zero deposit and unlimited genuine HP toner included.
+                  Our technicians serve Mussafah, Al Reem Island, Khalifa City, Yas Island, and all Abu Dhabi districts with certified HP repair and AMC support.
+                </p>
+              </div>
+
               <div className="flex flex-wrap gap-4">
                 <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
                   Get Free Quote

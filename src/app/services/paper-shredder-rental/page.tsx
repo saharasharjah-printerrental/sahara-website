@@ -67,6 +67,10 @@ const faqSchema = {
     { "@type": "Question", "name": "Is paper shredder rental better than buying in UAE?", "acceptedAnswer": { "@type": "Answer", "text": "For occasional or seasonal use, rental is significantly cheaper than buying. A good office shredder costs AED 800–3,000 to buy. Renting at AED 150/month gives you the same quality with maintenance included and no capital expenditure." } },
     { "@type": "Question", "name": "Do you deliver paper shredders to JAFZA, SAIF Zone, and free zones?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We deliver paper shredders to all UAE free zones including JAFZA (Dubai), SAIF Zone (Sharjah), DAFZA, DIFC, and Abu Dhabi free zones. Same-day delivery available for Dubai and Sharjah." } },
     { "@type": "Question", "name": "Are your shredders compliant with UAE data protection laws?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All shredders we supply meet the UAE Personal Data Protection Law (PDPL Federal Decree-Law No. 45 of 2021) requirements for secure document destruction. Cross-cut models meet DIN P-4 and micro-cut models meet DIN P-5 — the recommended standard for confidential documents." } },
+    { "@type": "Question", "name": "Where can I get a paper shredder machine in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "Sahara Office Equipments supplies and delivers paper shredder machines throughout Dubai — for rent from AED 150/month or as a one-off purchase. Free delivery and on-site setup are included across all Dubai districts, with same-day availability in most areas." } },
+    { "@type": "Question", "name": "Can I buy a paper shredder instead of renting one?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Sahara sells paper shredders outright as well as renting them. For offices that shred only occasionally, renting from AED 150/month (with maintenance and repairs included) usually works out cheaper than buying outright at AED 800–3,000+. For daily, high-volume shredding, buying can make sense — ask us for a side-by-side quote and we'll recommend whichever is cheaper for your actual usage." } },
+    { "@type": "Question", "name": "What's the difference between the paper shredders Sahara offers in the UAE?", "acceptedAnswer": { "@type": "Answer", "text": "Sahara's UAE shredder range covers three tiers: DIN P-4 cross-cut for general office documents, DIN P-5 micro-cut for confidential or HR files, and heavy-duty 30-sheet models for high-volume clear-outs. All are available to rent or buy, with free delivery across Dubai, Sharjah, and Abu Dhabi." } },
+    { "@type": "Question", "name": "Does Sahara supply paper shredders across Dubai and the wider UAE?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Sahara delivers and services paper shredders across Dubai, Sharjah, Abu Dhabi, Ajman, and Ras Al Khaimah, including free zones like JAFZA, SAIF Zone, and DIFC. Rental plans start from AED 150/month; outright purchase is also available on request." } },
   ],
 };
 
@@ -251,6 +255,13 @@ export default function PaperShredderRentalPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div className="mt-6 rounded-xl border border-[#f5be53]/20 bg-[#0d1b2e] p-5">
+              <p className="text-white font-semibold text-sm mb-1">Prefer to buy instead?</p>
+              <p className="text-[#8fa3bc] text-sm leading-relaxed">
+                Sahara sells paper shredders outright too — not just rental. If you shred daily at high volume, buying can be the cheaper option long-term.{" "}
+                <a href="tel:+971503823969" className="text-[#f5be53] font-semibold hover:underline">Call us for a quick rent-vs-buy comparison</a> based on your actual usage.
+              </p>
             </div>
           </div>
         </section>
