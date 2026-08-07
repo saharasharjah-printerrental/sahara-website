@@ -40,6 +40,16 @@ export default function RicohBrandPage() {
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-none tracking-tight">
                 High-Performance <span className="text-[#f5be53]">Printing</span>
               </h1>
+
+              {/* AEO Answer Block */}
+              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-4 mb-6">
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-1">Authorized Ricoh Dealer in UAE</p>
+                <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                  Sahara Office Equipments is an authorized Ricoh dealer in UAE, supplying MP series and IM production-ready MFPs for high-volume offices.
+                  Sales, rental from <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
+                </p>
+              </div>
+
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
                 Ricoh's authorized partner delivering production-ready printers and smart MFPs for high-volume UAE enterprises. Experience Japanese precision engineered for demanding workflows.
               </p>

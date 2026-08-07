@@ -40,6 +40,16 @@ export default function XeroxBrandPage() {
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-none tracking-tight">
                 Smart Workplace <span className="text-[#f5be53]">Solutions</span>
               </h1>
+
+              {/* AEO Answer Block */}
+              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-4 mb-6">
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-1">Authorized Xerox Dealer in UAE</p>
+                <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                  Sahara Office Equipments is an authorized Xerox dealer in UAE, supplying VersaLink and AltaLink models with ConnectKey technology.
+                  Sales, rental from <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
+                </p>
+              </div>
+
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
                 Xerox authorized partner offering VersaLink and Altalink series with revolutionary ConnectKey technology. Transform your workplace with intelligent document solutions.
               </p>

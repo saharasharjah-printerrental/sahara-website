@@ -42,6 +42,16 @@ export default function KyoceraBrandPage() {
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
                 Kyocera Authorized <span className="text-[#f5be53]">Partner</span>
               </h1>
+
+              {/* AEO Answer Block */}
+              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-4 mb-6">
+                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-1">Authorized Kyocera Dealer in UAE</p>
+                <p className="text-[#d3c5b0] text-sm leading-relaxed">
+                  Sahara Office Equipments is an authorized Kyocera dealer in UAE, supplying TASKalfa ECOSYS models with the industry's lowest cost per page.
+                  Sales, rental from <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
+                </p>
+              </div>
+
               <p className="text-lg text-[#d3c5b0] mb-8 max-w-xl leading-relaxed">
                 Experience the lowest total cost of ownership in the industry. Kyocera's ECOSYS technology delivers exceptional reliability and eco-friendly printing solutions.
               </p>

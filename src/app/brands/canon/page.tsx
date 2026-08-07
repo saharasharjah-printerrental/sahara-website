@@ -58,6 +58,16 @@ export default function CanonBrandPage() {
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-none tracking-tight">
             Canon <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f5be53] to-[#c8962e]">Elite</span> <br/>Business Imaging
           </h1>
+
+          {/* AEO Answer Block */}
+          <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-4 mb-6 max-w-2xl">
+            <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-1">Authorized Canon Dealer in UAE</p>
+            <p className="text-[#d3c5b0] text-sm leading-relaxed">
+              Sahara Office Equipments is an authorized Canon dealer in UAE, supplying imageRUNNER ADVANCE and imageCLASS models with uniFLOW workflow software.
+              Sales, rental from <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
+            </p>
+          </div>
+
           <p className="text-xl text-[#d3c5b0] max-w-2xl mb-10 leading-relaxed">
             Sahara is a premier Canon partner in the UAE, delivering unparalleled document workflows and precision engineering for the modern executive landscape.
           </p>
