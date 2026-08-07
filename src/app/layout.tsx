@@ -337,7 +337,14 @@ function isManagedAnalyticsScript(script: ParsedScript): boolean {
   return /gtag\s*\(\s*['"]config['"]|googletagmanager\.com\/gtm\.js|GTM-[A-Z0-9]+/i.test(script.inline);
 }
 
+// Every page render goes through this (root layout), so a warm-isolate
+// in-memory cache avoids a blocking D1 round trip on every single request.
+// Config is admin-edited and infrequent, so a short TTL is safe.
+let seoConfigCache: { data: ServerSEOConfig | null; expires: number } | null = null;
+const SEO_CONFIG_TTL_MS = 5 * 60 * 1000;
+
 async function getSEOConfig(): Promise<ServerSEOConfig | null> {
+  if (seoConfigCache && seoConfigCache.expires > Date.now()) return seoConfigCache.data;
   try {
     const db = (getRequestContext().env as any).DB;
     if (!db) return null;
@@ -349,8 +356,10 @@ async function getSEOConfig(): Promise<ServerSEOConfig | null> {
       for (const k of ["googleAnalyticsId", "googleAnalytics4Id", "googleTagManagerId", "microsoftClarityId", "metaPixelId", "hotjarId"] as const) {
         if (typeof parsed[k] === "string") (parsed as any)[k] = (parsed[k] as string).trim();
       }
+      seoConfigCache = { data: parsed, expires: Date.now() + SEO_CONFIG_TTL_MS };
       return parsed;
     }
+    seoConfigCache = { data: null, expires: Date.now() + SEO_CONFIG_TTL_MS };
   } catch {}
   return null;
 }
