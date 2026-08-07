@@ -223,14 +223,14 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-6">Our Services</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><Link href="/services/printer-rental" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
-              <li><Link href="/services/photocopier-rental" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
-              <li><Link href="/services/paper-shredder-rental" className="hover:text-[#f5be53] transition-colors">Paper Shredder Rental</Link></li>
-              <li><Link href="/services/papercut-print-management" className="hover:text-[#f5be53] transition-colors">PaperCut Print Management</Link></li>
-              <li><Link href="/services/amc" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
-              <li><Link href="/services/repair" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
-              <li><Link href="/services/toner" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
-              <li><Link href="/services/plotter-maintenance" className="hover:text-[#f5be53] transition-colors">Plotter Maintenance</Link></li>
+              <li><Link href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
+              <li><Link href="/services/photocopier-rental/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
+              <li><Link href="/services/paper-shredder-rental/" className="hover:text-[#f5be53] transition-colors">Paper Shredder Rental</Link></li>
+              <li><Link href="/services/papercut-print-management/" className="hover:text-[#f5be53] transition-colors">PaperCut Print Management</Link></li>
+              <li><Link href="/services/amc/" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
+              <li><Link href="/services/repair/" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
+              <li><Link href="/services/toner/" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
+              <li><Link href="/services/plotter-maintenance/" className="hover:text-[#f5be53] transition-colors">Plotter Maintenance</Link></li>
               <li><Link href="/copier-lease-uae" className="hover:text-[#f5be53] transition-colors">Copier Lease UAE</Link></li>
             </ul>
           </div>
@@ -296,13 +296,13 @@ export default function Footer() {
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/copier-lease-uae" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Lease UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/services/paper-shredder-rental" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Paper Shredder Rental UAE</Link>
+            <Link href="/services/paper-shredder-rental/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Paper Shredder Rental UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/services/papercut-print-management" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">PaperCut Print Management UAE</Link>
+            <Link href="/services/papercut-print-management/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">PaperCut Print Management UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/services/toner" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Toner Suppliers Dubai</Link>
+            <Link href="/services/toner/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Toner Suppliers Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/services/amc" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer AMC UAE</Link>
+            <Link href="/services/amc/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer AMC UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/brands/canon" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Rental</Link>
             <span className="text-slate-700 text-xs">|</span>

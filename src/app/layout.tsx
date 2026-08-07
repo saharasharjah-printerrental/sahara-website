@@ -3,6 +3,7 @@ import "./globals.css";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { Sora, Manrope } from "next/font/google";
 import { getGoogleReviewsData } from "@/lib/google-reviews";
+import { headers } from "next/headers";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -381,14 +382,25 @@ export default async function RootLayout({
   // is unreachable. Only applies when no admin-stored organizationSchema
   // override is set (cfg.organizationSchema), same as every other field here.
   const googleReviews = await getGoogleReviewsData();
-  const organizationSchemaWithLiveRating = {
-    ...organizationSchema,
-    aggregateRating: {
-      ...organizationSchema.aggregateRating,
-      ratingValue: googleReviews.rating,
-      reviewCount: googleReviews.reviewCount,
-    },
-  };
+
+  // Google treats site-wide review-rating markup (a business rating itself, injected on
+  // every page) as self-serving and structured-data-policy-ineligible. Scope aggregateRating
+  // to the homepage and /about — where the rating is the page's actual subject — and omit it
+  // everywhere else, while keeping the Organization/LocalBusiness block itself global.
+  const hdrs = await headers();
+  const pathname = hdrs.get("x-pathname") || "/";
+  const showAggregateRating = pathname === "/" || pathname.startsWith("/about");
+  const { aggregateRating: _omittedRating, ...organizationSchemaBase } = organizationSchema;
+  const organizationSchemaWithLiveRating = showAggregateRating
+    ? {
+        ...organizationSchemaBase,
+        aggregateRating: {
+          ...organizationSchema.aggregateRating,
+          ratingValue: googleReviews.rating,
+          reviewCount: googleReviews.reviewCount,
+        },
+      }
+    : organizationSchemaBase;
 
   return (
     <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>

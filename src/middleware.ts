@@ -57,7 +57,11 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
   const pathname = request.nextUrl.pathname;
   const isAdmin  = pathname.startsWith('/admin');
 
-  const response = NextResponse.next();
+  // Forward the pathname to Server Components (read via headers() in layout.tsx) —
+  // used to scope site-wide review-rating schema to the homepage/about only.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-pathname', pathname);
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
 
   // ── Security headers ──────────────────────────────────────────────────────
   response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');

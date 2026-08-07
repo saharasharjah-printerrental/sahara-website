@@ -31,14 +31,14 @@ const brands = [
 ];
 
 const services = [
-  { name: "Printer Rental", href: "/services/printer-rental", icon: Print },
-  { name: "Photocopier Rental", href: "/services/photocopier-rental", icon: CopyAll },
-  { name: "Paper Shredder Rental", href: "/services/paper-shredder-rental", icon: Article },
-  { name: "PaperCut Print Management", href: "/services/papercut-print-management", icon: SettingsSuggest },
-  { name: "Annual Maintenance (AMC)", href: "/services/amc", icon: Handyman },
-  { name: "Printer Repair", href: "/services/repair", icon: Build },
-  { name: "Toner & Spare Parts", href: "/services/printer-spare-parts", icon: Inventory },
-  { name: "Plotter Maintenance", href: "/services/plotter-maintenance", icon: ShoppingCart },
+  { name: "Printer Rental", href: "/services/printer-rental/", icon: Print },
+  { name: "Photocopier Rental", href: "/services/photocopier-rental/", icon: CopyAll },
+  { name: "Paper Shredder Rental", href: "/services/paper-shredder-rental/", icon: Article },
+  { name: "PaperCut Print Management", href: "/services/papercut-print-management/", icon: SettingsSuggest },
+  { name: "Annual Maintenance (AMC)", href: "/services/amc/", icon: Handyman },
+  { name: "Printer Repair", href: "/services/repair/", icon: Build },
+  { name: "Toner & Spare Parts", href: "/services/printer-spare-parts/", icon: Inventory },
+  { name: "Plotter Maintenance", href: "/services/plotter-maintenance/", icon: ShoppingCart },
 ];
 
 // Mobile bottom nav - direct link items (3 icons keeps bar uncluttered)

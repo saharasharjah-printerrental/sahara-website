@@ -99,7 +99,7 @@ export default function PaperCutPage() {
             <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
               <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
               <span className="mx-2">/</span>
-              <a href="/services/printer-rental" className="hover:text-[#f5be53] transition-colors">Services</a>
+              <a href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Services</a>
               <span className="mx-2">/</span>
               <span className="text-[#f5be53]">PaperCut Print Management</span>
             </nav>
@@ -286,13 +286,13 @@ export default function PaperCutPage() {
             <h2 className="text-xl font-bold text-white mb-6">Related Services &amp; Products</h2>
             <div className="flex flex-wrap gap-3">
               {[
-                { href: "/services/printer-rental", label: "Printer Rental UAE" },
-                { href: "/services/amc", label: "Annual Maintenance (AMC)" },
-                { href: "/services/repair", label: "Printer Repair Dubai" },
+                { href: "/services/printer-rental/", label: "Printer Rental UAE" },
+                { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
+                { href: "/services/repair/", label: "Printer Repair Dubai" },
                 { href: "/brands/kyocera", label: "Kyocera Printers UAE" },
                 { href: "/brands/canon", label: "Canon Printers UAE" },
                 { href: "/brands/ricoh", label: "Ricoh Printers UAE" },
-                { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental" },
+                { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental" },
               ].map((l) => (
                 <a key={l.href} href={l.href} className="text-sm text-[#f5be53] bg-[#f5be53]/10 border border-[#f5be53]/20 px-4 py-2 rounded-full hover:bg-[#f5be53]/20 transition-colors">
                   {l.label}

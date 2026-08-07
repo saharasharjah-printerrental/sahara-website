@@ -690,11 +690,11 @@ export default function PrinterRentalPage() {
           <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Related Services</p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { href: "/services/photocopier-rental", label: "Photocopier Rental" },
-              { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental" },
-              { href: "/services/amc", label: "Annual Maintenance (AMC)" },
-              { href: "/services/repair", label: "Printer Repair" },
-              { href: "/services/toner", label: "Toner & Spare Parts" },
+              { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+              { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental" },
+              { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
+              { href: "/services/repair/", label: "Printer Repair" },
+              { href: "/services/toner/", label: "Toner & Spare Parts" },
             ].map((link) => (
               <Link
                 key={link.href}

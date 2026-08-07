@@ -255,6 +255,10 @@ export const SERVICE_BLOG_MAP: Record<string, string[]> = {
   ],
   "paper-shredder-rental": [
     "paper-shredder-rental-uae-when-it-beats-buying",
+    "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
+    "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
+    "uae-pdpl-document-destruction-compliance-guide",
+    "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
   ],
   "papercut-print-management": [
     "papercut-print-management-uae-offices",
