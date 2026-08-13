@@ -1,5 +1,7 @@
-"use client";
-
+// Deliberately NOT a client component. `export const runtime` is ignored in
+// client components, which left Next's internal /_not-found route off the edge
+// runtime and failed the Cloudflare Pages build. This file uses no client-only
+// APIs, so it renders fine on the server.
 export const runtime = "edge";
 
 import Link from "next/link";
