@@ -6,12 +6,23 @@ export const runtime = 'edge';
 
 const BASE = SITE_URL;
 
-// Stagger dates: this week vs this month for SEO variety
-const thisWeek = new Date();
-const thisMonth = new Date();
-thisMonth.setDate(1); // First of month
+// Parse a D1 timestamp, falling back to the request time when the row has no
+// usable date. Never returns an invalid Date — an unparseable value would
+// serialise as 1970-01-01 in the sitemap.
+function rowDate(value: unknown, fallback: Date): Date {
+  if (typeof value !== 'string' || !value) return fallback;
+  const d = new Date(value.includes('T') ? value : value.replace(' ', 'T') + 'Z');
+  return Number.isNaN(d.getTime()) ? fallback : d;
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Computed per-request, NOT at module scope. Cloudflare Workers freeze the
+  // clock during module initialisation, so a module-scope `new Date()` returns
+  // the epoch — which is why every URL previously carried lastmod 1970-01-01.
+  const thisWeek = new Date();
+  const thisMonth = new Date();
+  thisMonth.setDate(1);
+
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE}/`,                              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 1.0 },
     { url: `${BASE}/services/printer-rental/`,      lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
@@ -19,7 +30,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/services/repair/`,              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/services/amc/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/services/plotter-maintenance/`, lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },
-    { url: `${BASE}/services/toner/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
+    // /services/toner/ is intentionally absent — it 301s to
+    // /services/printer-spare-parts/ and must not be advertised as canonical.
     { url: `${BASE}/services/printer-spare-parts/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/services/paper-shredder-rental/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/services/papercut-print-management/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.75 },
@@ -40,6 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/brands/epson/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/brands/lexmark/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/brands/samsung/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/brands/konica-minolta/`,        lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/printer-repair-dubai/`,          lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
     { url: `${BASE}/canon-printer-dubai/`,          lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/bravo-card-printers-uae/`,      lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
@@ -52,44 +65,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/rental-calculator/`,            lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
   ];
 
-  // Dynamic: blog posts — query D1 directly (no HTTP fetch, no redirect issues)
-  let blogRoutes: MetadataRoute.Sitemap = [];
-  try {
-    const db = (getRequestContext().env as any).DB;
-    if (db) {
-      const br = await db.prepare("SELECT slug FROM blogs WHERE isActive = 1").all();
-      blogRoutes = ((br?.results ?? []) as any[])
-        .map((r) => r.slug)
-        .filter(Boolean)
-        .map((slug: string) => ({
-          url: `${BASE}/blogs/${slug}/`,
-          lastModified: thisWeek,
-          changeFrequency: 'weekly' as const,
-          priority: 0.7,
-        }));
-    }
-  } catch (err) {
-    console.error('sitemap: failed to load blog routes from D1', err);
+  // Dynamic routes come from D1. If that read fails we throw rather than
+  // silently shipping a sitemap that omits every blog post and product —
+  // a 500 makes Google retry and keep the last good sitemap, whereas a
+  // quietly truncated sitemap looks authoritative and is not.
+  const db = (getRequestContext().env as any).DB;
+  if (!db) {
+    throw new Error('sitemap: D1 binding unavailable — refusing to emit a partial sitemap');
   }
 
-  // Dynamic: product detail pages — query D1 directly
+  let blogRoutes: MetadataRoute.Sitemap = [];
   let productRoutes: MetadataRoute.Sitemap = [];
   try {
-    const db = (getRequestContext().env as any).DB;
-    if (db) {
-      const pr = await db.prepare("SELECT slug FROM products WHERE is_active = 1").all();
-      productRoutes = ((pr?.results ?? []) as any[])
-        .map((r) => r.slug)
-        .filter(Boolean)
-        .map((slug: string) => ({
-          url: `${BASE}/products/${slug}/`,
-          lastModified: thisWeek,
-          changeFrequency: 'monthly' as const,
-          priority: 0.65,
-        }));
-    }
+    const br = await db.prepare('SELECT slug, publishedAt, createdAt FROM blogs WHERE isActive = 1').all();
+    blogRoutes = ((br?.results ?? []) as any[])
+      .filter((r) => r.slug)
+      .map((r) => ({
+        url: `${BASE}/blogs/${r.slug}/`,
+        lastModified: rowDate(r.publishedAt ?? r.createdAt, thisWeek),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      }));
+
+    const pr = await db.prepare('SELECT slug, created_at FROM products WHERE is_active = 1').all();
+    productRoutes = ((pr?.results ?? []) as any[])
+      .filter((r) => r.slug)
+      .map((r) => ({
+        url: `${BASE}/products/${r.slug}/`,
+        lastModified: rowDate(r.created_at, thisMonth),
+        changeFrequency: 'monthly' as const,
+        priority: 0.65,
+      }));
   } catch (err) {
-    console.error('sitemap: failed to load product routes from D1', err);
+    console.error('sitemap: D1 query failed', err);
+    throw err;
   }
 
   return [...staticRoutes, ...blogRoutes, ...productRoutes];
