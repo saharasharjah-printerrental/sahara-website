@@ -39,13 +39,18 @@ const DEFAULT_FAQS: FAQItem[] = [
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Printer Rental UAE | AED 250/mo | Zero Deposit | Sahara",
-    description: "Printer rental in the UAE from AED 250/month. Zero deposit, unlimited OEM toner, full maintenance. Canon, Kyocera, HP. Serving Dubai, Abu Dhabi, Sharjah, RAK, Fujairah & Al Ain. ☎ +971503823969",
-    keywords: "printer rental uae, photocopier rental dubai, copier lease uae, copier rental dubai, copier leasing uae, copier on rent uae, printer rental sharjah, zero deposit printer rental uae, canon printer uae, kyocera photocopier uae",
+    // Deliberately scoped to PRINTERS only. This page previously targeted
+    // copier and photocopier keywords as well, which caused Google to rank it
+    // for "photocopier rental in dubai" ahead of /services/photocopier-rental/
+    // — the purpose-built page, left stranded at position 48 on 1,863
+    // impressions and 1 click. Copier terms belong to that page, not this one.
+    title: "Printer Rental UAE | A4 & A3 Printers from AED 250/mo | Sahara",
+    description: "Office printer rental across the UAE from AED 250/month. Zero deposit, unlimited OEM toner, full maintenance, 4-hour response. Canon, Kyocera, HP, Brother. Dubai, Abu Dhabi, Sharjah. ☎ +971503823969",
+    keywords: "printer rental uae, office printer rental dubai, printer rental sharjah, printer rental abu dhabi, a4 printer rental uae, laser printer rental dubai, zero deposit printer rental uae, canon printer rental uae, hp printer rental dubai, brother printer rental uae, monthly printer rental uae",
     openGraph: {
-      title: "Printer Rental UAE | Sahara Office Equipments",
-      description: "Printer and photocopier rental across UAE from AED 250/month. Zero deposit, free toner, full maintenance. Canon, Kyocera, HP, Ricoh. Dubai, Sharjah, Abu Dhabi.",
-      images: [{ url: "https://www.saharaprinter.com/images/og-sahara-printer-rental-dubai-uae.jpg", width: 1200, height: 630, alt: "Printer Rental UAE Dubai — Sahara Office Equipments. Professional Canon, Kyocera, HP enterprise photocopiers on flexible monthly rental with zero deposit and free toner." }],
+      title: "Printer Rental UAE | From AED 250/mo | Sahara Office Equipments",
+      description: "Office printer rental across the UAE from AED 250/month. Zero deposit, free toner, full maintenance, 4-hour response. Canon, Kyocera, HP, Brother.",
+      images: [{ url: "https://www.saharaprinter.com/images/og-sahara-printer-rental-dubai-uae.jpg", width: 1200, height: 630, alt: "Printer Rental UAE Dubai — Sahara Office Equipments. Canon, Kyocera and HP office printers on flexible monthly rental with zero deposit and free toner." }],
       url: "https://www.saharaprinter.com/services/printer-rental/",
       siteName: "Sahara Office Equipments",
       locale: "en_AE",
@@ -99,7 +104,12 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Printer Rental Services UAE",
-  "alternateName": ["Photocopier Rental Dubai", "Copier Rental UAE", "Copier Leasing Dubai"],
+  // alternateName previously claimed "Photocopier Rental Dubai", "Copier Rental UAE"
+  // and "Copier Leasing Dubai". That is an explicit machine-readable claim on the
+  // terms /services/photocopier-rental/ is built for, and contributed to Google
+  // ranking this page for "photocopier rental in dubai" while that one sat at
+  // position 48. Copier naming now belongs solely to the photocopier page.
+  "alternateName": ["Office Printer Rental UAE", "Printer Leasing Dubai", "Printer Hire Sharjah"],
   "description": "Flexible printer and photocopier rental services in Dubai, Sharjah, Abu Dhabi and across UAE. Zero deposit, unlimited toner, full maintenance included. Plans from AED 250/month.",
   "provider": {
     "@type": "LocalBusiness",

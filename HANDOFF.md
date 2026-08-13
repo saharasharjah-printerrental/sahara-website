@@ -1,35 +1,343 @@
-# Handoff — SEO Trust/PAA/AEO session, resumed 2026-08-07
+# HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
-Previous session shipped commits `bb33bbe`, `0af04c7` (Google reviews, PAA FAQs, AEO blocks — see memory `feedback_seo_trust_paa_2026_08.md` for full detail). This resumption used Clarity MCP + GSC MCP to check in on those fixes and found/fixed one unrelated performance bug.
+**Status as of 2026-08-13 (updated after session 2). Execution has begun — see §0 for what is already done.**
 
-## What happened this resumption
+---
 
-1. **Clarity MCP confirmed working**, project ID `rwtan9eo0w` matches the admin-configured `seo_config.microsoftClarityId` — legitimate real sessions, not a broken snippet. User chose to skip token rotation for now (token was pasted into last session's transcript) — still worth doing eventually:
-   ```
-   claude mcp remove clarity-mcp-server -s user
-   claude mcp add clarity-mcp-server -s user -- clarity-mcp-server --clarity_api_token=<NEW_TOKEN>
-   ```
-2. **The planned rage-click/dead-click audit on the 4 target pages couldn't run** — not enough Clarity session volume yet. `printer-rental-dubai`, `services/printer-rental`, `hp-printer-abu-dhabi` had 0 sessions in the trailing 30 days; `printer-repair-dubai`/`services/repair` each had one ~1s bounce. Site-wide total was only 11 sessions/30 days vs. ~80 GSC organic clicks in the same window (plausible ad-blocker under-tracking, not a broken install).
-3. **GSC position check** (2026-08-07, all still page 3-6 — too soon after the `bb33bbe`/`0af04c7` fixes to expect movement):
-   - printer-rental-dubai: pos 45.2, 959 impr, 2 clicks
-   - hp-printer-abu-dhabi: pos 56.4, 446 impr, 1 click
-   - services/printer-rental: pos 37.6, 900 impr, 2 clicks
-   - services/repair: pos 25.1, 864 impr, 4 clicks
-   - printer-repair-dubai: pos 50.6, 204 impr, 0 clicks
-4. **Found and fixed a real perf bug via Clarity session replay**: real sessions showed homepage LCP 2.8s-5.2s, page-load times up to 8s. Root cause: `getSEOConfig()` in `src/app/layout.tsx` ran an **uncached D1 query on every single page request** (root layout, `runtime='edge'`, no caching anywhere in the codebase for it). Fixed with a module-level in-memory cache (`seoConfigCache`, 5-min TTL) — typechecks clean, **not yet committed/deployed**.
-   - Same pattern exists in `getGoogleReviewsData()` (`src/lib/google-reviews.ts`) — D1 read on every layout render, no TTL cache in front of it. Not fixed this round; worth doing if the layout.tsx fix doesn't fully resolve the LCP numbers.
+## 0. COMPLETED — do not redo
 
-## Still open / needs user action
+### ALL CODE FIXES DEPLOYED AND VERIFIED LIVE (2026-08-13, commit 993bb2c)
 
-1. ~~Commit + deploy the layout.tsx caching fix~~ — **done.** Committed as `0647ac8` (`fix(perf): cache SEO config lookup to avoid per-request D1 query`) and deployed 2026-08-07 alongside the paper-shredder-rental page rebuild (Fellowes model cards, `/mo` removal, DIN table→PDPL fold-in), the `aggregateRating` schema scoping fix (homepage/about only, via `x-pathname` middleware header — was firing site-wide before), and a repo-wide internal-link trailing-slash fix. See memory `feedback_seo_remediation_2026_08.md` and the shredder-page plan for full detail.
-2. **`GOOGLE_PLACES_API_KEY` + `GOOGLE_PLACE_ID`** in Cloudflare Dashboard → Pages → Settings → Environment Variables — not set yet.
-3. **Clarity token rotation** — deferred by user, see above.
-4. **Broader AEO rollout beyond brand pages**: `/canon-printer-dubai/`, RAK/Al Ain/Fujairah city pages, `/contact/`, `/products/*` still lack AEO blocks — deprioritized.
-5. **Trade license / TRN on `/about`** — needs the real number from the user.
-6. Consider the same in-memory-cache fix for `getGoogleReviewsData()` if LCP is still poor after the layout.tsx fix lands.
+Nine commits on `main`. Verified against production, not just locally:
 
-## Verification next resume
+| Page | Before | After (live) |
+|---|---|---|
+| `/brands/sharp/` | 12 words, no `<h1>` | 275, `Sharp Printers UAE` |
+| `/brands/epson/` | 12 words, no `<h1>` | 270, `Epson Printers UAE` |
+| `/brands/konica-minolta/` | 13 words, no `<h1>` | 310, `Konica Minolta Printers UAE` |
+| `/products/altalink-c8170/` | ~290 | 835 + FAQPage schema |
+| `/products/taskalfa-6003i-series/` | ~290 | 864 + FAQPage schema |
+| `/products/` | 0 product links | 9 links + 3 pagination hrefs |
+| `/our-clients/` | 69 | 519 |
+| `/services/printer-spare-parts/` | 110 | 458 |
+| `/contact/` | 134 | 334 |
+| sitemap | 70 URLs all `lastmod` 1970 | 0 epoch dates, 21 real values, 18 products + 15 blogs |
 
-- Re-run the Clarity rage-click/dead-click audit once session volume has grown past a handful per page — check total site session count first (`query-analytics-dashboard`, "Total session count across the entire site in the last 30 days") before trusting per-page numbers.
-- `mcp__gscServer__get_advanced_search_analytics` on the 5 pages above at +2-4 weeks from 2026-08-07 — expect average position moving off 25-56.
-- Once the layout.tsx fix is deployed, pull fresh Clarity sessions and compare LCP/page-load-time against the 2.8s-8s baseline recorded 2026-08-07.
+Sitemap resubmitted to GSC 2026-08-13 08:04.
+
+### THE BUILD WAS BROKEN FOR 6 DAYS — root cause found and fixed
+
+**Every Cloudflare Pages deploy from 2026-08-07 to 2026-08-13 failed.** Production was serving `0647ac8` from five days earlier. Commit `5381646` — the shredder page rebuild, five blog posts, schema scoping — never went live until today.
+
+Cause: `5381646` added `import { headers } from "next/headers"` to the **root layout** to scope `aggregateRating`. Calling `headers()` in a root layout forces Next to render the internal `/_not-found` route dynamically, and Next assigns that auto-generated route the default `nodejs` runtime. `@cloudflare/next-on-pages` rejects any non-edge route:
+
+```
+ERROR: The following routes were not configured to run with the Edge Runtime:
+  - /_not-found
+```
+
+Fix (`993bb2c`): layout emits Organization schema with **no** `aggregateRating`; `src/components/OrganizationRating.tsx` attaches the rating on the homepage and `/about` only, as a separate JSON-LD node referencing the same `@id` so Google merges them. **Never reintroduce `headers()` in the root layout** — there is a comment at the call site saying so.
+
+Related, worth planning: `@cloudflare/next-on-pages@1.13.16` is **deprecated** (migrate to the OpenNext adapter — it predates Next 15, which is why this was so fragile), and Next 15.5.2 carries CVE-2025-66478.
+
+Note: CI runs `npx @cloudflare/next-on-pages@1` directly, **not** `npm run build:cf`. The `build:cf` script in package.json is broken as written (`--skip-build` skips the `vercel build` that creates `.vercel/output/config.json`) but is unused by CI, so it was left alone.
+
+### Corrected finding — the "4 dead blog slugs" were NOT dead
+
+An earlier analysis flagged 4 slugs in `BLOG_LINK_MAP` as dead. **All four return HTTP 200 in production.** They live in D1 via the admin dashboard and simply are not in the seed migrations or the `blogContent.ts` fallback. Removing them would have broken working internal links into indexed posts. They are untouched.
+
+### Brand SSR bug — detail
+
+`src/components/BrandContentClient.tsx`. The component initialised state to `null` and returned `Loading...` until a `useEffect` ran; `useEffect` never runs server-side, so crawlers received a contentless page. State was only a render gate — `data` was recomputed from module-scope `brandData` anyway.
+
+Changes made:
+- State initialises synchronously from `brandData[slug]` (falls back to `defaultBrand`).
+- localStorage CMS override moved to a post-hydration layer. This also fixed a **latent bug**: the old code set state from localStorage but then rendered `brandData`, so admin CMS edits never displayed.
+- Removed the dead client-side redirect (`brands/[slug]/page.tsx:189` already calls `notFound()`).
+- Removed the now-unused `useRouter` / `useParams` import.
+- H1 changed from `{name} Partner` to `{name} Printers UAE` to match the title tag and target query.
+
+Verified against a local production server:
+
+| Page | Before | After |
+|---|---|---|
+| `/brands/sharp/` | 12 words, no `<h1>` | 274 words, `<h1>Sharp Printers UAE</h1>` |
+| `/brands/epson/` | 12 words, no `<h1>` | 269 words, `<h1>Epson Printers UAE</h1>` |
+| `/brands/konica-minolta/` | 13 words, no `<h1>` | 309 words, `<h1>Konica Minolta Printers UAE</h1>` |
+
+Deployed and verified live — see the table above.
+
+### GBP primary category — FIXED (live, by the user)
+
+Was `Printer repair service` PRIMARY, which told Google the business is a repair shop while the site and revenue are rental. Now:
+
+| Category | Status |
+|---|---|
+| **Office equipment rental company** | **PRIMARY** |
+| Printer repair service | secondary (retained — protects position 2.4 on "kyocera printer repair in dubai") |
+| Commercial printer | secondary |
+| Copier repair service | secondary |
+| Printing Equipment Supplier | secondary |
+| IT support and services | secondary |
+
+Public knowledge panel still displayed the old label at time of writing — normal propagation lag, saved record is correct.
+
+### GBP service areas — ADDED (live, by the user)
+
+20 service areas covering all seven emirates plus free zones. **Set expectations correctly: service areas are not a ranking lever.** Local pack ranking is driven by relevance, prominence, and proximity of the searcher to the verified address. Service areas affect display and marginally relevance; they do not extend ranking radius. This will not win Dubai.
+
+Two cleanups still outstanding: remove `Khalifah City - Khalifa City 2 - Emirate of Umm Al Quwain` (Khalifa City is in Abu Dhabi — wrong-emirate entry is a trust-signal problem), and ~12 of the 20 slots are redundant sub-areas already covered by their emirate-level entries.
+
+### Tooling note — GBP browser automation is UNSAFE, do not retry
+
+The GBP edit dialog is inside an iframe the accessibility tree cannot read, and the viewport resizes between actions so coordinate clicks go stale. During an attempt, stray input silently altered two additional-category fields to "Toner Cartridge S..." and "print management software". Caught at the "Discard changes?" prompt and discarded; nothing was saved. **GBP edits must be done by hand.** Reading the profile via browser automation is fine.
+
+---
+
+## 1. What this engagement is
+
+Apply the HQ Digital **Non-Brand Ranking Dissection & Scale System** (`C:\Users\SAHARA\Downloads\HQ-Digital-Non-Brand-Ranking-Dissection-and-Scale-Prompts.pdf`, 16pp, fully parsed) to saharaprinter.com, then execute the resulting fixes.
+
+The system is two prompts on the RCTCO framework:
+- **Prompt 1 — Dissection.** Diagnoses *why* the site already ranks. 7 stages, 20 Ranking Reason Codes (R01–R20), 8 Leak Codes (L1–L8). Emits a machine-readable `=== DISSECTION HANDOFF v1.0 ===` block. Diagnoses only — no recommendations.
+- **Prompt 2 — Scale.** Hard-gated on that handoff block. Produces blueprint, scored surface inventory, Wave 1 (≤12 assets), 30/60/90 plan, AEO layer.
+
+**Governing rule of the method: never invent data.** No estimated search volumes, no guessed backlink counts. Anything unverifiable is marked "needs check" with the exact check named. This rule is why several items below are deliberately left open rather than answered.
+
+To extract the PDF again: PyMuPDF (`import fitz`) is available at `C:\Python314\python.exe`. `pdftotext`/`pdftoppm` are not installed. Extracted text is at the session scratchpad as `hq-doc.txt`.
+
+---
+
+## 2. The headline problem
+
+**8,007 impressions → 87 clicks in 28 days. CTR 1.09%. Average position 23.0.**
+
+Google shows this site constantly and almost nobody clicks. Brand search is negligible (`sahara office equipments` = 4 clicks / 36 impressions), so **>95% of traffic is already non-brand** — the site has no brand-search cushion.
+
+GSC property: `sc-domain:saharaprinter.com` (MCP connected, siteOwner). 90-day window pulled: 2026-05-14 → 2026-08-12.
+
+---
+
+## 3. Verified findings
+
+All confirmed against the GSC API and live HTTP fetches on 2026-08-12/13.
+
+### Critical
+
+| # | Finding | Evidence |
+|---|---|---|
+| 1 | **3 brand pages server-render `Loading...` only** — `/brands/sharp/`, `/brands/epson/`, `/brands/konica-minolta/`: 12–13 words, **no `<h1>`** | Live fetch. The other 8 brand pages render 178–272 words correctly. `/brands/sharp/` is the site's #3 page — position 11.9, 284 impressions, 4 clicks — ranking on 12 words |
+| 2 | **13 of 18 product pages not indexed** | GSC: "Discovered – currently not indexed" or "URL is unknown to Google" |
+| 3 | Root cause of #2: `/products/` renders 61 words SSR with an empty grid — `ProductsClient` fetches client-side, so there is **no crawlable link path into any product URL** | Live fetch + `src/app/products/page.tsx` |
+
+Brand SSR word counts measured live: brother 257, canon 256, kyocera 272, lexmark 240, samsung 232, hp 220, ricoh 178 — versus **sharp 12, epson 12, konica-minolta 13**. Working pages carry metadata in a sibling `layout.tsx`; sharp/epson carry it in `page.tsx`; konica-minolta resolves via `brands/[slug]/page.tsx`. Fix at source in `src/components/BrandContentClient.tsx` (initialises state to `null`, returns `Loading...` until `useEffect` runs) — not by patching three routes.
+
+### High
+
+- `/services/toner/` declares canonical to `/services/printer-spare-parts/` yet is itself indexed — GSC canonical conflict.
+- Sitemap `lastmod` = `1970-01-01T00:00:00.000Z` on all 70 URLs.
+- `src/app/sitemap.ts` pulls blog/product URLs from D1 inside a silent `try/catch` returning `[]` — a D1 blip ships a sitemap with zero blog and product URLs, with no error surface.
+- `/our-clients/` unknown to Google, 69 words SSR.
+- Other thin pages: `/services/printer-spare-parts/` 110 words, `/contact/` 134, `/rental-calculator/` 253.
+
+### Medium / Low
+
+- Nav and footer `href`s omit the trailing slash while `trailingSlash: true` → sitewide 308 layer (`Header.tsx`, `MobileNav.tsx`, `Footer.tsx`, `lib/internalLinks.ts`).
+- `/brands/konica-minolta/` absent from sitemap, 1 inbound link.
+- Brand-page breadcrumb JSON-LD points to `/brands/`, which 301s to `/products/`.
+- 4 dead slugs in `BLOG_LINK_MAP` (`src/lib/internalLinks.ts`).
+
+### ALREADY FIXED — do not re-fix
+
+GSC reports brand pages with `user_canonical: https://www.saharaprinter.com/` (the homepage). **This is a stale 2026-07-23 crawl.** Live HTML now returns correct self-canonicals. The earlier canonical remediation worked; Google simply has not recrawled. This needs a **recrawl request**, not a code change.
+
+---
+
+## 4. The strategic finding — this is the important one
+
+The site **ranks top-10 where nobody competes, and 20–50 wherever real competitors exist.**
+
+**Winning (R01 competition vacuum + R12 long-tail specificity):**
+
+| Query | Position |
+|---|---|
+| paper shredder for rent near me / machine on rent / heavy duty for rent | 1–4 |
+| shredder rental · shredding service · shredding machine on rent near me | 1 |
+| copier leasing in sharjah | 2.6 |
+| kyocera printer repair in dubai | 2.4 |
+| plotter maintenance | 5.3 |
+| office equipment rental sharjah | 7.6 |
+| photocopier rental in sharjah | 7.7 |
+
+**Losing (contested head terms):**
+
+| Query | Impressions | Position |
+|---|---|---|
+| printer rental in dubai | 776 | 24.8 |
+| printer rental dubai | 463 | 21.4 |
+| photocopier rental in dubai | 299 | 23.5 |
+| photocopier rental | 242 | 31.5 |
+| photocopier leasing | 136 | 27.5 |
+
+**There is no evidence that R02 (domain authority) or R03 (page-level links) is working for this site at all.** Content and technical fixes will not move position 24 → 5 on contested Dubai terms. This is the central strategic constraint of the engagement.
+
+Dominant leak codes in the data: **L2 (impression-rich, click-poor)** and **L3 (striking distance)**. Worst L2 offenders: `/services/photocopier-rental/` 737 impressions / **0 clicks** / pos 53.8; `/services/printer-rental/` 1,047 / 3 / 34.3; `/printer-rental-dubai/` 925 / 3 / 47.1; `/services/repair/` 811 / 3 / 25.6. Also **L1 cannibalisation** across `/services/printer-rental/`, `/printer-rental-dubai/`, `/copier-lease-uae/`, `/services/photocopier-rental/`.
+
+Counterpoint worth noting: the paper-shredder cluster converts at **3.9% CTR versus the 1.09% site average**.
+
+---
+
+## 5. Decisions already taken by the user
+
+| Decision | Choice |
+|---|---|
+| Scope | Audit **+** technical fixes **+** content |
+| Product pages | **Enrich and link** (not noindex) |
+| Merchant Center | Additionally list spare-parts/toner items in Google Merchant Center |
+| Capacity | AI-assisted, high throughput — ~8–12 assets/month |
+
+---
+
+## 6. RESOLVED QUESTIONS AND REMAINING ONES
+
+### RESOLVED — authority (was Q3)
+
+**The site has effectively zero legitimate backlinks. R02 and R03 are absent.** This is now assessed, not "needs check", and it fully explains position 23 on contested Dubai terms alongside position 1–4 wherever nobody competes.
+
+Source: `C:\Users\SAHARA\Downloads\backlinks.json` — **25 links, 16 domains, every one with `page_from_rank: 0`.**
+
+| Domain(s) | What they are |
+|---|---|
+| `homesforsaleoldgreenwichct.com`, `ggmap.us.com` | Pages literally titled "Boost your Google rankings with Premium PBN & Link Building", 3,000 outbound links each, dofollow |
+| `bye.fyi`, `drjack.world`, `screenshots.wiki`, `quero.party` | "Domain Report" scraper pages, 3,500 outbound links |
+| `anchorurl.cloud`, `shortenurls.eu`, `urls-shortener.eu`, `buzzshrink.website`, `sites.jake.eu` | "URL Shared" link-shortener spam |
+| `ready.pro`, `newlyregddomains.com` | Auto-generated stats/registry scrapers |
+| `robuta.com`, `computers1000.com`, `dubaijobzone.com` | The only three remotely legitimate |
+
+All first appeared **4–11 August 2026** — a ten-day drip, characteristic of a purchased package rather than organic accumulation. User does not know whether links were bought. Unresolved; check for a recurring charge and watch whether new spam domains keep appearing.
+
+**Position on disavow: do not disavow yet.** Google discounts this class of link automatically. 25 links from 16 dead domains is very unlikely to be causing a penalty. The problem is the *absence* of good links, not the presence of bad ones — disavowing changes nothing about position 23.
+
+**Link acquisition targets for this business** (UAE B2B equipment supplier — digital PR does not fit):
+- **Manufacturer dealer locators.** The site claims authorized dealer status for Canon, Kyocera, HP, Xerox. If genuine, those dealer-locator pages are high-authority and topically perfect. Probably the single best link available. **Needs verification that the dealer claims are real.**
+- UAE directories: Yellow Pages UAE, Connect.ae, Dubai Chamber, Sharjah Chamber of Commerce
+- Free-zone supplier directories — SAIF Zone, Hamriyah, JAFZA (all served)
+- Client case studies with a reciprocal link; procurement portals
+- `/rental-calculator/` is already a genuine linkable asset (238 impressions)
+
+### RESOLVED — GBP (was Q2)
+
+Access confirmed, audited, and two fixes applied live. See §0. Key facts: **one location only** (Sharjah Industrial Area 11), **69 reviews at 5.0** (a genuine asset), 362 monthly views, 572 total interactions, Mon–Sat 08:00–19:00.
+
+**One Sharjah location explains the geography split exactly** — Sharjah queries rank 2.6–7.7, Dubai queries 21–47. A Sharjah-only listing cannot win the Dubai map pack; no configuration fixes that. The realistic options are a genuine staffed Dubai premises (a real second listing — virtual offices get removed) or winning Dubai organically. **362 monthly GBP views against ~8,000 monthly site impressions means the profile is badly underexposed.**
+
+### STILL OPEN
+
+1. **Dubai head terms vs. the niche already owned.** Chase "printer rental dubai" (big impressions, position 24, uphill), or press the advantage in shredders / Sharjah / Kyocera repair / plotter (positions 1–7)? Recommendation: roughly **70% niche + local, 30% Dubai head terms**, with the dissection's reason-code frequency table setting the final ratio. Needs the business read on where revenue actually is. **Note the authority finding above strengthens the case for the niche weighting.**
+
+2. **Were links purchased?** User does not know. Check for a recurring charge; Bing Webmaster Tools (API key available) gives a free independent second opinion on the profile.
+
+3. **Are the Canon/Kyocera/HP/Xerox authorized-dealer claims genuine?** Determines whether dealer-locator links — likely the best available — are reachable.
+
+4. **Definition of success in numbers.** 87 clicks/month today. Indexing + CTR work realistically reaches low hundreds within 90 days — a real multiple, but hundreds, not thousands. Needs alignment before month three.
+
+5. **Timeline expectations.** Indexing fixes surface in 2–4 weeks. Title/CTR rewrites 2–6 weeks. Position movement on contested terms 3–6 months if at all. GBP category changes days to weeks. Different clocks, report on different clocks.
+
+### Site audit PDF — mostly noise, two real findings
+
+`saharaprinter.com_5998fd84-...pdf` (SEO Site Checkup, 22pp) scores 83/100 "above average". **Treat that as reassurance, not diagnosis** — it graded meta tags and image sizes and could not see that three brand pages rendered `Loading...` or that 13 product pages were unindexed. Trust GSC over the score.
+
+Two findings independently confirmed via DNS lookup:
+- **No SPF record.** Only a Google verification TXT exists on the domain.
+- **No DMARC record.**
+
+Email-spoofing exposure, and it affects deliverability of quote emails. Also flagged: render-blocking resources, LCP 2.56s (target <2.5s), oversized images.
+
+---
+
+## 7. Merchant Center — BLOCKED on business data
+
+`src/app/services/printer-spare-parts/page.tsx` holds 13 supplies. **Every record has `price: "Contact for Pricing"`, `image: ""`, and no SKU/MPN/GTIN.** The `supplies` table (`database/schema.sql:49`) has no identifier columns.
+
+Google Merchant Center hard-requires `id`, `title`, `description`, `link`, `image_link`, `availability`, `price` per item; branded products additionally need `brand` plus `gtin` or `mpn`. **Three of these are currently unsatisfiable.**
+
+Approach: build the complete feed pipeline and Product schema now; **gate submission on a real price/image/MPN list from the business.** Do not submit with placeholder prices — Merchant Center suspends accounts for price mismatch.
+
+**Needed from the business:** real AED prices, product images, and MPN/part numbers for all 13 supplies. To be captured in `docs/seo/merchant-center-data-request.md`.
+
+---
+
+## 8. Draft execution plan
+
+### Phase 0 — Brand SSR bug — DONE, see §0
+
+### Phase 1 — Dissection Report → `docs/seo/dissection-report-2026-08.md`
+Seven stages per the PDF. Reuse `docs/seo/gsc-export-2026-08/` (`queries.json`, `query_page.json` 301KB, `pages.json`, `overview.json`); refresh via GSC MCP for the full 90 days. Brand terms to strip: `sahara`, `sahara office`, `sahara office equipments`, `saharaprinter`, `sahara printer`, misspellings. Target 8–15 clusters: printer rental UAE · photocopier/copier rental · leasing · shredders & document destruction · repair & service · brand-dealer · AMC · geo-specific · toner/consumables · specialist (plotter, card printers, PaperCut). Ends with the fenced handoff block.
+
+### Phase 2 — Scale Blueprint → `docs/seo/scale-blueprint-2026-08.md`
+12 sections per the PDF. Every recommendation carries its reason code. Where demand data is absent, score Demand Signal 0 and mark "needs keyword validation".
+
+### Phase 3 — Days 1–30: indexing recovery, leak fixes only (no new pages)
+1. ~~Brand SSR fix~~ — DONE (§0), needs commit + deploy + recrawl request
+2. **← NEXT:** Server-render products grid — mirror the `initialPosts` pattern already in `src/app/blogs/page.tsx`
+3. Expand product detail pages ~290 → 600+ words; add `Product` + `FAQPage` JSON-LD
+4. Resolve `/services/toner/` canonical conflict; purge it from internal links
+5. Sitemap integrity — real `lastModified`, fail loudly on D1 error, add `/brands/konica-minolta/`
+6. Trailing-slash sweep across nav/footer/internalLinks
+7. Breadcrumb schema → `/products/`
+8. Thin-page expansion — `/our-clients/`, `/services/printer-spare-parts/`, `/contact/`
+9. Clean 4 dead slugs in `internalLinks.ts`
+10. GSC recrawl requests for stale-canonical brand pages and fixed product URLs
+
+**Proof metric:** `/products/*` indexed count moves 5/18 → 18/18; sharp and epson render an `<h1>`.
+
+### Phase 4 — Days 31–60: CTR and extend
+Rewrite titles/descriptions on the worst L2 pages (photocopier-rental 737/0, printer-rental-dubai 925/3, services/printer-rental 1047/3, repair 811/3), leading with AED pricing and response times. Resolve rental/lease/copier cannibalisation. AEO extractability pass — definition-first opening within 100 words, comparison tables, stepwise lists. Extend the shredder cluster.
+
+### Phase 5 — Days 61–90: new clusters, Merchant Center, authority
+New clusters per blueprint. Merchant Center: migration adding `sku`/`mpn`/`gtin`/`price_amount`/`currency`/`availability`/`condition`/`image_url` to `supplies`; `src/app/feeds/supplies.xml/route.ts` emitting RSS 2.0 with `g:` namespace, excluding incomplete items; per-item `Product` JSON-LD with `offers`. Entity strengthening for AEO.
+
+---
+
+## 9. Critical files
+
+- `src/components/BrandContentClient.tsx` — the SSR bug, highest priority
+- `src/app/products/page.tsx`, `src/app/products/[slug]/page.tsx` — indexing root cause
+- `src/app/sitemap.ts` — lastmod, silent D1 failure, missing URL
+- `src/components/Header.tsx`, `MobileNav.tsx`, `Footer.tsx`, `src/lib/internalLinks.ts`
+- `src/app/services/toner/page.tsx` — canonical conflict
+- `src/app/services/printer-spare-parts/page.tsx` — thin content + Merchant Center
+- `src/app/our-clients/page.tsx`, `src/app/contact/page.tsx` — thin content
+- `database/schema.sql`, `database/migrations/` — supplies table extension
+- Reuse: `src/lib/siteUrl.ts`; `initialPosts` server-props pattern in `src/app/blogs/page.tsx`; FAQ seeding pattern in `database/migrations/012_seed_page_faqs.sql`
+
+---
+
+## 10. Verification
+
+1. `npm run build` clean before any commit.
+2. **SSR assertion sweep** — fetch every `/brands/*`, `/products/*`, and thin-page URL; assert HTTP 200, `<h1>` present, word count above threshold, self-referencing canonical, no `Loading...` in HTML. This is the check that found the bug; re-run it as the regression gate.
+3. Validate `sitemap.xml` — 70+ URLs, real `lastmod`, `/brands/konica-minolta/` present.
+4. Run product/FAQ JSON-LD through Google's Rich Results Test.
+5. `npm run test:smoke`.
+6. Post-deploy: GSC URL Inspection live test on 3 previously-unindexed product URLs; submit recrawl requests.
+7. Validate the Merchant Center feed against Google's spec before submission; confirm no placeholder prices.
+8. Re-measure at 14/30/60/90 days against blueprint kill criteria.
+
+Deploy is via git push to `main` (Cloudflare Pages builds it). Work on a branch, not `main`.
+
+---
+
+## 11. Next action when work resumes
+
+**All Phase 3 code work is done and deployed** (see §0). Remaining:
+
+1. **Manual GSC "Request Indexing"** for `/brands/konica-minolta/`, `/our-clients/`, and 3–4 product URLs. This cannot be automated — GSC's Request Indexing is UI-only, and Google's Indexing API officially supports only JobPosting and BroadcastEvent. Sitemap resubmission is already done.
+2. **Dissection Report** → `docs/seo/dissection-report-2026-08.md`
+3. **Scale Blueprint** → `docs/seo/scale-blueprint-2026-08.md`
+4. Re-measure indexed counts at 14 / 30 days.
+
+Carry into the Dissection Report as established facts, not assumptions:
+- Authority is absent (§6) — R02/R03 are not levers. Do not recommend a link sprint; the report should say plainly that links are not the current lever and name dealer-locator listings as the realistic first acquisition.
+- GBP is one Sharjah location with a now-correct primary category (§0) — Dubai map pack is unreachable without a real Dubai premises.
+- The winning pattern is R01 (competition vacuum) + R12 (long-tail specificity), concentrated in shredders, Sharjah, Kyocera repair, and plotter.

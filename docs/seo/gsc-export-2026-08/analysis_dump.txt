@@ -1,0 +1,77 @@
+TOTAL: 768 queries | 30 clicks | 15732 imps
+BRAND: 21 queries | 4 clicks (13%) | 105 imps (1%)
+NON-BRAND: 747 queries | 26 clicks (87%) | 15627 imps (99%)
+non-brand zero-click rows: 723 of 747
+non-brand weighted avg position: 27.8
+
+===== PAGES TABLE (all 67, by clicks) =====
+ 70c  9047i ctr 0.77% pos 15.4  https://www.saharaprinter.com/
+ 27c   719i ctr 3.76% pos 24.2  https://www.saharaprinter.com/services/paper-shredder-rental/
+  9c  2377i ctr 0.38% pos 40.0  https://www.saharaprinter.com/services/printer-rental/
+  8c   456i ctr 1.75% pos 13.2  https://www.saharaprinter.com/brands/sharp/
+  7c   526i ctr 1.33% pos 35.4  https://www.saharaprinter.com/products/
+  6c  1579i ctr 0.38% pos 33.1  https://www.saharaprinter.com/printer-rental-abu-dhabi/
+  5c  1296i ctr 0.39% pos 19.7  https://www.saharaprinter.com/photocopier-rental-sharjah/
+  5c  2440i ctr 0.20% pos 47.0  https://www.saharaprinter.com/printer-rental-dubai/
+  5c  2209i ctr 0.23% pos 29.0  https://www.saharaprinter.com/services/repair/
+  4c   570i ctr 0.70% pos 36.2  https://www.saharaprinter.com/canon-printer-dubai/
+  4c   253i ctr 1.58% pos 37.7  https://www.saharaprinter.com/contact/
+  4c   409i ctr 0.98% pos  9.5  https://www.saharaprinter.com/services/amc/
+  4c    50i ctr 8.00% pos 16.1  https://www.saharaprinter.com/services/papercut-print-management/
+  3c   343i ctr 0.87% pos 32.4  https://www.saharaprinter.com/brands/kyocera/
+  3c    35i ctr 8.57% pos  8.9  https://www.saharaprinter.com/brands/lexmark/
+  2c    79i ctr 2.53% pos 14.9  https://www.saharaprinter.com/printer-rental-al-ain/
+  2c    71i ctr 2.82% pos 24.4  https://www.saharaprinter.com/services/paper-shredder-rental
+  1c     4i ctr25.00% pos  5.8  https://www.saharaprinter.com/blogs/printer-repair-vs-replacement-dubai-guide-2025/
+  1c   188i ctr 0.53% pos 27.9  https://www.saharaprinter.com/blogs/total-cost-of-printer-ownership/
+  1c    63i ctr 1.59% pos 10.5  https://www.saharaprinter.com/bravo-card-printers-uae/
+  1c   541i ctr 0.18% pos 57.4  https://www.saharaprinter.com/hp-printer-abu-dhabi/
+  1c    53i ctr 1.89% pos  8.5  https://www.saharaprinter.com/printer-rental-fujairah/
+  1c   807i ctr 0.12% pos 68.0  https://www.saharaprinter.com/rental-calculator/
+  1c   155i ctr 0.65% pos 52.3  https://www.saharaprinter.com/services
+  1c  1844i ctr 0.05% pos 48.3  https://www.saharaprinter.com/services/photocopier-rental/
+  1c     6i ctr16.67% pos  4.8  https://www.saharaprinter.com/services/plotter-maintenance/
+  0c     1i ctr 0.00% pos  1.0  http://www.saharaprinter.com/
+  0c     3i ctr 0.00% pos  1.0  https://saharaprinter.com/
+  0c   503i ctr 0.00% pos 58.9  https://www.saharaprinter.com/about/
+  0c    32i ctr 0.00% pos 14.0  https://www.saharaprinter.com/blogs/
+  0c     4i ctr 0.00% pos 14.5  https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/
+  0c   658i ctr 0.00% pos 73.8  https://www.saharaprinter.com/blogs/how-to-choose-the-best-printer-rental-dubai-service/
+  0c    78i ctr 0.00% pos  6.0  https://www.saharaprinter.com/blogs/kyocera-vs-canon-vs-ricoh-best-copier-uae-2025/
+  0c     5i ctr 0.00% pos 16.8  https://www.saharaprinter.com/blogs/real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025/
+  0c    19i ctr 0.00% pos 32.6  https://www.saharaprinter.com/blogs/rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business/
+  0c    32i ctr 0.00% pos 19.7  https://www.saharaprinter.com/blogs/stop-wasting-money-on-printing-your-guide-to-smarter-office-habits/
+  0c     2i ctr 0.00% pos 24.0  https://www.saharaprinter.com/blogs/the-hidden-cost-of-your-office-copier
+  0c    46i ctr 0.00% pos 19.7  https://www.saharaprinter.com/blogs/the-hidden-cost-of-your-office-copier/
+  0c     1i ctr 0.00% pos 10.0  https://www.saharaprinter.com/blogs/video-walkthrough-solving-canon-printer-problems/
+  0c    26i ctr 0.00% pos  5.2  https://www.saharaprinter.com/blogs/what-is-printer-amc-uae-guide-2025/
+  0c    68i ctr 0.00% pos 47.2  https://www.saharaprinter.com/blogs/why-a-company-chooses-copier-rental-service-over-buying-a-copier/
+  0c     1i ctr 0.00% pos  6.0  https://www.saharaprinter.com/brands/brother
+  0c    50i ctr 0.00% pos 51.0  https://www.saharaprinter.com/brands/brother/
+  0c     1i ctr 0.00% pos  7.0  https://www.saharaprinter.com/brands/canon
+  0c   533i ctr 0.00% pos 52.9  https://www.saharaprinter.com/brands/canon/
+  0c     2i ctr 0.00% pos  8.0  https://www.saharaprinter.com/brands/hp
+  0c     3i ctr 0.00% pos  4.7  https://www.saharaprinter.com/brands/hp/
+  0c     8i ctr 0.00% pos  4.4  https://www.saharaprinter.com/brands/lexmark
+  0c     2i ctr 0.00% pos  6.0  https://www.saharaprinter.com/brands/ricoh
+  0c    15i ctr 0.00% pos  6.2  https://www.saharaprinter.com/brands/ricoh/
+  0c    11i ctr 0.00% pos 50.6  https://www.saharaprinter.com/brands/samsung/
+  0c    13i ctr 0.00% pos 30.4  https://www.saharaprinter.com/brands/xerox
+  0c    50i ctr 0.00% pos 64.7  https://www.saharaprinter.com/brands/xerox/
+  0c     3i ctr 0.00% pos 21.0  https://www.saharaprinter.com/canon-printer-dubai
+  0c   383i ctr 0.00% pos 47.8  https://www.saharaprinter.com/copier-lease-uae/
+  0c   448i ctr 0.00% pos 23.2  https://www.saharaprinter.com/get-quote
+  0c   202i ctr 0.00% pos 67.4  https://www.saharaprinter.com/get-quote/
+  0c    16i ctr 0.00% pos 17.1  https://www.saharaprinter.com/photocopier-rental-sharjah
+  0c     2i ctr 0.00% pos 29.0  https://www.saharaprinter.com/printer-rental-al-ain
+  0c   488i ctr 0.00% pos 45.7  https://www.saharaprinter.com/printer-rental-rak/
+  0c     1i ctr 0.00% pos 41.0  https://www.saharaprinter.com/printer-repair-dubai
+  0c   628i ctr 0.00% pos 48.0  https://www.saharaprinter.com/printer-repair-dubai/
+  0c   108i ctr 0.00% pos 35.4  https://www.saharaprinter.com/services/
+  0c     3i ctr 0.00% pos  9.3  https://www.saharaprinter.com/services/photocopier-rental
+  0c     5i ctr 0.00% pos 25.2  https://www.saharaprinter.com/services/printer-spare-parts/
+  0c     7i ctr 0.00% pos 34.4  https://www.saharaprinter.com/services/repair
+  0c     1i ctr 0.00% pos 21.0  https://www.saharaprinter.com/services/toner/
+
+===== QUERY x PAGE: top 60 non-brand pairs by impressions =====
+row sample keys: ['query', 'page', 'clicks', 'impressions', 'ctr', 'position'] {'query': 'sahara office equipments', 'page': 'https://www.saharaprinter.com/', 'clicks': 4, 'impressions': 34, 'ctr': 0.1176, 'position': 1.4}

@@ -1,0 +1,111 @@
+[
+ {
+  "batch": 0,
+  "urls": [
+   "https://www.saharaprinter.com/",
+   "https://www.saharaprinter.com/services/paper-shredder-rental/",
+   "https://www.saharaprinter.com/services/printer-rental/",
+   "https://www.saharaprinter.com/brands/sharp/",
+   "https://www.saharaprinter.com/products/",
+   "https://www.saharaprinter.com/printer-rental-abu-dhabi/",
+   "https://www.saharaprinter.com/photocopier-rental-sharjah/",
+   "https://www.saharaprinter.com/printer-rental-dubai/",
+   "https://www.saharaprinter.com/services/repair/",
+   "https://www.saharaprinter.com/canon-printer-dubai/"
+  ],
+  "result": "{\"site_url\": \"sc-domain:saharaprinter.com\", \"summary\": {\"total_checked\": 10, \"indexed\": 10, \"not_indexed\": 0, \"canonical_issues\": 0, \"robots_blocked\": 0, \"fetch_issues\": 0}, \"issues\": {\"not_indexed\": [], \"canonical_issues\": [], \"robots_blocked\": [], \"fetch_issues\": []}, \"indexed_urls\": [\"https://www.saharaprinter.com/\", \"https://www.saharaprinter.com/services/paper-shredder-rental/\", \"https://www.saharaprinter.com/services/printer-rental/\", \"https://www.saharaprinter.com/brands/sharp/\", \"https://www.saharaprinter.com/products/\", \"https://www.saharaprinter.com/printer-rental-abu-dhabi/\", \"https://www.saharaprinter.com/photocopier-rental-sharjah/\", \"https://www.saharaprinter.com/printer-rental-dubai/\", \"https://www.saharaprinter.com/services/repair/\", \"https://www.saharaprinter.com/canon-printer-dubai/\"]}"
+ },
+ {
+  "batch": 1,
+  "urls": [
+   "https://www.saharaprinter.com/contact/",
+   "https://www.saharaprinter.com/services/amc/",
+   "https://www.saharaprinter.com/services/papercut-print-management/",
+   "https://www.saharaprinter.com/brands/kyocera/",
+   "https://www.saharaprinter.com/brands/lexmark/",
+   "https://www.saharaprinter.com/printer-rental-al-ain/",
+   "https://www.saharaprinter.com/services/paper-shredder-rental",
+   "https://www.saharaprinter.com/blogs/printer-repair-vs-replacement-dubai-guide-2025/",
+   "https://www.saharaprinter.com/blogs/total-cost-of-printer-ownership/",
+   "https://www.saharaprinter.com/bravo-card-printers-uae/"
+  ],
+  "result": "{\"site_url\": \"sc-domain:saharaprinter.com\", \"summary\": {\"total_checked\": 10, \"indexed\": 9, \"not_indexed\": 1, \"canonical_issues\": 0, \"robots_blocked\": 0, \"fetch_issues\": 0}, \"issues\": {\"not_indexed\": [\"https://www.saharaprinter.com/services/paper-shredder-rental - Page with redirect\"], \"canonical_issues\": [], \"robots_blocked\": [], \"fetch_issues\": []}, \"indexed_urls\": [\"https://www.saharaprinter.com/contact/\", \"https://www.saharaprinter.com/services/amc/\", \"https://www.saharaprinter.com/services/papercut-print-management/\", \"https://www.saharaprinter.com/brands/kyocera/\", \"https://www.saharaprinter.com/brands/lexmark/\", \"https://www.saharaprinter.com/printer-rental-al-ain/\", \"https://www.saharaprinter.com/blogs/printer-repair-vs-replacement-dubai-guide-2025/\", \"https://www.saharaprinter.com/blogs/total-cost-of-printer-ownership/\", \"https://www.saharaprinter.com/bravo-card-printers-uae/\"]}"
+ },
+ {
+  "batch": 2,
+  "urls": [
+   "https://www.saharaprinter.com/hp-printer-abu-dhabi/",
+   "https://www.saharaprinter.com/printer-rental-fujairah/",
+   "https://www.saharaprinter.com/rental-calculator/",
+   "https://www.saharaprinter.com/services",
+   "https://www.saharaprinter.com/services/photocopier-rental/",
+   "https://www.saharaprinter.com/services/plotter-maintenance/",
+   "http://www.saharaprinter.com/",
+   "https://saharaprinter.com/",
+   "https://www.saharaprinter.com/about/",
+   "https://www.saharaprinter.com/blogs/"
+  ],
+  "result": "{\"site_url\": \"sc-domain:saharaprinter.com\", \"summary\": {\"total_checked\": 10, \"indexed\": 7, \"not_indexed\": 3, \"canonical_issues\": 0, \"robots_blocked\": 0, \"fetch_issues\": 0}, \"issues\": {\"not_indexed\": [\"https://www.saharaprinter.com/services - Page with redirect\", \"http://www.saharaprinter.com/ - Page with redirect\", \"https://saharaprinter.com/ - Page with redirect\"], \"canonical_issues\": [], \"robots_blocked\": [], \"fetch_issues\": []}, \"indexed_urls\": [\"https://www.saharaprinter.com/hp-printer-abu-dhabi/\", \"https://www.saharaprinter.com/printer-rental-fujairah/\", \"https://www.saharaprinter.com/rental-calculator/\", \"https://www.saharaprinter.com/services/photocopier-rental/\", \"https://www.saharaprinter.com/services/plotter-maintenance/\", \"https://www.saharaprinter.com/about/\", \"https://www.saharaprinter.com/blogs/\"]}"
+ },
+ {
+  "batch": 3,
+  "urls": [
+   "https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/",
+   "https://www.saharaprinter.com/blogs/how-to-choose-the-best-printer-rental-dubai-service/",
+   "https://www.saharaprinter.com/blogs/kyocera-vs-canon-vs-ricoh-best-copier-uae-2025/",
+   "https://www.saharaprinter.com/blogs/real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025/",
+   "https://www.saharaprinter.com/blogs/rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business/",
+   "https://www.saharaprinter.com/blogs/stop-wasting-money-on-printing-your-guide-to-smarter-office-habits/",
+   "https://www.saharaprinter.com/blogs/the-hidden-cost-of-your-office-copier",
+   "https://www.saharaprinter.com/blogs/the-hidden-cost-of-your-office-copier/",
+   "https://www.saharaprinter.com/blogs/video-walkthrough-solving-canon-printer-problems/",
+   "https://www.saharaprinter.com/blogs/what-is-printer-amc-uae-guide-2025/"
+  ],
+  "result": "{\"site_url\": \"sc-domain:saharaprinter.com\", \"summary\": {\"total_checked\": 10, \"indexed\": 9, \"not_indexed\": 1, \"canonical_issues\": 0, \"robots_blocked\": 0, \"fetch_issues\": 0}, \"issues\": {\"not_indexed\": [\"https://www.saharaprinter.com/blogs/the-hidden-cost-of-your-office-copier - Page with redirect\"], \"canonical_issues\": [], \"robots_blocked\": [], \"fetch_issues\": []}, \"indexed_urls\": [\"https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/\", \"https://www.saharaprinter.com/blogs/how-to-choose-the-best-printer-rental-dubai-service/\", \"https://www.saharaprinter.com/blogs/kyocera-vs-canon-vs-ricoh-best-copier-uae-2025/\", \"https://www.saharaprinter.com/blogs/real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025/\", \"https://www.saharaprinter.com/blogs/rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business/\", \"https://www.saharaprinter.com/blogs/stop-wasting-money-on-printing-your-guide-to-smarter-office-habits/\", \"https://www.saharaprinter.com/blogs/the-hidden-cost-of-your-office-copier/\", \"https://www.saharaprinter.com/blogs/video-walkthrough-solving-canon-printer-problems/\", \"https://www.saharaprinter.com/blogs/what-is-printer-amc-uae-guide-2025/\"]}"
+ },
+ {
+  "batch": 4,
+  "urls": [
+   "https://www.saharaprinter.com/blogs/why-a-company-chooses-copier-rental-service-over-buying-a-copier/",
+   "https://www.saharaprinter.com/brands/brother",
+   "https://www.saharaprinter.com/brands/brother/",
+   "https://www.saharaprinter.com/brands/canon",
+   "https://www.saharaprinter.com/brands/canon/",
+   "https://www.saharaprinter.com/brands/hp",
+   "https://www.saharaprinter.com/brands/hp/",
+   "https://www.saharaprinter.com/brands/lexmark",
+   "https://www.saharaprinter.com/brands/ricoh",
+   "https://www.saharaprinter.com/brands/ricoh/"
+  ],
+  "result": "{\"site_url\": \"sc-domain:saharaprinter.com\", \"summary\": {\"total_checked\": 10, \"indexed\": 5, \"not_indexed\": 5, \"canonical_issues\": 5, \"robots_blocked\": 0, \"fetch_issues\": 0}, \"issues\": {\"not_indexed\": [\"https://www.saharaprinter.com/brands/brother - Page with redirect\", \"https://www.saharaprinter.com/brands/canon - Page with redirect\", \"https://www.saharaprinter.com/brands/hp - Error: The read operation timed out\", \"https://www.saharaprinter.com/brands/lexmark - Error: The read operation timed out\", \"https://www.saharaprinter.com/brands/ricoh - Page with redirect\"], \"canonical_issues\": [\"https://www.saharaprinter.com/brands/brother - Google chose: https://www.saharaprinter.com/brands/brother/ instead of user-declared: https://www.saharaprinter.com/\", \"https://www.saharaprinter.com/brands/brother/ - Google chose: https://www.saharaprinter.com/brands/brother/ instead of user-declared: https://www.saharaprinter.com/\", \"https://www.saharaprinter.com/brands/hp/ - Google chose: https://www.saharaprinter.com/brands/hp/ instead of user-declared: https://www.saharaprinter.com/\", \"https://www.saharaprinter.com/brands/ricoh - Google chose: https://www.saharaprinter.com/brands/ricoh/ instead of user-declared: https://www.saharaprinter.com/\", \"https://www.saharaprinter.com/brands/ricoh/ - Google chose: https://www.saharaprinter.com/brands/ricoh/ instead of user-declared: https://www.saharaprinter.com/\"], \"robots_blocked\": [], \"fetch_issues\": []}, \"indexed_urls\": [\"https://www.saharaprinter.com/blogs/why-a-company-chooses-copier-rental-service-over-buying-a-copier/\", \"https://www.saharaprinter.com/brands/brother/\", \"https://www.saharaprinter.com/brands/canon/\", \"https://www.saharaprinter.com/brands/hp/\", \"https://www.saharaprinter.com/brands/ricoh/\"]}"
+ },
+ {
+  "batch": 5,
+  "urls": [
+   "https://www.saharaprinter.com/brands/samsung/",
+   "https://www.saharaprinter.com/brands/xerox",
+   "https://www.saharaprinter.com/brands/xerox/",
+   "https://www.saharaprinter.com/canon-printer-dubai",
+   "https://www.saharaprinter.com/copier-lease-uae/",
+   "https://www.saharaprinter.com/get-quote",
+   "https://www.saharaprinter.com/get-quote/",
+   "https://www.saharaprinter.com/photocopier-rental-sharjah",
+   "https://www.saharaprinter.com/printer-rental-al-ain",
+   "https://www.saharaprinter.com/printer-rental-rak/"
+  ],
+  "result": "{\"site_url\": \"sc-domain:saharaprinter.com\", \"summary\": {\"total_checked\": 10, \"indexed\": 4, \"not_indexed\": 6, \"canonical_issues\": 1, \"robots_blocked\": 0, \"fetch_issues\": 0}, \"issues\": {\"not_indexed\": [\"https://www.saharaprinter.com/brands/xerox - Error: The read operation timed out\", \"https://www.saharaprinter.com/canon-printer-dubai - Page with redirect\", \"https://www.saharaprinter.com/get-quote - Error: The read operation timed out\", \"https://www.saharaprinter.com/get-quote/ - Page with redirect\", \"https://www.saharaprinter.com/photocopier-rental-sharjah - Page with redirect\", \"https://www.saharaprinter.com/printer-rental-al-ain - Page with redirect\"], \"canonical_issues\": [\"https://www.saharaprinter.com/brands/xerox/ - Google chose: https://www.saharaprinter.com/brands/xerox/ instead of user-declared: https://www.saharaprinter.com/\"], \"robots_blocked\": [], \"fetch_issues\": []}, \"indexed_urls\": [\"https://www.saharaprinter.com/brands/samsung/\", \"https://www.saharaprinter.com/brands/xerox/\", \"https://www.saharaprinter.com/copier-lease-uae/\", \"https://www.saharaprinter.com/printer-rental-rak/\"]}"
+ },
+ {
+  "batch": 6,
+  "urls": [
+   "https://www.saharaprinter.com/printer-repair-dubai",
+   "https://www.saharaprinter.com/printer-repair-dubai/",
+   "https://www.saharaprinter.com/services/",
+   "https://www.saharaprinter.com/services/photocopier-rental",
+   "https://www.saharaprinter.com/services/printer-spare-parts/",
+   "https://www.saharaprinter.com/services/repair",
+   "https://www.saharaprinter.com/services/toner/"
+  ],
+  "result": "{\"site_url\": \"sc-domain:saharaprinter.com\", \"summary\": {\"total_checked\": 7, \"indexed\": 1, \"not_indexed\": 6, \"canonical_issues\": 0, \"robots_blocked\": 0, \"fetch_issues\": 0}, \"issues\": {\"not_indexed\": [\"https://www.saharaprinter.com/printer-repair-dubai - Page with redirect\", \"https://www.saharaprinter.com/printer-repair-dubai/ - Error: The read operation timed out\", \"https://www.saharaprinter.com/services/ - Page with redirect\", \"https://www.saharaprinter.com/services/photocopier-rental - Page with redirect\", \"https://www.saharaprinter.com/services/repair - Page with redirect\", \"https://www.saharaprinter.com/services/toner/ - Error: The read operation timed out\"], \"canonical_issues\": [], \"robots_blocked\": [], \"fetch_issues\": []}, \"indexed_urls\": [\"https://www.saharaprinter.com/services/printer-spare-parts/\"]}"
+ }
+]
