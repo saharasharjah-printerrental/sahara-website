@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // for "photocopier rental in dubai" ahead of /services/photocopier-rental/
     // — the purpose-built page, left stranded at position 48 on 1,863
     // impressions and 1 click. Copier terms belong to that page, not this one.
-    title: "Printer Rental UAE | A4 & A3 Printers from AED 250/mo | Sahara",
+    title: "Printer Rental UAE | A4 & A3 Printers from AED 250/mo",
     description: "Office printer rental across the UAE from AED 250/month. Zero deposit, unlimited OEM toner, full maintenance, 4-hour response. Canon, Kyocera, HP, Brother. Dubai, Abu Dhabi, Sharjah. ☎ +971503823969",
     keywords: "printer rental uae, office printer rental dubai, printer rental sharjah, printer rental abu dhabi, a4 printer rental uae, laser printer rental dubai, zero deposit printer rental uae, canon printer rental uae, hp printer rental dubai, brother printer rental uae, monthly printer rental uae",
     openGraph: {

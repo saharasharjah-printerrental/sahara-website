@@ -11,8 +11,13 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance | Sahara",
-  description: "UAE printer & photocopier rental from AED 250/month. Zero deposit, free toner, maintenance, delivery, and 4-hour emergency response across all 7 emirates.",
+  // 8,839 impressions at position 15.3 for 0.80% CTR — the largest absolute
+  // click gap on the site. The previous title ran to 67 characters and was
+  // truncated in the SERP before "Free Toner & Maintenance" was visible.
+  // Description now leads with third-party proof (69 Google reviews at 5.0),
+  // which no competitor in this SERP shows.
+  title: "Printer Rental UAE from AED 250/mo | Free Toner & Service",
+  description: "Rated 5.0 by 69 UAE businesses. Printer & photocopier rental from AED 250/month — zero deposit, unlimited genuine toner, all maintenance included, 4-hour on-site response across all 7 emirates. Since 2012. ☎ +971503823969",
   openGraph: {
     title: "Printer Rental UAE | AED 250/mo | Free Toner | Sahara",
     description: "Zero deposit printer & photocopier rental across UAE. Free toner & maintenance, 4-hour emergency response, and delivery across all 7 emirates.",

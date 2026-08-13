@@ -26,9 +26,14 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-  title: "Photocopier Rental Sharjah | AED 250/mo | Sahara",
+  // Strongest geographic cluster on the site (Sharjah outranks Dubai equivalents
+  // by 15-30 positions, backed by the verified Sharjah GBP) but only 0.38% CTR
+  // at position 19.7. Title now names copier rental explicitly — the actual
+  // query set is "copier rental services in sharjah" and "photocopier for rent
+  // sharjah" — and the description leads with local proof rather than generic terms.
+  title: "Photocopier Rental Sharjah | Copier Lease from AED 250/mo",
   description:
-    "Photocopier rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-min emergency response. Serving SAIF Zone, Industrial Area, Al Majaz. Canon & Kyocera. Call now.",
+    "Photocopier & copier rental in Sharjah from AED 250/month. Based in Industrial Area 11 — same-day delivery to SAIF Zone, Hamriyah, Al Majaz and Industrial Areas 1-18. Zero deposit, free toner, 4-hour response. Canon & Kyocera. ☎ +971503823969",
   keywords: [
     "photocopier rental sharjah",
     "printer rental sharjah",

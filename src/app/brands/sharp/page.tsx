@@ -44,7 +44,9 @@ const serviceSchema = {
 };
 
 export const metadata: Metadata = {
-  title: "Sharp Printers UAE | Authorized Dealer | Sahara Office",
+  // Position 13.2 at 1.71% CTR. "Authorized Dealer" alone gives no reason to
+  // click past twelve other results; adding the rental entry price does.
+  title: "Sharp Printers UAE | Authorized Dealer | From AED 250/mo",
   description: "Authorized Sharp printer and photocopier dealer in UAE. Smart MFPs with Sharp OSA integration. Sales, rental, and AMC. Dubai, Abu Dhabi, Sharjah. ☎ +971503823969",
   keywords: "sharp printer uae, sharp photocopier dubai, sharp mfp uae, sharp dealer uae, sharp copier sharjah",
   openGraph: {

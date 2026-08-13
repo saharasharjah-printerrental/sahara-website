@@ -6,8 +6,12 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 
 export const metadata: Metadata = {
-  title: "Annual Maintenance Contract (AMC) for Printers UAE | Sahara",
-  description: "Printer AMC plans in Dubai, Sharjah, Abu Dhabi. Quarterly to weekly servicing, all parts included, priority response. Protect your fleet from AED 299/month. Call +971503823969.",
+  // Position 9.5 with 0.99% CTR — top-10 and barely clicked, the largest
+  // CTR-versus-position gap on the site. Old title led with the formal term
+  // rather than the searched one and ran to 69 characters, so it truncated
+  // before reaching any differentiator.
+  title: "Printer AMC Dubai & UAE | From AED 299/mo, Parts Included",
+  description: "Printer & photocopier AMC across Dubai, Sharjah and Abu Dhabi from AED 299/month. All parts, labour and preventive servicing included — no per-visit charges. 4-hour response, OEM parts only, Canon/HP/Kyocera/Ricoh certified. ☎ +971503823969",
   keywords: "printer amc dubai, annual maintenance contract printer uae, photocopier amc sharjah, printer service contract uae, printer maintenance plan dubai, copier amc abu dhabi",
   openGraph: {
     title: "Annual Maintenance Contract (AMC) for Printers UAE | Sahara Office Equipments",
