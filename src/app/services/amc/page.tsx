@@ -79,6 +79,24 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-exclusions",
+      "name": "What does a printer AMC cover, and what is excluded?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Sahara AMC includes scheduled preventive servicing at manufacturer intervals, all labour for corrective repairs with unlimited call-outs, genuine OEM replacement parts such as rollers, fusers and drums, priority emergency response with a four-hour UAE-wide target, firmware updates, network reconfiguration, an annual deep clean and calibration, and remote diagnostic support. Excluded and quoted separately are: toner and ink consumables (these are included free on rental contracts but not on AMC), paper and media, damage from misuse or unauthorised third-party repair, relocation between premises, devices past manufacturer end-of-support where parts are unobtainable, and complete device replacement — an AMC maintains equipment you already own."
+      }
+    },
+    {
+      "@type": "Question",
+      "@id": "https://www.saharaprinter.com/services/amc/#faq-copier",
+      "name": "Do you offer AMC for photocopiers as well as printers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Sahara maintains Canon imageRUNNER ADVANCE, Kyocera TASKalfa, Ricoh MP, Xerox AltaLink and Sharp MX series photocopiers under annual maintenance contracts, including devices purchased elsewhere. Photocopier AMC is priced on monthly page volume and colour split rather than a flat device fee, because servicing intervals scale with usage — a copier running 20,000 pages a month needs a different schedule to one running 3,000."
+      }
+    },
+    {
+      "@type": "Question",
       "@id": "https://www.saharaprinter.com/services/amc/#faq-1",
       "name": "What is an Annual Maintenance Contract (AMC) for printers in UAE?",
       "acceptedAnswer": {
@@ -459,6 +477,128 @@ export default function AMCPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── What's covered vs excluded ──
+           "What does a printer AMC cover" is a definitional query and the exact
+           shape answer engines lift. Stating exclusions plainly is also the single
+           most common pre-sales question. */}
+      <section className="py-24 px-8 lg:px-24 bg-[#0a1524]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">No Surprises</span>
+            <h2 className="text-4xl font-bold text-white mt-3 mb-4">What a Sahara AMC Covers — and What It Does Not</h2>
+            <p className="text-[#7a94ad] max-w-2xl mx-auto text-sm">
+              Most AMC disputes in the UAE come from unclear scope. Ours is stated in full before you sign.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="glass-card rounded-2xl p-7 border border-[#f5be53]/20">
+              <h3 className="text-white font-bold text-lg mb-5">Included in every contract</h3>
+              <ul className="space-y-3">
+                {[
+                  "Scheduled preventive servicing at manufacturer-specified intervals",
+                  "All labour for corrective repairs, unlimited call-outs",
+                  "Genuine OEM replacement parts — rollers, fusers, drums, feed assemblies",
+                  "Priority emergency response, four-hour target across the UAE",
+                  "Firmware updates and network reconfiguration",
+                  "Annual deep clean and calibration",
+                  "Telephone and remote diagnostic support during working hours",
+                ].map((s) => (
+                  <li key={s} className="flex gap-3 text-[#d3c5b0] text-sm leading-relaxed">
+                    <span className="text-[#f5be53] font-bold mt-0.5">✓</span><span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="glass-card rounded-2xl p-7 border border-[#4f4536]/40">
+              <h3 className="text-white font-bold text-lg mb-5">Not included — quoted separately</h3>
+              <ul className="space-y-3">
+                {[
+                  "Toner and ink consumables (included free on rental contracts, not on AMC)",
+                  "Paper and media",
+                  "Damage from misuse, liquid ingress, or unauthorised third-party repair",
+                  "Relocation of equipment between premises",
+                  "Devices beyond manufacturer end-of-support where parts are unobtainable",
+                  "Complete device replacement — an AMC maintains equipment you own",
+                ].map((s) => (
+                  <li key={s} className="flex gap-3 text-[#8fa3bc] text-sm leading-relaxed">
+                    <span className="text-[#8fa3bc] font-bold mt-0.5">−</span><span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <p className="text-[#d3c5b0] text-sm leading-relaxed mt-8 max-w-3xl mx-auto text-center">
+            If you would rather not manage consumables or exclusions at all, a{" "}
+            <a href="/services/printer-rental/" className="text-[#f5be53] hover:underline">printer rental</a> or{" "}
+            <a href="/services/photocopier-rental/" className="text-[#f5be53] hover:underline">photocopier rental</a>{" "}
+            contract folds toner, maintenance and the device itself into one monthly figure.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Photocopier AMC + brands + emirate coverage ──
+           GSC shows this page at position 35.7 for "photocopier maintenance uae"
+           and 44.4 for "affordable photocopier maintenance company in uae" — copier
+           AMC demand exists and the page was printer-shaped. */}
+      <section className="py-24 px-8 lg:px-24">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div>
+            <h2 className="text-4xl font-bold text-white mb-4">Photocopier and Copier AMC</h2>
+            <p className="text-[#d3c5b0] leading-relaxed mb-4">
+              A photocopier AMC works the same way as a printer AMC but matters more, because an A3 multifunction
+              device is usually shared across a whole floor — when it stops, so does everyone's work. Copier contracts
+              are priced on monthly page volume and colour split rather than a flat device fee, because a machine
+              running 20,000 pages a month needs a different servicing interval to one running 3,000.
+            </p>
+            <p className="text-[#d3c5b0] leading-relaxed">
+              We maintain Canon imageRUNNER ADVANCE, Kyocera TASKalfa, Ricoh MP, Xerox AltaLink and Sharp MX series
+              copiers, including devices bought elsewhere. If you own the equipment outright, an AMC is normally
+              cheaper than paying per call-out; if you would rather not own it at all,{" "}
+              <a href="/services/photocopier-rental/" className="text-[#f5be53] hover:underline">photocopier rental</a>{" "}
+              includes the same cover plus the device and toner.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-4xl font-bold text-white mb-4">Brands we hold parts for</h2>
+            <p className="text-[#d3c5b0] leading-relaxed mb-5">
+              Our technicians are certified on Canon and Kyocera and are authorised service partners for HP and Xerox.
+              We stock consumables and wear parts for the models we service at our Sharjah workshop, which is why most
+              common faults are resolved on the first visit rather than after a parts order.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                ["Canon", "/brands/canon/"], ["Kyocera", "/brands/kyocera/"], ["HP", "/brands/hp/"],
+                ["Xerox", "/brands/xerox/"], ["Ricoh", "/brands/ricoh/"], ["Sharp", "/brands/sharp/"],
+                ["Brother", "/brands/brother/"], ["Epson", "/brands/epson/"], ["Lexmark", "/brands/lexmark/"],
+                ["Konica Minolta", "/brands/konica-minolta/"],
+              ].map(([n, href]) => (
+                <a key={n} href={href} className="px-4 py-2 rounded-full bg-[#142032] border border-[#f5be53]/20 text-sm text-[#d3c5b0] hover:text-[#f5be53] hover:border-[#f5be53]/50 transition-colors">
+                  {n}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-4xl font-bold text-white mb-4">AMC coverage across the UAE</h2>
+            <p className="text-[#d3c5b0] leading-relaxed">
+              Contracts are serviced from our Sharjah Industrial Area 11 workshop, with engineers covering{" "}
+              <a href="/printer-rental-dubai/" className="text-[#f5be53] hover:underline">Dubai</a>,{" "}
+              <a href="/photocopier-rental-sharjah/" className="text-[#f5be53] hover:underline">Sharjah</a>,{" "}
+              <a href="/printer-rental-abu-dhabi/" className="text-[#f5be53] hover:underline">Abu Dhabi</a>,{" "}
+              <a href="/printer-rental-al-ain/" className="text-[#f5be53] hover:underline">Al Ain</a>,{" "}
+              <a href="/printer-rental-fujairah/" className="text-[#f5be53] hover:underline">Fujairah</a>,{" "}
+              <a href="/printer-rental-rak/" className="text-[#f5be53] hover:underline">Ras Al Khaimah</a>, Ajman and
+              Umm Al Quwain — including the free zones at JAFZA, SAIF Zone, Hamriyah and Dubai Airport Free Zone.
+              Multi-site organisations are covered under a single contract with one consolidated invoice rather than
+              a separate agreement per location. Our four-hour response target applies UAE-wide; devices in Sharjah
+              and northern Dubai are typically reached faster given the workshop's location.
+            </p>
           </div>
         </div>
       </section>
