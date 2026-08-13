@@ -45,6 +45,16 @@ export async function generateMetadata(): Promise<Metadata> {
     "printer lease uae",
     "photocopier hire sharjah",
     "office equipment rental sharjah",
+    // Exact phrasings this page already ranks for in GSC but did not target:
+    // copier rental services in sharjah (104 impr, pos 19.6),
+    // photocopier for rent sharjah (88, 22.1), copier leasing in sharjah (9, 2.6),
+    // leasing printer in sharjah (8, 6.2), copier lease in sharjah (7, 6.7).
+    "copier rental services in sharjah",
+    "photocopier for rent sharjah",
+    "copier leasing in sharjah",
+    "leasing printer in sharjah",
+    "copier lease in sharjah",
+    "hamriyah free zone printer rental",
   ],
   alternates: { canonical: "https://www.saharaprinter.com/photocopier-rental-sharjah/" },
   openGraph: {
@@ -297,11 +307,14 @@ const industryInsights = [
   },
 ];
 
+// Hamriyah Free Zone was missing entirely despite being one of Sharjah's two
+// major free zones. Industrial Areas are now enumerated because businesses
+// there search by their own area number, and our workshop sits in Area 11.
 const sharjahAreas = [
-  "Industrial Area", "Al Majaz", "Muweilah", "SAIF Zone",
-  "Al Nahda", "Al Qasba", "Sharjah Airport", "King Faisal Rd",
-  "Al Khan", "Muwailih Commercial", "Al Taawun", "Rolla Square",
-  "Sharjah Media City", "University City",
+  "Industrial Area 1–18", "SAIF Zone", "Hamriyah Free Zone", "Al Majaz",
+  "Muweilah", "Al Nahda", "Al Qasba", "Al Qasimia", "Sharjah Airport",
+  "King Faisal Rd", "Al Khan", "Muwailih Commercial", "Al Taawun",
+  "Rolla Square", "Sharjah Media City", "University City", "Al Layyah", "Sajaa",
 ];
 
 export default async function PhotocopierRentalSharjah() {
@@ -576,6 +589,16 @@ export default async function PhotocopierRentalSharjah() {
           <h2 className="text-3xl font-bold text-white mb-8">Areas We Serve in Sharjah</h2>
           <p className="text-[#d3c5b0] mb-8">
             60-minute emergency response across all Sharjah districts. Same-day delivery for new rentals.
+          </p>
+          {/* The local-base advantage is the one thing no Dubai-headquartered
+              competitor can claim, and it is why Sharjah queries outrank their
+              Dubai equivalents by 15-30 positions. Stated explicitly. */}
+          <p className="text-[#d3c5b0] mb-8 text-sm leading-relaxed max-w-3xl mx-auto">
+            Our workshop and parts inventory are in <strong className="text-white">Sharjah Industrial Area 11</strong>,
+            not a Dubai head office serving Sharjah as an afterthought. For businesses in the Industrial Areas, SAIF
+            Zone and Hamriyah Free Zone that usually means an engineer on site within the hour and the part already on
+            the van — rather than a next-day slot and a parts order. It is also why we can swap a failed machine the
+            same day instead of leaving a floor without a copier.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {sharjahAreas.map((area, i) => (
