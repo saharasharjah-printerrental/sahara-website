@@ -89,8 +89,8 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
   // which blocked Clarity entirely and dropped GA4/Ads events sent to
   // region-specific analytics.google.com and ad.doubleclick.net endpoints.
   const scriptSrc = isAdmin
-    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://www.clarity.ms https://static.hotjar.com https://connect.facebook.net https://unpkg.com"
-    : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://www.clarity.ms https://static.hotjar.com https://connect.facebook.net";
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://www.clarity.ms https://*.clarity.ms https://static.hotjar.com https://connect.facebook.net https://unpkg.com"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://www.clarity.ms https://*.clarity.ms https://static.hotjar.com https://connect.facebook.net";
 
   const connectSrc = isAdmin
     ? "connect-src 'self' https:"
