@@ -363,6 +363,7 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => setIsMoreOpen(false)}
+                    aria-label="Close menu"
                     className="w-6 h-6 rounded-full bg-white/8 flex items-center justify-center text-slate-500 hover:text-white active:scale-90 transition-all"
                   >
                     <Close style={{ fontSize: 13 }} />

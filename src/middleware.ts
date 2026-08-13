@@ -80,14 +80,21 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
     response.headers.set('Cross-Origin-Opener-Policy',   'same-origin-allow-popups');
   }
 
-  // CSP — admin gets broader connect-src/img-src for management tools
+  // CSP — admin gets broader connect-src/img-src for management tools.
+  // Every domain here must match an integration layout.tsx actually knows how
+  // to inject (see getSEOConfig() consumers): GTM, GA/GA4, Meta Pixel,
+  // Microsoft Clarity, Hotjar. Missing one means that integration silently
+  // fails in production even though the admin panel accepts its ID —
+  // clarity.ms and analytics.google.com were missing here until 2026-08-13,
+  // which blocked Clarity entirely and dropped GA4/Ads events sent to
+  // region-specific analytics.google.com and ad.doubleclick.net endpoints.
   const scriptSrc = isAdmin
-    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://unpkg.com"
-    : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com";
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://www.clarity.ms https://static.hotjar.com https://connect.facebook.net https://unpkg.com"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://www.clarity.ms https://static.hotjar.com https://connect.facebook.net";
 
   const connectSrc = isAdmin
     ? "connect-src 'self' https:"
-    : "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://static.cloudflareinsights.com https://googleads.g.doubleclick.net";
+    : "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://*.analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net https://static.cloudflareinsights.com https://googleads.g.doubleclick.net https://www.clarity.ms https://*.clarity.ms https://in.hotjar.com https://*.hotjar.com https://connect.facebook.net https://www.facebook.com";
 
   const imgSrc = isAdmin
     ? "img-src 'self' data: blob: https: http:"

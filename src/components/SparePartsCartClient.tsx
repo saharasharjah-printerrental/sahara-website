@@ -153,7 +153,7 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
         <div className="absolute right-0 top-0 h-full w-full max-w-md bg-[#0a1425] shadow-2xl p-6 overflow-y-auto">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-white">Your Cart</h2>
-            <button onClick={() => setShowCart(false)} className="text-slate-400 hover:text-white"><Close /></button>
+            <button onClick={() => setShowCart(false)} aria-label="Close cart" className="text-slate-400 hover:text-white"><Close /></button>
           </div>
           {cart.length === 0 ? (
             <p className="text-slate-400 text-center py-8">Your cart is empty</p>
@@ -167,13 +167,13 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                         <p className="text-white font-medium text-sm">{item.supply.name}</p>
                         <p className="text-slate-400 text-xs">{item.supply.brand} - {item.supply.color || item.supply.category}</p>
                       </div>
-                      <button onClick={() => removeFromCart(item.supply.id)} className="text-slate-400 hover:text-red-400"><Close sx={{ fontSize: 18 }} /></button>
+                      <button onClick={() => removeFromCart(item.supply.id)} aria-label={`Remove ${item.supply.name} from cart`} className="text-slate-400 hover:text-red-400"><Close sx={{ fontSize: 18 }} /></button>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <button onClick={() => updateQuantity(item.supply.id, item.quantity - 1)} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">-</button>
+                        <button onClick={() => updateQuantity(item.supply.id, item.quantity - 1)} aria-label={`Decrease quantity of ${item.supply.name}`} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">-</button>
                         <span className="text-white w-8 text-center">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item.supply.id, item.quantity + 1)} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">+</button>
+                        <button onClick={() => updateQuantity(item.supply.id, item.quantity + 1)} aria-label={`Increase quantity of ${item.supply.name}`} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">+</button>
                       </div>
                       <span className="text-[#f5be53] font-medium">{item.supply.price}</span>
                     </div>

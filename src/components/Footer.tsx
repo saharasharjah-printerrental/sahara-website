@@ -193,7 +193,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Contact</h4>
+            <h3 className="text-white font-bold mb-6">Contact</h3>
             <ul className="space-y-4 text-sm text-slate-400">
               <li className="flex items-center gap-2">
                 <Smartphone className="text-[#f5be53] text-lg" />
@@ -221,7 +221,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Our Services</h4>
+            <h3 className="text-white font-bold mb-6">Our Services</h3>
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
               <li><Link href="/services/photocopier-rental/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
@@ -236,7 +236,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Locations</h4>
+            <h3 className="text-white font-bold mb-6">Locations</h3>
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link href="/printer-rental-dubai/" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
               <li><Link href="/photocopier-rental-sharjah/" className="hover:text-[#f5be53] transition-colors">Photocopier Sharjah</Link></li>
@@ -249,7 +249,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Blog Resources</h4>
+            <h3 className="text-white font-bold mb-6">Blog Resources</h3>
             <ul className="space-y-3 text-sm text-slate-400">
               <li>
                 <Link href="/blogs/how-to-choose-the-best-printer-rental-dubai-service/" className="hover:text-[#f5be53] transition-colors leading-snug">

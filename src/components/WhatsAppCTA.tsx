@@ -45,11 +45,14 @@ export default function WhatsAppCTA() {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e as unknown as React.MouseEvent); } }}
       className="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#25D366] to-[#1da851] cursor-grab active:cursor-grabbing select-none"
       style={{
         boxShadow: "6px 6px 16px rgba(0,0,0,0.3), -2px -2px 8px rgba(255,255,255,0.1)",
         touchAction: "none",
       }}
+      role="button"
+      tabIndex={0}
       aria-label="Chat on WhatsApp"
     >
       <Chat className="w-6 h-6 text-white pointer-events-none" />

@@ -82,13 +82,19 @@ const nextConfig = {
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
           { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
           {
+            // NOTE: src/middleware.ts sets its own Content-Security-Policy on
+            // every response and is what's actually served in production —
+            // this block is not observed to take effect under
+            // @cloudflare/next-on-pages + middleware. Kept in sync with
+            // middleware.ts anyway so it isn't misleading if that ever
+            // changes. Edit both together.
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://static.hotjar.com https://connect.facebook.net",
               "worker-src 'self' blob:",
               "img-src 'self' data: blob: https: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.facebook.com",
-              "connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.clarity.ms https://connect.facebook.net https://www.facebook.com",
+              "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms https://in.hotjar.com https://*.hotjar.com https://connect.facebook.net https://www.facebook.com",
               "frame-src 'self' https://www.googletagmanager.com https://www.facebook.com https://www.clarity.ms",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",

@@ -428,10 +428,10 @@ function FeaturedProductsSection() {
           <p className="text-4xl font-bold text-white">Elite Hardware Selection</p>
         </div>
         <div className="flex gap-4">
-          <button type="button" onClick={scrollLeft} className="w-12 h-12 rounded-full border border-[#9c8f7c]/20 flex items-center justify-center hover:border-[#f5be53] text-[#d3c5b0] hover:text-[#f5be53] transition-all cursor-pointer">
+          <button type="button" onClick={scrollLeft} aria-label="Scroll products left" className="w-12 h-12 rounded-full border border-[#9c8f7c]/20 flex items-center justify-center hover:border-[#f5be53] text-[#d3c5b0] hover:text-[#f5be53] transition-all cursor-pointer">
             <ArrowBack className="text-xl" />
           </button>
-          <button type="button" onClick={scrollRight} className="w-12 h-12 rounded-full bg-[#f5be53] text-[#412d00] flex items-center justify-center hover:scale-110 transition-all cursor-pointer">
+          <button type="button" onClick={scrollRight} aria-label="Scroll products right" className="w-12 h-12 rounded-full bg-[#f5be53] text-[#412d00] flex items-center justify-center hover:scale-110 transition-all cursor-pointer">
             <ArrowForward className="text-xl" />
           </button>
         </div>
