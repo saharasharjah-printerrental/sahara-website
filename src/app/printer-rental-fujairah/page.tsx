@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -263,6 +264,17 @@ export default async function PrinterRentalFujairah() {
                 Printer Rental{" "}
                 <span className="text-[#f5be53]">Fujairah</span>
               </h1>
+
+              <AnswerBlock
+                question="Does Sahara deliver rental printers to Fujairah and the east coast?"
+                answer="Yes — Sahara delivers and services rental printers across Fujairah. Coverage reaches Fujairah City, Dibba, Kalba, Khor Fakkan, and the Fujairah Free Trade Zone, with FFTZ entity billing supported. Engineers travel from the Sharjah headquarters for scheduled maintenance and breakdowns. Rental starts at AED 250 per month with free toner."
+                supportingPoints={[
+                  "Covers Fujairah City, Dibba, Kalba, Khor Fakkan and the Fujairah Free Trade Zone",
+                  "FFTZ free-zone entity billing supported alongside mainland LLC invoicing",
+                  "Zero deposit, unlimited genuine OEM toner, free delivery and free network setup",
+                  "Canon and Kyocera multifunction devices from AED 250/month",
+                ]}
+              />
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
                 Canon &amp; Kyocera printer and photocopier rental in Fujairah from AED 250/month. Zero deposit,
                 free toner, and on-site support across Fujairah City, Dibba, Kalba, and FFTZ.

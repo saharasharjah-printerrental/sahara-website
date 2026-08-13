@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import { AccountBalance, Schedule, Upgrade, Build, Inventory2, Cancel, ExpandMore } from "@mui/icons-material";
+import AnswerBlock from "@/components/AnswerBlock";
 
 export default function CopierLeaseUAE() {
   const [settings, setSettings] = useState<any>(null);
@@ -104,16 +105,16 @@ export default function CopierLeaseUAE() {
             Commercial Photocopier <span className="text-[#f5be53]">Lease</span>
           </h1>
 
-          {/* AEO Quick Answer Block */}
-          <div className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-6 max-w-2xl mx-auto text-left">
-            <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Copier Lease UAE — Quick Answer</p>
-            <p className="text-[#d3c5b0] text-sm leading-relaxed">
-              Copier leasing in the UAE is a long-term financial arrangement (12–60 months) where businesses access
-              enterprise Canon, Kyocera, and Xerox photocopiers with <strong className="text-white">zero upfront capital</strong>.
-              Lease payments qualify as OPEX — reducing taxable income under UAE Corporate Tax. Sahara offers
-              copier leases from <strong className="text-white">AED 250/month</strong> with full maintenance and toner included.
-            </p>
-          </div>
+          <AnswerBlock
+            question="What is the difference between leasing and renting a copier in the UAE?"
+            answer="Leasing runs longer than rental, but neither transfers ownership at Sahara. A lease typically commits 12 to 60 months for a lower monthly rate and stable budgeting; a rental runs 3 to 36 months with more flexibility. Both are OPEX, and both include toner, maintenance, and repairs."
+            supportingPoints={[
+              "Lease term 12–60 months; rental term 3–36 months — the machine returns to Sahara either way",
+              "Lease payments are an operating expense, deductible under UAE Corporate Tax",
+              "At end of term: renew, upgrade, or return at no collection or disposal cost",
+              "Canon, Kyocera and Xerox copiers from AED 250/month, zero deposit, toner and maintenance included",
+            ]}
+          />
 
           <p className="text-lg text-[#d3c5b0] max-w-2xl mx-auto mb-8">
             Flexible copier lease solutions with tax advantages, flexible terms, and full maintenance included. Zero deposit options available.

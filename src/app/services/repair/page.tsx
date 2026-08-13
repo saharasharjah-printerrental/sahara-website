@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 export const metadata: Metadata = {
   title: "Printer Repair Dubai | Fix Printer Near Me | HP Service Center | Sahara",
@@ -207,16 +208,16 @@ export default function RepairPage() {
                 Printer Repair<br /><span className="text-[#f5be53]">Dubai & UAE</span>
               </h1>
 
-              {/* AEO Answer Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Fix Printer Near Me — What is Printer Repair Service in UAE?</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  On-site printer repair is a professional service where factory-certified technicians visit your office,
-                  diagnose the fault, and fix it using genuine OEM parts — with a 4-hour response time across Dubai, Sharjah,
-                  Abu Dhabi, and all UAE emirates. As an HP Service Center in Dubai and authorized partner for Canon, Kyocera,
-                  Ricoh, and Xerox, Sahara has completed 50,000+ repairs since 2012.
-                </p>
-              </div>
+              <AnswerBlock
+                question="How much does it cost to repair a printer in the UAE?"
+                answer="Printer repair in the UAE starts from AED 150 per callout. That fee covers an on-site visit by a factory-certified technician, full diagnosis, and labour; genuine OEM parts are quoted separately before any work begins. Every repair carries a 30-day workmanship warranty. Machines under a Sahara AMC pay nothing per callout."
+                supportingPoints={[
+                  "Diagnosis and labour are included in the callout fee; parts are quoted before work starts",
+                  "Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp and Epson printers, copiers and plotters serviced",
+                  "30-day warranty on workmanship, and genuine OEM parts only — no compatibles",
+                  "Callouts are covered free under an AMC plan from AED 299/month per machine",
+                ]}
+              />
 
               {/* Trust Pill Row */}
               <div className="flex flex-wrap gap-3 mb-8">

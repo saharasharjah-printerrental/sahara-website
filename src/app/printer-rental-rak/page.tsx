@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -227,6 +228,17 @@ export default async function PrinterRentalRAK() {
                 Printer Rental{" "}
                 <span className="text-[#f5be53]">RAK</span>
               </h1>
+
+              <AnswerBlock
+                question="Can a RAK free-zone company rent a printer from Sahara?"
+                answer="Yes — Sahara bills RAK free-zone entities directly. Rental printers and copiers are delivered to RAK Free Trade Zone, Al Hamra, Al Marjan Island, Al Nakheel, and RAK Industrial Area, with invoicing arranged to suit free-zone accounting. Plans start at AED 250 per month, zero deposit, toner included."
+                supportingPoints={[
+                  "RAK FTZ, Al Hamra, Al Marjan Island, Al Nakheel and RAK Industrial Area covered",
+                  "Free-zone entity invoicing supported alongside mainland LLC billing",
+                  "Zero deposit, unlimited genuine OEM toner, free delivery and free network setup",
+                  "Canon and Kyocera multifunction devices from AED 250/month",
+                ]}
+              />
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
                 Canon &amp; Kyocera printer rental in Ras Al Khaimah from AED 250/month. Zero deposit, free toner,
                 and on-site support across RAK Free Trade Zone, Al Hamra, and Al Marjan Island.

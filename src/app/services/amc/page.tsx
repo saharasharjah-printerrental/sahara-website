@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 export const metadata: Metadata = {
   // Position 9.5 with 0.99% CTR — top-10 and barely clicked, the largest
@@ -298,15 +299,16 @@ export default function AMCPage() {
                 Printer AMC<br /><span className="text-[#f5be53]">Dubai & UAE</span>
               </h1>
 
-              {/* AEO Answer Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is a Printer AMC in UAE?</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  A Printer Annual Maintenance Contract (AMC) is a service agreement covering scheduled preventive
-                  maintenance, priority emergency repairs, and OEM parts for your office printers — at a fixed monthly fee.
-                  It converts unpredictable repair costs into a stable operational expense. Plans start from <strong className="text-white">AED 299/month</strong> per machine.
-                </p>
-              </div>
+              <AnswerBlock
+                question="What does a printer AMC cover, and what is excluded?"
+                answer="A printer AMC covers preventive servicing, labour, and priority emergency callouts. Sahara's plans start from AED 299 per month per machine and include scheduled visits, unlimited breakdown calls, and OEM spare parts. Consumables — toner, ink, and paper — are billed separately, as are machines damaged by misuse or power surges."
+                supportingPoints={[
+                  "From AED 299/month per machine, covering labour, spare parts and unlimited breakdown calls",
+                  "Excluded: toner, ink, paper, and damage from misuse, power surges or unauthorised servicing",
+                  "Covers Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp and Epson, including out-of-warranty units",
+                  "4-hour emergency response target across all seven emirates; multi-site fleet plans available",
+                ]}
+              />
 
               {/* Trust Pills */}
               <div className="flex flex-wrap gap-3 mb-8">

@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -369,17 +370,16 @@ export default async function PhotocopierRentalSharjah() {
                 <span className="text-[#f5be53]">Sharjah</span>
               </h1>
 
-              {/* AEO Quick Answer Block */}
-              <div className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-6">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Photocopier Rental Sharjah — Quick Answer</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Sahara Office Equipments provides photocopier and printer rental in Sharjah from{" "}
-                  <strong className="text-white">AED 250/month</strong> with zero deposit, unlimited genuine toner,
-                  and a <strong className="text-white">60-minute emergency response</strong> across SAIF Zone,
-                  Industrial Area, Al Majaz, and all Sharjah districts. Founded in 2012, Sahara is headquartered in
-                  Sharjah — making it the city&apos;s closest-based copier rental provider.
-                </p>
-              </div>
+              <AnswerBlock
+                question="How fast can a technician reach a Sharjah office?"
+                answer="Sahara targets a 60-minute on-site response anywhere in Sharjah. The company is headquartered at Al Arabi Building, Industrial Area 11, Sharjah, so engineers reach SAIF Zone, the Industrial Areas, Al Majaz, Al Nahda, and Muwaileh faster than Dubai-based providers. Photocopier rental starts from AED 250 per month."
+                supportingPoints={[
+                  "HQ at Al Arabi Building, Industrial Area 11, Sharjah — no cross-emirate travel time",
+                  "Covers SAIF Zone, Industrial Areas 1–18, Al Majaz, Al Nahda, Muwaileh and Al Khan",
+                  "60-minute emergency response target, with a replacement machine if a fix runs long",
+                  "Zero deposit, unlimited genuine toner and free network setup, from AED 250/month",
+                ]}
+              />
 
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
                 Canon &amp; Kyocera photocopiers from AED 250/month. Zero deposit, free toner, and 60-minute

@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -298,6 +299,17 @@ export default async function PrinterRentalAlAin() {
                 Printer Rental{" "}
                 <span className="text-[#f5be53]">Al Ain</span>
               </h1>
+
+              <AnswerBlock
+                question="Which Al Ain organisations rent printers from Sahara?"
+                answer="Healthcare, education, government, and industrial sites make up most Al Ain rentals. Clinics need reliable patient-record printing, schools and universities need per-user quota control at term-start peaks, and government offices need audited print logs. Sahara supplies Canon and Kyocera multifunction devices to all three from AED 250 monthly."
+                supportingPoints={[
+                  "Per-user quota and department cost-allocation control available via PaperCut integration",
+                  "Weekly preventive maintenance covering Al Jimi, Al Muwaiji, Zakher and Al Ain Industrial Area",
+                  "Zero deposit, unlimited genuine OEM toner, and free network setup on delivery",
+                  "Canon imageRUNNER ADVANCE and Kyocera TASKalfa multifunction devices from AED 250/month",
+                ]}
+              />
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
                 Canon &amp; Kyocera printer and photocopier rental in Al Ain from AED 250/month. Zero deposit,
                 free toner, and weekly maintenance for healthcare, education, government, and industry.

@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 export const metadata: Metadata = {
   title: "Plotter Repair & Maintenance Dubai | Wide-Format Printer AMC | Sahara",
@@ -204,16 +205,16 @@ export default function PlotterMaintenancePage() {
                 Plotter Maintenance<br /><span className="text-[#f5be53]">Dubai & UAE</span>
               </h1>
 
-              {/* AEO Answer Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is Plotter Maintenance in UAE?</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Plotter maintenance is scheduled servicing of wide-format printers — printhead cleaning, ink-line checks,
-                  media-feed calibration, and colour accuracy testing — that stops banding and jams before they cost you a
-                  print run. Sahara services Canon imagePROGRAF, HP DesignJet, and Epson SureColor plotters across Dubai,
-                  Sharjah, and Abu Dhabi, on-call or under an AMC plan.
-                </p>
-              </div>
+              <AnswerBlock
+                question="How often should a wide-format plotter be serviced?"
+                answer="Most wide-format plotters need a full service every three to six months. High-volume production units in Dubai print shops benefit from quarterly visits, while occasional-use office plotters can run six-monthly. A Sahara service covers printhead cleaning, ink-line checks, media-feed calibration, and colour accuracy testing on Canon imagePROGRAF, HP DesignJet, and Epson SureColor."
+                supportingPoints={[
+                  "Quarterly for production and reprographics use; six-monthly for low-volume office plotters",
+                  "Each visit: printhead clean, ink-line check, media-feed calibration, colour accuracy test",
+                  "Canon imagePROGRAF, HP DesignJet and Epson SureColor serviced with OEM parts only",
+                  "Available on callout or under an AMC plan — current rates confirmed same working day by phone",
+                ]}
+              />
 
               {/* Trust Pill Row */}
               <div className="flex flex-wrap gap-3 mb-8">

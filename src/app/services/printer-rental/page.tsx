@@ -9,6 +9,7 @@ import CountUp from "@/components/CountUp";
 import FaqSection from "@/components/FaqSection";
 import { Savings, Inventory2, BuildCircle, Emergency, Upgrade, Cancel, SupportAgent, Sync, Build, Verified, Print, CheckCircle, LocationOn, HeadsetMic } from "@mui/icons-material";
 import Link from "next/link";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -189,17 +190,16 @@ export default function PrinterRentalPage() {
                 Printer Rental Plans<br /><span className="text-[#f5be53]">Across the UAE</span>
               </h1>
 
-              {/* AEO Answer Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is Printer Rental in UAE?</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Printer rental in the UAE is a monthly leasing model where businesses access enterprise-grade
-                  Canon, Kyocera, HP, and Ricoh printers with <strong className="text-white">zero deposit</strong>,
-                  unlimited OEM toner, and full maintenance included — starting from{" "}
-                  <strong className="text-white">AED 250/month</strong>. Over 1,500 UAE businesses use this model
-                  to eliminate printing capital costs and unpredictable repair bills.
-                </p>
-              </div>
+              <AnswerBlock
+                question="What is included in a printer rental plan in the UAE?"
+                answer="Every Sahara rental plan includes the machine, toner, maintenance, and repairs. One fixed monthly fee from AED 250 covers unlimited genuine OEM toner, scheduled preventive servicing, all parts and labour, and free delivery with network setup. There is no deposit, no metered page charge, and no exit fee."
+                supportingPoints={[
+                  "A4 desktop from AED 250/month; A3 mid-range AED 500–800; A3 enterprise AED 1,000–2,000",
+                  "Canon, Kyocera, HP, Ricoh, Xerox, Brother, Sharp and Epson available under identical terms",
+                  "Contracts run 3 to 36 months, with upgrades permitted mid-contract at no penalty",
+                  "4-hour emergency response target across Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah and Al Ain",
+                ]}
+              />
 
               {/* Trust Pills */}
               <div className="flex flex-wrap gap-3 mb-8">

@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 const defaultFaqs = [
   { q: "Do you offer printer repair services in Dubai?", a: "Yes! We provide professional printer and photocopier repair services across Dubai. Our certified technicians can fix all major brands." },
@@ -125,16 +126,16 @@ export default function PrinterRepairDubai() {
                 Professional printer repair services in Dubai with 4-hour emergency response. All brands serviced including Canon, HP, Kyocera, Xerox.
               </p>
 
-              {/* AEO Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Printer Repair Dubai — Quick Answer</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Sahara dispatches certified technicians for printer and photocopier repair across Dubai with a{" "}
-                  <strong className="text-white">4-hour emergency response</strong> — under 2 hours for Business Bay, DIFC, and Downtown Dubai.
-                  Repairs start from <strong className="text-white">AED 150</strong>, use genuine OEM parts only, and carry a 30-day workmanship warranty.
-                  We service JLT, Marina, Deira, Sheikh Zayed Road, and every other Dubai district.
-                </p>
-              </div>
+              <AnswerBlock
+                question="How fast can a printer technician reach my Dubai office?"
+                answer="Sahara targets a 4-hour emergency response anywhere in Dubai. Business Bay, DIFC, and Downtown Dubai sit in a priority dispatch queue with a 2-hour target. If a repair cannot be completed within 24 hours, a loaner machine is delivered free so printing continues."
+                supportingPoints={[
+                  "4-hour target across Dubai; 2-hour priority for Business Bay, DIFC and Downtown",
+                  "Free loaner machine if a repair runs past 24 hours",
+                  "Covers JLT, Marina, Deira, Sheikh Zayed Road, Al Quoz, Jebel Ali and every other district",
+                  "Repairs from AED 150, genuine OEM parts only, 30-day workmanship warranty",
+                ]}
+              />
 
               <div className="flex flex-wrap gap-4">
                 <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">

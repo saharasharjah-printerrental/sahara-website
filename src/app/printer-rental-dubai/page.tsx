@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -205,16 +206,16 @@ export default async function PrinterRentalDubai() {
                 Printer Rental<br /><span className="text-[#f5be53]">Dubai</span>
               </h1>
 
-              {/* AEO Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Printer Rental Dubai — Quick Answer</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Sahara Office Equipments provides printer and photocopier rental in Dubai from <strong className="text-white">AED 250/month</strong> with
-                  zero deposit, unlimited OEM toner, and a <strong className="text-white">4-hour emergency response</strong> across all Dubai districts.
-                  Canon and Kyocera multifunction devices are delivered and network-configured same day.
-                  Over 1,500 Dubai businesses have trusted Sahara since 2012.
-                </p>
-              </div>
+              <AnswerBlock
+                question="How quickly can a rented printer be delivered in Dubai?"
+                answer="Same-day delivery is available across most Dubai districts. Business Bay, DIFC, JLT, Dubai Marina, Sheikh Zayed Road, and Deira are usually covered the same working day; everywhere else in Dubai is next-day. Sahara engineers handle network configuration on the delivery visit at no extra charge."
+                supportingPoints={[
+                  "Same-day: Business Bay, DIFC, JLT, Marina, Sheikh Zayed Road, Deira. Next-day: rest of Dubai",
+                  "Free zones served directly: JAFZA, DMCC, DAFZA, Dubai Internet City, Media City, Silicon Oasis",
+                  "Network setup and driver installation are included in the delivery visit",
+                  "4-hour emergency response target, 2-hour priority for Business Bay, DIFC and Downtown Dubai",
+                ]}
+              />
 
               <div className="flex flex-wrap gap-3 mb-8">
                 {["AED 250/mo Starting", "Zero Deposit", "Same-Day Delivery", "Free Toner", "4-hr Response"].map((t) => (

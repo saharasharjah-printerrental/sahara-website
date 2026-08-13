@@ -4,7 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import PaperCutFaqClient from "@/components/PaperCutFaqClient";
+import FaqSection from "@/components/FaqSection";
+import type { FaqItem } from "@/lib/faqs";
+import AnswerBlock from "@/components/AnswerBlock";
 
 export const metadata: Metadata = {
   title: "PaperCut Print Management UAE | MF & NG Setup | Sahara Office Equipments",
@@ -47,17 +49,18 @@ const breadcrumbSchema = {
   ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "What is PaperCut print management software?", "acceptedAnswer": { "@type": "Answer", "text": "PaperCut is the world's leading print management software used by 100+ million users across 200 countries. It tracks, controls, and reduces print costs by enforcing print policies, enabling secure print release, and reporting on usage by user, department, or project. Sahara provides PaperCut MF and NG setup, licensing, and support for UAE offices." } },
-    { "@type": "Question", "name": "How much does PaperCut cost for a UAE office?", "acceptedAnswer": { "@type": "Answer", "text": "PaperCut NG (for SMEs) starts from approximately AED 1,800 per year for 10 users. PaperCut MF (for enterprise with MFP integration) is licensed per device. Sahara provides competitive UAE pricing with installation, configuration, and 1-year support included." } },
-    { "@type": "Question", "name": "Which printers does PaperCut work with in UAE?", "acceptedAnswer": { "@type": "Answer", "text": "PaperCut MF works natively with Canon, Kyocera, Ricoh, Xerox, HP, Brother, and Sharp MFPs — all brands Sahara dealers in UAE. Installation integrates directly into the printer's touch panel for secure print release and copy/scan tracking." } },
-    { "@type": "Question", "name": "Can PaperCut reduce our office printing costs in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Dubai and UAE businesses that implement PaperCut typically see 20–30% reduction in print volume within 3 months — driven by duplex enforcement, colour restrictions, secure print release (reduces uncollected prints), and department quota management." } },
-    { "@type": "Question", "name": "Does Sahara provide PaperCut training and support in UAE?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Sahara's PaperCut implementation service includes on-site installation, Active Directory/LDAP integration, user training, and 12-month remote + on-site support across Dubai, Sharjah, and Abu Dhabi." } },
-  ],
-};
+// Default FAQ set for /services/papercut-print-management/. Fallback only:
+// FaqSection reads pageSlug 'papercut-print-management' from D1 (seeded in
+// migrations 005 and 018) and emits the FAQPage JSON-LD next to the accordion
+// it renders. Replaces both the hand-rolled faqSchema literal and the
+// client-side /api/faqs fetch in PaperCutFaqClient, which emitted no schema.
+const PAPERCUT_FAQS: FaqItem[] = [
+  { q: "What is PaperCut print management software?", a: "PaperCut is the world's leading print management software used by 100+ million users across 200 countries. It tracks, controls, and reduces print costs by enforcing print policies, enabling secure print release, and reporting on usage by user, department, or project. Sahara provides PaperCut MF and NG setup, licensing, and support for UAE offices." },
+  { q: "How much does PaperCut cost for a UAE office?", a: "PaperCut NG (for SMEs) starts from approximately AED 1,800 per year for 10 users. PaperCut MF (for enterprise with MFP integration) is licensed per device. Sahara provides competitive UAE pricing with installation, configuration, and 1-year support included." },
+  { q: "Which printers does PaperCut work with in UAE?", a: "PaperCut MF works natively with Canon, Kyocera, Ricoh, Xerox, HP, Brother, and Sharp MFPs — all brands Sahara dealers in UAE. Installation integrates directly into the printer's touch panel for secure print release and copy/scan tracking." },
+  { q: "Can PaperCut reduce our office printing costs in Dubai?", a: "Yes. Dubai and UAE businesses that implement PaperCut typically see 20–30% reduction in print volume within 3 months — driven by duplex enforcement, colour restrictions, secure print release (reduces uncollected prints), and department quota management." },
+  { q: "Does Sahara provide PaperCut training and support in UAE?", a: "Yes. Sahara's PaperCut implementation service includes on-site installation, Active Directory/LDAP integration, user training, and 12-month remote + on-site support across Dubai, Sharjah, and Abu Dhabi." },
+];
 
 const features = [
   { icon: "📊", title: "Usage Tracking", desc: "Report on print, copy, and scan activity by user, department, or project — across all your office printers and MFPs." },
@@ -86,7 +89,8 @@ export default function PaperCutPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {/* FAQPage JSON-LD is emitted by <FaqSection> alongside the accordion it renders,
+          so the questions can never drift apart from the schema that declares them. */}
       <main className="min-h-screen bg-[#071325]">
         <Header />
 
@@ -110,13 +114,16 @@ export default function PaperCutPage() {
                 PaperCut Print<br /><span className="text-[#f5be53]">Management UAE</span>
               </h1>
 
-              {/* AEO Answer Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is PaperCut Print Management in UAE?</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  PaperCut is print management software that tracks, controls, and reduces printing costs for UAE offices. Sahara Office Equipments provides <strong className="text-white">PaperCut MF</strong> (for enterprises with MFPs) and <strong className="text-white">PaperCut NG</strong> (for SMEs) — including setup, licensing, AD integration, and 12-month support in Dubai, Sharjah, and Abu Dhabi. UAE offices typically cut print volumes by <strong className="text-white">20–30%</strong> within 3 months.
-                </p>
-              </div>
+              <AnswerBlock
+                question="What is PaperCut print management and what does it do for a UAE office?"
+                answer="PaperCut is software that tracks, controls, and reduces office printing costs. Sahara installs PaperCut MF for enterprises running multifunction devices and PaperCut NG for smaller workgroups, covering licensing, Active Directory integration, and twelve months of support across Dubai, Sharjah, and Abu Dhabi. Print volumes typically fall 20–30% within three months."
+                supportingPoints={[
+                  "PaperCut MF is licensed per device; PaperCut NG is licensed per user, per year",
+                  "Embedded touch-panel apps on Canon, Kyocera, Ricoh, Xerox, HP and Sharp MFPs",
+                  "Secure print release holds jobs at the server until the user authenticates at the printer",
+                  "Setup takes half a day for NG, one to two days for a multi-device MF rollout",
+                ]}
+              />
 
               <div className="flex flex-wrap gap-3 mb-8">
                 {["20–30% Cost Reduction", "Secure Print Release", "Canon, Kyocera, HP, Xerox", "On-Site Setup UAE", "12-Month Support"].map((t) => (
@@ -256,7 +263,11 @@ export default function PaperCutPage() {
         <section className="py-20 px-8 lg:px-24">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-10">PaperCut UAE — Frequently Asked Questions</h2>
-            <PaperCutFaqClient />
+            <FaqSection
+              pageSlug="papercut-print-management"
+              defaultFaqs={PAPERCUT_FAQS}
+              pageId="https://www.saharaprinter.com/services/papercut-print-management/#faq"
+            />
           </div>
         </section>
 

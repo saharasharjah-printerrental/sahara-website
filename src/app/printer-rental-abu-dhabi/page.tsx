@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -357,6 +358,17 @@ export default async function PrinterRentalAbuDhabi() {
                 Printer Rental{" "}
                 <span className="text-[#f5be53]">Abu Dhabi</span>
               </h1>
+
+              <AnswerBlock
+                question="Which Abu Dhabi areas does Sahara cover, and how often are machines serviced?"
+                answer="Sahara covers all Abu Dhabi areas with weekly preventive maintenance visits. Coverage includes Mussafah, ICAD, Al Reem Island, Khalifa City, Yas Island, and the city centre, plus Al Ain. Rented machines get scheduled weekly checks rather than break-fix-only support, with a 4-to-6-hour emergency response target."
+                supportingPoints={[
+                  "Areas covered: Mussafah, ICAD I–III, Al Reem Island, Khalifa City, Yas Island, Corniche, Al Ain",
+                  "Weekly preventive maintenance is included, not charged as separate callouts",
+                  "Zero deposit, unlimited genuine OEM toner, and free network setup on delivery",
+                  "Rental from AED 250/month with a 4–6 hour emergency response target",
+                ]}
+              />
               <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
                 Canon &amp; Kyocera printer and photocopier rental from AED 250/month. Zero deposit, free OEM
                 toner, and weekly preventive maintenance across all Abu Dhabi areas.

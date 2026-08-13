@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import AnswerBlock from "@/components/AnswerBlock";
 
 interface FAQItem { q: string; a: string; }
 
@@ -254,16 +255,16 @@ export default async function PhotocopierRentalPage() {
                 Photocopier Rental<br /><span className="text-[#f5be53]">Dubai & UAE</span>
               </h1>
 
-              {/* AEO Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">What is Photocopier Rental in UAE?</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Photocopier rental in UAE is a monthly lease of an A3 multifunction device (MFD) that combines
-                  high-volume copying, printing, scanning, and faxing in one shared office machine. Canon imageRUNNER
-                  ADVANCE and Kyocera TASKalfa copiers are available from <strong className="text-white">AED 500/month</strong> — with
-                  zero deposit, unlimited toner, and full maintenance. Over 1,500 UAE businesses currently rent from Sahara.
-                </p>
-              </div>
+              <AnswerBlock
+                question="What is A3 photocopier rental and how does it differ from A4?"
+                answer="A3 photocopier rental covers machines printing sheets twice the size of A4. These multifunction devices print, copy, scan, and fax from one shared unit, handle far higher monthly volumes than a desktop A4 printer, and rent from AED 500 per month with toner, maintenance, and network setup included."
+                supportingPoints={[
+                  "An A3 sheet is 297 × 420 mm — double A4, used for plans, spreads and two-up booklets",
+                  "Canon imageRUNNER ADVANCE and Kyocera TASKalfa are the two most-rented A3 ranges",
+                  "A3 machines also print A4, so one copier replaces several separate desktop printers",
+                  "Zero deposit, unlimited genuine OEM toner, and a 4-hour emergency response target",
+                ]}
+              />
 
               <div className="flex flex-wrap gap-3 mb-8">
                 {["From AED 500/mo", "A3 + A4 Capable", "Zero Deposit", "Unlimited Toner", "Network Setup Included"].map((t) => (
