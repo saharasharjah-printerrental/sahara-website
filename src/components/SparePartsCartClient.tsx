@@ -19,6 +19,7 @@ interface Supply {
   alt_text?: string;
   image_width?: number;
   image_height?: number;
+  slug?: string;
 }
 
 interface SparePartsCartClientProps {
@@ -51,8 +52,9 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
       setSupplies(defaultSupplies);
     }
 
-    // Fetch from D1 first (real visitors won't have localStorage populated)
-    fetch('/api/supplies/')
+    // localStorage above is a paint-only cache; always re-fetch from D1 and
+    // overwrite it so admin price/stock edits reflect without a manual clear.
+    fetch('/api/supplies/', { cache: 'no-store' })
       .then(r => r.json())
       .then(data => {
         if (Array.isArray(data.supplies) && data.supplies.length > 0) {
@@ -183,16 +185,25 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                   <span>Total</span>
                   <span>{formatAED(cartTotal)}</span>
                 </div>
-                {hasUnpricedItems ? (
-                  <>
-                    <div className="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
-                      Some items show &quot;Contact for Pricing&quot; and can&apos;t be checked out online yet. Please request a quote for those.
-                    </div>
-                    <a href="/contact/" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Request a Quote</a>
-                  </>
-                ) : (
-                  <a href="/checkout/" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Proceed to Checkout</a>
+                {hasUnpricedItems && (
+                  <div className="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
+                    Some items show &quot;Contact for Pricing&quot; and can&apos;t be paid for online yet — request a quote and our team will confirm pricing.
+                  </div>
                 )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {hasUnpricedItems ? (
+                    <span className="block w-full bg-slate-700 text-slate-400 py-4 rounded-xl font-bold text-center cursor-not-allowed" title="Remove unpriced items to pay online">
+                      Pay Now
+                    </span>
+                  ) : (
+                    <a href="/checkout/" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">
+                      Pay Now
+                    </a>
+                  )}
+                  <a href="/request-quote/" onClick={() => setShowCart(false)} className="block w-full border-2 border-[#f5be53]/60 text-[#f5be53] py-4 rounded-xl font-bold text-center hover:bg-[#f5be53]/10 transition-colors">
+                    Request Quotation
+                  </a>
+                </div>
               </div>
             </>
           )}
@@ -273,19 +284,24 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                     <span className="text-xs font-bold text-[#f5be53] uppercase tracking-widest">{supply.brand}</span>
                     {getColorDot(supply.color)}
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">{supply.name}</h3>
+                  <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">
+                    {supply.slug ? (
+                      <a href={`/services/printer-spare-parts/${supply.slug}/`} className="hover:text-[#f5be53] transition-colors">{supply.name}</a>
+                    ) : supply.name}
+                  </h3>
                   <p className="text-slate-400 text-sm mb-2">Fits: {supply.compatibleModels}</p>
                   <div className="flex items-center justify-between text-sm text-slate-400 mb-4">
                     <span>Yield: {supply.yield}</span>
                     <span>Stock: {supply.stock}</span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2">
                     <span className="text-[#f5be53] font-bold text-lg">{supply.price}</span>
-                    {paymentSettings.paymentGatewayEnabled && paymentSettings.paymentGatewayUrl ? (
-                      <a href={paymentSettings.paymentGatewayUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg font-medium transition-all bg-[#f5be53] text-[#412d00] hover:scale-105">{paymentSettings.paymentGatewayLabel}</a>
-                    ) : (
+                    <div className="flex items-center gap-2">
                       <button onClick={() => addToCart(supply)} disabled={supply.stock === 0} className={`px-4 py-2 rounded-lg font-medium transition-all ${supply.stock > 0 ? "bg-[#f5be53] text-[#412d00] hover:scale-105" : "bg-slate-600 text-slate-400 cursor-not-allowed"}`}>Add to Cart</button>
-                    )}
+                      {paymentSettings.paymentGatewayEnabled && paymentSettings.paymentGatewayUrl && (
+                        <a href={paymentSettings.paymentGatewayUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg font-medium transition-all border border-[#f5be53]/60 text-[#f5be53] hover:bg-[#f5be53]/10">{paymentSettings.paymentGatewayLabel}</a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

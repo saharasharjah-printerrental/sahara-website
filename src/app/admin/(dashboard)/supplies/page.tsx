@@ -14,6 +14,13 @@ interface Supply {
   color?: string;
   yield: string;
   price: string;
+  priceAed: number;
+  priceOnRequest: boolean;
+  sku: string;
+  mpn: string;
+  gtin: string;
+  condition: string;
+  slug: string;
   stock: number;
   image: string;
   altText: string;
@@ -22,7 +29,25 @@ interface Supply {
   isActive: boolean;
 }
 
-const initialSupplies: Supply[] = [
+// Base pre-hydration fallback (client-side offline default). New pricing/
+// identity fields (migration 016) are filled in by withPricingDefaults below
+// so this list doesn't need to repeat the same six fields 13 times.
+type SupplyBase = Omit<Supply, "priceAed" | "priceOnRequest" | "sku" | "mpn" | "gtin" | "condition" | "slug">;
+
+function withPricingDefaults(s: SupplyBase): Supply {
+  return {
+    ...s,
+    priceAed: 0,
+    priceOnRequest: true,
+    sku: s.id,
+    mpn: "",
+    gtin: "",
+    condition: "new",
+    slug: s.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
+  };
+}
+
+const initialSupplies: Supply[] = ([
   { id: "1", name: "Canon C5045/5051/5250/5255 Toner Premium Black", brand: "Canon", category: "Toner", compatibleModels: "C5045, C5051, C5250, C5255", color: "Black", yield: "25,000 pages", price: "Contact for Pricing", stock: 50, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true },
   { id: "2", name: "Canon C5045/5051/5250/5255 Toner Premium Cyan", brand: "Canon", category: "Toner", compatibleModels: "C5045, C5051, C5250, C5255", color: "Cyan", yield: "25,000 pages", price: "Contact for Pricing", stock: 50, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true },
   { id: "3", name: "Canon C5045/5051/5250/5255 Toner Premium Yellow", brand: "Canon", category: "Toner", compatibleModels: "C5045, C5051, C5250, C5255", color: "Yellow", yield: "25,000 pages", price: "Contact for Pricing", stock: 50, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true },
@@ -36,7 +61,7 @@ const initialSupplies: Supply[] = [
   { id: "11", name: "Long Life OPC Drum for Canon IR ADVANCE C5235 C5240 C5250 C5255", brand: "Canon", category: "Drum", compatibleModels: "C5235, C5240, C5250, C5255", yield: "120,000 pages", price: "Contact for Pricing", stock: 15, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true },
   { id: "12", name: "Canon C5045/C5250/C5550 Paper Pickup Rollers", brand: "Canon", category: "Spare Part", compatibleModels: "C5045, C5250, C5550", yield: "N/A", price: "Contact for Pricing", stock: 20, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true },
   { id: "13", name: "Canon iR ADVANCE C5030, 5035, 5045, 5051, 5235, 5240, 5250, 5255 Maintenance Kit", brand: "Canon", category: "Maintenance Kit", compatibleModels: "C5030, C5035, C5045, C5051, C5235, C5240, C5250, C5255", yield: "300,000 pages", price: "Contact for Pricing", stock: 10, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true },
-];
+] as SupplyBase[]).map(withPricingDefaults);
 
 function mapSupply(s: any): Supply {
   return {
@@ -48,6 +73,15 @@ function mapSupply(s: any): Supply {
     color: s.color || '',
     yield: s.yield || '',
     price: s.price || '',
+    priceAed: Number(s.price_aed ?? s.priceAed ?? 0),
+    priceOnRequest: s.price_on_request === undefined || s.price_on_request === null
+      ? !(Number(s.price_aed) > 0)
+      : (s.price_on_request === 1 || s.price_on_request === true),
+    sku: s.sku || s.id,
+    mpn: s.mpn || '',
+    gtin: s.gtin || '',
+    condition: s.condition || 'new',
+    slug: s.slug || '',
     stock: s.stock ?? 0,
     image: s.image || '',
     altText: s.alt_text || s.altText || '',
@@ -242,6 +276,7 @@ export default function AdminSupplies() {
                       <th className="text-left text-sm font-medium text-slate-400 p-4">Category</th>
                       <th className="text-left text-sm font-medium text-slate-400 p-4">Compatible Models</th>
                       <th className="text-left text-sm font-medium text-slate-400 p-4">Yield</th>
+                      <th className="text-left text-sm font-medium text-slate-400 p-4">Price</th>
                       <th className="text-left text-sm font-medium text-slate-400 p-4">Stock</th>
                       <th className="text-left text-sm font-medium text-slate-400 p-4">Status</th>
                       <th className="text-left text-sm font-medium text-slate-400 p-4">Actions</th>
@@ -281,6 +316,13 @@ export default function AdminSupplies() {
                         <td className="p-4 text-slate-300 text-sm">{supply.compatibleModels}</td>
                         <td className="p-4 text-slate-300">{supply.yield}</td>
                         <td className="p-4">
+                          {supply.priceOnRequest || !(supply.priceAed > 0) ? (
+                            <span className="text-slate-500 text-sm">Contact for Pricing</span>
+                          ) : (
+                            <span className="text-[#f5be53] font-medium">AED {supply.priceAed.toLocaleString('en-AE')}</span>
+                          )}
+                        </td>
+                        <td className="p-4">
                           <span className={`font-medium ${supply.stock > 10 ? "text-green-400" : supply.stock > 0 ? "text-orange-400" : "text-red-400"}`}>
                             {supply.stock}
                           </span>
@@ -315,7 +357,7 @@ export default function AdminSupplies() {
                     ))}
                     {filteredSupplies.length === 0 && (
                       <tr>
-                        <td colSpan={8} className="p-8 text-center text-slate-400">No supplies found</td>
+                        <td colSpan={9} className="p-8 text-center text-slate-400">No supplies found</td>
                       </tr>
                     )}
                   </tbody>
@@ -342,7 +384,9 @@ export default function AdminSupplies() {
 function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: Supply | null; onSave: (s: Supply) => void; onClose: () => void; brands: string[]; categories: string[] }) {
   const [form, setForm] = useState<Supply>(supply || {
     id: "", name: "", brand: "Canon", category: "Toner", compatibleModels: "", color: "",
-    yield: "", price: "Contact for Pricing", stock: 0, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true,
+    yield: "", price: "Contact for Pricing", priceAed: 0, priceOnRequest: true,
+    sku: "", mpn: "", gtin: "", condition: "new", slug: "",
+    stock: 0, image: "", altText: "", imageWidth: 800, imageHeight: 800, isActive: true,
   });
   const colors = ["Black", "Cyan", "Yellow", "Magenta", "N/A"];
 
@@ -395,8 +439,46 @@ function SupplyModal({ supply, onSave, onClose, brands, categories }: { supply: 
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Price</label>
-            <input type="text" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" placeholder="Contact for Pricing" />
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-sm font-medium text-slate-300">Price (AED)</label>
+              <label className="flex items-center gap-2 text-sm text-slate-400">
+                <input
+                  type="checkbox"
+                  checked={form.priceOnRequest}
+                  onChange={(e) => setForm({ ...form, priceOnRequest: e.target.checked })}
+                  className="w-4 h-4 rounded"
+                />
+                Price on request ("Contact for Pricing")
+              </label>
+            </div>
+            <input
+              type="number"
+              min={0}
+              step="0.01"
+              value={form.priceAed || ""}
+              onChange={(e) => setForm({ ...form, priceAed: parseFloat(e.target.value) || 0 })}
+              disabled={form.priceOnRequest}
+              className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white disabled:opacity-40 disabled:cursor-not-allowed"
+              placeholder="e.g., 250.00"
+            />
+            <p className="text-xs text-slate-500 mt-2">
+              Live price shown on the site: {form.priceOnRequest || !(form.priceAed > 0) ? "Contact for Pricing" : `AED ${form.priceAed.toLocaleString('en-AE')}`}
+              {" — "}applies online instantly and is required (with SKU/stock) for the Google Merchant Center feed.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">SKU</label>
+              <input type="text" value={form.sku} onChange={(e) => setForm({ ...form, sku: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white text-sm" placeholder="auto: item ID" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">MPN</label>
+              <input type="text" value={form.mpn} onChange={(e) => setForm({ ...form, mpn: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white text-sm" placeholder="manufacturer part #" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">GTIN</label>
+              <input type="text" value={form.gtin} onChange={(e) => setForm({ ...form, gtin: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white text-sm" placeholder="barcode (optional)" />
+            </div>
           </div>
           <div>
             <CloudImagePicker

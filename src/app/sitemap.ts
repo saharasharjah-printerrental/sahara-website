@@ -63,6 +63,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/contact/`,                      lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/our-clients/`,                  lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/rental-calculator/`,            lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.65 },
+    { url: `${BASE}/returns-refunds/`,              lastModified: thisMonth, changeFrequency: 'yearly',  priority: 0.4 },
+    { url: `${BASE}/shipping-delivery/`,            lastModified: thisMonth, changeFrequency: 'yearly',  priority: 0.4 },
+    { url: `${BASE}/terms/`,                        lastModified: thisMonth, changeFrequency: 'yearly',  priority: 0.4 },
+    { url: `${BASE}/privacy-policy/`,               lastModified: thisMonth, changeFrequency: 'yearly',  priority: 0.4 },
   ];
 
   // Dynamic routes come from D1. If that read fails we throw rather than
@@ -101,5 +105,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     throw err;
   }
 
-  return [...staticRoutes, ...blogRoutes, ...productRoutes];
+  let supplyRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const sr = await db.prepare("SELECT slug, updatedAt, createdAt FROM supplies WHERE isActive = 1 AND slug != ''").all();
+    supplyRoutes = ((sr?.results ?? []) as any[])
+      .filter((r) => r.slug)
+      .map((r) => ({
+        url: `${BASE}/services/printer-spare-parts/${r.slug}/`,
+        lastModified: rowDate(r.updatedAt ?? r.createdAt, thisMonth),
+        changeFrequency: 'weekly' as const,
+        priority: 0.55,
+      }));
+  } catch (err) {
+    // supplies.slug is new (migration 016) — don't fail the whole sitemap if
+    // the migration hasn't been applied to this environment yet.
+    console.error('sitemap: supplies query failed (migration 016 applied?)', err);
+  }
+
+  return [...staticRoutes, ...blogRoutes, ...productRoutes, ...supplyRoutes];
 }

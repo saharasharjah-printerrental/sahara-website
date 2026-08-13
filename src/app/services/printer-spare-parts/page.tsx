@@ -1,11 +1,15 @@
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 import type { Metadata } from "next";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import SparePartsCartClient from "@/components/SparePartsCartClient";
 import { VerifiedUser, LocalShipping, Inventory } from "@mui/icons-material";
+import { normalizeR2Url } from "@/lib/r2url";
+import { resolveSupplyPrice } from "@/lib/price";
 
 export const metadata: Metadata = {
   title: "Printer Toner & Spare Parts UAE | Toner Cartridges Dubai | Sahara",
@@ -57,7 +61,46 @@ const breadcrumbSchema = {
   ],
 };
 
-export default function PrinterSparePartsPage() {
+// Server-render the live D1 catalog so Googlebot (and first paint) sees real
+// prices/stock instead of the static "Contact for Pricing" fallback below.
+// SparePartsCartClient still re-fetches client-side for realtime updates;
+// this is only the pre-hydration value.
+async function getLiveSupplies() {
+  try {
+    const db = (getRequestContext().env as any)?.DB;
+    if (!db) return defaultSupplies;
+    const result = await db.prepare(
+      "SELECT * FROM supplies WHERE isActive = 1 ORDER BY name ASC"
+    ).all();
+    const rows = result?.results ?? [];
+    if (!rows.length) return defaultSupplies;
+    return rows.map((s: any) => {
+      const resolved = resolveSupplyPrice(s);
+      return {
+        id: String(s.id),
+        name: s.name,
+        brand: s.brand || "",
+        category: s.category,
+        compatibleModels: s.compatibleModels || "",
+        color: s.color || "",
+        yield: s.yield || "",
+        price: resolved.display,
+        stock: s.stock ?? 0,
+        image: normalizeR2Url(s.image || ""),
+        alt_text: s.alt_text || "",
+        image_width: s.image_width || 800,
+        image_height: s.image_height || 800,
+        isActive: true,
+        slug: s.slug || "",
+      };
+    });
+  } catch {
+    return defaultSupplies;
+  }
+}
+
+export default async function PrinterSparePartsPage() {
+  const supplies = await getLiveSupplies();
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
@@ -81,7 +124,7 @@ export default function PrinterSparePartsPage() {
           </div>
         </section>
 
-        <SparePartsCartClient defaultSupplies={defaultSupplies} />
+        <SparePartsCartClient defaultSupplies={supplies} />
 
         <section className="py-16 px-8 lg:px-24 bg-[#101c2e]">
           <div className="max-w-7xl mx-auto">

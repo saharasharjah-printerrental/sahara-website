@@ -21,3 +21,32 @@ export function formatAED(amount: number): string {
   const rounded = Math.round(amount * 100) / 100;
   return `AED ${rounded.toLocaleString('en-AE', { maximumFractionDigits: 2 })}`;
 }
+
+/** A D1 `supplies` row shape sufficient to resolve a display/payable price. */
+export interface SupplyPriceRow {
+  price_aed?: number | string | null;
+  price_on_request?: number | null;
+  price?: string | null;
+}
+
+/**
+ * Single source of truth for turning a supplies row into a price the UI,
+ * cart, checkout, and Merchant Center feed can all agree on.
+ *
+ * `price_aed` / `price_on_request` (added in migration 016) are authoritative.
+ * The legacy free-text `price` column is only a fallback for rows that
+ * predate the migration and haven't been re-saved yet.
+ */
+export function resolveSupplyPrice(row: SupplyPriceRow): { aed: number; display: string; payable: boolean } {
+  const onRequest = row.price_on_request === undefined || row.price_on_request === null
+    ? !isPriced(row.price) // legacy row: infer from the old text column
+    : Boolean(row.price_on_request);
+
+  const aed = onRequest ? 0 : parsePriceAED(row.price_aed ?? row.price);
+
+  return {
+    aed,
+    display: aed > 0 ? formatAED(aed) : 'Contact for Pricing',
+    payable: aed > 0 && !onRequest,
+  };
+}

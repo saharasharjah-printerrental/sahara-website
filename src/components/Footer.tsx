@@ -321,6 +321,14 @@ export default function Footer() {
         
         <div className="py-6 border-t border-white/5 text-center text-slate-500 text-xs">
           © 2026 Sahara Office Equipments. All rights reserved.
+          <span className="mx-2">·</span>
+          <Link href="/terms/" className="hover:text-slate-400 transition-colors">Terms of Service</Link>
+          <span className="mx-2">·</span>
+          <Link href="/privacy-policy/" className="hover:text-slate-400 transition-colors">Privacy Policy</Link>
+          <span className="mx-2">·</span>
+          <Link href="/returns-refunds/" className="hover:text-slate-400 transition-colors">Returns &amp; Refunds</Link>
+          <span className="mx-2">·</span>
+          <Link href="/shipping-delivery/" className="hover:text-slate-400 transition-colors">Shipping &amp; Delivery</Link>
         </div>
       </div>
     </footer>
