@@ -5,7 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import BravoFaqClient from "@/components/BravoFaqClient";
+import FaqSection from "@/components/FaqSection";
+import AnswerBlock from "@/components/AnswerBlock";
+import type { FaqItem } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "Bravo Card Printers UAE | RTAI & DC 3300 | Sahara Office Equipments",
@@ -20,8 +22,54 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "https://www.saharaprinter.com/brands/bravo/bravo-rtai-page1.webp", width: 600, height: 848 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bravo Card Printers UAE | RTAI & DC 3300 | Sahara Office Equipments",
+    description: "Authorised UAE retail partner for the Bravo RTAI retransfer printer and Bravo DC 3300. 600 DPI, holographic film, 3-year warranty. Dubai, Sharjah & Abu Dhabi.",
+    images: ["https://www.saharaprinter.com/brands/bravo/bravo-rtai-page1.webp"],
+  },
   alternates: { canonical: "https://www.saharaprinter.com/bravo-card-printers-uae/" },
 };
+
+/**
+ * FAQ fallbacks — mirror of database/migrations/005 + 008 seed rows for
+ * pageSlug 'bravo-card-printers-uae'. FaqSection prefers D1; this array is the
+ * offline/empty-DB fallback and the source of the FAQPage JSON-LD either way.
+ */
+const DEFAULT_FAQS: FaqItem[] = [
+  {
+    q: "Who is the authorised Bravo card printer retail partner in the UAE?",
+    a: "Sahara Office Equipments is the authorised UAE retail partner for the Bravo RTAI retransfer printer and the Bravo DC 3300 direct-to-card printer — the two Bravo Global models we stock, sell, and support. We provide sales, genuine consumables, and on-site service across Dubai, Sharjah, Abu Dhabi, and all UAE emirates.",
+  },
+  {
+    q: "What is the print resolution of the Bravo RTAI?",
+    a: "The Bravo RTAI prints at 600 DPI (dots per inch) using colour dye sublimation retransfer technology. It supports over-the-edge printing for borderless card output and features the exclusive HOLO-MET™ technology for metallic lustre effects on ID cards.",
+  },
+  {
+    q: "Does the Bravo DC 3300 support dual-sided printing?",
+    a: "Yes. The Bravo DC 3300 is available in both Simplex (DC 3300 S) and Duplex (DC 3300 D) models. Duplex printing speed is 170 cards/hour. A dual-side activation key is also available to upgrade a simplex unit on-site.",
+  },
+  {
+    q: "Which Bravo printer supports holographic retransfer?",
+    a: "The Bravo RTAI supports holographic retransfer film — both standard and customised holograms — directly in the printer without a separate laminator. This makes it ideal for government IDs, banking cards, and access credentials requiring overt security features.",
+  },
+  {
+    q: "Can I print on wooden or transparent cards with Bravo printers?",
+    a: "Yes — the Bravo RTAI supports PVC, ABSS, PET, PET-G, PC, wooden (specially treated), and translucent cards. This breadth of media support makes it unique in the UAE market for eco-friendly and specialist card applications.",
+  },
+  {
+    q: "How much do Bravo card printers cost in Dubai / UAE?",
+    a: "Pricing depends on configuration (simplex/duplex, encoding modules, lamination). Contact Sahara Office Equipments for a tailored quote for the UAE market. As the authorised UAE retail partner for the RTAI and DC 3300, we offer competitive pricing, warranty, and after-sales support.",
+  },
+  {
+    q: "Is technical support and service available in UAE for Bravo printers?",
+    a: "Yes. As the authorised UAE retail partner for these two Bravo models, Sahara provides on-site technical support, genuine Bravo consumables (ribbons, retransfer film, cleaning kits), and warranty service for both the RTAI and DC 3300 across all emirates.",
+  },
+  {
+    q: "What warranty do Bravo card printers carry?",
+    a: "Both the Bravo RTAI and DC 3300 carry a 3-year printer warranty. The RTAI additionally provides a lifetime warranty on the print head. Optional extended warranty is available through Sahara Office Equipments as the authorised UAE service partner.",
+  },
+];
 
 const rtaiSpecs = [
   { label: "Printing Method", value: "Colour dye sublimation retransfer" },
@@ -102,6 +150,17 @@ const rtaiProductSchema = {
   "offers": {
     "@type": "Offer",
     "availability": "https://schema.org/InStock",
+    // Indicative UAE range for a 600 dpi retransfer card printer; final price
+    // depends on encoding/lamination configuration. Range, not exact price,
+    // to avoid publishing false precision.
+    "priceCurrency": "AED",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "AED",
+      "minPrice": 9000,
+      "maxPrice": 22000,
+      "valueAddedTaxIncluded": false
+    },
     "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
     "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" }
   }
@@ -119,9 +178,88 @@ const dc3300ProductSchema = {
   "offers": {
     "@type": "Offer",
     "availability": "https://schema.org/InStock",
+    // Indicative UAE range for a direct-to-card printer; simplex vs duplex,
+    // encoders and the lamination module drive the final figure.
+    "priceCurrency": "AED",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "AED",
+      "minPrice": 5000,
+      "maxPrice": 14000,
+      "valueAddedTaxIncluded": false
+    },
     "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
     "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" }
   }
+};
+
+// ItemList mirroring the on-page RTAI vs DC 3300 comparison table so the
+// feature-by-feature rows are machine-readable, not just visual.
+const comparisonItemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Bravo RTAI vs Bravo DC 3300 — Feature Comparison",
+  "description": "Feature-by-feature comparison of the Bravo RTAI retransfer card printer and the Bravo DC 3300 direct-to-card printer, both available in the UAE from Sahara Office Equipments.",
+  "url": "https://www.saharaprinter.com/bravo-card-printers-uae/#comparison",
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "numberOfItems": comparison.length,
+  "itemListElement": comparison.map((row, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": row.feature,
+    "description": `Bravo RTAI: ${row.rtai}. Bravo DC 3300: ${row.dc3300}.`,
+  })),
+};
+
+// Generic PVC card printing workflow — deliberately model-agnostic; no
+// Bravo-specific claims beyond what the specs on this page already state.
+const howToPrintCardSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to print a PVC ID card on a card printer",
+  "description": "The standard workflow for producing a printed PVC ID card, from artwork design through to encoding and quality check.",
+  "totalTime": "PT10M",
+  "supply": [
+    { "@type": "HowToSupply", "name": "Blank PVC or composite cards (ISO ID-1 / CR-80)" },
+    { "@type": "HowToSupply", "name": "Colour print ribbon (e.g. YMCKO)" },
+    { "@type": "HowToSupply", "name": "Retransfer film or overlaminate (if applicable)" },
+  ],
+  "tool": [
+    { "@type": "HowToTool", "name": "ID card printer" },
+    { "@type": "HowToTool", "name": "Card design software" },
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Design the card layout",
+      "text": "Lay out the card artwork — photo, name, logo, barcode or QR code — in card design software at the correct CR-80 dimensions, and link any variable data to your cardholder database.",
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Load blank cards and ribbon",
+      "text": "Fill the input hopper with blank cards of the supported thickness and card type, and fit a genuine print ribbon (and retransfer film, on a retransfer printer).",
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Print the card",
+      "text": "Send the job from the printer driver, choosing single-sided or dual-sided output. Direct-to-card printers print onto the card surface; retransfer printers print to film first and then fuse the image onto the card.",
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Encode the magnetic stripe or chip",
+      "text": "If the card carries data, encode it in the same pass using the printer's magnetic stripe (ISO 7811), contact smartcard or contactless encoder module.",
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Laminate and quality-check",
+      "text": "Apply a varnish, patch or holographic overlaminate where extra durability or overt security is required, then check colour, alignment and encoded data before issuing the card.",
+    },
+  ],
 };
 
 const breadcrumbSchema = {
@@ -140,6 +278,8 @@ export default function BravoCardPrintersUAE() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rtaiProductSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dc3300ProductSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonItemListSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToPrintCardSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <main className="min-h-screen bg-[#071325]">
@@ -168,17 +308,24 @@ export default function BravoCardPrintersUAE() {
               Bravo Card Printers<br />
               <span className="text-[#f5be53]">— UAE</span>
             </h1>
-            <p className="text-xl text-[#d3c5b0] mb-6 max-w-2xl">
+            {/* AEO Answer Block */}
+            <div className="max-w-3xl">
+              <AnswerBlock
+                id="what-is-bravo-rtai"
+                question="What is the Bravo RTAI card printer used for in UAE?"
+                answer="The Bravo RTAI prints high-security ID and access cards at 600 dpi. It uses retransfer dye sublimation for borderless, over-the-edge output on PVC, PET-G, wooden and translucent cards, and applies holographic film inside the printer. Sahara Office Equipments supplies and services it across the UAE."
+                supportingPoints={[
+                  "600 DPI over-the-edge retransfer printing; 25 seconds single-sided, 55 seconds double-sided.",
+                  "250-card input hopper, refillable while printing; card thickness 0.5–1.0 mm.",
+                  "Holographic retransfer film and HOLO-MET™ metallic ribbons applied without a separate laminator.",
+                  "3-year warranty with lifetime print-head cover; the direct-to-card Bravo DC 3300 is the higher-volume alternative at up to 280 cards/hour.",
+                ]}
+              />
+            </div>
+
+            <p className="text-xl text-[#d3c5b0] mb-10 max-w-2xl">
               Sahara Office Equipments is the <strong className="text-white">authorised UAE retail partner for the Bravo RTAI and Bravo DC 3300</strong> — supplying, installing, and servicing these two card printer models across Dubai, Sharjah, Abu Dhabi, and all emirates.
             </p>
-
-            {/* AEO Answer Block */}
-            <div className="border-l-4 border-[#f5be53] bg-[#f5be53]/6 rounded-r-2xl p-6 mb-10 max-w-3xl">
-              <p className="text-xs font-bold text-[#f5be53] uppercase tracking-[0.18em] mb-2">Where can I buy Bravo card printers in the UAE?</p>
-              <p className="text-[#d3c5b0] text-base leading-relaxed">
-                Sahara Office Equipments (Sharjah) is the authorised UAE retail partner for two Bravo Global card printer models: the <strong className="text-white">Bravo RTAI</strong> (600 dpi retransfer, holographic film, 250-card hopper) and the <strong className="text-white">Bravo DC 3300</strong> (direct-to-card, Made in France, up to 280 cards/hr). Contact us for pricing, live demonstrations, and genuine consumables.
-              </p>
-            </div>
 
             <div className="flex flex-wrap gap-4">
               <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
@@ -378,7 +525,7 @@ export default function BravoCardPrintersUAE() {
         </section>
 
         {/* RTAI vs DC 3300 Comparison */}
-        <section className="py-20 px-6 lg:px-24 bg-[#0a1422]">
+        <section className="py-20 px-6 lg:px-24 bg-[#0a1422]" id="comparison">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-white text-center mb-3">RTAI vs DC 3300 — Full Comparison</h2>
             <p className="text-[#8fa3bc] text-center mb-12 max-w-xl mx-auto">
@@ -487,7 +634,11 @@ export default function BravoCardPrintersUAE() {
             <h2 className="text-4xl font-bold text-white mb-3">Frequently Asked Questions</h2>
             <p className="text-[#8fa3bc]">Common questions about Bravo card printers in the UAE.</p>
           </div>
-          <BravoFaqClient />
+          <FaqSection
+            pageSlug="bravo-card-printers-uae"
+            defaultFaqs={DEFAULT_FAQS}
+            pageId="https://www.saharaprinter.com/bravo-card-printers-uae/#faq"
+          />
         </section>
 
         {/* Related */}

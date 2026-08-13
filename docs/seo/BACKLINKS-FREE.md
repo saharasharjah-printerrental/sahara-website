@@ -143,6 +143,96 @@
 
 ---
 
+## Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)
+
+> Source: `docs/seo/backlink-gap-2026-08.md`. These are placements where competitor
+> **Logic Office Equipments (officeequipments.ae)** appears and Sahara does not —
+> the clearest measurable link gap found. All are free, self-serve listings.
+
+### 21. YellowPages-UAE Brand Hubs (yellowpages-uae.com)
+- **DA:** ~38 | **Link type:** Dofollow (brand-scoped directory page)
+- **URL:** https://www.yellowpages-uae.com/
+- **Action:** Submit a supplier listing under each brand hub we genuinely deal — Kyocera, Canon, HP, Ricoh, Xerox, Brother. One listing per brand page.
+- **Anchor:** "Sahara Office Equipments — [Brand] Printer Supplier UAE"
+- **Notes:** Competitor Logic Office Equipments holds the Kyocera hub. Highest-priority gap closure. ~15 min per brand.
+
+### 22. ReachUAE Business Directory (reachuae.com)
+- **DA:** ~35 | **Link type:** Dofollow
+- **URL:** https://www.reachuae.com/
+- **Action:** Register as a supplier; attach to the brand pages (Kyocera, Canon, HP) rather than only the generic category.
+- **Anchor:** "Printer & Photocopier Supplier Sharjah — Sahara Office Equipments"
+- **Notes:** Competitor appears on the Kyocera brand page.
+
+### 23. ATN UAE (atninfo.com)
+- **DA:** ~40 | **Link type:** Dofollow brand/dealer listing
+- **URL:** https://www.atninfo.com/
+- **Action:** Submit as an authorised dealer under each relevant brand.
+- **Notes:** Surfaces in "[Brand] in UAE — top dealers" SERPs. Competitor is listed.
+
+### 24. TradersFind (tradersfind.com)
+- **DA:** ~44 | **Link type:** Dofollow
+- **URL:** https://www.tradersfind.com/
+- **Action:** Free business listing. Categories: Office Equipment, Printers, Photocopiers, IT Equipment Rental.
+- **Anchor:** "Printer Rental Dubai | Sahara Office Equipments"
+- **Notes:** Positions itself as UAE's largest B2B portal; crawled frequently.
+
+### 25. Aiwa.ae
+- **DA:** ~30 | **Link type:** Dofollow
+- **URL:** https://aiwa.ae/
+- **Action:** Free listing with full NAP + category selection.
+- **Notes:** UAE-first "smart" directory; free tier includes profile link.
+
+### 26. YallaPages (yallapages.ae)
+- **DA:** ~25 | **Link type:** Dofollow
+- **URL:** https://yallapages.ae/
+- **Action:** Free listing, instant approval.
+- **Notes:** Low DA but fast, clean UAE citation. Batch with 24/25/27.
+
+### 27. B2B-UAE (b2b-uae.ae)
+- **DA:** ~22 | **Link type:** Dofollow
+- **URL:** https://b2b-uae.ae/
+- **Action:** Free B2B listing.
+- **Notes:** Citation value primarily; batch submission.
+
+### 28. MyMidlist — Middle East Business Directory (mymidlist.com)
+- **DA:** ~28 | **Link type:** Dofollow
+- **URL:** https://mymidlist.com/
+- **Action:** Free listing; covers UAE, KSA, Qatar, Bahrain.
+- **Notes:** Useful if Sahara ever markets beyond the UAE.
+
+---
+
+## Tier 5 — Manufacturer & Partner Directories (relationship-gated, free)
+
+> Highest link quality available to this site. Every entry reflects a **real**
+> commercial relationship — do not apply where no dealer relationship exists.
+
+### 29. Bravo Global — Partner Program / dealer listing ⭐ TOP PRIORITY
+- **Link type:** Dofollow manufacturer partner page
+- **URL:** https://bravoglobal.com/partnerprogram/ · **Contact:** enquiry@bravoglobal.com · +971 4 323 7500 (Dubai)
+- **Action:** Send the dealer-listing request in `docs/seo/bravo-dealer-link-request.md`.
+- **Link target:** `/bravo-card-printers-uae/`
+- **Notes:** Bravo Global is Dubai-based. The Bravo page already declares `sameAs: bravoglobal.com`; a reciprocal link makes the authorised-partner claim independently verifiable. No competitor can contest this — none of sosauh.com, officeequipments.ae or printone.ae sell card printers.
+
+### 30. Canon Middle East — Where to Buy / store locator
+- **Link type:** Manufacturer dealer locator
+- **URL:** https://en.canon-me.com/where-to-buy/
+- **Action:** Apply for inclusion in the Canon ME authorised-store locator.
+- **Notes:** Official manufacturer citation; strong trust signal for the `/brands/canon` page.
+
+### 31. Kyocera Document Solutions — Middle East channel listing
+- **Link type:** Manufacturer/distributor partner listing
+- **Action:** Request a sub-dealer listing via Gulf Commercial Group (Kyocera's UAE distributor).
+- **Notes:** Competitor Logic Office Equipments leans heavily on its Kyocera dealer status.
+
+### 32. PaperCut — authorised reseller/partner directory
+- **Link type:** Dofollow vendor partner directory
+- **Action:** Apply through the PaperCut partner programme.
+- **Link target:** `/services/papercut-print-management`
+- **Notes:** Direct topical match to an existing dedicated service page, and untapped by all three tracked competitors.
+
+---
+
 ## NAP Submission Template
 
 Copy-paste for each directory:
@@ -185,6 +275,17 @@ Social Media:
 8. hidubai.com
 9. Connect.ae / Yellow Pages UAE
 10. MyDubai / Dubai SME
+11. **Bravo Global partner listing (#29)** — send the request email; highest-value single link on this list
+12. YellowPages-UAE brand hubs (#21) — closes the clearest measured competitor gap
+13. ReachUAE (#22) / ATN UAE (#23) brand listings
+14. TradersFind (#24), then batch Aiwa / YallaPages / B2B-UAE / MyMidlist (#25–28)
+15. Canon ME Where-to-Buy (#30), PaperCut partner directory (#32)
 
-**Estimated time: 4–6 hours for all 20 listings.**  
+**Estimated time: 4–6 hours for listings 1–20; a further 2–3 hours for 21–28.**
+**Tier 5 (29–32) is email/application work, not form-filling — allow 2–6 weeks for responses.**
 **Expected impact: 8–15 new citation signals within 30–60 days; local pack improvement in 60–90 days.**
+
+> **Measurement note (Aug 2026):** Bing Webmaster Tools API authenticates but returns
+> zero inbound-link rows for this property — see `docs/seo/backlink-gap-2026-08.md`.
+> Track acquisitions manually here and re-run `node --env-file=.env scripts/backlinks/bing-wmt.mjs`
+> monthly to check whether Bing starts reporting.

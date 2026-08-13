@@ -130,6 +130,38 @@ Do NOT pursue these from the original CSV — they are PBN, spam, or low-quality
 - groupbuyseo.org (SEO tool spam)
 - progressionbusiness.com (low quality)
 
+---
+
+## Editorial Angle Update — Aug 2026 (from competitor gap analysis)
+
+Source: `docs/seo/backlink-gap-2026-08.md`.
+
+Competitor research on **sosauh.com**, **officeequipments.ae** and **printone.ae**
+found that all three compete on printer rental / AMC / repair — and **none of them
+sell PVC ID card printers**. That makes `/bravo-card-printers-uae/` the only page on
+the site with an *uncontested* editorial angle.
+
+**Re-pitch existing Tier 1 targets with card-printing topics** rather than another
+printer-rental article — same domains, far less competition for the placement:
+
+| Target | Revised pitch | Link target |
+|---|---|---|
+| hashnode.com | "Integrating ID Card Issuance with Access Control — an SDK walkthrough" | `/bravo-card-printers-uae/` |
+| apsense.com | "Direct-to-Card vs Retransfer ID Printers: What UAE Businesses Should Buy" | `/bravo-card-printers-uae/` |
+| the-dots.com | "Designing Branded Employee ID Cards That Survive Daily Use" | `/bravo-card-printers-uae/` |
+
+**New vertical to prospect (Tier C in the gap doc):** UAE event/exhibition and
+facilities-management outlets. printone.ae owns the event-IT-rental link vertical;
+Sahara's event-credentialing use case (Bravo page) is a genuine, non-fabricated fit
+for exhibition-supplier and FM publications. Not yet prospected — add domains here
+as they are identified.
+
+**Also see** `BACKLINKS-FREE.md` Tier 5 (#29–32) for the manufacturer partner-page
+asks (Bravo Global, Canon ME, Kyocera, PaperCut), which are relationship requests
+rather than guest posts and are tracked there, not here.
+
+---
+
 ## Expected Outcome
 
 - **6–8 quality backlinks** from Tier 1 efforts over 30–60 days
