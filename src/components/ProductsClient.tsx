@@ -28,30 +28,36 @@ function localImg(image: string, brand: string): string {
   return BRAND_IMAGES[brand] || "/images/printer-canon-1.webp";
 }
 
+// Slugs must match the product rows in D1 and the URLs in sitemap.ts — the
+// grid only renders a crawlable link when a product has one.
 const defaultProducts = [
-  { id: "1", name: "imageRUNNER ADVANCE C5500", brand: "Canon", category: "MFP", condition: "New", priceRental: "AED 800/mo", specs: ["55 PPM", "Full Color", "A3 Support", "Network Ready"], image: "/images/printer-canon-1.webp", isActive: true },
-  { id: "2", name: "LaserJet Managed E82560", brand: "HP", category: "A3 Printers", condition: "New", priceRental: "AED 750/mo", specs: ["Wolf Security", "Energy Star", "56 PPM", "Duplex"], image: "/images/printer-hp.svg", isActive: true },
-  { id: "3", name: "TASKalfa 6003i Series", brand: "Kyocera", category: "MFP", condition: "New", priceRental: "AED 950/mo", specs: ["60 PPM", "Monochrome", "HyPAS Platform", "1200 DPI"], image: "/images/printer-kyocera.webp", isActive: true },
-  { id: "4", name: "AltaLink C8170", brand: "Xerox", category: "MFP", condition: "New", priceRental: "AED 1,100/mo", specs: ['10" UI Tablet', "ConnectKey", "Color", "70 PPM"], image: "/images/printer-xerox.webp", isActive: true },
-  { id: "5", name: "HL-L6400DW Enterprise", brand: "Brother", category: "A4 Printers", condition: "New", priceRental: "AED 400/mo", specs: ["50 PPM", "Duplex", "Wi-Fi Direct", "250-sheet Tray"], image: "/images/printer-brother.webp", isActive: true },
-  { id: "6", name: "MP 2555SP", brand: "Ricoh", category: "MFP", condition: "New", priceRental: "AED 500/mo", specs: ["25 PPM", "Copy/Print/Scan", "600 DPI", "Network Ready"], image: "/images/printer-ricoh.webp", isActive: true },
-  { id: "7", name: "ProXpress M4580FX", brand: "Samsung", category: "MFP", condition: "Refurbished", priceRental: "AED 350/mo", specs: ["43 PPM", "Fax Ready", "Duplex", "Auto Sort"], image: "/images/printer-samsung.webp", isActive: true },
-  { id: "8", name: "MS431dn Laser", brand: "Lexmark", category: "A4 Printers", condition: "Refurbished", priceRental: "AED 300/mo", specs: ["42 PPM", "1200 DPI", "512MB RAM", "USB 3.0"], image: "/images/printer-lexmark.webp", isActive: true },
-  { id: "9", name: "M6635cidn Color MFP", brand: "Kyocera", category: "MFP", condition: "New", priceRental: "AED 700/mo", specs: ["35 PPM", "Full Color", "Duplex", "Gigabit Ethernet"], image: "/images/printer-kyocera.webp", isActive: true },
-  { id: "10", name: "Color LaserJet Pro M479fdw", brand: "HP", category: "MFP", condition: "New", priceRental: "AED 450/mo", specs: ["27 PPM Color", "Wi-Fi", "Fax", "Touch Display"], image: "/images/heroBnr1.webp", isActive: true },
-  { id: "11", name: "imagePROGRAF PRO-4100", brand: "Canon", category: "Plotters", condition: "New", priceRental: "AED 1,200/mo", specs: ["12-Color Ink", "44-inch Roll", "2400 DPI", "Data Encrypt"], image: "/images/printer-canon-1.webp", isActive: true },
-  { id: "12", name: "DesignJet Z9+ PostScript", brand: "HP", category: "Plotters", condition: "Refurbished", priceRental: "AED 600/mo", specs: ["44-inch Roll", "2400 DPI", "PostScript", "HP Stitch"], image: "/images/printer-hp.svg", isActive: true },
-  { id: "13", name: "BP-70C31 Color MFP", brand: "Sharp", category: "MFP", condition: "New", priceRental: "AED 650/mo", specs: ["31 PPM Color", "A3 Support", "Cloud Connect", "Duplex"], image: "/brands/sharp.webp", isActive: true },
-  { id: "14", name: "EcoTank L15150 Wide-Format", brand: "Epson", category: "A3 Printers", condition: "New", priceRental: "AED 480/mo", specs: ["25 PPM Color", "A3+ Support", "Wi-Fi Direct", "Low Cost/Page"], image: "/brands/epson.webp", isActive: true },
+  { id: "1", slug: "imagerunner-advance-c5500", name: "imageRUNNER ADVANCE C5500", brand: "Canon", category: "MFP", condition: "New", priceRental: "AED 800/mo", specs: ["55 PPM", "Full Color", "A3 Support", "Network Ready"], image: "/images/printer-canon-1.webp", isActive: true },
+  { id: "2", slug: "laserjet-managed-e82560", name: "LaserJet Managed E82560", brand: "HP", category: "A3 Printers", condition: "New", priceRental: "AED 750/mo", specs: ["Wolf Security", "Energy Star", "56 PPM", "Duplex"], image: "/images/printer-hp.svg", isActive: true },
+  { id: "3", slug: "taskalfa-6003i-series", name: "TASKalfa 6003i Series", brand: "Kyocera", category: "MFP", condition: "New", priceRental: "AED 950/mo", specs: ["60 PPM", "Monochrome", "HyPAS Platform", "1200 DPI"], image: "/images/printer-kyocera.webp", isActive: true },
+  { id: "4", slug: "altalink-c8170", name: "AltaLink C8170", brand: "Xerox", category: "MFP", condition: "New", priceRental: "AED 1,100/mo", specs: ['10" UI Tablet', "ConnectKey", "Color", "70 PPM"], image: "/images/printer-xerox.webp", isActive: true },
+  { id: "5", slug: "hl-l6400dw-enterprise", name: "HL-L6400DW Enterprise", brand: "Brother", category: "A4 Printers", condition: "New", priceRental: "AED 400/mo", specs: ["50 PPM", "Duplex", "Wi-Fi Direct", "250-sheet Tray"], image: "/images/printer-brother.webp", isActive: true },
+  { id: "6", slug: "mp-2555sp", name: "MP 2555SP", brand: "Ricoh", category: "MFP", condition: "New", priceRental: "AED 500/mo", specs: ["25 PPM", "Copy/Print/Scan", "600 DPI", "Network Ready"], image: "/images/printer-ricoh.webp", isActive: true },
+  { id: "7", slug: "proxpress-m4580fx", name: "ProXpress M4580FX", brand: "Samsung", category: "MFP", condition: "Refurbished", priceRental: "AED 350/mo", specs: ["43 PPM", "Fax Ready", "Duplex", "Auto Sort"], image: "/images/printer-samsung.webp", isActive: true },
+  { id: "8", slug: "ms431dn-laser", name: "MS431dn Laser", brand: "Lexmark", category: "A4 Printers", condition: "Refurbished", priceRental: "AED 300/mo", specs: ["42 PPM", "1200 DPI", "512MB RAM", "USB 3.0"], image: "/images/printer-lexmark.webp", isActive: true },
+  { id: "9", slug: "m6635cidn-color-mfp", name: "M6635cidn Color MFP", brand: "Kyocera", category: "MFP", condition: "New", priceRental: "AED 700/mo", specs: ["35 PPM", "Full Color", "Duplex", "Gigabit Ethernet"], image: "/images/printer-kyocera.webp", isActive: true },
+  { id: "10", slug: "color-laserjet-pro-m479fdw", name: "Color LaserJet Pro M479fdw", brand: "HP", category: "MFP", condition: "New", priceRental: "AED 450/mo", specs: ["27 PPM Color", "Wi-Fi", "Fax", "Touch Display"], image: "/images/heroBnr1.webp", isActive: true },
+  { id: "11", slug: "imageprograf-pro-4100", name: "imagePROGRAF PRO-4100", brand: "Canon", category: "Plotters", condition: "New", priceRental: "AED 1,200/mo", specs: ["12-Color Ink", "44-inch Roll", "2400 DPI", "Data Encrypt"], image: "/images/printer-canon-1.webp", isActive: true },
+  { id: "12", slug: "designjet-z9-postscript", name: "DesignJet Z9+ PostScript", brand: "HP", category: "Plotters", condition: "Refurbished", priceRental: "AED 600/mo", specs: ["44-inch Roll", "2400 DPI", "PostScript", "HP Stitch"], image: "/images/printer-hp.svg", isActive: true },
+  { id: "13", slug: "bp-70c31-color-mfp", name: "BP-70C31 Color MFP", brand: "Sharp", category: "MFP", condition: "New", priceRental: "AED 650/mo", specs: ["31 PPM Color", "A3 Support", "Cloud Connect", "Duplex"], image: "/brands/sharp.webp", isActive: true },
+  { id: "14", slug: "ecotank-l15150-wide-format", name: "EcoTank L15150 Wide-Format", brand: "Epson", category: "A3 Printers", condition: "New", priceRental: "AED 480/mo", specs: ["25 PPM Color", "A3+ Support", "Wi-Fi Direct", "Low Cost/Page"], image: "/brands/epson.webp", isActive: true },
 ];
 
-export default function ProductsClient() {
+export default function ProductsClient({ initialProducts }: { initialProducts?: any[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Seed from server-rendered products so the grid (and its links into
+  // /products/<slug>/) exist in the initial HTML for crawlers.
+  const [products, setProducts] = useState<any[]>(
+    () => (initialProducts?.length ? initialProducts.map((p) => ({ ...p, image: localImg(p.image, p.brand) })) : defaultProducts)
+  );
+  const [loading, setLoading] = useState(false);
   const [paymentSettings, setPaymentSettings] = useState<{
     paymentGatewayEnabled: boolean;
     paymentGatewayUrl: string;
@@ -117,6 +123,12 @@ export default function ProductsClient() {
           return;
         }
       } catch {}
+      // Never downgrade server-rendered products to cached or default data —
+      // that would strip the slugs the grid needs to render crawlable links.
+      if (initialProducts?.length) {
+        setLoading(false);
+        return;
+      }
       const stored = localStorage.getItem("sahara_products");
       if (stored) {
         const parsed = JSON.parse(stored);
@@ -126,7 +138,7 @@ export default function ProductsClient() {
       }
       setLoading(false);
     })();
-  }, []);
+  }, [initialProducts]);
 
   const updateParams = (key: string, value: string | string[] | number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -139,7 +151,15 @@ export default function ProductsClient() {
       params.delete(key);
     }
     if (key !== "page") params.set("page", "1");
-    router.push(`/products?${params.toString()}`);
+    router.push(`/products/?${params.toString()}`);
+  };
+
+  // Real href for pagination so Googlebot can reach products beyond page 1.
+  // onClick keeps the client-side navigation; the href is what gets crawled.
+  const pageHref = (p: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(p));
+    return `/products/?${params.toString()}`;
   };
 
   const activeProducts = products.filter((p) => p.isActive);
@@ -208,7 +228,7 @@ export default function ProductsClient() {
         {/* Exclusive Distributor Callout */}
         <div className="max-w-7xl mx-auto px-8 lg:px-0 mb-4">
           <a
-            href="/bravo-card-printers-uae"
+            href="/bravo-card-printers-uae/"
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gradient-to-r from-[#0d1a2e] to-[#091524] border border-[#f5be53]/25 rounded-2xl p-5 hover:border-[#f5be53]/50 transition-colors group"
           >
             <div className="flex items-center gap-3 shrink-0">
@@ -348,13 +368,13 @@ export default function ProductsClient() {
             {totalPages > 1 && (
               <div className="flex justify-center gap-2 mt-12">
                 {safePage > 1 && (
-                  <button onClick={() => updateParams("page", safePage - 1)} className="px-4 py-2 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all">← Previous</button>
+                  <a href={pageHref(safePage - 1)} onClick={(e) => { e.preventDefault(); updateParams("page", safePage - 1); }} className="px-4 py-2 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all">← Previous</a>
                 )}
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <button key={p} onClick={() => updateParams("page", p)} className={`w-10 h-10 rounded-full font-bold transition-all ${p === safePage ? "bg-[#f5be53] text-[#412d00]" : "border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white"}`}>{p}</button>
+                  <a key={p} href={pageHref(p)} onClick={(e) => { e.preventDefault(); updateParams("page", p); }} aria-current={p === safePage ? "page" : undefined} className={`w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center ${p === safePage ? "bg-[#f5be53] text-[#412d00]" : "border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white"}`}>{p}</a>
                 ))}
                 {safePage < totalPages && (
-                  <button onClick={() => updateParams("page", safePage + 1)} className="px-4 py-2 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all">Next →</button>
+                  <a href={pageHref(safePage + 1)} onClick={(e) => { e.preventDefault(); updateParams("page", safePage + 1); }} className="px-4 py-2 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all">Next →</a>
                 )}
               </div>
             )}

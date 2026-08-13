@@ -102,13 +102,89 @@ export default function PrinterSparePartsPage() {
           </div>
         </section>
 
+        <section className="py-16 px-8 lg:px-24">
+          <div className="max-w-4xl mx-auto space-y-10">
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">Genuine toner and parts for UAE offices</h2>
+              <p className="text-[#d3c5b0] leading-relaxed mb-4">
+                Sahara supplies original manufacturer toner cartridges, drums, maintenance kits and replacement parts
+                for Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp and Epson equipment. We stock the consumables for
+                the models we place on rental and AMC, which means the part you need is usually already on our shelf in
+                Sharjah rather than on a two-week order from abroad.
+              </p>
+              <p className="text-[#d3c5b0] leading-relaxed">
+                We supply OEM consumables only. Compatible and refilled cartridges are cheaper per unit, but in UAE
+                office conditions they are the most common cause of drum damage, streaking and fuser failure — and
+                they void manufacturer warranty cover. The saving rarely survives the first service call.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">What we stock</h2>
+              <div className="grid md:grid-cols-2 gap-5">
+                {[
+                  ["Toner cartridges", "Black and full colour sets for Canon imageRUNNER, Kyocera TASKalfa, HP LaserJet, Ricoh MP and Xerox AltaLink series."],
+                  ["OPC drums", "Long-life drum units, including high-yield options rated well beyond standard cartridge life."],
+                  ["Maintenance kits", "Fuser, transfer and roller kits for scheduled preventive servicing at manufacturer-specified intervals."],
+                  ["Spare parts", "Pickup rollers, separation pads, fusers and feed assemblies for the models we service."],
+                ].map(([title, desc]) => (
+                  <div key={title} className="glass-card rounded-2xl p-5">
+                    <h3 className="text-white font-bold mb-2">{title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">Delivery across the UAE</h2>
+              <p className="text-[#d3c5b0] leading-relaxed">
+                Same-day delivery is available across{" "}
+                <a href="/photocopier-rental-sharjah/" className="text-[#f5be53] hover:underline">Sharjah</a>,{" "}
+                <a href="/printer-rental-dubai/" className="text-[#f5be53] hover:underline">Dubai</a> and{" "}
+                <a href="/printer-rental-abu-dhabi/" className="text-[#f5be53] hover:underline">Abu Dhabi</a> for orders
+                placed during working hours, and next-day to{" "}
+                <a href="/printer-rental-al-ain/" className="text-[#f5be53] hover:underline">Al Ain</a>,{" "}
+                <a href="/printer-rental-fujairah/" className="text-[#f5be53] hover:underline">Fujairah</a>,{" "}
+                <a href="/printer-rental-rak/" className="text-[#f5be53] hover:underline">Ras Al Khaimah</a>, Ajman and
+                Umm Al Quwain. Bulk pricing applies to volume orders and to businesses running several devices.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">You may not need to buy toner at all</h2>
+              <p className="text-[#d3c5b0] leading-relaxed">
+                Toner is included at no extra cost on every Sahara{" "}
+                <a href="/services/printer-rental/" className="text-[#f5be53] hover:underline">printer rental</a> and{" "}
+                <a href="/services/photocopier-rental/" className="text-[#f5be53] hover:underline">photocopier rental</a>{" "}
+                contract, with usage monitored remotely so replacements arrive before you run out. Buying consumables
+                separately makes sense if you own your equipment outright — in which case an{" "}
+                <a href="/services/amc/" className="text-[#f5be53] hover:underline">annual maintenance contract</a>{" "}
+                usually works out cheaper than purchasing toner and paying for{" "}
+                <a href="/services/repair/" className="text-[#f5be53] hover:underline">repairs</a> ad hoc.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">Pricing</h2>
+              <p className="text-[#d3c5b0] leading-relaxed">
+                Consumables pricing in the UAE moves with supply and exchange rates, so we quote current rates rather
+                than publishing fixed ones. Send us your device model or the part number from the cartridge you are
+                replacing and we will confirm availability and price, usually the same working day. Call{" "}
+                <a href="tel:+971503823969" className="text-[#f5be53] hover:underline">+971 50 382 3969</a> or use the
+                enquiry form.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto rounded-[3rem] gold-gradient p-12 md:p-16 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Need Supplies?</h2>
             <p className="text-[#483200] text-lg mb-8">Same-day delivery across the UAE</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">Request Quote</a>
-              <a href="/contact" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-4 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</a>
+              <a href="/contact/" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-4 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</a>
             </div>
           </div>
         </section>

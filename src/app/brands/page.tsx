@@ -40,7 +40,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Printer Brands", "item": "https://www.saharaprinter.com/brands/" },
+    { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.saharaprinter.com/products/" },
   ],
 };
 
@@ -194,7 +194,7 @@ export default function BrandsPage() {
               <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
                 Get a Free Quote
               </a>
-              <a href="/contact" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
+              <a href="/contact/" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
                 Talk to an Expert
               </a>
             </div>

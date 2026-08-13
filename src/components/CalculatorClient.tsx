@@ -685,14 +685,14 @@ export default function CalculatorClient() {
 
                     <div className="px-6 pb-6 pt-2 space-y-3">
                       <a
-                        href="/contact"
+                        href="/contact/"
                         className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#030d1a] py-4 rounded-xl font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(245,190,83,0.3)]"
                       >
                         <span className="material-symbols-outlined text-base">send</span>
                         Talk to an Expert
                       </a>
                       <a
-                        href="/contact"
+                        href="/contact/"
                         className="w-full bg-transparent border border-white/12 text-white py-3.5 rounded-xl font-semibold text-sm hover:border-[#f5be53]/30 hover:bg-white/3 transition-all flex items-center justify-center gap-2"
                       >
                         <span className="material-symbols-outlined text-base">calendar_month</span>

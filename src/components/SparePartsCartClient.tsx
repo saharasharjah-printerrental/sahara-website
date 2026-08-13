@@ -188,7 +188,7 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                     <div className="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
                       Some items show &quot;Contact for Pricing&quot; and can&apos;t be checked out online yet. Please request a quote for those.
                     </div>
-                    <a href="/contact" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Request a Quote</a>
+                    <a href="/contact/" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Request a Quote</a>
                   </>
                 ) : (
                   <a href="/checkout/" onClick={() => setShowCart(false)} className="block w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold text-center hover:scale-[1.02] transition-transform">Proceed to Checkout</a>

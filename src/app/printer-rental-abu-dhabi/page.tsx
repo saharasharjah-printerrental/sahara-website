@@ -655,7 +655,7 @@ export default async function PrinterRentalAbuDhabi() {
               { href: "/services/photocopier-rental", label: "Photocopier Rental" },
               { href: "/services/amc", label: "Annual Maintenance (AMC)" },
               { href: "/services/repair", label: "Printer Repair" },
-              { href: "/services/toner", label: "Toner & Spare Parts" },
+              { href: "/services/printer-spare-parts", label: "Toner & Spare Parts" },
               { href: "/hp-printer-abu-dhabi", label: "HP Printer Abu Dhabi" },
               { href: "/brands/canon", label: "Canon Printers" },
               { href: "/brands/kyocera", label: "Kyocera Printers" },
@@ -705,7 +705,7 @@ export default async function PrinterRentalAbuDhabi() {
               <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Resource Hub</p>
               <h2 className="text-2xl font-bold text-white">Abu Dhabi Printer Rental Guides</h2>
             </div>
-            <Link href="/blogs" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All â†’</Link>
+            <Link href="/blogs/" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All â†’</Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[

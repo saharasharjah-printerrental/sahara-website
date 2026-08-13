@@ -180,7 +180,7 @@ export default function Header() {
 
               {/* About Link */}
               <Link
-                href="/about"
+                href="/about/"
                 onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
                 className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/about") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
               >
@@ -189,7 +189,7 @@ export default function Header() {
 
               {/* Clients Link */}
               <Link
-                href="/our-clients"
+                href="/our-clients/"
                 onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
                 className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/our-clients") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
               >
@@ -224,7 +224,7 @@ export default function Header() {
 
               {/* Blogs Link */}
               <Link
-                href="/blogs"
+                href="/blogs/"
                 onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
                 className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/blogs") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
               >
@@ -233,7 +233,7 @@ export default function Header() {
 
               {/* Products Link */}
               <Link
-                href="/products"
+                href="/products/"
                 onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
                 className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/products") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
               >
@@ -262,7 +262,7 @@ export default function Header() {
                       ))}
                       <div className="border-t border-white/8 mx-3 my-1" />
                       <Link
-                        href="/bravo-card-printers-uae"
+                        href="/bravo-card-printers-uae/"
                         className="flex items-center gap-2 px-4 py-3 text-[#f5be53] hover:bg-[#1f2a3d] transition-colors font-semibold text-sm"
                         onClick={() => setIsBrandsOpen(false)}
                       >
@@ -276,7 +276,7 @@ export default function Header() {
 
               {/* Contact Link */}
               <Link
-                href="/contact"
+                href="/contact/"
                 onMouseEnter={() => { setIsServicesOpen(false); setIsBrandsOpen(false); }}
                 className={`relative z-10 px-4 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${isActive("/contact") ? "bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] shadow-md" : "text-slate-300 hover:text-white"}`}
               >
@@ -286,7 +286,7 @@ export default function Header() {
           </div>
 
           {/* CTA Button - Desktop */}
-          <Link href="/rental-calculator" className="hidden lg:block bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
+          <Link href="/rental-calculator/" className="hidden lg:block bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
             Get a Quote
           </Link>
 
@@ -431,7 +431,7 @@ export default function Header() {
                 {/* ── CTA footer ── */}
                 <div className="px-3 pb-3">
                   <Link
-                    href="/rental-calculator"
+                    href="/rental-calculator/"
                     onClick={() => setIsMoreOpen(false)}
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] font-bold text-sm active:scale-[0.98] transition-transform"
                   >

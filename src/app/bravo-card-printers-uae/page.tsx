@@ -154,7 +154,7 @@ export default function BravoCardPrintersUAE() {
             <nav className="flex items-center gap-2 text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
               <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
               <span>/</span>
-              <a href="/products" className="hover:text-[#f5be53] transition-colors">Products</a>
+              <a href="/products/" className="hover:text-[#f5be53] transition-colors">Products</a>
               <span>/</span>
               <span className="text-[#f5be53]">Bravo Card Printers</span>
             </nav>

@@ -167,7 +167,7 @@ export default function PrinterRentalPage() {
           <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
             <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
             <span className="mx-2">/</span>
-            <a href="/services" className="hover:text-[#f5be53] transition-colors">Services</a>
+            <a href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Services</a>
             <span className="mx-2">/</span>
             <span className="text-[#f5be53]">Printer Rental UAE</span>
           </nav>
@@ -204,7 +204,7 @@ export default function PrinterRentalPage() {
                 <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
                   Get a Quote
                 </a>
-                <a href="/rental-calculator" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
+                <a href="/rental-calculator/" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
                   Calculate Price
                 </a>
               </div>
@@ -651,7 +651,7 @@ export default function PrinterRentalPage() {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link href="/blogs" className="px-6 py-3 border border-[#f5be53]/30 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">
+            <Link href="/blogs/" className="px-6 py-3 border border-[#f5be53]/30 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">
               View All Articles →
             </Link>
           </div>
@@ -694,7 +694,7 @@ export default function PrinterRentalPage() {
               { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental" },
               { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
               { href: "/services/repair/", label: "Printer Repair" },
-              { href: "/services/toner/", label: "Toner & Spare Parts" },
+              { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
             ].map((link) => (
               <Link
                 key={link.href}

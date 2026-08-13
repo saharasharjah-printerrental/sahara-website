@@ -109,7 +109,7 @@ export default function NotFound() {
             Back to Home
           </Link>
           <Link
-            href="/contact"
+            href="/contact/"
             style={{
               background: "transparent",
               color: "#ffffff",

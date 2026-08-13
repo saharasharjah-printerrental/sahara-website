@@ -409,7 +409,7 @@ export default async function PrinterRentalDubai() {
               { href: "/services/photocopier-rental", label: "Photocopier Rental" },
               { href: "/services/amc", label: "Annual Maintenance (AMC)" },
               { href: "/services/repair", label: "Printer Repair" },
-              { href: "/services/toner", label: "Toner & Spare Parts" },
+              { href: "/services/printer-spare-parts", label: "Toner & Spare Parts" },
               { href: "/printer-repair-dubai", label: "Printer Repair Dubai" },
               { href: "/canon-printer-dubai", label: "Canon Printer Dubai" },
               { href: "/brands/canon", label: "Canon Printers" },
@@ -459,7 +459,7 @@ export default async function PrinterRentalDubai() {
               <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Resource Hub</p>
               <h2 className="text-2xl font-bold text-white">Dubai Printer Rental Guides</h2>
             </div>
-            <Link href="/blogs" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All â†’</Link>
+            <Link href="/blogs/" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All â†’</Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
