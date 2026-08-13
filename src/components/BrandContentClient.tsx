@@ -1,6 +1,5 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -31,36 +30,27 @@ const defaultBrand = (slug: string) => ({
 });
 
 export default function BrandContentClient({ slug, brandFaqs }: { slug: string; brandFaqs?: { q: string; a: string }[] }) {
-  const router = useRouter();
-  const [brand, setBrand] = useState<any>(null);
+  // Resolve synchronously so the brand copy is present in the server-rendered
+  // HTML. Crawlers never run useEffect, so deferring this hid the entire page
+  // body from Google. Unknown slugs are already rejected by notFound() in
+  // brands/[slug]/page.tsx.
+  const [brand, setBrand] = useState<any>(() =>
+    brandData[slug] ? { ...brandData[slug], slug } : { ...defaultBrand(slug), slug }
+  );
 
+  // CMS overrides from the admin dashboard are layered on after hydration.
   useEffect(() => {
     const stored = localStorage.getItem("sahara_brands");
-    if (stored) {
-      const brands = JSON.parse(stored);
-      const found = brands.find((b: any) => b.slug === slug && b.isActive);
-      if (found) setBrand(found);
-      else if (brandData[slug]) setBrand({ ...brandData[slug], slug });
-      else router.push("/products");
-    } else {
-      if (brandData[slug]) setBrand({ ...brandData[slug], slug });
-      else router.push("/products");
+    if (!stored) return;
+    try {
+      const found = JSON.parse(stored).find((b: any) => b.slug === slug && b.isActive);
+      if (found) setBrand({ ...found, slug });
+    } catch {
+      /* corrupt cache — keep the server-rendered brand data */
     }
-  }, [slug, router]);
+  }, [slug]);
 
-  if (!brand) {
-    return (
-      <main className="min-h-screen bg-[#071325]">
-        <Header />
-        <div className="pt-32 text-center">
-          <p className="text-[#f5be53]">Loading...</p>
-        </div>
-        <Footer />
-      </main>
-    );
-  }
-
-  const data = brandData[slug] || { ...defaultBrand(slug), slug };
+  const data = brand;
 
   return (
     <main className="min-h-screen bg-[#071325]">
@@ -77,7 +67,7 @@ export default function BrandContentClient({ slug, brandFaqs }: { slug: string; 
                 <span className="text-xs uppercase tracking-widest text-[#f5be53] font-medium">Authorized {data.name} Partner</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-                {data.name} <span className="text-[#f5be53]">Partner</span>
+                {data.name} Printers <span className="text-[#f5be53]">UAE</span>
               </h1>
               {/* AEO Answer Block */}
               <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-4 mb-6">
