@@ -397,6 +397,51 @@ export default function ContactPage() {
               </div>
             ))}
           </div>
+          <div className="mt-16 max-w-3xl space-y-8">
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">Opening hours and response times</h2>
+              <p className="text-[#d3c5b0] leading-relaxed">
+                Our office and workshop are open Monday to Saturday, 08:00 to 19:00, and closed on Sunday. Enquiries
+                received during working hours are normally answered the same day. For existing rental and AMC clients
+                with a device down, our target on-site response anywhere in the UAE is four hours — call the number
+                above rather than emailing, so the job goes straight to a technician.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">Where we cover</h2>
+              <p className="text-[#d3c5b0] leading-relaxed">
+                We deliver, install and service across all seven emirates from our Sharjah Industrial Area 11 base:{" "}
+                <a href="/printer-rental-dubai/" className="text-[#f5be53] hover:underline">Dubai</a>,{" "}
+                <a href="/photocopier-rental-sharjah/" className="text-[#f5be53] hover:underline">Sharjah</a>,{" "}
+                <a href="/printer-rental-abu-dhabi/" className="text-[#f5be53] hover:underline">Abu Dhabi</a>,{" "}
+                <a href="/printer-rental-al-ain/" className="text-[#f5be53] hover:underline">Al Ain</a>,{" "}
+                <a href="/printer-rental-fujairah/" className="text-[#f5be53] hover:underline">Fujairah</a>,{" "}
+                <a href="/printer-rental-rak/" className="text-[#f5be53] hover:underline">Ras Al Khaimah</a>, Ajman and
+                Umm Al Quwain — including the free-zone business parks at JAFZA, SAIF Zone, Hamriyah and Dubai Airport
+                Free Zone.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">What to tell us</h2>
+              <p className="text-[#d3c5b0] leading-relaxed mb-4">
+                To quote accurately we need three things: roughly how many pages you print a month, the black-and-white
+                versus colour split, and whether you need A4 or A3. If you are not sure, the{" "}
+                <a href="/rental-calculator/" className="text-[#f5be53] hover:underline">rental calculator</a> will
+                estimate it from your team size. With those details we can normally confirm a device and a current rate
+                the same working day.
+              </p>
+              <p className="text-[#d3c5b0] leading-relaxed">
+                Looking for something specific? See{" "}
+                <a href="/services/printer-rental/" className="text-[#f5be53] hover:underline">printer rental</a>,{" "}
+                <a href="/services/photocopier-rental/" className="text-[#f5be53] hover:underline">photocopier rental</a>,{" "}
+                <a href="/services/repair/" className="text-[#f5be53] hover:underline">repair and service</a>,{" "}
+                <a href="/services/amc/" className="text-[#f5be53] hover:underline">annual maintenance contracts</a>, or{" "}
+                <a href="/services/printer-spare-parts/" className="text-[#f5be53] hover:underline">toner and spare parts</a>.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
