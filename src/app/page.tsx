@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { getGoogleReviewsData, getGooglePlaceId } from "@/lib/google-reviews";
 import HomepageClient from "@/components/HomepageClient";
+import OrganizationRating from "@/components/OrganizationRating";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -68,6 +69,8 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#071325]">
+      {/* aggregateRating is scoped to the homepage and /about — see OrganizationRating */}
+      <OrganizationRating />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
 

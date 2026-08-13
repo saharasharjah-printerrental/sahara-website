@@ -3,7 +3,6 @@ import "./globals.css";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { Sora, Manrope } from "next/font/google";
 import { getGoogleReviewsData } from "@/lib/google-reviews";
-import { headers } from "next/headers";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -384,23 +383,17 @@ export default async function RootLayout({
   const googleReviews = await getGoogleReviewsData();
 
   // Google treats site-wide review-rating markup (a business rating itself, injected on
-  // every page) as self-serving and structured-data-policy-ineligible. Scope aggregateRating
-  // to the homepage and /about — where the rating is the page's actual subject — and omit it
-  // everywhere else, while keeping the Organization/LocalBusiness block itself global.
-  const hdrs = await headers();
-  const pathname = hdrs.get("x-pathname") || "/";
-  const showAggregateRating = pathname === "/" || pathname.startsWith("/about");
+  // every page) as self-serving and structured-data-policy-ineligible. The global
+  // Organization/LocalBusiness block therefore carries NO aggregateRating; the homepage
+  // and /about attach it themselves via <OrganizationRating />, which references this
+  // same @id so the two nodes merge.
+  //
+  // Do NOT reintroduce headers() here. Calling it in the root layout makes Next render
+  // the internal /_not-found route dynamically under the nodejs runtime, which
+  // @cloudflare/next-on-pages rejects — it broke every Pages build from 2026-08-07
+  // (commit 5381646) until 2026-08-13.
   const { aggregateRating: _omittedRating, ...organizationSchemaBase } = organizationSchema;
-  const organizationSchemaWithLiveRating = showAggregateRating
-    ? {
-        ...organizationSchemaBase,
-        aggregateRating: {
-          ...organizationSchema.aggregateRating,
-          ratingValue: googleReviews.rating,
-          reviewCount: googleReviews.reviewCount,
-        },
-      }
-    : organizationSchemaBase;
+  const organizationSchemaWithLiveRating = organizationSchemaBase;
 
   return (
     <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import CountUp from "@/components/CountUp";
+import OrganizationRating from "@/components/OrganizationRating";
 
 export const metadata: Metadata = {
   title: "About Sahara | UAE Printer Rental Experts Since 2012",
@@ -60,6 +61,8 @@ const breadcrumbSchema = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#071325]">
+      {/* aggregateRating is scoped to the homepage and /about — see OrganizationRating */}
+      <OrganizationRating />
       <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <Header />
