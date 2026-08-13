@@ -228,7 +228,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
         {/* Exclusive Distributor Callout */}
         <div className="max-w-7xl mx-auto px-8 lg:px-0 mb-4">
           <a
-            href="/bravo-card-printers-uae"
+            href="/bravo-card-printers-uae/"
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gradient-to-r from-[#0d1a2e] to-[#091524] border border-[#f5be53]/25 rounded-2xl p-5 hover:border-[#f5be53]/50 transition-colors group"
           >
             <div className="flex items-center gap-3 shrink-0">

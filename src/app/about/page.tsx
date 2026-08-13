@@ -264,7 +264,7 @@ export default function AboutPage() {
               Get a Quote
             </a>
             <a
-              href="/contact"
+              href="/contact/"
               className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-4 rounded-full font-bold text-lg backdrop-blur-sm"
             >
               Contact Us

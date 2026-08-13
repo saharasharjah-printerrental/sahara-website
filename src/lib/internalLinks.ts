@@ -90,7 +90,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/brands/canon", label: "Canon Printers UAE", type: "brand" },
       { href: "/canon-printer-dubai", label: "Canon Printer Dubai", type: "location" },
       { href: "/services/amc", label: "Canon Printer AMC", type: "service" },
-      { href: "/services/toner", label: "Canon Toner & Spare Parts", type: "service" },
+      { href: "/services/printer-spare-parts", label: "Canon Toner & Spare Parts", type: "service" },
     ],
     relatedSlugs: [
       "the-problem-we-solve",
@@ -156,7 +156,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
   "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits": {
     primaryService: { href: "/services/amc", label: "Annual Maintenance (AMC)", type: "service" },
     relatedLinks: [
-      { href: "/services/toner", label: "Toner & Spare Parts", type: "service" },
+      { href: "/services/printer-spare-parts", label: "Toner & Spare Parts", type: "service" },
       { href: "/services/printer-rental", label: "All-Inclusive Printer Rental", type: "service" },
       { href: "/rental-calculator/", label: "Reduce Printing Costs Now", type: "tool" },
     ],
@@ -184,7 +184,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     primaryService: { href: "/services/amc", label: "Annual Maintenance Contract (AMC)", type: "service" },
     relatedLinks: [
       { href: "/services/repair", label: "Printer Repair Services", type: "service" },
-      { href: "/services/toner", label: "Toner & Spare Parts", type: "service" },
+      { href: "/services/printer-spare-parts", label: "Toner & Spare Parts", type: "service" },
       { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
       { href: "/rental-calculator/", label: "Request an AMC Quote", type: "tool" },
     ],
@@ -325,7 +325,7 @@ export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/services/photocopier-rental": "photocopier rental",
   "/services/amc": "annual maintenance contract",
   "/services/repair": "printer repair services",
-  "/services/toner": "toner and spare parts",
+  "/services/printer-spare-parts": "toner and spare parts",
   "/products": "corporate printer sales",
   "/printer-rental-dubai": "printer rental Dubai",
   "/printer-rental-abu-dhabi": "printer rental Abu Dhabi",

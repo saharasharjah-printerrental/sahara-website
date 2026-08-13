@@ -229,22 +229,22 @@ export default function Footer() {
               <li><Link href="/services/papercut-print-management/" className="hover:text-[#f5be53] transition-colors">PaperCut Print Management</Link></li>
               <li><Link href="/services/amc/" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
               <li><Link href="/services/repair/" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
-              <li><Link href="/services/toner/" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
+              <li><Link href="/services/printer-spare-parts/" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
               <li><Link href="/services/plotter-maintenance/" className="hover:text-[#f5be53] transition-colors">Plotter Maintenance</Link></li>
-              <li><Link href="/copier-lease-uae" className="hover:text-[#f5be53] transition-colors">Copier Lease UAE</Link></li>
+              <li><Link href="/copier-lease-uae/" className="hover:text-[#f5be53] transition-colors">Copier Lease UAE</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-bold mb-6">Locations</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><Link href="/printer-rental-dubai" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
-              <li><Link href="/photocopier-rental-sharjah" className="hover:text-[#f5be53] transition-colors">Photocopier Sharjah</Link></li>
-              <li><Link href="/printer-rental-abu-dhabi" className="hover:text-[#f5be53] transition-colors">Printer Rental Abu Dhabi</Link></li>
-              <li><Link href="/printer-rental-rak" className="hover:text-[#f5be53] transition-colors">Printer Rental RAK</Link></li>
-              <li><Link href="/printer-rental-fujairah" className="hover:text-[#f5be53] transition-colors">Printer Rental Fujairah</Link></li>
-              <li><Link href="/printer-rental-al-ain" className="hover:text-[#f5be53] transition-colors">Printer Rental Al Ain</Link></li>
-              <li><Link href="/printer-repair-dubai" className="hover:text-[#f5be53] transition-colors">Printer Repair Dubai</Link></li>
+              <li><Link href="/printer-rental-dubai/" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
+              <li><Link href="/photocopier-rental-sharjah/" className="hover:text-[#f5be53] transition-colors">Photocopier Sharjah</Link></li>
+              <li><Link href="/printer-rental-abu-dhabi/" className="hover:text-[#f5be53] transition-colors">Printer Rental Abu Dhabi</Link></li>
+              <li><Link href="/printer-rental-rak/" className="hover:text-[#f5be53] transition-colors">Printer Rental RAK</Link></li>
+              <li><Link href="/printer-rental-fujairah/" className="hover:text-[#f5be53] transition-colors">Printer Rental Fujairah</Link></li>
+              <li><Link href="/printer-rental-al-ain/" className="hover:text-[#f5be53] transition-colors">Printer Rental Al Ain</Link></li>
+              <li><Link href="/printer-repair-dubai/" className="hover:text-[#f5be53] transition-colors">Printer Repair Dubai</Link></li>
             </ul>
           </div>
 
@@ -252,32 +252,32 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-6">Blog Resources</h4>
             <ul className="space-y-3 text-sm text-slate-400">
               <li>
-                <Link href="/blogs/how-to-choose-the-best-printer-rental-dubai-service" className="hover:text-[#f5be53] transition-colors leading-snug">
+                <Link href="/blogs/how-to-choose-the-best-printer-rental-dubai-service/" className="hover:text-[#f5be53] transition-colors leading-snug">
                   How to Choose Printer Rental Dubai
                 </Link>
               </li>
               <li>
-                <Link href="/blogs/total-cost-of-printer-ownership" className="hover:text-[#f5be53] transition-colors leading-snug">
+                <Link href="/blogs/total-cost-of-printer-ownership/" className="hover:text-[#f5be53] transition-colors leading-snug">
                   Total Cost of Printer Ownership
                 </Link>
               </li>
               <li>
-                <Link href="/blogs/why-a-company-chooses-copier-rental-service-over-buying-a-copier" className="hover:text-[#f5be53] transition-colors leading-snug">
+                <Link href="/blogs/why-a-company-chooses-copier-rental-service-over-buying-a-copier/" className="hover:text-[#f5be53] transition-colors leading-snug">
                   Copier Rental vs. Buying
                 </Link>
               </li>
               <li>
-                <Link href="/blogs/the-hidden-cost-of-your-office-copier" className="hover:text-[#f5be53] transition-colors leading-snug">
+                <Link href="/blogs/the-hidden-cost-of-your-office-copier/" className="hover:text-[#f5be53] transition-colors leading-snug">
                   Hidden Cost of Office Copier
                 </Link>
               </li>
               <li>
-                <Link href="/blogs/stop-wasting-money-on-printing-your-guide-to-smarter-office-habits" className="hover:text-[#f5be53] transition-colors leading-snug">
+                <Link href="/blogs/stop-wasting-money-on-printing-your-guide-to-smarter-office-habits/" className="hover:text-[#f5be53] transition-colors leading-snug">
                   Stop Wasting Money on Printing
                 </Link>
               </li>
               <li>
-                <Link href="/blogs" className="hover:text-[#f5be53] transition-colors font-medium text-slate-300">
+                <Link href="/blogs/" className="hover:text-[#f5be53] transition-colors font-medium text-slate-300">
                   View All Articles →
                 </Link>
               </li>
@@ -288,31 +288,31 @@ export default function Footer() {
         {/* SEO Internal Links — Keyword Anchor Text */}
         <div className="py-8 border-t border-white/5">
           <div className="text-center flex flex-wrap justify-center gap-x-3 gap-y-1.5 mb-3">
-            <Link href="/printer-rental-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Rental Dubai</Link>
+            <Link href="/printer-rental-dubai/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Rental Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/photocopier-rental-sharjah" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Photocopier Sharjah</Link>
+            <Link href="/photocopier-rental-sharjah/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Photocopier Sharjah</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/printer-rental-abu-dhabi" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Copier Abu Dhabi</Link>
+            <Link href="/printer-rental-abu-dhabi/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Copier Abu Dhabi</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/copier-lease-uae" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Lease UAE</Link>
+            <Link href="/copier-lease-uae/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Lease UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/services/paper-shredder-rental/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Paper Shredder Rental UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/services/papercut-print-management/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">PaperCut Print Management UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/services/toner/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Toner Suppliers Dubai</Link>
+            <Link href="/services/printer-spare-parts/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Toner Suppliers Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/services/amc/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer AMC UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/brands/canon" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Rental</Link>
+            <Link href="/brands/canon/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Rental</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/brands/kyocera" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Kyocera Photocopier</Link>
+            <Link href="/brands/kyocera/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Kyocera Photocopier</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/printer-repair-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Repair Dubai</Link>
+            <Link href="/printer-repair-dubai/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Repair Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/canon-printer-dubai" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Dubai</Link>
+            <Link href="/canon-printer-dubai/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/hp-printer-abu-dhabi" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">HP Printer Abu Dhabi</Link>
+            <Link href="/hp-printer-abu-dhabi/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">HP Printer Abu Dhabi</Link>
           </div>
           <p className="text-slate-600 text-xs text-center">
             Serving: Dubai · Sharjah · Abu Dhabi · Ajman · RAK · Fujairah · Al Ain — Free delivery across UAE

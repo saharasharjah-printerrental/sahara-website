@@ -264,7 +264,7 @@ export default function AMCPage() {
           <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
             <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
             <span className="mx-2">/</span>
-            <a href="/services" className="hover:text-[#f5be53] transition-colors">Services</a>
+            <a href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Services</a>
             <span className="mx-2">/</span>
             <span className="text-[#f5be53]">Annual Maintenance Contract</span>
           </nav>

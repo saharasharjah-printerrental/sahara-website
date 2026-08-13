@@ -195,7 +195,7 @@ export default function RepairPage() {
           <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
             <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
             <span className="mx-2">/</span>
-            <a href="/services" className="hover:text-[#f5be53] transition-colors">Services</a>
+            <a href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Services</a>
             <span className="mx-2">/</span>
             <span className="text-[#f5be53]">Printer Repair UAE</span>
           </nav>
@@ -228,7 +228,7 @@ export default function RepairPage() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a href="/contact" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
+                <a href="/contact/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
                   Book a Technician
                 </a>
                 <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors flex items-center gap-2">
@@ -446,7 +446,7 @@ export default function RepairPage() {
               <a href="tel:+971503823969" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl">
                 📞 Call Now — +971 50 382 3969
               </a>
-              <a href="/contact" className="bg-white/20 border border-[#412d00]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:bg-white/30 transition-colors">
+              <a href="/contact/" className="bg-white/20 border border-[#412d00]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:bg-white/30 transition-colors">
                 Book Online
               </a>
             </div>

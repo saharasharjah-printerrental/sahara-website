@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 export const runtime = 'edge';
 
@@ -90,7 +90,7 @@ export default function HPPrinterAbuDhabi() {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Brands", "item": "https://www.saharaprinter.com/brands/" },
+      { "@type": "ListItem", "position": 2, "name": "Brands", "item": "https://www.saharaprinter.com/products/" },
       { "@type": "ListItem", "position": 3, "name": "HP Printer Abu Dhabi", "item": "https://www.saharaprinter.com/hp-printer-abu-dhabi/" }
     ]
   };

@@ -13,7 +13,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://www.saharaprinter.com/" },
-    { "@type": "ListItem", position: 2, name: "Printer Brands", item: "https://www.saharaprinter.com/brands/" },
+    { "@type": "ListItem", position: 2, name: "Products", item: "https://www.saharaprinter.com/products/" },
     { "@type": "ListItem", position: 3, name: "Samsung Printers UAE", item: "https://www.saharaprinter.com/brands/samsung/" },
   ],
 };

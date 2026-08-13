@@ -41,7 +41,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
           <nav className="text-sm text-slate-500 mb-6 flex flex-wrap items-center gap-1" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-[#f5be53] transition-colors">Home</Link>
             <span className="mx-1">/</span>
-            <Link href="/blogs" className="hover:text-[#f5be53] transition-colors">Blog</Link>
+            <Link href="/blogs/" className="hover:text-[#f5be53] transition-colors">Blog</Link>
             <span className="mx-1">/</span>
             <span className="text-[#f5be53] line-clamp-1 max-w-xs">{post.title}</span>
           </nav>
@@ -94,7 +94,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/blogs" className="px-6 py-3 border border-[#f5be53]/30 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">View All Articles →</Link>
+            <Link href="/blogs/" className="px-6 py-3 border border-[#f5be53]/30 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">View All Articles →</Link>
           </div>
         </div>
       </section>
@@ -108,7 +108,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
               { href: "/services/photocopier-rental", label: "Photocopier Rental" },
               { href: "/services/amc", label: "AMC" },
               { href: "/services/repair", label: "Printer Repair" },
-              { href: "/services/toner", label: "Toner & Parts" },
+              { href: "/services/printer-spare-parts", label: "Toner & Parts" },
               { href: "/printer-rental-dubai", label: "Printer Rental Dubai" },
               { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi" },
               { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah" },
@@ -125,7 +125,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
           <p className="text-[#d3c5b0] mb-8">Get a customized quote for <Link href="/services/printer-rental/" className="text-[#f5be53] hover:underline">printer rental</Link>, <Link href="/services/repair/" className="text-[#f5be53] hover:underline">repair</Link>, or <Link href="/services/amc/" className="text-[#f5be53] hover:underline">maintenance</Link> — within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/rental-calculator/" className="px-8 py-4 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold inline-block hover:scale-105 transition-transform">Get a Free Quote</Link>
-            <Link href="/contact" className="px-8 py-4 glass-card text-white rounded-full font-bold inline-block border border-[#f5be53]/20 hover:bg-[#2a3548] transition-colors">Contact Us</Link>
+            <Link href="/contact/" className="px-8 py-4 glass-card text-white rounded-full font-bold inline-block border border-[#f5be53]/20 hover:bg-[#2a3548] transition-colors">Contact Us</Link>
           </div>
         </div>
       </section>

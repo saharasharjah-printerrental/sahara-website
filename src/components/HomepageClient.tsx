@@ -146,7 +146,7 @@ function HeroSection() {
             Get a Quote
           </a>
           <a
-            href="/services"
+            href="/services/printer-rental/"
             className="px-8 py-4 rounded-full font-bold text-lg text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors"
           >
             Explore Services
@@ -296,7 +296,7 @@ function ServicesSection() {
     { icon: Print, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental" },
     { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/products" },
     { icon: Build, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair" },
-    { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/toner" },
+    { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/printer-spare-parts" },
   ];
   return (
     <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
@@ -365,7 +365,7 @@ function LocationsSection() {
           ))}
         </div>
         <div className="text-center mt-10">
-          <Link href="/copier-lease-uae" className="px-6 py-3 border border-[#f5be53]/25 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">View Nationwide Copier Lease Plans →</Link>
+          <Link href="/copier-lease-uae/" className="px-6 py-3 border border-[#f5be53]/25 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">View Nationwide Copier Lease Plans →</Link>
         </div>
       </div>
     </section>
@@ -448,7 +448,7 @@ function FeaturedProductsSection() {
               <p className="text-[#d3c5b0] text-sm mb-6">{p.desc || "\u00A0"}</p>
               <div className="flex justify-between items-center">
                 <span className="text-[#f5be53] font-bold text-lg">{p.priceRental || "\u00A0"}</span>
-                {!loading && <Link href="/products" className="text-white hover:text-[#f5be53] transition-colors flex items-center gap-2">Details <East className="text-sm" /></Link>}
+                {!loading && <Link href="/products/" className="text-white hover:text-[#f5be53] transition-colors flex items-center gap-2">Details <East className="text-sm" /></Link>}
               </div>
             </div>
           </div>
@@ -576,8 +576,8 @@ function CTASection() {
             <p className="text-[#483200] text-lg md:text-xl font-medium">Get a customized proposal for your office equipment within 24 hours.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/rental-calculator" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">Get Your Quote</Link>
-            <Link href="/contact" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</Link>
+            <Link href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">Get Your Quote</Link>
+            <Link href="/contact/" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</Link>
           </div>
         </div>
       </div>
