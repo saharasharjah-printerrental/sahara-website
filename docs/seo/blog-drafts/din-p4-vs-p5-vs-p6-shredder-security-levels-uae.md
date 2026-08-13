@@ -36,7 +36,7 @@ DIN 66399 is the German industry standard (adopted internationally, including in
 
 ## Why P-4 Is the UAE Office Baseline
 
-The UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021) requires organisations to securely dispose of personal data in physical form, with fines up to AED 5 million for non-compliance. DIN P-4 cross-cut is widely accepted as the practical minimum for this requirement across general business documents — it's not reversible with basic reassembly, unlike strip-cut.
+The UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021) requires organisations to securely dispose of personal data held in physical form. Administrative fines are reported to range from AED 50,000 to AED 5 million depending on severity, though the law's executive regulations had still not been published as a discrete instrument as of mid-2026, so enforcement detail remains pending — take legal advice on your own position. DIN P-4 cross-cut is widely accepted as the practical minimum across general business documents: unlike strip-cut, it is not reversible by basic reassembly.
 
 ## When to Step Up to P-5 or Higher
 

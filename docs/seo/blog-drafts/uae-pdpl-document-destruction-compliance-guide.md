@@ -50,7 +50,11 @@ For organisations that need to demonstrate compliance — during a client audit,
 
 ## Fines and Enforcement
 
-Non-compliance with PDPL can result in fines up to **AED 5 million**, alongside reputational damage from a data-handling failure becoming public. Document destruction is a low-cost control relative to that exposure.
+Administrative fines under the PDPL are reported to range from **AED 50,000 to AED 5 million** depending on the nature and severity of the violation, with repeated breaches potentially attracting up to double the maximum. Suspension or restriction of data processing is also available as a sanction. Separately, unlawful disclosure of personal data can attract penalties under Federal Decree-Law No. 34 of 2021 on Combating Rumours and Cybercrimes.
+
+One important caveat: as of mid-2026 the PDPL's executive regulations have still not been published in the Official Gazette as a discrete instrument, so the detailed enforcement mechanics — including how fines are assessed in practice — remain pending. Organisations should treat the figures above as the stated statutory ceiling rather than as a schedule of enforced penalties, and take legal advice on their own exposure.
+
+Either way, secure document destruction is a low-cost control relative to that exposure, and one of the few compliance measures a business can implement immediately without waiting for regulatory clarification.
 
 ---
 
