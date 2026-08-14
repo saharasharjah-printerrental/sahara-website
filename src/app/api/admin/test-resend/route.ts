@@ -9,6 +9,24 @@ function getDB() {
   try { return getRequestContext().env.DB as any; } catch { return null; }
 }
 
+/**
+ * Resend accounts start in sandbox mode: until a sending domain is verified,
+ * emails can only be delivered to the address the Resend account was signed
+ * up with — any other recipient gets a 403 "validation_error". That's an
+ * account-level restriction, not a request bug, so surface it as an
+ * actionable message instead of raw JSON.
+ */
+function friendlyResendError(err: unknown): string {
+  const raw = String(err);
+  if (raw.includes('only send testing emails to your own email address')) {
+    return 'Resend account is in sandbox mode — it can only deliver to the email you signed up with until you verify a sending domain. Verify saharaprinter.com at resend.com/domains, then set From Email to an address on that domain.';
+  }
+  if (raw.includes('domain is not verified')) {
+    return 'The "From Email" domain isn\'t verified in Resend. Verify it at resend.com/domains, or clear From Email to use the resend.dev test sender.';
+  }
+  return raw;
+}
+
 export async function GET(_request: NextRequest) {
   const db = getDB();
   if (!db) return NextResponse.json({ configured: false, message: 'Database not configured' });
@@ -41,7 +59,7 @@ export async function GET(_request: NextRequest) {
       );
       return NextResponse.json({ configured: true, sent: true, to });
     } catch (err) {
-      return NextResponse.json({ configured: true, sent: false, error: String(err) });
+      return NextResponse.json({ configured: true, sent: false, error: friendlyResendError(err) });
     }
   } catch (error) {
     console.error('[/api/admin/test-resend] Error:', error);
@@ -88,7 +106,7 @@ export async function POST(request: NextRequest) {
       );
       return NextResponse.json({ configured: true, sent: true, to });
     } catch (err) {
-      return NextResponse.json({ configured: true, sent: false, error: String(err) });
+      return NextResponse.json({ configured: true, sent: false, error: friendlyResendError(err) });
     }
   } catch (error) {
     console.error('[/api/admin/test-resend] POST Error:', error);
