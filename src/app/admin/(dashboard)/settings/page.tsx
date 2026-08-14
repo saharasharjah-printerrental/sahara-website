@@ -222,6 +222,40 @@ export default function AdminSettings() {
       } catch { /* silent */ }
     })();
 
+    // Load SMTP credentials from their own D1 keys — the same keys
+    // getSmtpConfig() reads to actually send mail — rather than trusting the
+    // `smtp` sub-object embedded in the site_settings blob above. The two
+    // can drift, and this is the authoritative copy. Runs after the
+    // site_settings load so it wins if both resolve, and still populates
+    // correctly if the site_settings fetch above failed or returned nothing.
+    (async () => {
+      try {
+        const keys = ['smtp_host', 'smtp_port', 'smtp_user', 'smtp_pass', 'smtp_from_name', 'smtp_from_email', 'smtp_to_email'];
+        const results = await Promise.all(
+          keys.map(k => fetch(`/api/settings/?key=${k}`).then(r => r.json()))
+        );
+        const [host, port, user, pass, fromName, fromEmail, toEmail] = results.map(r => r?.setting?.value || '');
+        // Only overwrite the form if D1 actually has a user/pass on record —
+        // an empty response here just means SMTP was never configured, not
+        // that we should blank out whatever the site_settings load already
+        // populated (e.g. from a stale localStorage fallback).
+        if (user || pass) {
+          setSettings(prev => ({
+            ...prev,
+            smtp: {
+              smtpHost: host || defaultSmtp.smtpHost,
+              smtpPort: port || defaultSmtp.smtpPort,
+              smtpUser: user,
+              smtpPass: pass,
+              smtpFromName: fromName || defaultSmtp.smtpFromName,
+              smtpFromEmail: fromEmail,
+              smtpToEmail: toEmail,
+            },
+          }));
+        }
+      } catch { /* silent — falls back to whatever site_settings/localStorage provided */ }
+    })();
+
     // Load payment gateway credentials from D1
     (async () => {
       try {
@@ -244,14 +278,22 @@ export default function AdminSettings() {
 
     const d1Entries = [
       { key: "site_settings", value: json },
-      { key: "smtp_host", value: settings.smtp.smtpHost },
-      { key: "smtp_port", value: settings.smtp.smtpPort },
-      { key: "smtp_user", value: settings.smtp.smtpUser },
-      { key: "smtp_pass", value: settings.smtp.smtpPass },
-      { key: "smtp_from_name", value: settings.smtp.smtpFromName },
-      { key: "smtp_from_email", value: settings.smtp.smtpFromEmail },
-      { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
-      { key: "notification_email", value: settings.smtp.smtpToEmail },
+      // SMTP — only saved when a user/pass is present, same guard as the
+      // Cloudinary/Payment blocks below. Without this, saving ANY unrelated
+      // field (e.g. company phone) while the SMTP fields hadn't finished
+      // loading yet (or the load failed) would silently overwrite the real,
+      // working credentials in D1 with blanks — this was the root cause of
+      // SMTP "disappearing after a while".
+      ...(settings.smtp.smtpUser || settings.smtp.smtpPass ? [
+        { key: "smtp_host", value: settings.smtp.smtpHost },
+        { key: "smtp_port", value: settings.smtp.smtpPort },
+        { key: "smtp_user", value: settings.smtp.smtpUser },
+        { key: "smtp_pass", value: settings.smtp.smtpPass },
+        { key: "smtp_from_name", value: settings.smtp.smtpFromName },
+        { key: "smtp_from_email", value: settings.smtp.smtpFromEmail },
+        { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
+        { key: "notification_email", value: settings.smtp.smtpToEmail },
+      ] : []),
       { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
       // Only save cloudinary creds if they have actual values — prevents wiping stored
       // credentials if the D1 fetch silently failed on page load
