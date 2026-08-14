@@ -124,8 +124,8 @@ async function getResendConfig(): Promise<ResendConfig | null> {
       const map: Record<string, string> = {};
       rows.forEach((r: any) => { map[r.key] = r.value; });
       if (map.resend_enabled === 'false') return null;
-      apiKey = map.resend_api_key || '';
-      fromEmail = map.resend_from_email || '';
+      apiKey = (map.resend_api_key || '').trim();
+      fromEmail = (map.resend_from_email || '').trim();
     } catch (err) {
       console.error('[email-service] Failed to read Resend config from DB:', err);
     }
@@ -136,6 +136,7 @@ async function getResendConfig(): Promise<ResendConfig | null> {
     try { apiKey = (getRequestContext().env as any).RESEND_API_KEY || ''; } catch {
       try { apiKey = (globalThis as any).process?.env?.RESEND_API_KEY || ''; } catch { /* ignore */ }
     }
+    apiKey = apiKey.trim();
   }
 
   if (!apiKey) return null;

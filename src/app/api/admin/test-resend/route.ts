@@ -52,7 +52,7 @@ export async function GET(_request: NextRequest) {
 
     try {
       await sendViaResend(
-        { apiKey: map.resend_api_key, fromName: 'Sahara Printers', fromEmail: map.resend_from_email || 'onboarding@resend.dev' },
+        { apiKey: map.resend_api_key, fromName: 'Sahara Printers', fromEmail: (map.resend_from_email || '').trim() || 'onboarding@resend.dev' },
         to,
         'Sahara Printers — Resend Test',
         `<p>Test email from Sahara Printers admin panel via Resend — ${new Date().toUTCString()}</p>`,
@@ -77,9 +77,9 @@ export async function GET(_request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}));
-    const apiKey: string = body?.apiKey || '';
-    const fromEmail: string = body?.fromEmail || '';
-    let to: string = body?.to || '';
+    const apiKey: string = (body?.apiKey || '').trim();
+    const fromEmail: string = (body?.fromEmail || '').trim();
+    let to: string = (body?.to || '').trim();
 
     if (!apiKey) {
       return NextResponse.json({ configured: false, message: 'Paste a Resend API key first.' });
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       const db = getDB();
       if (db) {
         const row = await db.prepare(`SELECT value FROM settings WHERE key = 'smtp_to_email'`).first();
-        to = row?.value || '';
+        to = (row?.value || '').trim();
       }
     }
     to = to || fromEmail;

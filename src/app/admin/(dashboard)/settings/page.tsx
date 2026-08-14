@@ -303,11 +303,12 @@ export default function AdminSettings() {
         { key: "notification_email", value: settings.smtp.smtpToEmail },
       ] : []),
       // Resend fallback — same non-empty guard as SMTP above, so a blank
-      // field never wipes a previously saved API key.
-      ...(resendSettings.apiKey ? [
+      // field never wipes a previously saved API key. Trimmed so a stray
+      // space in From Email doesn't defeat the resend.dev fallback default.
+      ...(resendSettings.apiKey.trim() ? [
         { key: "resend_enabled", value: String(resendSettings.enabled) },
-        { key: "resend_api_key", value: resendSettings.apiKey },
-        { key: "resend_from_email", value: resendSettings.fromEmail },
+        { key: "resend_api_key", value: resendSettings.apiKey.trim() },
+        { key: "resend_from_email", value: resendSettings.fromEmail.trim() },
       ] : []),
       { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
       // Only save cloudinary creds if they have actual values — prevents wiping stored
