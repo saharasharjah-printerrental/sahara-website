@@ -8,6 +8,14 @@ export const metadata: Metadata = {
     title: "Contact Sahara | Printer Rental Dubai | +971503823969",
     description: "Reach Sahara Office Equipments for printer rental, repair & AMC in Dubai & UAE. Call or WhatsApp +971503823969.",
     url: "https://www.saharaprinter.com/contact/",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Contact Sahara Office Equipments — Printer Rental Dubai & UAE",
+      },
+    ],
   },
 };
 

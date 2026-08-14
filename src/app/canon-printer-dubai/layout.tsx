@@ -8,6 +8,14 @@ export const metadata: Metadata = {
     title: "Canon Printer Dubai | Rental & Service | Sahara Office",
     description: "Canon imageRUNNER & imageCLASS printers in Dubai from AED 250/mo. Zero deposit, free toner, 4-hr response. Canon Authorized Service.",
     url: "https://www.saharaprinter.com/canon-printer-dubai/",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Canon Printer Dubai — Sahara Office Equipments",
+      },
+    ],
   },
 };
 

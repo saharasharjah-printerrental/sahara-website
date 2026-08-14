@@ -8,6 +8,14 @@ export const metadata: Metadata = {
     title: "Printer Repair Dubai | 4-Hr Response | Sahara",
     description: "Same-day printer repair in Dubai — Canon, HP, Kyocera, Xerox. 4-hour emergency response, free diagnosis.",
     url: "https://www.saharaprinter.com/printer-repair-dubai/",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Printer Repair Dubai — Sahara Office Equipments",
+      },
+    ],
   },
 };
 

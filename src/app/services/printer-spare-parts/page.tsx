@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Printer Spare Parts & Toner UAE — Sahara Office Equipments",
+      },
+    ],
   },
   alternates: { canonical: "https://www.saharaprinter.com/services/printer-spare-parts/" },
 };

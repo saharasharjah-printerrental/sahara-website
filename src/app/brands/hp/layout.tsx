@@ -56,6 +56,14 @@ export const metadata: Metadata = {
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "HP Printers UAE — Sahara Office Equipments",
+      },
+    ],
   },
   other: {
     "script:ld+json": [

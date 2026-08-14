@@ -75,14 +75,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   try {
     const db = getRequestContext().env.DB as any;
-    const row = await db.prepare('SELECT title, excerpt, meta_title, meta_description, meta_keywords FROM blogs WHERE slug = ? AND isActive = 1').bind(slug).first();
+    const row = await db.prepare('SELECT title, excerpt, image, meta_title, meta_description, meta_keywords FROM blogs WHERE slug = ? AND isActive = 1').bind(slug).first();
     if (row) {
       const title = row.meta_title || `${row.title} | Sahara`;
       const description = row.meta_description || row.excerpt;
       const keywords = row.meta_keywords || 'printer rental uae, office equipment dubai, photocopier uae';
+      const image = row.image || 'https://www.saharaprinter.com/images/heroPrntr1.webp';
       return {
         title, description, keywords,
-        openGraph: { title, description, url: `https://www.saharaprinter.com/blogs/${slug}/`, siteName: 'Sahara Office Equipments', locale: 'en_AE', type: 'article' },
+        openGraph: {
+          title, description, url: `https://www.saharaprinter.com/blogs/${slug}/`, siteName: 'Sahara Office Equipments', locale: 'en_AE', type: 'article',
+          images: [{ url: image, width: 1200, height: 630, alt: row.title }],
+        },
         alternates: { canonical: `https://www.saharaprinter.com/blogs/${slug}/` },
       };
     }
@@ -94,7 +98,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${fallback.title} | Sahara`,
     description: fallback.excerpt,
     keywords: 'printer rental uae, office equipment dubai, photocopier uae',
-    openGraph: { title: `${fallback.title} | Sahara`, description: fallback.excerpt, url: `https://www.saharaprinter.com/blogs/${slug}/`, siteName: 'Sahara Office Equipments', locale: 'en_AE', type: 'article' },
+    openGraph: {
+      title: `${fallback.title} | Sahara`, description: fallback.excerpt, url: `https://www.saharaprinter.com/blogs/${slug}/`, siteName: 'Sahara Office Equipments', locale: 'en_AE', type: 'article',
+      images: [{ url: fallback.coverImage || 'https://www.saharaprinter.com/images/heroPrntr1.webp', width: 1200, height: 630, alt: fallback.title }],
+    },
     alternates: { canonical: `https://www.saharaprinter.com/blogs/${slug}/` },
   };
 }

@@ -52,6 +52,14 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/location-abu-dhabi.webp",
+        width: 1920,
+        height: 2880,
+        alt: "Printer Rental Abu Dhabi — Sahara Office Equipments",
+      },
+    ],
   },
   };
 }

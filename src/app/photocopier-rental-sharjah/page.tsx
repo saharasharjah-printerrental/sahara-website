@@ -66,6 +66,14 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/location-sharjah.webp",
+        width: 1920,
+        height: 1440,
+        alt: "Photocopier Rental Sharjah — Sahara Office Equipments",
+      },
+    ],
   },
   };
 }

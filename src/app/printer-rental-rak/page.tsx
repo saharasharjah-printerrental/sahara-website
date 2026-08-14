@@ -50,6 +50,14 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/location-rak.webp",
+        width: 1920,
+        height: 1181,
+        alt: "Printer Rental Ras Al Khaimah — Sahara Office Equipments",
+      },
+    ],
   },
   };
 }

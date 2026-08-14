@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "Sahara Printer",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Printer Rental Calculator — Sahara Office Equipments",
+      },
+    ],
   },
   alternates: {
     canonical: "https://www.saharaprinter.com/rental-calculator/",

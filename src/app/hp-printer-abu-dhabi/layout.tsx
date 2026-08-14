@@ -8,6 +8,14 @@ export const metadata: Metadata = {
     title: "HP Printer Abu Dhabi | Rental & Service | Sahara",
     description: "HP LaserJet & PageWide printers in Abu Dhabi from AED 250/mo. Zero deposit, free toner, 4-hr response.",
     url: "https://www.saharaprinter.com/hp-printer-abu-dhabi/",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "HP Printer Abu Dhabi — Sahara Office Equipments",
+      },
+    ],
   },
 };
 

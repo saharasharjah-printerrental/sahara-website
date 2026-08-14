@@ -8,6 +8,14 @@ export const metadata: Metadata = {
     title: "Copier Lease UAE | Photocopier Rental | Sahara Office",
     description: "Flexible copier leasing in UAE. Canon & Kyocera multifunction copiers from AED 300/mo. Zero deposit, AMC included.",
     url: "https://www.saharaprinter.com/copier-lease-uae/",
+    images: [
+      {
+        url: "/images/heroPrntr1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Copier Lease UAE — Sahara Office Equipments",
+      },
+    ],
   },
 };
 

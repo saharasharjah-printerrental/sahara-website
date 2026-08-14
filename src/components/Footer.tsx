@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useMotionValue } from "framer-motion";
 import { useRef } from "react";
 import { Smartphone, Phone, Headphones, Email } from "@mui/icons-material";
+import { fetchPublicSettings } from "@/lib/api";
 
 function FacebookIcon() {
   return (
@@ -96,13 +97,13 @@ export default function Footer() {
   const [socialLinks, setSocialLinks] = useState(defaultSocialLinks);
 
   useEffect(() => {
-    // Load settings from D1 API first
-    fetch('/api/settings')
-      .then(res => res.json())
+    // Load settings from D1 API first — deduped with Header's identical fetch
+    // via fetchPublicSettings (both mount on every page).
+    fetchPublicSettings()
       .then(data => {
-        if (data.settings && Object.keys(data.settings).length > 0) {
-          setSettings(prev => ({ ...prev, ...data.settings }));
-          localStorage.setItem("sahara_settings", JSON.stringify(data.settings));
+        if (data && Object.keys(data).length > 0) {
+          setSettings(prev => ({ ...prev, ...data }));
+          localStorage.setItem("sahara_settings", JSON.stringify(data));
         }
       })
       .catch(console.error);

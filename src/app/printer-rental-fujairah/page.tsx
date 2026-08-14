@@ -50,6 +50,14 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/location-fujairah.webp",
+        width: 1920,
+        height: 1440,
+        alt: "Printer Rental Fujairah — Sahara Office Equipments",
+      },
+    ],
   },
   };
 }

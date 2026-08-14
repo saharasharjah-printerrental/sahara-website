@@ -58,6 +58,26 @@ export async function getSettings(key?: string) {
   return fetchAPI(`/settings${query}`);
 }
 
+// /api/settings is served with Cache-Control: private, no-store (it can carry
+// an admin session's data), so the browser HTTP cache never dedupes it.
+// Header and Footer both mount on every page and both used to fetch it
+// independently, doubling this request site-wide. This module-scope promise
+// cache collapses concurrent/rapid calls into one network request per tab.
+let publicSettingsCache: { promise: Promise<Record<string, unknown>>; expires: number } | null = null;
+const PUBLIC_SETTINGS_TTL_MS = 30_000;
+
+export function fetchPublicSettings(): Promise<Record<string, unknown>> {
+  if (publicSettingsCache && publicSettingsCache.expires > Date.now()) {
+    return publicSettingsCache.promise;
+  }
+  const promise = fetch('/api/settings/')
+    .then((res) => res.json())
+    .then((data) => (data?.settings && typeof data.settings === 'object' ? data.settings : {}))
+    .catch(() => ({}));
+  publicSettingsCache = { promise, expires: Date.now() + PUBLIC_SETTINGS_TTL_MS };
+  return promise;
+}
+
 export async function uploadFile(file: File): Promise<{ url: string; error: string | null }> {
   try {
     const formData = new FormData();

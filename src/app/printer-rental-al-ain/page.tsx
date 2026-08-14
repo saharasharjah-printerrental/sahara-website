@@ -50,6 +50,14 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
     type: "website",
+    images: [
+      {
+        url: "/images/location-al-ain.webp",
+        width: 1920,
+        height: 1272,
+        alt: "Printer Rental Al Ain — Sahara Office Equipments",
+      },
+    ],
   },
   };
 }
