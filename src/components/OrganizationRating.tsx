@@ -15,6 +15,12 @@ import { getGoogleReviewsData } from "@/lib/google-reviews";
  * runtime — @cloudflare/next-on-pages rejects that, and it broke every
  * Cloudflare Pages build between 2026-08-07 and 2026-08-13. Opting in per
  * page avoids the problem entirely.
+ *
+ * @type must match the layout's organizationSchema even though this node
+ * only carries aggregateRating — Search Console's Review-snippets validator
+ * flags a JSON-LD node with no declared @type as "Invalid object type for
+ * field '<parent_node>'" even when it merges into a typed Organization node
+ * elsewhere via @id (GSC issue reported 2026-08-27).
  */
 export default async function OrganizationRating() {
   const { rating, reviewCount } = await getGoogleReviewsData();
@@ -22,6 +28,7 @@ export default async function OrganizationRating() {
 
   const node = {
     "@context": "https://schema.org",
+    "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
     "@id": "https://www.saharaprinter.com/#organization",
     aggregateRating: {
       "@type": "AggregateRating",

@@ -211,7 +211,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body: Setting = await request.json();
+    const body: Setting & { entries?: Setting[] } = await request.json();
+
+    // Batch form — { entries: [{key, value}, ...] } — saves the whole admin
+    // settings page in one D1 round trip and one rate-limit hit, instead of
+    // ~15-20 parallel single-key POSTs (which were exhausting the per-IP
+    // /api/settings/ rate limit during normal use and surfacing as a
+    // misleading "check your database connection" error).
+    if (Array.isArray(body.entries)) {
+      const entries = body.entries.filter((e) => e && typeof e.key === 'string');
+      if (entries.length === 0) {
+        return NextResponse.json({ success: true, saved: 0 }, { status: 200, headers: CACHE_CONTROL });
+      }
+      const stmt = db.prepare(`INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)`);
+      await db.batch(entries.map((e) => stmt.bind(e.key, e.value ?? '')));
+      return NextResponse.json(
+        { success: true, saved: entries.length },
+        { status: 200, headers: CACHE_CONTROL }
+      );
+    }
 
     await db.prepare(`
       INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)

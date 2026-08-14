@@ -197,103 +197,85 @@ export default function AdminSettings() {
   }, [checkStorageHealth]);
 
   useEffect(() => {
+    // Single bulk fetch for everything on this page — GET /api/settings/
+    // with no `key` param returns the full key-value map for an authenticated
+    // admin. Previously this page fired ~18 separate per-key GETs on every
+    // load (7 SMTP + 3 Cloudinary + 4 payment + 3 Resend + 1 site_settings),
+    // all counted against the same per-IP /api/settings/ rate-limit bucket
+    // as the Save button's requests — a few page reloads plus a save could
+    // exhaust it and surface as a misleading "check your database
+    // connection" error. One request removes that risk entirely.
     (async () => {
+      let map: Record<string, string> = {};
       try {
-        const res = await fetch('/api/settings/?key=site_settings');
+        const res = await fetch('/api/settings/');
         const data = await res.json();
-        if (data.setting?.value) {
-          const parsed = JSON.parse(data.setting.value);
+        if (data.settings && typeof data.settings === 'object') map = data.settings;
+      } catch { /* fall through to localStorage below */ }
+
+      if (map.site_settings) {
+        try {
+          const parsed = JSON.parse(map.site_settings);
           if (parsed && typeof parsed === "object") {
             setSettings(mergeWithDefaults(parsed));
-            localStorage.setItem("sahara_settings", data.setting.value);
-            return;
+            localStorage.setItem("sahara_settings", map.site_settings);
           }
+        } catch { /* ignore malformed stored JSON */ }
+      } else {
+        try {
+          const stored = localStorage.getItem("sahara_settings");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed && typeof parsed === "object") setSettings(mergeWithDefaults(parsed));
+          }
+        } catch (e) {
+          console.error("Error loading settings:", e);
         }
-      } catch { /* fall through to localStorage */ }
-      try {
-        const stored = localStorage.getItem("sahara_settings");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (parsed && typeof parsed === "object") setSettings(mergeWithDefaults(parsed));
-        }
-      } catch (e) {
-        console.error("Error loading settings:", e);
       }
-    })();
 
-    // Load Cloudinary credentials from D1
-    (async () => {
-      try {
-        const keys = ['cloudinary_cloud_name', 'cloudinary_api_key', 'cloudinary_api_secret'];
-        const results = await Promise.all(
-          keys.map(k => fetch(`/api/settings/?key=${k}`).then(r => r.json()))
-        );
+      if (map.cloudinary_cloud_name || map.cloudinary_api_key) {
         setCloudinarySettings({
-          cloudName: results[0]?.setting?.value || '',
-          apiKey: results[1]?.setting?.value || '',
-          apiSecret: results[2]?.setting?.value || '',
+          cloudName: map.cloudinary_cloud_name || '',
+          apiKey: map.cloudinary_api_key || '',
+          apiSecret: map.cloudinary_api_secret || '',
         });
-      } catch { /* silent */ }
-    })();
+      }
 
-    // Load SMTP credentials from their own D1 keys — the same keys
-    // getSmtpConfig() reads to actually send mail — rather than trusting the
-    // `smtp` sub-object embedded in the site_settings blob above. The two
-    // can drift, and this is the authoritative copy. Runs after the
-    // site_settings load so it wins if both resolve, and still populates
-    // correctly if the site_settings fetch above failed or returned nothing.
-    (async () => {
-      try {
-        const keys = ['smtp_host', 'smtp_port', 'smtp_user', 'smtp_pass', 'smtp_from_name', 'smtp_from_email', 'smtp_to_email'];
-        const results = await Promise.all(
-          keys.map(k => fetch(`/api/settings/?key=${k}`).then(r => r.json()))
-        );
-        const [host, port, user, pass, fromName, fromEmail, toEmail] = results.map(r => r?.setting?.value || '');
-        // Only overwrite the form if D1 actually has a user/pass on record —
-        // an empty response here just means SMTP was never configured, not
-        // that we should blank out whatever the site_settings load already
-        // populated (e.g. from a stale localStorage fallback).
-        if (user || pass) {
-          setSettings(prev => ({
-            ...prev,
-            smtp: {
-              smtpHost: host || defaultSmtp.smtpHost,
-              smtpPort: port || defaultSmtp.smtpPort,
-              smtpUser: user,
-              smtpPass: pass,
-              smtpFromName: fromName || defaultSmtp.smtpFromName,
-              smtpFromEmail: fromEmail,
-              smtpToEmail: toEmail,
-            },
-          }));
-        }
-      } catch { /* silent — falls back to whatever site_settings/localStorage provided */ }
-    })();
+      // SMTP is read from its own D1 keys — the same keys getSmtpConfig()
+      // reads to actually send mail — rather than trusting the `smtp`
+      // sub-object embedded in site_settings above. The two can drift, and
+      // this is the authoritative copy. Only overwrite the form if D1 has a
+      // user/pass on record; an empty result just means SMTP was never
+      // configured, not that we should blank out what site_settings gave us.
+      if (map.smtp_user || map.smtp_pass) {
+        setSettings(prev => ({
+          ...prev,
+          smtp: {
+            smtpHost: map.smtp_host || defaultSmtp.smtpHost,
+            smtpPort: map.smtp_port || defaultSmtp.smtpPort,
+            smtpUser: map.smtp_user || '',
+            smtpPass: map.smtp_pass || '',
+            smtpFromName: map.smtp_from_name || defaultSmtp.smtpFromName,
+            smtpFromEmail: map.smtp_from_email || '',
+            smtpToEmail: map.smtp_to_email || '',
+          },
+        }));
+      }
 
-    // Load Resend fallback credentials from D1, same guard pattern as SMTP above.
-    (async () => {
-      try {
-        const keys = ['resend_enabled', 'resend_api_key', 'resend_from_email'];
-        const results = await Promise.all(keys.map(k => fetch(`/api/settings/?key=${k}`).then(r => r.json())));
-        const [enabled, apiKey, fromEmail] = results.map(r => r?.setting?.value ?? '');
-        if (apiKey) {
-          setResendSettings({ enabled: enabled !== 'false', apiKey, fromEmail: fromEmail || '' });
-        }
-      } catch { /* silent */ }
-    })();
-
-    // Load payment gateway credentials from D1
-    (async () => {
-      try {
-        const keys = ['stripe_secret_key', 'paytabs_profile_id', 'paytabs_server_key', 'paytabs_region'];
-        const r = await Promise.all(keys.map(k => fetch(`/api/settings/?key=${k}`).then(x => x.json())));
-        setPaymentCreds({
-          stripeSecretKey: r[0]?.setting?.value || '',
-          paytabsProfileId: r[1]?.setting?.value || '',
-          paytabsServerKey: r[2]?.setting?.value || '',
-          paytabsRegion: r[3]?.setting?.value || 'ARE',
+      if (map.resend_api_key) {
+        setResendSettings({
+          enabled: map.resend_enabled !== 'false',
+          apiKey: map.resend_api_key,
+          fromEmail: map.resend_from_email || '',
         });
-      } catch { /* silent */ }
+      }
+
+      setPaymentCreds({
+        stripeSecretKey: map.stripe_secret_key || '',
+        paytabsProfileId: map.paytabs_profile_id || '',
+        paytabsServerKey: map.paytabs_server_key || '',
+        paytabsRegion: map.paytabs_region || 'ARE',
+      });
     })();
   }, []);
 
@@ -347,20 +329,18 @@ export default function AdminSettings() {
     ];
 
     try {
-      const results = await Promise.all(
-        d1Entries.map(({ key, value }) =>
-          fetch("/api/settings/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ key, value }),
-          })
-        )
-      );
-      const allOk = results.every(r => r.ok);
-      if (allOk) {
+      // One batched request instead of ~15-20 parallel single-key POSTs —
+      // see the comment on the load effect above for why that mattered.
+      const res = await fetch("/api/settings/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ entries: d1Entries }),
+      });
+      if (res.ok) {
         showToast('success', 'Settings saved to database!');
       } else {
-        showToast('error', 'Some settings failed to save. Check your database connection.');
+        const data = await res.json().catch(() => ({}));
+        showToast('error', data.details || data.error || `Save failed (HTTP ${res.status}). Please try again.`);
       }
     } catch {
       showToast('info', 'Settings saved locally (database unavailable)');
@@ -621,10 +601,20 @@ export default function AdminSettings() {
                   onClick={async () => {
                     setResendTesting(true);
                     try {
-                      const res = await fetch('/api/admin/test-resend');
+                      // Tests the key currently typed in the form, not what's
+                      // saved in D1 — so it works before you've clicked "Save".
+                      const res = await fetch('/api/admin/test-resend', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          apiKey: resendSettings.apiKey,
+                          fromEmail: resendSettings.fromEmail,
+                          to: settings.smtp.smtpToEmail,
+                        }),
+                      });
                       const data = await res.json();
                       if (!data.configured) {
-                        showToast('error', data.message || 'Resend not configured — save an API key first');
+                        showToast('error', data.message || 'Paste a Resend API key first');
                       } else if (data.sent) {
                         showToast('success', `Test email sent via Resend to ${data.to}`);
                       } else {
