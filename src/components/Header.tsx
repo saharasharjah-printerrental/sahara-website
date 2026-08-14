@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchPublicSettings } from "@/lib/api";
+import CartIndicator from "@/components/CartIndicator";
 import { Print, CopyAll, Handyman, Build, Inventory, ShoppingCart, Home, SettingsSuggest, Inventory2, RequestQuote, LocationOn, Article, Call, ExpandMore, ExpandLess, MoreHoriz, InfoOutlined, Close, Groups } from "@mui/icons-material";
 
 const navItems = [
@@ -287,9 +288,12 @@ export default function Header() {
           </div>
 
           {/* CTA Button - Desktop */}
-          <Link href="/rental-calculator/" className="hidden lg:block bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
-            Get a Quote
-          </Link>
+          <div className="hidden lg:flex items-center gap-3">
+            <CartIndicator variant="desktop" />
+            <Link href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
+              Get a Quote
+            </Link>
+          </div>
 
           {/* Mobile - Logo only */}
           <div className="lg:hidden" />
@@ -314,6 +318,8 @@ export default function Header() {
             </Link>
           );
         })}
+
+        <CartIndicator variant="mobile" />
 
         {/* More Button */}
         <div ref={moreRef}>

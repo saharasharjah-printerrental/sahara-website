@@ -35,7 +35,7 @@ npm run browser:doctor   # Diagnose browser automation issues
 - **State/Forms:** Redux Toolkit (minimal usage), Zod validation
 - **Animation:** Framer Motion
 - **Image Optimization:** Next.js Image + Sharp (WebP/AVIF formats)
-- **Email:** Nodemailer (send-email API route, requires RESEND_API_KEY)
+- **Email:** worker-mailer over `cloudflare:sockets` (Gmail SMTP), auto-failover to Resend HTTP API if SMTP fails
 - **Testing:** Playwright + agent-browser MCP
 - **Deployment:** Cloudflare Pages (Wrangler CLI) + next-on-pages
 - **Node.js:** 20+ required
@@ -53,7 +53,7 @@ src/app/
 │       ├── brands, clients, testimonials
 │       ├── faqs, inquiries, seo, blog, blog/editor
 ├── api/
-│   ├── send-email/ — email-service.ts (Nodemailer, get-quote emails)
+│   ├── send-email/ — email-service.ts (worker-mailer/Gmail SMTP + Resend failover, get-quote emails)
 │   ├── cms/ — fetch blog, testimonials, brands, products from DB
 │   ├── upload/ — file uploads for admin (images, logos)
 │   ├── convert-image/ — image format conversion (WebP, AVIF)
@@ -159,16 +159,29 @@ export default async function Home() {
 
 ## Email Service Setup
 
-**Location:** `src/app/api/send-email/email-service.ts`
+**Location:** `src/app/api/send-email/email-service.ts` (+ `providers/resend.ts`)
 
-Requires environment variable:
+Primary transport is Gmail SMTP via `worker-mailer` (raw SMTP over `cloudflare:sockets`,
+lazy `require()`'d so it isn't bundled at build time — see `serverExternalPackages` /
+webpack externals in `next.config.mjs`). Config lives in D1 `settings` (`smtp_*` keys),
+set from Admin → Settings.
+
+Every send goes through `deliver()`, which tries SMTP first and automatically falls back
+to the **Resend HTTP API** if SMTP throws. On a successful fallback it also emails the
+admin (throttled to once per 6h) that Gmail SMTP needs attention. Resend config:
 ```
-RESEND_API_KEY=your_resend_api_key
+RESEND_API_KEY=your_resend_api_key   # env fallback
 ```
+Preferred: Admin → Settings → "Resend — Email Fallback" (stored as D1 `resend_*` keys,
+`resend_api_key` is masked from unauthenticated `/api/settings/` responses same as `smtp_*`).
+
+`inquiries.email_provider` / `orders.email_provider` record which transport actually
+delivered each message (`smtp` or `resend`).
 
 Used by:
-- `POST /api/send-email` route
-- Get-quote form (contact page)
+- `POST /api/send-email` route (get-quote, contact, calculator)
+- `POST /api/orders/` (order confirmations)
+- `POST /api/admin/auth/forgot/` (password recovery)
 - Admin inquiry notifications
 
 ## Testing Architecture

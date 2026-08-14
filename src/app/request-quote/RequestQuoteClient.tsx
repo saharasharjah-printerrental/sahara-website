@@ -1,47 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { formatAED, parsePriceAED, isPriced } from "@/lib/price";
+import { formatAED, isPriced, parsePriceAED } from "@/lib/price";
 import { validateEmail, validateUAEPhone } from "@/lib/emailValidation";
-
-interface CartSupply {
-  id: string;
-  name: string;
-  brand: string;
-  price: string;
-  color?: string;
-  category?: string;
-}
-interface CartItem {
-  supply: CartSupply;
-  quantity: number;
-}
+import { useCart } from "@/hooks/useCart";
+import { resolveWhatsAppNumber, buildWaLink, buildCartQuoteMessage } from "@/lib/whatsapp";
 
 const emptyForm = { name: "", email: "", phone: "", company: "", notes: "" };
 
 export default function RequestQuoteClient() {
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const { cart, loaded, total: cartTotal, clear } = useCart();
   const [form, setForm] = useState({ ...emptyForm });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sahara_cart");
-      if (stored) setCart(JSON.parse(stored));
-    } catch { /* ignore corrupt cart */ }
-    setLoaded(true);
-  }, []);
-
   const set = (k: keyof typeof emptyForm, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
-  const cartTotal = cart.reduce((acc, it) => acc + parsePriceAED(it.supply.price) * it.quantity, 0);
   const allPriced = cart.length > 0 && cart.every((it) => isPriced(it.supply.price));
+
+  const sendWhatsApp = async () => {
+    const number = await resolveWhatsAppNumber();
+    const message = buildCartQuoteMessage(cart, { name: form.name, phone: form.phone, notes: form.notes });
+    window.open(buildWaLink(number, message), "_blank", "noopener,noreferrer");
+    try {
+      navigator.sendBeacon(
+        "/api/leads/whatsapp/",
+        new Blob([JSON.stringify({ name: form.name, phone: form.phone, message, source: "request_quote_page" })], { type: "application/json" })
+      );
+    } catch { /* best-effort */ }
+  };
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -86,6 +77,7 @@ export default function RequestQuoteClient() {
         setSubmitting(false);
         return;
       }
+      clear();
       setSubmitted(true);
     } catch {
       setSubmitError("Network error. Please try again or call +971 50 382 3969.");
@@ -109,9 +101,14 @@ export default function RequestQuoteClient() {
                 Our team will confirm pricing and availability, usually the same working day. You&apos;ll hear from us at{" "}
                 <span className="text-[#f5be53]">{form.email}</span> or on <span className="text-[#f5be53]">{form.phone}</span>.
               </p>
-              <a href="/services/printer-spare-parts/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-3 rounded-xl font-bold inline-block hover:scale-[1.02] transition-transform">
-                Back to Spare Parts
-              </a>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="/services/printer-spare-parts/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-3 rounded-xl font-bold inline-block hover:scale-[1.02] transition-transform">
+                  Back to Spare Parts
+                </a>
+                <button onClick={sendWhatsApp} className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-8 py-3 rounded-xl font-bold hover:brightness-110 transition-all">
+                  Also Send on WhatsApp
+                </button>
+              </div>
             </div>
           ) : !loaded ? (
             <p className="text-slate-400 text-center py-20">Loading…</p>
@@ -186,7 +183,14 @@ export default function RequestQuoteClient() {
                     disabled={submitting}
                     className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {submitting ? "Sending…" : "Send Quote Request"}
+                    {submitting ? "Sending…" : "Send Quote Request (Email)"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={sendWhatsApp}
+                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-3.5 rounded-xl font-bold mt-3 hover:brightness-110 transition-all"
+                  >
+                    Quote on WhatsApp
                   </button>
                   <p className="text-slate-500 text-xs mt-3 text-center">
                     Prefer to talk? Call <a href="tel:+971503823969" className="text-[#f5be53] hover:underline">+971 50 382 3969</a>.

@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const sent = await sendQuoteNotification(data);
+    const { sent, provider } = await sendQuoteNotification(data);
 
     // Persist inquiry to D1 regardless of email outcome, so the enquiry is
     // never lost and the admin panel can show delivery status accurately.
@@ -39,8 +39,8 @@ export async function POST(request: NextRequest) {
       const id = `inq-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
       const now = new Date().toISOString();
       db.prepare(`
-        INSERT INTO inquiries (id, name, email, phone, company, service, message, status, email_sent, email_sent_at, createdAt)
-        VALUES (?, ?, ?, ?, ?, ?, ?, 'new', ?, ?, ?)
+        INSERT INTO inquiries (id, name, email, phone, company, service, message, status, email_sent, email_sent_at, email_provider, createdAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, 'new', ?, ?, ?, ?)
       `).bind(
         id,
         data.customerName || '',
@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
         data.message || '',
         sent ? 1 : 0,
         sent ? now : '',
+        sent ? provider : '',
         now,
       ).run().catch((e: unknown) => console.error('[send-email] inquiry insert failed:', e));
     }

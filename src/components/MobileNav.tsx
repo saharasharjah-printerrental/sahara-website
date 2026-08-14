@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, SettingsSuggest, Inventory2, RequestQuote, MoreHoriz, Close, LocationOn, Article, Call, Print, ShoppingCart, Build, Handyman, Groups } from "@mui/icons-material";
+import CartIndicator from "@/components/CartIndicator";
 
 export default function MobileNav() {
   const pathname = usePathname();
@@ -57,6 +58,8 @@ export default function MobileNav() {
             </Link>
           );
         })}
+
+        <CartIndicator variant="mobile" />
 
         {/* More Button */}
         <button

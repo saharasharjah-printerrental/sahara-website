@@ -144,8 +144,9 @@ export async function POST(request: NextRequest) {
 
     // Emails — don't fail the order if delivery fails
     let emailSent = false;
+    let emailProvider = '';
     try {
-      emailSent = await sendOrderNotification({
+      const result = await sendOrderNotification({
         ref,
         customerName: String(customer.name).trim(),
         customerEmail: String(customer.email).trim(),
@@ -157,11 +158,13 @@ export async function POST(request: NextRequest) {
         instructions: String(delivery.instructions || '').trim(),
         items, subtotal, total,
       });
+      emailSent = result.sent;
+      emailProvider = result.sent ? result.provider : '';
     } catch (e) {
       console.error('[/api/orders] order email failed:', e);
     }
     if (emailSent) {
-      await db.prepare('UPDATE orders SET email_sent = 1 WHERE id = ?').bind(id).run()
+      await db.prepare('UPDATE orders SET email_sent = 1, email_provider = ? WHERE id = ?').bind(emailProvider, id).run()
         .catch((e: unknown) => console.error('[/api/orders] email_sent update failed:', e));
     }
 

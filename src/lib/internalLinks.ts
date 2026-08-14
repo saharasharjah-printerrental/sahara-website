@@ -222,6 +222,136 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       "what-is-printer-amc-uae-guide-2025",
     ],
   },
+  "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide": {
+    primaryService: { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae", label: "DIN P4 vs P5 vs P6 Security Levels", type: "blog" },
+      { href: "/blogs/paper-shredder-rental-uae-when-it-beats-buying", label: "When Renting Beats Buying", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
+      "paper-shredder-rental-uae-when-it-beats-buying",
+      "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
+    ],
+  },
+  "din-p4-vs-p5-vs-p6-shredder-security-levels-uae": {
+    primaryService: { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/blogs/uae-pdpl-document-destruction-compliance-guide", label: "UAE PDPL Compliance Guide", type: "blog" },
+      { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide", label: "Shredder Sizing & Cost Guide", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
+      "uae-pdpl-document-destruction-compliance-guide",
+      "paper-shredder-rental-uae-when-it-beats-buying",
+    ],
+  },
+  "how-to-choose-photocopier-small-office-sharjah": {
+    primaryService: { href: "/services/photocopier-rental", label: "Photocopier Rental", type: "service" },
+    relatedLinks: [
+      { href: "/photocopier-rental-sharjah", label: "Photocopier Rental Sharjah", type: "location" },
+      { href: "/brands/ricoh", label: "Ricoh Printers UAE", type: "brand" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "what-a-copier-rental-service-must-deliver-to-a-client",
+      "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
+      "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
+    ],
+  },
+  "paper-shredder-rental-uae-when-it-beats-buying": {
+    primaryService: { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide", label: "Shredder Sizing & Cost Guide", type: "blog" },
+      { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae", label: "DIN Security Levels Explained", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
+      "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
+      "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
+    ],
+  },
+  "papercut-print-management-uae-offices": {
+    primaryService: { href: "/services/papercut-print-management", label: "PaperCut Print Management", type: "service" },
+    relatedLinks: [
+      { href: "/services/amc", label: "Annual Maintenance (AMC)", type: "service" },
+      { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "printer-amc-dubai-whats-included",
+      "total-cost-of-printer-ownership",
+      "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits",
+    ],
+  },
+  "printer-amc-dubai-whats-included": {
+    primaryService: { href: "/services/amc", label: "Annual Maintenance Contract (AMC)", type: "service" },
+    relatedLinks: [
+      { href: "/services/repair", label: "Printer Repair Services", type: "service" },
+      { href: "/printer-repair-dubai", label: "Printer Repair Dubai", type: "location" },
+      { href: "/rental-calculator/", label: "Request an AMC Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "what-is-printer-amc-uae-guide-2025",
+      "printer-repair-vs-replacement-dubai-guide-2025",
+      "total-cost-of-printer-ownership",
+    ],
+  },
+  "printer-rental-vs-buying-uae-2026-cost-breakdown": {
+    primaryService: { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/printer-rental-dubai", label: "Printer Rental Dubai", type: "location" },
+      { href: "/products", label: "Buy a Printer", type: "service" },
+      { href: "/rental-calculator/", label: "Rent vs Buy Calculator", type: "tool" },
+    ],
+    relatedSlugs: [
+      "total-cost-of-printer-ownership",
+      "rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business",
+      "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
+    ],
+  },
+  "shredder-delivery-jafza-saif-zone-difc-uae-free-zones": {
+    primaryService: { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide", label: "Shredder Sizing & Cost Guide", type: "blog" },
+      { href: "/blogs/paper-shredder-rental-uae-when-it-beats-buying", label: "When Renting Beats Buying", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
+      "paper-shredder-rental-uae-when-it-beats-buying",
+      "uae-pdpl-document-destruction-compliance-guide",
+    ],
+  },
+  "toner-vs-ink-cartridge-uae-buyers-guide": {
+    primaryService: { href: "/services/printer-spare-parts", label: "Toner & Spare Parts", type: "service" },
+    relatedLinks: [
+      { href: "/services/printer-rental", label: "Printer Rental UAE", type: "service" },
+      { href: "/brands/epson", label: "Epson Printers UAE", type: "brand" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits",
+      "video-walkthrough-solving-canon-printer-problems",
+      "the-hidden-cost-of-your-office-copier",
+    ],
+  },
+  "uae-pdpl-document-destruction-compliance-guide": {
+    primaryService: { href: "/services/paper-shredder-rental", label: "Paper Shredder Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae", label: "DIN Security Levels Explained", type: "blog" },
+      { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide", label: "Shredder Sizing & Cost Guide", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
+      "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
+      "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
+    ],
+  },
 };
 
 // Service page to blog post mapping — for "From Our Blog" sections

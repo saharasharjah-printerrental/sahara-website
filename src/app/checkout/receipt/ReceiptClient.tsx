@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import OrderReceipt, { ReceiptOrder } from "@/components/OrderReceipt";
+import { clearCart } from "@/lib/cart";
 
 export default function ReceiptClient() {
   const params = useSearchParams();
@@ -21,8 +22,7 @@ export default function ReceiptClient() {
           setOrder(d.order);
           setState("found");
           // Order is complete — clear the cart so it isn't reused.
-          try { localStorage.removeItem("sahara_cart"); } catch { /* ignore */ }
-          window.dispatchEvent(new Event("sahara-cart-updated"));
+          clearCart();
         } else {
           setState("missing");
         }

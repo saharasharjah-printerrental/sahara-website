@@ -22,6 +22,12 @@ interface CloudinarySettings {
   apiSecret: string;
 }
 
+interface ResendSettings {
+  enabled: boolean;
+  apiKey: string;
+  fromEmail: string;
+}
+
 interface Settings {
   companyName: string;
   companyEmail: string;
@@ -68,12 +74,18 @@ interface Settings {
 
 const defaultSmtp: SmtpSettings = {
   smtpHost: "smtp.gmail.com",
-  smtpPort: "587",
+  smtpPort: "465",
   smtpUser: "",
   smtpPass: "",
   smtpFromName: "Sahara Printers",
   smtpFromEmail: "",
   smtpToEmail: "",
+};
+
+const defaultResend: ResendSettings = {
+  enabled: true,
+  apiKey: "",
+  fromEmail: "",
 };
 
 const defaultSettings: Settings = {
@@ -152,6 +164,8 @@ export default function AdminSettings() {
   const [cloudinaryTesting, setCloudinaryTesting] = useState(false);
   const [smtpTesting, setSmtpTesting] = useState(false);
   const [paymentCreds, setPaymentCreds] = useState<PaymentCreds>(defaultPaymentCreds);
+  const [resendSettings, setResendSettings] = useState<ResendSettings>(defaultResend);
+  const [resendTesting, setResendTesting] = useState(false);
 
   const mergeWithDefaults = (stored: Partial<Settings>): Settings => {
     return {
@@ -256,6 +270,18 @@ export default function AdminSettings() {
       } catch { /* silent — falls back to whatever site_settings/localStorage provided */ }
     })();
 
+    // Load Resend fallback credentials from D1, same guard pattern as SMTP above.
+    (async () => {
+      try {
+        const keys = ['resend_enabled', 'resend_api_key', 'resend_from_email'];
+        const results = await Promise.all(keys.map(k => fetch(`/api/settings/?key=${k}`).then(r => r.json())));
+        const [enabled, apiKey, fromEmail] = results.map(r => r?.setting?.value ?? '');
+        if (apiKey) {
+          setResendSettings({ enabled: enabled !== 'false', apiKey, fromEmail: fromEmail || '' });
+        }
+      } catch { /* silent */ }
+    })();
+
     // Load payment gateway credentials from D1
     (async () => {
       try {
@@ -293,6 +319,13 @@ export default function AdminSettings() {
         { key: "smtp_from_email", value: settings.smtp.smtpFromEmail },
         { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
         { key: "notification_email", value: settings.smtp.smtpToEmail },
+      ] : []),
+      // Resend fallback — same non-empty guard as SMTP above, so a blank
+      // field never wipes a previously saved API key.
+      ...(resendSettings.apiKey ? [
+        { key: "resend_enabled", value: String(resendSettings.enabled) },
+        { key: "resend_api_key", value: resendSettings.apiKey },
+        { key: "resend_from_email", value: resendSettings.fromEmail },
       ] : []),
       { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
       // Only save cloudinary creds if they have actual values — prevents wiping stored
@@ -428,7 +461,7 @@ export default function AdminSettings() {
                       type="text"
                       value={settings.smtp.smtpPort}
                       onChange={(e) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpPort: e.target.value } })}
-                      placeholder="587"
+                      placeholder="465"
                       className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
                     />
                   </div>
@@ -535,6 +568,79 @@ export default function AdminSettings() {
                   {smtpTesting ? 'Testing…' : 'Test Connection'}
                 </button>
                 <p className="text-xs text-slate-500">Save settings first, then test. Checks TCP reachability of your SMTP host.</p>
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 pt-6">
+              <h2 className="text-lg font-bold text-white mb-1">Resend — Email Fallback</h2>
+              <p className="text-sm text-slate-400 mb-4">
+                If Gmail SMTP fails to send (throttled, app password rotated, etc.), quotes and order emails
+                automatically retry through Resend instead of being lost — and you get an alert email the first
+                time that happens.
+              </p>
+
+              <div className="space-y-4">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={resendSettings.enabled}
+                    onChange={(e) => setResendSettings({ ...resendSettings, enabled: e.target.checked })}
+                    className="w-4 h-4 accent-[#f5be53]"
+                  />
+                  <span className="text-sm text-slate-300">Enable Resend fallback</span>
+                </label>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Resend API Key</label>
+                    <input
+                      type="password"
+                      value={resendSettings.apiKey}
+                      onChange={(e) => setResendSettings({ ...resendSettings, apiKey: e.target.value })}
+                      placeholder="re_xxxxxxxxxxxxxxxxxxxxx"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white font-mono tracking-widest"
+                    />
+                    <p className="text-xs text-slate-500 mt-1">From resend.com → API Keys. Never shown to non-admin requests.</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">From Email</label>
+                    <input
+                      type="email"
+                      value={resendSettings.fromEmail}
+                      onChange={(e) => setResendSettings({ ...resendSettings, fromEmail: e.target.value })}
+                      placeholder="noreply@saharaprinter.com"
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white"
+                    />
+                    <p className="text-xs text-slate-500 mt-1">Must be a verified sender/domain in your Resend account.</p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  disabled={resendTesting}
+                  onClick={async () => {
+                    setResendTesting(true);
+                    try {
+                      const res = await fetch('/api/admin/test-resend');
+                      const data = await res.json();
+                      if (!data.configured) {
+                        showToast('error', data.message || 'Resend not configured — save an API key first');
+                      } else if (data.sent) {
+                        showToast('success', `Test email sent via Resend to ${data.to}`);
+                      } else {
+                        showToast('error', data.error || 'Resend test failed');
+                      }
+                    } catch { showToast('error', 'Resend test failed — check console'); }
+                    finally { setResendTesting(false); }
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 bg-[#101c2e] border border-white/10 rounded-xl text-sm text-slate-300 hover:text-white hover:border-[#f5be53]/40 transition-colors disabled:opacity-50"
+                >
+                  <span className={`material-symbols-outlined text-base ${resendTesting ? 'animate-spin' : ''}`}>
+                    {resendTesting ? 'progress_activity' : 'mail'}
+                  </span>
+                  {resendTesting ? 'Testing…' : 'Send Test via Resend'}
+                </button>
+                <p className="text-xs text-slate-500">Save settings first, then test. Sends a live test email to your Sales Notification Email.</p>
               </div>
             </div>
 

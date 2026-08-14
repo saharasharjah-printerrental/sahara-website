@@ -4,21 +4,9 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import OrderReceipt, { ReceiptOrder } from "@/components/OrderReceipt";
-import { parsePriceAED, formatAED, isPriced } from "@/lib/price";
+import { formatAED, parsePriceAED } from "@/lib/price";
 import { validateEmail, validateUAEPhone } from "@/lib/emailValidation";
-
-interface CartSupply {
-  id: string;
-  name: string;
-  brand: string;
-  price: string;
-  color?: string;
-  category?: string;
-}
-interface CartItem {
-  supply: CartSupply;
-  quantity: number;
-}
+import { useCart } from "@/hooks/useCart";
 
 const EMIRATES = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Umm Al Quwain", "Ras Al Khaimah", "Fujairah"];
 
@@ -28,8 +16,7 @@ const emptyForm = {
 };
 
 export default function CheckoutClient() {
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const { cart, loaded, total: cartTotal, hasUnpriced, clear } = useCart();
   const [form, setForm] = useState({ ...emptyForm });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -38,18 +25,11 @@ export default function CheckoutClient() {
   const [payNotice, setPayNotice] = useState("");
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sahara_cart");
-      if (stored) setCart(JSON.parse(stored));
-    } catch { /* ignore corrupt cart */ }
     const p = new URLSearchParams(window.location.search).get("payment");
     if (p === "failed") setPayNotice("Your payment could not be completed. Your cart is saved — please review and try again.");
     else if (p === "cancelled") setPayNotice("Payment was cancelled. Your cart is still here whenever you're ready.");
-    setLoaded(true);
   }, []);
 
-  const cartTotal = cart.reduce((acc, it) => acc + parsePriceAED(it.supply.price) * it.quantity, 0);
-  const hasUnpriced = cart.some((it) => !isPriced(it.supply.price));
   const set = (k: keyof typeof emptyForm, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
   const validate = () => {
@@ -103,8 +83,7 @@ export default function CheckoutClient() {
       } catch { /* gateway unavailable — finalise without online payment */ }
 
       // No online payment: finalise the order inline and show the receipt.
-      localStorage.removeItem("sahara_cart");
-      window.dispatchEvent(new Event("sahara-cart-updated"));
+      clear();
       setPlacedOrder(data.order as ReceiptOrder);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {

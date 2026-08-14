@@ -3,21 +3,16 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Chat } from "@mui/icons-material";
+import { resolveWhatsAppNumber, DEFAULT_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 export default function WhatsAppCTA() {
-  const [whatsapp, setWhatsapp] = useState("971503823969");
+  const [whatsapp, setWhatsapp] = useState(DEFAULT_WHATSAPP_NUMBER);
   const [mounted, setMounted] = useState(false);
   const dragged = useRef(false);
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("sahara_settings");
-    if (stored) {
-      const settings = JSON.parse(stored);
-      if (settings.whatsappNumber) {
-        setWhatsapp(settings.whatsappNumber.replace(/[^0-9]/g, ""));
-      }
-    }
+    resolveWhatsAppNumber().then(setWhatsapp);
   }, []);
 
   const handleClick = (e: React.MouseEvent | React.TouchEvent) => {
@@ -46,7 +41,7 @@ export default function WhatsAppCTA() {
       whileTap={{ scale: 0.95 }}
       onClick={handleClick}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e as unknown as React.MouseEvent); } }}
-      className="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#25D366] to-[#1da851] cursor-grab active:cursor-grabbing select-none"
+      className="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#25D366] to-[#1da851] cursor-grab active:cursor-grabbing select-none [body.has-cart-bar_&]:bottom-40 md:[body.has-cart-bar_&]:bottom-24"
       style={{
         boxShadow: "6px 6px 16px rgba(0,0,0,0.3), -2px -2px 8px rgba(255,255,255,0.1)",
         touchAction: "none",

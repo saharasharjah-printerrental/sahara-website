@@ -1,8 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Close, ShoppingCart, Build, Settings } from "@mui/icons-material";
-import { parsePriceAED, formatAED, isPriced } from "@/lib/price";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Close, ShoppingCart, Build, Settings, Add, Remove } from "@mui/icons-material";
+import { formatAED, isPriced } from "@/lib/price";
+import { useCart } from "@/hooks/useCart";
+import { useToast } from "@/components/ui/Toast";
+import CartBar from "@/components/CartBar";
+import { resolveWhatsAppNumber, buildWaLink, buildCartQuoteMessage } from "@/lib/whatsapp";
 
 interface Supply {
   id: string;
@@ -31,8 +35,9 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [brandFilter, setBrandFilter] = useState("all");
-  const [cart, setCart] = useState<{ supply: Supply; quantity: number }[]>([]);
   const [showCart, setShowCart] = useState(false);
+  const [justAdded, setJustAdded] = useState<string | null>(null);
+  const [whatsappNumber, setWhatsappNumber] = useState<string | null>(null);
   const [paymentSettings, setPaymentSettings] = useState<{
     paymentGatewayEnabled: boolean;
     paymentGatewayUrl: string;
@@ -42,6 +47,11 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
     paymentGatewayUrl: "",
     paymentGatewayLabel: "Buy Now",
   });
+
+  const { cart, count, total, hasUnpriced, add, remove, setQty } = useCart();
+  const { showToast, ToastElement } = useToast();
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem("sahara_supplies");
@@ -67,8 +77,7 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
       })
       .catch(() => {});
 
-    const storedCart = localStorage.getItem("sahara_cart");
-    if (storedCart) setCart(JSON.parse(storedCart));
+    resolveWhatsAppNumber().then(setWhatsappNumber);
 
     const applyPayment = (parsed: Record<string, unknown>) => {
       setPaymentSettings({
@@ -104,30 +113,51 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
     return () => window.removeEventListener("sahara-settings-updated", handleSettingsChange);
   }, [defaultSupplies]);
 
-  const addToCart = (supply: Supply) => {
-    const existing = cart.find((item) => item.supply.id === supply.id);
-    const newCart = existing
-      ? cart.map((item) => item.supply.id === supply.id ? { ...item, quantity: item.quantity + 1 } : item)
-      : [...cart, { supply, quantity: 1 }];
-    setCart(newCart);
-    localStorage.setItem("sahara_cart", JSON.stringify(newCart));
-  };
+  // Drawer a11y: Escape to close, lock body scroll, focus the close button.
+  useEffect(() => {
+    if (!showCart) return;
+    document.body.classList.add("overflow-hidden");
+    closeBtnRef.current?.focus();
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setShowCart(false); return; }
+      if (e.key === "Tab" && drawerRef.current) {
+        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+          'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [showCart]);
 
-  const removeFromCart = (supplyId: string) => {
-    const newCart = cart.filter((item) => item.supply.id !== supplyId);
-    setCart(newCart);
-    localStorage.setItem("sahara_cart", JSON.stringify(newCart));
-  };
+  const handleAddToCart = useCallback((supply: Supply) => {
+    add({ id: supply.id, name: supply.name, brand: supply.brand, price: supply.price, color: supply.color, category: supply.category, slug: supply.slug });
+    showToast("success", `${supply.name} added to cart`);
+    setJustAdded(supply.id);
+    setTimeout(() => setJustAdded((cur) => (cur === supply.id ? null : cur)), 1500);
+  }, [add, showToast]);
 
-  const updateQuantity = (supplyId: string, quantity: number) => {
-    if (quantity < 1) { removeFromCart(supplyId); return; }
-    const newCart = cart.map((item) => item.supply.id === supplyId ? { ...item, quantity } : item);
-    setCart(newCart);
-    localStorage.setItem("sahara_cart", JSON.stringify(newCart));
-  };
+  const quantityInCart = (supplyId: string) => cart.find((item) => item.supply.id === supplyId)?.quantity ?? 0;
 
-  const cartTotal = cart.reduce((acc, item) => acc + parsePriceAED(item.supply.price) * item.quantity, 0);
-  const hasUnpricedItems = cart.some((item) => !isPriced(item.supply.price));
+  const sendWhatsAppQuote = async () => {
+    const number = whatsappNumber ?? await resolveWhatsAppNumber();
+    const message = buildCartQuoteMessage(cart);
+    window.open(buildWaLink(number, message), "_blank", "noopener,noreferrer");
+    try {
+      navigator.sendBeacon(
+        "/api/leads/whatsapp/",
+        new Blob([JSON.stringify({ message, source: "cart_drawer" })], { type: "application/json" })
+      );
+    } catch { /* best-effort */ }
+  };
 
   const filteredSupplies = supplies.filter((s) => {
     const matchesSearch = s.name.toLowerCase().includes(searchTerm.toLowerCase()) || s.compatibleModels.toLowerCase().includes(searchTerm.toLowerCase());
@@ -147,16 +177,29 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
 
   return (
     <>
+      {ToastElement}
+
       {/* Cart Sidebar */}
       <div className={`fixed inset-0 z-50 transition-opacity ${showCart ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
         <div className="absolute inset-0 bg-black/60" onClick={() => setShowCart(false)} />
-        <div className="absolute right-0 top-0 h-full w-full max-w-md bg-[#0a1425] shadow-2xl p-6 overflow-y-auto">
+        <div
+          ref={drawerRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Shopping cart"
+          className="absolute right-0 top-0 h-full w-full max-w-md bg-[#0a1425] shadow-2xl p-6 overflow-y-auto"
+        >
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-white">Your Cart</h2>
-            <button onClick={() => setShowCart(false)} aria-label="Close cart" className="text-slate-400 hover:text-white"><Close /></button>
+            <button ref={closeBtnRef} onClick={() => setShowCart(false)} aria-label="Close cart" className="text-slate-400 hover:text-white"><Close /></button>
           </div>
           {cart.length === 0 ? (
-            <p className="text-slate-400 text-center py-8">Your cart is empty</p>
+            <div className="text-center py-8">
+              <p className="text-slate-400 mb-4">Your cart is empty</p>
+              <button onClick={() => setShowCart(false)} className="text-[#f5be53] font-medium hover:underline">
+                Browse Spare Parts &amp; Toners
+              </button>
+            </div>
           ) : (
             <>
               <div className="space-y-4 mb-6">
@@ -167,13 +210,13 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                         <p className="text-white font-medium text-sm">{item.supply.name}</p>
                         <p className="text-slate-400 text-xs">{item.supply.brand} - {item.supply.color || item.supply.category}</p>
                       </div>
-                      <button onClick={() => removeFromCart(item.supply.id)} aria-label={`Remove ${item.supply.name} from cart`} className="text-slate-400 hover:text-red-400"><Close sx={{ fontSize: 18 }} /></button>
+                      <button onClick={() => remove(item.supply.id)} aria-label={`Remove ${item.supply.name} from cart`} className="text-slate-400 hover:text-red-400"><Close sx={{ fontSize: 18 }} /></button>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <button onClick={() => updateQuantity(item.supply.id, item.quantity - 1)} aria-label={`Decrease quantity of ${item.supply.name}`} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">-</button>
+                        <button onClick={() => setQty(item.supply.id, item.quantity - 1)} aria-label={`Decrease quantity of ${item.supply.name}`} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">-</button>
                         <span className="text-white w-8 text-center">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item.supply.id, item.quantity + 1)} aria-label={`Increase quantity of ${item.supply.name}`} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">+</button>
+                        <button onClick={() => setQty(item.supply.id, item.quantity + 1)} aria-label={`Increase quantity of ${item.supply.name}`} className="w-8 h-8 rounded-lg bg-[#101c2e] text-white flex items-center justify-center">+</button>
                       </div>
                       <span className="text-[#f5be53] font-medium">{item.supply.price}</span>
                     </div>
@@ -183,15 +226,15 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
               <div className="border-t border-white/10 pt-4 mb-6">
                 <div className="flex justify-between text-white font-bold text-lg mb-4">
                   <span>Total</span>
-                  <span>{formatAED(cartTotal)}</span>
+                  <span>{formatAED(total)}</span>
                 </div>
-                {hasUnpricedItems && (
+                {hasUnpriced && (
                   <div className="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
                     Some items show &quot;Contact for Pricing&quot; and can&apos;t be paid for online yet — request a quote and our team will confirm pricing.
                   </div>
                 )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {hasUnpricedItems ? (
+                <div className="grid grid-cols-1 gap-3">
+                  {hasUnpriced ? (
                     <span className="block w-full bg-slate-700 text-slate-400 py-4 rounded-xl font-bold text-center cursor-not-allowed" title="Remove unpriced items to pay online">
                       Pay Now
                     </span>
@@ -200,9 +243,14 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                       Pay Now
                     </a>
                   )}
-                  <a href="/request-quote/" onClick={() => setShowCart(false)} className="block w-full border-2 border-[#f5be53]/60 text-[#f5be53] py-4 rounded-xl font-bold text-center hover:bg-[#f5be53]/10 transition-colors">
-                    Request Quotation
-                  </a>
+                  <div className="grid grid-cols-2 gap-3">
+                    <a href="/request-quote/" onClick={() => setShowCart(false)} className="block w-full border-2 border-[#f5be53]/60 text-[#f5be53] py-3.5 rounded-xl font-bold text-center hover:bg-[#f5be53]/10 transition-colors">
+                      Email Quote
+                    </a>
+                    <button onClick={sendWhatsAppQuote} className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-3.5 rounded-xl font-bold text-center hover:brightness-110 transition-all">
+                      WhatsApp
+                    </button>
+                  </div>
                 </div>
               </div>
             </>
@@ -234,13 +282,15 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <p className="text-slate-400">Showing {filteredSupplies.length} products</p>
-            <button onClick={() => setShowCart(true)} className="hidden lg:flex items-center gap-3 glass-card px-6 py-3 rounded-full">
+            <button onClick={() => setShowCart(true)} className="flex items-center gap-3 glass-card px-6 py-3 rounded-full">
               <ShoppingCart className="text-[#f5be53]" />
-              <span className="text-white font-medium">Cart ({cart.reduce((acc, item) => acc + item.quantity, 0)})</span>
+              <span className="text-white font-medium">Cart ({count})</span>
             </button>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredSupplies.map((supply) => (
+            {filteredSupplies.map((supply) => {
+              const inCartQty = quantityInCart(supply.id);
+              return (
               <div key={supply.id} className="glass-card rounded-2xl overflow-hidden group hover:scale-[1.02] transition-all duration-300">
                 <div className="h-48 bg-[#142032] relative overflow-hidden">
                   {supply.image ? (
@@ -297,7 +347,21 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-[#f5be53] font-bold text-lg">{supply.price}</span>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => addToCart(supply)} disabled={supply.stock === 0} className={`px-4 py-2 rounded-lg font-medium transition-all ${supply.stock > 0 ? "bg-[#f5be53] text-[#412d00] hover:scale-105" : "bg-slate-600 text-slate-400 cursor-not-allowed"}`}>Add to Cart</button>
+                      {inCartQty > 0 ? (
+                        <div className="flex items-center gap-1 bg-[#101c2e] rounded-lg px-1 py-1">
+                          <button onClick={() => setQty(supply.id, inCartQty - 1)} aria-label={`Decrease ${supply.name} quantity`} className="w-7 h-7 rounded-md flex items-center justify-center text-white hover:bg-white/10"><Remove sx={{ fontSize: 16 }} /></button>
+                          <span className="text-white text-sm w-5 text-center">{inCartQty}</span>
+                          <button onClick={() => setQty(supply.id, inCartQty + 1)} aria-label={`Increase ${supply.name} quantity`} className="w-7 h-7 rounded-md flex items-center justify-center text-white hover:bg-white/10"><Add sx={{ fontSize: 16 }} /></button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleAddToCart(supply)}
+                          disabled={supply.stock === 0}
+                          className={`px-4 py-2 rounded-lg font-medium transition-all ${supply.stock > 0 ? (justAdded === supply.id ? "bg-green-500 text-white" : "bg-[#f5be53] text-[#412d00] hover:scale-105") : "bg-slate-600 text-slate-400 cursor-not-allowed"}`}
+                        >
+                          {justAdded === supply.id ? "Added ✓" : "Add to Cart"}
+                        </button>
+                      )}
                       {paymentSettings.paymentGatewayEnabled && paymentSettings.paymentGatewayUrl && (
                         <a href={paymentSettings.paymentGatewayUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg font-medium transition-all border border-[#f5be53]/60 text-[#f5be53] hover:bg-[#f5be53]/10">{paymentSettings.paymentGatewayLabel}</a>
                       )}
@@ -305,7 +369,7 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
                   </div>
                 </div>
               </div>
-            ))}
+            );})}
           </div>
           {filteredSupplies.length === 0 && (
             <div className="text-center py-16">
@@ -315,11 +379,7 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
         </div>
       </section>
 
-      {/* Mobile Cart Button */}
-      <button onClick={() => setShowCart(true)} className="lg:hidden fixed bottom-24 right-6 z-40 bg-[#f5be53] text-[#412d00] px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
-        <ShoppingCart />
-        <span className="font-bold">{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
-      </button>
+      <CartBar onViewCart={() => setShowCart(true)} />
     </>
   );
 }
