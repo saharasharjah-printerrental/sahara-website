@@ -339,6 +339,8 @@ export default function AdminSettings() {
       });
       if (res.ok) {
         showToast('success', 'Settings saved to database!');
+      } else if (res.status === 401) {
+        showToast('error', 'Your admin session has expired. Please log out and log back in, then try saving again.');
       } else {
         const data = await res.json().catch(() => ({}));
         showToast('error', data.details || data.error || `Save failed (HTTP ${res.status}). Please try again.`);
