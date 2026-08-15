@@ -109,6 +109,32 @@ export async function getSmtpConfig(): Promise<SmtpConfig | null> {
   }
 }
 
+/**
+ * Resolves where sales notification emails should land, independent of
+ * whether SMTP is configured. Previously this piggybacked on
+ * getSmtpConfig()?.toEmail, so a broken/missing SMTP config silently
+ * dropped the admin notification address entirely even though
+ * smtp_to_email / notification_email exist as their own D1 rows.
+ */
+export async function getNotificationEmail(): Promise<string> {
+  const db = getDB();
+  if (db) {
+    try {
+      const result = await db
+        .prepare(`SELECT key, value FROM settings WHERE key IN ('smtp_to_email', 'notification_email')`)
+        .all();
+      const rows: any[] = result?.results ?? [];
+      const map: Record<string, string> = {};
+      rows.forEach((r: any) => { map[r.key] = r.value; });
+      if (map.smtp_to_email) return map.smtp_to_email;
+      if (map.notification_email) return map.notification_email;
+    } catch (err) {
+      console.error('[email-service] Failed to read notification email from DB:', err);
+    }
+  }
+  try { return (getRequestContext().env as any).ADMIN_EMAIL || ''; } catch { return ''; }
+}
+
 async function getResendConfig(): Promise<ResendConfig | null> {
   const db = getDB();
   let apiKey = '';
@@ -331,13 +357,16 @@ function buildCustomerHtml(data: QuoteEmailData): string {
 // ── Public API ────────────────────────────────────────────────────────────────
 
 export interface DeliveryResult {
+  /** Whether the sales/admin notification was delivered — the copy that matters operationally. */
   sent: boolean;
+  /** Whether the customer's courtesy copy also went out. A false here must not block the order/inquiry. */
+  customerNotified: boolean;
   provider: 'smtp' | 'resend' | 'none';
 }
 
 export async function sendQuoteNotification(data: QuoteEmailData): Promise<DeliveryResult> {
   const config = await getSmtpConfig();
-  const toEmail = data.notificationEmail || config?.toEmail || '';
+  const toEmail = data.notificationEmail || (await getNotificationEmail());
 
   if (!config) {
     console.error('[email-service] SMTP not configured — set smtp_user and smtp_pass in Admin → Settings. Trying Resend only.');
@@ -350,8 +379,8 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<Deliv
     deliver(config, data.customerEmail, 'Your Quote Request — Sahara Printers', buildCustomerHtml(data)),
   ]);
 
-  const provider = customerResult.provider !== 'none' ? customerResult.provider : adminResult.provider;
-  return { sent: adminResult.ok && customerResult.ok, provider };
+  const provider = adminResult.provider !== 'none' ? adminResult.provider : customerResult.provider;
+  return { sent: adminResult.ok, customerNotified: customerResult.ok, provider };
 }
 
 // ── Order emails ──────────────────────────────────────────────────────────────
@@ -430,10 +459,7 @@ export async function sendOrderNotification(data: OrderEmailData): Promise<Deliv
     console.error('[email-service] SMTP not configured — trying Resend only for order emails.');
   }
 
-  let adminTo = config?.toEmail || '';
-  if (!adminTo) {
-    try { adminTo = (getRequestContext().env as any).ADMIN_EMAIL || ''; } catch { /* ignore */ }
-  }
+  const adminTo = await getNotificationEmail();
 
   const [adminResult, customerResult] = await Promise.all([
     adminTo
@@ -442,8 +468,8 @@ export async function sendOrderNotification(data: OrderEmailData): Promise<Deliv
     deliver(config, data.customerEmail, `Your Sahara Order ${data.ref}`, buildOrderCustomerHtml(data)),
   ]);
 
-  const provider = customerResult.provider !== 'none' ? customerResult.provider : adminResult.provider;
-  return { sent: adminResult.ok && customerResult.ok, provider };
+  const provider = adminResult.provider !== 'none' ? adminResult.provider : customerResult.provider;
+  return { sent: adminResult.ok, customerNotified: customerResult.ok, provider };
 }
 
 export async function sendSimpleEmail(

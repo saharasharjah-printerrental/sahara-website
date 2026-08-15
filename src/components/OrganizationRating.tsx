@@ -21,6 +21,13 @@ import { getGoogleReviewsData } from "@/lib/google-reviews";
  * flags a JSON-LD node with no declared @type as "Invalid object type for
  * field '<parent_node>'" even when it merges into a typed Organization node
  * elsewhere via @id (GSC issue reported 2026-08-27).
+ *
+ * `name` is required too — a rating fragment with @type/@id but no name is
+ * not a valid reviewed item on its own, and it's what GSC was actually
+ * flagging (the parent node it couldn't identify). See src/app/layout.tsx
+ * for the matching fix that strips any aggregateRating out of the
+ * admin-stored organizationSchema override, which was emitting a second,
+ * conflicting, un-@id'd rating node on every page.
  */
 export default async function OrganizationRating() {
   const { rating, reviewCount } = await getGoogleReviewsData();
@@ -30,6 +37,8 @@ export default async function OrganizationRating() {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
     "@id": "https://www.saharaprinter.com/#organization",
+    name: "Sahara Office Equipments",
+    url: "https://www.saharaprinter.com/",
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: rating,

@@ -1,19 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { ADMIN_SESSION_MAX_AGE_SECONDS, createAdminSession, isAdminRequest } from '@/lib/adminAuth';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
-
-async function createAdminSession(email: string, password: string): Promise<string> {
-  const issuedAt = Date.now().toString();
-  const payload = `${issuedAt}.${email.toLowerCase()}`;
-  const data = new TextEncoder().encode(`${payload}.${password}`);
-  const digest = await crypto.subtle.digest('SHA-256', data);
-  const signature = Array.from(new Uint8Array(digest))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
-  return `${payload}.${signature}`;
-}
 
 export async function POST(request: NextRequest) {
   let body: { email?: string; password?: string };
@@ -56,11 +46,31 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
       secure: request.nextUrl.protocol === 'https:',
       sameSite: 'lax',
-      maxAge: 60 * 60 * 12,
+      maxAge: ADMIN_SESSION_MAX_AGE_SECONDS,
       path: '/',
     });
     return response;
   }
 
   return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+}
+
+export async function GET(request: NextRequest) {
+  const authenticated = await isAdminRequest(request);
+  return NextResponse.json(
+    { authenticated },
+    { status: 200, headers: { 'Cache-Control': 'private, no-store' } },
+  );
+}
+
+export async function DELETE(request: NextRequest) {
+  const response = NextResponse.json({ success: true });
+  response.cookies.set('admin_session', '', {
+    httpOnly: true,
+    secure: request.nextUrl.protocol === 'https:',
+    sameSite: 'lax',
+    maxAge: 0,
+    path: '/',
+  });
+  return response;
 }

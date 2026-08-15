@@ -23,7 +23,7 @@ export default function RequestQuoteClient() {
   const allPriced = cart.length > 0 && cart.every((it) => isPriced(it.supply.price));
 
   const sendWhatsApp = async () => {
-    const number = await resolveWhatsAppNumber();
+    const number = await resolveWhatsAppNumber("support");
     const message = buildCartQuoteMessage(cart, { name: form.name, phone: form.phone, notes: form.notes });
     window.open(buildWaLink(number, message), "_blank", "noopener,noreferrer");
     try {

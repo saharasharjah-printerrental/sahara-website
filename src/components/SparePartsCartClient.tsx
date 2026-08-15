@@ -77,7 +77,7 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
       })
       .catch(() => {});
 
-    resolveWhatsAppNumber().then(setWhatsappNumber);
+    resolveWhatsAppNumber("support").then(setWhatsappNumber);
 
     const applyPayment = (parsed: Record<string, unknown>) => {
       setPaymentSettings({
@@ -148,7 +148,7 @@ export default function SparePartsCartClient({ defaultSupplies }: SparePartsCart
   const quantityInCart = (supplyId: string) => cart.find((item) => item.supply.id === supplyId)?.quantity ?? 0;
 
   const sendWhatsAppQuote = async () => {
-    const number = whatsappNumber ?? await resolveWhatsAppNumber();
+    const number = whatsappNumber ?? await resolveWhatsAppNumber("support");
     const message = buildCartQuoteMessage(cart);
     window.open(buildWaLink(number, message), "_blank", "noopener,noreferrer");
     try {

@@ -29,15 +29,29 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   useEffect(() => {
     setMounted(true);
     const auth = localStorage.getItem("sahara_admin_auth");
-    if (auth) {
-      setIsAuthenticated(true);
-    } else {
+    if (!auth) {
       router.push("/admin/login");
+      return;
     }
+    setIsAuthenticated(true);
+
+    // The localStorage flag never expires, but the admin_session cookie does
+    // (7 days) — verify it server-side so a stale session surfaces here
+    // instead of failing silently at Save time.
+    fetch("/api/admin/auth/")
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data?.authenticated) {
+          localStorage.removeItem("sahara_admin_auth");
+          router.push("/admin/login?expired=1");
+        }
+      })
+      .catch(() => { /* network hiccup — don't kick the admin out */ });
   }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem("sahara_admin_auth");
+    fetch("/api/admin/auth/", { method: "DELETE" }).catch(() => {});
     router.push("/admin/login");
   };
 

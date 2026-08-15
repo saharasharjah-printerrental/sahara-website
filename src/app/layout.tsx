@@ -171,13 +171,6 @@ const organizationSchema = {
     }
   ],
   "priceRange": "AED 250–2000",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": 5.0,
-    "reviewCount": 69,
-    "bestRating": 5,
-    "worstRating": 1
-  },
   "brand": [
     { "@type": "Brand", "name": "Canon" },
     { "@type": "Brand", "name": "Kyocera" },
@@ -384,16 +377,40 @@ export default async function RootLayout({
 
   // Google treats site-wide review-rating markup (a business rating itself, injected on
   // every page) as self-serving and structured-data-policy-ineligible. The global
-  // Organization/LocalBusiness block therefore carries NO aggregateRating; the homepage
-  // and /about attach it themselves via <OrganizationRating />, which references this
-  // same @id so the two nodes merge.
+  // Organization/LocalBusiness block therefore carries NO aggregateRating/review; the
+  // homepage and /about attach it themselves via <OrganizationRating />, which references
+  // this same @id so the two nodes merge.
+  //
+  // This guard MUST apply to the admin-stored override too (cfg.organizationSchema), not
+  // just the static fallback constant below — an override saved via Admin → SEO &
+  // Analytics previously bypassed the destructure entirely, which is how a stale
+  // "4.9 / 1500 reviews" rating ended up shipping on every single page and produced GSC's
+  // "Review snippets — Invalid object type" report (root cause: the merge-target rating
+  // node in OrganizationRating.tsx had no `name`, and this override created a second,
+  // conflicting, un-@id'd rating node alongside it).
   //
   // Do NOT reintroduce headers() here. Calling it in the root layout makes Next render
   // the internal /_not-found route dynamically under the nodejs runtime, which
   // @cloudflare/next-on-pages rejects — it broke every Pages build from 2026-08-07
   // (commit 5381646) until 2026-08-13.
-  const { aggregateRating: _omittedRating, ...organizationSchemaBase } = organizationSchema;
-  const organizationSchemaWithLiveRating = organizationSchemaBase;
+  function stripRatingFromOrgSchema(schema: Record<string, unknown>): Record<string, unknown> {
+    const { aggregateRating: _r, review: _rev, ...rest } = schema as Record<string, unknown> & { aggregateRating?: unknown; review?: unknown };
+    return rest;
+  }
+
+  let organizationSchemaOutput: string;
+  if (cfg?.organizationSchema?.trim()) {
+    try {
+      const parsedOverride = JSON.parse(cfg.organizationSchema);
+      organizationSchemaOutput = JSON.stringify(stripRatingFromOrgSchema(parsedOverride));
+    } catch {
+      // Not valid JSON — pass through unchanged rather than risk breaking
+      // whatever the admin has stored (better a manual review than a build error).
+      organizationSchemaOutput = cfg.organizationSchema.trim();
+    }
+  } else {
+    organizationSchemaOutput = JSON.stringify(stripRatingFromOrgSchema(organizationSchema));
+  }
 
   return (
     <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>
@@ -408,7 +425,7 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <script type="application/ld+json">{cfg?.organizationSchema?.trim() || JSON.stringify(organizationSchemaWithLiveRating)}</script>
+        <script type="application/ld+json">{organizationSchemaOutput}</script>
         <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
 
         {/* Google Tag Manager */}

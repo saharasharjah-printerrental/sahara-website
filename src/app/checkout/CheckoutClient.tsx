@@ -105,10 +105,17 @@ export default function CheckoutClient() {
             <div className="no-print-reset">
               <div className="no-print text-center mb-8">
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Order Placed ✓</h1>
-                <p className="text-slate-400">
-                  A confirmation has been emailed to {placedOrder.customerEmail}. Your order reference is{" "}
-                  <span className="text-[#f5be53] font-bold">{placedOrder.ref}</span>.
-                </p>
+                {placedOrder.emailSent === false ? (
+                  <p className="text-amber-300">
+                    Order recorded — reference <span className="text-[#f5be53] font-bold">{placedOrder.ref}</span>.
+                    We couldn&apos;t email your confirmation right now; our team will call you on {placedOrder.customerPhone}.
+                  </p>
+                ) : (
+                  <p className="text-slate-400">
+                    A confirmation has been emailed to {placedOrder.customerEmail}. Your order reference is{" "}
+                    <span className="text-[#f5be53] font-bold">{placedOrder.ref}</span>.
+                  </p>
+                )}
               </div>
               <OrderReceipt order={placedOrder} />
             </div>

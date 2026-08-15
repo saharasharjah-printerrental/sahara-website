@@ -142,9 +142,11 @@ export async function POST(request: NextRequest) {
       now, now,
     ).run();
 
-    // Emails — don't fail the order if delivery fails
+    // Emails — don't fail the order if delivery fails, but always record what
+    // happened so /admin/orders can show which orders were never announced
+    // instead of silently leaving email_provider blank.
     let emailSent = false;
-    let emailProvider = '';
+    let emailProvider = 'failed';
     try {
       const result = await sendOrderNotification({
         ref,
@@ -159,14 +161,13 @@ export async function POST(request: NextRequest) {
         items, subtotal, total,
       });
       emailSent = result.sent;
-      emailProvider = result.sent ? result.provider : '';
+      emailProvider = result.sent ? result.provider : 'failed';
     } catch (e) {
       console.error('[/api/orders] order email failed:', e);
     }
-    if (emailSent) {
-      await db.prepare('UPDATE orders SET email_sent = 1, email_provider = ? WHERE id = ?').bind(emailProvider, id).run()
-        .catch((e: unknown) => console.error('[/api/orders] email_sent update failed:', e));
-    }
+    await db.prepare('UPDATE orders SET email_sent = ?, email_provider = ? WHERE id = ?')
+      .bind(emailSent ? 1 : 0, emailProvider, id).run()
+      .catch((e: unknown) => console.error('[/api/orders] email_sent update failed:', e));
 
     return NextResponse.json({
       success: true,

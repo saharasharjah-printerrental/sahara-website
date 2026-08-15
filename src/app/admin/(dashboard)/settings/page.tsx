@@ -37,6 +37,7 @@ interface Settings {
   companyAddress: string;
   companyPOBox: string;
   whatsappNumber: string;
+  supportWhatsappNumber: string;
   workingHours: string;
   emergencySupport: string;
   mapEmbedUrl: string;
@@ -97,6 +98,7 @@ const defaultSettings: Settings = {
   companyAddress: "Al Arabi Building, Industrial Area 11, Sharjah, UAE",
   companyPOBox: "PO Box 47373, Sharjah",
   whatsappNumber: "+971 50 382 3969",
+  supportWhatsappNumber: "+971 50 380 2095",
   workingHours: "Sat - Thu: 8:00 AM - 8:00 PM",
   emergencySupport: "24/7 Emergency Support Available",
   mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57709.04655847797!2d55.37228622257977!3d25.310405175118643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin",
@@ -166,6 +168,11 @@ export default function AdminSettings() {
   const [paymentCreds, setPaymentCreds] = useState<PaymentCreds>(defaultPaymentCreds);
   const [resendSettings, setResendSettings] = useState<ResendSettings>(defaultResend);
   const [resendTesting, setResendTesting] = useState(false);
+  // Whether the bulk GET /api/settings/ returned an authenticated admin
+  // payload. If false (e.g. the admin_session cookie expired mid-visit),
+  // Save is disabled — otherwise it would overwrite real credentials with
+  // whatever partial/public data this page managed to load.
+  const [adminLoaded, setAdminLoaded] = useState(true);
 
   const mergeWithDefaults = (stored: Partial<Settings>): Settings => {
     return {
@@ -211,7 +218,15 @@ export default function AdminSettings() {
         const res = await fetch('/api/settings/');
         const data = await res.json();
         if (data.settings && typeof data.settings === 'object') map = data.settings;
-      } catch { /* fall through to localStorage below */ }
+        // `admin: true` is only present when the server accepted our
+        // admin_session cookie. Its absence (expired session, or the
+        // request fell back to the public projection) means the fields
+        // below are incomplete — Save must not run against them.
+        setAdminLoaded(Boolean(data.admin));
+      } catch {
+        setAdminLoaded(false);
+        /* fall through to localStorage below */
+      }
 
       if (map.site_settings) {
         try {
@@ -262,10 +277,13 @@ export default function AdminSettings() {
         }));
       }
 
-      if (map.resend_api_key) {
+      // resend_enabled / resend_from_email are not secrets and can be
+      // populated whenever either is present, independent of whether a key
+      // has been saved yet — mirrors the split save-guard in handleSave.
+      if (map.resend_api_key || map.resend_enabled !== undefined || map.resend_from_email) {
         setResendSettings({
           enabled: map.resend_enabled !== 'false',
-          apiKey: map.resend_api_key,
+          apiKey: map.resend_api_key || '',
           fromEmail: map.resend_from_email || '',
         });
       }
@@ -280,9 +298,12 @@ export default function AdminSettings() {
   }, []);
 
   const handleSave = async () => {
+    if (!adminLoaded) {
+      showToast('error', 'Not signed in — settings could not be loaded from the database. Log out and back in before saving.');
+      return;
+    }
+
     const json = JSON.stringify(settings);
-    localStorage.setItem("sahara_settings", json);
-    window.dispatchEvent(new Event("sahara-settings-updated"));
 
     const d1Entries = [
       { key: "site_settings", value: json },
@@ -302,13 +323,16 @@ export default function AdminSettings() {
         { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
         { key: "notification_email", value: settings.smtp.smtpToEmail },
       ] : []),
-      // Resend fallback — same non-empty guard as SMTP above, so a blank
-      // field never wipes a previously saved API key. Trimmed so a stray
-      // space in From Email doesn't defeat the resend.dev fallback default.
+      // resend_enabled / resend_from_email aren't secrets, so they save
+      // unconditionally — an admin can toggle the fallback off or change the
+      // From address without re-entering the key. Only the key itself stays
+      // behind a non-empty guard, so a blank field never wipes a previously
+      // saved key. Trimmed so a stray space in From Email doesn't defeat the
+      // resend.dev fallback default.
+      { key: "resend_enabled", value: String(resendSettings.enabled) },
+      { key: "resend_from_email", value: resendSettings.fromEmail.trim() },
       ...(resendSettings.apiKey.trim() ? [
-        { key: "resend_enabled", value: String(resendSettings.enabled) },
         { key: "resend_api_key", value: resendSettings.apiKey.trim() },
-        { key: "resend_from_email", value: resendSettings.fromEmail.trim() },
       ] : []),
       { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
       // Only save cloudinary creds if they have actual values — prevents wiping stored
@@ -338,6 +362,12 @@ export default function AdminSettings() {
         body: JSON.stringify({ entries: d1Entries }),
       });
       if (res.ok) {
+        // Only mirror to localStorage / broadcast the update once the
+        // database write actually succeeded — writing this beforehand made
+        // a failed save (e.g. an expired session) look identical to a
+        // successful one everywhere else on the site.
+        localStorage.setItem("sahara_settings", json);
+        window.dispatchEvent(new Event("sahara-settings-updated"));
         showToast('success', 'Settings saved to database!');
       } else if (res.status === 401) {
         showToast('error', 'Your admin session has expired. Please log out and log back in, then try saving again.');
@@ -346,7 +376,7 @@ export default function AdminSettings() {
         showToast('error', data.details || data.error || `Save failed (HTTP ${res.status}). Please try again.`);
       }
     } catch {
-      showToast('info', 'Settings saved locally (database unavailable)');
+      showToast('error', 'Could not reach the server — settings were NOT saved. Check your connection and try again.');
     }
   };
 
@@ -385,8 +415,13 @@ export default function AdminSettings() {
                   <input type="text" value={settings.companyCustomerService} onChange={(e) => setSettings({ ...settings, companyCustomerService: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">WhatsApp</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">WhatsApp (Sales)</label>
                   <input type="text" value={settings.whatsappNumber} onChange={(e) => setSettings({ ...settings, whatsappNumber: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Support WhatsApp Number</label>
+                  <input type="text" value={settings.supportWhatsappNumber} onChange={(e) => setSettings({ ...settings, supportWhatsappNumber: e.target.value })} className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" placeholder="+971 50 380 2095" />
+                  <p className="text-xs text-slate-500 mt-1">Used for spare parts / toner quote requests</p>
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-slate-300 mb-2">Address</label>
@@ -1032,7 +1067,17 @@ export default function AdminSettings() {
             </div>
 
             <div className="border-t border-white/10 pt-6">
-              <button onClick={handleSave} className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform">
+              {!adminLoaded && (
+                <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm">
+                  Not signed in — credentials could not be loaded. Log out and back in before saving,
+                  or you will overwrite settings with blanks.
+                </div>
+              )}
+              <button
+                onClick={handleSave}
+                disabled={!adminLoaded}
+                className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
                 Save Settings
               </button>
             </div>

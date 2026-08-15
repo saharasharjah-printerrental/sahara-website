@@ -2,7 +2,7 @@
 
 export const runtime = 'edge';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AdminLogin() {
@@ -12,6 +12,13 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("expired") === "1") {
+      setSessionExpired(true);
+    }
+  }, []);
 
   // Forgot password state
   const [showForgot, setShowForgot] = useState(false);
@@ -72,6 +79,11 @@ export default function AdminLogin() {
         <div className="glass-card rounded-2xl p-8">
           {!showForgot ? (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {sessionExpired && !error && (
+                <div className="bg-amber-500/10 border border-amber-500/20 text-amber-400 px-4 py-3 rounded-xl text-sm">
+                  Your session expired. Please sign in again.
+                </div>
+              )}
               {error && (
                 <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl text-sm">
                   {error}

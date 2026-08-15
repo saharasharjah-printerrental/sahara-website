@@ -25,6 +25,7 @@ export interface ReceiptOrder {
   total: number;
   status: string;
   createdAt?: string;
+  emailSent?: boolean;
 }
 
 export default function OrderReceipt({ order }: { order: ReceiptOrder }) {

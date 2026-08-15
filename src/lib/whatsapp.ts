@@ -5,6 +5,8 @@ import type { CartItem } from "@/lib/cart";
 import { formatAED, isPriced, cartTotal } from "@/lib/cart";
 
 export const DEFAULT_WHATSAPP_NUMBER = "971503823969";
+/** Support number for spare-parts / toner quote requests — admin-editable via supportWhatsappNumber. */
+export const SUPPORT_WHATSAPP_NUMBER = "971503802095";
 
 /**
  * Resolves the configured WhatsApp number from D1 (Admin -> Settings),
@@ -12,14 +14,20 @@ export const DEFAULT_WHATSAPP_NUMBER = "971503823969";
  * Real first-time visitors have no localStorage yet, so the D1 fetch is the
  * only path that reflects an admin's number change without a page they've
  * already visited.
+ *
+ * `kind: 'support'` resolves `supportWhatsappNumber` instead (used by the
+ * spare-parts/toner quote flows), falling back to SUPPORT_WHATSAPP_NUMBER.
  */
-export async function resolveWhatsAppNumber(): Promise<string> {
+export async function resolveWhatsAppNumber(kind: "sales" | "support" = "sales"): Promise<string> {
+  const settingsKey = kind === "support" ? "supportWhatsappNumber" : "whatsappNumber";
+  const fallback = kind === "support" ? SUPPORT_WHATSAPP_NUMBER : DEFAULT_WHATSAPP_NUMBER;
+
   try {
     const res = await fetch("/api/settings/?key=site_settings", { cache: "no-store" });
     const data = await res.json();
     if (data?.setting?.value) {
       const parsed = JSON.parse(data.setting.value);
-      if (parsed?.whatsappNumber) return String(parsed.whatsappNumber).replace(/[^0-9]/g, "");
+      if (parsed?.[settingsKey]) return String(parsed[settingsKey]).replace(/[^0-9]/g, "");
     }
   } catch { /* fall through to localStorage / default */ }
 
@@ -27,11 +35,11 @@ export async function resolveWhatsAppNumber(): Promise<string> {
     const stored = localStorage.getItem("sahara_settings");
     if (stored) {
       const parsed = JSON.parse(stored);
-      if (parsed?.whatsappNumber) return String(parsed.whatsappNumber).replace(/[^0-9]/g, "");
+      if (parsed?.[settingsKey]) return String(parsed[settingsKey]).replace(/[^0-9]/g, "");
     }
   } catch { /* ignore */ }
 
-  return DEFAULT_WHATSAPP_NUMBER;
+  return fallback;
 }
 
 export function buildWaLink(number: string, text: string): string {
