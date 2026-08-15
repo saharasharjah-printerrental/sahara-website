@@ -38,10 +38,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     // The localStorage flag never expires, but the admin_session cookie does
     // (7 days) — verify it server-side so a stale session surfaces here
     // instead of failing silently at Save time.
+    //
+    // Only a genuine `authenticated: false` from a 200 response counts as
+    // "log the admin out". A non-200 response (e.g. a 429 from the shared
+    // /api/ rate limit, or a transient 500) has no `authenticated` field at
+    // all, so treating any falsy/missing value as "not authenticated" was
+    // bouncing admins to the re-login screen on ordinary hiccups, not just
+    // real expiry.
     fetch("/api/admin/auth/")
-      .then((r) => r.json())
-      .then((data) => {
-        if (!data?.authenticated) {
+      .then(async (r) => {
+        if (!r.ok) return;
+        const data = await r.json();
+        if (data?.authenticated === false) {
           localStorage.removeItem("sahara_admin_auth");
           router.push("/admin/login?expired=1");
         }
