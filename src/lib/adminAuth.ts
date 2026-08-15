@@ -21,10 +21,20 @@ export async function isAdminRequest(request: NextRequest): Promise<boolean> {
   const session = request.cookies.get('admin_session')?.value;
   if (!password || !session) return false;
 
-  const parts = session.split('.');
-  if (parts.length !== 3) return false;
+  // Token is `${issuedAt}.${email}.${signature}`, but email addresses
+  // routinely contain a dot themselves (e.g. admin@sahara.ae), so a plain
+  // split('.') expecting exactly 3 parts yields 4+ and rejects every
+  // legitimately-issued session. issuedAt is digits-only and signature is
+  // hex-only — neither can contain a dot — so the first dot always ends
+  // issuedAt and the last dot always starts signature; everything between
+  // is the email, dots and all.
+  const firstDot = session.indexOf('.');
+  const lastDot = session.lastIndexOf('.');
+  if (firstDot === -1 || lastDot === -1 || firstDot === lastDot) return false;
 
-  const [issuedAt, email, signature] = parts;
+  const issuedAt = session.slice(0, firstDot);
+  const email = session.slice(firstDot + 1, lastDot);
+  const signature = session.slice(lastDot + 1);
   const issuedAtMs = Number(issuedAt);
   if (!Number.isFinite(issuedAtMs)) return false;
   if (Date.now() - issuedAtMs > ADMIN_SESSION_MAX_AGE_SECONDS * 1000) return false;
