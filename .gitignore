@@ -74,6 +74,13 @@ claude-seo/
 tmp*.html
 tmp_*.html
 
+# Python bytecode cache (tests/scripts/*.py helpers)
+__pycache__/
+*.pyc
+
+# Debug session dumps
+*-debug-session*.zip
+
 # npm config (may contain registry tokens)
 .npmrc
 
