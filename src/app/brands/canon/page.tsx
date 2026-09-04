@@ -8,7 +8,13 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import Image from "next/image";
-import { Hub, DeveloperBoard, Nature, Palette, Print, Security } from "@mui/icons-material";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import CtaBand from "@/components/ui/CtaBand";
+import { LayersIcon, SettingsIcon, LeafIcon, AwardIcon, ShieldCheckIcon } from "@/components/icons";
+
+const trail = [{ label: "Home", href: "/" }, { label: "Products", href: "/products/" }, { label: "Canon Printers UAE" }];
 
 export default function CanonBrandPage() {
   const [brandImage, setBrandImage] = useState("/images/unsplash-office.webp");
@@ -22,136 +28,119 @@ export default function CanonBrandPage() {
     }
   }, []);
 
-  const products = [
-    { name: "imageRUNNER ADVANCE DX", type: "Cloud-connected A3 Color MFP", speed: "High-speed scanning", img: "/images/printer-canon-1.webp" },
-    { name: "C3800 Series", type: "Compact powerhouses", speed: "Medium workgroups", img: "" },
-    { name: "C5800 Series", type: "Enterprise security", speed: "360° document protection", img: "" },
-  ];
-
   const features = [
-    { icon: Hub, title: "uniFLOW Online", desc: "Single cloud solution to manage all printing and scanning workflows. Increase security by requiring user authentication." },
-    { icon: DeveloperBoard, title: "MEAP Integration", desc: "Custom-built software to run directly on the device, bridging physical documents and digital systems." },
-    { icon: Nature, title: "Sustainable Precision", desc: "Low-energy consumption modes and long-life components reduce waste without sacrificing performance." },
-    { icon: Palette, title: "V² Color Technology", desc: "Exceptional color accuracy and consistency for professional results." },
+    { icon: LayersIcon, title: "uniFLOW Online", desc: "Single cloud solution to manage all printing and scanning workflows. Increase security by requiring user authentication." },
+    { icon: SettingsIcon, title: "MEAP Integration", desc: "Custom-built software to run directly on the device, bridging physical documents and digital systems." },
+    { icon: LeafIcon, title: "Sustainable Precision", desc: "Low-energy consumption modes and long-life components reduce waste without sacrificing performance." },
+    { icon: AwardIcon, title: "V² Color Technology", desc: "Exceptional color accuracy and consistency for professional results." },
   ];
 
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <main className="min-h-screen bg-surface">
       <Header />
-      
-      {/* Hero */}
-      <section className="relative min-h-[600px] flex items-center px-8 lg:px-24 overflow-hidden">
+
+      <section className="relative flex min-h-[600px] items-center overflow-hidden px-6 pt-32">
         <div className="absolute inset-0 z-0">
-          <img 
+          <img
             src={brandImage}
             alt="Canon Office"
-            className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
+            className="h-full w-full object-cover opacity-30 mix-blend-luminosity"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#071325] via-[#071325]/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent" />
         </div>
-        
-        <div className="relative z-10 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#142032]/60 border border-[#f5be53]/20 mb-8">
-            <span className="w-2 h-2 rounded-full bg-[#f5be53] animate-pulse"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#f5be53]">Official Canon Partner</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-none tracking-tight">
-            Canon <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f5be53] to-[#c8962e]">Elite</span> <br/>Business Imaging
-          </h1>
 
-          {/* AEO Answer Block */}
-          <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-4 mb-6 max-w-2xl">
-            <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-1">Authorized Canon Dealer in UAE</p>
-            <p className="text-[#d3c5b0] text-sm leading-relaxed">
-              Sahara Office Equipments is an authorized Canon dealer in UAE, supplying imageRUNNER ADVANCE and imageCLASS models with uniFLOW workflow software.
-              Sales, rental from <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
+        <div className="relative z-10 mx-auto max-w-content w-full">
+          <Breadcrumbs trail={trail} />
+          <Reveal className="max-w-4xl">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-pill border border-primary/20 bg-surface-mid/60 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-caption font-bold uppercase tracking-widest text-primary">Official Canon Partner</span>
+            </div>
+            <h1 className="font-sora text-display-xl font-extrabold leading-none tracking-tight text-white">
+              Canon <span className="bg-gradient-to-r from-primary to-primary-deep bg-clip-text text-transparent">Elite</span> <br />Business Imaging
+            </h1>
+
+            <div className="mt-6 max-w-2xl rounded-panel border border-primary/20 bg-surface-low p-5">
+              <p className="mb-1 text-caption font-bold uppercase tracking-widest text-primary">Authorized Canon Dealer in UAE</p>
+              <p className="text-sm leading-relaxed text-on-surface-variant">
+                Sahara Office Equipments is an authorized Canon dealer in UAE, supplying imageRUNNER ADVANCE and
+                imageCLASS models with uniFLOW workflow software. Sales, rental from{" "}
+                <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across
+                Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
+              </p>
+            </div>
+
+            <p className="mt-6 max-w-2xl text-body leading-relaxed text-muted">
+              Sahara is a premier Canon partner in the UAE, delivering unparalleled document workflows and
+              precision engineering for the modern executive landscape.
             </p>
-          </div>
-
-          <p className="text-xl text-[#d3c5b0] max-w-2xl mb-10 leading-relaxed">
-            Sahara is a premier Canon partner in the UAE, delivering unparalleled document workflows and precision engineering for the modern executive landscape.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/rental-calculator/?brand=canon" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg shadow-2xl shadow-[#f5be53]/30 hover:scale-105 transition-transform inline-block">
-              Enquire about Canon Solutions
-            </a>
-            <a href="#products" className="glass-card text-white px-10 py-5 rounded-full font-semibold border border-[#9c8f7c]/20 hover:bg-[#2a3548] transition-all inline-block">
-              View Product Guide
-            </a>
-          </div>
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <a href="/rental-calculator/?brand=canon" className="btn-primary">Enquire about Canon Solutions</a>
+              <a href="#products" className="btn-secondary">View Product Guide</a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Featured Hardware */}
-      <section id="products" className="py-24 px-8 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">imageRUNNER Series</h2>
-              <p className="text-[#d3c5b0] text-lg">Engineered for high-volume productivity and uncompromising security, the imageRUNNER ADVANCE series sets the gold standard for office efficiency.</p>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-2 group relative h-[500px] rounded-lg overflow-hidden glass-card">
+      <Section id="products" title="imageRUNNER Series" subtitle="Engineered for high-volume productivity and uncompromising security, the imageRUNNER ADVANCE series sets the gold standard for office efficiency." tone="raised" flush>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <Reveal className="md:col-span-2">
+            <div className="glass-card group relative h-[500px] overflow-hidden rounded-panel">
               <Image
                 src="/images/printer-canon-1.webp"
                 alt="Canon imageRUNNER"
                 fill
-                className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-700 opacity-80"
+                className="rounded-panel object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 66vw"
                 priority
               />
-              <div className="absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-[#071325] to-transparent">
-                <h3 className="text-3xl font-bold text-white mb-2">imageRUNNER ADVANCE DX</h3>
-                <p className="text-[#d3c5b0] max-w-md">Cloud-connected A3 color multifunction devices with high-speed scanning and integrated uniFLOW software.</p>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface to-transparent p-10">
+                <h3 className="mb-2 text-3xl font-bold text-white">imageRUNNER ADVANCE DX</h3>
+                <p className="max-w-md text-on-surface-variant">Cloud-connected A3 color multifunction devices with high-speed scanning and integrated uniFLOW software.</p>
               </div>
             </div>
-            <div className="grid grid-rows-2 gap-8">
-              <div className="glass-card rounded-lg p-8 flex flex-col justify-between border-l-4 border-l-[#f5be53] group">
+          </Reveal>
+          <div className="grid grid-rows-2 gap-8">
+            <Reveal delay={0.05}>
+              <div className="group flex h-full flex-col justify-between rounded-card border-l-4 border-l-primary bg-surface-low p-8">
                 <div>
-                  <Print className="text-[#f5be53] text-4xl mb-4 group-hover:rotate-12 transition-transform" />
-                  <h4 className="text-xl font-bold text-white mb-2">C3800 Series</h4>
-                  <p className="text-[#d3c5b0] text-sm">Compact powerhouses for medium workgroups with intelligent scanning.</p>
+                  <SettingsIcon size={32} className="mb-4 text-primary transition-transform group-hover:rotate-12" />
+                  <h4 className="mb-2 text-xl font-bold text-white">C3800 Series</h4>
+                  <p className="text-sm text-on-surface-variant">Compact powerhouses for medium workgroups with intelligent scanning.</p>
                 </div>
               </div>
-              <div className="glass-card rounded-lg p-8 flex flex-col justify-between border-l-4 border-l-[#f5be53] group">
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="group flex h-full flex-col justify-between rounded-card border-l-4 border-l-primary bg-surface-low p-8">
                 <div>
-                  <Security className="text-[#f5be53] text-4xl mb-4 group-hover:rotate-12 transition-transform" />
-                  <h4 className="text-xl font-bold text-white mb-2">C5800 Series</h4>
-                  <p className="text-[#d3c5b0] text-sm">Enterprise-grade security with 360-degree document protection.</p>
+                  <ShieldCheckIcon size={32} className="mb-4 text-primary transition-transform group-hover:rotate-12" />
+                  <h4 className="mb-2 text-xl font-bold text-white">C5800 Series</h4>
+                  <p className="text-sm text-on-surface-variant">Enterprise-grade security with 360-degree document protection.</p>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Technologies */}
-      <section className="py-24 px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#f5be53]/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Technological Superiority</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#f5be53] to-[#c8962e] mx-auto"></div>
-        </div>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <Section title="Technological Superiority" align="center">
+        <div className="mx-auto grid max-w-content grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div className="space-y-12">
-            {features.map((f, i) => {
-              const IconComponent = f.icon;
-              return (
-                <div key={i} className="flex gap-8 group">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#142032]/60 border border-[#f5be53]/30 flex items-center justify-center text-[#f5be53] group-hover:bg-[#f5be53] group-hover:text-[#071325] transition-all duration-500">
-                    <IconComponent className="text-3xl" />
+            {features.map((f) => (
+              <Reveal key={f.title}>
+                <div className="group flex gap-8">
+                  <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl border border-primary/30 bg-surface-mid/60 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-on-primary">
+                    <f.icon size={28} />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-[#f5be53] mb-3">{f.title}</h3>
-                    <p className="text-[#d3c5b0] leading-relaxed">{f.desc}</p>
+                    <h3 className="mb-3 text-2xl font-bold text-primary">{f.title}</h3>
+                    <p className="leading-relaxed text-on-surface-variant">{f.desc}</p>
                   </div>
                 </div>
-              );
-            })}
+              </Reveal>
+            ))}
           </div>
-          <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-2xl">
+          <Reveal delay={0.1} className="relative h-[500px] w-full overflow-hidden rounded-card shadow-2xl">
             <Image
               src="/images/printer-canon-2.webp"
               alt="Canon Technology"
@@ -159,36 +148,33 @@ export default function CanonBrandPage() {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-[#f5be53]/10 mix-blend-overlay"></div>
-          </div>
+            <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
-      {/* CTA */}
-      <section className="py-24 px-8 text-center bg-[#071325] relative overflow-hidden">
+      <section className="relative overflow-hidden bg-surface px-6 py-section text-center">
         <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <div className="w-[600px] h-[600px] border border-[#f5be53] rounded-full animate-pulse"></div>
+          <div className="h-[600px] w-[600px] animate-pulse rounded-full border border-primary" />
         </div>
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">Ready for the <span className="text-[#f5be53] italic">next</span> standard?</h2>
-          <p className="text-xl text-[#d3c5b0] mb-12">Consult with our executive imaging specialists to design a Canon solution tailored to your operational demands.</p>
-          <a href="/rental-calculator/?brand=canon" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-12 py-5 rounded-full font-bold text-lg shadow-2xl shadow-[#f5be53]/30 hover:scale-105 transition-transform inline-block">
-            Send Inquiry
-          </a>
-        </div>
+        <Reveal className="relative z-10 mx-auto max-w-3xl">
+          <h2 className="font-sora text-display font-bold text-white">Ready for the <span className="italic text-primary">next</span> standard?</h2>
+          <p className="mt-6 text-body text-on-surface-variant">Consult with our executive imaging specialists to design a Canon solution tailored to your operational demands.</p>
+          <a href="/rental-calculator/?brand=canon" className="btn-primary mt-9 inline-block">Send Inquiry</a>
+        </Reveal>
       </section>
 
       {/* Related — cross-link to Dubai rental page to signal complementary (not duplicate) intent */}
-      <section className="py-16 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Need Canon printer rental in Dubai specifically?</h2>
-          <p className="text-[#d3c5b0] mb-6">
+      <Section flush tone="raised">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="mb-4 text-2xl font-bold text-white">Need Canon printer rental in Dubai specifically?</h2>
+          <p className="text-muted">
             This page covers the full Canon imageRUNNER ADVANCE lineup and technology. For Dubai-specific
             pricing, delivery timelines, and local service coverage, see{" "}
-            <a href="/canon-printer-dubai/" className="text-[#f5be53] font-semibold hover:underline">Canon Printer Dubai</a>.
+            <a href="/canon-printer-dubai/" className="font-semibold text-primary hover:underline">Canon Printer Dubai</a>.
           </p>
         </div>
-      </section>
+      </Section>
 
       <Footer />
       <WhatsAppCTA />
