@@ -1,5 +1,41 @@
 # Sahara Backlink Acquisition Tracker - 30+ Quality Targets
 
+## 2026-09 update — new landing pages, and who executes what
+
+**New pages now available as link/citation targets** (built this session, not yet
+deployed — see git branch `feat/pvc-card-printers-apple-redesign`):
+
+| Page | Best for |
+|---|---|
+| `/bravo-card-printers-uae/` | Product/manufacturer-relationship directories, the Bravo dealer-listing ask (`bravo-dealer-link-request.md`) |
+| `/services/pvc-card-printer-rental/` | Event/exhibition-industry directories |
+| `/services/pvc-card-printer-sales/` | B2B procurement directories (Kompass, SIO365) |
+| `/services/pvc-card-printing-services/` | ID-card/security-industry directories and forums |
+| `/printer-rental-sharjah/` | Sharjah-specific citations — pair with the Sharjah HQ NAP below |
+| `/services/` | General "our services" landing page where a directory wants one link, not several |
+| `/copier-lease-uae/` | Leasing/finance-adjacent directories |
+
+Rows below can use any of these as the Landing Page column where more specific than the
+current "Homepage" default — e.g. row 8 (HiDubai, Dubai-relevant) could stay as-is, but a
+new Sharjah-specific directory submission should land on `/printer-rental-sharjah/`, not
+the homepage.
+
+**Execution boundary — read before working this list:** I (Claude) can research targets,
+draft the listing copy and outreach emails, and log outcomes in this table. I **cannot
+create accounts** on any of these platforms, or enter passwords, even with your
+approval — that's a hard rule, not a preference. For every row below:
+
+1. I prepare the exact listing text (business description, category, service list) using
+   the canonical NAP block below.
+2. You create the account and paste the listing text in, or I drive the browser while
+   you complete the account-creation / OTP / CAPTCHA / payment-style steps yourself.
+3. Once the listing is live, tell me the URL (or paste a screenshot) and I'll fill in
+   the Status / Live Link columns and, if useful, verify the link is followed and
+   matches our canonical URL (as the verification checklist at the bottom of this file
+   already describes for the Bravo ask).
+
+Nothing on this list has been submitted yet — every row is still `Pending`.
+
 ## Campaign Rules
 
 - Use ethical manual submissions only: no PBNs, link farms, spam comments, or automated mass posting.

@@ -10,9 +10,15 @@ relationship independently verifiable to search engines and AI answer engines, r
 than a one-sided claim. It is also the highest-authority link realistically available
 to this site — see `docs/seo/backlink-gap-2026-08.md`.
 
-**Constraint:** do not restate "sole" or "exclusive" distributor in any outreach —
-migration `008_fix_bravo_faq_accuracy.sql` already corrected the on-site copy to
-"authorised UAE retail partner," and outreach must match what the site actually says.
+**Constraint (updated 2026-09):** the site now states "authorised exclusive reseller in
+the UAE for the Bravo RTAI and DC 3300" — migration `021_bravo_exclusive_reseller.sql`
+restored this from the earlier "authorised UAE retail partner" wording (migration `008`
+had downgraded an unscoped "sole distributor" claim; the exclusive claim is correct once
+scoped to these two specific models, per user confirmation 2026-09-04). Outreach must
+match this exactly: **"authorised exclusive reseller for the RTAI and DC 3300"** — never
+an unscoped "sole distributor" or "exclusive distributor" claim covering the whole Bravo
+range, which Bravo could reasonably dispute if they have other UAE partners for other
+models.
 
 ## Contact details (from bravoglobal.com, verified Aug 2026)
 
@@ -92,10 +98,11 @@ This is what actually gets the ask accepted — lead with it, don't just ask:
 
 Dear Bravo Global Partner Team,
 
-I'm writing from **Sahara Office Equipments**, based in Sharjah, UAE. We supply, install
-and service the **Bravo RTAI** retransfer card printer and the **Bravo DC 3300**
-direct-to-card printer across Dubai, Sharjah, Abu Dhabi and the wider UAE, together with
-genuine Bravo consumables — ribbons, retransfer film and cleaning kits — held in local stock.
+I'm writing from **Sahara Office Equipments**, based in Sharjah, UAE — the authorised
+exclusive reseller in the UAE for the **Bravo RTAI** retransfer card printer and the
+**Bravo DC 3300** direct-to-card printer. We supply, install and service both models
+across Dubai, Sharjah, Abu Dhabi and the wider UAE, together with genuine Bravo
+consumables — ribbons, retransfer film and cleaning kits — held in local stock.
 
 We have built a dedicated product page for these two models covering full technical
 specifications, an RTAI vs DC 3300 comparison, indicative UAE pricing, consumables and
