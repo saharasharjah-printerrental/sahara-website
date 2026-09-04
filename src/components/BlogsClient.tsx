@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import Reveal from "@/components/ui/Reveal";
 
 interface BlogPost {
   id: string;
@@ -100,75 +101,81 @@ export default function BlogsClient({ initialPosts }: { initialPosts?: BlogPost[
   });
 
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <main className="min-h-screen bg-surface">
       <Header />
 
-      <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]"></div>
-        <div className="absolute -top-20 -right-20 w-96 h-96 bg-[#f5be53]/10 blur-[120px] rounded-full"></div>
-        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#f5be53]/5 blur-[120px] rounded-full"></div>
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#142032]/60 border border-[#f5be53]/20 mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#f5be53] animate-pulse"></span>
-            <span className="text-xs uppercase tracking-widest text-[#f5be53] font-medium">Latest Insights</span>
+      <section className="relative overflow-hidden px-6 pb-24 pt-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface to-surface-low" />
+        <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute -bottom-20 -left-20 h-96 w-96 rounded-full bg-primary/5 blur-[120px]" />
+        <Reveal className="relative mx-auto max-w-content text-center">
+          <div className="mb-6 inline-flex items-center gap-3 rounded-pill border border-primary/20 bg-surface-mid/60 px-4 py-2">
+            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-caption font-medium uppercase tracking-widest text-primary">Latest Insights</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Sahara <span className="text-[#f5be53]">Blog</span></h1>
-          <p className="text-lg text-[#d3c5b0] max-w-2xl mx-auto leading-relaxed">Expert insights on printer rental, office solutions, and managed print services for UAE businesses.</p>
-        </div>
+          <h1 className="font-sora text-display-xl font-extrabold tracking-tight text-white">
+            Sahara <span className="text-primary">Blog</span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-body leading-relaxed text-muted">
+            Expert insights on printer rental, office solutions, and managed print services for UAE businesses.
+          </p>
+        </Reveal>
       </section>
 
-      <section className="py-12 px-8 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-            <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-              <button onClick={() => updateParams("category", "all")} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === "all" ? "bg-[#f5be53] text-[#412d00]" : "bg-[#142032] text-slate-400 hover:text-white border border-white/10"}`}>All Posts</button>
+      <section className="bg-surface-low px-6 py-12">
+        <div className="mx-auto max-w-content">
+          <div className="flex flex-col items-center justify-between gap-6 lg:flex-row">
+            <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
+              <button onClick={() => updateParams("category", "all")} className={`rounded-pill px-4 py-2 text-sm font-medium transition-all ${selectedCategory === "all" ? "bg-primary text-on-primary" : "border border-white/10 bg-surface-mid text-muted hover:text-white"}`}>All Posts</button>
               {categories.map((cat) => (
-                <button key={cat} onClick={() => updateParams("category", cat)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === cat ? "bg-[#f5be53] text-[#412d00]" : "bg-[#142032] text-slate-400 hover:text-white border border-white/10"}`}>{cat}</button>
+                <button key={cat} onClick={() => updateParams("category", cat)} className={`rounded-pill px-4 py-2 text-sm font-medium transition-all ${selectedCategory === cat ? "bg-primary text-on-primary" : "border border-white/10 bg-surface-mid text-muted hover:text-white"}`}>{cat}</button>
               ))}
             </div>
             <div className="relative w-full lg:w-80">
-              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
-              <input type="text" placeholder="Search articles..." value={searchQuery} onChange={(e) => updateParams("search", e.target.value)} className="w-full bg-[#142032] border border-white/10 rounded-full py-3 pl-12 pr-4 text-white placeholder:text-slate-500 focus:border-[#f5be53] focus:outline-none" />
+              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-muted">search</span>
+              <input type="text" placeholder="Search articles..." value={searchQuery} onChange={(e) => updateParams("search", e.target.value)} className="w-full rounded-pill border border-white/10 bg-surface-mid py-3 pl-12 pr-4 text-white placeholder:text-slate-500 focus:border-primary focus:outline-none" />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="px-6 py-section">
+        <div className="mx-auto max-w-content">
           {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {Array(6).fill(null).map((_, i) => (
-                <div key={i} className="glass-card rounded-[32px] p-8 animate-pulse">
-                  <div className="h-48 bg-[#142032] rounded-2xl mb-4" />
-                  <div className="h-6 bg-[#142032] rounded mb-2" />
-                  <div className="h-4 bg-[#142032] rounded w-2/3" />
+                <div key={i} className="glass-card animate-pulse rounded-panel p-8">
+                  <div className="mb-4 h-48 rounded-card bg-surface-mid" />
+                  <div className="mb-2 h-6 rounded bg-surface-mid" />
+                  <div className="h-4 w-2/3 rounded bg-surface-mid" />
                 </div>
               ))}
             </div>
           ) : filteredPosts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {filteredPosts.map((post) => (
-                <Link href={`/blogs/${post.slug}`} key={post.id}>
-                  <article className="glass-card rounded-[32px] p-8 group hover:-translate-y-2 transition-transform duration-500 cursor-pointer h-full">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#142032] border border-[#f5be53]/20 mb-4">
-                      <span className="text-xs font-medium text-[#f5be53]">{post.category}</span>
-                    </div>
-                    <h2 className="text-xl font-bold text-white mb-3 group-hover:text-[#f5be53] transition-colors line-clamp-2">{post.title}</h2>
-                    <p className="text-[#d3c5b0] text-sm line-clamp-2 mb-4">{post.excerpt}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500 text-sm">{post.publishedAt}</span>
-                      <span className="text-[#f5be53] text-sm font-medium group-hover:translate-x-1 transition-transform">Read More →</span>
-                    </div>
-                  </article>
-                </Link>
+                <Reveal key={post.id} className="h-full">
+                  <Link href={`/blogs/${post.slug}`} className="block h-full">
+                    <article className="glass-card group h-full cursor-pointer rounded-panel p-8 transition-transform duration-500 hover:-translate-y-2">
+                      <div className="mb-4 inline-flex items-center gap-2 rounded-pill border border-primary/20 bg-surface-mid px-3 py-1">
+                        <span className="text-xs font-medium text-primary">{post.category}</span>
+                      </div>
+                      <h2 className="mb-3 line-clamp-2 text-xl font-bold text-white transition-colors group-hover:text-primary">{post.title}</h2>
+                      <p className="mb-4 line-clamp-2 text-sm text-on-surface-variant">{post.excerpt}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-500">{post.publishedAt}</span>
+                        <span className="text-sm font-medium text-primary transition-transform group-hover:translate-x-1">Read More →</span>
+                      </div>
+                    </article>
+                  </Link>
+                </Reveal>
               ))}
             </div>
           ) : (
-            <div className="text-center py-20">
-              <span className="material-symbols-outlined text-6xl text-[#d3c5b0] mb-4">article</span>
-              <h3 className="text-2xl font-bold text-white mb-2">No Articles Found</h3>
-              <p className="text-[#d3c5b0]">Try adjusting your filters or search query.</p>
+            <div className="py-20 text-center">
+              <span className="material-symbols-outlined mb-4 text-6xl text-muted">article</span>
+              <h3 className="mb-2 text-2xl font-bold text-white">No Articles Found</h3>
+              <p className="text-muted">Try adjusting your filters or search query.</p>
             </div>
           )}
         </div>
