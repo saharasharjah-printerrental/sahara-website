@@ -293,10 +293,10 @@ function DefinitionSection() {
 
 function ServicesSection() {
   const services = [
-    { icon: Print, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental" },
-    { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/products" },
-    { icon: Build, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair" },
-    { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/printer-spare-parts" },
+    { icon: Print, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental/" },
+    { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/products/" },
+    { icon: Build, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair/" },
+    { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/printer-spare-parts/" },
   ];
   return (
     <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
@@ -323,12 +323,12 @@ function ServicesSection() {
 
 function LocationsSection() {
   const locations = [
-    { city: "Dubai", href: "/printer-rental-dubai", label: "Printer Rental Dubai", desc: "Same-day delivery to Business Bay, DIFC, JLT, Marina & all Dubai districts.", price: "From AED 250/mo", highlight: true, icon: "🏙️" },
-    { city: "Abu Dhabi", href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance visits. Mussafah, Al Reem Island, Khalifa City & ADGM.", price: "From AED 250/mo", highlight: true, icon: "🕌" },
-    { city: "Sharjah", href: "/photocopier-rental-sharjah", label: "Photocopier Rental Sharjah", desc: "HQ in Sharjah Industrial Area. Fastest response times in the emirate.", price: "From AED 250/mo", highlight: false, icon: "🏭" },
-    { city: "RAK", href: "/printer-rental-rak", label: "Printer Rental RAK", desc: "Serving Ras Al Khaimah businesses, free zones & industrial areas.", price: "From AED 300/mo", highlight: false, icon: "🌿" },
-    { city: "Fujairah", href: "/printer-rental-fujairah", label: "Printer Rental Fujairah", desc: "East coast coverage — Fujairah port, free zones & business centres.", price: "From AED 300/mo", highlight: false, icon: "⛰️" },
-    { city: "Al Ain", href: "/printer-rental-al-ain", label: "Printer Rental Al Ain", desc: "Garden city coverage — Al Ain businesses, universities & clinics.", price: "From AED 300/mo", highlight: false, icon: "🌴" },
+    { city: "Dubai", href: "/printer-rental-dubai/", label: "Printer Rental Dubai", desc: "Same-day delivery to Business Bay, DIFC, JLT, Marina & all Dubai districts.", price: "From AED 250/mo", highlight: true, icon: "🏙️" },
+    { city: "Abu Dhabi", href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance visits. Mussafah, Al Reem Island, Khalifa City & ADGM.", price: "From AED 250/mo", highlight: true, icon: "🕌" },
+    { city: "Sharjah", href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "HQ in Sharjah Industrial Area. Fastest response times in the emirate.", price: "From AED 250/mo", highlight: true, icon: "🏭" },
+    { city: "RAK", href: "/printer-rental-rak/", label: "Printer Rental RAK", desc: "Serving Ras Al Khaimah businesses, free zones & industrial areas.", price: "From AED 300/mo", highlight: false, icon: "🌿" },
+    { city: "Fujairah", href: "/printer-rental-fujairah/", label: "Printer Rental Fujairah", desc: "East coast coverage — Fujairah port, free zones & business centres.", price: "From AED 300/mo", highlight: false, icon: "⛰️" },
+    { city: "Al Ain", href: "/printer-rental-al-ain/", label: "Printer Rental Al Ain", desc: "Garden city coverage — Al Ain businesses, universities & clinics.", price: "From AED 300/mo", highlight: false, icon: "🌴" },
   ];
   return (
     <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
