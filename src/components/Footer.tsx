@@ -233,6 +233,10 @@ export default function Footer() {
               <li><Link href="/services/printer-spare-parts/" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
               <li><Link href="/services/plotter-maintenance/" className="hover:text-[#f5be53] transition-colors">Plotter Maintenance</Link></li>
               <li><Link href="/copier-lease-uae/" className="hover:text-[#f5be53] transition-colors">Copier Lease UAE</Link></li>
+              <li><Link href="/bravo-card-printers-uae/" className="hover:text-[#f5be53] transition-colors">PVC Card Printers</Link></li>
+              <li><Link href="/services/pvc-card-printer-rental/" className="hover:text-[#f5be53] transition-colors">PVC Card Printer Rental</Link></li>
+              <li><Link href="/services/pvc-card-printer-sales/" className="hover:text-[#f5be53] transition-colors">PVC Card Printer Sales</Link></li>
+              <li><Link href="/services/pvc-card-printing-services/" className="hover:text-[#f5be53] transition-colors">PVC Card Printing Services</Link></li>
             </ul>
           </div>
 

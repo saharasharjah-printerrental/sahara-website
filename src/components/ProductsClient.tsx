@@ -234,12 +234,12 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
             <div className="flex items-center gap-3 shrink-0">
               <span className="text-2xl">🏅</span>
               <div>
-                <p className="text-[9px] font-bold text-[#f5be53] uppercase tracking-[0.2em]">Authorised UAE Retail Partner</p>
+                <p className="text-[9px] font-bold text-[#f5be53] uppercase tracking-[0.2em]">Authorised Exclusive Reseller</p>
                 <p className="text-white font-bold text-base leading-tight">PVC Card Printers — Bravo RTAI &amp; DC 3300</p>
               </div>
             </div>
             <p className="text-[#8fa3bc] text-sm sm:ml-auto max-w-sm">
-              Authorised UAE retail partner for the Bravo RTAI and DC 3300. 600 dpi retransfer &amp; direct-to-card ID printers for enterprise, government &amp; education.
+              Authorised exclusive reseller in the UAE for the Bravo RTAI and DC 3300. 600 dpi retransfer &amp; direct-to-card ID printers for enterprise, government &amp; education.
             </p>
             <span className="text-[#f5be53] text-sm font-semibold group-hover:translate-x-1 transition-transform shrink-0">View →</span>
           </a>

@@ -632,6 +632,29 @@ export default function AMCPage() {
         </div>
       </section>
 
+      {/* ── Related Services ── */}
+      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Related Services</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { href: "/services/printer-rental/", label: "Printer Rental" },
+              { href: "/services/repair/", label: "Printer Repair" },
+              { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
+              { href: "/services/pvc-card-printer-sales/", label: "PVC Card Printer Sales" },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section className="py-16 px-8">
         <div className="max-w-4xl mx-auto rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden"

@@ -705,6 +705,7 @@ export default function PrinterRentalPage() {
               { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
               { href: "/services/repair/", label: "Printer Repair" },
               { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
+              { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental" },
             ].map((link) => (
               <Link
                 key={link.href}

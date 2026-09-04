@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchPublicSettings } from "@/lib/api";
 import CartIndicator from "@/components/CartIndicator";
-import { Print, CopyAll, Handyman, Build, Inventory, ShoppingCart, Home, SettingsSuggest, Inventory2, RequestQuote, LocationOn, Article, Call, ExpandMore, ExpandLess, MoreHoriz, InfoOutlined, Close, Groups } from "@mui/icons-material";
+import { Print, CopyAll, Handyman, Build, Inventory, ShoppingCart, Home, SettingsSuggest, Inventory2, RequestQuote, LocationOn, Article, Call, ExpandMore, ExpandLess, MoreHoriz, InfoOutlined, Close, Groups, Badge } from "@mui/icons-material";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -41,6 +41,7 @@ const services = [
   { name: "Printer Repair", href: "/services/repair/", icon: Build },
   { name: "Toner & Spare Parts", href: "/services/printer-spare-parts/", icon: Inventory },
   { name: "Plotter Maintenance", href: "/services/plotter-maintenance/", icon: ShoppingCart },
+  { name: "PVC Card Printers", href: "/bravo-card-printers-uae/", icon: Badge },
 ];
 
 // Mobile bottom nav - direct link items (3 icons keeps bar uncluttered)
