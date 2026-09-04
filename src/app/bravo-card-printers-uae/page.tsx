@@ -7,9 +7,24 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import FaqSection from "@/components/FaqSection";
 import AnswerBlock from "@/components/AnswerBlock";
+import ProductHero from "@/components/ui/ProductHero";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
 import SpecTable from "@/components/ui/SpecTable";
 import ComparisonTable from "@/components/ui/ComparisonTable";
 import CtaBand from "@/components/ui/CtaBand";
+import {
+  AwardIcon,
+  ShieldCheckIcon,
+  LayersIcon,
+  LayerStackIcon,
+  LeafIcon,
+  IdCardIcon,
+  ClockIcon,
+  SettingsIcon,
+  TruckIcon,
+  HeadsetIcon,
+} from "@/components/icons";
 import type { FaqItem } from "@/lib/faqs";
 
 // Static, generous validity window for the indicative price ranges below —
@@ -40,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * FAQ fallbacks — mirror of database/migrations/005 + 008 seed rows for
+ * FAQ fallbacks — mirror of database/migrations/005 + 008 + 021 seed rows for
  * pageSlug 'bravo-card-printers-uae'. FaqSection prefers D1; this array is the
  * offline/empty-DB fallback and the source of the FAQPage JSON-LD either way.
  */
@@ -105,10 +120,7 @@ const rtaiSpecs = [
   { label: "Print Speed", value: "Single side: 25 sec | Double side: 55 sec" },
   { label: "Input Hopper", value: "250 cards — add cards while printing" },
   { label: "Card Thickness", value: "0.5 – 1.0 mm" },
-  {
-    label: "Card Formats",
-    value: "PVC, ABS, PET, PET-G, PC (ISO ID-1/CR-80)",
-  },
+  { label: "Card Formats", value: "PVC, ABS, PET, PET-G, PC (ISO ID-1/CR-80)" },
   {
     label: "Card Formats (brochure)",
     value: "Also Wooden (specially treated) and Translucent cards",
@@ -165,6 +177,73 @@ const comparison = [
   { feature: "Lamination (built-in)", rtai: "Yes — retransfer film acts as lam", dc3300: "Optional add-on module" },
   { feature: "Origin", rtai: "Bravo Global", dc3300: "Made in France" },
   { feature: "Best for", rtai: "High-security & specialty cards", dc3300: "High-volume standard ID printing" },
+];
+
+const rtaiFeatures = [
+  { icon: LayerStackIcon, title: "HOLO-MET™ Ribbons", body: "Print metallic silver and gold on card — overt visual security, no hot-stamp module needed." },
+  { icon: LeafIcon, title: "Wooden & Transparent Cards", body: "Specially treated wooden cards supported — sustainable, distinctive, and eco-friendly ID." },
+  { icon: LayersIcon, title: "Holographic Retransfer Film", body: "Standard or custom holograms applied in-printer without a separate lamination module." },
+  { icon: IdCardIcon, title: "250-Card Hopper", body: "Continuous high-volume operation — add cards mid-run without stopping the printer." },
+  { icon: ShieldCheckIcon, title: "SOC Security Technology", body: "Proprietary Secure On-Card technology with RFID ribbon and card-feeder lock." },
+  { icon: AwardIcon, title: "Lifetime Print Head Warranty", body: "Industry-leading protection — the print head is covered for the life of the printer." },
+];
+
+const dc3300Features = [
+  { icon: ClockIcon, title: "280 Cards / Hour", body: "Industry-leading throughput for YMCKO single-sided printing — handles high-volume corporate ID batches." },
+  { icon: AwardIcon, title: "Made in France†", body: "Per the Bravo Global brochure — European engineering and quality control, trusted by government, banking, and enterprise clients worldwide." },
+  { icon: SettingsIcon, title: "Multi-Encoding", body: "Magnetic stripe (ISO 7811), contact and contactless smartcard encoders — combinable, factory or on-site." },
+  { icon: LayersIcon, title: "Lamination Module", body: "Optional add-on for varnish, patch, or custom hologram overlaminates — 600 or 1,200 sides per roll." },
+  { icon: SettingsIcon, title: "Cross-Platform Software", body: "Bravo Premium Suite for Windows, Mac, and Linux. Bravo SDK available for system integration." },
+  { icon: ClockIcon, title: "Simplex → Duplex Upgrade", body: "Activate dual-side printing via software key — no hardware replacement needed." },
+];
+
+const useCases = [
+  { title: "Government & Public Sector", body: "National IDs, employee access cards, resident identity documents with overt security features. Common in Dubai and Abu Dhabi government entities." },
+  { title: "Banking & Finance", body: "Staff ID cards, VIP client cards, access credentials with RFID/smartcard encoding. Used by UAE banks and DIFC financial institutions." },
+  { title: "Corporate Enterprises", body: "Employee ID badges with photo, department, and barcode/QR for access control systems across free zones and business parks." },
+  { title: "Healthcare", body: "Patient ID bands, staff credentials, pharmacy dispensing cards with encoded data. Common in Dubai Health Authority-affiliated facilities." },
+  { title: "Education", body: "Student and staff cards for UAE universities, schools, and training institutes — including KHDA-registered institutions." },
+  { title: "Hospitality & Events", body: "Membership cards, loyalty cards, event credentials, RFID room keys — for hotels, exhibition centres, and large events in Dubai and Sharjah." },
+];
+
+const consumables = [
+  { name: "YMCKO Colour Ribbons", models: "RTAI & DC 3300", desc: "Full-colour plus overlay for protection and shine." },
+  { name: "Retransfer Film", models: "RTAI only", desc: "Genuine Bravo retransfer film including holographic variants." },
+  { name: "HOLO-MET™ Ribbons", models: "RTAI only", desc: "Metallic gold and silver ribbon for premium card effects." },
+  { name: "Cleaning Kits", models: "RTAI & DC 3300", desc: "Roller and hopper cleaning cards to maintain print quality." },
+];
+
+const pathCards = [
+  { icon: ClockIcon, title: "Rent a Card Printer", body: "Short-term hire for events, exhibitions, and onboarding drives — weekly, monthly, or annual terms.", href: "/services/pvc-card-printer-rental/" },
+  { icon: AwardIcon, title: "Buy a Card Printer", body: "Outright purchase of the RTAI or DC 3300, with warranty, consumables, and AMC options.", href: "/services/pvc-card-printer-sales/" },
+  { icon: IdCardIcon, title: "Have Cards Printed For You", body: "Bureau service — employee ID, security, hologram, wooden and transparent cards, printed and delivered.", href: "/services/pvc-card-printing-services/" },
+];
+
+const pricingRows: [string, string, string][] = [
+  ["Bravo DC 3300 S — simplex, no encoding", "AED 5,000 – 7,500", "Standard single-sided employee ID batches"],
+  ["Bravo DC 3300 D — duplex + smartcard encoding", "AED 8,500 – 14,000", "Corporate/campus ID with access-control encoding"],
+  ["Bravo RTAI — 600 DPI retransfer, standard config", "AED 9,000 – 15,000", "High-quality photo ID, over-the-edge printing"],
+  ["Bravo RTAI — with holographic security film", "AED 15,000 – 22,000", "Government ID, banking, access credentials"],
+];
+
+const deliveryAreas = [
+  "Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain",
+  "JAFZA", "DAFZA", "SAIF Zone", "DMCC",
+];
+
+const relatedLinks = [
+  { href: "/products/", label: "Office Printers UAE" },
+  { href: "/services/printer-rental/", label: "Printer Rental UAE" },
+  { href: "/services/amc/", label: "Printer AMC Dubai" },
+  { href: "/services/repair/", label: "Printer Repair Dubai" },
+  { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
+  { href: "/pvc-card-printer-quote/", label: "Get a Quote" },
+];
+
+const trail = [
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products/" },
+  { label: "PVC Card Printers" },
 ];
 
 const localBusinessSchema = {
@@ -337,332 +416,242 @@ export default function BravoCardPrintersUAE() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToPrintCardSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      <main className="min-h-screen bg-[#071325]">
+      <main className="min-h-screen bg-surface">
         <Header />
 
-        {/* Hero */}
-        <section className="relative pt-32 pb-20 px-6 lg:px-24 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325]/95 to-[#0d1a2e]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#f5be53]/5 rounded-full blur-[140px] pointer-events-none" />
+        <ProductHero
+          trail={trail}
+          eyebrow="Authorised Exclusive Reseller in the UAE — RTAI & DC 3300"
+          title={
+            <>
+              PVC Card Printers
+              <br />
+              <span className="text-primary">— UAE</span>
+            </>
+          }
+          answer={
+            <AnswerBlock
+              id="pvc-card-printer-uae"
+              question="What is a PVC card printer and where can I buy one in UAE?"
+              answer="A PVC card printer prints and encodes plastic ID, access, and membership cards in-house instead of ordering pre-printed batches. Sahara Office Equipments supplies two models in the UAE — the Bravo RTAI (600 DPI retransfer, holographic security) and the Bravo DC 3300 (direct-to-card, up to 280 cards/hour) — with sales, genuine consumables, and on-site support in Dubai, Sharjah, Abu Dhabi and all emirates."
+              supportingPoints={[
+                "Same machine, two names: \"PVC card printer\" and \"ID card printer\" both describe this hardware — pricing and specs below apply to either search.",
+                "600 DPI over-the-edge retransfer (RTAI) or up to 280 cards/hour direct-to-card (DC 3300) — pick by security level and volume.",
+                "Holographic retransfer film and HOLO-MET™ metallic ribbons applied without a separate laminator on the RTAI.",
+                "3-year warranty with lifetime print-head cover on the RTAI; genuine ribbons, film and blank PVC cards stocked locally.",
+              ]}
+            />
+          }
+          image={{ src: "/brands/bravo/rtai-official.webp", alt: "Bravo RTAI PVC card printer — Sahara UAE", width: 610, height: 610 }}
+          primaryCta={{ label: "Get a Quote", href: "/pvc-card-printer-quote/" }}
+          secondaryCta={{ label: "Call: +971 50 382 3969", href: "tel:+971503823969" }}
+        />
 
-          <div className="max-w-7xl mx-auto relative z-10">
-            <nav className="flex items-center gap-2 text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
-              <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
-              <span>/</span>
-              <a href="/products/" className="hover:text-[#f5be53] transition-colors">Products</a>
-              <span>/</span>
-              <span className="text-[#f5be53]">Bravo Card Printers</span>
-            </nav>
-
-            <div className="inline-flex items-center gap-2 bg-[#f5be53]/10 border border-[#f5be53]/30 text-[#f5be53] text-xs font-bold tracking-[0.2em] uppercase px-4 py-2 rounded-full mb-6">
-              <span className="w-2 h-2 bg-[#f5be53] rounded-full animate-pulse" />
-              Authorised Exclusive Reseller in the UAE — RTAI &amp; DC 3300
-            </div>
-
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
-              PVC Card Printers<br />
-              <span className="text-[#f5be53]">— UAE</span>
-            </h1>
-            {/* AEO Answer Block */}
-            <div className="max-w-3xl">
-              <AnswerBlock
-                id="pvc-card-printer-uae"
-                question="What is a PVC card printer and where can I buy one in UAE?"
-                answer="A PVC card printer prints and encodes plastic ID, access, and membership cards in-house instead of ordering pre-printed batches. Sahara Office Equipments supplies two models in the UAE — the Bravo RTAI (600 DPI retransfer, holographic security) and the Bravo DC 3300 (direct-to-card, up to 280 cards/hour) — with sales, genuine consumables, and on-site support in Dubai, Sharjah, Abu Dhabi and all emirates."
-                supportingPoints={[
-                  "Same machine, two names: \"PVC card printer\" and \"ID card printer\" both describe this hardware — pricing and specs below apply to either search.",
-                  "600 DPI over-the-edge retransfer (RTAI) or up to 280 cards/hour direct-to-card (DC 3300) — pick by security level and volume.",
-                  "Holographic retransfer film and HOLO-MET™ metallic ribbons applied without a separate laminator on the RTAI.",
-                  "3-year warranty with lifetime print-head cover on the RTAI; genuine ribbons, film and blank PVC cards stocked locally.",
-                ]}
-              />
-            </div>
-
-            <p className="text-xl text-[#d3c5b0] mb-10 max-w-2xl">
-              Sahara Office Equipments is the <strong className="text-white">authorised exclusive reseller in the UAE for the Bravo RTAI and Bravo DC 3300</strong> — the only UAE partner appointed by Bravo Global to supply, install, and service these two card printer models, across Dubai, Sharjah, Abu Dhabi, and all emirates.
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              <a href="/pvc-card-printer-quote/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
-                Get a Quote
-              </a>
-              <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
-                Call: +971 50 382 3969
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Partnership Statement */}
-        <section className="py-14 px-6 bg-[#0a1422]">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "Authorised Exclusive Reseller",
-                  desc: "Sahara is the authorised exclusive reseller in the UAE for two specific Bravo Global models — the RTAI and the DC 3300. We stock both, handle all sales, warranty, and service in-country."
-                },
-                {
-                  title: "Genuine Consumables",
-                  desc: "We stock original Bravo ribbons, retransfer films, and cleaning kits in-country for fast replenishment with no import delays or counterfeit risk."
-                },
-                {
-                  title: "Manufacturer-Backed Support",
-                  desc: "Full 3-year warranty service, preventive maintenance, and trained technicians for the Bravo RTAI and DC 3300 across all UAE emirates."
-                }
-              ].map((item, i) => (
-                <div key={i} className="glass-card p-7 rounded-2xl">
-                  <div className="w-10 h-10 rounded-xl bg-[#f5be53]/15 flex items-center justify-center mb-4">
-                    <span className="text-[#f5be53] font-bold text-lg">{i + 1}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-[#8fa3bc] text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-10 flex items-center justify-center">
-              <a
-                href="https://www.bravoglobal.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 border border-[#f5be53]/30 bg-[#f5be53]/5 px-6 py-3 rounded-full text-sm text-[#f5be53] font-semibold hover:bg-[#f5be53]/10 transition-colors"
-              >
-                <span className="text-lg">🏅</span>
-                Authorised Exclusive Reseller in the UAE — Bravo RTAI &amp; DC 3300
-                <span className="text-xs text-slate-500">(bravoglobal.com)</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Which Printer Is Right for You? */}
-        <section className="py-16 px-6 lg:px-24">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-3 text-center">Which PVC Card Printer Is Right for You?</h2>
-            <p className="text-[#8fa3bc] text-center mb-10 max-w-2xl mx-auto">Both models are available through Sahara in UAE. The right choice depends on your security requirements and print volume.</p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="glass-card p-8 rounded-2xl border border-[#f5be53]/20">
-                <span className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-3 block">Choose the Bravo RTAI if you need…</span>
-                <ul className="space-y-2 text-[#d3c5b0] text-sm">
-                  {[
-                    "Maximum print quality — 600 DPI over-the-edge borderless cards",
-                    "Built-in holographic security without a separate laminator",
-                    "Specialty media: wooden, translucent, or PET-G cards",
-                    "HOLO-MET™ metallic gold/silver ribbon effects",
-                    "Government IDs, banking VIP cards, high-security credentials",
-                    "Lifetime print head warranty for long-term ROI",
-                  ].map((p, i) => <li key={i} className="flex gap-2"><span className="text-[#f5be53] mt-0.5">✓</span>{p}</li>)}
-                </ul>
-              </div>
-              <div className="glass-card p-8 rounded-2xl border border-emerald-500/20">
-                <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-3 block">Choose the Bravo DC 3300 if you need…</span>
-                <ul className="space-y-2 text-[#d3c5b0] text-sm">
-                  {[
-                    "High-volume throughput — up to 280 cards/hour",
-                    "Lower cost per card for standard employee ID batches",
-                    "Cross-platform software (Windows, Mac, Linux)",
-                    "Flexible encoding: magnetic stripe, contact & contactless smartcard",
-                    "Corporate ID, membership cards, campus credentials",
-                    "Simplex-to-Duplex upgrade via software key (no hardware swap)",
-                  ].map((p, i) => <li key={i} className="flex gap-2"><span className="text-emerald-400 mt-0.5">✓</span>{p}</li>)}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Bravo RTAI */}
-        <section className="py-20 px-6 lg:px-24 bg-[#0a1422]" id="bravo-rtai">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="bg-[#f5be53]/15 text-[#f5be53] text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Colour Reverse Transfer</span>
-            </div>
-            <h2 className="text-4xl font-bold text-white mb-3">Bravo RTAI</h2>
-            <p className="text-[#8fa3bc] max-w-2xl mb-3">
-              600 DPI over-the-edge retransfer printing. The only card printer in its class with built-in holographic retransfer, wooden card support, and HOLO-MET™ metallic lustre ribbons — no separate laminator required.
-            </p>
-            <p className="text-sm text-[#f5be53] font-semibold mb-8 italic">"When exclusivity matters" — Bravo Global</p>
-
-            <div className="grid grid-cols-2 gap-4 mb-10 max-w-2xl">
-              <div className="rounded-2xl overflow-hidden bg-[#0d1a2e] border border-white/8">
-                <Image src="/brands/bravo/rtai-official.webp" alt="Bravo RTAI retransfer card printer — official product photo, bravoglobal.com" width={610} height={610} className="w-full h-auto object-cover" priority />
-              </div>
-              <div className="rounded-2xl overflow-hidden bg-[#0d1a2e] border border-white/8">
-                <Image src="/brands/bravo/bravo-rtai-page2.webp" alt="Bravo RTAI features and specifications" width={600} height={848} className="w-full h-auto object-cover" />
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-              {[
-                { icon: "✦", title: "HOLO-MET™ Ribbons", desc: "Print metallic Silver and Gold on card — overt visual security, no hot-stamp module needed." },
-                { icon: "🌿", title: "Wooden & Transparent Cards", desc: "Specially treated wooden cards supported — sustainable, distinctive, and eco-friendly ID." },
-                { icon: "🔒", title: "Holographic Retransfer Film", desc: "Standard or custom holograms applied in-printer without a separate lamination module." },
-                { icon: "🃏", title: "250-Card Hopper", desc: "Continuous high-volume operation — add cards mid-run without stopping the printer." },
-                { icon: "🛡", title: "SOC Security Technology", desc: "Proprietary Secure On-Card technology with RFID ribbon and card-feeder lock." },
-                { icon: "♾️", title: "Lifetime Print Head Warranty", desc: "Industry-leading protection — the print head is covered for the life of the printer." },
-              ].map((f, i) => (
-                <div key={i} className="glass-card p-5 rounded-xl">
-                  <div className="text-2xl mb-2">{f.icon}</div>
-                  <h3 className="text-white font-semibold text-sm mb-1">{f.title}</h3>
-                  <p className="text-[#8fa3bc] text-xs leading-relaxed">{f.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <h3 className="text-xl font-bold text-white mb-4">Bravo RTAI Technical Specifications</h3>
-            <div className="rounded-2xl border border-white/8 bg-[#0d1a2e] px-5">
-              <SpecTable
-                rows={rtaiSpecs}
-                caption={
-                  <>
-                    Specifications marked <sup className="text-primary">†</sup> come from the Bravo Global
-                    brochure rather than the{" "}
-                    <a
-                      href="https://bravoglobal.com/product/bravo-rtai/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                    >
-                      bravoglobal.com RTAI product page
-                    </a>
-                    .
-                  </>
-                }
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Bravo DC 3300 */}
-        <section className="py-20 px-6 lg:px-24" id="bravo-dc3300">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="bg-emerald-500/15 text-emerald-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Direct to Card</span>
-            </div>
-            <h2 className="text-4xl font-bold text-white mb-3">Bravo DC 3300</h2>
-            <p className="text-[#8fa3bc] max-w-2xl mb-8">
-              High-throughput direct-to-card printer with lamination module, multi-encoding options, and cross-platform software. Available in Simplex (DC 3300 S) and Duplex (DC 3300 D).
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 mb-10 max-w-2xl">
-              <div className="rounded-2xl overflow-hidden bg-[#0d1a2e] border border-white/8">
-                <Image src="/brands/bravo/dc3300-official.webp" alt="Bravo DC 3300 direct-to-card printer — official product photo, bravoglobal.com" width={610} height={610} className="w-full h-auto object-cover" priority />
-              </div>
-              <div className="rounded-2xl overflow-hidden bg-[#0d1a2e] border border-white/8">
-                <Image src="/brands/bravo/bravo-dc3300-page2.webp" alt="Bravo DC 3300 specifications and features" width={600} height={848} className="w-full h-auto object-cover" />
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-              {[
-                { icon: "🚀", title: "280 Cards / Hour", desc: "Industry-leading throughput for YMCKO single-sided printing — handles high-volume corporate ID batches." },
-                { icon: "🇫🇷", title: "Made in France†", desc: "Per the Bravo Global brochure — European engineering and quality control, trusted by government, banking, and enterprise clients worldwide." },
-                { icon: "📶", title: "Multi-Encoding", desc: "Magnetic stripe (ISO 7811), contact and contactless smartcard encoders — combinable, factory or on-site." },
-                { icon: "🧩", title: "Lamination Module", desc: "Optional add-on for varnish, patch, or custom hologram overlaminates — 600 or 1,200 sides per roll." },
-                { icon: "💻", title: "Cross-Platform Software", desc: "Bravo Premium Suite for Windows, Mac, and Linux. Bravo SDK available for system integration." },
-                { icon: "🔑", title: "Simplex → Duplex Upgrade", desc: "Activate dual-side printing via software key — no hardware replacement needed." },
-              ].map((f, i) => (
-                <div key={i} className="glass-card p-5 rounded-xl">
-                  <div className="text-2xl mb-2">{f.icon}</div>
-                  <h3 className="text-white font-semibold text-sm mb-1">{f.title}</h3>
-                  <p className="text-[#8fa3bc] text-xs leading-relaxed">{f.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <h3 className="text-xl font-bold text-white mb-4">Bravo DC 3300 Technical Specifications</h3>
-            <div className="rounded-2xl border border-white/8 bg-[#0d1a2e] px-5">
-              <SpecTable
-                rows={dc3300Specs}
-                caption={
-                  <>
-                    Specifications marked <sup className="text-primary">†</sup> come from the Bravo Global
-                    brochure rather than the{" "}
-                    <a
-                      href="https://bravoglobal.com/product/bravo-dc3300-direct-to-card-printer/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                    >
-                      bravoglobal.com DC 3300 product page
-                    </a>
-                    .
-                  </>
-                }
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* RTAI vs DC 3300 Comparison */}
-        <section className="py-20 px-6 lg:px-24 bg-[#0a1422]" id="comparison">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-white text-center mb-3">RTAI vs DC 3300 — Full Comparison</h2>
-            <p className="text-[#8fa3bc] text-center mb-12 max-w-xl mx-auto">
-              Both models are available through Sahara in UAE. Choose based on your card security requirements and print volume.
-            </p>
-            <ComparisonTable
-              columns={["Feature", "Bravo RTAI", "Bravo DC 3300"]}
-              highlightColumn={1}
-              rows={comparison.map((row) => [row.feature, row.rtai, row.dc3300])}
+        <Section flush eyebrow="Why Sahara" title="Authorised, stocked, and supported in-country">
+          <div className="grid gap-6 sm:grid-cols-3">
+            <FeatureCard
+              icon={AwardIcon}
+              title="Authorised Exclusive Reseller"
+              body="Sahara is the authorised exclusive reseller in the UAE for two specific Bravo Global models — the RTAI and the DC 3300. We stock both, handle all sales, warranty, and service in-country."
+            />
+            <FeatureCard
+              icon={TruckIcon}
+              title="Genuine Consumables"
+              body="We stock original Bravo ribbons, retransfer films, and cleaning kits in-country for fast replenishment with no import delays or counterfeit risk."
+              delay={0.05}
+            />
+            <FeatureCard
+              icon={HeadsetIcon}
+              title="Manufacturer-Backed Support"
+              body="Full 3-year warranty service, preventive maintenance, and trained technicians for the Bravo RTAI and DC 3300 across all UAE emirates."
+              delay={0.1}
             />
           </div>
-        </section>
+          <div className="mt-10 flex items-center justify-center">
+            <a
+              href="https://www.bravoglobal.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 rounded-pill border border-primary/30 bg-primary/5 px-6 py-3 text-caption font-semibold text-primary transition-colors hover:bg-primary/10"
+            >
+              <AwardIcon size={16} />
+              Authorised Exclusive Reseller in the UAE — Bravo RTAI &amp; DC 3300
+              <span className="text-caption text-muted">(bravoglobal.com)</span>
+            </a>
+          </div>
+        </Section>
 
-        {/* Use Cases */}
-        <section className="py-20 px-6 lg:px-24">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-white text-center mb-3">Who Uses Bravo Card Printers in UAE?</h2>
-            <p className="text-[#8fa3bc] text-center mb-12 max-w-xl mx-auto">From Dubai government offices to Sharjah free zone enterprises — Bravo printers serve identity credentialing at every level.</p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { sector: "Government & Public Sector", uses: "National IDs, employee access cards, resident identity documents with overt security features. Common in Dubai and Abu Dhabi government entities." },
-                { sector: "Banking & Finance", uses: "Staff ID cards, VIP client cards, access credentials with RFID/smartcard encoding. Used by UAE banks and DIFC financial institutions." },
-                { sector: "Corporate Enterprises", uses: "Employee ID badges with photo, department, and barcode/QR for access control systems across free zones and business parks." },
-                { sector: "Healthcare", uses: "Patient ID bands, staff credentials, pharmacy dispensing cards with encoded data. Common in Dubai Health Authority-affiliated facilities." },
-                { sector: "Education", uses: "Student and staff cards for UAE universities, schools, and training institutes — including KHDA-registered institutions." },
-                { sector: "Hospitality & Events", uses: "Membership cards, loyalty cards, event credentials, RFID room keys — for hotels, exhibition centres, and large events in Dubai and Sharjah." },
-              ].map((item, i) => (
-                <div key={i} className="glass-card p-7 rounded-2xl">
-                  <h3 className="text-white font-bold text-base mb-2">{item.sector}</h3>
-                  <p className="text-[#8fa3bc] text-sm leading-relaxed">{item.uses}</p>
-                </div>
-              ))}
+        <Section eyebrow="Compare Models" title="Which PVC card printer is right for you?" tone="raised">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-panel border border-primary/20 bg-surface-mid p-8">
+              <span className="mb-4 block text-caption font-bold uppercase tracking-widest text-primary">
+                Choose the Bravo RTAI if you need…
+              </span>
+              <ul className="space-y-2.5 text-[0.9rem] text-on-surface-variant">
+                {[
+                  "Maximum print quality — 600 DPI over-the-edge borderless cards",
+                  "Built-in holographic security without a separate laminator",
+                  "Specialty media: wooden, translucent, or PET-G cards",
+                  "HOLO-MET™ metallic gold/silver ribbon effects",
+                  "Government IDs, banking VIP cards, high-security credentials",
+                  "Lifetime print head warranty for long-term ROI",
+                ].map((p) => (
+                  <li key={p} className="flex gap-2">
+                    <span className="mt-0.5 text-primary">✓</span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-panel border border-emerald-500/20 bg-surface-mid p-8">
+              <span className="mb-4 block text-caption font-bold uppercase tracking-widest text-emerald-400">
+                Choose the Bravo DC 3300 if you need…
+              </span>
+              <ul className="space-y-2.5 text-[0.9rem] text-on-surface-variant">
+                {[
+                  "High-volume throughput — up to 280 cards/hour",
+                  "Lower cost per card for standard employee ID batches",
+                  "Cross-platform software (Windows, Mac, Linux)",
+                  "Flexible encoding: magnetic stripe, contact & contactless smartcard",
+                  "Corporate ID, membership cards, campus credentials",
+                  "Simplex-to-Duplex upgrade via software key (no hardware swap)",
+                ].map((p) => (
+                  <li key={p} className="flex gap-2">
+                    <span className="mt-0.5 text-emerald-400">✓</span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        </section>
+        </Section>
 
-        {/* Consumables Section */}
-        <section className="py-16 px-6 bg-[#0a1422]">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-3 text-center">Genuine Bravo Consumables — In Stock UAE</h2>
-            <p className="text-[#8fa3bc] text-center mb-10 max-w-2xl mx-auto">
-              As the authorised exclusive reseller for these two Bravo models, Sahara stocks genuine consumables locally — no waiting on international shipments. Avoid uncertified third-party ribbons that can void your warranty.
-            </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { name: "YMCKO Colour Ribbons", models: "RTAI & DC 3300", desc: "Full-colour plus overlay for protection and shine." },
-                { name: "Retransfer Film", models: "RTAI only", desc: "Genuine Bravo retransfer film including holographic variants." },
-                { name: "HOLO-MET™ Ribbons", models: "RTAI only", desc: "Metallic gold and silver ribbon for premium card effects." },
-                { name: "Cleaning Kits", models: "RTAI & DC 3300", desc: "Roller and hopper cleaning cards to maintain print quality." },
-              ].map((c, i) => (
-                <div key={i} className="glass-card p-5 rounded-xl">
-                  <h3 className="text-white font-semibold text-sm mb-1">{c.name}</h3>
-                  <span className="text-[#f5be53] text-xs font-bold block mb-2">{c.models}</span>
-                  <p className="text-[#8fa3bc] text-xs">{c.desc}</p>
-                </div>
-              ))}
+        <Section eyebrow="Colour Reverse Transfer" title="Bravo RTAI" id="bravo-rtai">
+          <p className="max-w-2xl text-body text-muted">
+            600 DPI over-the-edge retransfer printing. The only card printer in its class with built-in
+            holographic retransfer, wooden card support, and HOLO-MET™ metallic lustre ribbons — no
+            separate laminator required.
+          </p>
+          <p className="mt-3 text-[0.9rem] font-semibold italic text-primary">
+            &ldquo;When exclusivity matters&rdquo; — Bravo Global
+          </p>
+
+          <div className="mt-8 grid max-w-2xl grid-cols-2 gap-4">
+            <div className="overflow-hidden rounded-card border border-white/[0.08] bg-surface-low">
+              <Image src="/brands/bravo/rtai-official.webp" alt="Bravo RTAI retransfer card printer — official product photo, bravoglobal.com" width={610} height={610} className="h-auto w-full object-cover" priority />
             </div>
-            <div className="text-center mt-8">
-              <a href="/services/printer-spare-parts/" className="inline-block bg-[#f5be53]/10 border border-[#f5be53]/30 text-[#f5be53] px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#f5be53]/20 transition-colors">
-                Order Consumables →
-              </a>
+            <div className="overflow-hidden rounded-card border border-white/[0.08] bg-surface-low">
+              <Image src="/brands/bravo/bravo-rtai-page2.webp" alt="Bravo RTAI features and specifications" width={600} height={848} className="h-auto w-full object-cover" />
             </div>
           </div>
-        </section>
 
-        {/* CTA */}
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {rtaiFeatures.map((f, i) => (
+              <FeatureCard key={f.title} icon={f.icon} title={f.title} body={f.body} delay={(i % 3) * 0.05} />
+            ))}
+          </div>
+
+          <h3 className="mb-4 mt-12 font-sora text-headline font-bold text-white">Bravo RTAI Technical Specifications</h3>
+          <div className="rounded-card border border-white/[0.08] bg-surface-low px-5">
+            <SpecTable
+              rows={rtaiSpecs}
+              caption={
+                <>
+                  Specifications marked <sup className="text-primary">†</sup> come from the Bravo Global
+                  brochure rather than the{" "}
+                  <a href="https://bravoglobal.com/product/bravo-rtai/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    bravoglobal.com RTAI product page
+                  </a>
+                  .
+                </>
+              }
+            />
+          </div>
+        </Section>
+
+        <Section eyebrow="Direct to Card" title="Bravo DC 3300" id="bravo-dc3300" tone="raised">
+          <p className="max-w-2xl text-body text-muted">
+            High-throughput direct-to-card printer with lamination module, multi-encoding options, and
+            cross-platform software. Available in Simplex (DC 3300 S) and Duplex (DC 3300 D).
+          </p>
+
+          <div className="mt-8 grid max-w-2xl grid-cols-2 gap-4">
+            <div className="overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid">
+              <Image src="/brands/bravo/dc3300-official.webp" alt="Bravo DC 3300 direct-to-card printer — official product photo, bravoglobal.com" width={610} height={610} className="h-auto w-full object-cover" priority />
+            </div>
+            <div className="overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid">
+              <Image src="/brands/bravo/bravo-dc3300-page2.webp" alt="Bravo DC 3300 specifications and features" width={600} height={848} className="h-auto w-full object-cover" />
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {dc3300Features.map((f, i) => (
+              <FeatureCard key={f.title} icon={f.icon} title={f.title} body={f.body} delay={(i % 3) * 0.05} />
+            ))}
+          </div>
+
+          <h3 className="mb-4 mt-12 font-sora text-headline font-bold text-white">Bravo DC 3300 Technical Specifications</h3>
+          <div className="rounded-card border border-white/[0.08] bg-surface-mid px-5">
+            <SpecTable
+              rows={dc3300Specs}
+              caption={
+                <>
+                  Specifications marked <sup className="text-primary">†</sup> come from the Bravo Global
+                  brochure rather than the{" "}
+                  <a href="https://bravoglobal.com/product/bravo-dc3300-direct-to-card-printer/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    bravoglobal.com DC 3300 product page
+                  </a>
+                  .
+                </>
+              }
+            />
+          </div>
+        </Section>
+
+        <Section eyebrow="Full Comparison" title="RTAI vs DC 3300" id="comparison" align="center">
+          <ComparisonTable
+            columns={["Feature", "Bravo RTAI", "Bravo DC 3300"]}
+            highlightColumn={1}
+            rows={comparison.map((row) => [row.feature, row.rtai, row.dc3300])}
+          />
+        </Section>
+
+        <Section eyebrow="Use Cases" title="Who uses Bravo card printers in UAE?" align="center" tone="raised">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {useCases.map((u, i) => (
+              <FeatureCard key={u.title} title={u.title} body={u.body} delay={(i % 3) * 0.05} />
+            ))}
+          </div>
+        </Section>
+
+        <Section eyebrow="Consumables" title="Genuine Bravo consumables — in stock UAE" align="center">
+          <p className="mx-auto -mt-8 mb-10 max-w-2xl text-center text-[0.9rem] text-muted">
+            As the authorised exclusive reseller for these two Bravo models, Sahara stocks genuine
+            consumables locally — no waiting on international shipments. Avoid uncertified third-party
+            ribbons that can void your warranty.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {consumables.map((c, i) => (
+              <FeatureCard
+                key={c.name}
+                title={c.name}
+                body={
+                  <>
+                    <span className="mb-1 block text-caption font-bold text-primary">{c.models}</span>
+                    {c.desc}
+                  </>
+                }
+                delay={(i % 4) * 0.05}
+              />
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <a href="/services/printer-spare-parts/" className="inline-block rounded-pill border border-primary/30 bg-primary/10 px-6 py-3 text-caption font-semibold text-primary transition-colors hover:bg-primary/20">
+              Order Consumables →
+            </a>
+          </div>
+        </Section>
+
         <CtaBand
           title="Get a Bravo Printer Demo"
           body="As the authorised exclusive reseller in the UAE for the Bravo RTAI and DC 3300, we offer on-site demonstrations, live card printing samples, and tailored pricing for your organisation."
@@ -670,133 +659,86 @@ export default function BravoCardPrintersUAE() {
           secondary={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 
-        {/* Choose your path — the three intent-specific pages branching off this hub */}
-        <section className="py-16 px-6 lg:px-24 bg-[#0a1422]">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-3 text-center">Rent, Buy, or Have Us Print Your Cards</h2>
-            <p className="text-[#8fa3bc] text-center mb-10 max-w-2xl mx-auto">
-              This page covers the RTAI and DC 3300 hardware. For your specific need, go straight to:
-            </p>
-            <div className="grid sm:grid-cols-3 gap-6">
-              <a href="/services/pvc-card-printer-rental/" className="glass-card p-7 rounded-2xl hover:bg-[#2a3548] transition-colors">
-                <h3 className="text-white font-bold text-lg mb-2">Rent a Card Printer</h3>
-                <p className="text-[#8fa3bc] text-sm leading-relaxed">Short-term hire for events, exhibitions, and onboarding drives — weekly, monthly, or annual terms.</p>
-              </a>
-              <a href="/services/pvc-card-printer-sales/" className="glass-card p-7 rounded-2xl hover:bg-[#2a3548] transition-colors">
-                <h3 className="text-white font-bold text-lg mb-2">Buy a Card Printer</h3>
-                <p className="text-[#8fa3bc] text-sm leading-relaxed">Outright purchase of the RTAI or DC 3300, with warranty, consumables, and AMC options.</p>
-              </a>
-              <a href="/services/pvc-card-printing-services/" className="glass-card p-7 rounded-2xl hover:bg-[#2a3548] transition-colors">
-                <h3 className="text-white font-bold text-lg mb-2">Have Cards Printed For You</h3>
-                <p className="text-[#8fa3bc] text-sm leading-relaxed">Bureau service — employee ID, security, hologram, wooden and transparent cards, printed and delivered.</p>
+        <Section eyebrow="Next Step" title="Rent, buy, or have us print your cards" align="center" tone="raised">
+          <p className="mx-auto -mt-8 mb-10 max-w-2xl text-center text-[0.9rem] text-muted">
+            This page covers the RTAI and DC 3300 hardware. For your specific need, go straight to:
+          </p>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {pathCards.map((p, i) => (
+              <FeatureCard key={p.href} icon={p.icon} title={p.title} body={p.body} href={p.href} delay={i * 0.05} />
+            ))}
+          </div>
+        </Section>
+
+        <Section eyebrow="Pricing" title="How much does a PVC card printer cost in Dubai?" id="pricing" align="center">
+          <p className="mx-auto -mt-8 mb-10 max-w-2xl text-center text-[0.9rem] text-muted">
+            Indicative UAE pricing by configuration. Final price depends on encoding modules, lamination,
+            and simplex vs duplex — request a tailored quote for your exact requirement.
+          </p>
+          <ComparisonTable columns={["Configuration", "Indicative AED Price", "Best For"]} highlightColumn={1} rows={pricingRows} />
+
+          <div className="mt-14 grid gap-10 md:grid-cols-2">
+            <div>
+              <h3 className="mb-3 font-sora text-headline font-bold text-white">PVC Card Printer vs ID Card Printer — Same Machine</h3>
+              <p className="text-[0.9rem] leading-relaxed text-muted">
+                &ldquo;PVC card printer,&rdquo; &ldquo;ID card printer,&rdquo; and &ldquo;plastic card printer&rdquo; all describe the same
+                category of hardware — a desktop printer that prints and, optionally, encodes plastic
+                CR-80 cards. The Bravo RTAI and DC 3300 on this page cover both search terms: they print
+                on PVC card stock and produce finished ID cards in one pass, whether you&rsquo;re issuing
+                employee badges, student IDs, or access control credentials.
+              </p>
+            </div>
+            <div>
+              <h3 className="mb-3 font-sora text-headline font-bold text-white">Genuine Consumables — Ribbons &amp; Blank Cards</h3>
+              <p className="mb-3 text-[0.9rem] leading-relaxed text-muted">
+                We stock genuine YMCKO colour ribbons, retransfer film, blank PVC/composite cards (ISO
+                CR-80), and cleaning kits locally — no waiting on international shipments, and no
+                counterfeit-ribbon warranty risk. Browse current stock and pricing on our{" "}
+                <a href="/services/printer-spare-parts/" className="text-primary hover:underline">
+                  Toner &amp; Spare Parts
+                </a>{" "}
+                page.
+              </p>
+              <a href="/services/printer-spare-parts/" className="inline-block text-[0.9rem] font-semibold text-primary hover:underline">
+                Shop card printer ribbons &amp; consumables →
               </a>
             </div>
           </div>
-        </section>
 
-        {/* PVC Card Printer Pricing + GEO + Clarifier */}
-        <section className="py-20 px-6 lg:px-24 bg-[#0a1422]" id="pricing">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-white text-center mb-3">How Much Does a PVC Card Printer Cost in Dubai?</h2>
-            <p className="text-[#8fa3bc] text-center mb-10 max-w-2xl mx-auto">
-              Indicative UAE pricing by configuration. Final price depends on encoding modules, lamination, and simplex vs duplex — request a tailored quote for your exact requirement.
-            </p>
-            <div className="overflow-x-auto rounded-2xl border border-white/8 mb-14">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-[#0d1a2e]">
-                    <th className="px-5 py-4 text-left text-[#8fa3bc] font-semibold">Configuration</th>
-                    <th className="px-5 py-4 text-left text-[#f5be53] font-semibold">Indicative AED Price</th>
-                    <th className="px-5 py-4 text-left text-[#8fa3bc] font-semibold">Best For</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    { config: "Bravo DC 3300 S — simplex, no encoding", price: "AED 5,000 – 7,500", use: "Standard single-sided employee ID batches" },
-                    { config: "Bravo DC 3300 D — duplex + smartcard encoding", price: "AED 8,500 – 14,000", use: "Corporate/campus ID with access-control encoding" },
-                    { config: "Bravo RTAI — 600 DPI retransfer, standard config", price: "AED 9,000 – 15,000", use: "High-quality photo ID, over-the-edge printing" },
-                    { config: "Bravo RTAI — with holographic security film", price: "AED 15,000 – 22,000", use: "Government ID, banking, access credentials" },
-                  ].map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-[#0a1422]" : "bg-[#071325]"}>
-                      <td className="px-5 py-3 text-white font-medium">{row.config}</td>
-                      <td className="px-5 py-3 text-[#f5be53] font-semibold whitespace-nowrap">{row.price}</td>
-                      <td className="px-5 py-3 text-[#8fa3bc]">{row.use}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-10 mb-14">
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-3">PVC Card Printer vs ID Card Printer — Same Machine</h3>
-                <p className="text-[#8fa3bc] text-sm leading-relaxed">
-                  "PVC card printer," "ID card printer," and "plastic card printer" all describe the same category of
-                  hardware — a desktop printer that prints and, optionally, encodes plastic CR-80 cards. The Bravo
-                  RTAI and DC 3300 on this page cover both search terms: they print on PVC card stock and produce
-                  finished ID cards in one pass, whether you're issuing employee badges, student IDs, or access
-                  control credentials.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-3">Genuine Consumables — Ribbons &amp; Blank Cards</h3>
-                <p className="text-[#8fa3bc] text-sm leading-relaxed mb-3">
-                  We stock genuine YMCKO colour ribbons, retransfer film, blank PVC/composite cards (ISO CR-80), and
-                  cleaning kits locally — no waiting on international shipments, and no counterfeit-ribbon warranty
-                  risk. Browse current stock and pricing on our{" "}
-                  <a href="/services/printer-spare-parts/" className="text-[#f5be53] hover:underline">Toner &amp; Spare Parts</a> page.
-                </p>
-                <a href="/services/printer-spare-parts/" className="inline-block text-sm font-semibold text-[#f5be53] hover:underline">
-                  Shop card printer ribbons &amp; consumables →
-                </a>
-              </div>
-            </div>
-
-            <h3 className="text-xl font-bold text-white text-center mb-6">PVC Card Printer Delivery &amp; Support Across the UAE</h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                "Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain",
-                "JAFZA", "DAFZA", "SAIF Zone", "DMCC",
-              ].map((area) => (
-                <span key={area} className="text-xs font-medium text-[#d3c5b0] bg-[#101c2e] border border-white/8 px-4 py-2 rounded-full">{area}</span>
-              ))}
-            </div>
+          <h3 className="mb-6 mt-14 text-center font-sora text-headline font-bold text-white">
+            PVC Card Printer Delivery &amp; Support Across the UAE
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            {deliveryAreas.map((area) => (
+              <span key={area} className="rounded-pill border border-white/[0.08] bg-surface-low px-4 py-2 text-caption text-on-surface-variant">
+                {area}
+              </span>
+            ))}
           </div>
-        </section>
+        </Section>
 
-        {/* FAQ */}
-        <section className="py-24 px-6 max-w-4xl mx-auto">
+        <Section flush className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white mb-3">Frequently Asked Questions</h2>
-            <p className="text-[#8fa3bc]">Common questions about Bravo card printers in the UAE.</p>
+            <h2 className="font-sora text-title font-bold text-white mb-3">Frequently Asked Questions</h2>
+            <p className="text-muted">Common questions about Bravo card printers in the UAE.</p>
           </div>
           <FaqSection
             pageSlug="bravo-card-printers-uae"
             defaultFaqs={DEFAULT_FAQS}
             pageId="https://www.saharaprinter.com/bravo-card-printers-uae/#faq"
           />
-        </section>
+        </Section>
 
-        {/* Related */}
-        <section className="py-12 px-6 lg:px-24 border-t border-[#f5be53]/10">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-xl font-bold text-white mb-6">Related Products &amp; Services</h2>
-            <div className="flex flex-wrap gap-3">
-              {[
-                { href: "/products", label: "Office Printers UAE" },
-                { href: "/services/printer-rental", label: "Printer Rental UAE" },
-                { href: "/services/amc", label: "Printer AMC Dubai" },
-                { href: "/services/repair", label: "Printer Repair Dubai" },
-                { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
-                { href: "/pvc-card-printer-quote/", label: "Get a Quote" },
-              ].map((l) => (
-                <a key={l.href} href={l.href} className="text-sm text-[#f5be53] bg-[#f5be53]/10 border border-[#f5be53]/20 px-4 py-2 rounded-full hover:bg-[#f5be53]/20 transition-colors">
-                  {l.label}
-                </a>
-              ))}
-            </div>
+        <Section flush tone="ink">
+          <h2 className="text-headline font-bold text-white mb-6">Related Products &amp; Services</h2>
+          <div className="flex flex-wrap gap-3">
+            {relatedLinks.map((l) => (
+              <a key={l.href} href={l.href} className="text-caption text-primary bg-primary/10 border border-primary/20 px-4 py-2 rounded-pill hover:bg-primary/20 transition-colors">
+                {l.label}
+              </a>
+            ))}
           </div>
-        </section>
+        </Section>
 
         <Footer />
         <WhatsAppCTA />
