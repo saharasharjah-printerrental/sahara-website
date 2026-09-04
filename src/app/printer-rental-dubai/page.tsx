@@ -7,6 +7,12 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import AnswerBlock from "@/components/AnswerBlock";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
+import CtaBand from "@/components/ui/CtaBand";
+import { ShieldCheckIcon, AwardIcon, HeadsetIcon, TruckIcon } from "@/components/icons";
 
 interface FAQItem { q: string; a: string; }
 
@@ -149,11 +155,59 @@ const pricingTiers = [
 ];
 
 const dubaiIndustries = [
-  { name: "Financial Services & DIFC Firms", insight: "DIFC-based banks and financial firms trust Sahara for compliance-grade secure printing with PIN release and audit trails.", icon: "ðŸ’¹" },
-  { name: "Real Estate & Property", insight: "Dubai real estate agencies rely on A3 photocopiers for large-format floor plans, listing brochures, and high-volume contract duplication.", icon: "ðŸ™ï¸" },
-  { name: "Hospitality & Hotels", insight: "Dubai hotels use our event rental service for conferences, banquets, and temporary office setups — with same-day delivery to any hotel district.", icon: "ðŸ¨" },
-  { name: "Logistics & Free Zone Companies", insight: "JAFZA and Jebel Ali logistics operators require 24/7 manifest and label printing. We provide priority AMC coverage for operations that never stop.", icon: "ðŸšš" },
+  { name: "Financial Services & DIFC Firms", insight: "DIFC-based banks and financial firms trust Sahara for compliance-grade secure printing with PIN release and audit trails.", icon: ShieldCheckIcon },
+  { name: "Real Estate & Property", insight: "Dubai real estate agencies rely on A3 photocopiers for large-format floor plans, listing brochures, and high-volume contract duplication.", icon: AwardIcon },
+  { name: "Hospitality & Hotels", insight: "Dubai hotels use our event rental service for conferences, banquets, and temporary office setups — with same-day delivery to any hotel district.", icon: HeadsetIcon },
+  { name: "Logistics & Free Zone Companies", insight: "JAFZA and Jebel Ali logistics operators require 24/7 manifest and label printing. We provide priority AMC coverage for operations that never stop.", icon: TruckIcon },
 ];
+
+const blogPosts = [
+  {
+    slug: "how-to-choose-the-best-printer-rental-dubai-service",
+    title: "How to Choose the Best Printer Rental Dubai Service?",
+    category: "Guide",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp",
+  },
+  {
+    slug: "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
+    title: "How Dubai Companies Save Budget with Printer Rental",
+    category: "Finance",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1752651510/blogs/l3byyc7o8a8f1lddujis.jpg",
+  },
+  {
+    slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+    title: "Why Every UAE Business is Renting Printers in 2025",
+    category: "Trends",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
+  },
+  {
+    slug: "total-cost-of-printer-ownership",
+    title: "Total Cost of Printer Ownership vs. Rental",
+    category: "Finance",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
+  },
+];
+
+const relatedServices = [
+  { href: "/services/printer-rental/", label: "Printer Rental UAE" },
+  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
+  { href: "/services/repair/", label: "Printer Repair" },
+  { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
+  { href: "/printer-repair-dubai/", label: "Printer Repair Dubai" },
+  { href: "/canon-printer-dubai/", label: "Canon Printer Dubai" },
+  { href: "/brands/canon/", label: "Canon Printers" },
+  { href: "/brands/kyocera/", label: "Kyocera Printers" },
+];
+
+const otherLocations = [
+  { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
+  { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest response in Sharjah & Northern Emirates." },
+  { href: "/printer-rental-rak/", label: "Printer Rental RAK", desc: "Ras Al Khaimah businesses & free zones." },
+  { href: "/copier-lease-uae/", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract." },
+];
+
+const trail = [{ label: "Home", href: "/" }, { label: "Printer Rental Dubai" }];
 
 export default async function PrinterRentalDubai() {
   const faqs = await getFaqsFromD1();
@@ -173,120 +227,102 @@ export default async function PrinterRentalDubai() {
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
-    <main className="min-h-screen bg-[#071325]">
-      <Header />
 
-      {/* â"€â"€ Hero â"€â"€ */}
-      <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/images/location-dubai.webp"
-            alt="Dubai skyline corporate office"
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-            loading="eager"
-            width={1920}
-            height={1080}
-          />
-          <div className="absolute inset-0 bg-[#071325]/70" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#071325]/80 via-[#071325]/60 to-[#101c2e]" />
-        </div>
+      <main className="min-h-screen bg-surface">
+        <Header />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
-            <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
-            <span className="mx-2">/</span>
-            <span className="text-[#f5be53]">Printer Rental Dubai</span>
-          </nav>
+        {/* Hero — full-bleed skyline photo, distinct per city page by design */}
+        <section className="relative overflow-hidden px-6 pb-20 pt-32">
+          <div className="absolute inset-0">
+            <img
+              src="/images/location-dubai.webp"
+              alt="Dubai skyline corporate office"
+              className="h-full w-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              width={1920}
+              height={1080}
+            />
+            <div className="absolute inset-0 bg-surface/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/60 to-surface-low" />
+          </div>
 
-          <div className="grid lg:grid-cols-1 gap-12 items-center">
-            <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-xs">Dubai Â· Zero Deposit Â· Same-Day Delivery</span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Printer Rental<br /><span className="text-[#f5be53]">Dubai</span>
+          <div className="relative mx-auto max-w-content">
+            <Breadcrumbs trail={trail} />
+            <Reveal className="max-w-2xl">
+              <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Dubai · Zero Deposit · Same-Day Delivery</p>
+              <h1 className="font-sora text-display-xl font-extrabold text-white">
+                Printer Rental
+                <br />
+                <span className="text-primary">Dubai</span>
               </h1>
-
-              <AnswerBlock
-                question="How quickly can a rented printer be delivered in Dubai?"
-                answer="Same-day delivery is available across most Dubai districts. Business Bay, DIFC, JLT, Dubai Marina, Sheikh Zayed Road, and Deira are usually covered the same working day; everywhere else in Dubai is next-day. Sahara engineers handle network configuration on the delivery visit at no extra charge."
-                supportingPoints={[
-                  "Same-day: Business Bay, DIFC, JLT, Marina, Sheikh Zayed Road, Deira. Next-day: rest of Dubai",
-                  "Free zones served directly: JAFZA, DMCC, DAFZA, Dubai Internet City, Media City, Silicon Oasis",
-                  "Network setup and driver installation are included in the delivery visit",
-                  "4-hour emergency response target, 2-hour priority for Business Bay, DIFC and Downtown Dubai",
-                ]}
-              />
-
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="mt-6">
+                <AnswerBlock
+                  question="How quickly can a rented printer be delivered in Dubai?"
+                  answer="Same-day delivery is available across most Dubai districts. Business Bay, DIFC, JLT, Dubai Marina, Sheikh Zayed Road, and Deira are usually covered the same working day; everywhere else in Dubai is next-day. Sahara engineers handle network configuration on the delivery visit at no extra charge."
+                  supportingPoints={[
+                    "Same-day: Business Bay, DIFC, JLT, Marina, Sheikh Zayed Road, Deira. Next-day: rest of Dubai",
+                    "Free zones served directly: JAFZA, DMCC, DAFZA, Dubai Internet City, Media City, Silicon Oasis",
+                    "Network setup and driver installation are included in the delivery visit",
+                    "4-hour emergency response target, 2-hour priority for Business Bay, DIFC and Downtown Dubai",
+                  ]}
+                />
+              </div>
+              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
                 {["AED 250/mo Starting", "Zero Deposit", "Same-Day Delivery", "Free Toner", "4-hr Response"].map((t) => (
-                  <span key={t} className="text-xs font-bold text-white bg-[#f5be53]/10 border border-[#f5be53]/25 px-3 py-1.5 rounded-full">âœ" {t}</span>
+                  <li key={t} className="flex items-center gap-2 text-caption text-muted">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                    {t}
+                  </li>
                 ))}
+              </ul>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <a href="/rental-calculator/" className="btn-primary">Get Dubai Quote</a>
+                <a href="tel:+971503823969" className="btn-secondary">+971 50 382 3969</a>
               </div>
-
-              <div className="flex flex-wrap gap-4">
-                <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
-                  Get Dubai Quote
-                </a>
-                <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors flex items-center gap-2">
-                  📞 +971 50 382 3969
-                </a>
-              </div>
-            </div>
+            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* â"€â"€ Pricing Tiers â"€â"€ */}
-      <section className="py-16 px-4 lg:px-12 bg-[#0a1425]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Dubai Pricing</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Printer Rental Plans for Dubai Businesses</h2>
-            <p className="text-[#7a94ad] text-sm max-w-md mx-auto">All prices are per machine per month. Includes delivery, network setup, toner, and maintenance.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingTiers.map((tier, i) => (
-              <div key={i}
-                className={`relative rounded-3xl p-8 border-2 flex flex-col ${tier.popular ? 'border-[#f5be53]' : 'border-white/8'}`}
-                style={{
-                  background: 'linear-gradient(160deg, rgba(10,20,36,0.97) 0%, rgba(5,12,24,0.99) 100%)',
-                  boxShadow: tier.popular ? '0 0 40px rgba(245,190,83,0.12), 0 20px 60px rgba(0,0,0,0.5)' : '0 8px 32px rgba(0,0,0,0.4)',
-                }}>
+        <Section eyebrow="Dubai Pricing" title="Printer Rental Plans for Dubai Businesses" subtitle="All prices are per machine per month. Includes delivery, network setup, toner, and maintenance." align="center" tone="raised">
+          <div className="grid gap-8 md:grid-cols-3">
+            {pricingTiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`relative flex flex-col rounded-panel border-2 p-8 ${tier.popular ? "border-primary bg-surface-mid" : "border-white/[0.08] bg-surface-low"}`}
+              >
                 {tier.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f5be53] text-[#412d00] text-[10px] font-black px-4 py-0.5 rounded-full uppercase">Most Popular</span>
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-pill bg-primary px-4 py-0.5 text-[10px] font-black uppercase text-on-primary">Most Popular</span>
                 )}
-                <h3 className="text-2xl font-bold text-white text-center mb-1">{tier.name}</h3>
-                <div className="text-center mb-2">
-                  <span className="text-3xl font-black text-[#f5be53]">{tier.price}</span>
-                  <span className="text-slate-400 text-sm">{tier.period}</span>
+                <h3 className="mb-1 text-center text-2xl font-bold text-white">{tier.name}</h3>
+                <div className="mb-2 text-center">
+                  <span className="text-3xl font-black text-primary">{tier.price}</span>
+                  <span className="text-sm text-slate-400">{tier.period}</span>
                 </div>
-                <div className="text-center mb-6 space-y-1">
-                  <p className="text-slate-400 text-xs">ðŸ‘¥ {tier.users}</p>
-                  <p className="text-slate-400 text-xs">🔄 {tier.volume}</p>
+                <div className="mb-6 space-y-1 text-center">
+                  <p className="text-caption text-muted">{tier.users}</p>
+                  <p className="text-caption text-muted">{tier.volume}</p>
                 </div>
-                <ul className="space-y-2 mb-8 flex-1">
-                  {tier.includes.map((item, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
-                      <span className="text-[#f5be53] mt-0.5 shrink-0">âœ"</span>
+                <ul className="mb-8 flex-1 space-y-2">
+                  {tier.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                      <span className="mt-0.5 shrink-0 text-primary">✓</span>
                       {item}
                     </li>
                   ))}
                 </ul>
-                <a href="/rental-calculator/" className={`block text-center py-4 rounded-full font-bold transition-all hover:scale-[1.02] ${tier.popular ? 'bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00]' : 'glass-card text-white'}`}>
+                <a href="/rental-calculator/" className={`block rounded-pill py-4 text-center font-bold transition-all hover:scale-[1.02] ${tier.popular ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "glass-card text-white"}`}>
                   Get Dubai Quote
                 </a>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ What is Printer Rental in Dubai â"€â"€ (Word count / depth) */}
-      <section className="py-16 px-4 lg:px-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="glass-card rounded-3xl p-8 md:p-12" style={{ borderLeft: '4px solid #f5be53' }}>
-            <h2 className="text-3xl font-bold text-white mb-6">What is Printer Rental in Dubai?</h2>
-            <div className="space-y-4 text-[#d3c5b0] leading-relaxed">
+        <Section flush>
+          <div className="rounded-panel border-l-4 border-primary bg-surface-low p-8 md:p-12 max-w-4xl mx-auto">
+            <h2 className="mb-6 font-sora text-title font-bold text-white">What is Printer Rental in Dubai?</h2>
+            <div className="space-y-4 leading-relaxed text-on-surface-variant">
               <p>
                 Printer rental in Dubai is a managed equipment leasing model where businesses access enterprise-grade
                 Canon, Kyocera, HP, or Ricoh printers and photocopiers through a fixed monthly contract — without
@@ -294,7 +330,7 @@ export default async function PrinterRentalDubai() {
                 and repairs, and technical support.
               </p>
               <p>
-                In Dubai's fast-moving business environment — from the towers of Business Bay and DIFC to the warehouses
+                In Dubai&rsquo;s fast-moving business environment — from the towers of Business Bay and DIFC to the warehouses
                 of Jebel Ali and Al Quoz — printing needs change rapidly. Printer rental eliminates the risk of owning
                 depreciating assets. Instead of tying up capital in hardware that becomes obsolete in 3—4 years, companies
                 pay a predictable monthly operational expense and upgrade seamlessly.
@@ -312,196 +348,100 @@ export default async function PrinterRentalDubai() {
               </p>
             </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ Dubai Areas â"€â"€ */}
-      <section className="py-16 px-8 lg:px-24 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Coverage</span>
-            <h2 className="text-3xl font-bold text-white mt-3 mb-3">All Dubai Districts — Same-Day Delivery</h2>
-            <p className="text-[#7a94ad] text-sm">Our technicians operate from a Dubai service hub for fast response across all areas.</p>
-          </div>
+        <Section eyebrow="Coverage" title="All Dubai Districts — Same-Day Delivery" subtitle="Our technicians operate from a Dubai service hub for fast response across all areas." align="center" tone="raised">
           <div className="flex flex-wrap justify-center gap-3">
-            {dubaiAreas.map((area, i) => (
-              <span key={i} className="px-4 py-2 rounded-full text-sm text-[#d3c5b0] font-medium border border-white/8 bg-white/3 hover:border-[#f5be53]/30 hover:text-white transition-all">
-                📍 {area}
+            {dubaiAreas.map((area) => (
+              <span key={area} className="rounded-pill border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-[0.9rem] font-medium text-on-surface-variant transition-all hover:border-primary/30 hover:text-white">
+                {area}
               </span>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ Dubai Industries â"€â"€ */}
-      <section className="py-16 px-4 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Who We Serve in Dubai</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Printer Rental Trusted Across Dubai Sectors</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-6">
+        <Section eyebrow="Who We Serve in Dubai" title="Printer Rental Trusted Across Dubai Sectors" align="center">
+          <div className="grid gap-6 sm:grid-cols-2">
             {dubaiIndustries.map((ind, i) => (
-              <div key={i}
-                className="rounded-2xl p-6 group hover:-translate-y-1 transition-all duration-300"
-                style={{ background: 'linear-gradient(150deg, rgba(15,26,42,0.97) 0%, rgba(8,14,28,0.98) 100%)', border: '1px solid rgba(245,190,83,0.12)' }}>
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl">{ind.icon}</span>
-                  <div>
-                    <h3 className="text-white font-bold mb-2">{ind.name}</h3>
-                    <p className="text-[#6a87a4] text-sm leading-relaxed">{ind.insight}</p>
-                  </div>
-                </div>
-              </div>
+              <FeatureCard key={ind.name} icon={ind.icon} title={ind.name} body={ind.insight} delay={(i % 2) * 0.05} />
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ Stats â"€â"€ */}
-      <section className="py-12 px-8 bg-[#050d1a] border-y border-[#f5be53]/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <Section flush>
+          <div className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
             {[
               { value: "1,500+", label: "Happy Clients UAE" },
               { value: "AED 250", label: "Starting Price/Month" },
               { value: "4 Hours", label: "Emergency Response Dubai" },
               { value: "13+ Years", label: "Serving UAE" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="text-2xl md:text-3xl font-bold text-[#f5be53]">{s.value}</p>
-                <p className="text-xs uppercase tracking-widest text-slate-400 mt-1">{s.label}</p>
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="text-2xl md:text-3xl font-bold text-primary">{s.value}</p>
+                <p className="mt-1 text-caption uppercase tracking-widest text-muted">{s.label}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ FAQ â"€â"€ */}
-      <section className="py-24 px-8 max-w-4xl mx-auto">
-        <div className="text-center mb-14">
-          <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Questions</span>
-          <h2 className="text-4xl font-bold text-white mt-3">Printer Rental Dubai — FAQ</h2>
-          <p className="text-[#7a94ad] text-sm mt-3 max-w-md mx-auto">20 questions covering pricing, delivery, brands, printer types, and contracts — everything Dubai businesses ask.</p>
-        </div>
-        <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <details key={i}
-              className="rounded-2xl p-6 group cursor-pointer"
-              style={{ background: 'linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)', boxShadow: '6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)' }}
-              open={i === 0}>
-              <summary className="flex justify-between items-center list-none font-bold text-base text-white pr-2">
-                {faq.q}
-                <span className="text-[#f5be53] text-xl shrink-0 ml-4 group-open:rotate-180 transition-transform duration-200">â€º</span>
-              </summary>
-              <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{faq.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+        <Section flush className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Questions</p>
+            <h2 className="font-sora text-title font-bold text-white mb-3">Printer Rental Dubai — FAQ</h2>
+            <p className="mx-auto max-w-md text-[0.9rem] text-muted">20 questions covering pricing, delivery, brands, printer types, and contracts — everything Dubai businesses ask.</p>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <details key={faq.q} className="glass-card rounded-card p-6 group cursor-pointer" open={i === 0}>
+                <summary className="flex items-center justify-between gap-4 pr-2 list-none font-bold text-[1rem] text-white">
+                  {faq.q}
+                  <span className="shrink-0 text-xl text-primary transition-transform duration-200 group-open:rotate-180">›</span>
+                </summary>
+                <p className="mt-4 text-[0.9rem] leading-relaxed text-on-surface-variant">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </Section>
 
-      {/* â"€â"€ Related Services — Internal Cross-Links â"€â"€ */}
-      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Related Services</p>
+        <Section flush tone="raised">
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Related Services</p>
           <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { href: "/services/printer-rental", label: "Printer Rental UAE" },
-              { href: "/services/photocopier-rental", label: "Photocopier Rental" },
-              { href: "/services/amc", label: "Annual Maintenance (AMC)" },
-              { href: "/services/repair", label: "Printer Repair" },
-              { href: "/services/printer-spare-parts", label: "Toner & Spare Parts" },
-              { href: "/printer-repair-dubai", label: "Printer Repair Dubai" },
-              { href: "/canon-printer-dubai", label: "Canon Printer Dubai" },
-              { href: "/brands/canon", label: "Canon Printers" },
-              { href: "/brands/kyocera", label: "Kyocera Printers" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
-              >
+            {relatedServices.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-pill border border-white/[0.08] px-4 py-2 text-caption text-muted transition-all hover:text-white hover:border-primary/40">
                 {link.label}
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ Other UAE Locations — Cross-Location Links â"€â"€ */}
-      <section className="py-12 px-8 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Printer Rental in Other Emirates</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
-              { href: "/photocopier-rental-sharjah", label: "Photocopier Rental Sharjah", desc: "Our HQ. Fastest response in Sharjah & Northern Emirates." },
-              { href: "/printer-rental-rak", label: "Printer Rental RAK", desc: "Ras Al Khaimah businesses & free zones." },
-              { href: "/copier-lease-uae", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract." },
-            ].map((loc) => (
-              <Link
-                key={loc.href}
-                href={loc.href}
-                className="group rounded-2xl p-5 border border-white/6 bg-[#0d1b2e] hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-[#f5be53] transition-colors">{loc.label}</h4>
-                <p className="text-slate-500 text-xs leading-relaxed">{loc.desc}</p>
+        <Section flush>
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Printer Rental in Other Emirates</p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {otherLocations.map((loc) => (
+              <Link key={loc.href} href={loc.href} className="group rounded-card border border-white/[0.06] bg-surface-low p-5 transition-all duration-300 hover:-translate-y-0.5">
+                <h4 className="mb-1 text-[0.9rem] font-semibold text-white transition-colors group-hover:text-primary">{loc.label}</h4>
+                <p className="text-caption leading-relaxed text-slate-500">{loc.desc}</p>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ From Our Blog — Topical Authority â"€â"€ */}
-      <section className="py-16 px-8 lg:px-24 bg-[#0a1628]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Resource Hub</p>
-              <h2 className="text-2xl font-bold text-white">Dubai Printer Rental Guides</h2>
-            </div>
-            <Link href="/blogs/" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All â†’</Link>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              {
-                slug: "how-to-choose-the-best-printer-rental-dubai-service",
-                title: "How to Choose the Best Printer Rental Dubai Service?",
-                category: "Guide",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp",
-              },
-              {
-                slug: "how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
-                title: "How Dubai Companies Save Budget with Printer Rental",
-                category: "Finance",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1752651510/blogs/l3byyc7o8a8f1lddujis.jpg",
-              },
-              {
-                slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
-                title: "Why Every UAE Business is Renting Printers in 2025",
-                category: "Trends",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
-              },
-              {
-                slug: "total-cost-of-printer-ownership",
-                title: "Total Cost of Printer Ownership vs. Rental",
-                category: "Finance",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
-              },
-            ].map((post) => (
+        <Section eyebrow="Resource Hub" title="Dubai Printer Rental Guides" tone="raised">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {blogPosts.map((post) => (
               <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
-                <div className="rounded-2xl border border-white/8 bg-[#0d1b2e] overflow-hidden hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col">
-                  <img src={post.img} alt={post.title} className="w-full h-32 object-cover" loading="lazy" />
-                  <div className="p-4 flex flex-col flex-1">
-                    <span className="inline-flex px-2 py-0.5 rounded-full bg-[#142032] border border-[#f5be53]/20 text-[#f5be53] text-[10px] font-medium mb-2 self-start">
+                <div className="flex h-full flex-col overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid transition-transform duration-300 hover:-translate-y-1">
+                  <img src={post.img} alt={post.title} className="h-32 w-full object-cover" loading="lazy" />
+                  <div className="flex flex-1 flex-col p-4">
+                    <span className="mb-2 inline-flex self-start rounded-pill border border-primary/20 bg-surface-max px-2 py-0.5 text-[10px] font-medium text-primary">
                       {post.category}
                     </span>
-                    <h4 className="text-white text-xs font-semibold leading-snug group-hover:text-[#f5be53] transition-colors flex-1 line-clamp-3">
+                    <h4 className="line-clamp-3 flex-1 text-[0.8rem] font-semibold leading-snug text-white transition-colors group-hover:text-primary">
                       {post.title}
                     </h4>
-                    <span className="text-[#f5be53] text-xs mt-3 flex items-center gap-1">
+                    <span className="mt-3 flex items-center gap-1 text-caption text-primary">
                       Read
-                      <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="h-3 w-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
@@ -510,35 +450,22 @@ export default async function PrinterRentalDubai() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* â"€â"€ CTA â"€â"€ */}
-      <section className="py-16 px-8">
-        <div className="max-w-4xl mx-auto rounded-panel p-12 md:p-16 text-center relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #f5be53 0%, #c8962e 100%)' }}>
-          <div className="absolute -top-8 -right-8 w-48 h-48 bg-white/10 rounded-full blur-2xl" />
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Need Printer Rental in Dubai?</h2>
-            <p className="text-[#483200] text-lg mb-8 max-w-xl mx-auto">
-              Get a customized Dubai quote within 2 hours. Free consultation and same-day delivery available for most Dubai districts.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl">
-                Get Free Dubai Quote
-              </a>
-              <a href="tel:+971503823969" className="bg-white/20 border border-[#412d00]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:bg-white/30 transition-colors">
-                📞 Call Now
-              </a>
-            </div>
+          <div className="mt-8 text-right">
+            <Link href="/blogs/" className="text-[0.9rem] text-primary hover:underline">View All →</Link>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <Footer />
-      <WhatsAppCTA />
-      <JumpToTop />
-    </main>
+        <CtaBand
+          title="Need Printer Rental in Dubai?"
+          body="Get a customized Dubai quote within 2 hours. Free consultation and same-day delivery available for most Dubai districts."
+          primary={{ label: "Get Free Dubai Quote", href: "/rental-calculator/" }}
+          secondary={{ label: "Call Now", href: "tel:+971503823969" }}
+        />
+
+        <Footer />
+        <WhatsAppCTA />
+        <JumpToTop />
+      </main>
     </>
   );
 }
