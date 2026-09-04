@@ -4,6 +4,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
+import CtaBand from "@/components/ui/CtaBand";
+import { LayersIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Printer Brands UAE | Canon, HP, Kyocera, Ricoh, Xerox | Sahara",
@@ -22,17 +28,17 @@ export const metadata: Metadata = {
 };
 
 const brands = [
-  { slug: "canon", name: "Canon", tagline: "imageRUNNER ADVANCE & imageCLASS", desc: "Authorized Canon dealer in UAE. Reliable A3/A4 MFPs for enterprise offices.", icon: "🖨️" },
-  { slug: "hp", name: "HP", tagline: "LaserJet Enterprise & PageWide", desc: "HP Service Center in Dubai. LaserJet and PageWide solutions for all business sizes.", icon: "🖨️" },
-  { slug: "kyocera", name: "Kyocera", tagline: "ECOSYS & TASKalfa", desc: "ECOSYS technology for lowest total cost of ownership in UAE.", icon: "🖨️" },
-  { slug: "ricoh", name: "Ricoh", tagline: "IM C Series & MP Series", desc: "Authorized Ricoh dealer. Aficio and IM C series color MFPs for UAE businesses.", icon: "🖨️" },
-  { slug: "xerox", name: "Xerox", tagline: "VersaLink & AltaLink", desc: "Enterprise-grade Xerox MFPs for high-volume printing in Dubai offices.", icon: "🖨️" },
-  { slug: "brother", name: "Brother", tagline: "MFC & DCP Series", desc: "Wireless, cloud-ready Brother printers for SMEs across UAE.", icon: "🖨️" },
-  { slug: "sharp", name: "Sharp", tagline: "Sharp MFPs & Display Systems", desc: "Smart Sharp MFPs with OSA integration for connected offices.", icon: "🖨️" },
-  { slug: "epson", name: "Epson", tagline: "PrecisionCore & Wide-Format", desc: "Epson EcoTank and wide-format solutions for print-intensive environments.", icon: "🖨️" },
-  { slug: "samsung", name: "Samsung", tagline: "ProXpress & MultiXpress", desc: "Samsung enterprise printers with smart printing apps for UAE businesses.", icon: "🖨️" },
-  { slug: "lexmark", name: "Lexmark", tagline: "Managed Print Services", desc: "Lexmark enterprise laser solutions and MPS programs for UAE offices.", icon: "🖨️" },
-  { slug: "konica-minolta", name: "Konica Minolta", tagline: "bizhub A3 & A4 Series", desc: "Authorized Konica Minolta dealer in UAE. bizhub MFPs for high-volume corporate offices.", icon: "🖨️" },
+  { slug: "canon", name: "Canon", tagline: "imageRUNNER ADVANCE & imageCLASS", desc: "Authorized Canon dealer in UAE. Reliable A3/A4 MFPs for enterprise offices." },
+  { slug: "hp", name: "HP", tagline: "LaserJet Enterprise & PageWide", desc: "HP Service Center in Dubai. LaserJet and PageWide solutions for all business sizes." },
+  { slug: "kyocera", name: "Kyocera", tagline: "ECOSYS & TASKalfa", desc: "ECOSYS technology for lowest total cost of ownership in UAE." },
+  { slug: "ricoh", name: "Ricoh", tagline: "IM C Series & MP Series", desc: "Authorized Ricoh dealer. Aficio and IM C series color MFPs for UAE businesses." },
+  { slug: "xerox", name: "Xerox", tagline: "VersaLink & AltaLink", desc: "Enterprise-grade Xerox MFPs for high-volume printing in Dubai offices." },
+  { slug: "brother", name: "Brother", tagline: "MFC & DCP Series", desc: "Wireless, cloud-ready Brother printers for SMEs across UAE." },
+  { slug: "sharp", name: "Sharp", tagline: "Sharp MFPs & Display Systems", desc: "Smart Sharp MFPs with OSA integration for connected offices." },
+  { slug: "epson", name: "Epson", tagline: "PrecisionCore & Wide-Format", desc: "Epson EcoTank and wide-format solutions for print-intensive environments." },
+  { slug: "samsung", name: "Samsung", tagline: "ProXpress & MultiXpress", desc: "Samsung enterprise printers with smart printing apps for UAE businesses." },
+  { slug: "lexmark", name: "Lexmark", tagline: "Managed Print Services", desc: "Lexmark enterprise laser solutions and MPS programs for UAE offices." },
+  { slug: "konica-minolta", name: "Konica Minolta", tagline: "bizhub A3 & A4 Series", desc: "Authorized Konica Minolta dealer in UAE. bizhub MFPs for high-volume corporate offices." },
 ];
 
 const breadcrumbSchema = {
@@ -98,108 +104,87 @@ const faqSchema = {
   ],
 };
 
+const trail = [{ label: "Home", href: "/" }, { label: "Printer Brands" }];
+
 export default function BrandsPage() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      <main className="min-h-screen bg-[#071325]">
+      <main className="min-h-screen bg-surface">
         <Header />
 
-        {/* Hero */}
-        <section className="relative pt-32 pb-20 px-8 lg:px-24 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#f5be53]/6 rounded-full blur-[160px] pointer-events-none" />
-          <div className="max-w-7xl mx-auto relative z-10">
-            <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
-              <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
-              <span className="mx-2">/</span>
-              <span className="text-[#f5be53]">Printer Brands</span>
-            </nav>
+        <section className="relative overflow-hidden px-6 pb-20 pt-32">
+          <div className="pointer-events-none absolute left-1/4 top-0 h-[600px] w-[600px] rounded-full bg-primary/[0.06] blur-[160px]" />
+          <div className="relative mx-auto max-w-content">
+            <Breadcrumbs trail={trail} />
 
-            <div className="text-center max-w-3xl mx-auto">
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-xs">Authorized Dealer · UAE</span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Printer Brands<br /><span className="text-[#f5be53]">We Deal In UAE</span>
+            <Reveal className="mx-auto max-w-3xl text-center">
+              <p className="text-caption font-bold uppercase tracking-[0.2em] text-primary">Authorized Dealer · UAE</p>
+              <h1 className="mt-4 font-sora text-display-xl font-extrabold leading-tight text-white">
+                Printer Brands<br /><span className="text-primary">We Deal In UAE</span>
               </h1>
 
-              {/* AEO Answer Block */}
-              <div className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8 text-left">
-                <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Which Printer Brands Are Available in UAE?</p>
-                <p className="text-[#d3c5b0] text-sm leading-relaxed">
-                  Sahara Office Equipments is an authorized dealer for 11 major printer and photocopier brands in UAE —
-                  Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Samsung, Lexmark, and Konica Minolta. We offer
-                  sales, rental from AED 250/month, AMC contracts, and on-site repair across Dubai, Sharjah, and Abu Dhabi.
+              <div className="mb-8 mt-6 rounded-panel border border-primary/20 bg-surface-low p-5 text-left">
+                <p className="mb-2 text-caption font-bold uppercase tracking-widest text-primary">Which Printer Brands Are Available in UAE?</p>
+                <p className="text-sm leading-relaxed text-on-surface-variant">
+                  Sahara Office Equipments is an authorized dealer for 11 major printer and photocopier brands in
+                  UAE — Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, Epson, Samsung, Lexmark, and Konica
+                  Minolta. We offer sales, rental from AED 250/month, AMC contracts, and on-site repair across
+                  Dubai, Sharjah, and Abu Dhabi.
                 </p>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <div className="mb-4 flex flex-wrap justify-center gap-3">
                 {["11 Brands", "Sales & Rental", "AMC & Repair", "Free Toner", "Since 2012"].map((t) => (
-                  <span key={t} className="text-xs font-bold text-white bg-[#f5be53]/10 border border-[#f5be53]/25 px-3 py-1.5 rounded-full">
+                  <span key={t} className="rounded-pill border border-primary/25 bg-primary/10 px-3 py-1.5 text-xs font-bold text-white">
                     ✓ {t}
                   </span>
                 ))}
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
-        {/* Brand Grid */}
-        <section className="py-16 px-8 lg:px-24" style={{ background: '#050d1a' }}>
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-10 text-center">All Printer Brands — UAE Authorized Dealer</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {brands.map((brand) => (
-                <a
-                  key={brand.slug}
-                  href={`/brands/${brand.slug}`}
-                  className="glass-card rounded-2xl p-6 hover:border-[#f5be53]/40 transition-all group"
-                >
-                  <div className="text-4xl mb-3">{brand.icon}</div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-[#f5be53] transition-colors mb-1">
-                    {brand.name}
-                  </h3>
-                  <p className="text-[#f5be53] text-xs font-semibold mb-2">{brand.tagline}</p>
-                  <p className="text-[#d3c5b0] text-sm leading-relaxed">{brand.desc}</p>
-                  <div className="mt-4 text-[#f5be53] text-sm font-semibold flex items-center gap-1">
-                    View {brand.name} Products →
-                  </div>
-                </a>
-              ))}
-            </div>
+        <Section title="All Printer Brands — UAE Authorized Dealer" align="center" tone="ink" flush>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {brands.map((brand) => (
+              <FeatureCard
+                key={brand.slug}
+                icon={LayersIcon}
+                title={brand.name}
+                href={`/brands/${brand.slug}`}
+                body={
+                  <>
+                    <p className="mb-2 text-xs font-semibold text-primary">{brand.tagline}</p>
+                    <p>{brand.desc}</p>
+                  </>
+                }
+              />
+            ))}
           </div>
-        </section>
+        </Section>
 
-        {/* FAQ Section */}
-        <section className="py-16 px-8 lg:px-24">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-10 text-center">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              {faqSchema.mainEntity.map((faq, i) => (
-                <div key={i} className="glass-card rounded-2xl p-6">
-                  <h3 className="text-white font-semibold mb-2">{faq.name}</h3>
-                  <p className="text-[#d3c5b0] text-sm leading-relaxed">{faq.acceptedAnswer.text}</p>
+        <Section title="Frequently Asked Questions" align="center" className="max-w-3xl mx-auto">
+          <div className="space-y-4">
+            {faqSchema.mainEntity.map((faq) => (
+              <Reveal key={faq.name}>
+                <div className="glass-card rounded-card p-6">
+                  <h3 className="mb-2 font-semibold text-white">{faq.name}</h3>
+                  <p className="text-sm leading-relaxed text-on-surface-variant">{faq.acceptedAnswer.text}</p>
                 </div>
-              ))}
-            </div>
+              </Reveal>
+            ))}
           </div>
-        </section>
+        </Section>
 
-        {/* CTA */}
-        <section className="py-16 px-8 lg:px-24 text-center">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-4">Need Help Choosing a Printer Brand?</h2>
-            <p className="text-[#d3c5b0] mb-8">Our experts will recommend the right brand and model for your office volume, budget, and workflow.</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
-                Get a Free Quote
-              </a>
-              <a href="/contact/" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
-                Talk to an Expert
-              </a>
-            </div>
-          </div>
-        </section>
+        <CtaBand
+          title="Need Help Choosing a Printer Brand?"
+          body="Our experts will recommend the right brand and model for your office volume, budget, and workflow."
+          primary={{ label: "Get a Free Quote", href: "/rental-calculator/" }}
+          secondary={{ label: "Talk to an Expert", href: "/contact/" }}
+        />
 
         <Footer />
         <WhatsAppCTA />
