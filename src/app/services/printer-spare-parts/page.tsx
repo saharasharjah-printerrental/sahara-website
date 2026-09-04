@@ -7,7 +7,12 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import SparePartsCartClient from "@/components/SparePartsCartClient";
-import { VerifiedUser, LocalShipping, Inventory } from "@mui/icons-material";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
+import CtaBand from "@/components/ui/CtaBand";
+import { ShieldCheckIcon, TruckIcon, AwardIcon, ClockIcon } from "@/components/icons";
 import { normalizeR2Url } from "@/lib/r2url";
 import { resolveSupplyPrice } from "@/lib/price";
 
@@ -107,63 +112,75 @@ async function getLiveSupplies() {
   }
 }
 
+const benefits = [
+  { icon: ShieldCheckIcon, title: "Genuine OEM", desc: "Only original manufacturer supplies for optimal performance" },
+  { icon: TruckIcon, title: "Same-Day Delivery", desc: "Express delivery across Dubai, Abu Dhabi, and Sharjah" },
+  { icon: AwardIcon, title: "Bulk Pricing", desc: "Volume discounts for businesses with multiple devices" },
+  { icon: ClockIcon, title: "Auto-Replenishment", desc: "Automatic toner delivery based on usage tracking" },
+];
+
+const whatWeStock: [string, string][] = [
+  ["Toner cartridges", "Black and full colour sets for Canon imageRUNNER, Kyocera TASKalfa, HP LaserJet, Ricoh MP and Xerox AltaLink series."],
+  ["OPC drums", "Long-life drum units, including high-yield options rated well beyond standard cartridge life."],
+  ["Maintenance kits", "Fuser, transfer and roller kits for scheduled preventive servicing at manufacturer-specified intervals."],
+  ["Spare parts", "Pickup rollers, separation pads, fusers and feed assemblies for the models we service."],
+];
+
+const trail = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services/" },
+  { label: "Printer Spare Parts" },
+];
+
 export default async function PrinterSparePartsPage() {
   const supplies = await getLiveSupplies();
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-      <main className="min-h-screen bg-[#071325]">
+      <main className="min-h-screen bg-surface">
         <Header />
 
-        <section className="relative pt-32 pb-16 px-8 lg:px-24 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#f5be53]/10 rounded-full blur-[150px]" />
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">Genuine Supplies</span>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-4">
-                Printer <span className="text-[#f5be53]">Spare Parts</span>
+        <section className="relative overflow-hidden px-6 pb-14 pt-32">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl"
+          />
+          <div className="relative mx-auto max-w-content">
+            <Breadcrumbs trail={trail} />
+            <Reveal>
+              <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Genuine Supplies</p>
+              <h1 className="font-sora text-display font-extrabold text-white">
+                Printer <span className="text-primary">Spare Parts</span>
               </h1>
-              <p className="text-lg text-[#d3c5b0] max-w-xl">
+              <p className="mt-4 max-w-xl text-body text-muted">
                 Browse our complete inventory of OEM toners, drums, maintenance kits, and spare parts. Same-day delivery across UAE.
               </p>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         <SparePartsCartClient defaultSupplies={supplies} />
 
-        <section className="py-16 px-8 lg:px-24 bg-[#101c2e]">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { icon: VerifiedUser, title: "Genuine OEM", desc: "Only original manufacturer supplies for optimal performance" },
-                { icon: LocalShipping, title: "Same-Day Delivery", desc: "Express delivery across Dubai, Abu Dhabi, and Sharjah" },
-                { icon: Inventory, title: "Bulk Pricing", desc: "Volume discounts for businesses with multiple devices" },
-                { icon: Inventory, title: "Auto-Replenishment", desc: "Automatic toner delivery based on usage tracking" },
-              ].map((b, i) => (
-                <div key={i} className="glass-card p-6 rounded-2xl text-center">
-                  <b.icon className="text-3xl text-[#f5be53] mb-3" />
-                  <h3 className="text-lg font-bold text-white mb-2">{b.title}</h3>
-                  <p className="text-slate-400 text-sm">{b.desc}</p>
-                </div>
-              ))}
-            </div>
+        <Section tone="raised">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {benefits.map((b, i) => (
+              <FeatureCard key={b.title} icon={b.icon} title={b.title} body={b.desc} delay={(i % 4) * 0.05} />
+            ))}
           </div>
-        </section>
+        </Section>
 
-        <section className="py-16 px-8 lg:px-24">
-          <div className="max-w-4xl mx-auto space-y-10">
+        <Section>
+          <div className="mx-auto max-w-4xl space-y-10">
             <div>
-              <h2 className="text-2xl font-bold text-white mb-4">Genuine toner and parts for UAE offices</h2>
-              <p className="text-[#d3c5b0] leading-relaxed mb-4">
+              <h2 className="mb-4 font-sora text-headline font-bold text-white">Genuine toner and parts for UAE offices</h2>
+              <p className="mb-4 leading-relaxed text-on-surface-variant">
                 Sahara supplies original manufacturer toner cartridges, drums, maintenance kits and replacement parts
                 for Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp and Epson equipment. We stock the consumables for
                 the models we place on rental and AMC, which means the part you need is usually already on our shelf in
                 Sharjah rather than on a two-week order from abroad.
               </p>
-              <p className="text-[#d3c5b0] leading-relaxed">
+              <p className="leading-relaxed text-on-surface-variant">
                 We supply OEM consumables only. Compatible and refilled cartridges are cheaper per unit, but in UAE
                 office conditions they are the most common cause of drum damage, streaking and fuser failure — and
                 they void manufacturer warranty cover. The saving rarely survives the first service call.
@@ -171,74 +188,65 @@ export default async function PrinterSparePartsPage() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-white mb-4">What we stock</h2>
-              <div className="grid md:grid-cols-2 gap-5">
-                {[
-                  ["Toner cartridges", "Black and full colour sets for Canon imageRUNNER, Kyocera TASKalfa, HP LaserJet, Ricoh MP and Xerox AltaLink series."],
-                  ["OPC drums", "Long-life drum units, including high-yield options rated well beyond standard cartridge life."],
-                  ["Maintenance kits", "Fuser, transfer and roller kits for scheduled preventive servicing at manufacturer-specified intervals."],
-                  ["Spare parts", "Pickup rollers, separation pads, fusers and feed assemblies for the models we service."],
-                ].map(([title, desc]) => (
-                  <div key={title} className="glass-card rounded-2xl p-5">
-                    <h3 className="text-white font-bold mb-2">{title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+              <h2 className="mb-4 font-sora text-headline font-bold text-white">What we stock</h2>
+              <div className="grid gap-5 md:grid-cols-2">
+                {whatWeStock.map(([title, desc]) => (
+                  <div key={title} className="rounded-card border border-white/[0.08] bg-surface-low p-5">
+                    <h3 className="mb-2 font-bold text-white">{title}</h3>
+                    <p className="text-[0.9rem] leading-relaxed text-muted">{desc}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-white mb-4">Delivery across the UAE</h2>
-              <p className="text-[#d3c5b0] leading-relaxed">
+              <h2 className="mb-4 font-sora text-headline font-bold text-white">Delivery across the UAE</h2>
+              <p className="leading-relaxed text-on-surface-variant">
                 Same-day delivery is available across{" "}
-                <a href="/photocopier-rental-sharjah/" className="text-[#f5be53] hover:underline">Sharjah</a>,{" "}
-                <a href="/printer-rental-dubai/" className="text-[#f5be53] hover:underline">Dubai</a> and{" "}
-                <a href="/printer-rental-abu-dhabi/" className="text-[#f5be53] hover:underline">Abu Dhabi</a> for orders
+                <a href="/printer-rental-sharjah/" className="text-primary hover:underline">Sharjah</a>,{" "}
+                <a href="/printer-rental-dubai/" className="text-primary hover:underline">Dubai</a> and{" "}
+                <a href="/printer-rental-abu-dhabi/" className="text-primary hover:underline">Abu Dhabi</a> for orders
                 placed during working hours, and next-day to{" "}
-                <a href="/printer-rental-al-ain/" className="text-[#f5be53] hover:underline">Al Ain</a>,{" "}
-                <a href="/printer-rental-fujairah/" className="text-[#f5be53] hover:underline">Fujairah</a>,{" "}
-                <a href="/printer-rental-rak/" className="text-[#f5be53] hover:underline">Ras Al Khaimah</a>, Ajman and
+                <a href="/printer-rental-al-ain/" className="text-primary hover:underline">Al Ain</a>,{" "}
+                <a href="/printer-rental-fujairah/" className="text-primary hover:underline">Fujairah</a>,{" "}
+                <a href="/printer-rental-rak/" className="text-primary hover:underline">Ras Al Khaimah</a>, Ajman and
                 Umm Al Quwain. Bulk pricing applies to volume orders and to businesses running several devices.
               </p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-white mb-4">You may not need to buy toner at all</h2>
-              <p className="text-[#d3c5b0] leading-relaxed">
+              <h2 className="mb-4 font-sora text-headline font-bold text-white">You may not need to buy toner at all</h2>
+              <p className="leading-relaxed text-on-surface-variant">
                 Toner is included at no extra cost on every Sahara{" "}
-                <a href="/services/printer-rental/" className="text-[#f5be53] hover:underline">printer rental</a> and{" "}
-                <a href="/services/photocopier-rental/" className="text-[#f5be53] hover:underline">photocopier rental</a>{" "}
+                <a href="/services/printer-rental/" className="text-primary hover:underline">printer rental</a> and{" "}
+                <a href="/services/photocopier-rental/" className="text-primary hover:underline">photocopier rental</a>{" "}
                 contract, with usage monitored remotely so replacements arrive before you run out. Buying consumables
                 separately makes sense if you own your equipment outright — in which case an{" "}
-                <a href="/services/amc/" className="text-[#f5be53] hover:underline">annual maintenance contract</a>{" "}
+                <a href="/services/amc/" className="text-primary hover:underline">annual maintenance contract</a>{" "}
                 usually works out cheaper than purchasing toner and paying for{" "}
-                <a href="/services/repair/" className="text-[#f5be53] hover:underline">repairs</a> ad hoc.
+                <a href="/services/repair/" className="text-primary hover:underline">repairs</a> ad hoc.
               </p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-white mb-4">Pricing</h2>
-              <p className="text-[#d3c5b0] leading-relaxed">
+              <h2 className="mb-4 font-sora text-headline font-bold text-white">Pricing</h2>
+              <p className="leading-relaxed text-on-surface-variant">
                 Consumables pricing in the UAE moves with supply and exchange rates, so we quote current rates rather
                 than publishing fixed ones. Send us your device model or the part number from the cartridge you are
                 replacing and we will confirm availability and price, usually the same working day. Call{" "}
-                <a href="tel:+971503823969" className="text-[#f5be53] hover:underline">+971 50 382 3969</a> or use the
+                <a href="tel:+971503823969" className="text-primary hover:underline">+971 50 382 3969</a> or use the
                 enquiry form.
               </p>
             </div>
           </div>
-        </section>
+        </Section>
 
-        <section className="py-16 px-8">
-          <div className="max-w-4xl mx-auto rounded-panel gold-gradient p-12 md:p-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Need Supplies?</h2>
-            <p className="text-[#483200] text-lg mb-8">Same-day delivery across the UAE</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">Request Quote</a>
-              <a href="/contact/" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-4 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</a>
-            </div>
-          </div>
-        </section>
+        <CtaBand
+          title="Need Supplies?"
+          body="Same-day delivery across the UAE"
+          primary={{ label: "Request Quote", href: "/rental-calculator/" }}
+          secondary={{ label: "Contact Support", href: "/contact/" }}
+        />
 
         <Footer />
         <WhatsAppCTA />
