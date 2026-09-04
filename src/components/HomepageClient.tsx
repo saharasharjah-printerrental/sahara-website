@@ -567,7 +567,7 @@ function ReviewsSectionContent({
 function CTASection() {
   return (
     <section className="py-16 px-4">
-      <div className="max-w-7xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-20 relative overflow-hidden text-center md:text-left">
+      <div className="max-w-7xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-20 relative overflow-hidden text-center md:text-left">
         <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-12 -left-12 w-96 h-96 bg-black/5 rounded-full blur-3xl"></div>
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12">
