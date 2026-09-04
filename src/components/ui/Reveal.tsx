@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { fadeUp, REVEAL_VIEWPORT } from "@/lib/motion";
 
@@ -18,18 +18,17 @@ interface Props {
  * pages need: server components stay server components and just wrap their
  * sections in <Reveal>.
  *
- * Respects prefers-reduced-motion by rendering the content statically rather
- * than animating to the same place — that keeps the DOM free of transforms that
- * can trap focus outlines.
+ * Always renders the same motion element on server and client — branching on
+ * framer-motion's useReducedMotion() here caused a hydration mismatch, because
+ * that hook reads the media query synchronously on the client but has nothing
+ * to read on the server, so the two renders produced different DOM/attributes.
+ * prefers-reduced-motion is instead handled purely in CSS: the
+ * `[data-reveal]` rule under `@media (prefers-reduced-motion: reduce)` in
+ * globals.css forces opacity/transform back to their resting state, so both
+ * renders stay identical and only the stylesheet decides whether it animates.
  */
 export default function Reveal({ children, delay = 0, className, as = "div" }: Props) {
-  const reduce = useReducedMotion();
   const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
 
   return (
     <MotionTag

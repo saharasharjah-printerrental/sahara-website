@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { fadeUp, fadeIn } from "@/lib/motion";
 import type { Crumb } from "./Breadcrumbs";
@@ -41,9 +41,13 @@ export default function ProductHero({
   primaryCta,
   secondaryCta,
 }: Props) {
-  const reduce = useReducedMotion();
-  const initial = reduce ? "visible" : "hidden";
-
+  // initial/animate are fixed, not derived from useReducedMotion() — that hook
+  // reads the media query synchronously on the client but has nothing to read
+  // on the server, so branching on it here produced a hydration mismatch
+  // (server and client disagreeing on the inline style framer-motion renders
+  // for `initial`). Both wrappers below carry data-reveal instead, so the same
+  // CSS rule that neutralises Reveal.tsx under prefers-reduced-motion applies
+  // here too — see globals.css.
   return (
     <section className="relative overflow-hidden px-6 pb-20 pt-14 md:pt-20">
       {/* Radial glow — pure CSS, no image weight. */}
@@ -55,7 +59,7 @@ export default function ProductHero({
       <div className="relative mx-auto max-w-content">
         <Breadcrumbs trail={trail} />
         <div className="grid items-center gap-14 md:grid-cols-2">
-          <motion.div initial={initial} animate="visible" variants={fadeUp}>
+          <motion.div data-reveal initial="hidden" animate="visible" variants={fadeUp}>
             {eyebrow && (
               <p className="mb-5 inline-flex items-center gap-2 rounded-pill border border-primary/30 bg-primary/10 px-4 py-1.5 text-caption font-semibold uppercase tracking-[0.14em] text-primary">
                 {eyebrow}
@@ -87,7 +91,8 @@ export default function ProductHero({
 
           {image && (
             <motion.div
-              initial={initial}
+              data-reveal
+              initial="hidden"
               animate="visible"
               variants={fadeIn}
               transition={{ delay: 0.15 }}
