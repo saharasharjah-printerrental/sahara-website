@@ -1,11 +1,25 @@
-﻿export const runtime = 'edge';
+export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import AnswerBlock from "@/components/AnswerBlock";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
+import CtaBand from "@/components/ui/CtaBand";
+import {
+  SettingsIcon,
+  TruckIcon,
+  LayersIcon,
+  AwardIcon,
+  ShieldCheckIcon,
+  ClockIcon,
+} from "@/components/icons";
 
 interface FAQItem { q: string; a: string; }
 
@@ -27,11 +41,6 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-  // Strongest geographic cluster on the site (Sharjah outranks Dubai equivalents
-  // by 15-30 positions, backed by the verified Sharjah GBP) but only 0.38% CTR
-  // at position 19.7. Title now names copier rental explicitly — the actual
-  // query set is "copier rental services in sharjah" and "photocopier for rent
-  // sharjah" — and the description leads with local proof rather than generic terms.
   title: "Photocopier Rental Sharjah | Copier Lease from AED 250/mo",
   description:
     "Photocopier & copier rental in Sharjah from AED 250/month. Based in Industrial Area 11 — same-day delivery to SAIF Zone, Hamriyah, Al Majaz and Industrial Areas 1-18. Zero deposit, free toner, 4-hour response. Canon & Kyocera. ☎ +971503823969",
@@ -46,10 +55,6 @@ export async function generateMetadata(): Promise<Metadata> {
     "printer lease uae",
     "photocopier hire sharjah",
     "office equipment rental sharjah",
-    // Exact phrasings this page already ranks for in GSC but did not target:
-    // copier rental services in sharjah (104 impr, pos 19.6),
-    // photocopier for rent sharjah (88, 22.1), copier leasing in sharjah (9, 2.6),
-    // leasing printer in sharjah (8, 6.2), copier lease in sharjah (7, 6.7).
     "copier rental services in sharjah",
     "photocopier for rent sharjah",
     "copier leasing in sharjah",
@@ -233,14 +238,7 @@ const pricingTiers = [
     price: "AED 250—450",
     tag: null,
     ideal: "Small offices, reception desks",
-    features: [
-      "Canon LBP / Kyocera ECOSYS",
-      "Up to 45 ppm A4 mono",
-      "Print, copy, scan",
-      "Free genuine toner",
-      "Next-day delivery",
-      "60-min emergency support",
-    ],
+    features: ["Canon LBP / Kyocera ECOSYS", "Up to 45 ppm A4 mono", "Print, copy, scan", "Free genuine toner", "Next-day delivery", "60-min emergency support"],
     cta: "Get Quote",
   },
   {
@@ -248,15 +246,7 @@ const pricingTiers = [
     price: "AED 500—900",
     tag: "Most Popular",
     ideal: "Shared offices, SAIF Zone companies",
-    features: [
-      "Canon iR ADVANCE / Kyocera TASKalfa",
-      "35—55 ppm A3 & A4",
-      "Print, copy, scan, fax",
-      "Colour option available",
-      "Scan to email / folder / cloud",
-      "Free network setup",
-      "Same-day replacement guarantee",
-    ],
+    features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35—55 ppm A3 & A4", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder / cloud", "Free network setup", "Same-day replacement guarantee"],
     cta: "Get Quote",
   },
   {
@@ -264,15 +254,7 @@ const pricingTiers = [
     price: "AED 1,000—2,000",
     tag: null,
     ideal: "High-volume industries, large free zones",
-    features: [
-      "Canon imageRUNNER C5560i / Kyocera 5053ci",
-      "60—100 ppm A3 colour",
-      "Staple, booklet, hole-punch finishers",
-      "Secure print, user authentication",
-      "Monthly 50,000+ page capacity",
-      "Dedicated account manager",
-      "Multi-site billing available",
-    ],
+    features: ["Canon imageRUNNER C5560i / Kyocera 5053ci", "60—100 ppm A3 colour", "Staple, booklet, hole-punch finishers", "Secure print, user authentication", "Monthly 50,000+ page capacity", "Dedicated account manager", "Multi-site billing available"],
     cta: "Get Quote",
   },
 ];
@@ -281,50 +263,57 @@ const industryInsights = [
   {
     sector: "Manufacturing & Industrial",
     zone: "Sharjah Industrial Area",
-    icon: "ðŸ­",
     challenge: "Multi-shift operations need equipment that runs 24/7 without failure",
-    solution:
-      "Our Enterprise copiers handle 50,000+ pages/month. 60-min on-site response keeps production documentation flowing.",
+    solution: "Our Enterprise copiers handle 50,000+ pages/month. 60-min on-site response keeps production documentation flowing.",
     stat: "200+ Industrial Area businesses",
   },
   {
     sector: "Free Zone Companies",
     zone: "SAIF Zone",
-    icon: "âœˆï¸",
     challenge: "Free zone companies need flexible billing and quick equipment setup for new offices",
-    solution:
-      "Zero deposit, USD/AED invoicing available, setup within 24 hours. All SAIF Zone documentation handled.",
+    solution: "Zero deposit, USD/AED invoicing available, setup within 24 hours. All SAIF Zone documentation handled.",
     stat: "60+ SAIF Zone clients",
   },
   {
     sector: "Media & Creative",
     zone: "Sharjah Media City (Shams)",
-    icon: "📺",
     challenge: "Creative agencies need high-quality colour output with consistent colour accuracy",
-    solution:
-      "Canon imageRUNNER ADVANCE colour copiers with ICC profile calibration for accurate colour reproduction on all media.",
+    solution: "Canon imageRUNNER ADVANCE colour copiers with ICC profile calibration for accurate colour reproduction on all media.",
     stat: "Colour accuracy to ΔE < 2",
   },
   {
     sector: "Education & Government",
     zone: "University City Sharjah",
-    icon: "🎓",
     challenge: "Universities and government entities need high-volume, cost-controlled printing for thousands of users",
-    solution:
-      "User authentication, quota management, and cost-per-department reporting built into our Enterprise rental plans.",
+    solution: "User authentication, quota management, and cost-per-department reporting built into our Enterprise rental plans.",
     stat: "1 fil/page at 50K vol",
   },
 ];
 
-// Hamriyah Free Zone was missing entirely despite being one of Sharjah's two
-// major free zones. Industrial Areas are now enumerated because businesses
-// there search by their own area number, and our workshop sits in Area 11.
 const sharjahAreas = [
   "Industrial Area 1–18", "SAIF Zone", "Hamriyah Free Zone", "Al Majaz",
   "Muweilah", "Al Nahda", "Al Qasba", "Al Qasimia", "Sharjah Airport",
   "King Faisal Rd", "Al Khan", "Muwailih Commercial", "Al Taawun",
   "Rolla Square", "Sharjah Media City", "University City", "Al Layyah", "Sajaa",
 ];
+
+const whyChoose = [
+  { icon: ShieldCheckIcon, title: "Zero Deposit", body: "No upfront security deposit — pay only first month's rental to start." },
+  { icon: ClockIcon, title: "60-Min Response", body: "Dedicated Sharjah-based technicians dispatched within minutes of your call." },
+  { icon: AwardIcon, title: "Free OEM Toner", body: "Genuine Canon/Kyocera toner proactively delivered before you run out." },
+  { icon: SettingsIcon, title: "Network Setup Included", body: "Full LAN/Wi-Fi, scan-to-email, and user authentication — no extra charge." },
+  { icon: TruckIcon, title: "Replacement Guarantee", body: "If your copier can't be fixed same-day, we install a replacement unit." },
+  { icon: LayersIcon, title: "SAIF Zone Billing", body: "USD or AED invoicing with free zone documentation support." },
+];
+
+const relatedLinks = [
+  { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah" },
+  { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
+  { href: "/services/photocopier-rental/", label: "Photocopier Rental Service" },
+  { href: "/services/amc/", label: "Printer AMC" },
+];
+
+const trail = [{ label: "Home", href: "/" }, { label: "Photocopier Rental Sharjah" }];
 
 export default async function PhotocopierRentalSharjah() {
   const faqs = await getFaqsFromD1();
@@ -339,401 +328,250 @@ export default async function PhotocopierRentalSharjah() {
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
-    <main className="min-h-screen bg-[#071325]">
-      <Header />
 
-      {/* Breadcrumb */}
-      <nav className="pt-28 pb-2 px-8 lg:px-24 max-w-7xl mx-auto" aria-label="Breadcrumb">
-        <ol className="flex items-center gap-2 text-sm text-[#d3c5b0]">
-          <li><a href="/" className="hover:text-[#f5be53] transition-colors">Home</a></li>
-          <li className="text-[#f5be53]">/</li>
-          <li className="text-white font-medium">Photocopier Rental Sharjah</li>
-        </ol>
-      </nav>
+      <main className="min-h-screen bg-surface">
+        <Header />
 
-      {/* Hero */}
-      <section className="relative pt-8 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/images/location-sharjah.webp"
-            alt="Sharjah corporate office"
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-            loading="eager"
-            width={1920}
-            height={1080}
-          />
-          <div className="absolute inset-0 bg-[#071325]/70" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#071325]/80 via-[#071325]/60 to-[#101c2e]" />
-        </div>
+        <section className="relative overflow-hidden px-6 pb-20 pt-32">
+          <div className="absolute inset-0">
+            <img
+              src="/images/location-sharjah.webp"
+              alt="Sharjah corporate office"
+              className="h-full w-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              width={1920}
+              height={1080}
+            />
+            <div className="absolute inset-0 bg-surface/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/60 to-surface-low" />
+          </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-1 gap-12 items-center">
-            <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">
-                Sharjah — 60-Min Response
-              </span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Photocopier Rental{" "}
-                <span className="text-[#f5be53]">Sharjah</span>
+          <div className="relative mx-auto max-w-content">
+            <Breadcrumbs trail={trail} />
+            <Reveal className="max-w-2xl">
+              <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Sharjah — 60-Min Response</p>
+              <h1 className="font-sora text-display-xl font-extrabold text-white">
+                Photocopier Rental <span className="text-primary">Sharjah</span>
               </h1>
-
-              <AnswerBlock
-                question="How fast can a technician reach a Sharjah office?"
-                answer="Sahara targets a 60-minute on-site response anywhere in Sharjah. The company is headquartered at Al Arabi Building, Industrial Area 11, Sharjah, so engineers reach SAIF Zone, the Industrial Areas, Al Majaz, Al Nahda, and Muwaileh faster than Dubai-based providers. Photocopier rental starts from AED 250 per month."
-                supportingPoints={[
-                  "HQ at Al Arabi Building, Industrial Area 11, Sharjah — no cross-emirate travel time",
-                  "Covers SAIF Zone, Industrial Areas 1–18, Al Majaz, Al Nahda, Muwaileh and Al Khan",
-                  "60-minute emergency response target, with a replacement machine if a fix runs long",
-                  "Zero deposit, unlimited genuine toner and free network setup, from AED 250/month",
-                ]}
-              />
-
-              <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
+              <div className="mt-6">
+                <AnswerBlock
+                  question="How fast can a technician reach a Sharjah office?"
+                  answer="Sahara targets a 60-minute on-site response anywhere in Sharjah. The company is headquartered at Al Arabi Building, Industrial Area 11, Sharjah, so engineers reach SAIF Zone, the Industrial Areas, Al Majaz, Al Nahda, and Muwaileh faster than Dubai-based providers. Photocopier rental starts from AED 250 per month."
+                  supportingPoints={[
+                    "HQ at Al Arabi Building, Industrial Area 11, Sharjah — no cross-emirate travel time",
+                    "Covers SAIF Zone, Industrial Areas 1–18, Al Majaz, Al Nahda, Muwaileh and Al Khan",
+                    "60-minute emergency response target, with a replacement machine if a fix runs long",
+                    "Zero deposit, unlimited genuine toner and free network setup, from AED 250/month",
+                  ]}
+                />
+              </div>
+              <p className="mt-6 max-w-xl text-body text-muted">
                 Canon &amp; Kyocera photocopiers from AED 250/month. Zero deposit, free toner, and 60-minute
                 on-site emergency response across all Sharjah areas including SAIF Zone and Industrial Area.
               </p>
-
-              {/* Trust pills */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {["Zero Deposit", "Free Toner", "60-Min Response", "Free Network Setup", "Replacement Guarantee"].map(
-                  (p) => (
-                    <span
-                      key={p}
-                      className="text-xs font-semibold px-3 py-1 rounded-full border border-[#f5be53]/40 text-[#f5be53] bg-[#f5be53]/10"
-                    >
-                      {p}
-                    </span>
-                  )
-                )}
+              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                {["Zero Deposit", "Free Toner", "60-Min Response", "Free Network Setup", "Replacement Guarantee"].map((t) => (
+                  <li key={t} className="flex items-center gap-2 text-caption text-muted">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <a href="/rental-calculator/" className="btn-primary">Get Free Quote</a>
+                <a href="tel:+971503823969" className="btn-secondary">Call: +971 50 382 3969</a>
               </div>
-
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="/rental-calculator/"
-                  className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-                >
-                  Get Free Quote
-                </a>
-                <a
-                  href="tel:+971503823969"
-                  className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors"
-                >
-                  Call: +971 50 382 3969
-                </a>
-              </div>
-            </div>
+            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* AEO Answer Block */}
-      <section className="py-10 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto">
-          <div
-            className="rounded-3xl p-8 md:p-10"
-            style={{
-              background: "linear-gradient(135deg, #0f1e33 0%, #0a1420 100%)",
-              border: "1px solid rgba(245, 190, 83, 0.35)",
-              boxShadow: "0 0 40px rgba(245, 190, 83, 0.08)",
-            }}
-          >
-            <p className="text-[#f5be53] text-xs font-bold tracking-[0.25em] uppercase mb-3">
+        <Section flush>
+          <div className="mx-auto max-w-4xl rounded-panel border border-primary/[0.35] bg-surface-low p-8 md:p-10">
+            <p className="mb-3 text-caption font-bold uppercase tracking-[0.25em] text-primary">
               AI Answer — What is Photocopier Rental in Sharjah?
             </p>
-            <p className="text-white text-lg leading-relaxed">
+            <p className="text-[1.05rem] leading-relaxed text-white">
               Photocopier rental in Sharjah is a monthly subscription service where businesses pay from{" "}
-              <strong className="text-[#f5be53]">AED 250/month</strong> to use a Canon or Kyocera multifunction
+              <strong className="text-primary">AED 250/month</strong> to use a Canon or Kyocera multifunction
               copier — with toner, maintenance, and repairs all included. Sahara Office Equipment Trading LLC has
               served Sharjah businesses since 2012, offering{" "}
-              <strong className="text-[#f5be53]">60-minute emergency response</strong>, zero deposit, and free
+              <strong className="text-primary">60-minute emergency response</strong>, zero deposit, and free
               installation across SAIF Zone, Industrial Area, and all Sharjah districts.
             </p>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Stats Bar */}
-      <section className="py-12 px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="glass-card rounded-2xl py-8 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <Section flush>
+          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 rounded-panel border border-white/[0.08] bg-surface-low px-6 py-8 text-center md:grid-cols-4">
             {[
               { number: "60", suffix: " min", label: "Response Time" },
               { number: "1,500", suffix: "+", label: "Happy Clients" },
               { number: "13", suffix: "+", label: "Years Serving UAE" },
               { number: "AED 250", suffix: "/mo", label: "Starting Price" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="text-3xl font-bold text-[#f5be53]">
-                  {s.number}
-                  <span className="text-xl">{s.suffix}</span>
-                </p>
-                <p className="text-xs uppercase tracking-widest text-slate-400 mt-1">{s.label}</p>
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="text-3xl font-bold text-primary">{s.number}<span className="text-xl">{s.suffix}</span></p>
+                <p className="mt-1 text-caption uppercase tracking-widest text-muted">{s.label}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Long-form Content */}
-      <section className="py-16 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Why Sharjah Businesses Choose Photocopier Rental Over Buying
-          </h2>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Sharjah is home to over 30,000 registered businesses across its Industrial Areas, SAIF Zone, Sharjah
-            Media City, and University City. For many of these businesses — particularly SMEs in manufacturing,
-            logistics, and professional services — purchasing a commercial photocopier outright means a capital
-            outlay of AED 8,000 to AED 45,000, plus ongoing toner and maintenance costs. Rental eliminates this
-            entirely.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            With Sahara's photocopier rental in Sharjah, businesses pay a fixed monthly fee that covers the machine,
-            all genuine OEM toner cartridges, preventive maintenance visits, and unlimited on-site repairs. The
-            60-minute emergency response time is uniquely valuable for Sharjah Industrial Area businesses where a
-            copier outage can halt production documentation, delivery orders, and compliance paperwork.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            SAIF Zone and Sharjah Media City companies benefit from Sahara's flexible billing — USD or AED invoicing
-            is available, and equipment can be added or upgraded mid-contract without renegotiation. New office
-            setups in SAIF Zone are completed within 24 hours of order, including full network configuration and
-            user account setup.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Unlike desktop laser printers which cost 5—15 fils per A4 page, our rented photocopiers deliver
-            black-and-white output at approximately <strong className="text-white">1—2 fils per page</strong> — a
-            saving of up to 87% on per-page costs for businesses printing more than 3,000 pages per month.
-          </p>
-        </div>
-      </section>
-
-      {/* Pricing Tiers */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Sharjah Rental Plans</h2>
-            <p className="text-[#d3c5b0] mt-3 text-lg">All plans: zero deposit Â· free toner Â· free delivery Â· 60-min support</p>
+        <Section flush tone="raised">
+          <div className="mx-auto max-w-4xl space-y-6">
+            <h2 className="font-sora text-title font-bold text-white">
+              Why Sharjah Businesses Choose Photocopier Rental Over Buying
+            </h2>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Sharjah is home to over 30,000 registered businesses across its Industrial Areas, SAIF Zone, Sharjah
+              Media City, and University City. For many of these businesses — particularly SMEs in manufacturing,
+              logistics, and professional services — purchasing a commercial photocopier outright means a capital
+              outlay of AED 8,000 to AED 45,000, plus ongoing toner and maintenance costs. Rental eliminates this
+              entirely.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              With Sahara&rsquo;s photocopier rental in Sharjah, businesses pay a fixed monthly fee that covers the
+              machine, all genuine OEM toner cartridges, preventive maintenance visits, and unlimited on-site
+              repairs. The 60-minute emergency response time is uniquely valuable for Sharjah Industrial Area
+              businesses where a copier outage can halt production documentation, delivery orders, and compliance
+              paperwork.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              SAIF Zone and Sharjah Media City companies benefit from Sahara&rsquo;s flexible billing — USD or AED
+              invoicing is available, and equipment can be added or upgraded mid-contract without renegotiation. New
+              office setups in SAIF Zone are completed within 24 hours of order, including full network
+              configuration and user account setup.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Unlike desktop laser printers which cost 5—15 fils per A4 page, our rented photocopiers deliver
+              black-and-white output at approximately <strong className="text-white">1—2 fils per page</strong> — a
+              saving of up to 87% on per-page costs for businesses printing more than 3,000 pages per month.
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingTiers.map((tier, i) => (
+        </Section>
+
+        <Section title="Sharjah Rental Plans" subtitle="All plans: zero deposit · free toner · free delivery · 60-min support" align="center">
+          <div className="grid gap-8 md:grid-cols-3">
+            {pricingTiers.map((tier) => (
               <div
-                key={i}
-                className="glass-card rounded-3xl p-8 flex flex-col relative overflow-hidden"
-                style={
-                  tier.tag
-                    ? { border: "1px solid rgba(245,190,83,0.6)", boxShadow: "0 0 40px rgba(245,190,83,0.12)" }
-                    : {}
-                }
+                key={tier.name}
+                className={`relative flex flex-col overflow-hidden rounded-panel p-8 ${tier.tag ? "border border-primary/60 bg-surface-mid" : "border border-white/[0.08] bg-surface-low"}`}
               >
                 {tier.tag && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] text-xs font-bold px-4 py-1 rounded-bl-2xl">
+                  <div className="absolute right-0 top-0 rounded-bl-2xl bg-gradient-to-r from-primary to-primary-deep px-4 py-1 text-xs font-bold text-on-primary">
                     {tier.tag}
                   </div>
                 )}
-                <h3 className="text-xl font-bold text-white mb-1">{tier.name}</h3>
-                <p className="text-[#f5be53] text-2xl font-bold mb-1">{tier.price}<span className="text-sm font-normal text-[#d3c5b0]">/month</span></p>
-                <p className="text-[#d3c5b0] text-sm mb-6 italic">{tier.ideal}</p>
-                <ul className="space-y-2 flex-1">
-                  {tier.features.map((f, fi) => (
-                    <li key={fi} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
-                      <span className="text-[#f5be53] mt-0.5 shrink-0">âœ"</span>
+                <h3 className="mb-1 text-xl font-bold text-white">{tier.name}</h3>
+                <p className="mb-1 text-2xl font-bold text-primary">{tier.price}<span className="text-sm font-normal text-muted">/month</span></p>
+                <p className="mb-6 text-[0.9rem] italic text-muted">{tier.ideal}</p>
+                <ul className="flex-1 space-y-2">
+                  {tier.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                      <span className="mt-0.5 shrink-0 text-primary">✓</span>
                       {f}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="/rental-calculator/"
-                  className="mt-8 block text-center py-3 rounded-full font-bold text-sm transition-all"
-                  style={
-                    tier.tag
-                      ? { background: "linear-gradient(to right, #f5be53, #c8962e)", color: "#412d00" }
-                      : { background: "rgba(245,190,83,0.1)", border: "1px solid rgba(245,190,83,0.3)", color: "#f5be53" }
-                  }
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   {tier.cta}
                 </a>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Industry Insights */}
-      <section className="py-24 px-8 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Sharjah Industry Use Cases</h2>
-            <p className="text-[#d3c5b0] mt-3">How different Sharjah sectors benefit from copier rental</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {industryInsights.map((ins, i) => (
-              <div key={i} className="glass-card rounded-3xl p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{ins.icon}</span>
-                  <div>
-                    <h3 className="text-lg font-bold text-white">{ins.sector}</h3>
-                    <p className="text-[#f5be53] text-sm">{ins.zone}</p>
-                  </div>
+        <Section title="Sharjah Industry Use Cases" subtitle="How different Sharjah sectors benefit from copier rental" align="center" tone="raised">
+          <div className="grid gap-6 md:grid-cols-2">
+            {industryInsights.map((ins) => (
+              <div key={ins.sector} className="glass-card rounded-panel p-8">
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold text-white">{ins.sector}</h3>
+                  <p className="text-sm text-primary">{ins.zone}</p>
                 </div>
-                <p className="text-[#d3c5b0] text-sm mb-3">
+                <p className="mb-3 text-sm text-on-surface-variant">
                   <strong className="text-white">Challenge:</strong> {ins.challenge}
                 </p>
-                <p className="text-[#d3c5b0] text-sm mb-4">
+                <p className="mb-4 text-sm text-on-surface-variant">
                   <strong className="text-white">Solution:</strong> {ins.solution}
                 </p>
-                <div className="bg-[#f5be53]/10 rounded-xl px-4 py-2 inline-block">
-                  <span className="text-[#f5be53] text-sm font-bold">{ins.stat}</span>
+                <div className="inline-block rounded-xl bg-primary/10 px-4 py-2">
+                  <span className="text-sm font-bold text-primary">{ins.stat}</span>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Areas We Serve */}
-      <section className="py-16 px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-8">Areas We Serve in Sharjah</h2>
-          <p className="text-[#d3c5b0] mb-8">
-            60-minute emergency response across all Sharjah districts. Same-day delivery for new rentals.
-          </p>
-          {/* The local-base advantage is the one thing no Dubai-headquartered
-              competitor can claim, and it is why Sharjah queries outrank their
-              Dubai equivalents by 15-30 positions. Stated explicitly. */}
-          <p className="text-[#d3c5b0] mb-8 text-sm leading-relaxed max-w-3xl mx-auto">
+        <Section title="Areas We Serve in Sharjah" subtitle="60-minute emergency response across all Sharjah districts. Same-day delivery for new rentals." align="center">
+          <p className="mx-auto mb-8 max-w-3xl text-center text-sm leading-relaxed text-on-surface-variant">
             Our workshop and parts inventory are in <strong className="text-white">Sharjah Industrial Area 11</strong>,
             not a Dubai head office serving Sharjah as an afterthought. For businesses in the Industrial Areas, SAIF
-            Zone and Hamriyah Free Zone that usually means an engineer on site within the hour and the part already on
-            the van — rather than a next-day slot and a parts order. It is also why we can swap a failed machine the
-            same day instead of leaving a floor without a copier.
+            Zone and Hamriyah Free Zone that usually means an engineer on site within the hour and the part already
+            on the van — rather than a next-day slot and a parts order. It is also why we can swap a failed machine
+            the same day instead of leaving a floor without a copier.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {sharjahAreas.map((area, i) => (
-              <span
-                key={i}
-                className="bg-[#2a3548] border border-[#f5be53]/20 px-4 py-2 rounded-full text-[#d3c5b0] text-sm hover:border-[#f5be53]/50 transition-colors"
-              >
+            {sharjahAreas.map((area) => (
+              <span key={area} className="rounded-pill border border-primary/20 bg-surface-max px-4 py-2 text-[0.9rem] text-on-surface-variant transition-colors hover:border-primary/50">
                 {area}
               </span>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Why Sahara for Sharjah */}
-      <section className="py-24 px-8 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Why Choose Sahara in Sharjah?</h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Zero Deposit", desc: "No upfront security deposit — pay only first month's rental to start." },
-              { title: "60-Min Response", desc: "Dedicated Sharjah-based technicians dispatched within minutes of your call." },
-              { title: "Free OEM Toner", desc: "Genuine Canon/Kyocera toner proactively delivered before you run out." },
-              { title: "Network Setup Included", desc: "Full LAN/Wi-Fi, scan-to-email, and user authentication — no extra charge." },
-              { title: "Replacement Guarantee", desc: "If your copier can't be fixed same-day, we install a replacement unit." },
-              { title: "SAIF Zone Billing", desc: "USD or AED invoicing with free zone documentation support." },
-            ].map((b, i) => (
-              <div key={i} className="glass-card p-6 rounded-2xl">
-                <div className="w-10 h-10 rounded-xl bg-[#f5be53]/20 flex items-center justify-center mb-4">
-                  <span className="text-[#f5be53] text-xl">âœ"</span>
-                </div>
-                <h3 className="text-base font-bold text-white mb-2">{b.title}</h3>
-                <p className="text-[#d3c5b0] text-sm">{b.desc}</p>
-              </div>
+        <Section title="Why Choose Sahara in Sharjah?" align="center" tone="raised">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {whyChoose.map((b) => (
+              <FeatureCard key={b.title} icon={b.icon} title={b.title} body={b.body} />
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* CTA Banner */}
-      <section className="py-20 px-8">
-        <div className="max-w-4xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 relative overflow-hidden text-center">
-          <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#412d00] mb-4">
-              Need a Photocopier in Sharjah?
-            </h2>
-            <p className="text-[#483200] text-lg mb-8">
-              Quote within 2 hours. Free site visit. Same-day setup available across Sharjah.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/rental-calculator/"
-                className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-              >
-                Get Free Quote
-              </a>
-              <a
-                href="tel:+971503823969"
-                className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm"
-              >
-                Call +971 50 382 3969
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+        <CtaBand
+          title="Need a Photocopier in Sharjah?"
+          body="Quote within 2 hours. Free site visit. Same-day setup available across Sharjah."
+          primary={{ label: "Get Free Quote", href: "/rental-calculator/" }}
+          secondary={{ label: "Call +971 50 382 3969", href: "tel:+971503823969" }}
+        />
 
-      {/* FAQ */}
-      <section className="py-24 px-8">
-        <div className="max-w-4xl mx-auto">
+        <Section flush className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Photocopier Rental Sharjah — FAQ</h2>
-            <p className="text-[#d3c5b0] mt-3">12 questions answered by our Sharjah team</p>
+            <h2 className="font-sora text-title font-bold text-white mb-3">Photocopier Rental Sharjah — FAQ</h2>
+            <p className="text-muted">12 questions answered by our Sharjah team</p>
           </div>
           <div className="space-y-4">
             {faqs.map((f, i) => (
-              <details
-                key={i}
-                className="rounded-2xl p-6 group cursor-pointer"
-                style={{
-                  background: "linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)",
-                  boxShadow: "6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)",
-                }}
-                open={i === 0}
-              >
-                <summary className="flex justify-between items-start gap-4 list-none font-bold text-base text-white">
+              <details key={f.q} className="glass-card rounded-card p-6 group cursor-pointer" open={i === 0}>
+                <summary className="flex list-none items-start justify-between gap-4 font-bold text-[1rem] text-white">
                   <span>{f.q}</span>
-                  <span className="text-[#f5be53] shrink-0 mt-1 group-open:rotate-180 transition-transform text-lg leading-none">
-                    â–¾
-                  </span>
+                  <span className="mt-1 shrink-0 text-lg leading-none text-primary transition-transform group-open:rotate-180">▾</span>
                 </summary>
-                <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{f.a}</p>
+                <p className="mt-4 text-[0.9rem] leading-relaxed text-on-surface-variant">{f.a}</p>
               </details>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Related</p>
+        <Section flush tone="raised">
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Related</p>
           <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah" },
-              { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
-              { href: "/services/photocopier-rental/", label: "Photocopier Rental Service" },
-              { href: "/services/amc/", label: "Printer AMC" },
-            ].map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
-              >
+            {relatedLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-pill border border-white/[0.08] px-4 py-2 text-caption text-muted transition-all hover:text-white hover:border-primary/40">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <Footer />
-      <WhatsAppCTA />
-      <JumpToTop />
-    </main>
+        <Footer />
+        <WhatsAppCTA />
+        <JumpToTop />
+      </main>
     </>
   );
 }
