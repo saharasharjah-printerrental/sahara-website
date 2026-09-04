@@ -6,6 +6,19 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import AnswerBlock from "@/components/AnswerBlock";
+import ProductHero from "@/components/ui/ProductHero";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
+import ComparisonTable from "@/components/ui/ComparisonTable";
+import CtaBand from "@/components/ui/CtaBand";
+import {
+  ShieldCheckIcon,
+  AwardIcon,
+  HeadsetIcon,
+  SettingsIcon,
+  ClockIcon,
+  TruckIcon,
+} from "@/components/icons";
 
 interface FAQItem { q: string; a: string; }
 
@@ -190,23 +203,23 @@ const devices = [
   },
 ];
 
-const printerVsCopier = [
-  { feature: "Page Format", copier: "A3 + A4 (both)", printer: "A4 only (mostly)" },
-  { feature: "Monthly Volume", copier: "5,000–100,000+ pages", printer: "200–3,000 pages" },
-  { feature: "Concurrent Users", copier: "10–80 users", printer: "1–5 users" },
-  { feature: "Functions", copier: "Print + Copy + Scan + Fax + Cloud", printer: "Print (+ basic scan)" },
-  { feature: "Cost-Per-Page", copier: "AED 0.02–0.05 (mono)", printer: "AED 0.08–0.15 (mono)" },
-  { feature: "Monthly Rental", copier: "AED 500–2,000", printer: "AED 250–400" },
-  { feature: "Best For", copier: "Shared office, legal, real estate, HR, accounts", printer: "Individual workstation, reception desk" },
+const printerVsCopier: [string, string, string][] = [
+  ["Page Format", "A3 + A4 (both)", "A4 only (mostly)"],
+  ["Monthly Volume", "5,000–100,000+ pages", "200–3,000 pages"],
+  ["Concurrent Users", "10–80 users", "1–5 users"],
+  ["Functions", "Print + Copy + Scan + Fax + Cloud", "Print (+ basic scan)"],
+  ["Cost-Per-Page", "AED 0.02–0.05 (mono)", "AED 0.08–0.15 (mono)"],
+  ["Monthly Rental", "AED 500–2,000", "AED 250–400"],
+  ["Best For", "Shared office, legal, real estate, HR, accounts", "Individual workstation, reception desk"],
 ];
 
 const industries = [
-  { name: "Legal & Accounting Firms", need: "High-volume contract, report and agreement printing. Secure print release keeps confidential documents private.", icon: "⚖️", volume: "10,000–50,000 pages/month" },
-  { name: "Real Estate Agencies", need: "Large-format property brochures, A3 floor plans, and high-volume contract duplication during sales periods.", icon: "🏢", volume: "5,000–20,000 pages/month" },
-  { name: "Medical & Dental Clinics", need: "Patient file printing, prescription reproduction, and HIPAA-compliant secure scanning to EMR systems.", icon: "🏥", volume: "3,000–10,000 pages/month" },
-  { name: "Construction & Engineering", need: "A3 technical drawings, site plans, and report reproduction. Durable devices that handle dusty environments.", icon: "🏗️", volume: "8,000–30,000 pages/month" },
-  { name: "Education & Training", need: "Exam paper reproduction, course material printing, and administrative document workflows at scale.", icon: "🎓", volume: "20,000–100,000 pages/month" },
-  { name: "Logistics & Shipping", need: "Manifest printing, label reproduction, and 24/7 document processing workflows without downtime.", icon: "🚚", volume: "15,000–60,000 pages/month" },
+  { name: "Legal & Accounting Firms", need: "High-volume contract, report and agreement printing. Secure print release keeps confidential documents private.", icon: ShieldCheckIcon, volume: "10,000–50,000 pages/month" },
+  { name: "Real Estate Agencies", need: "Large-format property brochures, A3 floor plans, and high-volume contract duplication during sales periods.", icon: AwardIcon, volume: "5,000–20,000 pages/month" },
+  { name: "Medical & Dental Clinics", need: "Patient file printing, prescription reproduction, and HIPAA-compliant secure scanning to EMR systems.", icon: HeadsetIcon, volume: "3,000–10,000 pages/month" },
+  { name: "Construction & Engineering", need: "A3 technical drawings, site plans, and report reproduction. Durable devices that handle dusty environments.", icon: SettingsIcon, volume: "8,000–30,000 pages/month" },
+  { name: "Education & Training", need: "Exam paper reproduction, course material printing, and administrative document workflows at scale.", icon: ClockIcon, volume: "20,000–100,000 pages/month" },
+  { name: "Logistics & Shipping", need: "Manifest printing, label reproduction, and 24/7 document processing workflows without downtime.", icon: TruckIcon, volume: "15,000–60,000 pages/month" },
 ];
 
 const workflowFeatures = [
@@ -216,6 +229,12 @@ const workflowFeatures = [
   { title: "Secure Print Release", desc: "PIN or card-authenticated release prevents confidential documents from sitting in the output tray." },
   { title: "User Authentication", desc: "Department-level cost tracking. Know exactly which team prints how much every month." },
   { title: "Mobile Printing", desc: "AirPrint, Google Cloud Print, and manufacturer apps for printing directly from phones and tablets." },
+];
+
+const trail = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services/" },
+  { label: "Photocopier Rental UAE" },
 ];
 
 export default async function PhotocopierRentalPage() {
@@ -231,309 +250,163 @@ export default async function PhotocopierRentalPage() {
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
-    <main className="min-h-screen bg-[#071325]">
-      <Header />
 
-      {/* ── Hero ── */}
-      <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]" />
-        <div className="absolute top-1/2 right-0 w-[700px] h-[700px] bg-[#f5be53]/6 rounded-full blur-[200px] pointer-events-none" />
+      <main className="min-h-screen bg-surface">
+        <Header />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
-            <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
-            <span className="mx-2">/</span>
-            <a href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Services</a>
-            <span className="mx-2">/</span>
-            <span className="text-[#f5be53]">Photocopier Rental UAE</span>
-          </nav>
+        <ProductHero
+          trail={trail}
+          eyebrow="A3 Multifunction · Print · Copy · Scan · Fax"
+          title={
+            <>
+              Photocopier Rental
+              <br />
+              <span className="text-primary">Dubai &amp; UAE</span>
+            </>
+          }
+          answer={
+            <AnswerBlock
+              question="What is A3 photocopier rental and how does it differ from A4?"
+              answer="A3 photocopier rental covers machines printing sheets twice the size of A4. These multifunction devices print, copy, scan, and fax from one shared unit, handle far higher monthly volumes than a desktop A4 printer, and rent from AED 500 per month with toner, maintenance, and network setup included."
+              supportingPoints={[
+                "An A3 sheet is 297 × 420 mm — double A4, used for plans, spreads and two-up booklets",
+                "Canon imageRUNNER ADVANCE and Kyocera TASKalfa are the two most-rented A3 ranges",
+                "A3 machines also print A4, so one copier replaces several separate desktop printers",
+                "Zero deposit, unlimited genuine OEM toner, and a 4-hour emergency response target",
+              ]}
+            />
+          }
+          badges={["From AED 500/mo", "A3 + A4 Capable", "Zero Deposit", "Unlimited Toner", "Network Setup Included", "Sharjah HQ Since 2012"]}
+          image={{ src: "/images/heroPrntr1.webp", alt: "Canon imageRUNNER A3 multifunction photocopier rental Dubai UAE Sharjah", width: 800, height: 440 }}
+          primaryCta={{ label: "Get Copier Quote", href: "/rental-calculator/" }}
+          secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
+        />
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-xs">A3 Multifunction · Print · Copy · Scan · Fax</span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Photocopier Rental<br /><span className="text-[#f5be53]">Dubai & UAE</span>
-              </h1>
-
-              <AnswerBlock
-                question="What is A3 photocopier rental and how does it differ from A4?"
-                answer="A3 photocopier rental covers machines printing sheets twice the size of A4. These multifunction devices print, copy, scan, and fax from one shared unit, handle far higher monthly volumes than a desktop A4 printer, and rent from AED 500 per month with toner, maintenance, and network setup included."
-                supportingPoints={[
-                  "An A3 sheet is 297 × 420 mm — double A4, used for plans, spreads and two-up booklets",
-                  "Canon imageRUNNER ADVANCE and Kyocera TASKalfa are the two most-rented A3 ranges",
-                  "A3 machines also print A4, so one copier replaces several separate desktop printers",
-                  "Zero deposit, unlimited genuine OEM toner, and a 4-hour emergency response target",
-                ]}
-              />
-
-              <div className="flex flex-wrap gap-3 mb-8">
-                {["From AED 500/mo", "A3 + A4 Capable", "Zero Deposit", "Unlimited Toner", "Network Setup Included"].map((t) => (
-                  <span key={t} className="text-xs font-bold text-white bg-[#f5be53]/10 border border-[#f5be53]/25 px-3 py-1.5 rounded-full">
-                    ✓ {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
-                  Get Copier Quote
-                </a>
-                <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors flex items-center gap-2">
-                  📞 +971 50 382 3969
-                </a>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 bg-[#f5be53]/8 rounded-3xl blur-xl" />
-              <div className="relative rounded-3xl overflow-hidden border border-[#f5be53]/15"
-                style={{ boxShadow: '0 0 60px rgba(245,190,83,0.10), 0 24px 80px rgba(0,0,0,0.5)' }}>
-                <img
-                  src="/images/heroPrntr1.webp"
-                  alt="Canon imageRUNNER A3 multifunction photocopier rental Dubai UAE Sharjah"
-                  className="w-full h-[440px] object-contain bg-[#0a1628]"
-                  loading="eager"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#071325]/95 to-transparent p-6">
-                  <p className="text-white font-bold text-sm">Canon & Kyocera A3 Multifunction Copiers</p>
-                  <p className="text-[#f5be53] text-xs">Sharjah Headquarters — Serving All UAE Since 2012</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Stats Bar ── */}
-      <section className="py-10 bg-[#050d1a] border-y border-[#f5be53]/10">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <Section flush>
+          <div className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
             {[
               { value: "1,500+", label: "Active Copiers Deployed" },
               { value: "AED 500", label: "Starting Monthly Rate" },
               { value: "4 Hours", label: "Emergency Response" },
               { value: "13+ Years", label: "UAE Market Experience" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="text-2xl md:text-3xl font-bold text-[#f5be53]">{s.value}</p>
-                <p className="text-xs uppercase tracking-widest text-slate-400 mt-1">{s.label}</p>
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="text-2xl md:text-3xl font-bold text-primary">{s.value}</p>
+                <p className="mt-1 text-caption uppercase tracking-widest text-muted">{s.label}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* ── Copier vs Printer Comparison ── */}
-      <section className="py-16 px-4 lg:px-12 bg-[#0a1425]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Which Do You Need?</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Photocopier vs. Desktop Printer</h2>
-            <p className="text-[#7a94ad] max-w-lg mx-auto text-sm">
-              Many businesses waste money renting desktop printers when a single A3 photocopier would handle
-              the same workload at half the cost-per-page.
-            </p>
-          </div>
-          <div className="overflow-x-auto rounded-2xl" style={{ border: '1px solid rgba(245,190,83,0.15)' }}>
-            <table className="w-full min-w-[560px]">
-              <thead>
-                <tr style={{ background: 'rgba(245,190,83,0.08)', borderBottom: '1px solid rgba(245,190,83,0.15)' }}>
-                  <th className="text-left text-white font-bold py-4 px-6 text-sm">Feature</th>
-                  <th className="text-center text-[#f5be53] font-bold py-4 px-4 text-sm border-x border-[#f5be53]/20">A3 Photocopier</th>
-                  <th className="text-center text-slate-400 font-bold py-4 px-4 text-sm">Desktop Printer</th>
-                </tr>
-              </thead>
-              <tbody>
-                {printerVsCopier.map((row, i) => (
-                  <tr key={i} className="border-t"
-                    style={{ background: i % 2 === 0 ? 'rgba(10,20,38,0.6)' : 'rgba(7,15,30,0.6)', borderColor: 'rgba(255,255,255,0.04)' }}>
-                    <td className="py-4 px-6 text-white text-sm font-medium">{row.feature}</td>
-                    <td className="py-4 px-4 text-center text-[#f5be53] text-xs font-semibold border-x border-[#f5be53]/10">{row.copier}</td>
-                    <td className="py-4 px-4 text-center text-slate-500 text-xs">{row.printer}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+        <Section eyebrow="Which Do You Need?" title="Photocopier vs. Desktop Printer" subtitle="Many businesses waste money renting desktop printers when a single A3 photocopier would handle the same workload at half the cost-per-page." align="center" tone="raised">
+          <ComparisonTable columns={["Feature", "A3 Photocopier", "Desktop Printer"]} highlightColumn={1} rows={printerVsCopier} />
+        </Section>
 
-      {/* ── Featured Devices ── */}
-      <section className="py-16 px-4 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Our Fleet</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">A3 Photocopiers Available to Rent</h2>
-            <p className="text-[#7a94ad] max-w-md mx-auto text-sm">All devices include delivery, network setup, and full service — included in the monthly rate.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {devices.map((d, i) => (
-              <div key={i}
-                className={`relative rounded-2xl p-6 flex flex-col border-2 ${d.highlight ? 'border-[#f5be53]' : 'border-white/8'}`}
-                style={{
-                  background: 'linear-gradient(160deg, rgba(10,20,36,0.97) 0%, rgba(5,12,24,0.99) 100%)',
-                  boxShadow: d.highlight ? '0 0 40px rgba(245,190,83,0.12)' : '0 4px 24px rgba(0,0,0,0.3)',
-                }}>
+        <Section eyebrow="Our Fleet" title="A3 Photocopiers Available to Rent" subtitle="All devices include delivery, network setup, and full service — included in the monthly rate." align="center">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {devices.map((d) => (
+              <div
+                key={d.name}
+                className={`relative flex flex-col rounded-panel border p-6 ${d.highlight ? "border-primary bg-surface-mid" : "border-white/[0.08] bg-surface-low"}`}
+              >
                 {d.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#f5be53] text-[#412d00] text-[10px] font-black px-3 py-0.5 rounded-full uppercase">Most Popular</span>
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-pill bg-primary px-3 py-0.5 text-[10px] font-black uppercase text-on-primary">Most Popular</span>
                 )}
-                <div className="mb-4">
-                  <p className="text-[#f5be53] text-xs font-bold uppercase tracking-wider mb-1">{d.type}</p>
-                  <h3 className="text-white font-bold text-sm leading-snug">{d.name}</h3>
-                </div>
-                <div className="space-y-2 mb-4 flex-1">
-                  <p className="text-[#6a87a4] text-xs">⚡ {d.speed}</p>
-                  <p className="text-[#6a87a4] text-xs">👥 {d.users}</p>
-                  <div className="flex flex-wrap gap-1 mt-2">
+                <p className="mb-1 text-caption font-bold uppercase tracking-wider text-primary">{d.type}</p>
+                <h3 className="mb-4 text-[0.9rem] font-bold leading-snug text-white">{d.name}</h3>
+                <div className="mb-4 flex-1 space-y-2">
+                  <p className="text-caption text-muted">{d.speed}</p>
+                  <p className="text-caption text-muted">{d.users}</p>
+                  <div className="mt-2 flex flex-wrap gap-1">
                     {d.functions.map((fn) => (
-                      <span key={fn} className="text-[9px] font-bold text-[#d3c5b0] bg-white/5 px-2 py-0.5 rounded-full border border-white/8">{fn}</span>
+                      <span key={fn} className="rounded-pill border border-white/[0.08] bg-white/5 px-2 py-0.5 text-[9px] font-bold text-on-surface-variant">{fn}</span>
                     ))}
                   </div>
                 </div>
-                <div className="pt-4 border-t border-white/8">
-                  <p className="text-[#f5be53] font-bold text-sm">{d.price}</p>
-                  <p className="text-slate-500 text-[10px]">Incl. toner, maintenance & setup</p>
+                <div className="border-t border-white/[0.08] pt-4">
+                  <p className="text-[0.9rem] font-bold text-primary">{d.price}</p>
+                  <p className="text-[10px] text-slate-500">Incl. toner, maintenance &amp; setup</p>
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-center text-slate-500 text-xs mt-8">Other brands (Ricoh, Xerox, Sharp, Konica Minolta) available on request. Contact us for current fleet availability.</p>
-        </div>
-      </section>
+          <p className="mt-8 text-center text-caption text-muted">Other brands (Ricoh, Xerox, Sharp, Konica Minolta) available on request. Contact us for current fleet availability.</p>
+        </Section>
 
-      {/* ── Workflow & Connectivity ── */}
-      <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Document Workflows</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Beyond Copying — Full Office Integration</h2>
-            <p className="text-[#7a94ad] max-w-lg mx-auto text-sm">
-              Modern A3 photocopiers are document workflow hubs. Our engineers configure every feature on delivery day.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Section eyebrow="Document Workflows" title="Beyond Copying — Full Office Integration" subtitle="Modern A3 photocopiers are document workflow hubs. Our engineers configure every feature on delivery day." align="center" tone="raised">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {workflowFeatures.map((w, i) => (
-              <div key={i}
-                className="rounded-2xl p-6 group hover:-translate-y-1 transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(150deg, rgba(15,26,42,0.97) 0%, rgba(8,14,28,0.98) 100%)',
-                  border: '1px solid rgba(245,190,83,0.12)',
-                }}>
-                <h3 className="text-white font-bold mb-2">{w.title}</h3>
-                <p className="text-[#6a87a4] text-sm leading-relaxed">{w.desc}</p>
-              </div>
+              <FeatureCard key={w.title} title={w.title} body={w.desc} delay={(i % 3) * 0.05} />
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* ── How It Works ── */}
-      <section className="py-16 px-4 lg:px-12">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Process</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">How to Rent a Photocopier in UAE</h2>
-          </div>
+        <Section eyebrow="Process" title="How to Rent a Photocopier in UAE" align="center">
           <div className="relative">
-            <div className="hidden lg:block absolute top-12 left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] h-px bg-gradient-to-r from-transparent via-[#f5be53]/30 to-transparent" />
-            <div className="grid lg:grid-cols-4 gap-8">
-              {howToSchema.step.map((s, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#f5be53] to-[#c8962e] text-[#412d00] font-black text-base flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(245,190,83,0.35)]">
-                    {String(i + 1).padStart(2, '0')}
+            <div className="absolute left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] top-12 hidden h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent lg:block" />
+            <div className="grid gap-8 lg:grid-cols-4">
+              {howToSchema.step.map((s) => (
+                <div key={s.name} className="text-center">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-deep text-base font-black text-on-primary">
+                    {String(s.position).padStart(2, "0")}
                   </div>
-                  <h3 className="text-white font-bold mt-3 mb-2 text-sm">{s.name}</h3>
-                  <p className="text-[#6a87a4] text-xs leading-relaxed">{s.text}</p>
+                  <h3 className="mb-2 mt-3 text-[0.9rem] font-bold text-white">{s.name}</h3>
+                  <p className="text-[0.8rem] leading-relaxed text-muted">{s.text}</p>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* ── Industries ── */}
-      <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Industry Solutions</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Photocopier Rental for Every Sector</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Section eyebrow="Industry Solutions" title="Photocopier Rental for Every Sector" align="center" tone="raised">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((ind, i) => (
-              <div key={i}
-                className="rounded-2xl p-6 group hover:-translate-y-1 transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(150deg, rgba(12,22,40,0.97) 0%, rgba(7,15,30,0.98) 100%)',
-                  border: '1px solid rgba(245,190,83,0.12)',
-                }}>
-                <div className="flex items-start gap-3 mb-3">
-                  <span className="text-3xl">{ind.icon}</span>
-                  <div>
-                    <h3 className="text-white font-bold text-sm">{ind.name}</h3>
-                    <p className="text-[#f5be53] text-[10px] font-semibold mt-0.5">📄 {ind.volume}</p>
-                  </div>
-                </div>
-                <p className="text-[#6a87a4] text-xs leading-relaxed">{ind.need}</p>
-              </div>
+              <FeatureCard
+                key={ind.name}
+                icon={ind.icon}
+                title={ind.name}
+                delay={(i % 3) * 0.05}
+                body={
+                  <>
+                    <p className="mb-2 text-caption font-semibold text-primary">{ind.volume}</p>
+                    {ind.need}
+                  </>
+                }
+              />
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* ── FAQ ── */}
-      <section className="py-24 px-8 max-w-4xl mx-auto">
-        <div className="text-center mb-14">
-          <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Questions</span>
-          <h2 className="text-4xl font-bold text-white mt-3">Photocopier Rental FAQ</h2>
-          <p className="text-[#7a94ad] text-sm mt-3 max-w-md mx-auto">12 questions covering cost, contracts, connectivity, and everything in between.</p>
-        </div>
-        <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <details
-              key={i}
-              className="rounded-2xl p-6 group cursor-pointer"
-              style={{
-                background: 'linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)',
-                boxShadow: '6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)',
-              }}
-              open={i === 0}
-            >
-              <summary className="flex justify-between items-center list-none font-bold text-base text-white pr-2">
-                {faq.q}
-                <span className="text-[#f5be53] text-xl shrink-0 ml-4 group-open:rotate-180 transition-transform duration-200">›</span>
-              </summary>
-              <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{faq.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="py-16 px-8">
-        <div className="max-w-4xl mx-auto rounded-panel p-12 md:p-16 text-center relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #f5be53 0%, #c8962e 100%)' }}>
-          <div className="absolute -top-8 -right-8 w-48 h-48 bg-white/10 rounded-full blur-2xl" />
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Ready to Rent a Photocopier?</h2>
-            <p className="text-[#483200] text-lg mb-8 max-w-xl mx-auto">
-              Tell us your monthly copy volume and office size. We'll match you to the right device and deliver a cost-per-page quote within 2 hours.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl">
-                Get Copier Quote
-              </a>
-              <a href="tel:+971503823969" className="bg-white/20 border border-[#412d00]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:bg-white/30 transition-colors">
-                📞 +971 50 382 3969
-              </a>
-            </div>
+        <Section flush className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Questions</p>
+            <h2 className="font-sora text-title font-bold text-white mb-3">Photocopier Rental FAQ</h2>
+            <p className="mx-auto max-w-md text-[0.9rem] text-muted">12 questions covering cost, contracts, connectivity, and everything in between.</p>
           </div>
-        </div>
-      </section>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <details key={i} className="glass-card rounded-card p-6 group cursor-pointer" open={i === 0}>
+                <summary className="flex items-center justify-between gap-4 pr-2 list-none font-bold text-[1rem] text-white">
+                  {faq.q}
+                  <span className="shrink-0 text-xl text-primary transition-transform duration-200 group-open:rotate-180">›</span>
+                </summary>
+                <p className="mt-4 text-[0.9rem] leading-relaxed text-on-surface-variant">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </Section>
 
-      <Footer />
-      <WhatsAppCTA />
-      <JumpToTop />
-    </main>
+        <CtaBand
+          title="Ready to Rent a Photocopier?"
+          body="Tell us your monthly copy volume and office size. We'll match you to the right device and deliver a cost-per-page quote within 2 hours."
+          primary={{ label: "Get Copier Quote", href: "/rental-calculator/" }}
+          secondary={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
+        />
+
+        <Footer />
+        <WhatsAppCTA />
+        <JumpToTop />
+      </main>
     </>
   );
 }
