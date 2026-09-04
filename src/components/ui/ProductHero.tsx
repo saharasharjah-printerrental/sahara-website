@@ -58,8 +58,14 @@ export default function ProductHero({
       />
       <div className="relative mx-auto max-w-content">
         <Breadcrumbs trail={trail} />
-        <div className="grid items-center gap-14 md:grid-cols-2">
-          <motion.div data-reveal initial="hidden" animate="visible" variants={fadeUp}>
+        <div className={`grid items-center gap-14 ${image ? "md:grid-cols-2" : ""}`}>
+          <motion.div
+            data-reveal
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className={image ? undefined : "max-w-3xl"}
+          >
             {eyebrow && (
               <p className="mb-5 inline-flex items-center gap-2 rounded-pill border border-primary/30 bg-primary/10 px-4 py-1.5 text-caption font-semibold uppercase tracking-[0.14em] text-primary">
                 {eyebrow}
