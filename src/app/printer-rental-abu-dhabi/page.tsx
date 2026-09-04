@@ -7,6 +7,12 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import AnswerBlock from "@/components/AnswerBlock";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
+import CtaBand from "@/components/ui/CtaBand";
+import { ShieldCheckIcon, AwardIcon, TruckIcon, HeadsetIcon } from "@/components/icons";
 
 interface FAQItem { q: string; a: string; }
 
@@ -214,8 +220,6 @@ const DEFAULT_FAQS: FAQItem[] = [
   },
 ];
 
-
-
 const pricingTiers = [
   {
     name: "A4 Desktop",
@@ -230,7 +234,6 @@ const pricingTiers = [
       "Weekly preventive maintenance",
       "Emergency 4—6hr response",
     ],
-    cta: "Get Quote",
   },
   {
     name: "A3 Mid-Range",
@@ -246,7 +249,6 @@ const pricingTiers = [
       "Free network & Wi-Fi setup",
       "Same-day replacement guarantee",
     ],
-    cta: "Get Quote",
   },
   {
     name: "A3 Enterprise",
@@ -262,7 +264,6 @@ const pricingTiers = [
       "Dedicated account manager",
       "Multi-site billing available",
     ],
-    cta: "Get Quote",
   },
 ];
 
@@ -270,7 +271,7 @@ const industryInsights = [
   {
     sector: "Oil & Gas / Government",
     zone: "ADNOC / ADGM",
-    icon: "ðŸ›¢ï¸",
+    icon: ShieldCheckIcon,
     challenge:
       "Large government and energy sector offices need high-volume, secure document handling with audit trails",
     solution:
@@ -280,7 +281,7 @@ const industryInsights = [
   {
     sector: "Real Estate & Construction",
     zone: "Yas Island / Al Reem",
-    icon: "ðŸ—ï¸",
+    icon: AwardIcon,
     challenge: "Real estate offices produce large volumes of A3 blueprints, contracts, and marketing material",
     solution:
       "A3 colour copiers with 55 ppm output handle design documents, contracts, and brochure printing with same-day setup.",
@@ -289,7 +290,7 @@ const industryInsights = [
   {
     sector: "Manufacturing & Logistics",
     zone: "Mussafah Industrial",
-    icon: "ðŸ­",
+    icon: TruckIcon,
     challenge:
       "Industrial businesses in Mussafah need reliable documentation equipment with quick breakdown recovery",
     solution:
@@ -299,7 +300,7 @@ const industryInsights = [
   {
     sector: "Hospitality & Tourism",
     zone: "Saadiyat / Yas Island",
-    icon: "ðŸ¨",
+    icon: HeadsetIcon,
     challenge:
       "Hotels and resorts need multi-point printing across front desk, F&B, and events with mobile print capability",
     solution:
@@ -315,6 +316,54 @@ const abuDhabiAreas = [
   "ADGM / Al Maryah", "Mohammed Bin Zayed City",
 ];
 
+const relatedServices = [
+  { href: "/services/printer-rental/", label: "Printer Rental UAE" },
+  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
+  { href: "/services/repair/", label: "Printer Repair" },
+  { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
+  { href: "/hp-printer-abu-dhabi/", label: "HP Printer Abu Dhabi" },
+  { href: "/brands/canon/", label: "Canon Printers" },
+  { href: "/brands/kyocera/", label: "Kyocera Printers" },
+  { href: "/copier-lease-uae/", label: "Copier Lease UAE" },
+];
+
+const otherLocations = [
+  { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", desc: "Same-day delivery. Business Bay, DIFC, JLT, Marina & all Dubai areas." },
+  { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest service in Sharjah & Northern Emirates." },
+  { href: "/printer-rental-al-ain/", label: "Printer Rental Al Ain", desc: "Serving Al Ain businesses, universities & clinics." },
+  { href: "/copier-lease-uae/", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract & invoice." },
+];
+
+const blogPosts = [
+  {
+    slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
+    title: "Why Companies Choose Copier Rental Over Buying",
+    category: "Guide",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg",
+  },
+  {
+    slug: "total-cost-of-printer-ownership",
+    title: "Total Cost of Printer Ownership",
+    category: "Finance",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
+  },
+  {
+    slug: "what-a-copier-rental-service-must-deliver-to-a-client",
+    title: "What a Copier Rental Service Must Deliver",
+    category: "Guide",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758723167/blogs/gifymghto0ykchvzrjyt.jpg",
+  },
+  {
+    slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+    title: "Why Every UAE Business is Renting Printers in 2025",
+    category: "Trends",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
+  },
+];
+
+const trail = [{ label: "Home", href: "/" }, { label: "Printer Rental Abu Dhabi" }];
+
 export default async function PrinterRentalAbuDhabi() {
   const faqs = await getFaqsFromD1();
   const faqSchema = faqs.length > 0 ? {
@@ -328,445 +377,270 @@ export default async function PrinterRentalAbuDhabi() {
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
-    <main className="min-h-screen bg-[#071325]">
-      <Header />
 
-      {/* Breadcrumb */}
-      <nav className="pt-28 pb-2 px-8 lg:px-24 max-w-7xl mx-auto" aria-label="Breadcrumb">
-        <ol className="flex items-center gap-2 text-sm text-[#d3c5b0]">
-          <li><a href="/" className="hover:text-[#f5be53] transition-colors">Home</a></li>
-          <li className="text-[#f5be53]">/</li>
-          <li className="text-white font-medium">Printer Rental Abu Dhabi</li>
-        </ol>
-      </nav>
+      <main className="min-h-screen bg-surface">
+        <Header />
 
-      {/* Hero */}
-      <section className="relative pt-8 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/images/location-abu-dhabi.webp"
-            alt="Abu Dhabi corporate office"
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-            loading="eager"
-            width={1920}
-            height={1080}
-          />
-          <div className="absolute inset-0 bg-[#071325]/70" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#071325]/80 via-[#071325]/60 to-[#101c2e]" />
-        </div>
+        {/* Hero — full-bleed Abu Dhabi photo, distinct per city page by design */}
+        <section className="relative overflow-hidden px-6 pb-20 pt-32">
+          <div className="absolute inset-0">
+            <img
+              src="/images/location-abu-dhabi.webp"
+              alt="Abu Dhabi corporate office"
+              className="h-full w-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              width={1920}
+              height={1080}
+            />
+            <div className="absolute inset-0 bg-surface/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/60 to-surface-low" />
+          </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-1 gap-12 items-center">
-            <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">
-                Abu Dhabi — Weekly Maintenance
-              </span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Printer Rental{" "}
-                <span className="text-[#f5be53]">Abu Dhabi</span>
+          <div className="relative mx-auto max-w-content">
+            <Breadcrumbs trail={trail} />
+            <Reveal className="max-w-2xl">
+              <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Abu Dhabi — Weekly Maintenance</p>
+              <h1 className="font-sora text-display-xl font-extrabold text-white">
+                Printer Rental <span className="text-primary">Abu Dhabi</span>
               </h1>
-
-              <AnswerBlock
-                question="Which Abu Dhabi areas does Sahara cover, and how often are machines serviced?"
-                answer="Sahara covers all Abu Dhabi areas with weekly preventive maintenance visits. Coverage includes Mussafah, ICAD, Al Reem Island, Khalifa City, Yas Island, and the city centre, plus Al Ain. Rented machines get scheduled weekly checks rather than break-fix-only support, with a 4-to-6-hour emergency response target."
-                supportingPoints={[
-                  "Areas covered: Mussafah, ICAD I–III, Al Reem Island, Khalifa City, Yas Island, Corniche, Al Ain",
-                  "Weekly preventive maintenance is included, not charged as separate callouts",
-                  "Zero deposit, unlimited genuine OEM toner, and free network setup on delivery",
-                  "Rental from AED 250/month with a 4–6 hour emergency response target",
-                ]}
-              />
-              <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
+              <div className="mt-6">
+                <AnswerBlock
+                  question="Which Abu Dhabi areas does Sahara cover, and how often are machines serviced?"
+                  answer="Sahara covers all Abu Dhabi areas with weekly preventive maintenance visits. Coverage includes Mussafah, ICAD, Al Reem Island, Khalifa City, Yas Island, and the city centre, plus Al Ain. Rented machines get scheduled weekly checks rather than break-fix-only support, with a 4-to-6-hour emergency response target."
+                  supportingPoints={[
+                    "Areas covered: Mussafah, ICAD I–III, Al Reem Island, Khalifa City, Yas Island, Corniche, Al Ain",
+                    "Weekly preventive maintenance is included, not charged as separate callouts",
+                    "Zero deposit, unlimited genuine OEM toner, and free network setup on delivery",
+                    "Rental from AED 250/month with a 4–6 hour emergency response target",
+                  ]}
+                />
+              </div>
+              <p className="mt-6 max-w-xl text-body text-muted">
                 Canon &amp; Kyocera printer and photocopier rental from AED 250/month. Zero deposit, free OEM
                 toner, and weekly preventive maintenance across all Abu Dhabi areas.
               </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {["Zero Deposit", "Free OEM Toner", "Weekly Service", "4—6hr Emergency", "Free Network Setup"].map(
-                  (p) => (
-                    <span
-                      key={p}
-                      className="text-xs font-semibold px-3 py-1 rounded-full border border-[#f5be53]/40 text-[#f5be53] bg-[#f5be53]/10"
-                    >
-                      {p}
-                    </span>
-                  )
-                )}
+              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                {["Zero Deposit", "Free OEM Toner", "Weekly Service", "4—6hr Emergency", "Free Network Setup"].map((t) => (
+                  <li key={t} className="flex items-center gap-2 text-caption text-muted">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <a href="/rental-calculator/" className="btn-primary">Get Free Quote</a>
+                <a href="tel:+971503823969" className="btn-secondary">Call: +971 50 382 3969</a>
               </div>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="/rental-calculator/"
-                  className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-                >
-                  Get Free Quote
-                </a>
-                <a
-                  href="tel:+971503823969"
-                  className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors"
-                >
-                  Call: +971 50 382 3969
-                </a>
-              </div>
-            </div>
+            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* AEO Block */}
-      <section className="py-10 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto">
-          <div
-            className="rounded-3xl p-8 md:p-10"
-            style={{
-              background: "linear-gradient(135deg, #0f1e33 0%, #0a1420 100%)",
-              border: "1px solid rgba(245, 190, 83, 0.35)",
-              boxShadow: "0 0 40px rgba(245, 190, 83, 0.08)",
-            }}
-          >
-            <p className="text-[#f5be53] text-xs font-bold tracking-[0.25em] uppercase mb-3">
+        <Section flush>
+          <div className="mx-auto max-w-4xl rounded-panel border border-primary/[0.35] bg-surface-low p-8 md:p-10">
+            <p className="mb-3 text-caption font-bold uppercase tracking-[0.25em] text-primary">
               AI Answer — What is Printer Rental in Abu Dhabi?
             </p>
-            <p className="text-white text-lg leading-relaxed">
+            <p className="text-[1.05rem] leading-relaxed text-white">
               Printer rental in Abu Dhabi is a monthly subscription from{" "}
-              <strong className="text-[#f5be53]">AED 250/month</strong> where businesses use Canon or Kyocera
+              <strong className="text-primary">AED 250/month</strong> where businesses use Canon or Kyocera
               printers and photocopiers — with toner, maintenance, and repairs included. Sahara Office Equipment
               Trading LLC, founded in 2012, serves Abu Dhabi businesses with{" "}
-              <strong className="text-[#f5be53]">weekly preventive maintenance</strong>, 4—6hr emergency response,
+              <strong className="text-primary">weekly preventive maintenance</strong>, 4—6hr emergency response,
               and zero deposit plans across Mussafah, Al Reem Island, Khalifa City, and ADGM.
             </p>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Stats */}
-      <section className="py-12 px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="glass-card rounded-2xl py-8 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <Section flush>
+          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 rounded-panel border border-white/[0.08] bg-surface-low px-6 py-8 text-center md:grid-cols-4">
             {[
               { number: "4—6", suffix: " hrs", label: "Emergency Response" },
               { number: "1,500", suffix: "+", label: "UAE Clients Served" },
               { number: "13", suffix: "+", label: "Years in UAE" },
               { number: "AED 250", suffix: "/mo", label: "Starting Price" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="text-3xl font-bold text-[#f5be53]">
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="text-3xl font-bold text-primary">
                   {s.number}
                   <span className="text-xl">{s.suffix}</span>
                 </p>
-                <p className="text-xs uppercase tracking-widest text-slate-400 mt-1">{s.label}</p>
+                <p className="mt-1 text-caption uppercase tracking-widest text-muted">{s.label}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Long-form Content */}
-      <section className="py-16 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Printer Rental in Abu Dhabi — Why Businesses Choose Leasing Over Buying
-          </h2>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Abu Dhabi's business environment — spanning government entities, oil and gas firms, real estate
-            developers, and a growing SME sector — demands reliable document infrastructure. Purchasing a commercial
-            printer or photocopier outright costs AED 8,000 to AED 45,000, and that's before toner, maintenance
-            parts, and the cost of downtime when equipment fails.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Sahara's printer rental in Abu Dhabi converts those unpredictable capital and operating expenses into a
-            single fixed monthly payment. Our plans cover the machine, all genuine Canon or Kyocera toner, weekly
-            preventive maintenance, unlimited repairs, and emergency support within 4—6 hours. For Abu Dhabi
-            businesses in ADGM (Al Maryah Island), this means predictable IT spend that aligns with free zone
-            financial reporting requirements.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Mussafah Industrial Area clients benefit from our on-site technical knowledge of industrial
-            environments — dusty conditions, extended operating hours, and multi-shift demands. We configure
-            enterprise-grade Canon and Kyocera devices to handle 50,000+ pages/month without degradation, backed
-            by weekly preventive maintenance that catches issues before they cause downtime.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            For Abu Dhabi businesses printing more than 2,000 pages per month, our rental copiers deliver
-            black-and-white output at approximately{" "}
-            <strong className="text-white">1—2 fils per A4 page</strong> — compared to 8—15 fils for consumer
-            cartridge printers. At 5,000 pages/month, that difference saves AED 300—650/month in consumables alone,
-            making the rental effectively self-funding.
-          </p>
-        </div>
-      </section>
-
-      {/* Pricing Tiers */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Abu Dhabi Rental Plans</h2>
-            <p className="text-[#d3c5b0] mt-3 text-lg">
-              All plans: zero deposit Â· free toner Â· free delivery Â· weekly maintenance
+        <Section flush tone="raised">
+          <div className="mx-auto max-w-4xl space-y-6">
+            <h2 className="font-sora text-title font-bold text-white">
+              Printer Rental in Abu Dhabi — Why Businesses Choose Leasing Over Buying
+            </h2>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Abu Dhabi&rsquo;s business environment — spanning government entities, oil and gas firms, real estate
+              developers, and a growing SME sector — demands reliable document infrastructure. Purchasing a commercial
+              printer or photocopier outright costs AED 8,000 to AED 45,000, and that&rsquo;s before toner, maintenance
+              parts, and the cost of downtime when equipment fails.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Sahara&rsquo;s printer rental in Abu Dhabi converts those unpredictable capital and operating expenses into a
+              single fixed monthly payment. Our plans cover the machine, all genuine Canon or Kyocera toner, weekly
+              preventive maintenance, unlimited repairs, and emergency support within 4—6 hours. For Abu Dhabi
+              businesses in ADGM (Al Maryah Island), this means predictable IT spend that aligns with free zone
+              financial reporting requirements.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Mussafah Industrial Area clients benefit from our on-site technical knowledge of industrial
+              environments — dusty conditions, extended operating hours, and multi-shift demands. We configure
+              enterprise-grade Canon and Kyocera devices to handle 50,000+ pages/month without degradation, backed
+              by weekly preventive maintenance that catches issues before they cause downtime.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              For Abu Dhabi businesses printing more than 2,000 pages per month, our rental copiers deliver
+              black-and-white output at approximately{" "}
+              <strong className="text-white">1—2 fils per A4 page</strong> — compared to 8—15 fils for consumer
+              cartridge printers. At 5,000 pages/month, that difference saves AED 300—650/month in consumables alone,
+              making the rental effectively self-funding.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingTiers.map((tier, i) => (
+        </Section>
+
+        <Section title="Abu Dhabi Rental Plans" subtitle="All plans: zero deposit · free toner · free delivery · weekly maintenance" align="center">
+          <div className="grid gap-8 md:grid-cols-3">
+            {pricingTiers.map((tier) => (
               <div
-                key={i}
-                className="glass-card rounded-3xl p-8 flex flex-col relative overflow-hidden"
-                style={
-                  tier.tag
-                    ? { border: "1px solid rgba(245,190,83,0.6)", boxShadow: "0 0 40px rgba(245,190,83,0.12)" }
-                    : {}
-                }
+                key={tier.name}
+                className={`relative flex flex-col overflow-hidden rounded-panel p-8 ${tier.tag ? "border border-primary/60 bg-surface-mid" : "border border-white/[0.08] bg-surface-low"}`}
               >
                 {tier.tag && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] text-xs font-bold px-4 py-1 rounded-bl-2xl">
+                  <div className="absolute right-0 top-0 rounded-bl-2xl bg-gradient-to-r from-primary to-primary-deep px-4 py-1 text-xs font-bold text-on-primary">
                     {tier.tag}
                   </div>
                 )}
-                <h3 className="text-xl font-bold text-white mb-1">{tier.name}</h3>
-                <p className="text-[#f5be53] text-2xl font-bold mb-1">
+                <h3 className="mb-1 text-xl font-bold text-white">{tier.name}</h3>
+                <p className="mb-1 text-2xl font-bold text-primary">
                   {tier.price}
-                  <span className="text-sm font-normal text-[#d3c5b0]">/month</span>
+                  <span className="text-sm font-normal text-muted">/month</span>
                 </p>
-                <p className="text-[#d3c5b0] text-sm mb-6 italic">{tier.ideal}</p>
-                <ul className="space-y-2 flex-1">
-                  {tier.features.map((f, fi) => (
-                    <li key={fi} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
-                      <span className="text-[#f5be53] mt-0.5 shrink-0">âœ"</span>
+                <p className="mb-6 text-[0.9rem] italic text-muted">{tier.ideal}</p>
+                <ul className="flex-1 space-y-2">
+                  {tier.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                      <span className="mt-0.5 shrink-0 text-primary">✓</span>
                       {f}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="/rental-calculator/"
-                  className="mt-8 block text-center py-3 rounded-full font-bold text-sm transition-all"
-                  style={
-                    tier.tag
-                      ? { background: "linear-gradient(to right, #f5be53, #c8962e)", color: "#412d00" }
-                      : {
-                          background: "rgba(245,190,83,0.1)",
-                          border: "1px solid rgba(245,190,83,0.3)",
-                          color: "#f5be53",
-                        }
-                  }
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
-                  {tier.cta}
+                  Get Quote
                 </a>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Industry Insights */}
-      <section className="py-24 px-8 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Abu Dhabi Industry Use Cases</h2>
-            <p className="text-[#d3c5b0] mt-3">How different Abu Dhabi sectors use printer rental</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
+        <Section title="Abu Dhabi Industry Use Cases" subtitle="How different Abu Dhabi sectors use printer rental" align="center" tone="raised">
+          <div className="grid gap-6 md:grid-cols-2">
             {industryInsights.map((ins, i) => (
-              <div key={i} className="glass-card rounded-3xl p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{ins.icon}</span>
-                  <div>
-                    <h3 className="text-lg font-bold text-white">{ins.sector}</h3>
-                    <p className="text-[#f5be53] text-sm">{ins.zone}</p>
+              <Reveal key={ins.sector} delay={(i % 2) * 0.05}>
+                <div className="h-full rounded-panel border border-white/[0.08] bg-surface-low p-8">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
+                      <ins.icon size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">{ins.sector}</h3>
+                      <p className="text-caption text-primary">{ins.zone}</p>
+                    </div>
+                  </div>
+                  <p className="mb-3 text-[0.9rem] text-muted"><strong className="text-white">Challenge:</strong> {ins.challenge}</p>
+                  <p className="mb-4 text-[0.9rem] text-muted"><strong className="text-white">Solution:</strong> {ins.solution}</p>
+                  <div className="inline-block rounded-pill bg-primary/10 px-4 py-2">
+                    <span className="text-sm font-bold text-primary">{ins.stat}</span>
                   </div>
                 </div>
-                <p className="text-[#d3c5b0] text-sm mb-3">
-                  <strong className="text-white">Challenge:</strong> {ins.challenge}
-                </p>
-                <p className="text-[#d3c5b0] text-sm mb-4">
-                  <strong className="text-white">Solution:</strong> {ins.solution}
-                </p>
-                <div className="bg-[#f5be53]/10 rounded-xl px-4 py-2 inline-block">
-                  <span className="text-[#f5be53] text-sm font-bold">{ins.stat}</span>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Areas */}
-      <section className="py-16 px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Areas We Serve in Abu Dhabi</h2>
-          <p className="text-[#d3c5b0] mb-8">
-            Weekly scheduled maintenance visits. Emergency response within 4—6 hours.
-          </p>
+        <Section title="Areas We Serve in Abu Dhabi" subtitle="Weekly scheduled maintenance visits. Emergency response within 4—6 hours." align="center">
           <div className="flex flex-wrap justify-center gap-3">
-            {abuDhabiAreas.map((area, i) => (
-              <span
-                key={i}
-                className="bg-[#2a3548] border border-[#f5be53]/20 px-4 py-2 rounded-full text-[#d3c5b0] text-sm hover:border-[#f5be53]/50 transition-colors"
-              >
+            {abuDhabiAreas.map((area) => (
+              <span key={area} className="rounded-pill border border-primary/20 bg-surface-max px-4 py-2 text-[0.9rem] text-on-surface-variant transition-colors hover:border-primary/50">
                 {area}
               </span>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* CTA */}
-      <section className="py-20 px-8">
-        <div className="max-w-4xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 relative overflow-hidden text-center">
-          <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#412d00] mb-4">Need a Printer in Abu Dhabi?</h2>
-            <p className="text-[#483200] text-lg mb-8">
-              Quote within 2 hours. Free site visit. Same-week delivery across Abu Dhabi.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/rental-calculator/"
-                className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-              >
-                Get Free Quote
-              </a>
-              <a
-                href="tel:+971503823969"
-                className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm"
-              >
-                Call +971 50 382 3969
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+        <CtaBand
+          title="Need a Printer in Abu Dhabi?"
+          body="Quote within 2 hours. Free site visit. Same-week delivery across Abu Dhabi."
+          primary={{ label: "Get Free Quote", href: "/rental-calculator/" }}
+          secondary={{ label: "Call +971 50 382 3969", href: "tel:+971503823969" }}
+        />
 
-      {/* FAQ */}
-      <section className="py-24 px-8">
-        <div className="max-w-4xl mx-auto">
+        <Section flush className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Printer Rental Abu Dhabi — FAQ</h2>
-            <p className="text-[#d3c5b0] mt-3">12 questions answered by our team</p>
+            <h2 className="font-sora text-title font-bold text-white mb-3">Printer Rental Abu Dhabi — FAQ</h2>
+            <p className="text-muted">12 questions answered by our team</p>
           </div>
           <div className="space-y-4">
             {faqs.map((f, i) => (
-              <details
-                key={i}
-                className="rounded-2xl p-6 group cursor-pointer"
-                style={{
-                  background: "linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)",
-                  boxShadow: "6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)",
-                }}
-                open={i === 0}
-              >
-                <summary className="flex justify-between items-start gap-4 list-none font-bold text-base text-white">
+              <details key={f.q} className="glass-card rounded-card p-6 group cursor-pointer" open={i === 0}>
+                <summary className="flex list-none items-start justify-between gap-4 font-bold text-[1rem] text-white">
                   <span>{f.q}</span>
-                  <span className="text-[#f5be53] shrink-0 mt-1 group-open:rotate-180 transition-transform text-lg leading-none">
-                    â–¾
-                  </span>
+                  <span className="mt-1 shrink-0 text-lg leading-none text-primary transition-transform group-open:rotate-180">▾</span>
                 </summary>
-                <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{f.a}</p>
+                <p className="mt-4 text-[0.9rem] leading-relaxed text-on-surface-variant">{f.a}</p>
               </details>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ Related Services — Internal Cross-Links â"€â"€ */}
-      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Related Services</p>
+        <Section flush tone="raised">
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Related Services</p>
           <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { href: "/services/printer-rental", label: "Printer Rental UAE" },
-              { href: "/services/photocopier-rental", label: "Photocopier Rental" },
-              { href: "/services/amc", label: "Annual Maintenance (AMC)" },
-              { href: "/services/repair", label: "Printer Repair" },
-              { href: "/services/printer-spare-parts", label: "Toner & Spare Parts" },
-              { href: "/hp-printer-abu-dhabi", label: "HP Printer Abu Dhabi" },
-              { href: "/brands/canon", label: "Canon Printers" },
-              { href: "/brands/kyocera", label: "Kyocera Printers" },
-              { href: "/copier-lease-uae", label: "Copier Lease UAE" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
-              >
+            {relatedServices.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-pill border border-white/[0.08] px-4 py-2 text-caption text-muted transition-all hover:text-white hover:border-primary/40">
                 {link.label}
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ Other UAE Locations â"€â"€ */}
-      <section className="py-12 px-8 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Printer Rental in Other Emirates</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { href: "/printer-rental-dubai", label: "Printer Rental Dubai", desc: "Same-day delivery. Business Bay, DIFC, JLT, Marina & all Dubai areas." },
-              { href: "/photocopier-rental-sharjah", label: "Photocopier Rental Sharjah", desc: "Our HQ. Fastest service in Sharjah & Northern Emirates." },
-              { href: "/printer-rental-al-ain", label: "Printer Rental Al Ain", desc: "Serving Al Ain businesses, universities & clinics." },
-              { href: "/copier-lease-uae", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract & invoice." },
-            ].map((loc) => (
-              <Link
-                key={loc.href}
-                href={loc.href}
-                className="group rounded-2xl p-5 border border-white/6 bg-[#0d1b2e] hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-[#f5be53] transition-colors">{loc.label}</h4>
-                <p className="text-slate-500 text-xs leading-relaxed">{loc.desc}</p>
+        <Section flush>
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Printer Rental in Other Emirates</p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {otherLocations.map((loc) => (
+              <Link key={loc.href} href={loc.href} className="group rounded-card border border-white/[0.06] bg-surface-low p-5 transition-all duration-300 hover:-translate-y-0.5">
+                <h4 className="mb-1 text-[0.9rem] font-semibold text-white transition-colors group-hover:text-primary">{loc.label}</h4>
+                <p className="text-caption leading-relaxed text-slate-500">{loc.desc}</p>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* â"€â"€ From Our Blog â"€â"€ */}
-      <section className="py-16 px-8 lg:px-24 bg-[#0a1628]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-xs font-bold text-[#f5be53] uppercase tracking-widest mb-2">Resource Hub</p>
-              <h2 className="text-2xl font-bold text-white">Abu Dhabi Printer Rental Guides</h2>
-            </div>
-            <Link href="/blogs/" className="text-[#f5be53] text-sm hover:underline hidden sm:block">View All â†’</Link>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              {
-                slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
-                title: "Why Companies Choose Copier Rental Over Buying",
-                category: "Guide",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg",
-              },
-              {
-                slug: "total-cost-of-printer-ownership",
-                title: "Total Cost of Printer Ownership",
-                category: "Finance",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
-              },
-              {
-                slug: "what-a-copier-rental-service-must-deliver-to-a-client",
-                title: "What a Copier Rental Service Must Deliver",
-                category: "Guide",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758723167/blogs/gifymghto0ykchvzrjyt.jpg",
-              },
-              {
-                slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
-                title: "Why Every UAE Business is Renting Printers in 2025",
-                category: "Trends",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
-              },
-            ].map((post) => (
+        <Section eyebrow="Resource Hub" title="Abu Dhabi Printer Rental Guides" tone="raised">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {blogPosts.map((post) => (
               <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
-                <div className="rounded-2xl border border-white/8 bg-[#0d1b2e] overflow-hidden hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col">
-                  <img src={post.img} alt={post.title} className="w-full h-32 object-cover" loading="lazy" />
-                  <div className="p-4 flex flex-col flex-1">
-                    <span className="inline-flex px-2 py-0.5 rounded-full bg-[#142032] border border-[#f5be53]/20 text-[#f5be53] text-[10px] font-medium mb-2 self-start">
+                <div className="flex h-full flex-col overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid transition-transform duration-300 hover:-translate-y-1">
+                  <img src={post.img} alt={post.title} className="h-32 w-full object-cover" loading="lazy" />
+                  <div className="flex flex-1 flex-col p-4">
+                    <span className="mb-2 inline-flex self-start rounded-pill border border-primary/20 bg-surface-max px-2 py-0.5 text-[10px] font-medium text-primary">
                       {post.category}
                     </span>
-                    <h4 className="text-white text-xs font-semibold leading-snug group-hover:text-[#f5be53] transition-colors flex-1 line-clamp-3">
+                    <h4 className="line-clamp-3 flex-1 text-[0.8rem] font-semibold leading-snug text-white transition-colors group-hover:text-primary">
                       {post.title}
                     </h4>
-                    <span className="text-[#f5be53] text-xs mt-3 flex items-center gap-1">
+                    <span className="mt-3 flex items-center gap-1 text-caption text-primary">
                       Read
-                      <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="h-3 w-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
@@ -775,13 +649,15 @@ export default async function PrinterRentalAbuDhabi() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+          <div className="mt-8 text-right">
+            <Link href="/blogs/" className="text-[0.9rem] text-primary hover:underline">View All →</Link>
+          </div>
+        </Section>
 
-      <Footer />
-      <WhatsAppCTA />
-      <JumpToTop />
-    </main>
+        <Footer />
+        <WhatsAppCTA />
+        <JumpToTop />
+      </main>
     </>
   );
 }
