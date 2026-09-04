@@ -341,3 +341,60 @@ Carry into the Dissection Report as established facts, not assumptions:
 - Authority is absent (§6) — R02/R03 are not levers. Do not recommend a link sprint; the report should say plainly that links are not the current lever and name dealer-locator listings as the realistic first acquisition.
 - GBP is one Sharjah location with a now-correct primary category (§0) — Dubai map pack is unreachable without a real Dubai premises.
 - The winning pattern is R01 (competition vacuum) + R12 (long-tail specificity), concentrated in shredders, Sharjah, Kyocera repair, and plotter.
+
+---
+
+## 12. UI Redesign Engagement — status as of 2026-09-04
+
+**Separate workstream from the SEO engagement above (§0–11), running in parallel on its own branch. Not yet touched: none of the SEO Phase 3–5 items above have been started in this session.**
+
+### Scope of this engagement (user's original request)
+
+Three parts, given together at the start of this session:
+1. Reframe the Bravo card-printer page as a "PVC card printer" category, establish Sahara as **authorised exclusive reseller in the UAE for the Bravo RTAI and DC 3300**, split into three pages (rentals / sales / printing services covering all card types — ID, hologram, security, wooden, transparent, etc.)
+2. Site-wide **Apple-style UI redesign** — the user's words: the site looked "like a generic ai maded website"; replace generic/emoji icons with animated ones, rebuild the colour palette/layout/card blocks
+3. **SEO recovery** — diagnose low clicks despite prior SEO work using GSC data (this is the §0–11 engagement above, not started yet in this session)
+
+**Standing constraint, unchanged and still in force:** *"do not commit to github or deploy to cf until and unless i approve, before that we need to run it in locally and make sure all is fine."* Everything below is local-only, on a feature branch, never pushed to `origin`, never deployed.
+
+### Branch
+
+`feat/pvc-card-printers-apple-redesign` — **44 commits ahead of `main`, 0 pushed to `origin`.** 84 files changed vs `main` (+7,939 / −6,937 lines). Every commit was individually verified before being made: `npx tsc --noEmit` clean, then a live browser check (fresh tab, console-error sweep, and for interactive components an actual interaction test) before moving to the next file.
+
+### Design system (built first, phases 1–2 of the plan at `~/.claude/plans/we-need-to-address-floating-hejlsberg.md`)
+
+- `tailwind.config.js` — full token system: `surface`/`surface-low/mid/high/max`, `ink`, `primary`/`primary-deep`/`on-primary`, `on-surface`/`on-surface-variant`, `muted`, `outline`; Apple type scale (`display-xl` → `caption`); `spacing.section`; `maxWidth.content`; `borderRadius.card/panel/pill`
+- `src/components/ui/` primitives — `Section`, `Reveal`, `Breadcrumbs`, `ProductHero`, `SpecTable`, `ComparisonTable`, `FeatureCard`, `CtaBand` — the shared vocabulary every rebuilt page now uses instead of hand-rolled JSX
+- `src/components/icons/` — 10 ported animated icons (framer-motion, no new dependency): `IdCardIcon`, `ShieldCheckIcon`, `LayersIcon`, `AwardIcon`, `ClockIcon`, `TruckIcon`, `HeadsetIcon`, `SettingsIcon`, `LayerStackIcon`, `LeafIcon`
+- `src/lib/motion.ts` — shared `fadeUp`/`stagger` variants
+- Two real bugs found and fixed during rollout: a hydration mismatch in `Reveal.tsx`/`ProductHero.tsx` (was branching on `useReducedMotion()`, now CSS-only), and `ProductHero` forcing an empty 2nd grid column on pages with no product image
+
+### PVC card printer pages (phases 3–4, done)
+
+- `src/app/bravo-card-printers-uae/page.tsx` — fully rebuilt (not just sanitized — an earlier partial pass was caught by the user and redone properly). Reseller wording now "authorised exclusive reseller in the UAE for the Bravo RTAI and DC 3300" throughout; specs reconciled against bravoglobal.com; official product images downloaded/converted to WebP
+- `src/app/services/pvc-card-printer-rental/page.tsx`, `pvc-card-printer-sales/page.tsx`, `pvc-card-printing-services/page.tsx` — three new pages, built on the primitives from the start
+- **Not yet done:** registering these in `sitemap.ts`, `Header.tsx`/`Footer.tsx` nav (desktop dropdown only has the old Bravo link, mobile drawer has none), `llms.txt`, admin FAQ page, and the D1 FAQ migrations (`021_bravo_exclusive_reseller.sql`, `022_seed_pvc_service_page_faqs.sql`) referenced in the plan file — check the plan file before resuming, this may still be outstanding
+
+### Apple-style redesign rollout — pages rebuilt so far
+
+Homepage, all 10 service pages, all 9 city/location pages, all 11 brand pages + hub, and all remaining content pages are done:
+
+| Batch | Pages | Status |
+|---|---|---|
+| Homepage | `src/components/HomepageClient.tsx` | ✅ |
+| Services | printer-rental, photocopier-rental, repair, amc, paper-shredder-rental, papercut-print-management, plotter-maintenance, printer-spare-parts + 3 new PVC pages | ✅ |
+| City/location | printer-rental-dubai, -abu-dhabi, -al-ain, -fujairah, -rak, photocopier-rental-sharjah, printer-repair-dubai, canon-printer-dubai, hp-printer-abu-dhabi | ✅ |
+| Brands | canon, hp, kyocera, brother, lexmark, ricoh, xerox, samsung (bespoke pages) + shared `BrandContentClient.tsx` (epson/sharp/konica-minolta) + `/brands/` hub | ✅ |
+| Remaining content | `/products` (`ProductsClient.tsx`), `/blogs` (list + `BlogPostClient.tsx`), `/about`, `/contact`, `/rental-calculator` (`CalculatorClient.tsx` — highest-risk page, 829 lines of pricing logic, done conservatively: tokens + icons only, zero logic changes), `/request-quote`, `/our-clients` | ✅ |
+
+**Deliberately not touched:** `src/app/admin/**` — different surface, own Material Symbols conventions, no SEO stake, explicitly out of scope per the plan.
+
+**Open item found during the brand-pages batch:** `next.config.mjs:51-52` has a pre-existing permanent redirect — `/brands/` (exact path) → `/products/` — that predates this session (added to fix 404s from an old Ubersuggest audit). This makes the rebuilt `/brands/page.tsx` hub currently **unreachable** in the running site. Rebuilt it anyway for consistency; flagged to the user; **no decision made yet** on whether to drop the redirect and let the hub serve, or leave it as dead code. Ask before touching `next.config.mjs`.
+
+### Next action when work resumes
+
+1. **User's explicit next step:** review the local build (`npm run build` / `npm run start`) before anything goes further — has not been run yet this session, only `tsc --noEmit` per-file plus dev-server live checks.
+2. Decide the `/brands/` redirect question above.
+3. Confirm the PVC page registration checklist (sitemap/nav/llms.txt/FAQ migrations) — verify against the plan file, finish whatever is outstanding.
+4. Resume the SEO engagement (§0–11 above) — nothing from Phase 3–5 there has been started in this session; §11 "Next action when work resumes" in that section is still the right entry point.
+5. Still nothing pushed to `origin` or deployed — needs explicit user approval first, per the standing constraint.
