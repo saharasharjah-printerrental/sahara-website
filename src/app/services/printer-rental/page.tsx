@@ -7,9 +7,23 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import CountUp from "@/components/CountUp";
 import FaqSection from "@/components/FaqSection";
-import { Savings, Inventory2, BuildCircle, Emergency, Upgrade, Cancel, SupportAgent, Sync, Build, Verified, Print, CheckCircle, LocationOn, HeadsetMic } from "@mui/icons-material";
 import Link from "next/link";
 import AnswerBlock from "@/components/AnswerBlock";
+import ProductHero from "@/components/ui/ProductHero";
+import Section from "@/components/ui/Section";
+import FeatureCard from "@/components/ui/FeatureCard";
+import ComparisonTable from "@/components/ui/ComparisonTable";
+import CtaBand from "@/components/ui/CtaBand";
+import {
+  AwardIcon,
+  ShieldCheckIcon,
+  TruckIcon,
+  SettingsIcon,
+  ClockIcon,
+  LayersIcon,
+  LayerStackIcon,
+  HeadsetIcon,
+} from "@/components/icons";
 
 interface FAQItem { q: string; a: string; }
 
@@ -61,14 +75,27 @@ export async function generateMetadata(): Promise<Metadata> {
 };
 }
 
+const definitionPoints = [
+  { icon: SettingsIcon, title: "All-Inclusive Leasing", body: "A simple monthly fee that covers your machine, unlimited toner, maintenance, repairs, and full technical support." },
+  { icon: AwardIcon, title: "Smart Financials", body: "Healthy cash flow with zero upfront capital investment, zero deposit, and absolutely no exit fees." },
+  { icon: ShieldCheckIcon, title: "Premium Equipment", body: "Enjoy access to high-performance, industry-leading devices from trusted brands like Canon and Kyocera." },
+  { icon: TruckIcon, title: "Seamless UAE Coverage", body: "Popular and fully supported across major business centers: Dubai, Sharjah, and Abu Dhabi." },
+];
+
+const features = [
+  { icon: ClockIcon, title: "Flexible Terms", desc: "Rent from 3-36 months with easy upgrade options" },
+  { icon: SettingsIcon, title: "Full Maintenance", desc: "All repairs and servicing included at no extra cost" },
+  { icon: ShieldCheckIcon, title: "Premium Brands", desc: "HP, Canon, Ricoh, Xerox and more" },
+];
+
 const benefits = [
-  { icon: Savings, title: "Zero Deposit Option", desc: "No upfront security deposit required. Start renting with minimal initial investment." },
-  { icon: Inventory2, title: "Unlimited Free Toner", desc: "All plans include genuine OEM toner at no extra cost. Never worry about consumables again." },
-  { icon: BuildCircle, title: "Full Maintenance Included", desc: "Comprehensive servicing, repairs, and preventive maintenance covered in your rental." },
-  { icon: Emergency, title: "4-Hour Emergency Response", desc: "Critical issues get resolved within 4 hours. Keep your business running without downtime." },
-  { icon: Upgrade, title: "Upgrade Anytime Policy", desc: "Scale up your equipment as your business grows. Upgrade without heavy termination fees." },
-  { icon: Cancel, title: "No Exit Fees", desc: "Flexible contracts with no hidden termination fees. Return or upgrade easily." },
-  { icon: SupportAgent, title: "24/7 Technical Support", desc: "Round-the-clock assistance from certified technicians across all UAE locations." },
+  { icon: AwardIcon, title: "Zero Deposit Option", desc: "No upfront security deposit required. Start renting with minimal initial investment." },
+  { icon: LayersIcon, title: "Unlimited Free Toner", desc: "All plans include genuine OEM toner at no extra cost. Never worry about consumables again." },
+  { icon: SettingsIcon, title: "Full Maintenance Included", desc: "Comprehensive servicing, repairs, and preventive maintenance covered in your rental." },
+  { icon: ClockIcon, title: "4-Hour Emergency Response", desc: "Critical issues get resolved within 4 hours. Keep your business running without downtime." },
+  { icon: LayerStackIcon, title: "Upgrade Anytime Policy", desc: "Scale up your equipment as your business grows. Upgrade without heavy termination fees." },
+  { icon: ShieldCheckIcon, title: "No Exit Fees", desc: "Flexible contracts with no hidden termination fees. Return or upgrade easily." },
+  { icon: HeadsetIcon, title: "24/7 Technical Support", desc: "Round-the-clock assistance from certified technicians across all UAE locations." },
 ];
 
 const pricingTiers = [
@@ -84,21 +111,68 @@ const process = [
   { step: "4", title: "Ongoing Support", desc: "Enjoy unlimited toner, maintenance, and 24/7 technical support." },
 ];
 
-const rentVsBuyRows = [
-  { factor: "Upfront Investment", renting: "AED 0 — zero deposit", buying: "AED 8,000–25,000+ per machine" },
-  { factor: "Monthly Cost", renting: "AED 250–2,000 all-inclusive", buying: "Unpredictable: parts + toner + AMC" },
-  { factor: "Toner & Consumables", renting: "Unlimited OEM toner included", buying: "You pay per cartridge (~AED 200–800)" },
-  { factor: "Maintenance & Repairs", renting: "Free — covered in rental", buying: "Paid AMC or break-fix costs" },
-  { factor: "Technology Upgrades", renting: "Upgrade anytime, no penalty", buying: "Resell & repurchase at full cost" },
-  { factor: "Cash Flow Impact", renting: "Operational expense (OPEX)", buying: "Capital expense (CAPEX) — balance sheet" },
-  { factor: "Response to Breakdown", renting: "4-hr on-site + loaner machine", buying: "Depends on AMC or your IT team" },
-  { factor: "End of Life Disposal", renting: "Sahara handles it — eco-friendly", buying: "E-waste disposal cost is yours" },
+const rentVsBuyRows: [string, string, string][] = [
+  ["Upfront Investment", "AED 0 — zero deposit", "AED 8,000–25,000+ per machine"],
+  ["Monthly Cost", "AED 250–2,000 all-inclusive", "Unpredictable: parts + toner + AMC"],
+  ["Toner & Consumables", "Unlimited OEM toner included", "You pay per cartridge (~AED 200–800)"],
+  ["Maintenance & Repairs", "Free — covered in rental", "Paid AMC or break-fix costs"],
+  ["Technology Upgrades", "Upgrade anytime, no penalty", "Resell & repurchase at full cost"],
+  ["Cash Flow Impact", "Operational expense (OPEX)", "Capital expense (CAPEX) — balance sheet"],
+  ["Response to Breakdown", "4-hr on-site + loaner machine", "Depends on AMC or your IT team"],
+  ["End of Life Disposal", "Sahara handles it — eco-friendly", "E-waste disposal cost is yours"],
 ];
 
 const freeZones = [
   "JAFZA (Dubai)", "SAIF Zone (Sharjah)", "DAFZA (Dubai Airport)", "DMCC (JLT)",
   "DIFC", "Dubai Silicon Oasis", "ICAD I (Abu Dhabi)", "Al Reem Island",
   "Mussafah Industrial", "Dubai Media City", "Dubai Internet City", "KEZAD"
+];
+
+const blogPosts = [
+  {
+    slug: "how-to-choose-the-best-printer-rental-dubai-service",
+    title: "How to Choose the Best Printer Rental Dubai Service?",
+    category: "Guide",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp",
+  },
+  {
+    slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
+    title: "Why a Company Chooses Copier Rental Over Buying",
+    category: "Guide",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg",
+  },
+  {
+    slug: "total-cost-of-printer-ownership",
+    title: "Total Cost of Printer Ownership",
+    category: "Finance",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
+  },
+  {
+    slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+    title: "Why Every UAE Business is Renting Printers in 2025",
+    category: "Trends",
+    img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
+  },
+];
+
+const locationLinks = [
+  { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
+  { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi" },
+  { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah" },
+  { href: "/photocopier-rental-sharjah/", label: "Photocopier Sharjah" },
+  { href: "/printer-rental-rak/", label: "Printer Rental RAK" },
+  { href: "/printer-rental-fujairah/", label: "Printer Rental Fujairah" },
+  { href: "/printer-rental-al-ain/", label: "Printer Rental Al Ain" },
+  { href: "/copier-lease-uae/", label: "Copier Lease UAE" },
+];
+
+const relatedServices = [
+  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental" },
+  { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
+  { href: "/services/repair/", label: "Printer Repair" },
+  { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
+  { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental" },
 ];
 
 const schema = {
@@ -159,408 +233,179 @@ const breadcrumbSchema = {
   ],
 };
 
+const trail = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services/" },
+  { label: "Printer Rental UAE" },
+];
+
 export default function PrinterRentalPage() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-    <main className="min-h-screen bg-[#071325]">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#f5be53]/10 rounded-full blur-[150px]"></div>
+      <main className="min-h-screen bg-surface">
+        <Header />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Breadcrumb */}
-          <nav className="text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
-            <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
-            <span className="mx-2">/</span>
-            <a href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Services</a>
-            <span className="mx-2">/</span>
-            <span className="text-[#f5be53]">Printer Rental UAE</span>
-          </nav>
+        <ProductHero
+          trail={trail}
+          eyebrow="All 7 Emirates · Free Toner · Cancel Anytime"
+          title={
+            <>
+              Printer Rental Plans
+              <br />
+              <span className="text-primary">Across the UAE</span>
+            </>
+          }
+          answer={
+            <AnswerBlock
+              question="What is included in a printer rental plan in the UAE?"
+              answer="Every Sahara rental plan includes the machine, toner, maintenance, and repairs. One fixed monthly fee from AED 250 covers unlimited genuine OEM toner, scheduled preventive servicing, all parts and labour, and free delivery with network setup. There is no deposit, no metered page charge, and no exit fee."
+              supportingPoints={[
+                "A4 desktop from AED 250/month; A3 mid-range AED 500–800; A3 enterprise AED 1,000–2,000",
+                "Canon, Kyocera, HP, Ricoh, Xerox, Brother, Sharp and Epson available under identical terms",
+                "Contracts run 3 to 36 months, with upgrades permitted mid-contract at no penalty",
+                "4-hour emergency response target across Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah and Al Ain",
+              ]}
+            />
+          }
+          badges={["AED 250/mo Starting", "Zero Deposit", "Unlimited Toner", "Same-Day Delivery", "Cancel Anytime", "COP28 Proud Supplier"]}
+          image={{ src: "/images/service-maintanence.webp", alt: "Sahara printer technician servicing photocopier in Dubai UAE", width: 800, height: 440 }}
+          primaryCta={{ label: "Get a Quote", href: "/rental-calculator/" }}
+          secondaryCta={{ label: "Calculate Price", href: "/rental-calculator/" }}
+        />
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-xs">All 7 Emirates · Free Toner · Cancel Anytime</span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Printer Rental Plans<br /><span className="text-[#f5be53]">Across the UAE</span>
-              </h1>
-
-              <AnswerBlock
-                question="What is included in a printer rental plan in the UAE?"
-                answer="Every Sahara rental plan includes the machine, toner, maintenance, and repairs. One fixed monthly fee from AED 250 covers unlimited genuine OEM toner, scheduled preventive servicing, all parts and labour, and free delivery with network setup. There is no deposit, no metered page charge, and no exit fee."
-                supportingPoints={[
-                  "A4 desktop from AED 250/month; A3 mid-range AED 500–800; A3 enterprise AED 1,000–2,000",
-                  "Canon, Kyocera, HP, Ricoh, Xerox, Brother, Sharp and Epson available under identical terms",
-                  "Contracts run 3 to 36 months, with upgrades permitted mid-contract at no penalty",
-                  "4-hour emergency response target across Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah and Al Ain",
-                ]}
-              />
-
-              {/* Trust Pills */}
-              <div className="flex flex-wrap gap-3 mb-8">
-                {["AED 250/mo Starting", "Zero Deposit", "Unlimited Toner", "Same-Day Delivery", "Cancel Anytime"].map((t) => (
-                  <span key={t} className="text-xs font-bold text-white bg-[#f5be53]/10 border border-[#f5be53]/25 px-3 py-1.5 rounded-full">
-                    ✓ {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.35)]">
-                  Get a Quote
-                </a>
-                <a href="/rental-calculator/" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
-                  Calculate Price
-                </a>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-[#f5be53]/8 rounded-3xl blur-xl" />
-              <div className="relative rounded-3xl overflow-hidden border border-[#f5be53]/15"
-                style={{ boxShadow: '0 0 60px rgba(245,190,83,0.10), 0 24px 80px rgba(0,0,0,0.5)' }}>
-                <img
-                  src="/images/service-maintanence.webp"
-                  alt="Sahara printer technician servicing photocopier in Dubai UAE"
-                  className="w-full h-[440px] object-contain bg-[#0a1628]"
-                  loading="eager"
-                  fetchPriority="high"
-                  width={800}
-                  height={440}
-                />
-                {/* COP28 badge */}
-                <div className="absolute top-4 left-4 bg-[#071325]/90 backdrop-blur-sm border border-[#f5be53]/30 rounded-xl px-3 py-2">
-                  <p className="text-[#f5be53] text-xs font-bold">🏆 COP28 Proud Supplier</p>
-                  <p className="text-slate-400 text-[10px]">Official Event Equipment Partner</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Printer Rental = Copier Rental — Synonym Clarification ── */}
-      <section className="py-14 px-8 lg:px-24 bg-[#101c2e] border-y border-[#f5be53]/10">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Also Searching For a Copier?</span>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mt-3 mb-4">
+        {/* Printer Rental = Copier Rental — Synonym Clarification */}
+        <Section flush align="center">
+          <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Also Searching For a Copier?</p>
+          <h2 className="font-sora text-headline font-bold text-white mb-4">
             Printer Rental, Copier Rental, Copier Lease — One Service
           </h2>
-          <p className="text-[#d3c5b0] text-sm leading-relaxed max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-[0.9rem] leading-relaxed text-muted">
             Most of our fleet are multifunction devices, so a <strong className="text-white">printer rental</strong>{" "}
             from Sahara is the same as a <strong className="text-white">copier rental</strong> or{" "}
             <strong className="text-white">copier lease</strong> — one monthly plan covers print, copy, scan, and
             fax. Whether your team searched for copier leasing, a copier on rent, or a printer lease, you land on
             the same zero-deposit, all-inclusive plans below.
           </p>
-        </div>
-      </section>
+        </Section>
 
-      {/* What is Printer Rental — Feature Grid */}
-      <section className="relative py-28 px-8 lg:px-24 overflow-hidden" style={{ background: '#050d1a' }}>
-
-        {/* Circuit board grid texture */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: `linear-gradient(rgba(245,190,83,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,190,83,0.04) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }} />
-
-        {/* Dot intersections overlay */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: `radial-gradient(circle, rgba(245,190,83,0.12) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }} />
-
-        {/* Center ambient depth */}
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 75% 60% at 50% 50%, rgba(7,19,37,0.7) 0%, transparent 75%)' }} />
-
-        <div className="max-w-5xl mx-auto relative z-10">
-
-          {/* ── Centered heading ── */}
-          <div className="text-center mb-14">
-            <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.1] tracking-tight mb-4">
-              What is <span className="text-[#f5be53]">Printer Rental</span> in the UAE?
-            </h2>
-            <p className="text-[#7a94ad] text-base max-w-lg mx-auto leading-relaxed">
-              Flexible leasing options to access top-tier multifunction printers (MFPs) and
-              photocopiers with low monthly operational costs.
-            </p>
-          </div>
-
-          {/* ── 4-card grid — outer cards normal, inner two elevated ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:items-end">
-            {([
-              {
-                Icon: Build,
-                title: 'All-Inclusive Leasing',
-                body: 'A simple monthly fee that covers your machine, unlimited toner, maintenance, repairs, and full technical support.',
-                elevated: false,
-              },
-              {
-                Icon: Savings,
-                title: 'Smart Financials',
-                body: 'Healthy cash flow with zero upfront capital investment, zero deposit, and absolutely no exit fees.',
-                elevated: true,
-              },
-              {
-                Icon: Verified,
-                title: 'Premium Equipment',
-                body: 'Enjoy access to high-performance, industry-leading devices from trusted brands like Canon and Kyocera.',
-                elevated: true,
-              },
-              {
-                Icon: LocationOn,
-                title: 'Seamless UAE Coverage',
-                body: 'Popular and fully supported across major business centers: Dubai, Sharjah, and Abu Dhabi.',
-                elevated: false,
-              },
-            ] as const).map(({ Icon, title, body, elevated }, i) => (
-              <div key={i}
-                className={`group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ${elevated ? 'lg:-translate-y-5' : ''}`}
-                style={{
-                  background: 'linear-gradient(170deg, rgba(8,18,36,0.97) 0%, rgba(5,11,22,0.99) 100%)',
-                  border: '1px solid rgba(245,190,83,0.22)',
-                  boxShadow: elevated
-                    ? '0 0 0 1px rgba(245,190,83,0.15), 0 0 40px rgba(245,190,83,0.12), 0 20px 60px rgba(0,0,0,0.5)'
-                    : '0 0 0 1px rgba(245,190,83,0.08), 0 0 20px rgba(245,190,83,0.06), 0 8px 32px rgba(0,0,0,0.4)',
-                }}>
-
-                {/* Corner circuit node — top-left */}
-                <div className="absolute top-0 left-0 w-4 h-4 pointer-events-none">
-                  <div className="absolute top-2 left-0 w-3 h-px" style={{ background: 'rgba(245,190,83,0.35)' }} />
-                  <div className="absolute top-0 left-2 w-px h-3" style={{ background: 'rgba(245,190,83,0.35)' }} />
-                </div>
-                {/* Corner circuit node — bottom-right */}
-                <div className="absolute bottom-0 right-0 w-4 h-4 pointer-events-none">
-                  <div className="absolute bottom-2 right-0 w-3 h-px" style={{ background: 'rgba(245,190,83,0.35)' }} />
-                  <div className="absolute bottom-0 right-2 w-px h-3" style={{ background: 'rgba(245,190,83,0.35)' }} />
-                </div>
-
-                {/* Glow intensifies on hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-                  style={{ boxShadow: 'inset 0 0 30px rgba(245,190,83,0.06)' }} />
-
-                {/* ── Icon illustration area ── */}
-                <div className="relative flex items-center justify-center pt-8 pb-6 px-6">
-                  {/* Radial backdrop behind icon */}
-                  <div className="absolute inset-0"
-                    style={{ background: 'radial-gradient(ellipse 70% 80% at 50% 60%, rgba(245,190,83,0.07) 0%, transparent 70%)' }} />
-                  <div className="relative w-20 h-20 rounded-[1.25rem] flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                    style={{
-                      background: 'linear-gradient(145deg, rgba(245,190,83,0.16) 0%, rgba(245,190,83,0.04) 100%)',
-                      border: '1px solid rgba(245,190,83,0.32)',
-                      boxShadow: '0 0 0 6px rgba(245,190,83,0.05), 0 0 30px rgba(245,190,83,0.14)',
-                    }}>
-                    <Icon style={{ fontSize: 38, color: '#f5be53' }} />
-                  </div>
-                </div>
-
-                {/* ── Text area ── */}
-                <div className="px-6 pb-7 flex flex-col flex-1"
-                  style={{ borderTop: '1px solid rgba(245,190,83,0.08)' }}>
-                  <h3 className="text-white font-bold text-[0.95rem] mt-5 mb-2 leading-snug">{title}</h3>
-                  <p className="text-[#6a87a4] text-[0.8rem] leading-relaxed">{body}</p>
-                </div>
-
-                {/* Bottom glow bar — appears on hover */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'linear-gradient(90deg, transparent, #f5be53, transparent)' }} />
-              </div>
+        <Section
+          eyebrow="What We Offer"
+          title={<>What is <span className="text-primary">Printer Rental</span> in the UAE?</>}
+          subtitle="Flexible leasing options to access top-tier multifunction printers (MFPs) and photocopiers with low monthly operational costs."
+          align="center"
+          tone="ink"
+        >
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {definitionPoints.map((p, i) => (
+              <FeatureCard key={p.title} icon={p.icon} title={p.title} body={p.body} delay={(i % 4) * 0.05} />
             ))}
           </div>
+        </Section>
 
-          {/* Sparkle decoration — bottom right */}
-          <div className="flex justify-end mt-8 pr-2">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M11 0L12.5 9.5L22 11L12.5 12.5L11 22L9.5 12.5L0 11L9.5 9.5L11 0Z" fill="#f5be53" fillOpacity="0.5" />
-            </svg>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { icon: Sync, title: "Flexible Terms", desc: "Rent from 3-36 months with easy upgrade options" },
-              { icon: Build, title: "Full Maintenance", desc: "All repairs and servicing included at no extra cost" },
-              { icon: Verified, title: "Premium Brands", desc: "HP, Canon, Ricoh, Xerox and more" },
-            ].map((f, i) => (
-              <div key={i} className="glass-card p-8 rounded-3xl text-center">
-                <f.icon className="text-4xl text-[#f5be53] mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">{f.title}</h3>
-                <p className="text-[#d3c5b0]">{f.desc}</p>
-              </div>
+        <Section flush>
+          <div className="grid gap-6 md:grid-cols-3">
+            {features.map((f, i) => (
+              <FeatureCard key={f.title} icon={f.icon} title={f.title} body={f.desc} delay={(i % 3) * 0.05} />
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Benefits Section */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white">Benefits of Our Printer Rental</h2>
-            <p className="text-[#d3c5b0] mt-4">Everything you need for seamless printing</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Section eyebrow="Why Sahara" title="Benefits of Our Printer Rental" subtitle="Everything you need for seamless printing" align="center" tone="raised">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {benefits.map((b, i) => (
-              <div key={i} className="glass-card p-6 rounded-2xl">
-                <b.icon className="text-3xl text-[#f5be53] mb-3" />
-                <h3 className="text-lg font-bold text-white mb-2">{b.title}</h3>
-                <p className="text-[#d3c5b0] text-sm">{b.desc}</p>
-              </div>
+              <FeatureCard key={b.title} icon={b.icon} title={b.title} body={b.desc} delay={(i % 3) * 0.05} />
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Pricing Section */}
-      <section className="py-24 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white">Rental Pricing</h2>
-            <p className="text-[#d3c5b0] mt-4">Flexible plans for every business size</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
+        <Section eyebrow="Pricing" title="Rental Pricing" subtitle="Flexible plans for every business size" align="center">
+          <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
             {pricingTiers.map((p, i) => (
-              <div key={i} className={`glass-card p-8 rounded-3xl text-center ${i === 1 ? 'border-2 border-[#f5be53]' : ''}`}>
-                {i === 1 && <span className="bg-[#f5be53] text-[#412d00] px-3 py-1 rounded-full text-xs font-bold mb-4 inline-block">Most Popular</span>}
-                <h3 className="text-xl font-bold text-white mb-2">{p.tier}</h3>
-                <p className="text-3xl font-bold text-[#f5be53] mb-2">{p.range}</p>
-                <p className="text-[#d3c5b0] text-sm">{p.desc}</p>
+              <div
+                key={p.tier}
+                className={`rounded-panel border p-8 text-center ${i === 1 ? "border-2 border-primary bg-surface-mid" : "border-white/[0.08] bg-surface-low"}`}
+              >
+                {i === 1 && (
+                  <span className="mb-4 inline-block rounded-pill bg-primary px-3 py-1 text-caption font-bold text-on-primary">Most Popular</span>
+                )}
+                <h3 className="mb-2 font-sora text-headline font-bold text-white">{p.tier}</h3>
+                <p className="mb-2 text-[1.6rem] font-bold text-primary">{p.range}</p>
+                <p className="text-[0.9rem] text-muted">{p.desc}</p>
               </div>
             ))}
           </div>
-          <p className="text-center text-[#d3c5b0] text-sm mt-8">*Prices may vary based on specific requirements. Contact us for a customized quote.</p>
-        </div>
-      </section>
+          <p className="mt-8 text-center text-caption text-muted">*Prices may vary based on specific requirements. Contact us for a customized quote.</p>
+        </Section>
 
-      {/* Process Section */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white">How It Works</h2>
-            <p className="text-[#d3c5b0] mt-4">Get started in 4 simple steps</p>
-          </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {process.map((p, i) => (
-              <div key={i} className="glass-card p-6 rounded-3xl text-center relative">
-                <div className="w-10 h-10 rounded-full bg-[#f5be53] text-[#412d00] font-bold text-xl flex items-center justify-center mx-auto mb-4">{p.step}</div>
-                <h3 className="text-lg font-bold text-white mb-2">{p.title}</h3>
-                <p className="text-[#d3c5b0] text-sm">{p.desc}</p>
+        <Section eyebrow="Getting Started" title="How It Works" subtitle="Get started in 4 simple steps" align="center" tone="raised">
+          <div className="grid gap-6 md:grid-cols-4">
+            {process.map((p) => (
+              <div key={p.step} className="rounded-panel border border-white/[0.08] bg-surface-mid p-6 text-center">
+                <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xl font-bold text-on-primary">{p.step}</div>
+                <h3 className="mb-2 text-[1.05rem] font-bold text-white">{p.title}</h3>
+                <p className="text-[0.85rem] text-muted">{p.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Stats */}
-      <section className="py-16 px-8 bg-[#071325]">
-        <div className="max-w-4xl mx-auto">
-          <div className="glass-card rounded-[2rem] p-10 flex flex-wrap justify-center gap-12 md:gap-20">
+        <Section flush>
+          <div className="mx-auto max-w-4xl rounded-panel border border-white/[0.08] bg-surface-low p-10 flex flex-wrap justify-center gap-12 md:gap-20">
             {[
               { number: 2500, suffix: "+", label: "Printers Deployed" },
               { number: 1500, suffix: "+", label: "Happy Clients" },
               { number: 13, suffix: "+", label: "Years Experience" },
               { number: 2, suffix: "hr", label: "Response Time" },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <p className="text-3xl font-bold text-[#f5be53]">
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <p className="text-3xl font-bold text-primary">
                   <CountUp to={s.number} duration={2} separator="," />
                   {s.suffix}
                 </p>
-                <p className="text-xs uppercase tracking-widest text-slate-400 mt-2">{s.label}</p>
+                <p className="mt-2 text-caption uppercase tracking-widest text-muted">{s.label}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* ── Rent vs Buy Comparison ── */}
-      <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Decision Guide</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Rent vs. Buy — The True Cost Breakdown</h2>
-            <p className="text-[#7a94ad] max-w-lg mx-auto text-sm">
-              Most businesses underestimate the total cost of owning printers. This table shows the real comparison.
-            </p>
+        <Section eyebrow="Decision Guide" title="Rent vs. Buy — The True Cost Breakdown" subtitle="Most businesses underestimate the total cost of owning printers. This table shows the real comparison." align="center" tone="ink">
+          <ComparisonTable columns={["Cost Factor", "Rent with Sahara", "Buy Your Own"]} highlightColumn={1} rows={rentVsBuyRows} />
+          <div className="mt-8 flex justify-center">
+            <a href="/rental-calculator/" className="btn-primary">Get a Rental Quote — No Commitment</a>
           </div>
-          <div className="overflow-x-auto rounded-2xl" style={{ border: '1px solid rgba(245,190,83,0.15)' }}>
-            <table className="w-full min-w-[540px]">
-              <thead>
-                <tr style={{ background: 'rgba(245,190,83,0.08)', borderBottom: '1px solid rgba(245,190,83,0.15)' }}>
-                  <th className="text-left text-white font-bold py-4 px-6 text-sm">Cost Factor</th>
-                  <th className="text-center text-[#f5be53] font-bold py-4 px-4 text-sm border-x border-[#f5be53]/20">Rent with Sahara</th>
-                  <th className="text-center text-slate-400 font-bold py-4 px-4 text-sm">Buy Your Own</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rentVsBuyRows.map((row, i) => (
-                  <tr key={i}
-                    className="border-t"
-                    style={{
-                      background: i % 2 === 0 ? 'rgba(10,20,38,0.6)' : 'rgba(7,15,30,0.6)',
-                      borderColor: 'rgba(255,255,255,0.04)'
-                    }}>
-                    <td className="py-4 px-6 text-white text-sm font-medium">{row.factor}</td>
-                    <td className="py-4 px-4 text-center text-[#f5be53] text-xs font-semibold border-x border-[#f5be53]/10">{row.renting}</td>
-                    <td className="py-4 px-4 text-center text-slate-500 text-xs">{row.buying}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="flex justify-center mt-8">
-            <a href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
-              Get a Rental Quote — No Commitment
-            </a>
-          </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* ── Eco-Print / Sustainability ── */}
-      <section className="py-20 px-8 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl overflow-hidden relative"
-            style={{
-              background: 'linear-gradient(135deg, rgba(10,26,18,0.98) 0%, rgba(5,16,12,0.99) 100%)',
-              border: '1px solid rgba(52,168,83,0.2)',
-              boxShadow: '0 0 60px rgba(52,168,83,0.06)',
-            }}>
+        {/* Eco-Print / Sustainability — kept visually distinct (green accent) from the rest of the page's gold accent, since it's a different message */}
+        <Section flush>
+          <div className="overflow-hidden rounded-panel border border-emerald-500/20 bg-gradient-to-br from-[rgba(10,26,18,0.98)] to-[rgba(5,16,12,0.99)]">
             <div className="grid lg:grid-cols-2 gap-0">
               <div className="p-10 lg:p-14">
-                <span className="text-green-400 font-bold tracking-[0.2em] uppercase text-xs">🌱 Eco-Print Initiative</span>
-                <h2 className="text-3xl font-bold text-white mt-3 mb-5">
-                  Rent a Printer.<br />Reduce UAE's E-Waste.
+                <span className="text-caption font-bold uppercase tracking-[0.2em] text-emerald-400">🌱 Eco-Print Initiative</span>
+                <h2 className="mt-3 mb-5 font-sora text-title font-bold text-white">
+                  Rent a Printer.<br />Reduce UAE&rsquo;s E-Waste.
                 </h2>
-                <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                <p className="mb-6 text-[0.9rem] leading-relaxed text-slate-300">
                   When you rent instead of buy, retired machines are returned to Sahara for refurbishment or
                   responsible recycling — not landfill. Our circular equipment model has prevented over
                   <strong className="text-white"> 2,000 printers</strong> from entering UAE waste streams since 2012.
                 </p>
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="mb-6 grid grid-cols-2 gap-4">
                   {[
                     { stat: "2,000+", label: "Machines Recycled" },
                     { stat: "0 AED", label: "E-Waste Cost to You" },
                     { stat: "COP28", label: "Official Supplier" },
                     { stat: "ISO", label: "Aligned Practices" },
-                  ].map((s, i) => (
-                    <div key={i} className="bg-white/5 rounded-xl p-3 text-center">
-                      <p className="text-green-400 font-bold text-lg">{s.stat}</p>
-                      <p className="text-slate-400 text-xs">{s.label}</p>
+                  ].map((s) => (
+                    <div key={s.label} className="rounded-card bg-white/5 p-3 text-center">
+                      <p className="text-lg font-bold text-emerald-400">{s.stat}</p>
+                      <p className="text-caption text-slate-400">{s.label}</p>
                     </div>
                   ))}
                 </div>
-                <a href="/rental-calculator/" className="inline-block bg-green-500/20 border border-green-400/30 text-green-400 px-6 py-3 rounded-full font-bold text-sm hover:bg-green-500/30 transition-colors">
+                <a href="/rental-calculator/" className="inline-block rounded-pill border border-emerald-400/30 bg-emerald-500/20 px-6 py-3 text-[0.9rem] font-bold text-emerald-400 transition-colors hover:bg-emerald-500/30">
                   Learn About Our Green Plan →
                 </a>
               </div>
@@ -568,90 +413,51 @@ export default function PrinterRentalPage() {
                 <img
                   src="/images/sustain1.webp"
                   alt="Eco-friendly printer rental UAE sustainability circular economy"
-                  className="w-full h-full object-cover opacity-60"
+                  className="h-full w-full object-cover opacity-60"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[rgba(10,26,18,0.95)] via-[rgba(10,26,18,0.3)] to-transparent" />
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* ── Free Zone Coverage ── */}
-      <section className="py-16 px-8 lg:px-24 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Coverage</span>
-            <h2 className="text-3xl font-bold text-white mt-3 mb-3">We Deliver to Every UAE Free Zone</h2>
-            <p className="text-[#7a94ad] text-sm max-w-md mx-auto">Free delivery and same-day setup across all major free zones and business districts.</p>
-          </div>
+        <Section eyebrow="Coverage" title="We Deliver to Every UAE Free Zone" subtitle="Free delivery and same-day setup across all major free zones and business districts." align="center" tone="raised">
           <div className="flex flex-wrap justify-center gap-3">
-            {freeZones.map((zone, i) => (
-              <span key={i}
-                className="px-4 py-2 rounded-full text-sm text-[#d3c5b0] font-medium border border-white/8 bg-white/3 hover:border-[#f5be53]/30 hover:text-white transition-all">
-                📍 {zone}
+            {freeZones.map((zone) => (
+              <span key={zone} className="rounded-pill border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-[0.9rem] font-medium text-on-surface-variant transition-all hover:border-primary/30 hover:text-white">
+                {zone}
               </span>
             ))}
           </div>
-          <p className="text-center text-slate-500 text-xs mt-6">
+          <p className="mt-6 text-center text-caption text-muted">
             + All 7 emirates: Dubai · Sharjah · Abu Dhabi · Ajman · RAK · Fujairah · Al Ain
           </p>
-        </div>
-      </section>
+        </Section>
 
-      {/* FAQ */}
-      <section className="py-24 px-8 max-w-4xl mx-auto">
-        <FaqSection pageSlug="services/printer-rental" defaultFaqs={DEFAULT_FAQS} />
-      </section>
-
-      {/* From Our Blog — Internal Link Cluster */}
-      <section className="py-16 px-4 lg:px-12 bg-[#0a1628]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-[#f5be53] font-bold tracking-[0.25em] uppercase text-xs">Resource Hub</span>
-            <h2 className="text-3xl font-bold text-white mt-3 mb-3">Learn Before You Rent</h2>
-            <p className="text-slate-400 text-sm max-w-lg mx-auto">Expert guides to help UAE businesses make smarter printer decisions.</p>
+        <Section flush className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="font-sora text-title font-bold text-white mb-3">Frequently Asked Questions</h2>
+            <p className="text-muted">Common questions about printer rental in the UAE.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              {
-                slug: "how-to-choose-the-best-printer-rental-dubai-service",
-                title: "How to Choose the Best Printer Rental Dubai Service?",
-                category: "Guide",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1771224373/blogs/ai73xmapai8rb1z1u7qg.webp",
-              },
-              {
-                slug: "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
-                title: "Why a Company Chooses Copier Rental Over Buying",
-                category: "Guide",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758617392/blogs/icz06yszynxpk624dmox.jpg",
-              },
-              {
-                slug: "total-cost-of-printer-ownership",
-                title: "Total Cost of Printer Ownership",
-                category: "Finance",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1758623726/blogs/rm2ptjektgnlq5hyoeyl.jpg",
-              },
-              {
-                slug: "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
-                title: "Why Every UAE Business is Renting Printers in 2025",
-                category: "Trends",
-                img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
-              },
-            ].map((post) => (
+          <FaqSection pageSlug="services/printer-rental" defaultFaqs={DEFAULT_FAQS} />
+        </Section>
+
+        <Section eyebrow="Resource Hub" title="Learn Before You Rent" subtitle="Expert guides to help UAE businesses make smarter printer decisions." align="center" tone="ink">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {blogPosts.map((post) => (
               <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
-                <div className="rounded-2xl border border-white/8 bg-[#0d1b2e] overflow-hidden hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col">
-                  <img src={post.img} alt={post.title} className="w-full h-36 object-cover" loading="lazy" />
-                  <div className="p-4 flex flex-col flex-1">
-                    <span className="inline-flex px-2 py-0.5 rounded-full bg-[#142032] border border-[#f5be53]/20 text-[#f5be53] text-xs font-medium mb-2 self-start">
+                <div className="flex h-full flex-col overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid transition-transform duration-300 hover:-translate-y-1">
+                  <img src={post.img} alt={post.title} className="h-36 w-full object-cover" loading="lazy" />
+                  <div className="flex flex-1 flex-col p-4">
+                    <span className="mb-2 inline-flex self-start rounded-pill border border-primary/20 bg-surface-max px-2 py-0.5 text-caption font-medium text-primary">
                       {post.category}
                     </span>
-                    <h4 className="text-white text-sm font-semibold leading-snug group-hover:text-[#f5be53] transition-colors flex-1 line-clamp-3">
+                    <h4 className="line-clamp-3 flex-1 text-[0.9rem] font-semibold leading-snug text-white transition-colors group-hover:text-primary">
                       {post.title}
                     </h4>
-                    <span className="text-[#f5be53] text-xs mt-3 flex items-center gap-1">
+                    <span className="mt-3 flex items-center gap-1 text-caption text-primary">
                       Read Article
-                      <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="h-3 w-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
@@ -660,80 +466,45 @@ export default function PrinterRentalPage() {
               </Link>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Link href="/blogs/" className="px-6 py-3 border border-[#f5be53]/30 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">
+          <div className="mt-8 text-center">
+            <Link href="/blogs/" className="inline-block rounded-pill border border-primary/30 px-6 py-3 text-[0.9rem] font-medium text-primary transition-colors hover:bg-primary/10">
               View All Articles →
             </Link>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Location Cross-Links */}
-      <section className="py-12 px-8 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Printer Rental by Location</p>
+        <Section flush>
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Printer Rental by Location</p>
           <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { href: "/printer-rental-dubai", label: "Printer Rental Dubai" },
-              { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi" },
-              { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah" },
-              { href: "/printer-rental-rak", label: "Printer Rental RAK" },
-              { href: "/printer-rental-fujairah", label: "Printer Rental Fujairah" },
-              { href: "/printer-rental-al-ain", label: "Printer Rental Al Ain" },
-              { href: "/copier-lease-uae", label: "Copier Lease UAE" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
-              >
-                📍 {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Related Services */}
-      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Related Services</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
-              { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental" },
-              { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
-              { href: "/services/repair/", label: "Printer Repair" },
-              { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
-              { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
-              >
+            {locationLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-pill border border-white/[0.08] px-4 py-2 text-caption text-muted transition-all hover:text-white hover:border-primary/40">
                 {link.label}
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* CTA */}
-      <section className="py-24 px-8">
-        <div className="max-w-4xl mx-auto rounded-panel gold-gradient p-12 md:p-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">Ready to Rent?</h2>
-          <p className="text-[#483200] text-lg mb-8">Get a customized quote within 2 hours</p>
-          <a href="/rental-calculator/" className="inline-block bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform">
-            Get Your Quote
-          </a>
-        </div>
-      </section>
+        <Section flush tone="ink">
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Related Services</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {relatedServices.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-pill border border-white/[0.08] px-4 py-2 text-caption text-muted transition-all hover:text-white hover:border-primary/40">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </Section>
 
-      <Footer />
-      <WhatsAppCTA />
-      <JumpToTop />
-    </main>
+        <CtaBand
+          title="Ready to Rent?"
+          body="Get a customized quote within 2 hours"
+          primary={{ label: "Get Your Quote", href: "/rental-calculator/" }}
+        />
+
+        <Footer />
+        <WhatsAppCTA />
+        <JumpToTop />
+      </main>
     </>
   );
 }
