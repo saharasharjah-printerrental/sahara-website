@@ -85,47 +85,47 @@ export default function RequestQuoteClient() {
     setSubmitting(false);
   };
 
-  const inputCls = "w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white placeholder-slate-500 focus:border-[#f5be53]/50 focus:outline-none";
-  const labelCls = "block text-sm font-medium text-slate-300 mb-1.5";
+  const inputCls = "w-full bg-surface-low border border-white/10 rounded-xl py-3 px-4 text-white placeholder-slate-500 focus:border-primary/50 focus:outline-none";
+  const labelCls = "block text-sm font-medium text-on-surface-variant mb-1.5";
 
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <main className="min-h-screen bg-surface">
       <Header />
 
-      <section className="pt-32 pb-20 px-6 lg:px-24">
-        <div className="max-w-4xl mx-auto">
+      <section className="px-6 pb-20 pt-32 lg:px-24">
+        <div className="mx-auto max-w-4xl">
           {submitted ? (
-            <div className="text-center py-20">
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Request Sent ✓</h1>
-              <p className="text-slate-400 max-w-md mx-auto mb-8">
-                Our team will confirm pricing and availability, usually the same working day. You&apos;ll hear from us at{" "}
-                <span className="text-[#f5be53]">{form.email}</span> or on <span className="text-[#f5be53]">{form.phone}</span>.
+            <div className="py-20 text-center">
+              <h1 className="mb-3 text-3xl font-bold text-white md:text-4xl">Request Sent ✓</h1>
+              <p className="mx-auto mb-8 max-w-md text-muted">
+                Our team will confirm pricing and availability, usually the same working day. You&apos;ll hear from
+                us at <span className="text-primary">{form.email}</span> or on{" "}
+                <span className="text-primary">{form.phone}</span>.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="/services/printer-spare-parts/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-3 rounded-xl font-bold inline-block hover:scale-[1.02] transition-transform">
-                  Back to Spare Parts
-                </a>
-                <button onClick={sendWhatsApp} className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-8 py-3 rounded-xl font-bold hover:brightness-110 transition-all">
+              <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                <a href="/services/printer-spare-parts/" className="btn-primary">Back to Spare Parts</a>
+                <button onClick={sendWhatsApp} className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-8 py-3 font-bold text-white transition-all hover:brightness-110">
                   Also Send on WhatsApp
                 </button>
               </div>
             </div>
           ) : !loaded ? (
-            <p className="text-slate-400 text-center py-20">Loading…</p>
+            <p className="py-20 text-center text-muted">Loading…</p>
           ) : (
             <>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Request a Quotation</h1>
-              <p className="text-slate-400 mb-8">
-                Tell us who to send the quote to. We&apos;ll confirm current pricing, stock, and delivery — usually the same working day.
+              <h1 className="mb-2 text-3xl font-bold text-white md:text-4xl">Request a Quotation</h1>
+              <p className="mb-8 text-muted">
+                Tell us who to send the quote to. We&apos;ll confirm current pricing, stock, and delivery — usually
+                the same working day.
               </p>
-              <div className="grid lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 glass-card rounded-2xl p-6 md:p-8">
-                  <h2 className="text-xl font-bold text-white mb-6">Your Details</h2>
-                  <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid gap-8 lg:grid-cols-3">
+                <div className="glass-card rounded-panel p-6 md:p-8 lg:col-span-2">
+                  <h2 className="mb-6 text-xl font-bold text-white">Your Details</h2>
+                  <div className="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label className={labelCls}>Full Name *</label>
                       <input className={inputCls} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your name" />
-                      {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                      {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
                     </div>
                     <div>
                       <label className={labelCls}>Company</label>
@@ -134,12 +134,12 @@ export default function RequestQuoteClient() {
                     <div>
                       <label className={labelCls}>Email *</label>
                       <input className={inputCls} type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" />
-                      {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+                      {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
                     </div>
                     <div>
                       <label className={labelCls}>UAE Mobile *</label>
                       <input className={inputCls} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+971 50 123 4567" />
-                      {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                      {errors.phone && <p className="mt-1 text-xs text-red-400">{errors.phone}</p>}
                     </div>
                     <div className="sm:col-span-2">
                       <label className={labelCls}>Notes</label>
@@ -148,25 +148,25 @@ export default function RequestQuoteClient() {
                   </div>
                 </div>
 
-                <div className="glass-card rounded-2xl p-6 h-fit">
-                  <h2 className="text-xl font-bold text-white mb-4">Items</h2>
+                <div className="glass-card h-fit rounded-panel p-6">
+                  <h2 className="mb-4 text-xl font-bold text-white">Items</h2>
                   {cart.length === 0 ? (
-                    <p className="text-slate-400 text-sm mb-4">
+                    <p className="mb-4 text-sm text-muted">
                       No items attached. You can still send a general enquiry, or{" "}
-                      <a href="/services/printer-spare-parts/" className="text-[#f5be53] hover:underline">browse spare parts</a> first.
+                      <a href="/services/printer-spare-parts/" className="text-primary hover:underline">browse spare parts</a> first.
                     </p>
                   ) : (
                     <>
-                      <div className="space-y-3 mb-4">
+                      <div className="mb-4 space-y-3">
                         {cart.map((it) => (
                           <div key={it.supply.id} className="flex justify-between gap-3 text-sm">
-                            <span className="text-slate-300">{it.supply.name} <span className="text-slate-500">× {it.quantity}</span></span>
-                            <span className="text-white whitespace-nowrap">{isPriced(it.supply.price) ? formatAED(parsePriceAED(it.supply.price) * it.quantity) : "TBC"}</span>
+                            <span className="text-on-surface-variant">{it.supply.name} <span className="text-slate-500">× {it.quantity}</span></span>
+                            <span className="whitespace-nowrap text-white">{isPriced(it.supply.price) ? formatAED(parsePriceAED(it.supply.price) * it.quantity) : "TBC"}</span>
                           </div>
                         ))}
                       </div>
                       {allPriced && (
-                        <div className="border-t border-white/10 pt-4 flex justify-between text-white font-bold text-lg mb-5">
+                        <div className="mb-5 flex justify-between border-t border-white/10 pt-4 text-lg font-bold text-white">
                           <span>Est. Total</span>
                           <span>{formatAED(cartTotal)}</span>
                         </div>
@@ -174,26 +174,26 @@ export default function RequestQuoteClient() {
                     </>
                   )}
                   {submitError && (
-                    <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm">
+                    <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">
                       {submitError}
                     </div>
                   )}
                   <button
                     onClick={submit}
                     disabled={submitting}
-                    className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full rounded-xl bg-gradient-to-r from-primary to-primary-deep py-4 font-bold text-on-primary transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {submitting ? "Sending…" : "Send Quote Request (Email)"}
                   </button>
                   <button
                     type="button"
                     onClick={sendWhatsApp}
-                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-3.5 rounded-xl font-bold mt-3 hover:brightness-110 transition-all"
+                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 font-bold text-white transition-all hover:brightness-110"
                   >
                     Quote on WhatsApp
                   </button>
-                  <p className="text-slate-500 text-xs mt-3 text-center">
-                    Prefer to talk? Call <a href="tel:+971503823969" className="text-[#f5be53] hover:underline">+971 50 382 3969</a>.
+                  <p className="mt-3 text-center text-xs text-slate-500">
+                    Prefer to talk? Call <a href="tel:+971503823969" className="text-primary hover:underline">+971 50 382 3969</a>.
                   </p>
                 </div>
               </div>
