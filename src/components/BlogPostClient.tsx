@@ -6,6 +6,10 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import BlogInternalLinks from "@/components/BlogInternalLinks";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import CtaBand from "@/components/ui/CtaBand";
 import { BlogLinkConfig } from "@/lib/internalLinks";
 
 interface BlogPost {
@@ -26,109 +30,106 @@ interface BlogPostClientProps {
   linkConfig?: BlogLinkConfig | null;
 }
 
+const serviceLinks = [
+  { href: "/services/printer-rental", label: "Printer Rental" },
+  { href: "/services/photocopier-rental", label: "Photocopier Rental" },
+  { href: "/services/amc", label: "AMC" },
+  { href: "/services/repair", label: "Printer Repair" },
+  { href: "/services/printer-spare-parts", label: "Toner & Parts" },
+  { href: "/printer-rental-dubai", label: "Printer Rental Dubai" },
+  { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi" },
+  { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah" },
+];
+
 export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostClientProps) {
   const sameCategoryPosts = allPosts.filter(p => p.slug !== post.slug && p.category === post.category);
   const otherPosts = allPosts.filter(p => p.slug !== post.slug && p.category !== post.category);
   const morePosts = [...sameCategoryPosts, ...otherPosts].slice(0, 3);
+  const trail = [{ label: "Home", href: "/" }, { label: "Blog", href: "/blogs/" }, { label: post.title }];
 
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <main className="min-h-screen bg-surface">
       <Header />
 
-      <section className="relative pt-32 pb-16 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071325] via-[#071325] to-[#101c2e]" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <nav className="text-sm text-slate-500 mb-6 flex flex-wrap items-center gap-1" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-[#f5be53] transition-colors">Home</Link>
-            <span className="mx-1">/</span>
-            <Link href="/blogs/" className="hover:text-[#f5be53] transition-colors">Blog</Link>
-            <span className="mx-1">/</span>
-            <span className="text-[#f5be53] line-clamp-1 max-w-xs">{post.title}</span>
-          </nav>
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#142032] border border-[#f5be53]/20 text-[#f5be53] text-sm mb-4">{post.category}</span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{post.title}</h1>
-          <p className="text-[#d3c5b0] text-lg">{post.publishedAt}</p>
+      <section className="relative overflow-hidden px-6 pb-16 pt-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface to-surface-low" />
+        <div className="relative mx-auto max-w-content">
+          <Breadcrumbs trail={trail} />
+          <Reveal>
+            <span className="mb-4 inline-flex items-center gap-2 rounded-pill border border-primary/20 bg-surface-mid px-3 py-1 text-sm text-primary">{post.category}</span>
+            <h1 className="mb-4 font-sora text-display font-bold text-white">{post.title}</h1>
+            <p className="text-body text-muted">{post.publishedAt}</p>
+          </Reveal>
         </div>
       </section>
 
       {post.coverImage && (
-        <section className="px-8 lg:px-24 pb-16">
-          <div className="max-w-5xl mx-auto">
-            <img src={post.coverImage} alt={post.title} className="w-full h-auto rounded-2xl" />
-          </div>
+        <section className="px-6 pb-16">
+          <Reveal className="mx-auto max-w-5xl">
+            <img src={post.coverImage} alt={post.title} className="h-auto w-full rounded-panel" />
+          </Reveal>
         </section>
       )}
 
-      <section className="px-8 lg:px-24 pb-10">
-        <div className="max-w-3xl mx-auto">
+      <section className="px-6 pb-10">
+        <div className="mx-auto max-w-3xl">
           <div className="prose prose-invert max-w-none">
-            <p className="text-[#d3c5b0] text-lg leading-relaxed">{post.excerpt}</p>
+            <p className="text-body leading-relaxed text-on-surface-variant">{post.excerpt}</p>
             {post.content && post.content.trim() !== "" && post.content !== "<p><br></p>" && post.content !== "<p>&nbsp;</p>" && post.content !== "Full content here..." ? (
-              <div className="text-[#d3c5b0] leading-relaxed mt-6 blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+              <div className="blog-content mt-6 leading-relaxed text-on-surface-variant" dangerouslySetInnerHTML={{ __html: post.content }} />
             ) : (
-              <p className="text-slate-500 mt-6 italic">No content available for this post.</p>
+              <p className="mt-6 italic text-slate-500">No content available for this post.</p>
             )}
           </div>
         </div>
       </section>
 
-      <section className="px-8 lg:px-24 pb-16">
+      <section className="px-6 pb-16">
         <BlogInternalLinks currentSlug={post.slug} allPosts={allPosts} linkConfig={linkConfig} />
       </section>
 
-      <section className="py-16 px-8 bg-[#101c2e]">
-        <div className="max-w-7xl mx-auto">
-          <h3 className="text-2xl font-bold text-white mb-2">More Articles</h3>
-          <p className="text-slate-400 text-sm mb-8">{sameCategoryPosts.length > 0 ? `More from ${post.category}` : "More from our blog"}</p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {morePosts.map((p) => (
-              <Link key={p.id} href={`/blogs/${p.slug}`}>
-                <div className="glass-card rounded-2xl p-6 group cursor-pointer hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col">
-                  <img src={p.coverImage} alt={p.title} className="w-full h-40 object-cover rounded-xl mb-4" loading="lazy" />
-                  <span className="inline-flex px-2.5 py-0.5 rounded-full bg-[#142032] border border-[#f5be53]/20 text-[#f5be53] text-xs font-medium mb-3 self-start">{p.category}</span>
-                  <h4 className="text-white font-bold group-hover:text-[#f5be53] transition-colors flex-1 line-clamp-2">{p.title}</h4>
-                  <p className="text-slate-400 text-sm mt-2 line-clamp-2">{p.excerpt}</p>
-                  <p className="text-slate-500 text-xs mt-3">{p.publishedAt}</p>
+      <Section title="More Articles" subtitle={sameCategoryPosts.length > 0 ? `More from ${post.category}` : "More from our blog"} tone="raised" flush>
+        <div className="grid gap-6 md:grid-cols-3">
+          {morePosts.map((p) => (
+            <Reveal key={p.id} className="h-full">
+              <Link href={`/blogs/${p.slug}`} className="block h-full">
+                <div className="glass-card group flex h-full cursor-pointer flex-col rounded-card p-6 transition-transform duration-300 hover:-translate-y-1">
+                  <img src={p.coverImage} alt={p.title} className="mb-4 h-40 w-full rounded-xl object-cover" loading="lazy" />
+                  <span className="mb-3 inline-flex self-start rounded-pill border border-primary/20 bg-surface-mid px-2.5 py-0.5 text-xs font-medium text-primary">{p.category}</span>
+                  <h4 className="flex-1 line-clamp-2 font-bold text-white transition-colors group-hover:text-primary">{p.title}</h4>
+                  <p className="mt-2 line-clamp-2 text-sm text-muted">{p.excerpt}</p>
+                  <p className="mt-3 text-xs text-slate-500">{p.publishedAt}</p>
                 </div>
               </Link>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <Link href="/blogs/" className="px-6 py-3 border border-[#f5be53]/30 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">View All Articles →</Link>
-          </div>
+            </Reveal>
+          ))}
         </div>
-      </section>
+        <div className="mt-10 text-center">
+          <Link href="/blogs/" className="inline-block rounded-pill border border-primary/30 px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/10">View All Articles →</Link>
+        </div>
+      </Section>
 
-      <section className="py-12 px-8">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Our Services</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { href: "/services/printer-rental", label: "Printer Rental" },
-              { href: "/services/photocopier-rental", label: "Photocopier Rental" },
-              { href: "/services/amc", label: "AMC" },
-              { href: "/services/repair", label: "Printer Repair" },
-              { href: "/services/printer-spare-parts", label: "Toner & Parts" },
-              { href: "/printer-rental-dubai", label: "Printer Rental Dubai" },
-              { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi" },
-              { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah" },
-            ].map((link) => (
-              <Link key={link.href} href={link.href} className="px-4 py-2 rounded-full border border-white/10 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/30 transition-all">{link.label}</Link>
-            ))}
-          </div>
+      <Section flush>
+        <p className="mb-6 text-center text-caption font-bold uppercase tracking-widest text-muted">Our Services</p>
+        <div className="flex flex-wrap justify-center gap-3">
+          {serviceLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="rounded-pill border border-white/10 px-4 py-2 text-xs text-muted transition-all hover:border-primary/30 hover:text-white">{link.label}</Link>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="py-20 px-8">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Need Printer Solutions in UAE?</h2>
-          <p className="text-[#d3c5b0] mb-8">Get a customized quote for <Link href="/services/printer-rental/" className="text-[#f5be53] hover:underline">printer rental</Link>, <Link href="/services/repair/" className="text-[#f5be53] hover:underline">repair</Link>, or <Link href="/services/amc/" className="text-[#f5be53] hover:underline">maintenance</Link> — within 2 hours.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/rental-calculator/" className="px-8 py-4 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] rounded-full font-bold inline-block hover:scale-105 transition-transform">Get a Free Quote</Link>
-            <Link href="/contact/" className="px-8 py-4 glass-card text-white rounded-full font-bold inline-block border border-[#f5be53]/20 hover:bg-[#2a3548] transition-colors">Contact Us</Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Need Printer Solutions in UAE?"
+        body={
+          <>
+            Get a customized quote for <Link href="/services/printer-rental/" className="text-on-primary underline">printer rental</Link>,{" "}
+            <Link href="/services/repair/" className="text-on-primary underline">repair</Link>, or{" "}
+            <Link href="/services/amc/" className="text-on-primary underline">maintenance</Link> — within 2 hours.
+          </>
+        }
+        primary={{ label: "Get a Free Quote", href: "/rental-calculator/" }}
+        secondary={{ label: "Contact Us", href: "/contact/" }}
+      />
 
       <Footer />
       <WhatsAppCTA />
