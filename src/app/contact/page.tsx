@@ -7,9 +7,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle, Smartphone, Phone, Headphones, Email, LocationOn, AccessTime } from "@mui/icons-material";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
 
 function FacebookIcon() {
   return (
@@ -52,6 +54,8 @@ const SocialIcon = ({ icon }: { icon: string }) => {
   };
   return icons[icon] || null;
 };
+
+const trail = [{ label: "Home", href: "/" }, { label: "Contact" }];
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -192,82 +196,85 @@ export default function ContactPage() {
     ],
   };
 
+  const inputCls = "w-full bg-surface-low border-none rounded-xl py-4 px-6 text-white placeholder:text-muted";
+
   return (
-    <main className="min-h-screen bg-[#071325]">
+    <main className="min-h-screen bg-surface">
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <Header />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 px-8 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Contact <span className="text-[#f5be53]">Us</span>
-          </h1>
-          <p className="text-lg text-[#d3c5b0] max-w-2xl">
-            Get in touch with our team for sales inquiries, technical support, or service requests. We're here to help!
-          </p>
+      <section className="px-6 pb-16 pt-32 lg:px-24">
+        <div className="mx-auto max-w-content">
+          <Breadcrumbs trail={trail} />
+          <Reveal>
+            <h1 className="mb-6 font-sora text-display-xl font-bold text-white">
+              Contact <span className="text-primary">Us</span>
+            </h1>
+            <p className="max-w-2xl text-body text-muted">
+              Get in touch with our team for sales inquiries, technical support, or service requests. We&apos;re
+              here to help!
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* Send us a Message - Upper Section */}
-      <section className="px-8 lg:px-24 pb-16">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-            <span className="w-2 h-8 bg-[#f5be53] rounded-full"></span>
+      <section className="px-6 pb-16 lg:px-24">
+        <div className="mx-auto max-w-content">
+          <h2 className="mb-8 flex items-center gap-3 text-3xl font-bold text-white">
+            <span className="h-8 w-2 rounded-full bg-primary" />
             Send us a Message
           </h2>
-          
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="glass-card rounded-[2rem] p-8">
+
+          <div className="grid gap-12 lg:grid-cols-2">
+            <Reveal className="glass-card rounded-panel p-8">
               {submitted ? (
-                <div className="text-center py-8">
-                  <CheckCircle className="text-5xl text-green-400 mb-4" sx={{ fontSize: 60 }} />
-                  <h3 className="text-xl font-bold text-white mb-2">Thank You!</h3>
-                  <p className="text-slate-400">Your inquiry has been submitted. We'll get back to you within 30 minutes.</p>
+                <div className="py-8 text-center">
+                  <CheckCircle className="mb-4 text-5xl text-green-400" sx={{ fontSize: 60 }} />
+                  <h3 className="mb-2 text-xl font-bold text-white">Thank You!</h3>
+                  <p className="text-muted">Your inquiry has been submitted. We&apos;ll get back to you within 30 minutes.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <input 
-                      type="text" 
-                      placeholder="Your Name *" 
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <input
+                      type="text"
+                      placeholder="Your Name *"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
+                      className={inputCls}
                     />
-                    <input 
-                      type="text" 
-                      placeholder="Company Name" 
+                    <input
+                      type="text"
+                      placeholder="Company Name"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
+                      className={inputCls}
                     />
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <input 
-                      type="email" 
-                      placeholder="Email Address *" 
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <input
+                      type="email"
+                      placeholder="Email Address *"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
+                      className={inputCls}
                     />
-                    <input 
-                      type="tel" 
-                      placeholder="Phone Number *" 
+                    <input
+                      type="tel"
+                      placeholder="Phone Number *"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       required
-                      className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50" 
+                      className={inputCls}
                     />
                   </div>
-                  <select 
+                  <select
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     required
-                    className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white"
+                    className={inputCls}
                   >
                     <option value="">Select Service</option>
                     <option>Printer Rental</option>
@@ -276,68 +283,66 @@ export default function ContactPage() {
                     <option>AMC/Maintenance</option>
                     <option>Toner & Supplies</option>
                   </select>
-                  <textarea 
-                    placeholder="Your Message" 
+                  <textarea
+                    placeholder="Your Message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
-                    rows={5} 
-                    className="w-full bg-[#101c2e] border-none rounded-xl py-4 px-6 text-white placeholder:text-[#d3c5b0]/50"
+                    rows={5}
+                    className={inputCls}
                   ></textarea>
-                  <button type="submit" className="w-full bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] py-5 rounded-xl font-bold text-lg hover:scale-[1.02] transition-transform">
+                  <button type="submit" className="btn-primary w-full py-5 text-lg">
                     Send Message
                   </button>
                 </form>
               )}
-            </div>
+            </Reveal>
 
-            {/* Contact Info */}
             <div className="space-y-6">
-              <div className="glass-card rounded-[2rem] p-8">
+              <Reveal delay={0.05} className="glass-card rounded-panel p-8">
                 <div className="space-y-6">
-                  {contactNumbers.map((contact, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <contact.icon className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
+                  {contactNumbers.map((contact) => (
+                    <div key={contact.label} className="flex items-start gap-4">
+                      <contact.icon className="text-3xl text-primary" sx={{ fontSize: 36 }} />
                       <div>
                         <h3 className="font-bold text-white">{contact.label}</h3>
-                        <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
+                        <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="text-muted transition-colors hover:text-primary">
                           {contact.phone}
                         </a>
                       </div>
                     </div>
                   ))}
                   <div className="flex items-start gap-4">
-                    <Email className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
+                    <Email className="text-3xl text-primary" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Email</h3>
-                      <a href={`mailto:${settings?.companyEmail || 'info@saharaedoc.com'}`} className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">
+                      <a href={`mailto:${settings?.companyEmail || 'info@saharaedoc.com'}`} className="text-muted transition-colors hover:text-primary">
                         {settings?.companyEmail || 'info@saharaedoc.com'}
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <LocationOn className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
+                    <LocationOn className="text-3xl text-primary" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Headquarters</h3>
-                      <p className="text-[#d3c5b0]">{settings?.companyAddress || 'Al Arabi Building, Industrial Area 11'}</p>
-                      <p className="text-[#d3c5b0]">Sharjah, UAE</p>
-                      <p className="text-[#d3c5b0] text-sm mt-1">{settings?.companyPOBox || 'PO Box 47373, Sharjah'}</p>
+                      <p className="text-muted">{settings?.companyAddress || 'Al Arabi Building, Industrial Area 11'}</p>
+                      <p className="text-muted">Sharjah, UAE</p>
+                      <p className="mt-1 text-sm text-muted">{settings?.companyPOBox || 'PO Box 47373, Sharjah'}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <AccessTime className="text-3xl text-[#f5be53]" sx={{ fontSize: 36 }} />
+                    <AccessTime className="text-3xl text-primary" sx={{ fontSize: 36 }} />
                     <div>
                       <h3 className="font-bold text-white">Business Hours</h3>
-                      <p className="text-[#d3c5b0]">Sat - Thu: {settings?.workingHours || '8:00 AM - 8:00 PM'}</p>
-                      <p className="text-[#f5be53] text-sm">{settings?.emergencySupport || '24/7 Emergency Support Available'}</p>
+                      <p className="text-muted">Sat - Thu: {settings?.workingHours || '8:00 AM - 8:00 PM'}</p>
+                      <p className="text-sm text-primary">{settings?.emergencySupport || '24/7 Emergency Support Available'}</p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
 
-              {/* Social Media */}
-              <div className="glass-card rounded-[2rem] p-8">
-                <h2 className="text-xl font-bold text-white mb-4">Follow Us</h2>
+              <Reveal delay={0.1} className="glass-card rounded-panel p-8">
+                <h2 className="mb-4 text-xl font-bold text-white">Follow Us</h2>
                 <div className="flex gap-4">
                   {socialLinks.map((social) => (
                     <motion.a
@@ -346,104 +351,102 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ y: -5, scale: 1.1 }}
-                      className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#1a2a3a] to-[#0d1520] flex items-center justify-center text-[#f5be53] transition-all duration-300 cursor-pointer shadow-lg"
+                      className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-2xl bg-gradient-to-br from-[#1a2a3a] to-[#0d1520] text-primary shadow-lg transition-all duration-300"
                       aria-label={`Follow us on ${social.name}`}
                     >
                       <SocialIcon icon={social.icon} />
                     </motion.a>
                   ))}
                 </div>
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Map View - Lower Section */}
-      <section className="py-16 px-8 lg:px-24 bg-[#0a1425]">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-            <span className="w-2 h-8 bg-[#f5be53] rounded-full"></span>
-            Map View
-          </h2>
-          
-          <div className="glass-card rounded-[2rem] overflow-hidden">
-            <div className="relative w-full h-[450px] bg-[#0a1425]">
-              <iframe 
-                src={settings?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1802.0!2d55.4260483!3d25.2942534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin"}
-                width="100%" 
-                height="100%"
-                style={{ border: 0, position: 'absolute', top: 0, left: 0 }} 
-                allowFullScreen 
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Sahara Office Equipment Location Map"
-              />
-            </div>
+      <Section flush tone="raised">
+        <h2 className="mb-8 flex items-center gap-3 text-3xl font-bold text-white">
+          <span className="h-8 w-2 rounded-full bg-primary" />
+          Map View
+        </h2>
+
+        <Reveal className="glass-card overflow-hidden rounded-panel">
+          <div className="relative h-[450px] w-full bg-surface-low">
+            <iframe
+              src={settings?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1802.0!2d55.4260483!3d25.2942534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f62e0d0595f%3A0xa40ba77aedf65618!2sSAHARA%20office%20equipments!5e0!3m2!1sen!2sin!4v1768635734168!5m2!1sen!2sin"}
+              width="100%"
+              height="100%"
+              style={{ border: 0, position: 'absolute', top: 0, left: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Sahara Office Equipment Location Map"
+            />
           </div>
-          
-          <div className="mt-6 p-6 bg-[#0d1b2e] rounded-2xl border border-[#f5be53]/20">
-            <p className="text-[#d3c5b0] text-center">
-              <span className="text-[#f5be53] font-semibold">Location:</span> {settings?.companyAddress || 'Al Arabi Building, Industrial Area 11, Sharjah, UAE'}
+        </Reveal>
+
+        <div className="mt-6 rounded-card border border-primary/20 bg-surface-low p-6">
+          <p className="text-center text-on-surface-variant">
+            <span className="font-semibold text-primary">Location:</span> {settings?.companyAddress || 'Al Arabi Building, Industrial Area 11, Sharjah, UAE'}
+          </p>
+        </div>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {locations.map((loc) => (
+            <Reveal key={loc.city} className="glass-card rounded-card p-6">
+              <h3 className="mb-2 text-lg font-bold text-white">{loc.city}</h3>
+              <p className="mb-2 text-sm text-muted">{loc.address}</p>
+              <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="font-bold text-primary">{loc.phone}</a>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-16 max-w-3xl space-y-8">
+          <Reveal>
+            <h2 className="mb-4 text-2xl font-bold text-white">Opening hours and response times</h2>
+            <p className="leading-relaxed text-on-surface-variant">
+              Our office and workshop are open Monday to Saturday, 08:00 to 19:00, and closed on Sunday. Enquiries
+              received during working hours are normally answered the same day. For existing rental and AMC clients
+              with a device down, our target on-site response anywhere in the UAE is four hours — call the number
+              above rather than emailing, so the job goes straight to a technician.
             </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6 mt-8">
-            {locations.map((loc, i) => (
-              <div key={i} className="glass-card rounded-2xl p-6">
-                <h3 className="font-bold text-white text-lg mb-2">{loc.city}</h3>
-                <p className="text-[#d3c5b0] text-sm mb-2">{loc.address}</p>
-                <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="text-[#f5be53] font-bold">{loc.phone}</a>
-              </div>
-            ))}
-          </div>
-          <div className="mt-16 max-w-3xl space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-4">Opening hours and response times</h2>
-              <p className="text-[#d3c5b0] leading-relaxed">
-                Our office and workshop are open Monday to Saturday, 08:00 to 19:00, and closed on Sunday. Enquiries
-                received during working hours are normally answered the same day. For existing rental and AMC clients
-                with a device down, our target on-site response anywhere in the UAE is four hours — call the number
-                above rather than emailing, so the job goes straight to a technician.
-              </p>
-            </div>
+          </Reveal>
 
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-4">Where we cover</h2>
-              <p className="text-[#d3c5b0] leading-relaxed">
-                We deliver, install and service across all seven emirates from our Sharjah Industrial Area 11 base:{" "}
-                <a href="/printer-rental-dubai/" className="text-[#f5be53] hover:underline">Dubai</a>,{" "}
-                <a href="/photocopier-rental-sharjah/" className="text-[#f5be53] hover:underline">Sharjah</a>,{" "}
-                <a href="/printer-rental-abu-dhabi/" className="text-[#f5be53] hover:underline">Abu Dhabi</a>,{" "}
-                <a href="/printer-rental-al-ain/" className="text-[#f5be53] hover:underline">Al Ain</a>,{" "}
-                <a href="/printer-rental-fujairah/" className="text-[#f5be53] hover:underline">Fujairah</a>,{" "}
-                <a href="/printer-rental-rak/" className="text-[#f5be53] hover:underline">Ras Al Khaimah</a>, Ajman and
-                Umm Al Quwain — including the free-zone business parks at JAFZA, SAIF Zone, Hamriyah and Dubai Airport
-                Free Zone.
-              </p>
-            </div>
+          <Reveal>
+            <h2 className="mb-4 text-2xl font-bold text-white">Where we cover</h2>
+            <p className="leading-relaxed text-on-surface-variant">
+              We deliver, install and service across all seven emirates from our Sharjah Industrial Area 11 base:{" "}
+              <a href="/printer-rental-dubai/" className="text-primary hover:underline">Dubai</a>,{" "}
+              <a href="/photocopier-rental-sharjah/" className="text-primary hover:underline">Sharjah</a>,{" "}
+              <a href="/printer-rental-abu-dhabi/" className="text-primary hover:underline">Abu Dhabi</a>,{" "}
+              <a href="/printer-rental-al-ain/" className="text-primary hover:underline">Al Ain</a>,{" "}
+              <a href="/printer-rental-fujairah/" className="text-primary hover:underline">Fujairah</a>,{" "}
+              <a href="/printer-rental-rak/" className="text-primary hover:underline">Ras Al Khaimah</a>, Ajman and
+              Umm Al Quwain — including the free-zone business parks at JAFZA, SAIF Zone, Hamriyah and Dubai
+              Airport Free Zone.
+            </p>
+          </Reveal>
 
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-4">What to tell us</h2>
-              <p className="text-[#d3c5b0] leading-relaxed mb-4">
-                To quote accurately we need three things: roughly how many pages you print a month, the black-and-white
-                versus colour split, and whether you need A4 or A3. If you are not sure, the{" "}
-                <a href="/rental-calculator/" className="text-[#f5be53] hover:underline">rental calculator</a> will
-                estimate it from your team size. With those details we can normally confirm a device and a current rate
-                the same working day.
-              </p>
-              <p className="text-[#d3c5b0] leading-relaxed">
-                Looking for something specific? See{" "}
-                <a href="/services/printer-rental/" className="text-[#f5be53] hover:underline">printer rental</a>,{" "}
-                <a href="/services/photocopier-rental/" className="text-[#f5be53] hover:underline">photocopier rental</a>,{" "}
-                <a href="/services/repair/" className="text-[#f5be53] hover:underline">repair and service</a>,{" "}
-                <a href="/services/amc/" className="text-[#f5be53] hover:underline">annual maintenance contracts</a>, or{" "}
-                <a href="/services/printer-spare-parts/" className="text-[#f5be53] hover:underline">toner and spare parts</a>.
-              </p>
-            </div>
-          </div>
+          <Reveal>
+            <h2 className="mb-4 text-2xl font-bold text-white">What to tell us</h2>
+            <p className="mb-4 leading-relaxed text-on-surface-variant">
+              To quote accurately we need three things: roughly how many pages you print a month, the
+              black-and-white versus colour split, and whether you need A4 or A3. If you are not sure, the{" "}
+              <a href="/rental-calculator/" className="text-primary hover:underline">rental calculator</a> will
+              estimate it from your team size. With those details we can normally confirm a device and a current
+              rate the same working day.
+            </p>
+            <p className="leading-relaxed text-on-surface-variant">
+              Looking for something specific? See{" "}
+              <a href="/services/printer-rental/" className="text-primary hover:underline">printer rental</a>,{" "}
+              <a href="/services/photocopier-rental/" className="text-primary hover:underline">photocopier rental</a>,{" "}
+              <a href="/services/repair/" className="text-primary hover:underline">repair and service</a>,{" "}
+              <a href="/services/amc/" className="text-primary hover:underline">annual maintenance contracts</a>, or{" "}
+              <a href="/services/printer-spare-parts/" className="text-primary hover:underline">toner and spare parts</a>.
+            </p>
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
       <Footer />
       <WhatsAppCTA />
