@@ -657,7 +657,7 @@ export default function AMCPage() {
 
       {/* ── CTA ── */}
       <section className="py-16 px-8">
-        <div className="max-w-4xl mx-auto rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden"
+        <div className="max-w-4xl mx-auto rounded-panel p-12 md:p-16 text-center relative overflow-hidden"
           style={{ background: 'linear-gradient(135deg, #f5be53 0%, #c8962e 100%)' }}>
           <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-black/10 rounded-full blur-2xl" />
           <div className="relative z-10">

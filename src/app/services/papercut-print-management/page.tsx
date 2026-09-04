@@ -273,7 +273,7 @@ export default function PaperCutPage() {
 
         {/* CTA */}
         <section className="py-20 px-8 lg:px-24" style={{ background: '#050d1a' }}>
-          <div className="max-w-4xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 relative overflow-hidden text-center">
+          <div className="max-w-4xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 relative overflow-hidden text-center">
             <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
             <div className="relative z-10">
               <p className="text-[#5a3d00] text-sm font-bold uppercase tracking-[0.18em] mb-3">PaperCut Certified Partner — UAE</p>

@@ -252,7 +252,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <section className="py-16 px-8">
-        <div className="max-w-4xl mx-auto rounded-[3rem] gold-gradient p-12 md:p-16 text-center">
+        <div className="max-w-4xl mx-auto rounded-panel gold-gradient p-12 md:p-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#412d00] mb-4">
             Ready to Transform Your Office?
           </h2>

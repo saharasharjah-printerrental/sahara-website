@@ -192,7 +192,7 @@ export default function PrinterRepairDubai() {
 
       {/* CTA */}
       <section className="py-24 px-8">
-        <div className="max-w-4xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 relative overflow-hidden text-center">
+        <div className="max-w-4xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 relative overflow-hidden text-center">
           <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="relative z-10">
             <h2 className="text-4xl md:text-5xl font-bold text-[#412d00] mb-6">Need Printer Repair in Dubai?</h2>

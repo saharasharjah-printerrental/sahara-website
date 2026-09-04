@@ -215,7 +215,7 @@ export default function CopierLeaseUAE() {
 
       {/* CTA */}
       <section className="py-24 px-8">
-        <div className="max-w-4xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 text-center">
+        <div className="max-w-4xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 text-center">
           <h2 className="text-4xl font-bold text-[#412d00] mb-6">Ready to Lease a Copier?</h2>
           <p className="text-[#483200] text-lg mb-8">Get a customized lease proposal within 24 hours.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

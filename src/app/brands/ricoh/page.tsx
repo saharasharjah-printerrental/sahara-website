@@ -119,7 +119,7 @@ export default function RicohBrandPage() {
 
       {/* CTA */}
       <section className="py-24 px-8">
-        <div className="max-w-4xl mx-auto glass-card rounded-[3rem] p-12 md:p-16 text-center">
+        <div className="max-w-4xl mx-auto glass-card rounded-panel p-12 md:p-16 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Boost Productivity?</h2>
           <p className="text-[#d3c5b0] mb-8">Get a customized quote for Ricoh printers tailored to your business needs.</p>
           <a href="/rental-calculator/?brand=ricoh" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform inline-block">
