@@ -1,11 +1,16 @@
-﻿export const runtime = 'edge';
+export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import AnswerBlock from "@/components/AnswerBlock";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
+import CtaBand from "@/components/ui/CtaBand";
 
 interface FAQItem { q: string; a: string; }
 
@@ -140,43 +145,21 @@ const pricingTiers = [
     price: "AED 250—450",
     tag: null,
     ideal: "Small offices, reception, remote sites",
-    features: [
-      "Canon LBP / Kyocera ECOSYS",
-      "Up to 45 ppm A4 mono",
-      "Print, copy, scan",
-      "Free genuine OEM toner",
-      "On-site support included",
-      "4—6hr emergency response",
-    ],
+    features: ["Canon LBP / Kyocera ECOSYS", "Up to 45 ppm A4 mono", "Print, copy, scan", "Free genuine OEM toner", "On-site support included", "4—6hr emergency response"],
   },
   {
     name: "A3 Mid-Range",
     price: "AED 500—900",
     tag: "Most Popular",
     ideal: "Shared RAK offices & free zone companies",
-    features: [
-      "Canon iR ADVANCE / Kyocera TASKalfa",
-      "35—55 ppm A3 & A4 mono",
-      "Print, copy, scan, fax",
-      "Colour option available",
-      "Scan to email / folder",
-      "Free network setup",
-      "Same-day replacement guarantee",
-    ],
+    features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35—55 ppm A3 & A4 mono", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder", "Free network setup", "Same-day replacement guarantee"],
   },
   {
     name: "A3 Enterprise",
     price: "AED 1,000—2,000",
     tag: null,
     ideal: "Manufacturing, large hospitality",
-    features: [
-      "Canon imageRUNNER C5560i",
-      "60—100 ppm A3 colour",
-      "Staple, booklet finishers",
-      "Secure print, user auth",
-      "50,000+ pages/month",
-      "Dedicated account manager",
-    ],
+    features: ["Canon imageRUNNER C5560i", "60—100 ppm A3 colour", "Staple, booklet finishers", "Secure print, user auth", "50,000+ pages/month", "Dedicated account manager"],
   },
 ];
 
@@ -185,6 +168,24 @@ const rakAreas = [
   "Al Jazeera", "Al Dhaith", "Khuzam", "Al Nakheel",
   "Al Dhait", "Dafan Al Khor",
 ];
+
+const relatedServices = [
+  { href: "/services/printer-rental/", label: "Printer Rental UAE" },
+  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
+  { href: "/services/repair/", label: "Printer Repair" },
+  { href: "/brands/canon/", label: "Canon Printers" },
+  { href: "/brands/kyocera/", label: "Kyocera Printers" },
+];
+
+const otherLocations = [
+  { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", desc: "Same-day delivery across all Dubai districts." },
+  { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
+  { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest service in Sharjah & Northern Emirates." },
+  { href: "/printer-rental-fujairah/", label: "Printer Rental Fujairah", desc: "East Coast coverage — Dibba, Kalba, FFTZ." },
+];
+
+const trail = [{ label: "Home", href: "/" }, { label: "Printer Rental Ras Al Khaimah" }];
 
 export default async function PrinterRentalRAK() {
   const faqs = await getFaqsFromD1();
@@ -198,304 +199,222 @@ export default async function PrinterRentalRAK() {
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
-    <main className="min-h-screen bg-[#071325]">
-      <Header />
 
-      {/* Breadcrumb */}
-      <nav className="pt-28 pb-2 px-8 lg:px-24 max-w-7xl mx-auto" aria-label="Breadcrumb">
-        <ol className="flex items-center gap-2 text-sm text-[#d3c5b0]">
-          <li><a href="/" className="hover:text-[#f5be53] transition-colors">Home</a></li>
-          <li className="text-[#f5be53]">/</li>
-          <li className="text-white font-medium">Printer Rental Ras Al Khaimah</li>
-        </ol>
-      </nav>
+      <main className="min-h-screen bg-surface">
+        <Header />
 
-      {/* Hero */}
-      <section className="relative pt-8 pb-24 px-8 lg:px-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/images/location-rak.webp"
-            alt="Ras Al Khaimah corporate office"
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-            loading="eager"
-            width={1920}
-            height={1080}
-          />
-          <div className="absolute inset-0 bg-[#071325]/70" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#071325]/80 via-[#071325]/60 to-[#101c2e]" />
-        </div>
+        <section className="relative overflow-hidden px-6 pb-20 pt-32">
+          <div className="absolute inset-0">
+            <img
+              src="/images/location-rak.webp"
+              alt="Ras Al Khaimah corporate office"
+              className="h-full w-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              width={1920}
+              height={1080}
+            />
+            <div className="absolute inset-0 bg-surface/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/60 to-surface-low" />
+          </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-1 gap-12 items-center">
-            <div>
-              <span className="text-[#f5be53] font-bold tracking-[0.2em] uppercase text-sm">
-                Ras Al Khaimah — Zero Deposit
-              </span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
-                Printer Rental{" "}
-                <span className="text-[#f5be53]">RAK</span>
+          <div className="relative mx-auto max-w-content">
+            <Breadcrumbs trail={trail} />
+            <Reveal className="max-w-2xl">
+              <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Ras Al Khaimah — Zero Deposit</p>
+              <h1 className="font-sora text-display-xl font-extrabold text-white">
+                Printer Rental <span className="text-primary">RAK</span>
               </h1>
-
-              <AnswerBlock
-                question="Can a RAK free-zone company rent a printer from Sahara?"
-                answer="Yes — Sahara bills RAK free-zone entities directly. Rental printers and copiers are delivered to RAK Free Trade Zone, Al Hamra, Al Marjan Island, Al Nakheel, and RAK Industrial Area, with invoicing arranged to suit free-zone accounting. Plans start at AED 250 per month, zero deposit, toner included."
-                supportingPoints={[
-                  "RAK FTZ, Al Hamra, Al Marjan Island, Al Nakheel and RAK Industrial Area covered",
-                  "Free-zone entity invoicing supported alongside mainland LLC billing",
-                  "Zero deposit, unlimited genuine OEM toner, free delivery and free network setup",
-                  "Canon and Kyocera multifunction devices from AED 250/month",
-                ]}
-              />
-              <p className="text-lg text-[#d3c5b0] mb-6 max-w-xl">
+              <div className="mt-6">
+                <AnswerBlock
+                  question="Can a RAK free-zone company rent a printer from Sahara?"
+                  answer="Yes — Sahara bills RAK free-zone entities directly. Rental printers and copiers are delivered to RAK Free Trade Zone, Al Hamra, Al Marjan Island, Al Nakheel, and RAK Industrial Area, with invoicing arranged to suit free-zone accounting. Plans start at AED 250 per month, zero deposit, toner included."
+                  supportingPoints={[
+                    "RAK FTZ, Al Hamra, Al Marjan Island, Al Nakheel and RAK Industrial Area covered",
+                    "Free-zone entity invoicing supported alongside mainland LLC billing",
+                    "Zero deposit, unlimited genuine OEM toner, free delivery and free network setup",
+                    "Canon and Kyocera multifunction devices from AED 250/month",
+                  ]}
+                />
+              </div>
+              <p className="mt-6 max-w-xl text-body text-muted">
                 Canon &amp; Kyocera printer rental in Ras Al Khaimah from AED 250/month. Zero deposit, free toner,
                 and on-site support across RAK Free Trade Zone, Al Hamra, and Al Marjan Island.
               </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {["Zero Deposit", "Free Toner", "RAK FTZ Billing", "Free Network Setup", "Replacement Guarantee"].map(
-                  (p) => (
-                    <span
-                      key={p}
-                      className="text-xs font-semibold px-3 py-1 rounded-full border border-[#f5be53]/40 text-[#f5be53] bg-[#f5be53]/10"
-                    >
-                      {p}
-                    </span>
-                  )
-                )}
+              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                {["Zero Deposit", "Free Toner", "RAK FTZ Billing", "Free Network Setup", "Replacement Guarantee"].map((t) => (
+                  <li key={t} className="flex items-center gap-2 text-caption text-muted">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <a href="/rental-calculator/" className="btn-primary">Get Free Quote</a>
+                <a href="tel:+971503823969" className="btn-secondary">Call: +971 50 382 3969</a>
               </div>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="/rental-calculator/"
-                  className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-                >
-                  Get Free Quote
-                </a>
-                <a
-                  href="tel:+971503823969"
-                  className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors"
-                >
-                  Call: +971 50 382 3969
-                </a>
-              </div>
-            </div>
+            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* AEO Block */}
-      <section className="py-10 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto">
-          <div
-            className="rounded-3xl p-8 md:p-10"
-            style={{
-              background: "linear-gradient(135deg, #0f1e33 0%, #0a1420 100%)",
-              border: "1px solid rgba(245, 190, 83, 0.35)",
-              boxShadow: "0 0 40px rgba(245, 190, 83, 0.08)",
-            }}
-          >
-            <p className="text-[#f5be53] text-xs font-bold tracking-[0.25em] uppercase mb-3">
+        <Section flush>
+          <div className="mx-auto max-w-4xl rounded-panel border border-primary/[0.35] bg-surface-low p-8 md:p-10">
+            <p className="mb-3 text-caption font-bold uppercase tracking-[0.25em] text-primary">
               AI Answer — What is Printer Rental in Ras Al Khaimah?
             </p>
-            <p className="text-white text-lg leading-relaxed">
+            <p className="text-[1.05rem] leading-relaxed text-white">
               Printer rental in Ras Al Khaimah is a monthly service from{" "}
-              <strong className="text-[#f5be53]">AED 250/month</strong> providing Canon or Kyocera printers
-              and photocopiers with toner, maintenance, and repairs included. Sahara Office Equipment Trading LLC
-              serves RAK businesses including RAK Free Trade Zone, Al Hamra, and Al Marjan Island with{" "}
-              <strong className="text-[#f5be53]">zero deposit</strong> plans and 4—6hr emergency response.
+              <strong className="text-primary">AED 250/month</strong> providing Canon or Kyocera printers and
+              photocopiers with toner, maintenance, and repairs included. Sahara Office Equipment Trading LLC serves
+              RAK businesses including RAK Free Trade Zone, Al Hamra, and Al Marjan Island with{" "}
+              <strong className="text-primary">zero deposit</strong> plans and 4—6hr emergency response.
             </p>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Stats */}
-      <section className="py-12 px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="glass-card rounded-2xl py-8 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <Section flush>
+          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 rounded-panel border border-white/[0.08] bg-surface-low px-6 py-8 text-center md:grid-cols-4">
             {[
               { number: "4—6", suffix: " hrs", label: "Emergency Response" },
               { number: "1,500", suffix: "+", label: "UAE Clients" },
               { number: "13", suffix: "+", label: "Years in UAE" },
               { number: "AED 250", suffix: "/mo", label: "Starting Price" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="text-3xl font-bold text-[#f5be53]">
-                  {s.number}<span className="text-xl">{s.suffix}</span>
-                </p>
-                <p className="text-xs uppercase tracking-widest text-slate-400 mt-1">{s.label}</p>
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="text-3xl font-bold text-primary">{s.number}<span className="text-xl">{s.suffix}</span></p>
+                <p className="mt-1 text-caption uppercase tracking-widest text-muted">{s.label}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Long-form Content */}
-      <section className="py-16 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Why RAK Businesses Choose Printer Rental Over Buying
-          </h2>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Ras Al Khaimah's diverse economy — from manufacturing and ceramics in the industrial zones to luxury
-            hospitality at Al Hamra and Al Marjan Island — creates varied printing requirements. RAK Free Trade
-            Zone alone hosts over 14,000 registered companies, many of which need document infrastructure from day
-            one of operations.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Printer rental in RAK from Sahara provides RAK FTZ companies with immediate access to Canon and
-            Kyocera equipment, no deposit, and USD or AED invoicing options — eliminating the administrative
-            friction of sourcing equipment when setting up a new RAK free zone office. Setup within 24 hours of
-            order, including full network configuration.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            For manufacturing businesses in RAK's industrial zones — producing ceramics, building materials, and
-            pharmaceuticals — our enterprise copiers handle 50,000+ pages per month of production documentation
-            without degradation. Backed by on-site support within 4—6 hours, downtime that stops documentation
-            from flowing is avoided.
-          </p>
-          <p className="text-[#d3c5b0] text-lg leading-relaxed">
-            Cost-per-page on our rented devices is{" "}
-            <strong className="text-white">1—2 fils per A4 page</strong> — compared to 8—15 fils for consumer
-            desktop printers. For a RAK office printing 3,000 pages/month, the saving in consumables alone
-            offsets a large portion of the monthly rental fee.
-          </p>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">RAK Rental Plans</h2>
-            <p className="text-[#d3c5b0] mt-3 text-lg">Zero deposit Â· free toner Â· free delivery Â· on-site support</p>
+        <Section flush tone="raised">
+          <div className="mx-auto max-w-4xl space-y-6">
+            <h2 className="font-sora text-title font-bold text-white">
+              Why RAK Businesses Choose Printer Rental Over Buying
+            </h2>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Ras Al Khaimah&rsquo;s diverse economy — from manufacturing and ceramics in the industrial zones to
+              luxury hospitality at Al Hamra and Al Marjan Island — creates varied printing requirements. RAK Free
+              Trade Zone alone hosts over 14,000 registered companies, many of which need document infrastructure
+              from day one of operations.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Printer rental in RAK from Sahara provides RAK FTZ companies with immediate access to Canon and
+              Kyocera equipment, no deposit, and USD or AED invoicing options — eliminating the administrative
+              friction of sourcing equipment when setting up a new RAK free zone office. Setup within 24 hours of
+              order, including full network configuration.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              For manufacturing businesses in RAK&rsquo;s industrial zones — producing ceramics, building materials,
+              and pharmaceuticals — our enterprise copiers handle 50,000+ pages per month of production
+              documentation without degradation. Backed by on-site support within 4—6 hours, downtime that stops
+              documentation from flowing is avoided.
+            </p>
+            <p className="text-[1.05rem] leading-relaxed text-on-surface-variant">
+              Cost-per-page on our rented devices is <strong className="text-white">1—2 fils per A4 page</strong> —
+              compared to 8—15 fils for consumer desktop printers. For a RAK office printing 3,000 pages/month, the
+              saving in consumables alone offsets a large portion of the monthly rental fee.
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingTiers.map((tier, i) => (
+        </Section>
+
+        <Section title="RAK Rental Plans" subtitle="Zero deposit · free toner · free delivery · on-site support" align="center">
+          <div className="grid gap-8 md:grid-cols-3">
+            {pricingTiers.map((tier) => (
               <div
-                key={i}
-                className="glass-card rounded-3xl p-8 flex flex-col relative overflow-hidden"
-                style={
-                  tier.tag
-                    ? { border: "1px solid rgba(245,190,83,0.6)", boxShadow: "0 0 40px rgba(245,190,83,0.12)" }
-                    : {}
-                }
+                key={tier.name}
+                className={`relative flex flex-col overflow-hidden rounded-panel p-8 ${tier.tag ? "border border-primary/60 bg-surface-mid" : "border border-white/[0.08] bg-surface-low"}`}
               >
                 {tier.tag && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] text-xs font-bold px-4 py-1 rounded-bl-2xl">
+                  <div className="absolute right-0 top-0 rounded-bl-2xl bg-gradient-to-r from-primary to-primary-deep px-4 py-1 text-xs font-bold text-on-primary">
                     {tier.tag}
                   </div>
                 )}
-                <h3 className="text-xl font-bold text-white mb-1">{tier.name}</h3>
-                <p className="text-[#f5be53] text-2xl font-bold mb-1">
-                  {tier.price}<span className="text-sm font-normal text-[#d3c5b0]">/month</span>
-                </p>
-                <p className="text-[#d3c5b0] text-sm mb-6 italic">{tier.ideal}</p>
-                <ul className="space-y-2 flex-1">
-                  {tier.features.map((f, fi) => (
-                    <li key={fi} className="flex items-start gap-2 text-sm text-[#d3c5b0]">
-                      <span className="text-[#f5be53] mt-0.5 shrink-0">âœ"</span>
+                <h3 className="mb-1 text-xl font-bold text-white">{tier.name}</h3>
+                <p className="mb-1 text-2xl font-bold text-primary">{tier.price}<span className="text-sm font-normal text-muted">/month</span></p>
+                <p className="mb-6 text-[0.9rem] italic text-muted">{tier.ideal}</p>
+                <ul className="flex-1 space-y-2">
+                  {tier.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                      <span className="mt-0.5 shrink-0 text-primary">✓</span>
                       {f}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="/rental-calculator/"
-                  className="mt-8 block text-center py-3 rounded-full font-bold text-sm transition-all"
-                  style={
-                    tier.tag
-                      ? { background: "linear-gradient(to right, #f5be53, #c8962e)", color: "#412d00" }
-                      : { background: "rgba(245,190,83,0.1)", border: "1px solid rgba(245,190,83,0.3)", color: "#f5be53" }
-                  }
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   Get Quote
                 </a>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Areas */}
-      <section className="py-16 px-8 bg-[#101c2e]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Areas We Serve in Ras Al Khaimah</h2>
-          <p className="text-[#d3c5b0] mb-8">
-            On-site support across all RAK districts. Emergency response within 4—6 hours.
-          </p>
+        <Section title="Areas We Serve in Ras Al Khaimah" subtitle="On-site support across all RAK districts. Emergency response within 4—6 hours." align="center" tone="raised">
           <div className="flex flex-wrap justify-center gap-3">
-            {rakAreas.map((area, i) => (
-              <span
-                key={i}
-                className="bg-[#2a3548] border border-[#f5be53]/20 px-4 py-2 rounded-full text-[#d3c5b0] text-sm"
-              >
+            {rakAreas.map((area) => (
+              <span key={area} className="rounded-pill border border-primary/20 bg-surface-max px-4 py-2 text-[0.9rem] text-on-surface-variant">
                 {area}
               </span>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* CTA */}
-      <section className="py-20 px-8">
-        <div className="max-w-4xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-16 relative overflow-hidden text-center">
-          <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#412d00] mb-4">Need a Printer in RAK?</h2>
-            <p className="text-[#483200] text-lg mb-8">
-              Quote within 2 hours. Free site visit. Setup within 24 hours across RAK.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/rental-calculator/"
-                className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform"
-              >
-                Get Free Quote
-              </a>
-              <a
-                href="tel:+971503823969"
-                className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm"
-              >
-                Call +971 50 382 3969
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+        <CtaBand
+          title="Need a Printer in RAK?"
+          body="Quote within 2 hours. Free site visit. Setup within 24 hours across RAK."
+          primary={{ label: "Get Free Quote", href: "/rental-calculator/" }}
+          secondary={{ label: "Call +971 50 382 3969", href: "tel:+971503823969" }}
+        />
 
-      {/* FAQ */}
-      <section className="py-24 px-8">
-        <div className="max-w-4xl mx-auto">
+        <Section flush className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white">Printer Rental RAK — FAQ</h2>
-            <p className="text-[#d3c5b0] mt-3">12 questions answered</p>
+            <h2 className="font-sora text-title font-bold text-white mb-3">Printer Rental RAK — FAQ</h2>
+            <p className="text-muted">12 questions answered</p>
           </div>
           <div className="space-y-4">
             {faqs.map((f, i) => (
-              <details
-                key={i}
-                className="rounded-2xl p-6 group cursor-pointer"
-                style={{
-                  background: "linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)",
-                  boxShadow: "6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)",
-                }}
-                open={i === 0}
-              >
-                <summary className="flex justify-between items-start gap-4 list-none font-bold text-base text-white">
+              <details key={f.q} className="glass-card rounded-card p-6 group cursor-pointer" open={i === 0}>
+                <summary className="flex list-none items-start justify-between gap-4 font-bold text-[1rem] text-white">
                   <span>{f.q}</span>
-                  <span className="text-[#f5be53] shrink-0 mt-1 group-open:rotate-180 transition-transform text-lg leading-none">
-                    ▾
-                  </span>
+                  <span className="mt-1 shrink-0 text-lg leading-none text-primary transition-transform group-open:rotate-180">▾</span>
                 </summary>
-                <p className="mt-4 text-[#d3c5b0] leading-relaxed text-sm">{f.a}</p>
+                <p className="mt-4 text-[0.9rem] leading-relaxed text-on-surface-variant">{f.a}</p>
               </details>
             ))}
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <Footer />
-      <WhatsAppCTA />
-      <JumpToTop />
-    </main>
+        <Section flush tone="raised">
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Related Services</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {relatedServices.map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-pill border border-white/[0.08] px-4 py-2 text-caption text-muted transition-all hover:text-white hover:border-primary/40">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </Section>
+
+        <Section flush>
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Printer Rental in Other Emirates</p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {otherLocations.map((loc) => (
+              <Link key={loc.href} href={loc.href} className="group rounded-card border border-white/[0.06] bg-surface-low p-5 transition-all duration-300 hover:-translate-y-0.5">
+                <h4 className="mb-1 text-[0.9rem] font-semibold text-white transition-colors group-hover:text-primary">{loc.label}</h4>
+                <p className="text-caption leading-relaxed text-slate-500">{loc.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </Section>
+
+        <Footer />
+        <WhatsAppCTA />
+        <JumpToTop />
+      </main>
     </>
   );
 }
