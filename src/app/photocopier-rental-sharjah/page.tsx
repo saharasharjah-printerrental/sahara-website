@@ -708,6 +708,28 @@ export default async function PhotocopierRentalSharjah() {
         </div>
       </section>
 
+      <section className="py-12 px-8 lg:px-24 bg-[#050d1a]">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Related</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah" },
+              { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
+              { href: "/services/photocopier-rental/", label: "Photocopier Rental Service" },
+              { href: "/services/amc/", label: "Printer AMC" },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 rounded-full border border-[#f5be53]/20 text-slate-400 text-xs hover:text-white hover:border-[#f5be53]/40 transition-all"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />

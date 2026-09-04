@@ -20,7 +20,9 @@ interface PageOption {
 const pageOptions: PageOption[] = [
   { value: "homepage", label: "Homepage" },
   { value: "printer-rental-dubai", label: "Printer Rental Dubai" },
+  { value: "printer-rental-sharjah", label: "Printer Rental Sharjah" },
   { value: "printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi" },
+  { value: "services", label: "Services Hub" },
   { value: "photocopier-rental-sharjah", label: "Photocopier Rental Sharjah" },
   { value: "printer-rental-fujairah", label: "Printer Rental Fujairah" },
   { value: "printer-rental-rak", label: "Printer Rental RAK" },

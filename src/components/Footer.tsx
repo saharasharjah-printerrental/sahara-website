@@ -244,6 +244,7 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-6">Locations</h3>
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link href="/printer-rental-dubai/" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
+              <li><Link href="/printer-rental-sharjah/" className="hover:text-[#f5be53] transition-colors">Printer Rental Sharjah</Link></li>
               <li><Link href="/photocopier-rental-sharjah/" className="hover:text-[#f5be53] transition-colors">Photocopier Sharjah</Link></li>
               <li><Link href="/printer-rental-abu-dhabi/" className="hover:text-[#f5be53] transition-colors">Printer Rental Abu Dhabi</Link></li>
               <li><Link href="/printer-rental-rak/" className="hover:text-[#f5be53] transition-colors">Printer Rental RAK</Link></li>

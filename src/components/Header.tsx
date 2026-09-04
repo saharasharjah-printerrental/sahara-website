@@ -47,7 +47,7 @@ const services = [
 // Mobile bottom nav - direct link items (3 icons keeps bar uncluttered)
 const bottomNavItems = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Services", href: "/services/printer-rental", icon: SettingsSuggest },
+  { name: "Services", href: "/services/", icon: SettingsSuggest },
   { name: "Products", href: "/products", icon: Inventory2 },
 ];
 

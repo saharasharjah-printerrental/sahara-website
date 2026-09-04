@@ -37,14 +37,22 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/get-quote', destination: '/rental-calculator', permanent: true },
+      // Destinations always carry the trailing slash, on BOTH the slash and
+      // no-slash source variants below. With trailingSlash: true, whichever
+      // rule matches first (Next.js redirects() ignores which source has the
+      // slash when both are present — the earlier array entry wins) would
+      // otherwise hand back a no-slash destination, forcing a second redirect
+      // hop through Next's own trailing-slash normalization. GSC flagged this
+      // exact two-hop chain on /get-quote/ (Aug 2026 export, ~650 impressions
+      // stuck on a page that could never actually be crawled as canonical).
+      { source: '/get-quote', destination: '/rental-calculator/', permanent: true },
       { source: '/get-quote/', destination: '/rental-calculator/', permanent: true },
       // Fix 404 pages found in Ubersuggest audit
-      { source: '/brands', destination: '/products', permanent: true },
+      { source: '/brands', destination: '/products/', permanent: true },
       { source: '/brands/', destination: '/products/', permanent: true },
-      { source: '/products/canon-imageclass-mf644cdw', destination: '/products', permanent: true },
+      { source: '/products/canon-imageclass-mf644cdw', destination: '/products/', permanent: true },
       { source: '/products/canon-imageclass-mf644cdw/', destination: '/products/', permanent: true },
-      { source: '/products/hp-laserjet-pro-m404dn', destination: '/products', permanent: true },
+      { source: '/products/hp-laserjet-pro-m404dn', destination: '/products/', permanent: true },
       { source: '/products/hp-laserjet-pro-m404dn/', destination: '/products/', permanent: true },
     ];
   },
