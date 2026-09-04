@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Reveal from "@/components/ui/Reveal";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -46,6 +48,8 @@ const defaultProducts = [
   { id: "13", slug: "bp-70c31-color-mfp", name: "BP-70C31 Color MFP", brand: "Sharp", category: "MFP", condition: "New", priceRental: "AED 650/mo", specs: ["31 PPM Color", "A3 Support", "Cloud Connect", "Duplex"], image: "/brands/sharp.webp", isActive: true },
   { id: "14", slug: "ecotank-l15150-wide-format", name: "EcoTank L15150 Wide-Format", brand: "Epson", category: "A3 Printers", condition: "New", priceRental: "AED 480/mo", specs: ["25 PPM Color", "A3+ Support", "Wi-Fi Direct", "Low Cost/Page"], image: "/brands/epson.webp", isActive: true },
 ];
+
+const trail = [{ label: "Home", href: "/" }, { label: "Products" }];
 
 export default function ProductsClient({ initialProducts }: { initialProducts?: any[] }) {
   const searchParams = useSearchParams();
@@ -198,153 +202,155 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
 
   return (
     <>
-      <main className="min-h-screen bg-[#071325]">
+      <main className="min-h-screen bg-surface">
         <Header />
 
-        <section className="pt-32 pb-8 px-8 lg:px-24">
-          <header className="max-w-7xl mx-auto mb-12">
-            <nav className="flex mb-6 text-sm font-medium text-[#d3c5b0] gap-2 items-center">
-              <a href="/" className="hover:text-[#f5be53] transition-colors">Home</a>
-              <span className="material-symbols-outlined text-xs">chevron_right</span>
-              <span className="text-[#f5be53]">Products</span>
-            </nav>
-            <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+        <section className="px-6 pb-8 pt-32">
+          <header className="mx-auto mb-12 max-w-content">
+            <Breadcrumbs trail={trail} />
+            <Reveal className="flex flex-col items-end justify-between gap-6 md:flex-row">
               <div>
-                <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tighter mb-4">Precision <span className="text-[#f5be53]">Equipments</span></h1>
-                <p className="text-[#d3c5b0] max-w-xl text-lg">Harness the power of industrial-grade reliability. Curated technology for the high-performance executive office.</p>
+                <h1 className="font-sora text-display-xl font-bold tracking-tighter text-white">
+                  Precision <span className="text-primary">Equipments</span>
+                </h1>
+                <p className="mt-4 max-w-xl text-body text-muted">
+                  Harness the power of industrial-grade reliability. Curated technology for the high-performance
+                  executive office.
+                </p>
               </div>
-              <div className="flex items-center gap-4 bg-[#101c2e] p-1 rounded-full">
-                <button onClick={() => setViewMode("grid")} className={`p-3 rounded-full flex items-center justify-center transition-all ${viewMode === "grid" ? "bg-[#f5be53] text-[#412d00]" : "text-[#d3c5b0] hover:text-white"}`}>
+              <div className="flex items-center gap-4 rounded-pill bg-surface-low p-1">
+                <button onClick={() => setViewMode("grid")} className={`flex items-center justify-center rounded-full p-3 transition-all ${viewMode === "grid" ? "bg-primary text-on-primary" : "text-muted hover:text-white"}`}>
                   <span className="material-symbols-outlined">grid_view</span>
                 </button>
-                <button onClick={() => setViewMode("list")} className={`p-3 rounded-full flex items-center justify-center transition-all ${viewMode === "list" ? "bg-[#f5be53] text-[#412d00]" : "text-[#d3c5b0] hover:text-white"}`}>
+                <button onClick={() => setViewMode("list")} className={`flex items-center justify-center rounded-full p-3 transition-all ${viewMode === "list" ? "bg-primary text-on-primary" : "text-muted hover:text-white"}`}>
                   <span className="material-symbols-outlined">list</span>
                 </button>
               </div>
-            </div>
+            </Reveal>
           </header>
         </section>
 
         {/* Bravo PVC Card Printer Callout */}
-        <div className="max-w-7xl mx-auto px-8 lg:px-0 mb-4">
+        <div className="mx-auto mb-4 max-w-content px-6 lg:px-0">
           <a
             href="/bravo-card-printers-uae/"
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gradient-to-r from-[#0d1a2e] to-[#091524] border border-[#f5be53]/25 rounded-2xl p-5 hover:border-[#f5be53]/50 transition-colors group"
+            className="group flex flex-col items-start gap-4 rounded-panel border border-primary/25 bg-surface-low p-5 transition-colors hover:border-primary/50 sm:flex-row sm:items-center"
           >
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex shrink-0 items-center gap-3">
               <span className="text-2xl">🏅</span>
               <div>
-                <p className="text-[9px] font-bold text-[#f5be53] uppercase tracking-[0.2em]">Authorised Exclusive Reseller</p>
-                <p className="text-white font-bold text-base leading-tight">PVC Card Printers — Bravo RTAI &amp; DC 3300</p>
+                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary">Authorised Exclusive Reseller</p>
+                <p className="text-base font-bold leading-tight text-white">PVC Card Printers — Bravo RTAI &amp; DC 3300</p>
               </div>
             </div>
-            <p className="text-[#8fa3bc] text-sm sm:ml-auto max-w-sm">
-              Authorised exclusive reseller in the UAE for the Bravo RTAI and DC 3300. 600 dpi retransfer &amp; direct-to-card ID printers for enterprise, government &amp; education.
+            <p className="max-w-sm text-sm text-muted sm:ml-auto">
+              Authorised exclusive reseller in the UAE for the Bravo RTAI and DC 3300. 600 dpi retransfer &amp;
+              direct-to-card ID printers for enterprise, government &amp; education.
             </p>
-            <span className="text-[#f5be53] text-sm font-semibold group-hover:translate-x-1 transition-transform shrink-0">View →</span>
+            <span className="shrink-0 text-sm font-semibold text-primary transition-transform group-hover:translate-x-1">View →</span>
           </a>
         </div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-12">
+        <div className="mx-auto grid max-w-content grid-cols-1 gap-12 px-6 lg:grid-cols-4 lg:px-0">
           <aside className="space-y-10">
             <div className="relative">
-              <input className="w-full bg-[#142032] border-none rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-[#f5be53] text-white placeholder:text-[#d3c5b0]/50" placeholder="Search models..." type="text" value={searchQuery} onChange={(e) => updateParams("search", e.target.value)} />
-              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#d3c5b0]">search</span>
+              <input className="w-full rounded-2xl border-none bg-surface-mid py-4 pl-12 pr-4 text-white placeholder:text-muted focus:ring-2 focus:ring-primary" placeholder="Search models..." type="text" value={searchQuery} onChange={(e) => updateParams("search", e.target.value)} />
+              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-muted">search</span>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-[#f5be53]">Brand</h3>
+              <h3 className="text-caption font-bold uppercase tracking-widest text-primary">Brand</h3>
               {brands.map((brand) => (
-                <label key={brand} className="flex items-center gap-3 cursor-pointer group">
-                  <input type="checkbox" className="w-5 h-5 rounded border-[#4f4536] bg-[#142032] text-[#f5be53] focus:ring-[#f5be53]/20" checked={selectedBrands.includes(brand)} onChange={() => toggleBrand(brand)} />
-                  <span className="text-[#d3c5b0] group-hover:text-white transition-colors">{brand}</span>
+                <label key={brand} className="group flex cursor-pointer items-center gap-3">
+                  <input type="checkbox" className="h-5 w-5 rounded border-outline/40 bg-surface-mid text-primary focus:ring-primary/20" checked={selectedBrands.includes(brand)} onChange={() => toggleBrand(brand)} />
+                  <span className="text-muted transition-colors group-hover:text-white">{brand}</span>
                 </label>
               ))}
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-[#f5be53]">Category</h3>
+              <h3 className="text-caption font-bold uppercase tracking-widest text-primary">Category</h3>
               <div className="flex flex-wrap gap-2">
                 {categories.map((cat) => (
-                  <button key={cat} onClick={() => toggleCategory(cat)} className={`px-4 py-2 rounded-full border text-xs font-bold transition-all ${selectedCategories.includes(cat) ? "bg-[#f5be53] text-[#412d00] border-[#f5be53]" : "border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white"}`}>{cat}</button>
+                  <button key={cat} onClick={() => toggleCategory(cat)} className={`rounded-pill border px-4 py-2 text-xs font-bold transition-all ${selectedCategories.includes(cat) ? "border-primary bg-primary text-on-primary" : "border-outline/30 text-muted hover:border-primary hover:text-white"}`}>{cat}</button>
                 ))}
               </div>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-[#f5be53]">Condition</h3>
+              <h3 className="text-caption font-bold uppercase tracking-widest text-primary">Condition</h3>
               <div className="space-y-2">
                 {conditions.map((cond) => (
-                  <div key={cond} onClick={() => toggleCondition(cond)} className={`flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${selectedConditions.includes(cond) ? "bg-[#142032] border-[#f5be53]" : "bg-[#101c2e] border-[#4f4536]/10 hover:border-[#f5be53]/30"}`}>
+                  <div key={cond} onClick={() => toggleCondition(cond)} className={`flex cursor-pointer items-center justify-between rounded-xl border p-3 transition-all ${selectedConditions.includes(cond) ? "border-primary bg-surface-mid" : "border-outline/10 bg-surface-low hover:border-primary/30"}`}>
                     <span className="text-white">{cond === "New" ? "Brand New" : cond}</span>
-                    <span className={`material-symbols-outlined text-lg ${selectedConditions.includes(cond) ? "text-[#f5be53]" : "text-[#d3c5b0]"}`}>{cond === "New" ? "verified" : "history"}</span>
+                    <span className={`material-symbols-outlined text-lg ${selectedConditions.includes(cond) ? "text-primary" : "text-muted"}`}>{cond === "New" ? "verified" : "history"}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {(selectedBrands.length > 0 || selectedCategories.length > 0 || selectedConditions.length > 0 || searchQuery) && (
-              <button onClick={clearFilters} className="w-full py-2 rounded-xl border border-[#4f4536] text-[#d3c5b0] hover:border-red-400 hover:text-red-400 text-sm transition-all">Clear Filters</button>
+              <button onClick={clearFilters} className="w-full rounded-xl border border-outline/30 py-2 text-sm text-muted transition-all hover:border-red-400 hover:text-red-400">Clear Filters</button>
             )}
           </aside>
 
           <div className="lg:col-span-3">
-            <div className="flex items-center justify-between mb-6">
-              <p className="text-[#d3c5b0] text-sm">Showing <span className="text-white font-bold">{filteredProducts.length}</span> products{totalPages > 1 && <span> — Page <span className="text-white font-bold">{safePage}</span> of <span className="text-white font-bold">{totalPages}</span></span>}</p>
+            <div className="mb-6 flex items-center justify-between">
+              <p className="text-sm text-muted">Showing <span className="font-bold text-white">{filteredProducts.length}</span> products{totalPages > 1 && <span> — Page <span className="font-bold text-white">{safePage}</span> of <span className="font-bold text-white">{totalPages}</span></span>}</p>
             </div>
 
             {loading ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {Array(6).fill(null).map((_, i) => (
-                  <div key={i} className="glass-card rounded-2xl p-6 animate-pulse">
-                    <div className="h-48 bg-[#142032] rounded-xl mb-4" />
-                    <div className="h-6 bg-[#142032] rounded mb-2" />
-                    <div className="h-4 bg-[#142032] rounded w-2/3" />
+                  <div key={i} className="glass-card animate-pulse rounded-card p-6">
+                    <div className="mb-4 h-48 rounded-xl bg-surface-mid" />
+                    <div className="mb-2 h-6 rounded bg-surface-mid" />
+                    <div className="h-4 w-2/3 rounded bg-surface-mid" />
                   </div>
                 ))}
               </div>
             ) : paginatedProducts.length === 0 ? (
-              <div className="text-center py-20">
-                <span className="material-symbols-outlined text-6xl text-[#d3c5b0] mb-4">inventory_2</span>
-                <h3 className="text-2xl font-bold text-white mb-2">No Products Found</h3>
-                <p className="text-[#d3c5b0]">Try adjusting your filters or search query.</p>
+              <div className="py-20 text-center">
+                <span className="material-symbols-outlined mb-4 text-6xl text-muted">inventory_2</span>
+                <h3 className="mb-2 text-2xl font-bold text-white">No Products Found</h3>
+                <p className="text-muted">Try adjusting your filters or search query.</p>
               </div>
             ) : (
               <div className={`grid gap-6 ${viewMode === "grid" ? "md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
                 {paginatedProducts.map((p) => (
-                  <div key={p.id} className="glass-card rounded-2xl overflow-hidden group">
+                  <div key={p.id} className="glass-card group overflow-hidden rounded-card">
                     {p.slug ? (
-                      <a href={`/products/${p.slug}/`} className="block h-48 bg-[#142032] relative overflow-hidden">
-                        {p.image && <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />}
-                        {p.brand && <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>}
+                      <a href={`/products/${p.slug}/`} className="relative block h-48 overflow-hidden bg-surface-mid">
+                        {p.image && <img src={p.image} alt={p.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />}
+                        {p.brand && <div className="absolute left-4 top-4 rounded-pill bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary backdrop-blur-md">{p.brand}</div>}
                       </a>
                     ) : (
-                      <div className="h-48 bg-[#142032] relative overflow-hidden">
-                        {p.image && <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />}
-                        {p.brand && <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>}
+                      <div className="relative h-48 overflow-hidden bg-surface-mid">
+                        {p.image && <img src={p.image} alt={p.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />}
+                        {p.brand && <div className="absolute left-4 top-4 rounded-pill bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary backdrop-blur-md">{p.brand}</div>}
                       </div>
                     )}
                     <div className="p-6">
                       {p.slug ? (
                         <a href={`/products/${p.slug}/`}>
-                          <h3 className="text-xl font-bold text-white mb-2 hover:text-[#f5be53] transition-colors">{p.name}</h3>
+                          <h3 className="mb-2 text-xl font-bold text-white transition-colors hover:text-primary">{p.name}</h3>
                         </a>
                       ) : (
-                        <h3 className="text-xl font-bold text-white mb-2">{p.name}</h3>
+                        <h3 className="mb-2 text-xl font-bold text-white">{p.name}</h3>
                       )}
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="mb-4 flex flex-wrap gap-2">
                         {p.specs?.slice(0, 3).map((spec: string, i: number) => (
-                          <span key={i} className="px-2 py-1 bg-[#142032] rounded-full text-xs text-[#d3c5b0]">{spec}</span>
+                          <span key={i} className="rounded-pill bg-surface-mid px-2 py-1 text-xs text-muted">{spec}</span>
                         ))}
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-[#f5be53] font-bold text-lg">{p.priceRental}</span>
-                        <span className="text-white text-sm">{p.condition === "New" ? "Brand New" : p.condition}</span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-lg font-bold text-primary">{p.priceRental}</span>
+                        <span className="text-sm text-white">{p.condition === "New" ? "Brand New" : p.condition}</span>
                       </div>
                       {p.slug && (
                         <a
                           href={`/products/${p.slug}/`}
-                          className="mt-4 block w-full text-center border border-[#f5be53]/40 text-[#f5be53] px-4 py-2 rounded-xl font-bold text-sm hover:bg-[#f5be53]/10 transition-colors"
+                          className="mt-4 block w-full rounded-xl border border-primary/40 px-4 py-2 text-center text-sm font-bold text-primary transition-colors hover:bg-primary/10"
                         >
                           View Details
                         </a>
@@ -354,7 +360,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
                           href={paymentSettings.paymentGatewayUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-2 block w-full text-center bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-4 py-2 rounded-xl font-bold text-sm hover:scale-105 transition-transform"
+                          className="mt-2 block w-full rounded-xl bg-gradient-to-r from-primary to-primary-deep px-4 py-2 text-center text-sm font-bold text-on-primary transition-transform hover:scale-105"
                         >
                           {paymentSettings.paymentGatewayLabel || "Buy Now"}
                         </a>
@@ -366,29 +372,29 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
             )}
 
             {totalPages > 1 && (
-              <div className="flex justify-center gap-2 mt-12">
+              <div className="mt-12 flex justify-center gap-2">
                 {safePage > 1 && (
-                  <a href={pageHref(safePage - 1)} onClick={(e) => { e.preventDefault(); updateParams("page", safePage - 1); }} className="px-4 py-2 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all">← Previous</a>
+                  <a href={pageHref(safePage - 1)} onClick={(e) => { e.preventDefault(); updateParams("page", safePage - 1); }} className="rounded-pill border border-outline/30 px-4 py-2 text-muted transition-all hover:border-primary hover:text-white">← Previous</a>
                 )}
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <a key={p} href={pageHref(p)} onClick={(e) => { e.preventDefault(); updateParams("page", p); }} aria-current={p === safePage ? "page" : undefined} className={`w-10 h-10 rounded-full font-bold transition-all flex items-center justify-center ${p === safePage ? "bg-[#f5be53] text-[#412d00]" : "border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white"}`}>{p}</a>
+                  <a key={p} href={pageHref(p)} onClick={(e) => { e.preventDefault(); updateParams("page", p); }} aria-current={p === safePage ? "page" : undefined} className={`flex h-10 w-10 items-center justify-center rounded-full font-bold transition-all ${p === safePage ? "bg-primary text-on-primary" : "border border-outline/30 text-muted hover:border-primary hover:text-white"}`}>{p}</a>
                 ))}
                 {safePage < totalPages && (
-                  <a href={pageHref(safePage + 1)} onClick={(e) => { e.preventDefault(); updateParams("page", safePage + 1); }} className="px-4 py-2 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all">Next →</a>
+                  <a href={pageHref(safePage + 1)} onClick={(e) => { e.preventDefault(); updateParams("page", safePage + 1); }} className="rounded-pill border border-outline/30 px-4 py-2 text-muted transition-all hover:border-primary hover:text-white">Next →</a>
                 )}
               </div>
             )}
           </div>
 
           {/* Shop by Brand — cross-links to per-brand catalog pages */}
-          <div className="mt-20 pt-12 border-t border-[#4f4536]/30">
-            <h2 className="text-2xl font-bold text-white text-center mb-8">Shop by Brand</h2>
+          <div className="mt-20 border-t border-white/10 pt-12 lg:col-span-4">
+            <h2 className="mb-8 text-center text-2xl font-bold text-white">Shop by Brand</h2>
             <div className="flex flex-wrap justify-center gap-3">
               {["canon", "hp", "kyocera", "xerox", "ricoh", "brother", "sharp", "epson", "lexmark", "samsung"].map((slug) => (
                 <a
                   key={slug}
                   href={`/brands/${slug}/`}
-                  className="px-6 py-3 rounded-full border border-[#4f4536] text-[#d3c5b0] hover:border-[#f5be53] hover:text-white transition-all capitalize"
+                  className="rounded-pill border border-outline/30 px-6 py-3 capitalize text-muted transition-all hover:border-primary hover:text-white"
                 >
                   {slug}
                 </a>
