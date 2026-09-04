@@ -5,24 +5,30 @@ import Link from "next/link";
 import { CipherText } from "@/components/CipherText";
 import StatsClay from "@/components/StatsClay";
 import GoogleReviewsBadge from "@/components/GoogleReviewsBadge";
+import AnswerBlock from "@/components/AnswerBlock";
+import CtaBand from "@/components/ui/CtaBand";
+import FeatureCard from "@/components/ui/FeatureCard";
+import Reveal from "@/components/ui/Reveal";
+import {
+  SettingsIcon,
+  AwardIcon,
+  ShieldCheckIcon,
+  TruckIcon,
+  ClockIcon,
+  HeadsetIcon,
+  LayersIcon,
+} from "@/components/icons";
 import {
   Layers,
   People,
   Favorite,
   Computer,
-  Print,
-  ShoppingCart,
-  Build,
-  Opacity,
   ArrowBack,
   ArrowForward,
   East,
   Star,
   Person,
   ExpandMore,
-  Savings,
-  Verified,
-  LocationOn,
 } from "@mui/icons-material";
 
 const LOCAL_BRAND_LOGOS: Record<string, string> = {
@@ -113,8 +119,8 @@ function HeroSection() {
         contentVisibility: "auto",
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-[#071325]/95 via-[#071325]/75 to-[#071325]/30 z-0" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#071325] to-transparent z-0" />
+      <div className="absolute inset-0 bg-gradient-to-r from-surface/95 via-surface/75 to-surface/30 z-0" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-surface to-transparent z-0" />
 
       <div className="w-full max-w-3xl relative z-10 space-y-8">
         <h1 className="sr-only">Printer &amp; Photocopier Rental UAE | All-Inclusive Plans</h1>
@@ -131,23 +137,23 @@ function HeroSection() {
           className="mb-4 drop-shadow-[0_2px_24px_rgba(0,0,0,0.8)]"
           delay={1500}
         />
-        <div className="aeo-block bg-[#0d1b2e]/80 border border-[#f5be53]/20 rounded-xl p-4 max-w-lg">
-          <span className="text-[#f5be53] font-bold text-xs uppercase tracking-widest block mb-1">Printer Rental UAE — Quick Answer</span>
-          <p className="text-[#d3c5b0] text-sm leading-relaxed">Sahara Office Equipments provides printer and photocopier rental across UAE from <strong>AED 250/month</strong> with zero deposit, free toner, and 4-hour emergency support since 2012.</p>
+        <div className="max-w-lg">
+          <AnswerBlock
+            id="printer-rental-uae-quick-answer"
+            question="Printer Rental UAE — Quick Answer"
+            answer="Sahara Office Equipments provides printer and photocopier rental across UAE from AED 250/month with zero deposit, free toner, and 4-hour emergency support since 2012."
+          />
         </div>
         <p className="text-lg md:text-xl text-white/90 max-w-xl leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
           Premium office equipment solutions for the modern executive. From high-speed printing to expert technical support, we power your productivity with precision.
         </p>
         <div className="flex flex-wrap gap-4 pt-2">
-          <a
-            href="/rental-calculator/"
-            className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_4px_24px_rgba(245,190,83,0.4)]"
-          >
+          <a href="/rental-calculator/" className="btn-primary">
             Get a Quote
           </a>
           <a
             href="/services/printer-rental/"
-            className="px-8 py-4 rounded-full font-bold text-lg text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors"
+            className="px-8 py-4 rounded-pill font-bold text-lg text-white border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors"
           >
             Explore Services
           </a>
@@ -214,9 +220,9 @@ function BrandCarouselSection({ initialLogos = [] }: { initialLogos?: any[] }) {
   const displayLogos = [...logos, ...logos, ...logos];
 
   return (
-    <section className="py-12 bg-[#101c2e]">
+    <section className="py-12 bg-surface-low">
       <div className="text-center mb-8">
-        <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase">Trusted Brands</h2>
+        <h2 className="text-caption font-bold text-primary tracking-[0.3em] uppercase">Trusted Brands</h2>
       </div>
       <noscript>
         <div className="flex gap-8 flex-wrap justify-center px-4 py-2">
@@ -230,11 +236,11 @@ function BrandCarouselSection({ initialLogos = [] }: { initialLogos?: any[] }) {
         onMouseEnter={() => (pausedRef.current = true)}
         onMouseLeave={() => (pausedRef.current = false)}
       >
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#101c2e] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#101c2e] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-low to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-low to-transparent z-10 pointer-events-none" />
         <div ref={trackRef} className="flex gap-12 items-center py-2" style={{ width: "max-content" }} suppressHydrationWarning>
           {displayLogos.map((logo, i) => (
-            <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-xl bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity">
+            <div key={i} className="flex-shrink-0 flex items-center justify-center w-32 h-16 rounded-card border border-white/[0.06] bg-white/5 p-3 opacity-60 hover:opacity-100 transition-opacity">
               {logo.imageUrl ? (
                 <img src={LOCAL_BRAND_LOGOS[logo.name?.toLowerCase()] || logo.imageUrl} alt={logo.name} className="max-h-full max-w-full object-contain" loading="lazy" />
               ) : (
@@ -249,41 +255,30 @@ function BrandCarouselSection({ initialLogos = [] }: { initialLogos?: any[] }) {
 }
 
 function DefinitionSection() {
+  const points = [
+    { Icon: SettingsIcon, title: "All-Inclusive Leasing", body: "A simple monthly fee that covers your machine, unlimited toner, maintenance, repairs, and full technical support." },
+    { Icon: AwardIcon, title: "Smart Financials", body: "Healthy cash flow with zero upfront capital investment, zero deposit, and absolutely no exit fees." },
+    { Icon: ShieldCheckIcon, title: "Premium Equipment", body: "Enjoy access to high-performance, industry-leading devices from trusted brands like Canon and Kyocera." },
+    { Icon: TruckIcon, title: "Seamless UAE Coverage", body: "Popular and fully supported across major business centers: Dubai, Sharjah, and Abu Dhabi." },
+  ];
   return (
-    <section className="relative py-16 px-4 lg:px-12 overflow-hidden" style={{ background: "#050d1a" }}>
+    <section className="relative py-section px-4 lg:px-12 overflow-hidden bg-ink">
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `linear-gradient(rgba(245,190,83,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,190,83,0.04) 1px, transparent 1px)`, backgroundSize: "40px 40px" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `radial-gradient(circle, rgba(245,190,83,0.12) 1px, transparent 1px)`, backgroundSize: "40px 40px" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 75% 60% at 50% 50%, rgba(7,19,37,0.7) 0%, transparent 75%)" }} />
       <div className="max-w-5xl mx-auto relative z-10">
-        <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.1] tracking-tight mb-4">
-            What is <span className="text-[#f5be53]">Printer Rental</span> in the UAE?
+        <Reveal className="text-center mb-14">
+          <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">What We Offer</p>
+          <h2 className="font-sora text-title font-bold text-white">
+            What is <span className="text-primary">Printer Rental</span> in the UAE?
           </h2>
-          <p className="text-[#7a94ad] text-base max-w-lg mx-auto leading-relaxed">
+          <p className="text-muted text-[0.95rem] max-w-lg mx-auto leading-relaxed mt-5">
             Flexible leasing options to access top-tier multifunction printers (MFPs) and photocopiers with low monthly operational costs.
           </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:items-end">
-          {([
-            { Icon: Build, title: "All-Inclusive Leasing", body: "A simple monthly fee that covers your machine, unlimited toner, maintenance, repairs, and full technical support.", elevated: false },
-            { Icon: Savings, title: "Smart Financials", body: "Healthy cash flow with zero upfront capital investment, zero deposit, and absolutely no exit fees.", elevated: true },
-            { Icon: Verified, title: "Premium Equipment", body: "Enjoy access to high-performance, industry-leading devices from trusted brands like Canon and Kyocera.", elevated: true },
-            { Icon: LocationOn, title: "Seamless UAE Coverage", body: "Popular and fully supported across major business centers: Dubai, Sharjah, and Abu Dhabi.", elevated: false },
-          ] as const).map(({ Icon, title, body, elevated }, i) => (
-            <div key={i} className={`group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ${elevated ? "lg:-translate-y-5" : ""}`} style={{ background: "linear-gradient(170deg, rgba(8,18,36,0.97) 0%, rgba(5,11,22,0.99) 100%)", border: "1px solid rgba(245,190,83,0.22)", boxShadow: elevated ? "0 0 0 1px rgba(245,190,83,0.15), 0 0 40px rgba(245,190,83,0.12), 0 20px 60px rgba(0,0,0,0.5)" : "0 0 0 1px rgba(245,190,83,0.08), 0 0 20px rgba(245,190,83,0.06), 0 8px 32px rgba(0,0,0,0.4)" }}>
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" style={{ boxShadow: "inset 0 0 30px rgba(245,190,83,0.06)" }} />
-              <div className="relative flex items-center justify-center pt-8 pb-6 px-6">
-                <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 50% 60%, rgba(245,190,83,0.07) 0%, transparent 70%)" }} />
-                <div className="relative w-20 h-20 rounded-[1.25rem] flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: "linear-gradient(145deg, rgba(245,190,83,0.16) 0%, rgba(245,190,83,0.04) 100%)", border: "1px solid rgba(245,190,83,0.32)", boxShadow: "0 0 0 6px rgba(245,190,83,0.05), 0 0 30px rgba(245,190,83,0.14)" }}>
-                  <Icon style={{ fontSize: 38, color: "#f5be53" }} />
-                </div>
-              </div>
-              <div className="px-6 pb-7 flex flex-col flex-1" style={{ borderTop: "1px solid rgba(245,190,83,0.08)" }}>
-                <h3 className="text-white font-bold text-[0.95rem] mt-5 mb-2 leading-snug">{title}</h3>
-                <p className="text-[#6a87a4] text-[0.8rem] leading-relaxed">{body}</p>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(90deg, transparent, #f5be53, transparent)" }} />
-            </div>
+        </Reveal>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {points.map((p, i) => (
+            <FeatureCard key={p.title} icon={p.Icon} title={p.title} body={p.body} delay={(i % 4) * 0.05} />
           ))}
         </div>
       </div>
@@ -293,27 +288,21 @@ function DefinitionSection() {
 
 function ServicesSection() {
   const services = [
-    { icon: Print, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental/" },
-    { icon: ShoppingCart, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/products/" },
-    { icon: Build, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair/" },
-    { icon: Opacity, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/printer-spare-parts/" },
+    { icon: ClockIcon, title: "Printer Rental", desc: "Flexible leasing options for high-volume enterprises. Scale your operations without capital stress.", href: "/services/printer-rental/" },
+    { icon: TruckIcon, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/products/" },
+    { icon: HeadsetIcon, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair/" },
+    { icon: LayersIcon, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/printer-spare-parts/" },
   ];
   return (
-    <section className="py-16 px-4 lg:px-12 bg-[#101c2e]">
+    <section className="py-section px-4 lg:px-12 bg-surface-low">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Our Expertise</h2>
-          <p className="text-4xl font-bold text-white">Office Solutions Redefined</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Reveal className="mb-16">
+          <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Our Expertise</p>
+          <h2 className="font-sora text-title font-bold text-white">Office Solutions Redefined</h2>
+        </Reveal>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => (
-            <Link key={i} href={s.href} className="glass-card p-8 rounded-3xl light-leak group hover:scale-[1.02] transition-all duration-500 block">
-              <div className="w-14 h-14 rounded-2xl bg-[#2a3548] flex items-center justify-center mb-6 text-[#f5be53] group-hover:bg-[#f5be53] group-hover:text-[#412d00] transition-colors">
-                <s.icon className="text-3xl" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3 whitespace-nowrap">{s.title}</h3>
-              <p className="text-[#d3c5b0] text-sm leading-relaxed">{s.desc}</p>
-            </Link>
+            <FeatureCard key={s.href} icon={s.icon} title={s.title} body={s.desc} href={s.href} delay={(i % 4) * 0.05} />
           ))}
         </div>
       </div>
@@ -331,41 +320,53 @@ function LocationsSection() {
     { city: "Al Ain", href: "/printer-rental-al-ain/", label: "Printer Rental Al Ain", desc: "Garden city coverage — Al Ain businesses, universities & clinics.", price: "From AED 300/mo", highlight: false, icon: "🌴" },
   ];
   return (
-    <section className="py-16 px-4 lg:px-12 bg-[#050d1a]">
+    <section className="py-section px-4 lg:px-12 bg-ink">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">UAE Coverage</h2>
-          <p className="text-4xl font-bold text-white">Printer Rental Across All 7 Emirates</p>
-          <p className="text-[#7a94ad] mt-4 max-w-lg mx-auto text-sm">Same-day delivery in Dubai & Abu Dhabi. Free delivery and setup across the UAE.</p>
-        </div>
+        <Reveal className="text-center mb-14">
+          <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">UAE Coverage</p>
+          <h2 className="font-sora text-title font-bold text-white">Printer Rental Across All 7 Emirates</h2>
+          <p className="text-muted mt-5 max-w-lg mx-auto text-[0.9rem]">Same-day delivery in Dubai &amp; Abu Dhabi. Free delivery and setup across the UAE.</p>
+        </Reveal>
         <div className="grid md:grid-cols-2 gap-6 mb-6">
-          {locations.filter((l) => l.highlight).map((loc) => (
-            <Link key={loc.href} href={loc.href} className="group relative rounded-3xl p-8 overflow-hidden hover:-translate-y-1 transition-all duration-300" style={{ background: "linear-gradient(150deg, rgba(15,26,44,0.98) 0%, rgba(8,15,28,0.99) 100%)", border: "1px solid rgba(245,190,83,0.25)", boxShadow: "0 0 40px rgba(245,190,83,0.08), 0 20px 60px rgba(0,0,0,0.4)" }}>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: "inset 0 0 40px rgba(245,190,83,0.06)" }} />
-              <div className="flex items-start justify-between mb-4">
-                <span className="text-4xl">{loc.icon}</span>
-                <span className="text-xs font-bold text-[#f5be53] bg-[#f5be53]/10 border border-[#f5be53]/20 px-3 py-1 rounded-full">{loc.price}</span>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#f5be53] transition-colors">{loc.label}</h3>
-              <p className="text-[#7a94ad] text-sm leading-relaxed mb-6">{loc.desc}</p>
-              <span className="inline-flex items-center gap-2 text-[#f5be53] text-sm font-semibold">View Plans <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></span>
-            </Link>
+          {locations.filter((l) => l.highlight).map((loc, i) => (
+            <Reveal key={loc.href} delay={i * 0.05}>
+              <Link href={loc.href} className="group relative block rounded-panel border border-primary/25 bg-surface-mid p-8 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-4xl">{loc.icon}</span>
+                  <span className="rounded-pill border border-primary/20 bg-primary/10 px-3 py-1 text-caption font-bold text-primary">{loc.price}</span>
+                </div>
+                <h3 className="mb-2 font-sora text-headline font-bold text-white transition-colors group-hover:text-primary">{loc.label}</h3>
+                <p className="mb-6 text-[0.9rem] leading-relaxed text-muted">{loc.desc}</p>
+                <span className="inline-flex items-center gap-2 text-[0.9rem] font-semibold text-primary">
+                  View Plans
+                  <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {locations.filter((l) => !l.highlight).map((loc) => (
-            <Link key={loc.href} href={loc.href} className="group rounded-2xl p-5 hover:-translate-y-0.5 transition-all duration-300" style={{ background: "linear-gradient(150deg, rgba(12,22,38,0.97) 0%, rgba(7,14,26,0.98) 100%)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-2xl">{loc.icon}</span>
-                <h3 className="text-white font-bold text-sm group-hover:text-[#f5be53] transition-colors leading-snug">{loc.label}</h3>
-              </div>
-              <p className="text-slate-500 text-xs leading-relaxed mb-3">{loc.desc}</p>
-              <span className="text-[#f5be53]/70 text-xs font-medium">{loc.price}</span>
-            </Link>
+          {locations.filter((l) => !l.highlight).map((loc, i) => (
+            <FeatureCard
+              key={loc.href}
+              title={loc.label}
+              href={loc.href}
+              delay={(i % 4) * 0.05}
+              body={
+                <>
+                  <p className="mb-2">{loc.desc}</p>
+                  <span className="text-primary/70 text-caption font-medium">{loc.price}</span>
+                </>
+              }
+            />
           ))}
         </div>
         <div className="text-center mt-10">
-          <Link href="/copier-lease-uae/" className="px-6 py-3 border border-[#f5be53]/25 text-[#f5be53] rounded-full text-sm font-medium hover:bg-[#f5be53]/10 transition-colors inline-block">View Nationwide Copier Lease Plans →</Link>
+          <Link href="/copier-lease-uae/" className="inline-block rounded-pill border border-primary/25 px-6 py-3 text-[0.9rem] font-medium text-primary transition-colors hover:bg-primary/10">
+            View Nationwide Copier Lease Plans →
+          </Link>
         </div>
       </div>
     </section>
@@ -421,34 +422,34 @@ function FeaturedProductsSection() {
   const scrollRight = useCallback(() => containerRef.current?.scrollBy({ left: 420, behavior: "smooth" }), []);
 
   return (
-    <section className="py-16 px-4 overflow-hidden">
+    <section className="py-section px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto mb-16 flex justify-between items-end">
-        <div>
-          <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Inventory</h2>
-          <p className="text-4xl font-bold text-white">Elite Hardware Selection</p>
-        </div>
+        <Reveal>
+          <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Inventory</p>
+          <h2 className="font-sora text-title font-bold text-white">Elite Hardware Selection</h2>
+        </Reveal>
         <div className="flex gap-4">
-          <button type="button" onClick={scrollLeft} aria-label="Scroll products left" className="w-12 h-12 rounded-full border border-[#9c8f7c]/20 flex items-center justify-center hover:border-[#f5be53] text-[#d3c5b0] hover:text-[#f5be53] transition-all cursor-pointer">
+          <button type="button" onClick={scrollLeft} aria-label="Scroll products left" className="w-12 h-12 rounded-pill border border-white/[0.1] flex items-center justify-center hover:border-primary text-on-surface-variant hover:text-primary transition-all cursor-pointer">
             <ArrowBack className="text-xl" />
           </button>
-          <button type="button" onClick={scrollRight} aria-label="Scroll products right" className="w-12 h-12 rounded-full bg-[#f5be53] text-[#412d00] flex items-center justify-center hover:scale-110 transition-all cursor-pointer">
+          <button type="button" onClick={scrollRight} aria-label="Scroll products right" className="w-12 h-12 rounded-pill bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-all cursor-pointer">
             <ArrowForward className="text-xl" />
           </button>
         </div>
       </div>
       <div ref={containerRef} className="flex gap-8 no-scrollbar overflow-x-auto pb-8 snap-x max-w-7xl mx-auto scroll-smooth">
         {(loading ? FEATURED_SKELETON : products).map((p, i) => (
-          <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center glass-card rounded-3xl overflow-hidden group">
-            <div className="h-64 bg-[#142032] relative overflow-hidden">
+          <div key={i} className="min-w-[320px] md:min-w-[400px] snap-center rounded-panel border border-white/[0.08] bg-surface-low overflow-hidden group">
+            <div className="h-64 bg-surface-mid relative overflow-hidden">
               {p.image && <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />}
-              {p.brand && <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#f5be53] uppercase tracking-widest">{p.brand}</div>}
+              {p.brand && <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-pill text-[10px] font-bold text-primary uppercase tracking-widest">{p.brand}</div>}
             </div>
             <div className="p-8">
-              <h3 className="text-xl font-bold text-white mb-2">{p.name || "\u00A0"}</h3>
-              <p className="text-[#d3c5b0] text-sm mb-6">{p.desc || "\u00A0"}</p>
+              <h3 className="text-xl font-bold text-white mb-2">{p.name || " "}</h3>
+              <p className="text-on-surface-variant text-sm mb-6">{p.desc || " "}</p>
               <div className="flex justify-between items-center">
-                <span className="text-[#f5be53] font-bold text-lg">{p.priceRental || "\u00A0"}</span>
-                {!loading && <Link href="/products/" className="text-white hover:text-[#f5be53] transition-colors flex items-center gap-2">Details <East className="text-sm" /></Link>}
+                <span className="text-primary font-bold text-lg">{p.priceRental || " "}</span>
+                {!loading && <Link href="/products/" className="text-white hover:text-primary transition-colors flex items-center gap-2">Details <East className="text-sm" /></Link>}
               </div>
             </div>
           </div>
@@ -526,30 +527,32 @@ function ReviewsSectionContent({
   const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   return (
-    <section className="py-24 bg-[#101c2e]/50 relative">
+    <section className="py-section bg-surface-low/50 relative">
       <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
-        <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Wall of Trust</h2>
-        <p className="text-4xl font-bold text-white mb-4">What Our Clients Say</p>
-        {googleReviews && (
-          <GoogleReviewsBadge
-            rating={googleReviews.rating}
-            reviewCount={googleReviews.reviewCount}
-            placeId={googlePlaceId}
-            className="justify-center text-lg"
-          />
-        )}
+        <Reveal>
+          <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Wall of Trust</p>
+          <h2 className="font-sora text-title font-bold text-white mb-5">What Our Clients Say</h2>
+          {googleReviews && (
+            <GoogleReviewsBadge
+              rating={googleReviews.rating}
+              reviewCount={googleReviews.reviewCount}
+              placeId={googlePlaceId}
+              className="justify-center text-lg"
+            />
+          )}
+        </Reveal>
       </div>
       <div className="overflow-hidden" onMouseEnter={() => (pausedRef.current = true)} onMouseLeave={() => (pausedRef.current = false)}>
         <div ref={trackRef} className="flex gap-6 py-4" style={{ width: "max-content" }} suppressHydrationWarning>
           {allTestimonials.map((t, i) => (
-            <div key={i} className="glass-card w-[350px] flex-shrink-0 p-8 rounded-2xl flex flex-col justify-between h-64">
-              <div className="flex text-[#f5be53] gap-1 mb-4">
+            <div key={i} className="w-[350px] flex-shrink-0 rounded-card border border-white/[0.08] bg-surface-mid p-8 flex flex-col justify-between h-64">
+              <div className="flex text-primary gap-1 mb-4">
                 {[1, 2, 3, 4, 5].map((star) => (star <= (t.rating || 5) ? <Star key={star} style={{ fontSize: "1.25rem" }} /> : <Star key={star} style={{ fontSize: "1.25rem", opacity: 0.3 }} />))}
               </div>
-              <p className="text-[#d7e3fc] italic text-sm">&quot;{t.text}&quot;</p>
+              <p className="text-on-surface italic text-sm">&quot;{t.text}&quot;</p>
               <div className="mt-6 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#2a3548] flex items-center justify-center overflow-hidden">
-                  {t.avatarUrl ? <img src={t.avatarUrl} alt={t.name} className="w-full h-full object-cover" /> : <Person className="text-[#f5be53]" />}
+                <div className="w-10 h-10 rounded-full bg-surface-max flex items-center justify-center overflow-hidden">
+                  {t.avatarUrl ? <img src={t.avatarUrl} alt={t.name} className="w-full h-full object-cover" /> : <Person className="text-primary" />}
                 </div>
                 <div>
                   <p className="text-white font-bold text-sm">{t.name}</p>
@@ -566,22 +569,12 @@ function ReviewsSectionContent({
 
 function CTASection() {
   return (
-    <section className="py-16 px-4">
-      <div className="max-w-7xl mx-auto rounded-panel bg-gradient-to-br from-[#f5be53] to-[#c8962e] p-12 md:p-20 relative overflow-hidden text-center md:text-left">
-        <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-12 -left-12 w-96 h-96 bg-black/5 rounded-full blur-3xl"></div>
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12">
-          <div className="max-w-xl">
-            <h2 className="text-4xl md:text-6xl font-bold text-[#412d00] mb-6">Ready to Upgrade?</h2>
-            <p className="text-[#483200] text-lg md:text-xl font-medium">Get a customized proposal for your office equipment within 24 hours.</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/rental-calculator/" className="bg-[#071325] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">Get Your Quote</Link>
-            <Link href="/contact/" className="bg-[#c8962e]/20 border border-[#483200]/30 text-[#412d00] px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm">Contact Support</Link>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CtaBand
+      title="Ready to Upgrade?"
+      body="Get a customized proposal for your office equipment within 24 hours."
+      primary={{ label: "Get Your Quote", href: "/rental-calculator/" }}
+      secondary={{ label: "Contact Support", href: "/contact/" }}
+    />
   );
 }
 
@@ -610,19 +603,19 @@ function FAQSectionContent({ initialFaqs = [] }: { initialFaqs?: { q: string; a:
   }, []);
 
   return (
-    <section className="py-16 px-4 max-w-4xl mx-auto">
-      <div className="text-center mb-16">
-        <h2 className="text-sm font-bold text-[#f5be53] tracking-[0.3em] uppercase mb-4">Questions</h2>
-        <p className="text-4xl font-bold text-white">Frequently Asked</p>
-      </div>
+    <section className="py-section px-4 max-w-4xl mx-auto">
+      <Reveal className="text-center mb-16">
+        <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Questions</p>
+        <h2 className="font-sora text-title font-bold text-white">Frequently Asked</h2>
+      </Reveal>
       <div className="space-y-4">
         {faqs.map((f, i) => (
-          <details key={i} className="rounded-2xl p-6 group cursor-pointer" style={{ background: "linear-gradient(145deg, #0f1a2a 0%, #0a121c 100%)", boxShadow: "6px 6px 16px rgba(0,0,0,0.4), -3px -3px 10px rgba(255,255,255,0.03)" }} open={i === 0}>
+          <details key={i} className="glass-card rounded-card p-6 group cursor-pointer" open={i === 0}>
             <summary className="flex justify-between items-center list-none font-bold text-lg text-white">
               {f.q}
-              <ExpandMore className="text-[#f5be53] group-open:rotate-180 transition-transform" />
+              <ExpandMore className="text-primary group-open:rotate-180 transition-transform" />
             </summary>
-            <p className="mt-4 text-[#d3c5b0] leading-relaxed">{f.a}</p>
+            <p className="mt-4 text-on-surface-variant leading-relaxed">{f.a}</p>
           </details>
         ))}
       </div>
