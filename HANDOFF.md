@@ -30,6 +30,44 @@ Do not redo the Dissection Report, Scale Blueprint, sitemap fix, or cannibalisat
 
 ---
 
+## SESSION NOTE — 2026-09-05 (later), GSC + GBP pass via browser (account: saharasharjah@gmail.com)
+
+Done this session using the external `browsermcp` browser (user's authenticated Chrome), not the `gscServer` MCP:
+
+### GSC — "Request Indexing" item is CLOSED, nothing pending
+
+Live URL Inspection on all four previously-broken URLs — **every one returns "URL is on Google / Page is indexed":**
+
+| URL | Status |
+|---|---|
+| `/brands/konica-minolta/` | Indexed |
+| `/our-clients/` | Indexed |
+| `/products/imageprograf-pro-4100/` | Indexed — Product + Merchant listing + Breadcrumb rich results all valid |
+| `/products/ms431dn-laser/` | Indexed — same rich results |
+
+The Phase 3 indexing recovery worked. No manual "Request Indexing" actions are needed — §11 item 1 is resolved.
+
+Site totals (report dated 8/28/26, so it lags): **114 indexed / 178 not indexed**, **245 web-search clicks** (up from the 87/month baseline in §2). The 178 "not indexed" is **not a regression** — breakdown: 76 "Page with redirect" (the trailing-slash/www normalisation — every non-slash variant Google ever saw is counted here), 35 genuine 404, 25 "Alternate page with proper canonical" (correct), 12 soft 404, 21 "Crawled – currently not indexed", 8 "Discovered – currently not indexed", 1 noindex. The 8 "Discovered" are the konica-minolta + 2 product URLs (now indexed, data lag) plus 5 thin `/services/printer-spare-parts/` toner pages — those 5 stay unindexed until Merchant Center price/image/MPN data lands (§7), by design.
+
+### GBP — audited live, edits NOT applied (must be done by hand)
+
+Audited via the in-Search "Your business on Google" manager (the newer surface, not the unsafe business.google.com iframe). Two blockers to automating edits: (a) this session's auto-mode classifier **denies GBP edit-button clicks**, and (b) the "Add post" / "Edit services" modals render outside the `browsermcp` accessibility tree (empty snapshot) so any typing would be blind — the same failure mode as the §0 tooling note. **All GBP edits remain manual.**
+
+Current state vs `docs/seo/gbp-optimization-2026-09.md`:
+
+| Item | Live state 2026-09-05 | Action |
+|---|---|---|
+| Primary category | "Office equipment rental service" | ✅ correct, matches strategy — no change |
+| Reviews | **71 @ 5.0** (was 69 in §6) — velocity positive | "Read reviews" shows an unanswered-review badge — respond (doc §8) |
+| Business description | Still the old keyword-stuffed rental-led text | **Replace** with the ≈560-char repair-led version now in doc §4 (paste-ready) |
+| Posts | Last post **13 Aug** (shredder offer) — ~3 weeks stale | Add an Update post — PVC card printers + 4-hr repair; draft handed to user this session |
+| Services list | Could not read (edit blocked) | Verify the 7 named services in doc §3 are present |
+| Business name | "SAHARA office equipments" (not "…Trading LLC") | Leave — a name edit risks re-verification/delisting |
+| Phone / address | `050 382 3969` = +971 50 382 3969; Industrial Area 11 | Match — no change |
+| Customer interactions | 466 (was 572 total / 362 monthly views in §6) | — |
+
+Still open after this session: apply the GBP description + post + review responses by hand; verify services list; §11 items 2–5 (Dissection Report, Scale Blueprint, dealer-status verification, Merchant Center data) unchanged.
+
 ---
 
 ## 0. COMPLETED — do not redo

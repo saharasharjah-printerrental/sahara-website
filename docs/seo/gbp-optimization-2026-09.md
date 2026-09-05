@@ -44,13 +44,30 @@ each with a one-line description:
 
 ### 4. Business description (750-char limit)
 Lead with the repair service and the geography, since that's the query this brief is
-solving for — don't bury it under a generic "we do everything" opening:
+solving for — don't bury it under a generic "we do everything" opening.
 
-> Sahara Office Equipments provides printer and photocopier repair across Dubai,
-> Sharjah, and Abu Dhabi, with 4-hour emergency response and OEM parts. Since 2012, we've
-> also supplied printer rental, copier leasing, AMC contracts, and PVC/ID card printers
-> (authorised exclusive UAE reseller for Bravo RTAI & DC 3300) to 150+ UAE businesses.
-> Certified technicians for Canon, HP, Kyocera, Ricoh, Xerox, Brother, and Epson.
+**Current live description (as of 2026-09-05) — keyword-stuffed, rental-led, replace it:**
+
+> "Sahara Printer – Premier Printer Rental UAE & Copier Leasing Dubai (10+ Years)
+> Professional office equipment solutions across Dubai, Abu Dhabi, Sharjah, and all UAE
+> emirates. Top brands: Canon, Kyocera, Konica Minolta, Ricoh, Sharp, Epson, HP, Brother,
+> Xerox. Services: Printer rental UAE | Copier leasing | Repair & maintenance FREE
+> Benefits: Toner, installation, maintenance, fast delivery, customized quotes Your
+> trusted partner for multifunction printer solutions across UAE!"
+
+**Replacement — paste this verbatim into the GBP description field (≈560 chars):**
+
+> Sahara Office Equipments provides printer and photocopier repair across Dubai, Sharjah,
+> and Abu Dhabi — 4-hour emergency response, OEM parts, and certified technicians for
+> Canon, HP, Kyocera, Ricoh, Xerox, Brother, and Epson. Since 2012 we have also supplied
+> printer rental, copier leasing, AMC contracts, paper shredders, plotters, and PVC/ID
+> card printers (authorised exclusive UAE reseller for the Bravo RTAI and DC 3300) to
+> 150+ UAE businesses. Free toner, installation, and maintenance on every rental. Call
+> +971 50 382 3969 or request a quote at saharaprinter.com.
+
+Note: the description change is text-only and low risk — it does not trigger
+re-verification. Do not change the **business name** ("SAHARA office equipments") the
+same way; a name edit can trigger re-verification and temporary delisting.
 
 ### 5. Photos
 "Near me" / Maps results weight photo count and recency. Add, if not already present:
