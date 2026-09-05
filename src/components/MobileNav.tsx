@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, SettingsSuggest, Inventory2, RequestQuote, MoreHoriz, Close, LocationOn, Article, Call, Print, ShoppingCart, Build, Handyman, Groups } from "@mui/icons-material";
+import { Home, SettingsSuggest, Inventory2, RequestQuote, MoreHoriz, Close, LocationOn, Article, Call, Print, ShoppingCart, Build, Handyman, Groups, Badge } from "@mui/icons-material";
 import CartIndicator from "@/components/CartIndicator";
 
 export default function MobileNav() {
@@ -25,6 +25,7 @@ export default function MobileNav() {
     { name: "Toner & Parts", href: "/services/printer-spare-parts/", icon: ShoppingCart },
     { name: "Printer Repair", href: "/services/repair/", icon: Build },
     { name: "AMC Services", href: "/services/amc/", icon: Handyman },
+    { name: "PVC Card Printers", href: "/bravo-card-printers-uae/", icon: Badge },
   ];
 
   const morePages = [
