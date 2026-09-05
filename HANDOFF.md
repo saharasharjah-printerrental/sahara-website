@@ -59,8 +59,8 @@ Current state vs `docs/seo/gbp-optimization-2026-09.md`:
 |---|---|---|
 | Primary category | "Office equipment rental service" | ✅ correct, matches strategy — no change |
 | Reviews | **71 @ 5.0** (was 69 in §6) — velocity positive | "Read reviews" shows an unanswered-review badge — respond (doc §8) |
-| Business description | Still the old keyword-stuffed rental-led text | **Replace** with the ≈560-char repair-led version now in doc §4 (paste-ready) |
-| Posts | Last post **13 Aug** (shredder offer) — ~3 weeks stale | Add an Update post — PVC card printers + 4-hr repair; draft handed to user this session |
+| Business description | User submitted the new ≈560-char repair-led version (doc §4) on **2026-09-05** — **in Google's "validating" / review queue**, not yet public. Public panel still shows the old text until it clears review (hours–2 days). No further action unless it gets rejected. | — |
+| Posts | Last post **13 Aug** (shredder offer) — ~3 weeks stale. Draft Update post (PVC card printers + 4-hr repair, "Learn more" → /bravo-card-printers-uae/) handed to user this session; **not yet posted.** | User to post it |
 | Services list | Could not read (edit blocked) | Verify the 7 named services in doc §3 are present |
 | Business name | "SAHARA office equipments" (not "…Trading LLC") | Leave — a name edit risks re-verification/delisting |
 | Phone / address | `050 382 3969` = +971 50 382 3969; Industrial Area 11 | Match — no change |
