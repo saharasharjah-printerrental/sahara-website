@@ -1,6 +1,34 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
-**Status as of 2026-08-13 (updated after session 2). Execution has begun — see §0 for what is already done.**
+**Status as of 2026-08-13 (updated after session 2), corrected 2026-09-05 — everything below §0 describing "STILL OPEN" or "Next action" items is stale. §0 was accurate as of 2026-08-13 but sections 1–11 were never updated after a large burst of further work. See the correction note immediately below before reading further.**
+
+## CORRECTION — 2026-09-05, read this first
+
+Sections 1–11 below describe the engagement as of 2026-08-13 and say the Dissection Report, Scale Blueprint, sitemap fix, cannibalisation fix, and Merchant Center pages are still open. **They are not.** Confirmed via `git log` on 2026-09-05:
+
+| Item §8/§11 called open | Actual status | Commit |
+|---|---|---|
+| Dissection Report → `docs/seo/dissection-report-2026-08.md` | **Done**, 801 lines, full 7-stage analysis with a live UAE SERP verification addendum | written 2026-08-13 |
+| Scale Blueprint → `docs/seo/scale-blueprint-2026-08.md` | **Done**, 346 lines, 12 sections, kill criteria, first-five-actions table | written 2026-08-13 |
+| `/services/toner/` canonical conflict | **Fixed** — 11 internal links repointed, removed from sitemap | `c99829f` |
+| Sitemap lastmod/silent-D1-failure/missing URL | **Fixed** — root cause was `new Date()` at module scope frozen by the Workers clock; now computed per-request | `a9d3169` |
+| Printer/photocopier cannibalisation (this was L1 in §4, not in the original Phase 3 list but the biggest strategic finding) | **Fixed** — `/services/printer-rental/` no longer claims photocopier terms in meta/schema | `64a0b1e` |
+| Trailing-slash sweep | **Done** — ~51 internal hrefs normalised across Header/Footer/MobileNav/landing pages | `c99829f` |
+| Merchant Center | Pages built (`a4b6e36` "numeric pricing, dual-CTA cart, Merchant Center pages") — **still gated on real price/image/MPN data from the business**, per §7 below, which is still accurate |
+| GBP optimization brief | **New document since**, `docs/seo/gbp-optimization-2026-09.md` (2026-09-04) — a manual checklist for the user to apply in the GBP dashboard, not yet confirmed applied |
+| Blog cluster | 10 posts drafted in `docs/seo/blog-drafts/` **and published to D1** (`e78d3ad`) |
+| AEO answer blocks | Rolled out across service/geo pages (`bcfc641`) |
+
+**What is genuinely still open, confirmed 2026-09-05:**
+1. **GSC "Request Indexing"** for previously-broken URLs — UI-only, cannot be automated, needs the user. (Attempted a live GSC indexing-status check via the `gscServer` MCP this session; `list_properties` hung for 3+ minutes, almost certainly needing an interactive OAuth re-auth — did not force it. Re-run when the user can complete a re-auth prompt if one appears.)
+2. **GBP dashboard changes** in `docs/seo/gbp-optimization-2026-09.md` — not yet confirmed applied.
+3. **Canon/Kyocera/HP/Xerox dealer-status verification** (§6, still open) — needed to know if dealer-locator links are reachable.
+4. **Merchant Center submission** — blocked on real business data (§7), unchanged.
+5. Whether links were purchased (§6 Q2) — unresolved, watch for a recurring charge.
+
+Do not redo the Dissection Report, Scale Blueprint, sitemap fix, or cannibalisation fix — re-read the actual files/commits above instead.
+
+---
 
 ---
 
@@ -389,12 +417,18 @@ Homepage, all 10 service pages, all 9 city/location pages, all 11 brand pages + 
 
 **Deliberately not touched:** `src/app/admin/**` — different surface, own Material Symbols conventions, no SEO stake, explicitly out of scope per the plan.
 
-**Open item found during the brand-pages batch:** `next.config.mjs:51-52` has a pre-existing permanent redirect — `/brands/` (exact path) → `/products/` — that predates this session (added to fix 404s from an old Ubersuggest audit). This makes the rebuilt `/brands/page.tsx` hub currently **unreachable** in the running site. Rebuilt it anyway for consistency; flagged to the user; **no decision made yet** on whether to drop the redirect and let the hub serve, or leave it as dead code. Ask before touching `next.config.mjs`.
+**RESOLVED 2026-09-05:** user chose to drop the redirect. Removed both `/brands` and `/brands/` rules from `next.config.mjs`. Verified live on a fresh `npm run start`: `/brands/` now returns 200 with the rebuilt hub page (previously a stale server process masked this — the first post-edit check still showed the 308 until the old `next start` process on port 3000 was killed and restarted).
+
+**RESOLVED 2026-09-05 — PVC page registration checklist:** verified against the plan file (`~/.claude/plans/we-need-to-address-floating-hejlsberg.md:238-243`). Already done: `sitemap.ts`, `Header.tsx` desktop dropdown, `Footer.tsx`, `public/llms.txt`, admin FAQ page dropdown. Two real gaps found and fixed:
+- `MobileNav.tsx` services list had no PVC/Bravo entry (desktop had it, mobile drawer didn't) — added `{ name: "PVC Card Printers", href: "/bravo-card-printers-uae/", icon: Badge }`.
+- `database/migrations/021_bravo_exclusive_reseller.sql` and `022_seed_pvc_service_page_faqs.sql` existed as files but had **never been executed** against local D1 — confirmed via direct sqlite query (0 rows) before running `npx wrangler d1 execute sahara-printer-db --local --env production --file=...` for both. Verified rows landed and FAQ copy now renders on `/bravo-card-printers-uae/` and the three PVC service pages.
+
+Committed as `4eae396` on the branch (still not pushed to `origin`, per the standing constraint).
 
 ### Next action when work resumes
 
-1. **User's explicit next step:** review the local build (`npm run build` / `npm run start`) before anything goes further — has not been run yet this session, only `tsc --noEmit` per-file plus dev-server live checks.
-2. Decide the `/brands/` redirect question above.
-3. Confirm the PVC page registration checklist (sitemap/nav/llms.txt/FAQ migrations) — verify against the plan file, finish whatever is outstanding.
-4. Resume the SEO engagement (§0–11 above) — nothing from Phase 3–5 there has been started in this session; §11 "Next action when work resumes" in that section is still the right entry point.
+1. `npm run build` and local browser verification — **DONE 2026-09-05**, clean build, no TS errors, no edge-runtime route failures.
+2. `/brands/` redirect — **RESOLVED**, see above.
+3. PVC page registration checklist — **RESOLVED**, see above.
+4. Resume the SEO engagement (§0–11 above) — nothing from Phase 3–5 there has been started yet; §11 "Next action when work resumes" in that section is the entry point. **Note:** GSC "Request Indexing" is UI-only and cannot be automated by the agent — flag this to the user rather than attempting it.
 5. Still nothing pushed to `origin` or deployed — needs explicit user approval first, per the standing constraint.
