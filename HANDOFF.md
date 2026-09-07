@@ -37,13 +37,25 @@ Same session, same branch, commits `c678003` (Track B) and pending Track C commi
 
 **What was deliberately NOT done autonomously, and why:** no new directory accounts were created on any of the 31 candidates, and nothing was posted to GBP. Both are outward-facing, not easily reversible (real business email/NAP goes to a third party; a directory account sometimes needs a password), and the existing zumvu.com password-leak incident in `BACKLINKS-AUTO.md`'s Security Note is a concrete reason to keep a human in the loop for account creation specifically. The two directories already mid-registration (zumvu.com, hotfrog.com) are still stuck awaiting email confirmation since 2026-05-19 — needs someone to check `saharasharjah@gmail.com`.
 
-**Still open:**
-- Track D (GSC snapshot tooling — no d14/d30/d60/d90 measurement has ever been run against the Aug 2026 blueprint's kill criteria).
+**Still open (before Track D, superseded below where Track D closes an item):**
 - **C4 — unresolved security item, carried over from `docs/seo/BACKLINKS-AUTO.md`:** the password `Sahara@2026` for the zumvu.com directory account is still readable in this repo's git history. Rotate it before any further backlink campaign work.
 - Get a free Moz API key (2,500 rows/month, https://moz.com/products/api) if real DA gating matters — every candidate stays UNSCORED by design until then.
 - Confirm the zumvu.com / hotfrog.com email verifications.
 - Execute the directory submissions and GBP posting queue — user committed to this, content/tooling is ready, the actual submissions are manual.
 - Nothing from either session has been pushed to `origin` or deployed.
+
+## SESSION NOTE — 2026-09-07 (continued again), Track D
+
+Same session, same branch. Track D closes the item above — the blueprint's d14/d30/d60/d90 kill-criteria checks have **never been run against a saved artifact before this**; `docs/seo/gsc-export-2026-08/{queries,pages,query_page,overview}.json` are all 0 bytes.
+
+- **Discovered:** `claude-seo/scripts/gsc_query.py` (standalone Python GSC access) has no working auth — `--check`/`sites` returns `Could not build GSC service.` No service account is configured. This is a one-time setup only you can do (grant a GCP service account access under Search Console → Settings → Users) — documented in `docs/seo/gsc-snapshots/README.md`. **What works today is the `gscServer` MCP tool**, already used throughout both this engagement's sessions — snapshots are taken through that, not a standalone script, until the Python auth is set up.
+- Took the **first-ever snapshot**: `docs/seo/gsc-snapshots/2026-09-07.json`, day ~25 of the Aug 13 blueprint cycle. Documented an honest methodology caveat: the query-level cluster breakdown undercounts true totals because GSC anonymizes very low-volume individual queries out of query-dimension results (cluster sum 24 clicks/7,046 impressions vs the ground-truth 110 clicks/10,832 impressions from the page/device-level `get_performance_overview` call) — this is standard GSC API behavior, not a pull error, and is called out explicitly so nobody mistakes the cluster numbers for complete totals.
+- Built `tests/scripts/gsc_snapshot_score.py` — scores any snapshot file against the blueprint's kill criteria in one command, exits non-zero on any FAIL.
+- **Result for 2026-09-07: 5 PASS, 1 FAIL, 2 not-yet-due.** PASS: products-indexed proxy (14/18, target was 12 by d14), `/services/photocopier-rental/` clicks, homepage click share (29%, target <40% by d90), site CTR (1.02%, target >0.80% by d45), total clicks (110, target >100 by d90) — several targets already cleared well ahead of their checkpoint date. FAIL: referring domains (0 legitimate new ones since Aug, target 3+ by d90 — Track C's screening tool exists now but no submissions have been made yet). Not yet due: `/services/amc/` position (13.5, needs <9.5 by d60 ~2026-10-12) and `/printer-rental-dubai/` position (56.2, needs <35 by d90 ~2026-11-11 — 21 positions short, on track to fail without the link acquisition this engagement has repeatedly flagged as the actual ceiling).
+
+**Next snapshot due:** ~2026-10-12 (d60) to check the AMC position criterion specifically; run `python tests/scripts/gsc_snapshot_score.py` against a new dated file in `docs/seo/gsc-snapshots/` following the README's steps.
+
+**All four tracks (A/B/C/D) from the 2026-09-07 plan are now done in some form.** What's left everywhere is either (a) manual execution only the user can do (directory submissions, GBP posting, password rotation, email confirmations), or (b) waiting for a checkpoint date to re-measure. Nothing has been pushed to `origin` or deployed.
 
 ---
 

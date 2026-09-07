@@ -1,0 +1,55 @@
+{
+  "snapshot_date": "2026-09-07",
+  "date_range": { "start": "2026-08-10", "end": "2026-09-06", "days": 28 },
+  "source": "mcp__gscServer__* (GSC Search Analytics API, live, not the stale docs/seo/gsc-export-2026-08/ export)",
+  "methodology_notes": [
+    "overall.* comes from get_performance_overview — a page/device-level aggregate, NOT restricted by the query dimension, so it is the ground-truth total for this date range.",
+    "clusters.* comes from a query,device dimension pull (769 rows). GSC anonymizes/drops very low-volume individual queries from query-dimension results for privacy, so cluster totals UNDERCOUNT the true total (cluster sum: 24 clicks / 7,046 impressions vs the ground-truth 110 clicks / 10,832 impressions from overall.*). This is a known, documented GSC API behavior, not a bug in this pull. Cluster figures are still valid for RELATIVE comparison across snapshots taken with the same methodology — do not read them as complete totals.",
+    "uae_mobile.* comes from a country=are,device dimension pull — page/device-level, NOT query-restricted, so this IS a ground-truth figure (unlike clusters.uae_mobile_query_sample below, which is provided only for cross-checking and inherits the query-dimension undercount).",
+    "products_indexed is a proxy count (distinct /products/{slug}/ pages showing >0 impressions in the page-dimension pull) rather than a formal GSC Coverage index status, to avoid burning URL Inspection API quota (10 URLs/batch, rate-limited) on a routine snapshot. Re-verify via URL Inspection at a real checkpoint (d30, d60, d90) if this proxy and Coverage disagree."
+  ],
+  "overall": {
+    "total_clicks": 110,
+    "total_impressions": 10832,
+    "ctr": 0.0102,
+    "avg_position": 19.8
+  },
+  "uae_mobile": {
+    "clicks": 20,
+    "impressions": 1087,
+    "ctr": 0.0184,
+    "avg_position": 10.7
+  },
+  "uae_desktop": {
+    "clicks": 50,
+    "impressions": 7743,
+    "ctr": 0.0065,
+    "avg_position": 22.9
+  },
+  "clusters_query_sample": {
+    "note": "UNDERCOUNTS true totals — see methodology_notes. Directional only.",
+    "printer_generic": { "clicks": 4, "impressions": 2163, "avg_position": 26.3 },
+    "dubai": { "clicks": 5, "impressions": 1785, "avg_position": 26.3 },
+    "photocopier_generic": { "clicks": 0, "impressions": 869, "avg_position": 30.1 },
+    "other": { "clicks": 1, "impressions": 597, "avg_position": 30.3 },
+    "shredder": { "clicks": 3, "impressions": 362, "avg_position": 18.3 },
+    "ai_surface": { "clicks": 0, "impressions": 299, "avg_position": 2.4 },
+    "abu_dhabi": { "clicks": 1, "impressions": 287, "avg_position": 19.1 },
+    "sharjah": { "clicks": 0, "impressions": 280, "avg_position": 24.5 },
+    "repair_generic": { "clicks": 1, "impressions": 239, "avg_position": 24.0 },
+    "kyocera": { "clicks": 2, "impressions": 74, "avg_position": 23.9 },
+    "brand": { "clicks": 6, "impressions": 43, "avg_position": 2.8 },
+    "amc": { "clicks": 1, "impressions": 39, "avg_position": 17.7 },
+    "plotter_niche": { "clicks": 0, "impressions": 9, "avg_position": 6.4 }
+  },
+  "kill_criteria_pages": {
+    "products_indexed_proxy": { "count": 14, "of": 18, "target_d14": 12, "status": "PASS (day 25 of this cycle, checked late)" },
+    "services_photocopier_rental_clicks": { "clicks_28d": 2, "target_d30": 1, "status": "PASS" },
+    "services_amc_position": { "position": 13.5, "target_d60": 9.5, "status": "NOT YET DUE (d60 ~2026-10-12)", "current_gap": "3.5 positions short of target" },
+    "printer_rental_dubai_position": { "position": 56.2, "target_d90": 35, "status": "NOT YET DUE (d90 ~2026-11-11)", "current_gap": "21.2 positions short — on track to fail without a link acquisition breakthrough, per this engagement's own authority finding" },
+    "homepage_click_share": { "homepage_clicks_28d": 32, "total_clicks_28d": 110, "share": 0.291, "target_d90_max": 0.40, "status": "PASS — already below target" },
+    "site_ctr": { "ctr": 0.0102, "target_d45_min": 0.008, "status": "PASS — already above target" },
+    "referring_domains": { "legitimate_new_domains_since_aug": 0, "target_d90_min": 3, "status": "FAIL if unchanged by d90 — 0 legitimate new referring domains acquired; Track C tooling now exists to work the queue in docs/seo/BACKLINKS-FREE.md but no submissions have been made yet" },
+    "total_clicks": { "clicks_28d": 110, "target_d90_min": 100, "status": "PASS — already above target" }
+  }
+}
