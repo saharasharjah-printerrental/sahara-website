@@ -6,6 +6,18 @@ export const runtime = 'edge';
 
 const BASE = SITE_URL;
 
+// Sep 2026: these two product slugs still exist as `is_active = 1` rows in
+// D1 (so the query below would otherwise emit them), but next.config.mjs
+// permanently 308-redirects both to /products/ ("Fix 404 pages found in
+// Ubersuggest audit"). The sitemap was advertising them as canonical
+// indexable Product pages while every visit immediately redirected away —
+// exactly the shape of GSC's "Products" report flagging a redirect/URL
+// error, since a Product page that always redirects can never carry a
+// valid Product rich result. Excluded here to stop re-submitting them;
+// the underlying D1 rows should be set is_active = 0 to fix this at the
+// source (out of scope for a Next.js code change).
+const DEAD_PRODUCT_SLUGS = new Set(['canon-imageclass-mf644cdw', 'hp-laserjet-pro-m404dn']);
+
 // Parse a D1 timestamp, falling back to the request time when the row has no
 // usable date. Never returns an invalid Date — an unparseable value would
 // serialise as 1970-01-01 in the sitemap.
@@ -100,7 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const pr = await db.prepare('SELECT slug, created_at FROM products WHERE is_active = 1').all();
     productRoutes = ((pr?.results ?? []) as any[])
-      .filter((r) => r.slug)
+      .filter((r) => r.slug && !DEAD_PRODUCT_SLUGS.has(r.slug))
       .map((r) => ({
         url: `${BASE}/products/${r.slug}/`,
         lastModified: rowDate(r.created_at, thisMonth),
