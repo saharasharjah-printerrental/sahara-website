@@ -1,5 +1,31 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## SESSION NOTE — 2026-09-07, full audit + Track A recovery fixes
+
+Full audit and 90-day plan at `C:\Users\SAHARA\.claude\plans\seo-audit-saharaprinter-com-currently-precious-hollerith.md`. Branch: `fix/seo-recovery-track-a` (off `feat/pvc-card-printers-apple-redesign`, commit `01228ee`, **not pushed**).
+
+**Headline finding:** clicks were flat despite the Aug 2026 fixes because most of the impression growth (10,832/mo, up from 8,007) is structurally unclickable — ~400 impressions/mo are synthetic AI-prompt queries at position 2–3 that never convert, and thousands more sit at positions 33–80. Raw impressions/avg-position are no longer valid KPIs for this site.
+
+**Biggest single find:** `/get-quote` → 308 → `/get-quote/` → 308 → `/rental-calculator/` was outranking the real `/printer-rental-sharjah/` page (indexed, healthy, zero impressions) at position 14–15 for "printer rental sharjah" queries. Fixed — see below.
+
+**Done this session (Track A, committed):**
+- Repointed the `/get-quote` redirects at `/printer-rental-sharjah/` instead of `/rental-calculator/`.
+- Stripped printer-rental keyword/meta targeting from `/photocopier-rental-sharjah/` (cannibalisation surgery, same pattern as `64a0b1e`) now that `/printer-rental-sharjah/` owns that intent.
+- Raised `/photocopier-rental-sharjah/`'s sitemap priority above the decaying `/services/photocopier-rental/` hub (908 impressions, position 63.2).
+- Completed the trailing-slash sweep in `Header.tsx`, `MobileNav.tsx`, `BlogPostClient.tsx`, `internalLinks.ts` (~60 unslashed hrefs remained — self-inflicting most of GSC's 76 "Page with redirect" entries) and gave `/printer-rental-sharjah/` real internal link equity (it had exactly one known inbound link before this).
+- Fixed `canon-printer-dubai/page.tsx` — it was a client component shipping `"mainEntity": []` FAQPage schema in SSR HTML (verified live via curl before fixing). Converted to a server component using the shared `lib/faqs.ts` pattern, added the BreadcrumbList it was missing, aligned its AED 300 FAQ answer to the AED 250 sitewide entry price. **`hp-printer-abu-dhabi` and `printer-repair-dubai` were checked at the same time and do NOT have this bug** (state already initialises from real FAQ data) — do not "fix" them, they're fine.
+- Deleted `copier-lease-uae/layout.tsx` — a dead, conflicting metadata export (different title, AED 300 vs the page's AED 250).
+- `npm run build` clean; redirects and schema verified live against a local production server.
+
+**Still open from this session's plan (not started):**
+- Track B (Dubai head-term rebuilds — `services/repair` vs `printer-repair-dubai` role inversion, `services/photocopier-rental` and `printer-rental-dubai` rebuilds, Kyocera repair page).
+- Track C (backlink acquisition tool on the existing `BACKLINKS-AUTO.md` pipeline — user explicitly declined the `backlink-generator-tool` GitHub repo after it was identified as a non-functional URL blaster with no editorial link creation).
+- Track D (GSC snapshot tooling — no d14/d30/d60/d90 measurement has ever been run against the Aug 2026 blueprint's kill criteria).
+- **C4 — unresolved security item, carried over from `docs/seo/BACKLINKS-AUTO.md`:** the password `Sahara@2026` for the zumvu.com directory account is still readable in this repo's git history. Rotate it before any further backlink campaign work.
+- Nothing from this session has been pushed to `origin` or deployed.
+
+---
+
 **Status as of 2026-08-13 (updated after session 2), corrected 2026-09-05 — everything below §0 describing "STILL OPEN" or "Next action" items is stale. §0 was accurate as of 2026-08-13 but sections 1–11 were never updated after a large burst of further work. See the correction note immediately below before reading further.**
 
 ## CORRECTION — 2026-09-05, read this first
