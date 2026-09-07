@@ -117,7 +117,27 @@ const serviceSchema = {
   "offers": [
     {
       "@type": "Offer",
-      "itemOffered": { "@type": "Product", "name": "Bravo RTAI Colour Reverse Transfer Card Printer" },
+      "itemOffered": {
+        "@type": "Product",
+        "name": "Bravo RTAI Colour Reverse Transfer Card Printer",
+        // GSC "Product snippets" flagged this nested Product invalid: 'Either
+        // "offers", "review", or "aggregateRating" should be specified' — a
+        // bare { "@type": "Product", "name": ... } with no offers of its own
+        // fails Google's Product validation even though the PARENT Offer
+        // above carries real pricing. Fixed by giving the Product its own
+        // AggregateOffer, built from the two real configurations already in
+        // pricingTable below (standard AED 9,000-15,000, with holographic
+        // security film AED 15,000-22,000) — not fabricated, same numbers
+        // quoted to customers on this page.
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "AED",
+          "lowPrice": 9000,
+          "highPrice": 22000,
+          "offerCount": 2,
+          "availability": "https://schema.org/InStock",
+        },
+      },
       "priceCurrency": "AED",
       "priceValidUntil": PRICE_VALID_UNTIL,
       "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "AED", "minPrice": 9000, "maxPrice": 22000, "valueAddedTaxIncluded": false },
@@ -126,7 +146,21 @@ const serviceSchema = {
     },
     {
       "@type": "Offer",
-      "itemOffered": { "@type": "Product", "name": "Bravo DC 3300 Direct to Card Printer" },
+      "itemOffered": {
+        "@type": "Product",
+        "name": "Bravo DC 3300 Direct to Card Printer",
+        // Same fix — AggregateOffer built from the two real DC 3300
+        // configurations below (S/simplex AED 5,000-7,500, D/duplex +
+        // encoding AED 8,500-14,000).
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "AED",
+          "lowPrice": 5000,
+          "highPrice": 14000,
+          "offerCount": 2,
+          "availability": "https://schema.org/InStock",
+        },
+      },
       "priceCurrency": "AED",
       "priceValidUntil": PRICE_VALID_UNTIL,
       "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "AED", "minPrice": 5000, "maxPrice": 14000, "valueAddedTaxIncluded": false },

@@ -39,14 +39,37 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.saharaprinter.com/services/printer-spare-parts/" },
 };
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Printer Spare Parts & Toner Supplies UAE",
-  "description": "Genuine OEM printer toners, drums, maintenance kits, and spare parts for enterprise printers and photocopiers. Canon, HP, Ricoh, Kyocera.",
-  "brand": { "@type": "Brand", "name": "Sahara Office Equipments" },
-  "offers": { "@type": "AggregateOffer", "priceCurrency": "AED" },
-};
+// Sep 2026: GSC "Product snippets" flagged this schema invalid — the
+// AggregateOffer below shipped with no lowPrice/highPrice/offerCount at
+// all, because it was a static module-level constant, disconnected from
+// the live `supplies` data the page actually renders (fetched separately
+// in getLiveSupplies(), below). Per HANDOFF.md §7, most supply rows are
+// still "Contact for Pricing" placeholders pending real business data for
+// Merchant Center — so rather than fabricate numbers, buildProductSchema()
+// computes the AggregateOffer from whichever supplies are ACTUALLY priced
+// right now (price_aed > 0) and returns null — omitting the Product schema
+// entirely — if none are. A page making no Product claim is valid; a
+// Product claiming AggregateOffer with no prices is not.
+function buildProductSchema(supplies: { priceAED: number }[]) {
+  const priced = supplies.filter((s) => s.priceAED > 0);
+  if (priced.length === 0) return null;
+  const prices = priced.map((s) => s.priceAED);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Printer Spare Parts & Toner Supplies UAE",
+    "description": "Genuine OEM printer toners, drums, maintenance kits, and spare parts for enterprise printers and photocopiers. Canon, HP, Ricoh, Kyocera.",
+    "brand": { "@type": "Brand", "name": "Sahara Office Equipments" },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "AED",
+      "lowPrice": Math.min(...prices),
+      "highPrice": Math.max(...prices),
+      "offerCount": priced.length,
+      "availability": "https://schema.org/InStock",
+    },
+  };
+}
 
 const defaultSupplies = [
   { id: "1", name: "Canon C5045/5051/5250/5255 Toner Premium Black C-EXV 28", brand: "Canon", category: "Toner" as const, compatibleModels: "C5045, C5051, C5250, C5255", color: "Black", yield: "25,000 pages", price: "Contact for Pricing", stock: 50, image: "", isActive: true },
@@ -79,14 +102,19 @@ const breadcrumbSchema = {
 // SparePartsCartClient still re-fetches client-side for realtime updates;
 // this is only the pre-hydration value.
 async function getLiveSupplies() {
+  // priceAED (numeric, 0 when unpriced) rides alongside the display string
+  // so buildProductSchema() above can compute a real AggregateOffer from
+  // whichever items are actually priced, without re-parsing the display
+  // text. defaultSupplies are all "Contact for Pricing" placeholders, so
+  // they're always priceAED: 0.
   try {
     const db = (getRequestContext().env as any)?.DB;
-    if (!db) return defaultSupplies;
+    if (!db) return defaultSupplies.map((s) => ({ ...s, priceAED: 0 }));
     const result = await db.prepare(
       "SELECT * FROM supplies WHERE isActive = 1 ORDER BY name ASC"
     ).all();
     const rows = result?.results ?? [];
-    if (!rows.length) return defaultSupplies;
+    if (!rows.length) return defaultSupplies.map((s) => ({ ...s, priceAED: 0 }));
     return rows.map((s: any) => {
       const resolved = resolveSupplyPrice(s);
       return {
@@ -98,6 +126,7 @@ async function getLiveSupplies() {
         color: s.color || "",
         yield: s.yield || "",
         price: resolved.display,
+        priceAED: resolved.aed,
         stock: s.stock ?? 0,
         image: normalizeR2Url(s.image || ""),
         alt_text: s.alt_text || "",
@@ -108,7 +137,7 @@ async function getLiveSupplies() {
       };
     });
   } catch {
-    return defaultSupplies;
+    return defaultSupplies.map((s) => ({ ...s, priceAED: 0 }));
   }
 }
 
@@ -134,9 +163,10 @@ const trail = [
 
 export default async function PrinterSparePartsPage() {
   const supplies = await getLiveSupplies();
+  const productSchema = buildProductSchema(supplies);
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      {productSchema && <script type="application/ld+json">{JSON.stringify(productSchema)}</script>}
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <main className="min-h-screen bg-surface">
         <Header />
