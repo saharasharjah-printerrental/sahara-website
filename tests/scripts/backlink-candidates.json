@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Google Business Profile",
+    "url": "https://business.google.com/",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Bing Places for Business",
+    "url": "https://www.bingplaces.com/",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Apple Maps Business Connect",
+    "url": "https://businessconnect.apple.com/",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Yellow Pages UAE (yp.ae)",
+    "url": "https://www.yp.ae/add-business",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Connect.ae",
+    "url": "https://connect.ae/en/add-business",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "hidubai.com",
+    "url": "https://hidubai.com/businesses/add",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Yellowpages.ae (Emirates247)",
+    "url": "https://yellowpages.ae/free-listing",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Dubizzle Business Directory",
+    "url": "https://business.dubizzle.com/",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Foursquare (Business)",
+    "url": "https://business.foursquare.com/",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Waze Places",
+    "url": "https://www.waze.com/livemap",
+    "category": "Tier 1 — UAE Business Directories (Highest Priority)"
+  },
+  {
+    "name": "Crunchbase",
+    "url": "https://www.crunchbase.com/organization/add",
+    "category": "Tier 2 — Global SMB Directories (High DA, Safe for UAE)"
+  },
+  {
+    "name": "Trustpilot",
+    "url": "https://business.trustpilot.com/",
+    "category": "Tier 2 — Global SMB Directories (High DA, Safe for UAE)"
+  },
+  {
+    "name": "Glassdoor (Company Profile)",
+    "url": "https://www.glassdoor.com/employers/claim/",
+    "category": "Tier 2 — Global SMB Directories (High DA, Safe for UAE)"
+  },
+  {
+    "name": "LinkedIn Company Page",
+    "url": "https://www.linkedin.com/company/",
+    "category": "Tier 2 — Global SMB Directories (High DA, Safe for UAE)"
+  },
+  {
+    "name": "Facebook Business Page",
+    "url": "https://www.facebook.com/business/",
+    "category": "Tier 2 — Global SMB Directories (High DA, Safe for UAE)"
+  },
+  {
+    "name": "MyDubai (Dubai SME Hub)",
+    "url": "https://www.sme.ae/en/business-directory",
+    "category": "Tier 3 — Industry & UAE-Specific Directories"
+  },
+  {
+    "name": "UAE Business Directory (uae-business.com)",
+    "url": "https://uae-business.com/add-listing",
+    "category": "Tier 3 — Industry & UAE-Specific Directories"
+  },
+  {
+    "name": "Kompass UAE",
+    "url": "https://ae.kompass.com/registration/",
+    "category": "Tier 3 — Industry & UAE-Specific Directories"
+  },
+  {
+    "name": "D&B Hoovers (Dun & Bradstreet)",
+    "url": "https://www.dnb.com/",
+    "category": "Tier 3 — Industry & UAE-Specific Directories"
+  },
+  {
+    "name": "Justdial UAE (if applicable)",
+    "url": "https://business.justdial.com/",
+    "category": "Tier 3 — Industry & UAE-Specific Directories"
+  },
+  {
+    "name": "YellowPages-UAE Brand Hubs (yellowpages-uae.com)",
+    "url": "https://www.yellowpages-uae.com/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "ReachUAE Business Directory (reachuae.com)",
+    "url": "https://www.reachuae.com/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "ATN UAE (atninfo.com)",
+    "url": "https://www.atninfo.com/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "TradersFind (tradersfind.com)",
+    "url": "https://www.tradersfind.com/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "Aiwa.ae",
+    "url": "https://aiwa.ae/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "YallaPages (yallapages.ae)",
+    "url": "https://yallapages.ae/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "B2B-UAE (b2b-uae.ae)",
+    "url": "https://b2b-uae.ae/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "MyMidlist — Middle East Business Directory (mymidlist.com)",
+    "url": "https://mymidlist.com/",
+    "category": "Tier 4 — Brand-Hub & B2B Portals (added Aug 2026 from competitor gap analysis)"
+  },
+  {
+    "name": "Bravo Global — Partner Program / dealer listing ⭐ TOP PRIORITY",
+    "url": "https://bravoglobal.com/partnerprogram/",
+    "category": "Tier 5 — Manufacturer & Partner Directories (relationship-gated, free)"
+  },
+  {
+    "name": "Canon Middle East — Where to Buy / store locator",
+    "url": "https://en.canon-me.com/where-to-buy/",
+    "category": "Tier 5 — Manufacturer & Partner Directories (relationship-gated, free)"
+  },
+  {
+    "name": "Sharjah Chamber of Commerce & Industry — Business Directory",
+    "url": "https://www.sharjah.gov.ae/BusinessDirectory/Index",
+    "category": "Tier 5 — Manufacturer & Partner Directories (relationship-gated, free)"
+  }
+]

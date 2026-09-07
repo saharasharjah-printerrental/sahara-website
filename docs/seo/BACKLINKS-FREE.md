@@ -231,6 +231,12 @@
 - **Link target:** `/services/papercut-print-management`
 - **Notes:** Direct topical match to an existing dedicated service page, and untapped by all three tracked competitors.
 
+### 33. Sharjah Chamber of Commerce & Industry — Business Directory
+- **Link type:** `.gov.ae` government business directory citation — highest-trust TLD available to this business
+- **URL:** https://www.sharjah.gov.ae/BusinessDirectory/Index
+- **Action:** Sahara is a registered Sharjah trading entity (per `docs/seo/backlink-gap-2026-08.md` B6), so a listing may already exist under trade-license registration and just need claiming/updating with the website URL and current NAP — check before assuming a fresh application is needed. If no listing exists, membership/registration with the Chamber is the prerequisite (not just a form submission), so allow more lead time than the Tier 1-4 directories above.
+- **Notes:** Sharjah is the business's actual headquarters (Industrial Area 11) — a `.gov.ae` citation from the home-emirate chamber is exactly the kind of prominence signal Google's local-pack algorithm weighs, and it's unclaimed by all three tracked competitors, none of which are Sharjah-based. **Not yet screened by `tests/scripts/backlink_guard.py`** — add it to `tests/scripts/backlink-candidates.json` (or re-run the extraction script against this file) before the next screening pass.
+
 ---
 
 ## NAP Submission Template

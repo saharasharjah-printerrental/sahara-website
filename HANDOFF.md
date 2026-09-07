@@ -17,12 +17,33 @@ Full audit and 90-day plan at `C:\Users\SAHARA\.claude\plans\seo-audit-saharapri
 - Deleted `copier-lease-uae/layout.tsx` — a dead, conflicting metadata export (different title, AED 300 vs the page's AED 250).
 - `npm run build` clean; redirects and schema verified live against a local production server.
 
-**Still open from this session's plan (not started):**
-- Track B (Dubai head-term rebuilds — `services/repair` vs `printer-repair-dubai` role inversion, `services/photocopier-rental` and `printer-rental-dubai` rebuilds, Kyocera repair page).
-- Track C (backlink acquisition tool on the existing `BACKLINKS-AUTO.md` pipeline — user explicitly declined the `backlink-generator-tool` GitHub repo after it was identified as a non-functional URL blaster with no editorial link creation).
+## SESSION NOTE — 2026-09-07 (continued), Track B + Track C
+
+Same session, same branch, commits `c678003` (Track B) and pending Track C commit. Still **not pushed**.
+
+**Track B — done:**
+- `services/repair/page.tsx`: retitled from "Printer Repair Dubai" (collided with `/printer-repair-dubai/`'s exact-match query, and this UAE-wide hub was winning the collision at pos 23.0 vs the geo page's 38.6) to "Printer & Photocopier Repair UAE". Service schema `alternateName` and HowTo `name` updated to match.
+- `printer-repair-dubai/page.tsx`: H1 now actually says "Dubai" (it didn't before). Added a district response-time table, a 4-step process section, and Service+HowTo schema — brought to comparable depth with the UAE hub instead of losing to it.
+- `services/photocopier-rental/page.tsx`: retitled from "Photocopier Rental in Dubai" (collided with `/printer-rental-dubai/`) to "Photocopier Rental UAE" — title/H1 only, the page already had real depth (comparison table, device fleet, 12-item FAQ).
+- `printer-rental-dubai/page.tsx`: dropped "photocopier rental dubai" / "copier lease dubai" from keywords meta (belonged to other pages), same surgery as `64a0b1e`.
+- **New page** `kyocera-printer-repair/page.tsx`: built on a verified live SERP check (Sahara absent from page one for "kyocera printer repair dubai" while 8+ competitors including tracked-competitor sosauh.com run dedicated pages) — explicitly **not** built on the Aug 2026 report's "position 2.4" claim, which was 7 impressions/mo and doesn't reappear in the current GSC export at all. One UAE-wide page (Dubai/Abu Dhabi/Sharjah), not three geo pages. Registered in sitemap, Footer, internalLinks.ts, cross-linked from `brands/kyocera` and `services/repair`.
+
+**Track C — done (code/tooling only, see caveat below):**
+- Built `tests/scripts/backlink_guard.py` — a real DA-gated, spam-filtered candidate screener, in place of the `backlink-generator-tool` GitHub repo the client asked for. That repo was cloned and read: it's a client-side iframe/popup/ping URL blaster with zero editorial link creation (cannot produce a link of any DA), and its README promotes AddMeFast/Hit4Hit/RankBoostUp click-exchange networks — the same class of asset that produced the 25-link, 16-domain, all-`page_from_rank:0` spam incident already documented in this file's §6. Full writeup: `docs/seo/backlink-verification-2026-09.md`.
+- **Re-verified the known spam links live** (not a re-read of the stale export): 14 of 25 are now DNS-dead, 4 have had the link removed, 7 still live (only `robuta.com` and `computers1000.com` remain dofollow). Confirms the existing "do not disavow" position with fresh evidence — most of it is dying off on its own.
+- **Screened all 31 legitimate directory candidates** from `docs/seo/BACKLINKS-FREE.md` (extracted programmatically into `tests/scripts/backlink-candidates.json` so it stays in sync with the doc): 0 rejected, 0 auto-approved, all 31 correctly reported UNSCORED because no Moz/Bing API key is configured — the screener will not fabricate a DA number, per this whole engagement's "never invent data" rule.
+- Added a new Tier 5 candidate to `BACKLINKS-FREE.md`: **Sharjah Chamber of Commerce & Industry Business Directory** (`sharjah.gov.ae/BusinessDirectory/Index`) — a `.gov.ae` citation from the business's actual home emirate, unclaimed by all three tracked competitors, none of which are Sharjah-based. May already have a dormant listing under trade-license registration — check before assuming a fresh application.
+- Wrote `docs/seo/gbp-content-queue-2026-09.md` — 3 ready-to-paste GBP Post drafts (Kyocera repair, Dubai 4-hour response, PVC card printers — the last one still not posted since it was drafted 2026-09-05), review response templates by scenario, 3 Q&A seed pairs, and a standing weekly/biweekly/monthly cadence. This operationalizes the "GBP weekly upkeep" commitment — content is ready, posting itself is still manual (GBP browser automation remains documented as unsafe, don't retry it).
+
+**What was deliberately NOT done autonomously, and why:** no new directory accounts were created on any of the 31 candidates, and nothing was posted to GBP. Both are outward-facing, not easily reversible (real business email/NAP goes to a third party; a directory account sometimes needs a password), and the existing zumvu.com password-leak incident in `BACKLINKS-AUTO.md`'s Security Note is a concrete reason to keep a human in the loop for account creation specifically. The two directories already mid-registration (zumvu.com, hotfrog.com) are still stuck awaiting email confirmation since 2026-05-19 — needs someone to check `saharasharjah@gmail.com`.
+
+**Still open:**
 - Track D (GSC snapshot tooling — no d14/d30/d60/d90 measurement has ever been run against the Aug 2026 blueprint's kill criteria).
 - **C4 — unresolved security item, carried over from `docs/seo/BACKLINKS-AUTO.md`:** the password `Sahara@2026` for the zumvu.com directory account is still readable in this repo's git history. Rotate it before any further backlink campaign work.
-- Nothing from this session has been pushed to `origin` or deployed.
+- Get a free Moz API key (2,500 rows/month, https://moz.com/products/api) if real DA gating matters — every candidate stays UNSCORED by design until then.
+- Confirm the zumvu.com / hotfrog.com email verifications.
+- Execute the directory submissions and GBP posting queue — user committed to this, content/tooling is ready, the actual submissions are manual.
+- Nothing from either session has been pushed to `origin` or deployed.
 
 ---
 
