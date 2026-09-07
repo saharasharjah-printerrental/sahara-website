@@ -1,5 +1,21 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## SESSION NOTE — 2026-09-07 (post-deploy), reindex request + product snippet audit
+
+Pushed straight to `main` (commit `a9c79c0`), deployed. User reported still seeing a "product snippet" issue in GSC after the A/B/C/D deploy and asked to re-audit everything.
+
+**Full live re-verification, all PASS:** `/get-quote` → single hop → `/printer-rental-sharjah/`; `photocopier-rental-sharjah` keywords no longer mention printer rental; `canon-printer-dubai` FAQPage schema non-empty; `copier-lease-uae` title correct (no more dual metadata); `services/repair` retitled off "Printer Repair Dubai"; `printer-repair-dubai` H1 now says Dubai; `services/photocopier-rental` retitled off "in Dubai"; `printer-rental-dubai` keywords no longer claim photocopier/copier-lease terms; `kyocera-printer-repair` live and indexable; trailing-slash fixes present in rendered nav HTML; sitemap carries `printer-rental-sharjah` at the right priority.
+
+**Product snippet bug found and fixed:** `canon-imageclass-mf644cdw` and `hp-laserjet-pro-m404dn` are still `is_active = 1` in D1, so `sitemap.ts` kept emitting them as canonical Product pages — while `next.config.mjs` permanently 308-redirects both to `/products/`. A sitemap-submitted Product URL that always redirects can never carry a valid Product rich result; this is very likely what GSC's Products/Merchant listings report was flagging. Excluded both from the sitemap generation (`DEAD_PRODUCT_SLUGS` in `sitemap.ts`). **The underlying D1 rows should also be set `is_active = 0`** — no D1 write access from this environment (wrangler isn't authenticated here), needs to be done via the admin dashboard or a migration.
+
+All 16 genuinely live `/products/*/` pages were checked individually — each has a real `image` and at least one `Offer` with `price`/`priceCurrency`/`availability` in its Product JSON-LD. No missing-field bug found there.
+
+**Investigated but deliberately not "fixed":** Google's well-documented non-critical warning `Missing field "shippingDetails"/"hasMerchantReturnPolicy" (in "offers")` is a plausible second contributor to whatever the user is seeing — it's one of the most common entries in GSC's Products report sitewide, not specific to this site. Did not add it because the product pages have no actual checkout/cart flow (lead-gen "Get Quote" CTAs only, verified — no `/checkout/` link anywhere on `products/[slug]/page.tsx`), and the site's existing `returns-refunds/` and `shipping-delivery/` pages are explicitly scoped to toner/spare-parts consumables ("purchased online"), not to the rental/sale equipment in the `products` table. Fabricating an equipment return/shipping policy that doesn't reflect a real transaction flow would be inaccurate structured data — worse than the current non-critical warning. **Needs the user's actual equipment sale/return terms (if any exist) before this can be added correctly**, or explicit confirmation to ignore it as non-critical.
+
+**Reindexing — no programmatic capability exists.** Checked: the Google Indexing API v3 wrapper (`claude-seo/scripts/indexing_notify.py`) has no working auth in this environment (same missing service-account issue as `gsc_query.py`, confirmed via `--status` returning `Could not build Indexing service`) — and separately, that API is officially scoped to JobPosting/BroadcastEvent content only, not general pages, so it wouldn't be the right tool even with credentials. GSC's "Request Indexing" button is UI-only, as already documented earlier in this file. **URLs worth manually requesting indexing for, in priority order:** `/kyocera-printer-repair/` (brand new page), `/canon-printer-dubai/` (schema fix), `/printer-repair-dubai/`, `/services/repair/`, `/services/photocopier-rental/`, `/printer-rental-dubai/`, `/photocopier-rental-sharjah/`, `/copier-lease-uae/`, `/printer-rental-sharjah/`, and the sitemap itself (resubmit via GSC → Sitemaps after this deploy clears, so Google picks up the two now-removed dead product URLs).
+
+---
+
 ## SESSION NOTE — 2026-09-07, full audit + Track A recovery fixes
 
 Full audit and 90-day plan at `C:\Users\SAHARA\.claude\plans\seo-audit-saharaprinter-com-currently-precious-hollerith.md`. Branch: `fix/seo-recovery-track-a` (off `feat/pvc-card-printers-apple-redesign`, commit `01228ee`, **not pushed**).
