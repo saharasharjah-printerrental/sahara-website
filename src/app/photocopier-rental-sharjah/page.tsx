@@ -44,23 +44,24 @@ export async function generateMetadata(): Promise<Metadata> {
   title: "Photocopier Rental Sharjah | Copier Lease from AED 250/mo",
   description:
     "Photocopier & copier rental in Sharjah from AED 250/month. Based in Industrial Area 11 — same-day delivery to SAIF Zone, Hamriyah, Al Majaz and Industrial Areas 1-18. Zero deposit, free toner, 4-hour response. Canon & Kyocera. ☎ +971503823969",
+  // Sep 2026: printer-rental terms moved to /printer-rental-sharjah/, the
+  // dedicated page for that intent (see its file comment) — this page now
+  // targets photocopier/copier rental only, to stop the two Sharjah pages
+  // splitting the same demand.
   keywords: [
     "photocopier rental sharjah",
-    "printer rental sharjah",
     "copier lease sharjah",
-    "SAIF Zone printer rental",
+    "SAIF Zone photocopier rental",
     "industrial area sharjah copier",
     "canon kyocera rental sharjah",
     "zero deposit copier sharjah",
-    "printer lease uae",
     "photocopier hire sharjah",
     "office equipment rental sharjah",
     "copier rental services in sharjah",
     "photocopier for rent sharjah",
     "copier leasing in sharjah",
-    "leasing printer in sharjah",
     "copier lease in sharjah",
-    "hamriyah free zone printer rental",
+    "hamriyah free zone photocopier rental",
   ],
   alternates: { canonical: "https://www.saharaprinter.com/photocopier-rental-sharjah/" },
   openGraph: {
@@ -89,7 +90,7 @@ const localBusinessSchema = {
   name: "Sahara Office Equipments — Sharjah Photocopier Rental",
   legalName: "Sahara Office Equipment Trading LLC",
   description:
-    "Photocopier and printer rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
+    "Photocopier rental in Sharjah from AED 250/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
   url: "https://www.saharaprinter.com/photocopier-rental-sharjah",
   telephone: "+971503823969",
   email: "info@saharaprinter.com",

@@ -31,14 +31,15 @@ interface BlogPostClientProps {
 }
 
 const serviceLinks = [
-  { href: "/services/printer-rental", label: "Printer Rental" },
-  { href: "/services/photocopier-rental", label: "Photocopier Rental" },
-  { href: "/services/amc", label: "AMC" },
-  { href: "/services/repair", label: "Printer Repair" },
-  { href: "/services/printer-spare-parts", label: "Toner & Parts" },
-  { href: "/printer-rental-dubai", label: "Printer Rental Dubai" },
-  { href: "/printer-rental-abu-dhabi", label: "Printer Rental Abu Dhabi" },
-  { href: "/photocopier-rental-sharjah", label: "Photocopier Sharjah" },
+  { href: "/services/printer-rental/", label: "Printer Rental" },
+  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/services/amc/", label: "AMC" },
+  { href: "/services/repair/", label: "Printer Repair" },
+  { href: "/services/printer-spare-parts/", label: "Toner & Parts" },
+  { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
+  { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi" },
+  { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah" },
+  { href: "/photocopier-rental-sharjah/", label: "Photocopier Sharjah" },
 ];
 
 export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostClientProps) {

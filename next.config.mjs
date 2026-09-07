@@ -42,11 +42,16 @@ const nextConfig = {
       // rule matches first (Next.js redirects() ignores which source has the
       // slash when both are present — the earlier array entry wins) would
       // otherwise hand back a no-slash destination, forcing a second redirect
-      // hop through Next's own trailing-slash normalization. GSC flagged this
-      // exact two-hop chain on /get-quote/ (Aug 2026 export, ~650 impressions
-      // stuck on a page that could never actually be crawled as canonical).
-      { source: '/get-quote', destination: '/rental-calculator/', permanent: true },
-      { source: '/get-quote/', destination: '/rental-calculator/', permanent: true },
+      // hop through Next's own trailing-slash normalization.
+      //
+      // Sep 2026: repointed from /rental-calculator/ to /printer-rental-sharjah/.
+      // GSC showed /get-quote still indexed and ranking (pos 14-15, ~100
+      // impressions/mo) for "printer rental sharjah" queries while the real
+      // page, /printer-rental-sharjah/, had zero impressions despite being
+      // indexed and healthy. Sending this stale URL's equity at the actual
+      // target page instead of the calculator.
+      { source: '/get-quote', destination: '/printer-rental-sharjah/', permanent: true },
+      { source: '/get-quote/', destination: '/printer-rental-sharjah/', permanent: true },
       // Fix 404 pages found in Ubersuggest audit
       { source: '/products/canon-imageclass-mf644cdw', destination: '/products/', permanent: true },
       { source: '/products/canon-imageclass-mf644cdw/', destination: '/products/', permanent: true },

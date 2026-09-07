@@ -13,8 +13,8 @@ export default function MobileNav() {
 
   const bottomNavItems = [
     { name: "Home", href: "/", icon: Home },
-    { name: "Services", href: "/services", icon: SettingsSuggest },
-    { name: "Products", href: "/products", icon: Inventory2 },
+    { name: "Services", href: "/services/", icon: SettingsSuggest },
+    { name: "Products", href: "/products/", icon: Inventory2 },
     { name: "Get Quote", href: "/rental-calculator/", icon: RequestQuote },
   ];
 
@@ -29,11 +29,11 @@ export default function MobileNav() {
   ];
 
   const morePages = [
-    { name: "About Us", href: "/about", icon: Article },
-    { name: "Clients", href: "/our-clients", icon: Groups },
-    { name: "Blog", href: "/blogs", icon: Article },
-    { name: "Locations", href: "/printer-rental-dubai", icon: LocationOn },
-    { name: "Contact", href: "/contact", icon: Call },
+    { name: "About Us", href: "/about/", icon: Article },
+    { name: "Clients", href: "/our-clients/", icon: Groups },
+    { name: "Blog", href: "/blogs/", icon: Article },
+    { name: "Locations", href: "/printer-rental-dubai/", icon: LocationOn },
+    { name: "Contact", href: "/contact/", icon: Call },
   ];
 
   const isActive = (href: string) => {

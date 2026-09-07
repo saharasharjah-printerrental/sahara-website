@@ -11,25 +11,25 @@ import { Print, CopyAll, Handyman, Build, Inventory, ShoppingCart, Home, Setting
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Clients", href: "/our-clients" },
-  { name: "Blogs", href: "/blogs" },
-  { name: "Products", href: "/products" },
-  { name: "Contact", href: "/contact" },
+  { name: "About", href: "/about/" },
+  { name: "Clients", href: "/our-clients/" },
+  { name: "Blogs", href: "/blogs/" },
+  { name: "Products", href: "/products/" },
+  { name: "Contact", href: "/contact/" },
 ];
 
 const brands = [
-  { name: "HP", href: "/brands/hp" },
-  { name: "Canon", href: "/brands/canon" },
-  { name: "Ricoh", href: "/brands/ricoh" },
-  { name: "Xerox", href: "/brands/xerox" },
-  { name: "Kyocera", href: "/brands/kyocera" },
-  { name: "Brother", href: "/brands/brother" },
-  { name: "Samsung", href: "/brands/samsung" },
-  { name: "Lexmark", href: "/brands/lexmark" },
-  { name: "Sharp", href: "/brands/sharp" },
-  { name: "Epson", href: "/brands/epson" },
-  { name: "Konica Minolta", href: "/brands/konica-minolta" },
+  { name: "HP", href: "/brands/hp/" },
+  { name: "Canon", href: "/brands/canon/" },
+  { name: "Ricoh", href: "/brands/ricoh/" },
+  { name: "Xerox", href: "/brands/xerox/" },
+  { name: "Kyocera", href: "/brands/kyocera/" },
+  { name: "Brother", href: "/brands/brother/" },
+  { name: "Samsung", href: "/brands/samsung/" },
+  { name: "Lexmark", href: "/brands/lexmark/" },
+  { name: "Sharp", href: "/brands/sharp/" },
+  { name: "Epson", href: "/brands/epson/" },
+  { name: "Konica Minolta", href: "/brands/konica-minolta/" },
 ];
 
 const services = [
@@ -48,15 +48,15 @@ const services = [
 const bottomNavItems = [
   { name: "Home", href: "/", icon: Home },
   { name: "Services", href: "/services/", icon: SettingsSuggest },
-  { name: "Products", href: "/products", icon: Inventory2 },
+  { name: "Products", href: "/products/", icon: Inventory2 },
 ];
 
 // Mobile "More" dropdown items
 const moreNavItems = [
-  { name: "Clients", href: "/our-clients", icon: Groups },
-  { name: "Locations", href: "/printer-rental-dubai", icon: LocationOn },
-  { name: "Blog", href: "/blogs", icon: Article },
-  { name: "Contact", href: "/contact", icon: Call },
+  { name: "Clients", href: "/our-clients/", icon: Groups },
+  { name: "Locations", href: "/printer-rental-dubai/", icon: LocationOn },
+  { name: "Blog", href: "/blogs/", icon: Article },
+  { name: "Contact", href: "/contact/", icon: Call },
 ];
 
 export default function Header() {
@@ -65,17 +65,17 @@ export default function Header() {
   const [isBrandsOpen, setIsBrandsOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [brands, setBrands] = useState<{ name: string; href: string }[]>([
-  { name: "HP", href: "/brands/hp" },
-  { name: "Canon", href: "/brands/canon" },
-  { name: "Ricoh", href: "/brands/ricoh" },
-  { name: "Xerox", href: "/brands/xerox" },
-  { name: "Kyocera", href: "/brands/kyocera" },
-  { name: "Brother", href: "/brands/brother" },
-  { name: "Samsung", href: "/brands/samsung" },
-  { name: "Lexmark", href: "/brands/lexmark" },
-  { name: "Sharp", href: "/brands/sharp" },
-  { name: "Epson", href: "/brands/epson" },
-  { name: "Konica Minolta", href: "/brands/konica-minolta" },
+  { name: "HP", href: "/brands/hp/" },
+  { name: "Canon", href: "/brands/canon/" },
+  { name: "Ricoh", href: "/brands/ricoh/" },
+  { name: "Xerox", href: "/brands/xerox/" },
+  { name: "Kyocera", href: "/brands/kyocera/" },
+  { name: "Brother", href: "/brands/brother/" },
+  { name: "Samsung", href: "/brands/samsung/" },
+  { name: "Lexmark", href: "/brands/lexmark/" },
+  { name: "Sharp", href: "/brands/sharp/" },
+  { name: "Epson", href: "/brands/epson/" },
+  { name: "Konica Minolta", href: "/brands/konica-minolta/" },
 ]);
   const [settings, setSettings] = useState<any>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
@@ -409,11 +409,11 @@ export default function Header() {
                   {/* ── Pages ── */}
                   <p className="text-[9px] font-bold text-slate-600 uppercase tracking-[0.2em] px-2 pb-1">Pages</p>
                   {[
-                    { name: "Get Quote", href: "/rental-calculator",    icon: RequestQuote },
-                    { name: "About Us",  href: "/about",                icon: InfoOutlined },
-                    { name: "Blogs",     href: "/blogs",                icon: Article      },
-                    { name: "Locations", href: "/printer-rental-dubai", icon: LocationOn   },
-                    { name: "Contact",   href: "/contact",              icon: Call         },
+                    { name: "Get Quote", href: "/rental-calculator/",    icon: RequestQuote },
+                    { name: "About Us",  href: "/about/",                icon: InfoOutlined },
+                    { name: "Blogs",     href: "/blogs/",                icon: Article      },
+                    { name: "Locations", href: "/printer-rental-dubai/", icon: LocationOn   },
+                    { name: "Contact",   href: "/contact/",              icon: Call         },
                   ].map((item) => {
                     const active = isActive(item.href);
                     return (

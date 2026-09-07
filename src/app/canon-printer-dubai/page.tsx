@@ -1,8 +1,5 @@
-"use client";
-
 export const runtime = 'edge';
 
-import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -11,87 +8,79 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import CtaBand from "@/components/ui/CtaBand";
+import { getFaqsForPage, buildFaqSchema } from "@/lib/faqs";
+import type { FaqItem } from "@/lib/faqs";
 
+// Sep 2026: converted from a client component whose FAQPage JSON-LD shipped
+// as `"mainEntity": []` in SSR HTML (state initialised to [], only
+// populated from localStorage in useEffect, which never runs server-side —
+// verified live via curl before this fix). Same bug class as the Aug 2026
+// brand-page Loading... bug and the copier-lease-uae fix. hp-printer-abu-dhabi
+// and printer-repair-dubai were checked at the same time and do NOT have
+// this bug (their state already initialises from defaultFaqs), so only this
+// page needed the conversion. Also adds the BreadcrumbList schema this page
+// was missing relative to its two siblings, and aligns the AED 300 price
+// quoted in its own FAQ answer to the AED 250 entry price used sitewide.
 const trail = [{ label: "Home", href: "/" }, { label: "Brands", href: "/brands/canon/" }, { label: "Canon Printer Dubai" }];
 
-export default function CanonPrinterDubai() {
-  const [, setSettings] = useState<any>(null);
-  const [faqs, setFaqs] = useState<{q: string; a: string}[]>([]);
+const DEFAULT_FAQS: FaqItem[] = [
+  { q: "Do you rent Canon printers in Dubai?", a: "Yes! We offer a wide range of Canon printers and photocopiers for rent in Dubai, including imageRUNNER, i-SENSYS, and imageCLASS series." },
+  { q: "What Canon models are available for rental in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, i-SENSYS MF, imageCLASS, and MAXIFY series. From compact A4 printers to heavy-duty A3 copiers." },
+  { q: "How much does Canon printer rental cost in Dubai?", a: "Canon printer rental in Dubai starts from AED 250/month for A4 models, with A3 enterprise copiers from AED 500-2000/month. All include free toner." },
+  { q: "Do you provide Canon printer repair in Dubai?", a: "Yes, our certified technicians provide on-site Canon printer repair in Dubai with 4-hour emergency response time." },
+  { q: "Is Canon toner included in the rental price?", a: "Yes! All our Canon printer rentals in Dubai include unlimited genuine Canon toner at no extra cost." },
+  { q: "Can I upgrade my Canon printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your Canon printer anytime during the contract." },
+  { q: "Do you offer Canon printer AMC in Dubai?", a: "Yes, we offer Annual Maintenance Contracts for Canon printers covering all repairs, toner, and preventive maintenance." },
+  { q: "What areas in Dubai do you serve for Canon rentals?", a: "We serve all Dubai areas including Business Bay, JLT, Deira, Marina, DIFC, Sheikh Zayed Road, and all other districts." },
+];
 
-  useEffect(() => {
-    const stored = localStorage.getItem("sahara_settings");
-    if (stored) {
-      setSettings(JSON.parse(stored));
-    }
+const canonModels = [
+  { name: "Canon imageRUNNER ADVANCE C356i", type: "A4 Color MFP", speed: "35 ppm", features: "Print, Copy, Scan, Send" },
+  { name: "Canon imageRUNNER ADVANCE 5540i", type: "A3 B&W", speed: "40 ppm", features: "High-speed, Security" },
+  { name: "Canon imageRUNNER ADVANCE C5250", type: "A3 Color", speed: "50 ppm", features: "Full Color, Professional" },
+  { name: "Canon i-SENSYS MF655Cdn", type: "A4 Color", speed: "21 ppm", features: "Compact, Network" },
+];
 
-    const faqStored = localStorage.getItem("sahara_faqs");
-    if (faqStored) {
-      const allFaqs = JSON.parse(faqStored);
-      const pageFaqs = allFaqs.filter((f: any) => f.pageSlug === "canon-dubai" && f.isActive)
-        .sort((a: any, b: any) => a.sortOrder - b.sortOrder)
-        .map((f: any) => ({ q: f.question, a: f.answer }));
-      setFaqs(pageFaqs.length > 0 ? pageFaqs : defaultFaqs);
-    } else {
-      setFaqs(defaultFaqs);
-    }
-  }, []);
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Sahara Office Equipments - Canon Dubai",
+  "description": "Canon printer rental in Dubai. imageRUNNER, i-SENSYS, imageCLASS series with zero deposit and free toner.",
+  "url": "https://www.saharaprinter.com/canon-printer-dubai/",
+  "telephone": "+971503823969",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Business Bay",
+    "addressLocality": "Dubai",
+    "addressCountry": "AE"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Dubai"
+  },
+  "priceRange": "AED 250-2000",
+  "openingHours": "24/7"
+};
 
-  const defaultFaqs = [
-    { q: "Do you rent Canon printers in Dubai?", a: "Yes! We offer a wide range of Canon printers and photocopiers for rent in Dubai, including imageRUNNER, i-SENSYS, and imageCLASS series." },
-    { q: "What Canon models are available for rental in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, i-SENSYS MF, imageCLASS, and MAXIFY series. From compact A4 printers to heavy-duty A3 copiers." },
-    { q: "How much does Canon printer rental cost in Dubai?", a: "Canon printer rental in Dubai starts from AED 300/month for A4 models, with A3 enterprise copiers from AED 500-2000/month. All include free toner." },
-    { q: "Do you provide Canon printer repair in Dubai?", a: "Yes, our certified technicians provide on-site Canon printer repair in Dubai with 4-hour emergency response time." },
-    { q: "Is Canon toner included in the rental price?", a: "Yes! All our Canon printer rentals in Dubai include unlimited genuine Canon toner at no extra cost." },
-    { q: "Can I upgrade my Canon printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your Canon printer anytime during the contract." },
-    { q: "Do you offer Canon printer AMC in Dubai?", a: "Yes, we offer Annual Maintenance Contracts for Canon printers covering all repairs, toner, and preventive maintenance." },
-    { q: "What areas in Dubai do you serve for Canon rentals?", a: "We serve all Dubai areas including Business Bay, JLT, Deira, Marina, DIFC, Sheikh Zayed Road, and all other districts." },
-  ];
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.saharaprinter.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Brands", "item": "https://www.saharaprinter.com/brands/canon/" },
+    { "@type": "ListItem", "position": 3, "name": "Canon Printer Dubai", "item": "https://www.saharaprinter.com/canon-printer-dubai/" }
+  ]
+};
 
-  const canonModels = [
-    { name: "Canon imageRUNNER ADVANCE C356i", type: "A4 Color MFP", speed: "35 ppm", features: "Print, Copy, Scan, Send" },
-    { name: "Canon imageRUNNER ADVANCE 5540i", type: "A3 B&W", speed: "40 ppm", features: "High-speed, Security" },
-    { name: "Canon imageRUNNER ADVANCE C5250", type: "A3 Color", speed: "50 ppm", features: "Full Color, Professional" },
-    { name: "Canon i-SENSYS MF655Cdn", type: "A4 Color", speed: "21 ppm", features: "Compact, Network" },
-  ];
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments - Canon Dubai",
-    "description": "Canon printer rental in Dubai. imageRUNNER, i-SENSYS, imageCLASS series with zero deposit and free toner.",
-    "url": "https://www.saharaprinter.com/canon-printer-dubai",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Business Bay",
-      "addressLocality": "Dubai",
-      "addressCountry": "AE"
-    },
-    "areaServed": {
-      "@type": "State",
-      "name": "Dubai"
-    },
-    "priceRange": "AED 300-2000",
-    "openingHours": "24/7"
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  };
+export default async function CanonPrinterDubai() {
+  const faqs = await getFaqsForPage("canon-dubai", DEFAULT_FAQS);
+  const faqSchema = buildFaqSchema(faqs);
 
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
 
       <main className="min-h-screen bg-surface">
         <Header />

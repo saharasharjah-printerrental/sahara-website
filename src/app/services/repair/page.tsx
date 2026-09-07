@@ -212,7 +212,7 @@ export default function RepairPage() {
           eyebrow="Factory-Certified Technicians"
           title={
             <>
-              Printer Repair
+              {"Printer Repair "}
               <br />
               <span className="text-primary">Dubai &amp; UAE</span>
             </>
@@ -349,11 +349,13 @@ export default function RepairPage() {
         {/* Related — cross-link to Dubai-specific repair page to signal complementary (not duplicate) intent */}
         <Section flush tone="raised">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="mb-4 font-sora text-headline font-bold text-white">Based in Dubai?</h2>
+            <h2 className="mb-4 font-sora text-headline font-bold text-white">Based in Dubai or Sharjah?</h2>
             <p className="text-muted">
               This page covers our full UAE-wide repair process, brands serviced, and SLA terms. For Dubai
               district coverage, local response times, and area-specific details, see{" "}
               <a href="/printer-repair-dubai/" className="font-semibold text-primary hover:underline">Printer Repair Dubai</a>.
+              Our head office and fastest technician response are based in{" "}
+              <a href="/printer-rental-sharjah/" className="font-semibold text-primary hover:underline">Sharjah</a>.
             </p>
           </div>
         </Section>
