@@ -43,9 +43,18 @@ export async function generateMetadata(): Promise<Metadata> {
   // This page owns every copier / photocopier / MFP query. /services/printer-rental/
   // was previously competing for the same terms and winning, leaving this page at
   // position 48 on 1,863 impressions and 1 click. Keep copier vocabulary here.
-  title: "Photocopier Rental in Dubai | Copier Lease from AED 500/mo",
-  description: "Photocopier rental in Dubai, Sharjah & Abu Dhabi from AED 500/month. A3 multifunction copiers — print, copy, scan, fax. Canon imageRUNNER, Kyocera TASKalfa. Zero deposit, free toner, 4-hour response. ☎ +971503823969",
-  keywords: "photocopier rental in dubai, photocopier rental, photocopier rental dubai, copier rental dubai, copier rental uae, photocopier leasing, copier on rent, photocopier for rent, copier lease dubai, copier rental services in sharjah, photocopier rental in uae, a3 photocopier rental dubai, multifunction copier rental dubai, canon imagerunner rental uae, kyocera copier rental dubai, photocopier lease abu dhabi",
+  //
+  // Sep 2026: retitled away from "Photocopier Rental in Dubai" — this page
+  // is the UAE-wide hub (the OG title below already said "UAE"), but the
+  // <title> tag led with "in Dubai," colliding with /printer-rental-dubai/'s
+  // geo intent and likely diluting this page's own decay (908 impressions,
+  // position 53.8 -> 63.2, while /photocopier-rental-sharjah/ outranks it at
+  // 9.1 for the bare "photocopier rental" query). Body content already has
+  // real depth (comparison table, device fleet, workflow features, 12-item
+  // FAQ) — the fix here is title/H1 framing, not more content.
+  title: "Photocopier Rental UAE | A3 Copier Lease from AED 500/mo",
+  description: "Photocopier rental across the UAE — Dubai, Sharjah & Abu Dhabi — from AED 500/month. A3 multifunction copiers — print, copy, scan, fax. Canon imageRUNNER, Kyocera TASKalfa. Zero deposit, free toner, 4-hour response. ☎ +971503823969",
+  keywords: "photocopier rental uae, photocopier rental, photocopier rental in uae, copier rental dubai, copier rental uae, photocopier leasing, copier on rent, photocopier for rent, copier lease dubai, copier rental services in sharjah, photocopier rental in dubai, a3 photocopier rental dubai, multifunction copier rental dubai, canon imagerunner rental uae, kyocera copier rental dubai, photocopier lease abu dhabi",
   openGraph: {
     title: "Photocopier Rental UAE | A3 Copier Lease Dubai Sharjah | Sahara Office Equipments",
     description: "Rent A3 multifunction photocopiers with print, copy, scan and fax. Canon & Kyocera. From AED 500/month, zero deposit, free toner. Serving all UAE.",
@@ -259,9 +268,9 @@ export default async function PhotocopierRentalPage() {
           eyebrow="A3 Multifunction · Print · Copy · Scan · Fax"
           title={
             <>
-              Photocopier Rental
+              {"Photocopier Rental "}
               <br />
-              <span className="text-primary">Dubai &amp; UAE</span>
+              <span className="text-primary">UAE</span>
             </>
           }
           answer={

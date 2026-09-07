@@ -36,7 +36,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
   title: "Printer Rental Dubai | AED 250/mo | Zero Deposit | Sahara",
   description: "Printer rental Dubai from AED 250/month. Zero deposit, free toner & maintenance. 4-hr emergency response. Business Bay, JLT, DIFC, Marina, Deira & all areas. Call +971503823969",
-  keywords: "printer rental dubai, photocopier rental dubai, copier lease dubai, printer rental business bay, printer rental DIFC, printer rental JLT, canon printer rental dubai, kyocera printer dubai, zero deposit printer rental dubai",
+  // Sep 2026: dropped "photocopier rental dubai" and "copier lease dubai"
+  // from keywords — those are /services/photocopier-rental/'s and
+  // /copier-lease-uae/'s meta targets respectively (same surgery as 64a0b1e).
+  // This page's own AED 500/1000 tiers in the OfferCatalog below describe
+  // its real product lineup, not a competing keyword claim, so left as-is.
+  keywords: "printer rental dubai, printer rental business bay, printer rental DIFC, printer rental JLT, canon printer rental dubai, kyocera printer dubai, zero deposit printer rental dubai",
   openGraph: {
     title: "Printer Rental Dubai | Sahara Office Equipments",
     description: "Canon & Kyocera printer rental in Dubai from AED 250/month. Zero deposit, free toner, 4-hour response. Serving Business Bay, JLT, DIFC, Marina, Deira and all Dubai districts.",
@@ -252,7 +257,7 @@ export default async function PrinterRentalDubai() {
             <Reveal className="max-w-2xl">
               <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Dubai · Zero Deposit · Same-Day Delivery</p>
               <h1 className="font-sora text-display-xl font-extrabold text-white">
-                Printer Rental
+                {"Printer Rental "}
                 <br />
                 <span className="text-primary">Dubai</span>
               </h1>

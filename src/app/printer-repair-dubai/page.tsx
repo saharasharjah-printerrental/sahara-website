@@ -28,6 +28,28 @@ const defaultFaqs = [
 
 const trail = [{ label: "Home", href: "/" }, { label: "Repair Services", href: "/services/repair/" }, { label: "Printer Repair Dubai" }];
 
+// Sep 2026: depth pass. This page previously covered ~505 words against
+// /services/repair/'s ~1150 while carrying the exact-match "Printer Repair
+// Dubai" query — the reverse of what should rank. Added the district
+// response-time table and process-steps section below, an H1 that now says
+// "Dubai" (it didn't before), and Service/HowTo schema matching the UAE
+// hub's richness so this page can actually compete for its own head term.
+const dubaiDistricts = [
+  { area: "Business Bay, DIFC, Downtown Dubai", response: "2-hour priority dispatch" },
+  { area: "JLT, Dubai Marina, Al Sufouh", response: "4-hour standard response" },
+  { area: "Deira, Bur Dubai, Al Karama", response: "4-hour standard response" },
+  { area: "Sheikh Zayed Road corridor", response: "4-hour standard response" },
+  { area: "Al Quoz, Al Barsha", response: "4-hour standard response" },
+  { area: "Jebel Ali, Dubai South, DIP", response: "Same-day, scheduled dispatch" },
+];
+
+const repairProcessSteps = [
+  { step: "01", title: "Call or WhatsApp", desc: "Describe the fault and printer model. Dispatch triages by district and machine to send the right technician first time.", time: "< 5 min" },
+  { step: "02", title: "Technician En Route", desc: "A certified engineer is dispatched from our nearest Dubai coverage point. Priority queue for Business Bay, DIFC and Downtown.", time: "< 2 hrs (priority) / < 4 hrs" },
+  { step: "03", title: "On-Site Diagnosis", desc: "Full fault diagnosis on your machine with a transparent, itemised quote before any part is touched — no surprise charges.", time: "15–30 min" },
+  { step: "04", title: "Repair & Sign-Off", desc: "Genuine OEM parts installed, a test print run confirms the fix, and you receive a service report with a 30-day workmanship warranty.", time: "30–120 min" },
+];
+
 export default function PrinterRepairDubai() {
   const [, setSettings] = useState<any>(null);
   // Initialized with defaultFaqs (not []) so the server-rendered HTML — what
@@ -59,6 +81,42 @@ export default function PrinterRepairDubai() {
     { icon: LayerStackIcon, title: "Deep Cleaning", body: "Interior cleaning, roller cleaning, belt replacement, printhead maintenance" },
     { icon: ClockIcon, title: "Emergency Repairs", body: "4-hour response for critical issues, same-day service for urgent requests" },
   ];
+
+  const repairServiceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Printer Repair Service Dubai",
+    "description": "On-site printer and photocopier repair in Dubai with 2-hour priority response for Business Bay, DIFC and Downtown, and 4-hour standard response citywide. Genuine OEM parts, certified technicians, 30-day workmanship warranty.",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Sahara Office Equipments",
+      "legalName": "Sahara Office Equipment Trading LLC",
+      "telephone": "+971503823969"
+    },
+    "areaServed": { "@type": "City", "name": "Dubai" },
+    "serviceType": "Printer Repair",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "AED",
+      "price": "150",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Book Printer Repair in Dubai",
+    "description": "Steps to get an on-site printer or photocopier repair technician dispatched in Dubai from Sahara Office Equipments.",
+    "totalTime": "PT2H",
+    "estimatedCost": { "@type": "MonetaryAmount", "currency": "AED", "value": "150" },
+    "step": repairProcessSteps.map((s, i) => ({
+      "@type": "HowToStep",
+      "position": i + 1,
+      "name": s.title,
+      "text": s.desc
+    }))
+  };
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -106,6 +164,8 @@ export default function PrinterRepairDubai() {
 
   return (
     <>
+      <script type="application/ld+json">{JSON.stringify(repairServiceSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
@@ -129,7 +189,7 @@ export default function PrinterRepairDubai() {
               <Reveal>
                 <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Printer Repair Dubai</p>
                 <h1 className="font-sora text-display-xl font-extrabold text-white">
-                  Printer &amp; Photocopier <span className="text-primary">Repair</span>
+                  Printer &amp; Photocopier Repair <span className="text-primary">Dubai</span>
                 </h1>
                 <p className="mt-6 max-w-xl text-body text-muted">
                   Professional printer repair services in Dubai with 4-hour emergency response. All brands serviced
@@ -166,10 +226,60 @@ export default function PrinterRepairDubai() {
           </div>
         </section>
 
+        <Section flush>
+          <div className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
+            {[
+              { value: "2 Hrs", label: "Priority Response (DIFC/Business Bay)" },
+              { value: "4 Hrs", label: "Standard Response, Citywide" },
+              { value: "AED 150", label: "Callout From" },
+              { value: "30 Days", label: "Workmanship Warranty" },
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="text-2xl md:text-3xl font-bold text-primary">{s.value}</p>
+                <p className="mt-1 text-caption uppercase tracking-widest text-muted">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
         <Section title="Our Printer Repair Services in Dubai" align="center">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {repairServices.map((s) => (
               <FeatureCard key={s.title} icon={s.icon} title={s.title} body={s.body} />
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Response Time by Dubai District" subtitle="Dispatch is scheduled by district and technician location, not a single citywide queue." align="center" tone="raised">
+          <div className="mx-auto max-w-3xl overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-white/10 text-caption uppercase tracking-widest text-muted">
+                  <th className="py-3 pr-4">District</th>
+                  <th className="py-3">Response Target</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dubaiDistricts.map((d) => (
+                  <tr key={d.area} className="border-b border-white/5">
+                    <td className="py-3 pr-4 font-semibold text-white">{d.area}</td>
+                    <td className="py-3 text-on-surface-variant">{d.response}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Section>
+
+        <Section title="How a Dubai Repair Call Works" subtitle="From your call to a working printer — typically under 4 hours, faster in priority districts." align="center">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {repairProcessSteps.map((s) => (
+              <div key={s.step} className="rounded-card border border-white/[0.08] bg-surface-low p-6">
+                <p className="mb-2 text-3xl font-bold text-primary/40">{s.step}</p>
+                <h3 className="mb-2 text-lg font-bold text-white">{s.title}</h3>
+                <p className="mb-3 text-sm text-on-surface-variant">{s.desc}</p>
+                <p className="text-caption font-semibold uppercase tracking-widest text-primary">{s.time}</p>
+              </div>
             ))}
           </div>
         </Section>
@@ -186,7 +296,7 @@ export default function PrinterRepairDubai() {
 
         <CtaBand
           title="Need Printer Repair in Dubai?"
-          body="Get a technician dispatched within 4 hours. Free diagnosis for AMC clients."
+          body="Get a technician dispatched within 4 hours — 2 hours for Business Bay, DIFC and Downtown. Free diagnosis for AMC clients."
           primary={{ label: "Request Repair", href: "/rental-calculator/" }}
           secondary={{ label: "Call Now", href: "tel:+971503823969" }}
         />

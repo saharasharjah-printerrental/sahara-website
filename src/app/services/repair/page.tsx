@@ -20,14 +20,20 @@ import {
   TruckIcon,
 } from "@/components/icons";
 
+// Sep 2026: retitled away from "Printer Repair Dubai" — that exact phrase
+// was this page's title AND /printer-repair-dubai/'s target query, and Google
+// ranked this UAE-wide hub (pos 23.0) ahead of the dedicated geo page (pos
+// 38.6, H1 didn't even say "Dubai"). Roles were inverted. This page now
+// owns the UAE-wide/brand-service intent; /printer-repair-dubai/ owns the
+// Dubai geo intent and was strengthened to match (see its own file).
 export const metadata: Metadata = {
-  title: "Printer Repair Dubai | Fix Printer Near Me | HP Service Center | Sahara",
-  description: "On-site printer repair near you in Dubai, Sharjah & Abu Dhabi. Fix printer fast — 4-hr emergency response, OEM parts. Canon, HP, Kyocera, Xerox, Ricoh. HP Service Center Dubai. ☎ +971503823969",
-  keywords: "printer repair dubai, printer services near me, fix printer near me, printer repairing near me, hp service center dubai, hp service center in dubai, printer fixing near me, printer fix services, photocopier repair sharjah, canon printer repair uae, kyocera service uae, printer technician dubai, printer service and repair",
+  title: "Printer & Photocopier Repair UAE | All Major Brands | Sahara",
+  description: "On-site printer & photocopier repair across Dubai, Sharjah & Abu Dhabi — 4-hr emergency response, OEM parts only. Canon, HP, Kyocera, Xerox, Ricoh. HP Service Center Dubai. ☎ +971503823969",
+  keywords: "printer repair uae, printer repair service, printer services near me, fix printer near me, printer repairing near me, hp service center dubai, hp service center in dubai, printer fixing near me, printer fix services, photocopier repair sharjah, canon printer repair uae, kyocera service uae, printer technician dubai, printer service and repair",
   openGraph: {
-    title: "Printer Repair Service Dubai & UAE | Sahara Office Equipments",
+    title: "Printer & Photocopier Repair Service UAE | Sahara Office Equipments",
     description: "On-site printer repair with 4-hour emergency response across UAE. Certified technicians for Canon, HP, Kyocera, Xerox, Ricoh and all major brands.",
-    images: [{ url: "https://www.saharaprinter.com/images/homement.webp", width: 1200, height: 630, alt: "Printer Repair Dubai UAE" }],
+    images: [{ url: "https://www.saharaprinter.com/images/homement.webp", width: 1200, height: 630, alt: "Printer Repair UAE" }],
     url: "https://www.saharaprinter.com/services/repair/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
@@ -40,7 +46,7 @@ const repairServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Printer Repair Service UAE",
-  "alternateName": "On-Site Photocopier Repair Dubai",
+  "alternateName": "On-Site Photocopier Repair UAE",
   "description": "Professional on-site printer and photocopier repair service across UAE. Factory-certified technicians service all major brands including Canon, HP, Kyocera, Ricoh, and Xerox. 4-hour emergency response, OEM parts, 98% first-visit fix rate.",
   "provider": {
     "@type": "LocalBusiness",
@@ -72,7 +78,7 @@ const repairServiceSchema = {
 const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  "name": "How to Get Printer Repair Service in Dubai UAE",
+  "name": "How to Get Printer Repair Service in the UAE",
   "description": "Steps to book on-site printer repair service from Sahara Office Equipments in UAE",
   "totalTime": "PT4H",
   "estimatedCost": { "@type": "MonetaryAmount", "currency": "AED", "value": "Contact for quote" },
@@ -212,9 +218,9 @@ export default function RepairPage() {
           eyebrow="Factory-Certified Technicians"
           title={
             <>
-              {"Printer Repair "}
+              {"Printer & Photocopier Repair "}
               <br />
-              <span className="text-primary">Dubai &amp; UAE</span>
+              <span className="text-primary">UAE</span>
             </>
           }
           answer={
@@ -293,6 +299,11 @@ export default function RepairPage() {
               </div>
             ))}
           </div>
+          <p className="mt-8 text-center text-caption text-muted">
+            Kyocera specialist? See our dedicated{" "}
+            <a href="/kyocera-printer-repair/" className="font-semibold text-primary hover:underline">Kyocera printer repair page</a>{" "}
+            for ECOSYS and TASKalfa fault guides and city-by-city response times.
+          </p>
         </Section>
 
         <Section eyebrow="Process" title="How a Repair Call Works" subtitle="From your call to a working printer — typically under 4 hours." align="center" tone="raised">

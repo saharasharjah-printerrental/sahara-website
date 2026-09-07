@@ -60,7 +60,8 @@ export default function KyoceraBrandPage() {
                 <p className="text-sm leading-relaxed text-on-surface-variant">
                   Sahara Office Equipments is an authorized Kyocera dealer in UAE, supplying TASKalfa ECOSYS models
                   with the industry&apos;s lowest cost per page. Sales, rental from{" "}
-                  <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across
+                  <strong className="text-white">AED 250/month</strong>, AMC contracts, and{" "}
+                  <a href="/kyocera-printer-repair/" className="text-primary hover:underline">on-site repair</a> across
                   Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
                 </p>
               </div>

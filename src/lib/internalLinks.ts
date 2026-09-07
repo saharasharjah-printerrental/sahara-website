@@ -35,6 +35,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/services/amc/", label: "Annual Maintenance Contract", type: "service" },
       { href: "/services/printer-rental/", label: "Printer Rental UAE", type: "service" },
       { href: "/printer-repair-dubai/", label: "Printer Repair Dubai", type: "location" },
+      { href: "/kyocera-printer-repair/", label: "Kyocera Printer Repair", type: "location" },
     ],
     relatedSlugs: [
       "what-a-copier-rental-service-must-deliver-to-a-client",
@@ -411,7 +412,7 @@ export const RELATED_BRAND_MAP: Record<string, { services: string[]; blogs: stri
   kyocera: {
     services: ["/services/printer-rental/", "/services/amc/"],
     blogs: ["printer-rental-vs-buying-uae-2026-cost-breakdown", "total-cost-of-printer-ownership"],
-    locations: ["/printer-rental-dubai/", "/printer-rental-abu-dhabi/"],
+    locations: ["/printer-rental-dubai/", "/printer-rental-abu-dhabi/", "/kyocera-printer-repair/"],
   },
   ricoh: {
     services: ["/services/amc/", "/services/printer-rental/"],
@@ -466,6 +467,7 @@ export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/printer-repair-dubai/": "printer repair Dubai",
   "/canon-printer-dubai/": "Canon printer Dubai",
   "/hp-printer-abu-dhabi/": "HP printer Abu Dhabi",
+  "/kyocera-printer-repair/": "Kyocera printer repair",
   "/brands/canon/": "Canon printers",
   "/brands/hp/": "HP printers",
   "/brands/kyocera/": "Kyocera printers",
