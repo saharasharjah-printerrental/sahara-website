@@ -1,5 +1,26 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## SESSION NOTE — 2026-09-07 (later), real GSC Product snippets fix via browsermcp
+
+The earlier same-day session's product-snippet investigation (sitemap dead-redirect fix, `a9c79c0`) was a reasonable hypothesis from code inspection alone, but **not the actual cause** — confirmed by live GSC inspection this session. `@browsermcp/mcp` was installed (`claude mcp add-json browsermcp ...`, connects to a real Chrome extension the user pairs manually, distinct from the built-in `claude-in-chrome` tool) and paired with the `saharasharjah@gmail.com` browser session, which has real GSC access to the property. Requires a session restart (`claude --continue`) after registration before the new MCP tools load — noted for next time this comes up.
+
+GSC → Product snippets report: **0 Valid, 3 Invalid (2 critical issues)**. Exact findings, read directly from the report, not inferred:
+
+| Issue | Page | Root cause |
+|---|---|---|
+| `Either "offers", "review", or "aggregateRating" should be specified` (2 items: Bravo RTAI, Bravo DC 3300) | `/services/pvc-card-printer-sales/` | The Service schema's `offers[].itemOffered` nested a bare `{ "@type": "Product", "name": "..." }` with no `offers` of its own. Google validates nested Product nodes as standalone listings regardless of nesting. |
+| `Missing field "lowPrice"` (critical) + `highPrice`/`offerCount`/`aggregateRating`/`review` (non-critical) (1 item) | `/services/printer-spare-parts/` | The top-level Product schema's `AggregateOffer` was a static module-level constant — `{ "@type": "AggregateOffer", "priceCurrency": "AED" }` — completely disconnected from the live `supplies` data the page actually renders. |
+
+**Fixed, commit `2fb7216`, pushed to `main`:**
+- `pvc-card-printer-sales/page.tsx`: each nested Product now carries a real `AggregateOffer` (RTAI: AED 9,000–22,000 across 2 configs; DC 3300: AED 5,000–14,000 across 2 configs) — the same numbers already quoted in the page's own `pricingTable`, not fabricated.
+- `printer-spare-parts/page.tsx`: `buildProductSchema()` computes `lowPrice`/`highPrice`/`offerCount` from whichever live `supplies` rows are actually priced (`price_aed > 0`) at request time, and returns `null` (omitting the Product schema entirely) if none are — so this self-heals whenever real prices are added and never again ships an empty/broken `AggregateOffer`. **Verified production already has real supply prices (AED 10, 250, 299, 500)** despite §7 below recording "every record has price: Contact for Pricing" back in August — that's since been partially fixed by whoever's been using the admin dashboard; §7 is now stale on that specific point.
+
+**Not the fix**: the earlier sitemap dead-redirect-URL fix (`a9c79c0`) is unrelated to this specific GSC report — it's still correct to have made (a sitemap shouldn't list a URL that just redirects), but the two affected products (`canon-imageclass-mf644cdw`, `hp-laserjet-pro-m404dn`) were never the ones GSC was flagging here.
+
+**Next step for the user**: in GSC → Product snippets, click "validate fix" on both issue rows once this deploy is confirmed live (Google re-crawls over the following days/weeks; this doesn't happen instantly).
+
+---
+
 ## SESSION NOTE — 2026-09-07 (post-deploy), reindex request + product snippet audit
 
 Pushed straight to `main` (commit `a9c79c0`), deployed. User reported still seeing a "product snippet" issue in GSC after the A/B/C/D deploy and asked to re-audit everything.
