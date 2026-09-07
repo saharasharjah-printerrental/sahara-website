@@ -224,11 +224,11 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     ],
   },
   "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide": {
-    primaryService: { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
+    primaryService: { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder", type: "service" },
     relatedLinks: [
       { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN P4 vs P5 vs P6 Security Levels", type: "blog" },
       { href: "/blogs/paper-shredder-rental-uae-when-it-beats-buying/", label: "When Renting Beats Buying", type: "blog" },
-      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+      { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
     ],
     relatedSlugs: [
       "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
@@ -237,11 +237,11 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     ],
   },
   "din-p4-vs-p5-vs-p6-shredder-security-levels-uae": {
-    primaryService: { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
+    primaryService: { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder", type: "service" },
     relatedLinks: [
       { href: "/blogs/uae-pdpl-document-destruction-compliance-guide/", label: "UAE PDPL Compliance Guide", type: "blog" },
       { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/", label: "Shredder Sizing & Cost Guide", type: "blog" },
-      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+      { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
     ],
     relatedSlugs: [
       "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
@@ -266,9 +266,9 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
   "paper-shredder-rental-uae-when-it-beats-buying": {
     primaryService: { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
     relatedLinks: [
+      { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder", type: "service" },
       { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/", label: "Shredder Sizing & Cost Guide", type: "blog" },
       { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN Security Levels Explained", type: "blog" },
-      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
     ],
     relatedSlugs: [
       "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
@@ -318,9 +318,9 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
   "shredder-delivery-jafza-saif-zone-difc-uae-free-zones": {
     primaryService: { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
     relatedLinks: [
+      { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder", type: "service" },
       { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/", label: "Shredder Sizing & Cost Guide", type: "blog" },
       { href: "/blogs/paper-shredder-rental-uae-when-it-beats-buying/", label: "When Renting Beats Buying", type: "blog" },
-      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
     ],
     relatedSlugs: [
       "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
@@ -344,9 +344,9 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
   "uae-pdpl-document-destruction-compliance-guide": {
     primaryService: { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
     relatedLinks: [
+      { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder", type: "service" },
       { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN Security Levels Explained", type: "blog" },
       { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/", label: "Shredder Sizing & Cost Guide", type: "blog" },
-      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
     ],
     relatedSlugs: [
       "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",

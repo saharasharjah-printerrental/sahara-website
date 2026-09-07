@@ -13,13 +13,21 @@ import ComparisonTable from "@/components/ui/ComparisonTable";
 import { ShieldCheckIcon, AwardIcon, SettingsIcon, TruckIcon } from "@/components/icons";
 import type { FaqItem } from "@/lib/faqs";
 
+// Sep 2026: re-scoped to RENTAL only. This page previously carried both
+// rental and sale intent ("Rental & Sales" title, a bolted-on "Prefer to
+// Buy?" section, no Product schema) while /services/paper-shredder-sales/
+// 404'd. Buy-intent volume is real and large ("paper shredder" 154
+// impressions @ pos 21, "buy paper shredder" 71 @ 9.4) and now has its own
+// page with proper Product/AggregateOffer schema — see that file. This page
+// keeps the rental terms (already ranking 1-4 on "shredder rental",
+// "paper shredder for rent near me" etc.) and stops splitting that intent.
 export const metadata: Metadata = {
-  title: "Paper Shredder Rental & Sales Dubai UAE | Fellowes Shredders | Sahara",
-  description: "Rent or buy a paper shredder in Dubai, Sharjah & Abu Dhabi — Fellowes Powershred LX65 & 325Ci cross-cut models. UAE PDPL compliant document destruction. Free delivery, setup & maintenance. ☎ +971503823969",
-  keywords: "paper shredder rental dubai, shredder rental uae, buy paper shredder dubai, paper shredder machine dubai, document shredding services uae, confidential document destruction dubai, fellowes shredder dubai, shredder for rent dubai, din p-4 shredder uae, office paper shredder uae",
+  title: "Paper Shredder Rental Dubai & UAE | Fellowes Shredders | Sahara",
+  description: "Rent a paper shredder in Dubai, Sharjah & Abu Dhabi from AED 150 — Fellowes Powershred LX65 & 325Ci cross-cut models. UAE PDPL compliant document destruction. Free delivery, setup & maintenance. ☎ +971503823969",
+  keywords: "paper shredder rental dubai, shredder rental uae, shredder for rent dubai, paper shredder machine rental near me, document shredding services uae, confidential document destruction dubai, fellowes shredder rental dubai, din p-4 shredder uae, paper shredder machine repair near me",
   openGraph: {
-    title: "Paper Shredder Rental & Sales Dubai & UAE | Sahara Office Equipments",
-    description: "Fellowes Powershred cross-cut paper shredders for rent or purchase in Dubai, Sharjah & Abu Dhabi. UAE PDPL compliant document destruction. Free delivery & setup. ☎ +971503823969",
+    title: "Paper Shredder Rental Dubai & UAE | Sahara Office Equipments",
+    description: "Fellowes Powershred cross-cut paper shredders for rent in Dubai, Sharjah & Abu Dhabi from AED 150. UAE PDPL compliant document destruction. Free delivery & setup. ☎ +971503823969",
     url: "https://www.saharaprinter.com/services/paper-shredder-rental/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
@@ -28,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paper Shredder Rental & Sales Dubai & UAE | Sahara Office Equipments",
-    description: "Fellowes Powershred cross-cut paper shredders for rent or purchase in Dubai, Sharjah & Abu Dhabi. UAE PDPL compliant document destruction.",
+    title: "Paper Shredder Rental Dubai & UAE | Sahara Office Equipments",
+    description: "Fellowes Powershred cross-cut paper shredders for rent in Dubai, Sharjah & Abu Dhabi from AED 150. UAE PDPL compliant document destruction.",
     images: ["https://www.saharaprinter.com/images/shredder-fellowes-325ci.webp"],
   },
   alternates: { canonical: "https://www.saharaprinter.com/services/paper-shredder-rental/" },
@@ -38,8 +46,8 @@ export const metadata: Metadata = {
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Paper Shredder Rental & Sales UAE",
-  "description": "Paper shredder rental and sales in Dubai, Sharjah, and Abu Dhabi. Fellowes Powershred DIN P-4 cross-cut models. UAE PDPL compliant document destruction for offices, events, and audits.",
+  "name": "Paper Shredder Rental UAE",
+  "description": "Paper shredder rental in Dubai, Sharjah, and Abu Dhabi. Fellowes Powershred DIN P-4 cross-cut models. UAE PDPL compliant document destruction for offices, events, and audits.",
   "provider": {
     "@type": "LocalBusiness",
     "name": "Sahara Office Equipments",
@@ -131,6 +139,7 @@ const rentVsBuyRows: [string, string, string][] = [
 ];
 
 const relatedServices = [
+  { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder" },
   { href: "/services/printer-rental/", label: "Printer Rental UAE" },
   { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
   { href: "/services/repair/", label: "Printer Repair Dubai" },
@@ -159,7 +168,7 @@ export default function PaperShredderRentalPage() {
           eyebrow="Dubai · Sharjah · Abu Dhabi"
           title={
             <>
-              Paper Shredder Rental &amp; Sales
+              {"Paper Shredder Rental "}
               <br />
               <span className="text-primary">Dubai &amp; UAE</span>
             </>
@@ -172,11 +181,11 @@ export default function PaperShredderRentalPage() {
                 "Fellowes Powershred LX65: 10 sheets per pass, 22.7L bin — from AED 150",
                 "Fellowes Powershred 325Ci: 24 sheets per pass, 83L bin — from AED 400",
                 "DIN P-4 cross-cut meets UAE PDPL (Federal Decree-Law No. 45 of 2021) destruction requirements",
-                "Free delivery to JAFZA, SAIF Zone, DAFZA and DIFC; outright purchase also available",
+                "Free delivery to JAFZA, SAIF Zone, DAFZA and DIFC; repairs and maintenance included",
               ]}
             />
           }
-          badges={["Rent or Buy", "Free Delivery", "Same-Day Available", "Custom Contract Terms", "UAE PDPL Compliant"]}
+          badges={["Rental From AED 150", "Free Delivery", "Same-Day Available", "Custom Contract Terms", "UAE PDPL Compliant"]}
           primaryCta={{ label: "Get Shredder Quote", href: "/rental-calculator/" }}
           secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
@@ -227,11 +236,11 @@ export default function PaperShredderRentalPage() {
 
         <Section title="Prefer to Buy a Paper Shredder in Dubai?" tone="raised">
           <p className="mb-6 max-w-3xl leading-relaxed text-muted">
-            Sahara sells Fellowes Powershred paper shredders outright too — not just rental. A good office shredder costs <strong className="text-white">AED 800–3,000+</strong> to buy, versus renting from <strong className="text-white">AED 150</strong> with maintenance included. If you shred daily at high volume, buying can be the cheaper option long-term; if usage is occasional or seasonal, rental usually wins. We&rsquo;ll recommend whichever works out cheaper for your actual usage.
+            Sahara also sells Fellowes Powershred paper shredders outright — from <strong className="text-white">AED 800</strong> for a personal/light-office model up to <strong className="text-white">AED 3,500+</strong> for a departmental machine. If you shred daily at high volume, buying is usually cheaper long-term; for occasional or seasonal use, renting from AED 150/month with maintenance included usually wins. See full pricing by category, model specs, and DIN security-level guidance on our paper shredder sales page.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="tel:+971503823969" className="btn-primary">Call for a Rent-vs-Buy Comparison</a>
-            <a href="/rental-calculator/" className="btn-secondary">Get a Purchase Quote</a>
+            <a href="/services/paper-shredder-sales/" className="btn-primary">See Shredder Pricing &amp; Buy</a>
+            <a href="tel:+971503823969" className="btn-secondary">Call for a Rent-vs-Buy Comparison</a>
           </div>
         </Section>
 

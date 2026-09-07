@@ -21,6 +21,7 @@ export default function MobileNav() {
   const services = [
     { name: "Printer Rental", href: "/services/printer-rental/", icon: Print },
     { name: "Paper Shredder Rental", href: "/services/paper-shredder-rental/", icon: Article },
+    { name: "Buy a Paper Shredder", href: "/services/paper-shredder-sales/", icon: Article },
     { name: "PaperCut Print Management", href: "/services/papercut-print-management/", icon: SettingsSuggest },
     { name: "Toner & Parts", href: "/services/printer-spare-parts/", icon: ShoppingCart },
     { name: "Printer Repair", href: "/services/repair/", icon: Build },

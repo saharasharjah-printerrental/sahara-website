@@ -227,6 +227,7 @@ export default function Footer() {
               <li><Link href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
               <li><Link href="/services/photocopier-rental/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
               <li><Link href="/services/paper-shredder-rental/" className="hover:text-[#f5be53] transition-colors">Paper Shredder Rental</Link></li>
+              <li><Link href="/services/paper-shredder-sales/" className="hover:text-[#f5be53] transition-colors">Buy a Paper Shredder</Link></li>
               <li><Link href="/services/papercut-print-management/" className="hover:text-[#f5be53] transition-colors">PaperCut Print Management</Link></li>
               <li><Link href="/services/amc/" className="hover:text-[#f5be53] transition-colors">Annual Maintenance (AMC)</Link></li>
               <li><Link href="/services/repair/" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>

@@ -47,6 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // /services/printer-spare-parts/ and must not be advertised as canonical.
     { url: `${BASE}/services/printer-spare-parts/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/services/paper-shredder-rental/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/services/paper-shredder-sales/`,  lastModified: thisWeek,  changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/services/papercut-print-management/`, lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.75 },
     { url: `${BASE}/printer-rental-dubai/`,         lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.95 },
     { url: `${BASE}/printer-rental-abu-dhabi/`,     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
