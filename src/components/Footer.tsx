@@ -322,6 +322,14 @@ export default function Footer() {
             <Link href="/hp-printer-abu-dhabi/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">HP Printer Abu Dhabi</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/kyocera-printer-repair/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Kyocera Printer Repair</Link>
+            <span className="text-slate-700 text-xs">|</span>
+            <Link href="/hp-printer-repair/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">HP Printer Repair</Link>
+            <span className="text-slate-700 text-xs">|</span>
+            <Link href="/canon-printer-repair/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Repair</Link>
+            <span className="text-slate-700 text-xs">|</span>
+            <Link href="/brother-printer-repair/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Brother Printer Repair</Link>
+            <span className="text-slate-700 text-xs">|</span>
+            <Link href="/printer-repair-sharjah/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Repair Sharjah</Link>
           </div>
           <p className="text-slate-600 text-xs text-center">
             Serving: Dubai · Sharjah · Abu Dhabi · Ajman · RAK · Fujairah · Al Ain — Free delivery across UAE

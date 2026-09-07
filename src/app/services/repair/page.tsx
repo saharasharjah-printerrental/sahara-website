@@ -174,12 +174,13 @@ const commonProblems = [
 ];
 
 const brandExpertise = [
-  { name: "Canon", models: "imageRUNNER ADVANCE, i-SENSYS, PIXMA Pro", certLevel: "Factory Certified" },
-  { name: "HP", models: "LaserJet Enterprise, OfficeJet Pro, DesignJet", certLevel: "Authorized Service" },
-  { name: "Kyocera", models: "ECOSYS, TASKalfa, FS series", certLevel: "Factory Certified" },
-  { name: "Ricoh", models: "MP series, IM series, SP series", certLevel: "Authorized Service" },
-  { name: "Xerox", models: "VersaLink, AltaLink, WorkCentre", certLevel: "Authorized Service" },
-  { name: "Brother", models: "MFC, DCP, HL series", certLevel: "Certified Partner" },
+  { name: "Canon", models: "imageRUNNER ADVANCE, i-SENSYS, PIXMA Pro", certLevel: "Factory Certified", href: "/canon-printer-repair/" },
+  { name: "HP", models: "LaserJet Enterprise, OfficeJet Pro, DesignJet", certLevel: "Authorized Service", href: "/hp-printer-repair/" },
+  { name: "Kyocera", models: "ECOSYS, TASKalfa, FS series", certLevel: "Factory Certified", href: "/kyocera-printer-repair/" },
+  { name: "Ricoh", models: "MP series, IM series, SP series", certLevel: "Authorized Service", href: "/ricoh-printer-repair/" },
+  { name: "Xerox", models: "VersaLink, AltaLink, WorkCentre", certLevel: "Authorized Service", href: "/xerox-printer-repair/" },
+  { name: "Brother", models: "MFC, DCP, HL series", certLevel: "Certified Partner", href: "/brother-printer-repair/" },
+  { name: "Epson", models: "EcoTank, WorkForce Pro, SureColor", certLevel: "Authorized Service", href: "/epson-printer-repair/" },
 ];
 
 const processSteps = [
@@ -285,18 +286,18 @@ export default function RepairPage() {
         <Section eyebrow="Brand Expertise" title="Certified for Every Major Brand" subtitle="Unlike generalist repair shops, our engineers hold brand-specific certifications — meaning faster diagnosis and correct repairs the first time." align="center">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {brandExpertise.map((b) => (
-              <div key={b.name} className="flex items-start gap-4 rounded-card border border-white/[0.08] bg-surface-low p-6 transition-all hover:border-primary/30">
+              <a key={b.name} href={b.href} className="flex items-start gap-4 rounded-card border border-white/[0.08] bg-surface-low p-6 transition-all hover:border-primary/30">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] border border-primary/20 bg-primary/10 text-xs font-black text-primary">
                   {b.name.substring(0, 2).toUpperCase()}
                 </div>
                 <div>
                   <div className="mb-1 flex items-center gap-2">
-                    <h3 className="font-bold text-white">{b.name}</h3>
+                    <h3 className="font-bold text-white">{b.name} Printer Repair</h3>
                     <span className="rounded-pill bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">{b.certLevel}</span>
                   </div>
                   <p className="text-caption text-muted">{b.models}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           <p className="mt-8 text-center text-caption text-muted">
@@ -366,7 +367,7 @@ export default function RepairPage() {
               district coverage, local response times, and area-specific details, see{" "}
               <a href="/printer-repair-dubai/" className="font-semibold text-primary hover:underline">Printer Repair Dubai</a>.
               Our head office and fastest technician response are based in{" "}
-              <a href="/printer-rental-sharjah/" className="font-semibold text-primary hover:underline">Sharjah</a>.
+              <a href="/printer-repair-sharjah/" className="font-semibold text-primary hover:underline">Sharjah</a>.
             </p>
           </div>
         </Section>
