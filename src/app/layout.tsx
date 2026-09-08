@@ -433,15 +433,26 @@ export default async function RootLayout({
           <script>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId.trim()}');`}</script>
         )}
 
-        {/* Google Analytics (UA + GA4) */}
-        {uaId && (
+        {/* Google Analytics (UA + GA4) — skipped whenever GTM is configured.
+            Sep 2026: GTM's own container already carries a "Google Tag" tag
+            that fires this exact GA4 property (and the linked Google Ads
+            account) on every page — verified live in Tag Manager. Also
+            injecting gtag.js here for the same ID double-fires every GA4
+            hit and duplicated Google Ads conversion pings, which is what
+            produced the extra doubleclick.net/conversion-tracking network
+            errors flagged in GSC's crawl report. Gating on
+            googleTagManagerId lets the admin SEO page still record the
+            correct GA4 ID for reference (e.g. for anyone reading the CMS
+            config) without it ever causing a second live injection. If GTM
+            is ever removed, this field becomes the live source again. */}
+        {!cfg?.googleTagManagerId && uaId && (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${uaId}`} />
             <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${uaId}');${ga4Id ? `gtag('config','${ga4Id}',{send_page_view:true,debug_mode:false});` : ""}`}</script>
           </>
         )}
-        {/* GA4 standalone — only when no UA ID is set */}
-        {ga4Id && !uaId && (
+        {/* GA4 standalone — only when no UA ID and no GTM */}
+        {!cfg?.googleTagManagerId && ga4Id && !uaId && (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} />
             <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ga4Id}',{send_page_view:true,debug_mode:false});`}</script>
