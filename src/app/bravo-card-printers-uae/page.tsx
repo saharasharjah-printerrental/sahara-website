@@ -295,21 +295,23 @@ const rtaiProductSchema = {
   "manufacturer": { "@type": "Organization", "name": "Bravo Global", "url": "https://www.bravoglobal.com" },
   "category": "ID Card Printer",
   "image": "https://www.saharaprinter.com/brands/bravo/rtai-official.webp",
+  // Sep 2026: GSC Product snippets flagged this as invalid — a plain Offer
+  // with a nested PriceSpecification.minPrice/maxPrice carries no field
+  // Google's Product parser recognizes as a price, so it read as "no offer"
+  // at all. Fixed to AggregateOffer with real lowPrice/highPrice (the same
+  // indicative UAE range, unchanged) — offerCount is honestly 1 since this
+  // is one model's configuration-driven price range, not multiple offers.
   "offers": {
-    "@type": "Offer",
+    "@type": "AggregateOffer",
     "availability": "https://schema.org/InStock",
     // Indicative UAE range for a 600 dpi retransfer card printer; final price
     // depends on encoding/lamination configuration. Range, not exact price,
     // to avoid publishing false precision.
     "priceCurrency": "AED",
+    "lowPrice": 9000,
+    "highPrice": 22000,
+    "offerCount": 1,
     "priceValidUntil": PRICE_VALID_UNTIL,
-    "priceSpecification": {
-      "@type": "PriceSpecification",
-      "priceCurrency": "AED",
-      "minPrice": 9000,
-      "maxPrice": 22000,
-      "valueAddedTaxIncluded": false
-    },
     "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
     "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" }
   }
@@ -324,20 +326,17 @@ const dc3300ProductSchema = {
   "manufacturer": { "@type": "Organization", "name": "Bravo Global", "url": "https://www.bravoglobal.com" },
   "category": "ID Card Printer",
   "image": "https://www.saharaprinter.com/brands/bravo/dc3300-official.webp",
+  // See rtaiProductSchema above for why this is AggregateOffer, not Offer.
   "offers": {
-    "@type": "Offer",
+    "@type": "AggregateOffer",
     "availability": "https://schema.org/InStock",
     // Indicative UAE range for a direct-to-card printer; simplex vs duplex,
     // encoders and the lamination module drive the final figure.
     "priceCurrency": "AED",
+    "lowPrice": 5000,
+    "highPrice": 14000,
+    "offerCount": 1,
     "priceValidUntil": PRICE_VALID_UNTIL,
-    "priceSpecification": {
-      "@type": "PriceSpecification",
-      "priceCurrency": "AED",
-      "minPrice": 5000,
-      "maxPrice": 14000,
-      "valueAddedTaxIncluded": false
-    },
     "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
     "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" }
   }

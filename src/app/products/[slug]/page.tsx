@@ -144,41 +144,74 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     })),
   };
 
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    brand: { "@type": "Brand", name: product.brand },
-    category: product.category,
-    description,
-    image: images.length > 0 ? images.map((i) => (i.startsWith("http") ? i : `${SITE_URL}${i}`)) : undefined,
-    offers: [
-      product.price_rental
-        ? {
-            "@type": "Offer",
-            price: product.price_rental,
-            priceCurrency: "AED",
-            availability: "https://schema.org/InStock",
-            url: canonical,
-            priceSpecification: {
-              "@type": "UnitPriceSpecification",
-              price: product.price_rental,
-              priceCurrency: "AED",
-              unitText: "MONTH",
-            },
-          }
-        : undefined,
-      product.price_sale
-        ? {
-            "@type": "Offer",
-            price: product.price_sale,
-            priceCurrency: "AED",
-            availability: "https://schema.org/InStock",
-            url: canonical,
-          }
-        : undefined,
-    ].filter(Boolean),
-  };
+  // Sep 2026: GSC Product snippets report flagged two distinct errors coming
+  // from this schema. (1) Products with neither price_rental nor price_sale
+  // produced `offers: []` — an empty array reads as "no offer" to Google,
+  // triggering "Either offers, review, or aggregateRating should be
+  // specified." (2) Products with BOTH prices produced a raw two-item
+  // Offer[] array, which Google's Product validator does not accept for
+  // multiple offers — it wants a single Offer or an AggregateOffer,
+  // triggering "Missing field lowPrice (in offers)" because it expected
+  // AggregateOffer shape. Fixed by building exactly one of: a single Offer
+  // (one real price), a real AggregateOffer (both real prices, lowPrice/
+  // highPrice/offerCount computed from them, not fabricated), or omitting
+  // `offers` entirely when there is no real price to report.
+  const rentalOffer = product.price_rental
+    ? {
+        "@type": "Offer",
+        price: product.price_rental,
+        priceCurrency: "AED",
+        availability: "https://schema.org/InStock",
+        url: canonical,
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: product.price_rental,
+          priceCurrency: "AED",
+          unitText: "MONTH",
+        },
+      }
+    : null;
+  const saleOffer = product.price_sale
+    ? {
+        "@type": "Offer",
+        price: product.price_sale,
+        priceCurrency: "AED",
+        availability: "https://schema.org/InStock",
+        url: canonical,
+      }
+    : null;
+
+  let offers: Record<string, unknown> | undefined;
+  if (rentalOffer && saleOffer) {
+    const prices = [product.price_rental, product.price_sale];
+    offers = {
+      "@type": "AggregateOffer",
+      priceCurrency: "AED",
+      lowPrice: Math.min(...prices),
+      highPrice: Math.max(...prices),
+      offerCount: 2,
+      offers: [rentalOffer, saleOffer],
+    };
+  } else if (rentalOffer) {
+    offers = rentalOffer;
+  } else if (saleOffer) {
+    offers = saleOffer;
+  }
+
+  // No real price at all -> omit the Product schema rather than emit one
+  // with no offers/review/aggregateRating, which Google flags as invalid.
+  const productSchema = offers
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        brand: { "@type": "Brand", name: product.brand },
+        category: product.category,
+        description,
+        image: images.length > 0 ? images.map((i) => (i.startsWith("http") ? i : `${SITE_URL}${i}`)) : undefined,
+        offers,
+      }
+    : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -192,7 +225,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(productSchema)}</script>
+      {productSchema && <script type="application/ld+json">{JSON.stringify(productSchema)}</script>}
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <main className="min-h-screen bg-[#071325]">

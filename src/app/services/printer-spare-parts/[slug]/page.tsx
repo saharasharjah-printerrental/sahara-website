@@ -93,7 +93,13 @@ export default async function SupplyDetailPage({ params }: { params: Promise<{ s
   const image = normalizeR2Url(supply.image || "");
   const related = await getRelatedSupplies(supply.category, slug);
 
-  const productSchema = {
+  // Sep 2026: many supply rows are still "Contact for Pricing" placeholders
+  // (resolved.payable === false). A Product with an Offer that has no price
+  // is invalid for Google's Product snippet check ("offers" present but
+  // incomplete), so the whole Product schema is omitted for unpriced items
+  // rather than shipping a broken offer — matching the same rule already
+  // applied on /services/printer-spare-parts/ (the listing page).
+  const productSchema = resolved.payable ? {
     "@context": "https://schema.org",
     "@type": "Product",
     name: supply.name,
@@ -108,7 +114,7 @@ export default async function SupplyDetailPage({ params }: { params: Promise<{ s
       "@type": "Offer",
       url: canonical,
       priceCurrency: "AED",
-      price: resolved.payable ? resolved.aed : undefined,
+      price: resolved.aed,
       availability: supply.stock > 0
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
@@ -132,7 +138,7 @@ export default async function SupplyDetailPage({ params }: { params: Promise<{ s
         },
       },
     },
-  };
+  } : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -146,7 +152,7 @@ export default async function SupplyDetailPage({ params }: { params: Promise<{ s
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(productSchema)}</script>
+      {productSchema && <script type="application/ld+json">{JSON.stringify(productSchema)}</script>}
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <main className="min-h-screen bg-[#071325]">
         <Header />
