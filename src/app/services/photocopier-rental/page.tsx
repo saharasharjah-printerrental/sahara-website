@@ -386,6 +386,21 @@ export default async function PhotocopierRentalPage() {
           </div>
         </Section>
 
+        <Section flush tone="raised">
+          <p className="text-center text-caption font-bold uppercase tracking-widest text-muted mb-6">Photocopier Rental by City</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { href: "/photocopier-rental-sharjah/", label: "Sharjah" },
+              { href: "/photocopier-rental-dubai/", label: "Dubai" },
+              { href: "/photocopier-rental-abu-dhabi/", label: "Abu Dhabi" },
+            ].map((c) => (
+              <a key={c.href} href={c.href} className="rounded-pill border border-white/[0.08] px-4 py-2 text-caption text-muted transition-all hover:text-white hover:border-primary/40">
+                {c.label}
+              </a>
+            ))}
+          </div>
+        </Section>
+
         <Section flush className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-caption font-semibold uppercase tracking-[0.18em] text-primary mb-4">Questions</p>

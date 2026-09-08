@@ -62,6 +62,20 @@ const localBusinessSchema = {
   "openingHours": "24/7"
 };
 
+// Sep 2026: added — this page had LocalBusiness + FAQPage + BreadcrumbList
+// but no Service schema, unlike its siblings (kyocera-printer-repair,
+// printer-repair-dubai, etc.).
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Canon Printer Rental Dubai",
+  "description": "Canon imageRUNNER, i-SENSYS and imageCLASS printer rental in Dubai with zero deposit, free toner, and 4-hour emergency response.",
+  "provider": { "@type": "LocalBusiness", "name": "Sahara Office Equipments", "telephone": "+971503823969" },
+  "areaServed": { "@type": "City", "name": "Dubai" },
+  "serviceType": "Printer Rental",
+  "offers": { "@type": "AggregateOffer", "priceCurrency": "AED", "lowPrice": 250, "highPrice": 2000, "offerCount": 1, "availability": "https://schema.org/InStock" },
+};
+
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -79,6 +93,7 @@ export default async function CanonPrinterDubai() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
 
@@ -101,7 +116,7 @@ export default async function CanonPrinterDubai() {
               <Reveal>
                 <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Canon Printer Rental Dubai</p>
                 <h1 className="font-sora text-display-xl font-extrabold text-white">
-                  Canon Photocopiers <span className="text-primary">Dubai</span>
+                  Canon Printer <span className="text-primary">Dubai</span>
                 </h1>
                 <p className="mt-6 max-w-xl text-body text-muted">
                   Premium Canon printer and photocopier rental in Dubai. imageRUNNER, i-SENSYS, and imageCLASS

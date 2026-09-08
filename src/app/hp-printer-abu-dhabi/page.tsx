@@ -78,6 +78,19 @@ export default function HPPrinterAbuDhabi() {
     "openingHours": "24/7"
   };
 
+  // Sep 2026: added — this page had LocalBusiness + FAQPage + BreadcrumbList
+  // but no Service schema, unlike its siblings.
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "HP Printer Rental Abu Dhabi",
+    "description": "HP LaserJet, PageWide and OfficeJet printer rental in Abu Dhabi with zero deposit, free toner, and 4-hour emergency response.",
+    "provider": { "@type": "LocalBusiness", "name": "Sahara Office Equipments", "telephone": "+971503823969" },
+    "areaServed": { "@type": "City", "name": "Abu Dhabi" },
+    "serviceType": "Printer Rental",
+    "offers": { "@type": "AggregateOffer", "priceCurrency": "AED", "lowPrice": 250, "highPrice": 2000, "offerCount": 1, "availability": "https://schema.org/InStock" },
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -104,6 +117,7 @@ export default function HPPrinterAbuDhabi() {
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
 
@@ -126,7 +140,7 @@ export default function HPPrinterAbuDhabi() {
               <Reveal>
                 <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">HP Printer Rental Abu Dhabi</p>
                 <h1 className="font-sora text-display-xl font-extrabold text-white">
-                  HP Photocopiers <span className="text-primary">Abu Dhabi</span>
+                  HP Printer <span className="text-primary">Abu Dhabi</span>
                 </h1>
                 <p className="mt-6 max-w-xl text-body text-muted">
                   Premium HP printer and photocopier rental in Abu Dhabi. LaserJet, PageWide, and OfficeJet series

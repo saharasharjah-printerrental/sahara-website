@@ -290,11 +290,11 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     ],
   },
   "printer-amc-dubai-whats-included": {
-    primaryService: { href: "/services/amc/", label: "Annual Maintenance Contract (AMC)", type: "service" },
+    primaryService: { href: "/printer-amc-dubai/", label: "Printer AMC Dubai", type: "location" },
     relatedLinks: [
+      { href: "/services/amc/", label: "Annual Maintenance Contract (AMC)", type: "service" },
       { href: "/services/repair/", label: "Printer Repair Services", type: "service" },
       { href: "/printer-repair-dubai/", label: "Printer Repair Dubai", type: "location" },
-      { href: "/rental-calculator/", label: "Request an AMC Quote", type: "tool" },
     ],
     relatedSlugs: [
       "what-is-printer-amc-uae-guide-2025",

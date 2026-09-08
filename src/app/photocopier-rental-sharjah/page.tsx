@@ -309,7 +309,8 @@ const whyChoose = [
 
 const relatedLinks = [
   { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah" },
-  { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai" },
+  { href: "/photocopier-rental-abu-dhabi/", label: "Photocopier Rental Abu Dhabi" },
   { href: "/services/photocopier-rental/", label: "Photocopier Rental Service" },
   { href: "/services/amc/", label: "Printer AMC" },
 ];

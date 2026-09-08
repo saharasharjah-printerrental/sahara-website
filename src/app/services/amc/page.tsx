@@ -284,6 +284,7 @@ const brandLinks: [string, string][] = [
 ];
 
 const relatedServices = [
+  { href: "/printer-amc-dubai/", label: "Printer AMC Dubai" },
   { href: "/services/printer-rental/", label: "Printer Rental" },
   { href: "/services/repair/", label: "Printer Repair" },
   { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },

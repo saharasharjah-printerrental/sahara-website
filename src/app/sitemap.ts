@@ -42,6 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/services/photocopier-rental/`,  lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
     { url: `${BASE}/services/repair/`,              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/services/amc/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/printer-amc-dubai/`,             lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },
     { url: `${BASE}/services/plotter-maintenance/`, lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },
     // /services/toner/ is intentionally absent — it 301s to
     // /services/printer-spare-parts/ and must not be advertised as canonical.
@@ -52,6 +53,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/printer-rental-dubai/`,         lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.95 },
     { url: `${BASE}/printer-rental-abu-dhabi/`,     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/photocopier-rental-sharjah/`,   lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.92 },
+    { url: `${BASE}/photocopier-rental-dubai/`,     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE}/photocopier-rental-abu-dhabi/`, lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/printer-rental-sharjah/`,       lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.95 },
     { url: `${BASE}/printer-rental-rak/`,           lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/printer-rental-fujairah/`,      lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },

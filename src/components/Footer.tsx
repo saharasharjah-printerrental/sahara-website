@@ -246,7 +246,9 @@ export default function Footer() {
               <li><Link href="/printer-rental-dubai/" className="hover:text-[#f5be53] transition-colors">Printer Rental Dubai</Link></li>
               <li><Link href="/printer-rental-sharjah/" className="hover:text-[#f5be53] transition-colors">Printer Rental Sharjah</Link></li>
               <li><Link href="/photocopier-rental-sharjah/" className="hover:text-[#f5be53] transition-colors">Photocopier Sharjah</Link></li>
+              <li><Link href="/photocopier-rental-dubai/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental Dubai</Link></li>
               <li><Link href="/printer-rental-abu-dhabi/" className="hover:text-[#f5be53] transition-colors">Printer Rental Abu Dhabi</Link></li>
+              <li><Link href="/photocopier-rental-abu-dhabi/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental Abu Dhabi</Link></li>
               <li><Link href="/printer-rental-rak/" className="hover:text-[#f5be53] transition-colors">Printer Rental RAK</Link></li>
               <li><Link href="/printer-rental-fujairah/" className="hover:text-[#f5be53] transition-colors">Printer Rental Fujairah</Link></li>
               <li><Link href="/printer-rental-al-ain/" className="hover:text-[#f5be53] transition-colors">Printer Rental Al Ain</Link></li>
@@ -309,6 +311,8 @@ export default function Footer() {
             <Link href="/services/printer-spare-parts/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Toner Suppliers Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/services/amc/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer AMC UAE</Link>
+            <span className="text-slate-700 text-xs">|</span>
+            <Link href="/printer-amc-dubai/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer AMC Dubai</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/brands/canon/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Canon Printer Rental</Link>
             <span className="text-slate-700 text-xs">|</span>
