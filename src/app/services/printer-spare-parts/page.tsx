@@ -12,6 +12,7 @@ import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import FeatureCard from "@/components/ui/FeatureCard";
 import CtaBand from "@/components/ui/CtaBand";
+import AnswerBlock from "@/components/AnswerBlock";
 import { ShieldCheckIcon, TruckIcon, AwardIcon, ClockIcon } from "@/components/icons";
 import { normalizeR2Url } from "@/lib/r2url";
 import { resolveSupplyPrice } from "@/lib/price";
@@ -186,6 +187,17 @@ export default async function PrinterSparePartsPage() {
               <p className="mt-4 max-w-xl text-body text-muted">
                 Browse our complete inventory of OEM toners, drums, maintenance kits, and spare parts. Same-day delivery across UAE.
               </p>
+              <div className="mt-6">
+                <AnswerBlock
+                  question="Where can I buy genuine printer toner and spare parts in UAE?"
+                  answer="Sahara Office Equipments stocks genuine OEM toner cartridges, drums, maintenance kits, and spare parts for Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, and Epson printers. Orders ship same-day across Dubai, Abu Dhabi, and Sharjah."
+                  supportingPoints={[
+                    "Genuine OEM toners, drums, and maintenance kits — not compatible/refilled cartridges",
+                    "Stocked for Canon, HP, Kyocera, Ricoh, Xerox, Brother, Sharp, and Epson",
+                    "Same-day delivery across Dubai, Abu Dhabi, and Sharjah",
+                  ]}
+                />
+              </div>
             </Reveal>
           </div>
         </section>

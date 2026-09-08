@@ -8,6 +8,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
+import AnswerBlock from "@/components/AnswerBlock";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -227,6 +228,17 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
                 </button>
               </div>
             </Reveal>
+            <div className="mt-8">
+              <AnswerBlock
+                question="Which printer and photocopier brands does Sahara sell in UAE?"
+                answer="Sahara Office Equipments supplies new and refurbished Canon, HP, Kyocera, Xerox, Brother, Ricoh, Samsung, and Lexmark printers and photocopiers across the UAE. Devices are available for outright purchase or rental from AED 300/month, with delivery, installation, and AMC support included."
+                supportingPoints={[
+                  "Canon, HP, Kyocera, Xerox, Brother, Ricoh, Samsung, and Lexmark models in stock",
+                  "New and refurbished options from AED 300/month rental",
+                  "Delivery, installation, and AMC support included on every device",
+                ]}
+              />
+            </div>
           </header>
         </section>
 

@@ -9,6 +9,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import CtaBand from "@/components/ui/CtaBand";
+import AnswerBlock from "@/components/AnswerBlock";
 import {
   ShieldCheckIcon,
   LeafIcon,
@@ -123,6 +124,17 @@ export default function BrandContentClient({ slug, brandFaqs }: { slug: string; 
                 As an authorized Sahara partner, we deliver {data.name}&apos;s enterprise solutions with expert
                 support, competitive pricing, and full warranty coverage.
               </p>
+              <div className="mt-6">
+                <AnswerBlock
+                  question={`Where can I buy or rent ${data.name} printers in UAE?`}
+                  answer={`Sahara Office Equipments is an authorized ${data.name} dealer in UAE. ${data.description} Sales, rental from AED 250/month, AMC contracts, and on-site repair are available across Dubai, Sharjah, and Abu Dhabi.`}
+                  supportingPoints={[
+                    `Authorized ${data.name} dealer with full manufacturer warranty support`,
+                    "Rental plans from AED 250/month with zero deposit",
+                    "AMC and on-site repair across Dubai, Sharjah, and Abu Dhabi",
+                  ]}
+                />
+              </div>
               <div className="mt-9 flex flex-wrap gap-4">
                 <a href={`/rental-calculator/?brand=${slug}`} className="btn-primary">Enquire for {data.name} Models</a>
                 <a href="#products" className="btn-secondary">View Products</a>

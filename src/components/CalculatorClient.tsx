@@ -8,6 +8,7 @@ import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
+import AnswerBlock from "@/components/AnswerBlock";
 import { ShieldCheckIcon, HeadsetIcon, AwardIcon } from "@/components/icons";
 
 // ── Pricing constants ──────────────────────────────────────────────────────────
@@ -439,6 +440,18 @@ export default function CalculatorClient() {
             <p className="text-base text-muted max-w-xl mx-auto leading-relaxed">
               Configure your exact requirements. Enter your details to unlock your personalised commercial proposal.
             </p>
+            <div className="mt-8 max-w-xl mx-auto text-left">
+              <AnswerBlock
+                question="How much does printer rental cost in UAE?"
+                answer="Printer and photocopier rental in UAE starts from AED 250/month for an A4 desktop device, rising to AED 2,000/month for high-volume A3 colour machines. Every plan includes zero deposit, free toner, delivery, installation, and maintenance."
+                supportingPoints={[
+                  "A4 desktop printers from AED 250/month",
+                  "A3 multifunction copiers from AED 500-900/month",
+                  "Enterprise A3 colour devices from AED 1,000-2,000/month",
+                  "Zero deposit, free toner, and maintenance included on every plan",
+                ]}
+              />
+            </div>
           </Reveal>
         </div>
       </section>

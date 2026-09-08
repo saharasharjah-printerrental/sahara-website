@@ -11,6 +11,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import CtaBand from "@/components/ui/CtaBand";
+import AnswerBlock from "@/components/AnswerBlock";
 import { ClockIcon, SettingsIcon, LeafIcon, AwardIcon } from "@/components/icons";
 
 const trail = [{ label: "Home", href: "/" }, { label: "Products", href: "/products/" }, { label: "Ricoh Printers UAE" }];
@@ -56,6 +57,18 @@ export default function RicohBrandPage() {
                   <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across
                   Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
                 </p>
+              </div>
+
+              <div className="mt-6">
+                <AnswerBlock
+                  question="Where can I buy or rent Ricoh printers in UAE?"
+                  answer="Sahara Office Equipments is an authorized Ricoh dealer in UAE, supplying MP series and IM production-ready MFPs for high-volume offices. Sales, rental from AED 250/month, AMC contracts, and on-site repair are available across Dubai, Sharjah, and Abu Dhabi."
+                  supportingPoints={[
+                    "Authorized Ricoh dealer for MP series and IM production-ready MFPs",
+                    "Rental plans from AED 250/month with zero deposit",
+                    "AMC and on-site repair across Dubai, Sharjah, and Abu Dhabi",
+                  ]}
+                />
               </div>
 
               <p className="mt-6 max-w-xl text-body leading-relaxed text-muted">

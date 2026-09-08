@@ -11,6 +11,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import CtaBand from "@/components/ui/CtaBand";
+import AnswerBlock from "@/components/AnswerBlock";
 import { AwardIcon, LeafIcon, ShieldCheckIcon, SettingsIcon, ClockIcon } from "@/components/icons";
 
 const trail = [{ label: "Home", href: "/" }, { label: "Products", href: "/products/" }, { label: "Kyocera Printers UAE" }];
@@ -64,6 +65,18 @@ export default function KyoceraBrandPage() {
                   <a href="/kyocera-printer-repair/" className="text-primary hover:underline">on-site repair</a> across
                   Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
                 </p>
+              </div>
+
+              <div className="mt-6">
+                <AnswerBlock
+                  question="Where can I buy or rent Kyocera printers in UAE?"
+                  answer="Sahara Office Equipments is an authorized Kyocera dealer in UAE, supplying TASKalfa ECOSYS models with the industry's lowest cost per page. Sales, rental from AED 250/month, AMC contracts, and on-site repair are available across Dubai, Sharjah, and Abu Dhabi."
+                  supportingPoints={[
+                    "Authorized Kyocera dealer for TASKalfa ECOSYS models",
+                    "Rental plans from AED 250/month with zero deposit",
+                    "AMC and on-site repair across Dubai, Sharjah, and Abu Dhabi",
+                  ]}
+                />
               </div>
 
               <p className="mt-6 max-w-xl text-body leading-relaxed text-muted">

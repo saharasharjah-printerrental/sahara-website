@@ -12,6 +12,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import CtaBand from "@/components/ui/CtaBand";
+import AnswerBlock from "@/components/AnswerBlock";
 import { LayersIcon, SettingsIcon, LeafIcon, AwardIcon, ShieldCheckIcon } from "@/components/icons";
 
 const trail = [{ label: "Home", href: "/" }, { label: "Products", href: "/products/" }, { label: "Canon Printers UAE" }];
@@ -68,6 +69,18 @@ export default function CanonBrandPage() {
                 <strong className="text-white">AED 250/month</strong>, AMC contracts, and on-site repair across
                 Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
               </p>
+            </div>
+
+            <div className="mt-6 max-w-2xl">
+              <AnswerBlock
+                question="Where can I buy or rent Canon printers in UAE?"
+                answer="Sahara Office Equipments is an authorized Canon dealer in UAE, supplying imageRUNNER ADVANCE and imageCLASS models with uniFLOW workflow software. Sales, rental from AED 250/month, AMC contracts, and on-site repair are available across Dubai, Sharjah, and Abu Dhabi."
+                supportingPoints={[
+                  "Authorized Canon dealer for imageRUNNER ADVANCE and imageCLASS models",
+                  "Rental plans from AED 250/month with zero deposit",
+                  "AMC and on-site repair across Dubai, Sharjah, and Abu Dhabi",
+                ]}
+              />
             </div>
 
             <p className="mt-6 max-w-2xl text-body leading-relaxed text-muted">
