@@ -113,7 +113,7 @@ const nextConfig = {
               "worker-src 'self' blob:",
               "img-src 'self' data: blob: https: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.facebook.com",
               "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://ad.doubleclick.net https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms https://in.hotjar.com https://*.hotjar.com https://connect.facebook.net https://www.facebook.com",
-              "frame-src 'self' https://www.googletagmanager.com https://www.facebook.com https://www.clarity.ms",
+              "frame-src 'self' https://www.googletagmanager.com https://www.facebook.com https://www.clarity.ms https://www.google.com https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "media-src 'self'",

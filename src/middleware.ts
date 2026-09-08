@@ -107,7 +107,12 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
     "font-src 'self' https://fonts.gstatic.com data:",
     imgSrc,
     connectSrc,
-    "frame-src 'self' https://www.google.com https://www.google.com/maps https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com",
+    // googletagmanager.com required here for the GTM <noscript> <iframe
+    // src="https://www.googletagmanager.com/ns.html?id=..."> fallback
+    // rendered in layout.tsx right after <body> — missing it silently
+    // blocks that iframe under CSP (flagged by GTM's own "Container
+    // diagnostics: security settings are blocking measurement" warning).
+    "frame-src 'self' https://www.google.com https://www.google.com/maps https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com https://www.googletagmanager.com",
   ].join('; ');
 
   response.headers.set('Content-Security-Policy', csp);
