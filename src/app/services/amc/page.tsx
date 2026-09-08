@@ -287,7 +287,7 @@ const relatedServices = [
   { href: "/services/printer-rental/", label: "Printer Rental" },
   { href: "/services/repair/", label: "Printer Repair" },
   { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
-  { href: "/services/pvc-card-printer-sales/", label: "PVC Card Printer Sales" },
+  { href: "/bravo-card-printers-uae/", label: "PVC Card Printer Sales" },
 ];
 
 const trail = [
@@ -320,7 +320,7 @@ export default function AMCPage() {
               <Reveal>
                 <p className="mb-5 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Protect Your Fleet</p>
                 <h1 className="font-sora text-display-xl font-extrabold text-white">
-                  Printer AMC
+                  {"Printer AMC "}
                   <br />
                   <span className="text-primary">Dubai &amp; UAE</span>
                 </h1>

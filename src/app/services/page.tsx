@@ -54,7 +54,7 @@ const services = [
 
 const cardServices = [
   { icon: ClockIcon, title: "PVC Card Printer Rental", body: "Short and long-term rental of the Bravo RTAI and DC 3300.", href: "/services/pvc-card-printer-rental/" },
-  { icon: AwardIcon, title: "PVC Card Printer Sales", body: "Buy the RTAI or DC 3300 with a 3-year warranty.", href: "/services/pvc-card-printer-sales/" },
+  { icon: AwardIcon, title: "PVC Card Printer Sales", body: "Buy the RTAI or DC 3300 with a 3-year warranty.", href: "/bravo-card-printers-uae/" },
   { icon: IdCardIcon, title: "PVC Card Printing Services", body: "ID, security, hologram, wooden and transparent cards — printed and delivered.", href: "/services/pvc-card-printing-services/" },
 ];
 

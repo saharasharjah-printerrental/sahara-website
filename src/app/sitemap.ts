@@ -80,9 +80,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/canon-printer-dubai/`,          lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/bravo-card-printers-uae/`,      lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/services/pvc-card-printer-rental/`, lastModified: thisWeek, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${BASE}/services/pvc-card-printer-sales/`, lastModified: thisWeek, changeFrequency: 'weekly', priority: 0.8 },
+    // /services/pvc-card-printer-sales/ is intentionally absent — Sep 2026,
+    // folded into /bravo-card-printers-uae/ via a 301 (same pattern as
+    // /services/toner/). The hub already carried the Product+Offer blocks
+    // and buy-intent AEO question at 2.8x the sales page's word count; two
+    // competing pages for "buy pvc card printer dubai" converts worse than
+    // one, per the Sharjah-consolidation lesson.
     { url: `${BASE}/services/pvc-card-printing-services/`, lastModified: thisWeek, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${BASE}/pvc-card-printer-quote/`,       lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
+    // /pvc-card-printer-quote/ is intentionally absent — noindexed Sep 2026,
+    // see that page's own file comment. A lead-capture form doesn't need to
+    // rank; it needs traffic sent to it from /bravo-card-printers-uae/.
     { url: `${BASE}/hp-printer-abu-dhabi/`,         lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/products/`,                     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },
     { url: `${BASE}/blogs/`,                        lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.7 },

@@ -32,10 +32,22 @@ import type { FaqItem } from "@/lib/faqs";
 // per-request; redeploying refreshes it.
 const PRICE_VALID_UNTIL = new Date(Date.now() + 1000 * 60 * 60 * 24 * 180).toISOString().slice(0, 10);
 
+// Sep 2026: repositioning pass. GSC showed "bravo id card printers" at only
+// 38 impressions in 90 days while the live UAE SERP for ID/PVC card printers
+// is entirely HID Fargo, Evolis, Matica, and Javelin distributors — plus a
+// real, unaddressed signal for "zebra card printer rental" (23 impressions,
+// pos 54). Title/H1 already led with "PVC Card Printers UAE" (category
+// first, brand second) so this wasn't a title-collision problem — it's a
+// content-coverage one: nothing on the page acknowledged other brands.
+// Added an honest capability section/FAQ below (services/pricing for other
+// brands ARE real per the business, per-model specs are NOT — Bravo remains
+// the only brand with sourced, verified spec data on this page, so it's the
+// only one given full spec treatment). Not fabricating Fargo/Evolis/Zebra
+// model data that doesn't exist in this codebase or engagement.
 export const metadata: Metadata = {
-  title: "PVC Card Printers UAE | Bravo RTAI & DC 3300 ID Card Printers | Sahara",
-  description: "PVC & ID card printers in UAE — Bravo RTAI retransfer and Bravo DC 3300 direct-to-card, from Sahara Office Equipments, authorised exclusive UAE reseller for these two models. 600 DPI, holographic security, 3-year warranty. Dubai, Sharjah & Abu Dhabi. ☎ +971503823969",
-  keywords: "pvc card printer dubai, id card printer uae, plastic card printer dubai, pvc card printing machine price in dubai, employee id card printer uae, student id card printer dubai, access control card printer uae, double sided id card printer dubai, retransfer card printer uae, bravo card printer uae, bravo rtai uae, bravo dc 3300 uae, card printer ribbon dubai",
+  title: "PVC & ID Card Printers UAE | Bravo, Fargo, Evolis & More | Sahara",
+  description: "PVC & ID card printers in UAE — Bravo RTAI, Bravo DC 3300, and other leading brands, from Sahara Office Equipments. 600 DPI, holographic security, 3-year warranty on Bravo. Dubai, Sharjah & Abu Dhabi. ☎ +971503823969",
+  keywords: "pvc card printer dubai, id card printer uae, plastic card printer dubai, pvc card printing machine price in dubai, employee id card printer uae, student id card printer dubai, access control card printer uae, double sided id card printer dubai, retransfer card printer uae, zebra card printer rental uae, id card printer dealer dubai, bravo card printer uae, bravo rtai uae, bravo dc 3300 uae, card printer ribbon dubai",
   openGraph: {
     title: "PVC Card Printers UAE | Bravo RTAI & DC 3300 | Sahara",
     description: "PVC & ID card printers in UAE — authorised exclusive UAE reseller for the Bravo RTAI retransfer printer and Bravo DC 3300. 600 DPI, holographic security, 3-year warranty. Dubai, Sharjah & Abu Dhabi.",
@@ -107,6 +119,10 @@ const DEFAULT_FAQS: FaqItem[] = [
   {
     q: "Where can I buy PVC card printer ribbons and blank cards in Dubai?",
     a: "Sahara Office Equipments stocks genuine YMCKO ribbons, retransfer film, HOLO-MET metallic ribbons, and blank PVC/composite cards locally for same-day availability — see our Toner & Spare Parts page. Third-party ribbons can void your printer warranty.",
+  },
+  {
+    q: "Do you sell or service ID card printer brands other than Bravo, like HID Fargo, Evolis, or Zebra?",
+    a: "Yes. Bravo RTAI and DC 3300 are our primary line, where we're the authorised exclusive UAE reseller with full spec documentation, warranty, and stocked consumables. We can also source, supply, and service other leading ID card printer brands — including HID Fargo, Evolis, Zebra, and Matica — on request. Contact us with your requirement for a tailored recommendation and quote.",
   },
 ];
 
@@ -215,7 +231,7 @@ const consumables = [
 
 const pathCards = [
   { icon: ClockIcon, title: "Rent a Card Printer", body: "Short-term hire for events, exhibitions, and onboarding drives — weekly, monthly, or annual terms.", href: "/services/pvc-card-printer-rental/" },
-  { icon: AwardIcon, title: "Buy a Card Printer", body: "Outright purchase of the RTAI or DC 3300, with warranty, consumables, and AMC options.", href: "/services/pvc-card-printer-sales/" },
+  { icon: AwardIcon, title: "Buy a Card Printer", body: "Outright purchase of the RTAI or DC 3300, with warranty, consumables, and AMC options.", href: "#pricing" },
   { icon: IdCardIcon, title: "Have Cards Printed For You", body: "Bureau service — employee ID, security, hologram, wooden and transparent cards, printed and delivered.", href: "/services/pvc-card-printing-services/" },
 ];
 
@@ -424,7 +440,7 @@ export default function BravoCardPrintersUAE() {
           eyebrow="Authorised Exclusive Reseller in the UAE — RTAI & DC 3300"
           title={
             <>
-              PVC Card Printers
+              {"PVC Card Printers "}
               <br />
               <span className="text-primary">— UAE</span>
             </>
@@ -433,12 +449,13 @@ export default function BravoCardPrintersUAE() {
             <AnswerBlock
               id="pvc-card-printer-uae"
               question="What is a PVC card printer and where can I buy one in UAE?"
-              answer="A PVC card printer prints and encodes plastic ID, access, and membership cards in-house instead of ordering pre-printed batches. Sahara Office Equipments supplies two models in the UAE — the Bravo RTAI (600 DPI retransfer, holographic security) and the Bravo DC 3300 (direct-to-card, up to 280 cards/hour) — with sales, genuine consumables, and on-site support in Dubai, Sharjah, Abu Dhabi and all emirates."
+              answer="A PVC card printer prints and encodes plastic ID, access, and membership cards in-house instead of ordering pre-printed batches. Sahara Office Equipments is the authorised exclusive UAE reseller for the Bravo RTAI (600 DPI retransfer, holographic security) and Bravo DC 3300 (direct-to-card, up to 280 cards/hour), and can also source, supply, and service other leading ID card printer brands — with sales, genuine consumables, and on-site support in Dubai, Sharjah, Abu Dhabi and all emirates."
               supportingPoints={[
                 "Same machine, two names: \"PVC card printer\" and \"ID card printer\" both describe this hardware — pricing and specs below apply to either search.",
                 "600 DPI over-the-edge retransfer (RTAI) or up to 280 cards/hour direct-to-card (DC 3300) — pick by security level and volume.",
                 "Holographic retransfer film and HOLO-MET™ metallic ribbons applied without a separate laminator on the RTAI.",
                 "3-year warranty with lifetime print-head cover on the RTAI; genuine ribbons, film and blank PVC cards stocked locally.",
+                "Need a different brand — HID Fargo, Evolis, Zebra, or Matica? Contact us; we can source, supply, and service these on request.",
               ]}
             />
           }

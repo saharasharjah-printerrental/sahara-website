@@ -3,10 +3,18 @@ import type { Metadata } from "next";
 import PvcCardQuoteClient from "./PvcCardQuoteClient";
 import { SITE_URL } from "@/lib/siteUrl";
 
+// Sep 2026: noindex'd. This is a client-rendered lead-capture form (~120
+// SSR words) that was competing on "id card printer price uae" /
+// "pvc card printer quote uae" against /bravo-card-printers-uae/, which
+// has the real depth, pricing table, and Product schema those queries
+// deserve. A conversion form doesn't need to rank on its own — it needs
+// traffic sent to it from the page that does, which already links here
+// via its primary CTA. Same reasoning as /checkout/ and /request-quote/.
 export const metadata: Metadata = {
   title: "PVC Card Printer Quote UAE | Bravo RTAI & DC 3300 | Sahara",
   description: "Get a priced quote for a PVC / ID card printer in the UAE — Bravo RTAI retransfer or DC 3300 direct-to-card. Tell us your card volume, encoding and security needs; we confirm pricing the same working day. ☎ +971503823969",
   keywords: "pvc card printer quote uae, id card printer price dubai, bravo rtai quote, bravo dc 3300 quote, card printer quotation uae",
+  robots: { index: false, follow: false },
   openGraph: {
     title: "PVC Card Printer Quote UAE | Bravo RTAI & DC 3300 | Sahara",
     description: "Configure your PVC card printer requirements — model, card volume, encoding, security — and get a tailored UAE quote from Sahara Office Equipments.",

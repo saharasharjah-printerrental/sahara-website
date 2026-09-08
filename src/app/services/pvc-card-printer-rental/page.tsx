@@ -172,7 +172,7 @@ export default function PvcCardPrinterRentalPage() {
           <ComparisonTable columns={["", "Rental", "Purchase"]} highlightColumn={1} rows={rentVsBuy} />
           <p className="mt-6 text-caption text-muted">
             Looking to buy instead?{" "}
-            <a href="/services/pvc-card-printer-sales/" className="text-primary hover:underline">
+            <a href="/bravo-card-printers-uae/#pricing" className="text-primary hover:underline">
               See PVC card printer sales &amp; pricing
             </a>
             .
@@ -217,8 +217,7 @@ export default function PvcCardPrinterRentalPage() {
           <h2 className="text-headline font-bold text-white mb-6">Related</h2>
           <div className="flex flex-wrap gap-3">
             {[
-              { href: "/bravo-card-printers-uae/", label: "PVC Card Printers — Model Guide" },
-              { href: "/services/pvc-card-printer-sales/", label: "PVC Card Printer Sales" },
+              { href: "/bravo-card-printers-uae/", label: "PVC Card Printers — Model Guide & Sales" },
               { href: "/services/pvc-card-printing-services/", label: "PVC Card Printing Services" },
               { href: "/services/printer-rental/", label: "Printer Rental UAE" },
               { href: "/rental-calculator/", label: "Rental Calculator" },

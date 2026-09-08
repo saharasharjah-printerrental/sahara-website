@@ -57,6 +57,13 @@ const nextConfig = {
       { source: '/products/canon-imageclass-mf644cdw/', destination: '/products/', permanent: true },
       { source: '/products/hp-laserjet-pro-m404dn', destination: '/products/', permanent: true },
       { source: '/products/hp-laserjet-pro-m404dn/', destination: '/products/', permanent: true },
+      // Sep 2026: folded into /bravo-card-printers-uae/ — that hub page
+      // already carried the Product+Offer blocks and buy-intent AEO
+      // question at 2.8x the word count of this dedicated sales page, so
+      // the two were cannibalising each other for "buy pvc card printer
+      // dubai" / "id card printer price uae". One consolidated page.
+      { source: '/services/pvc-card-printer-sales', destination: '/bravo-card-printers-uae/', permanent: true },
+      { source: '/services/pvc-card-printer-sales/', destination: '/bravo-card-printers-uae/', permanent: true },
     ];
   },
   async headers() {

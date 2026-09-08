@@ -240,9 +240,8 @@ export default function PvcCardPrintingServicesPage() {
           <h2 className="text-headline font-bold text-white mb-6">Related</h2>
           <div className="flex flex-wrap gap-3">
             {[
-              { href: "/bravo-card-printers-uae/", label: "PVC Card Printers — Model Guide" },
+              { href: "/bravo-card-printers-uae/", label: "PVC Card Printers — Model Guide & Sales" },
               { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental" },
-              { href: "/services/pvc-card-printer-sales/", label: "PVC Card Printer Sales" },
               { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
             ].map((l) => (
               <a key={l.href} href={l.href} className="text-caption text-primary bg-primary/10 border border-primary/20 px-4 py-2 rounded-pill hover:bg-primary/20 transition-colors">
