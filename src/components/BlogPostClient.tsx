@@ -32,7 +32,7 @@ interface BlogPostClientProps {
 
 const serviceLinks = [
   { href: "/services/printer-rental/", label: "Printer Rental" },
-  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental" },
   { href: "/services/amc/", label: "AMC" },
   { href: "/services/repair/", label: "Printer Repair" },
   { href: "/services/printer-spare-parts/", label: "Toner & Parts" },

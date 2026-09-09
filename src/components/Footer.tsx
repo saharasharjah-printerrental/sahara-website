@@ -225,7 +225,7 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-6">Our Services</h3>
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link href="/services/printer-rental/" className="hover:text-[#f5be53] transition-colors">Printer Rental</Link></li>
-              <li><Link href="/services/photocopier-rental/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
+              <li><Link href="/photocopier-rental-dubai/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental</Link></li>
               <li><Link href="/services/paper-shredder-rental/" className="hover:text-[#f5be53] transition-colors">Paper Shredder Rental</Link></li>
               <li><Link href="/services/paper-shredder-sales/" className="hover:text-[#f5be53] transition-colors">Buy a Paper Shredder</Link></li>
               <li><Link href="/services/papercut-print-management/" className="hover:text-[#f5be53] transition-colors">PaperCut Print Management</Link></li>
@@ -233,7 +233,7 @@ export default function Footer() {
               <li><Link href="/services/repair/" className="hover:text-[#f5be53] transition-colors">Printer Repair</Link></li>
               <li><Link href="/services/printer-spare-parts/" className="hover:text-[#f5be53] transition-colors">Toner & Spare Parts</Link></li>
               <li><Link href="/services/plotter-maintenance/" className="hover:text-[#f5be53] transition-colors">Plotter Maintenance</Link></li>
-              <li><Link href="/copier-lease-uae/" className="hover:text-[#f5be53] transition-colors">Copier Lease UAE</Link></li>
+              <li><Link href="/photocopier-rental-abu-dhabi/" className="hover:text-[#f5be53] transition-colors">Photocopier Rental Abu Dhabi</Link></li>
               <li><Link href="/bravo-card-printers-uae/" className="hover:text-[#f5be53] transition-colors">PVC Card Printers &amp; Sales</Link></li>
               <li><Link href="/services/pvc-card-printer-rental/" className="hover:text-[#f5be53] transition-colors">PVC Card Printer Rental</Link></li>
               <li><Link href="/services/pvc-card-printing-services/" className="hover:text-[#f5be53] transition-colors">PVC Card Printing Services</Link></li>
@@ -302,7 +302,7 @@ export default function Footer() {
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/printer-rental-abu-dhabi/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Copier Abu Dhabi</Link>
             <span className="text-slate-700 text-xs">|</span>
-            <Link href="/copier-lease-uae/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Printer Lease UAE</Link>
+            <Link href="/photocopier-rental-dubai/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Photocopier Lease UAE</Link>
             <span className="text-slate-700 text-xs">|</span>
             <Link href="/services/paper-shredder-rental/" className="text-slate-500 text-xs hover:text-slate-400 transition-colors">Paper Shredder Rental UAE</Link>
             <span className="text-slate-700 text-xs">|</span>

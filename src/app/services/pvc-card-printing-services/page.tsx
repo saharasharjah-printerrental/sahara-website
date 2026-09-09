@@ -25,7 +25,7 @@ import type { FaqItem } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "PVC Card Printing Services UAE | ID, Security & Custom Cards | Sahara",
-  description: "PVC card printing services in UAE — employee ID, student ID, security cards, custom hologram cards, wooden & transparent cards, printed and delivered by Sahara Office Equipments. Dubai, Sharjah & Abu Dhabi. ☎ +971503823969",
+  description: "PVC card printing in UAE — employee ID, security, hologram, wooden & transparent cards. Minimum 10 cards per order. Dubai, Sharjah & Abu Dhabi.",
   keywords: "pvc card printing services uae, id card printing dubai, security card printing uae, hologram card printing dubai, custom id card printing uae, wooden card printing dubai, transparent card printing uae, employee id card printing service",
   openGraph: {
     title: "PVC Card Printing Services UAE | Sahara Office Equipments",
@@ -64,7 +64,7 @@ const DEFAULT_FAQS: FaqItem[] = [
   },
   {
     q: "What is the minimum order quantity and turnaround time?",
-    a: "There is no strict minimum for standard ID cards; custom hologram and specialty-media orders (wooden, transparent) typically require a small minimum run. Standard turnaround is 2-3 business days after artwork approval; rush service is available.",
+    a: "Every order carries a minimum of 10 cards, rising to 25 for wooden/transparent cards and 50 for custom hologram cards. Standard turnaround is 2-3 business days after artwork approval for standard ID cards (5-7 days for hologram and specialty media); rush service is available.",
   },
   {
     q: "Can you encode access-control or RFID data during printing?",
@@ -97,7 +97,7 @@ const orderingSteps = [
 ];
 
 const moqTable = [
-  ["Standard ID / employee cards", "No strict minimum", "2–3 business days"],
+  ["Standard ID / employee cards", "10 cards", "2–3 business days"],
   ["Access-control / RFID encoded", "10 cards", "2–3 business days"],
   ["Custom hologram cards", "50 cards", "5–7 business days"],
   ["Wooden / transparent cards", "25 cards", "5–7 business days"],
@@ -183,12 +183,14 @@ export default function PvcCardPrintingServicesPage() {
               answer="Yes — Sahara Office Equipments prints and delivers finished PVC cards as a bureau service: employee ID, security cards, custom hologram cards, wooden and transparent cards, and more, on our own Bravo RTAI and DC 3300 printers, with no hardware purchase required."
               supportingPoints={[
                 "Full card catalogue: ID, access-control/RFID, membership, custom hologram, security, wooden, and transparent cards.",
+                "Minimum order 10 cards per run — 25 for wooden/transparent, 50 for custom hologram.",
                 "Encoding included where needed — magnetic stripe, contact smartcard, and RFID.",
                 "Standard turnaround 2–3 business days after artwork approval; rush service available.",
                 "Delivered across Dubai, Sharjah, Abu Dhabi, and all UAE emirates.",
               ]}
             />
           }
+          badges={["Minimum 10 Cards", "2–3 Day Turnaround", "Encoding Included", "UAE-Wide Delivery"]}
           image={{ src: "/brands/bravo/rtai-official.webp", alt: "PVC cards printed by Sahara Office Equipments in UAE", width: 610, height: 610 }}
           primaryCta={{ label: "Request a Printing Quote", href: "/pvc-card-printer-quote/" }}
           secondaryCta={{ label: "Call: +971 50 382 3969", href: "tel:+971503823969" }}
@@ -213,7 +215,7 @@ export default function PvcCardPrintingServicesPage() {
           </div>
         </Section>
 
-        <Section eyebrow="Order Details" title="Minimum order & turnaround">
+        <Section eyebrow="Order Details" title="Minimum order & turnaround" subtitle="Every order carries a minimum of 10 cards, rising to 25 for wooden/transparent media and 50 for custom hologram cards.">
           <ComparisonTable columns={["Card Type", "Minimum Order", "Standard Turnaround"]} rows={moqTable} />
         </Section>
 

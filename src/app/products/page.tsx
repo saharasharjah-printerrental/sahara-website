@@ -1,11 +1,11 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from '@cloudflare/next-on-pages';
-import ProductsClient from "@/components/ProductsClient";
+import ProductsClient, { PRODUCTS_FAQS } from "@/components/ProductsClient";
 
 export const metadata: Metadata = {
-  title: "Printer Products UAE | Canon, HP, Kyocera, Xerox | Sahara Office",
-  description: "Browse industrial-grade printers and photocopiers for rent in Dubai & UAE. Canon imageRUNNER, HP LaserJet, Kyocera TASKalfa, Xerox AltaLink. New & refurbished options from AED 300/month.",
+  title: "Printer Products UAE | Canon, HP, Kyocera, Xerox",
+  description: "Printers & photocopiers for rent in the UAE from AED 300/month. Canon, HP, Kyocera, Xerox — new & refurbished, zero deposit, free toner.",
   keywords: "printer products uae, photocopier sale dubai, office printer Canon HP Kyocera Xerox, buy printer uae, multifunction printer rental",
   openGraph: {
     title: "Printer Products UAE | Canon, HP, Kyocera, Xerox",
@@ -87,6 +87,18 @@ export default async function ProductsPage() {
     ],
   };
 
+  // Mirrors the FAQ accordion ProductsClient renders below the product grid
+  // — built from the same PRODUCTS_FAQS source so the two can never drift.
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: PRODUCTS_FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <>
       {/* Omitted entirely when D1 is unreachable — an ItemList with
@@ -95,6 +107,7 @@ export default async function ProductsPage() {
         <script type="application/ld+json">{JSON.stringify(productListSchema)}</script>
       )}
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <ProductsClient initialProducts={initialProducts.length > 0 ? initialProducts : undefined} />
     </>
   );

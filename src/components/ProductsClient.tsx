@@ -52,6 +52,15 @@ const defaultProducts = [
 
 const trail = [{ label: "Home", href: "/" }, { label: "Products" }];
 
+// Exported so page.tsx (server component) can build the matching FAQPage
+// JSON-LD server-side from the same source, rather than duplicating the text.
+export const PRODUCTS_FAQS = [
+  { q: "Can I rent or buy printers and photocopiers from this page?", a: "Both. Every product listed can be rented monthly (zero deposit, free toner and maintenance included) or purchased outright — request a quote for either option." },
+  { q: "What printer brands does Sahara sell in the UAE?", a: "Canon, HP, Kyocera, Xerox, Brother, Ricoh, Samsung, Lexmark, Sharp, and Epson — covering A4 desktop printers, A3 multifunction copiers, and wide-format plotters." },
+  { q: "What is the price range for printers and photocopiers?", a: "Rental starts from AED 300/month for an A4 desktop printer, rising to AED 1,200/month for enterprise A3 colour MFPs and wide-format plotters. Outright purchase pricing is available on request." },
+  { q: "Is there a difference between new and refurbished products?", a: "Yes — refurbished units are fully serviced and tested Sahara stock at a lower price point, while new units carry full manufacturer warranty. Condition is marked on every product." },
+];
+
 export default function ProductsClient({ initialProducts }: { initialProducts?: any[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -212,11 +221,11 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
             <Reveal className="flex flex-col items-end justify-between gap-6 md:flex-row">
               <div>
                 <h1 className="font-sora text-display-xl font-bold tracking-tighter text-white">
-                  Precision <span className="text-primary">Equipments</span>
+                  Printer &amp; Photocopier <span className="text-primary">Products UAE</span>
                 </h1>
                 <p className="mt-4 max-w-xl text-body text-muted">
-                  Harness the power of industrial-grade reliability. Curated technology for the high-performance
-                  executive office.
+                  Canon, HP, Kyocera, and Xerox printers and photocopiers for rent across Dubai, Sharjah, and Abu
+                  Dhabi — new and refurbished, from AED 300/month.
                 </p>
               </div>
               <div className="flex items-center gap-4 rounded-pill bg-surface-low p-1">
@@ -396,6 +405,22 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
                 )}
               </div>
             )}
+          </div>
+
+          {/* FAQ — matches PRODUCTS_FAQS' FAQPage schema emitted server-side in page.tsx */}
+          <div className="mt-20 border-t border-white/10 pt-12 lg:col-span-4 max-w-3xl mx-auto">
+            <h2 className="mb-8 text-center text-2xl font-bold text-white">Printer Products — FAQ</h2>
+            <div className="space-y-4">
+              {PRODUCTS_FAQS.map((f, i) => (
+                <details key={f.q} className="glass-card rounded-card p-6 group cursor-pointer" open={i === 0}>
+                  <summary className="flex list-none items-start justify-between gap-4 font-bold text-[1rem] text-white">
+                    <span>{f.q}</span>
+                    <span className="mt-1 shrink-0 text-lg leading-none text-primary transition-transform group-open:rotate-180">▾</span>
+                  </summary>
+                  <p className="mt-4 text-[0.9rem] leading-relaxed text-on-surface-variant">{f.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
 
           {/* Shop by Brand — cross-links to per-brand catalog pages */}

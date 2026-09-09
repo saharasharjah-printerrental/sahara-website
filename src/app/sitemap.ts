@@ -39,7 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/`,                              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 1.0 },
     { url: `${BASE}/services/`,                     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
     { url: `${BASE}/services/printer-rental/`,      lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE}/services/photocopier-rental/`,  lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
+    // /services/photocopier-rental/ is intentionally absent — 301'd to
+    // /photocopier-rental-dubai/ (Sep 2026 copier consolidation; see
+    // next.config.mjs redirects) after decaying to position 66 UAE-wide.
     { url: `${BASE}/services/repair/`,              lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/services/amc/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/printer-amc-dubai/`,             lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.75 },
@@ -53,13 +55,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/printer-rental-dubai/`,         lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.95 },
     { url: `${BASE}/printer-rental-abu-dhabi/`,     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/photocopier-rental-sharjah/`,   lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.92 },
-    { url: `${BASE}/photocopier-rental-dubai/`,     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
+    // Priority raised from 0.85: this page absorbed /services/photocopier-rental/'s
+    // content and equity in the Sep 2026 consolidation (see redirects above).
+    { url: `${BASE}/photocopier-rental-dubai/`,     lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.92 },
     { url: `${BASE}/photocopier-rental-abu-dhabi/`, lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/printer-rental-sharjah/`,       lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.95 },
     { url: `${BASE}/printer-rental-rak/`,           lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/printer-rental-fujairah/`,      lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/printer-rental-al-ain/`,        lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/copier-lease-uae/`,             lastModified: thisWeek, changeFrequency: 'weekly',  priority: 0.85 },
+    // /copier-lease-uae/ is intentionally absent — 301'd to
+    // /photocopier-rental-dubai/ (Sep 2026 copier consolidation).
     { url: `${BASE}/brands/canon/`,                 lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/brands/hp/`,                    lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/brands/kyocera/`,               lastModified: thisMonth, changeFrequency: 'monthly', priority: 0.7 },

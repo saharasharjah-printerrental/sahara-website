@@ -252,7 +252,7 @@ export default async function XeroxPrinterRepair() {
             <h2 className="mb-4 text-2xl font-bold text-white">Looking to rent or lease a Xerox printer instead?</h2>
             <p className="text-muted">
               This page covers Xerox repair and service. For rental and leasing, see our{" "}
-              <a href="/copier-lease-uae/" className="font-semibold text-primary hover:underline">copier lease UAE</a>{" "}
+              <a href="/photocopier-rental-dubai/" className="font-semibold text-primary hover:underline">copier lease UAE</a>{" "}
               page or our{" "}
               <a href="/services/repair/" className="font-semibold text-primary hover:underline">full repair service page</a>{" "}
               for other brands and UAE-wide coverage.

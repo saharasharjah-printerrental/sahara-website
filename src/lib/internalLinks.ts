@@ -44,11 +44,11 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     ],
   },
   "what-a-copier-rental-service-must-deliver-to-a-client": {
-    primaryService: { href: "/services/photocopier-rental/", label: "Photocopier Rental", type: "service" },
+    primaryService: { href: "/photocopier-rental-dubai/", label: "Photocopier Rental", type: "service" },
     relatedLinks: [
       { href: "/services/amc/", label: "Annual Maintenance Contract", type: "service" },
       { href: "/photocopier-rental-sharjah/", label: "Photocopier Rental Sharjah", type: "location" },
-      { href: "/copier-lease-uae/", label: "Copier Lease UAE", type: "location" },
+      { href: "/photocopier-rental-abu-dhabi/", label: "Photocopier Rental Abu Dhabi", type: "location" },
       { href: "/rental-calculator/", label: "Request a Quote", type: "tool" },
     ],
     relatedSlugs: [
@@ -63,7 +63,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", type: "location" },
       { href: "/services/printer-rental/", label: "Printer Rental UAE", type: "service" },
       { href: "/rental-calculator/", label: "Calculate Rental Cost", type: "tool" },
-      { href: "/copier-lease-uae/", label: "Copier Lease UAE", type: "location" },
+      { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", type: "location" },
     ],
     relatedSlugs: [
       "total-cost-of-printer-ownership",
@@ -104,7 +104,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     relatedLinks: [
       { href: "/services/amc/", label: "Annual Maintenance (AMC)", type: "service" },
       { href: "/rental-calculator/", label: "Cost Comparison Calculator", type: "tool" },
-      { href: "/copier-lease-uae/", label: "Copier Lease UAE", type: "location" },
+      { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", type: "location" },
     ],
     relatedSlugs: [
       "total-cost-of-printer-ownership",
@@ -146,7 +146,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi", type: "location" },
       { href: "/rental-calculator/", label: "Rent vs Buy Calculator", type: "tool" },
       { href: "/products/", label: "Buy a Printer", type: "service" },
-      { href: "/copier-lease-uae/", label: "Copier Lease UAE", type: "location" },
+      { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", type: "location" },
     ],
     relatedSlugs: [
       "total-cost-of-printer-ownership",
@@ -168,7 +168,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     ],
   },
   "kyocera-vs-canon-vs-ricoh-best-copier-uae-2025": {
-    primaryService: { href: "/services/photocopier-rental/", label: "Photocopier Rental UAE", type: "service" },
+    primaryService: { href: "/photocopier-rental-dubai/", label: "Photocopier Rental UAE", type: "service" },
     relatedLinks: [
       { href: "/brands/kyocera/", label: "Kyocera Printers UAE", type: "brand" },
       { href: "/brands/canon/", label: "Canon Printers UAE", type: "brand" },
@@ -250,9 +250,9 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
     ],
   },
   "how-to-choose-photocopier-small-office-sharjah": {
-    primaryService: { href: "/services/photocopier-rental/", label: "Photocopier Rental", type: "service" },
+    primaryService: { href: "/photocopier-rental-sharjah/", label: "Photocopier Rental Sharjah", type: "location" },
     relatedLinks: [
-      { href: "/photocopier-rental-sharjah/", label: "Photocopier Rental Sharjah", type: "location" },
+      { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", type: "location" },
       { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", type: "location" },
       { href: "/brands/ricoh/", label: "Ricoh Printers UAE", type: "brand" },
       { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
@@ -392,6 +392,12 @@ export const SERVICE_BLOG_MAP: Record<string, string[]> = {
     "uae-pdpl-document-destruction-compliance-guide",
     "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
   ],
+  "paper-shredder-sales": [
+    "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
+    "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
+    "paper-shredder-rental-uae-when-it-beats-buying",
+    "uae-pdpl-document-destruction-compliance-guide",
+  ],
   "papercut-print-management": [
     "papercut-print-management-uae-offices",
   ],
@@ -422,7 +428,7 @@ export const RELATED_BRAND_MAP: Record<string, { services: string[]; blogs: stri
   xerox: {
     services: ["/services/printer-rental/", "/services/repair/"],
     blogs: ["printer-rental-vs-buying-uae-2026-cost-breakdown", "how-to-choose-photocopier-small-office-sharjah"],
-    locations: ["/printer-rental-dubai/", "/copier-lease-uae/"],
+    locations: ["/printer-rental-dubai/", "/photocopier-rental-dubai/"],
   },
   brother: {
     services: ["/services/printer-rental/", "/services/repair/"],
@@ -454,7 +460,7 @@ export const RELATED_BRAND_MAP: Record<string, { services: string[]; blogs: stri
 // Anchor text map for inline contextual links (used in blog content)
 export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/services/printer-rental/": "printer rental UAE",
-  "/services/photocopier-rental/": "photocopier rental",
+  "/photocopier-rental-dubai/": "photocopier rental",
   "/services/amc/": "annual maintenance contract",
   "/services/repair/": "printer repair services",
   "/services/printer-spare-parts/": "toner and spare parts",
@@ -463,7 +469,6 @@ export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/printer-rental-abu-dhabi/": "printer rental Abu Dhabi",
   "/photocopier-rental-sharjah/": "photocopier rental Sharjah",
   "/printer-rental-sharjah/": "printer rental Sharjah",
-  "/copier-lease-uae/": "copier lease UAE",
   "/printer-repair-dubai/": "printer repair Dubai",
   "/canon-printer-dubai/": "Canon printer Dubai",
   "/hp-printer-abu-dhabi/": "HP printer Abu Dhabi",

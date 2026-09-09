@@ -243,7 +243,7 @@ const industryInsights = [
 
 const relatedServices = [
   { href: "/services/printer-rental/", label: "Printer Rental UAE" },
-  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental" },
   { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
   { href: "/services/repair/", label: "Printer Repair" },
   { href: "/brands/canon/", label: "Canon Printers" },
@@ -254,7 +254,7 @@ const otherLocations = [
   { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", desc: "Same-day delivery across all Dubai districts." },
   { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
   { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest service in Sharjah & Northern Emirates." },
-  { href: "/copier-lease-uae/", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract & invoice." },
+  { href: "/photocopier-rental-abu-dhabi/", label: "Photocopier Rental Abu Dhabi", desc: "Weekly maintenance across Abu Dhabi." },
 ];
 
 const trail = [{ label: "Home", href: "/" }, { label: "Printer Rental Al Ain" }];

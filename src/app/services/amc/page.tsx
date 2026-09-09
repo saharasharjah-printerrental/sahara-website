@@ -483,7 +483,7 @@ export default function AMCPage() {
           <p className="mx-auto mt-8 max-w-3xl text-center text-[0.9rem] leading-relaxed text-on-surface-variant">
             If you would rather not manage consumables or exclusions at all, a{" "}
             <a href="/services/printer-rental/" className="text-primary hover:underline">printer rental</a> or{" "}
-            <a href="/services/photocopier-rental/" className="text-primary hover:underline">photocopier rental</a>{" "}
+            <a href="/photocopier-rental-dubai/" className="text-primary hover:underline">photocopier rental</a>{" "}
             contract folds toner, maintenance and the device itself into one monthly figure.
           </p>
         </Section>
@@ -506,7 +506,7 @@ export default function AMCPage() {
                 We maintain Canon imageRUNNER ADVANCE, Kyocera TASKalfa, Ricoh MP, Xerox AltaLink and Sharp MX series
                 copiers, including devices bought elsewhere. If you own the equipment outright, an AMC is normally
                 cheaper than paying per call-out; if you would rather not own it at all,{" "}
-                <a href="/services/photocopier-rental/" className="text-primary hover:underline">photocopier rental</a>{" "}
+                <a href="/photocopier-rental-dubai/" className="text-primary hover:underline">photocopier rental</a>{" "}
                 includes the same cover plus the device and toner.
               </p>
             </div>

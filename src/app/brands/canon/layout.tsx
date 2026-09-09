@@ -43,6 +43,25 @@ const serviceSchema = {
   serviceType: "Canon Printer Dealer UAE",
 };
 
+// Sep 2026: this page owns a large, coherent "Canon dealer/distributor" query
+// cluster (61+58+32+32+31+31+14+12 = 271 UAE impressions/28d) at position
+// 36.8-51.2 with 0 clicks — the biggest single unclaimed intent found in this
+// session's cannibalisation review. It had Service+FAQPage+BreadcrumbList
+// schema but no ItemList pointing at real, live Canon product pages, so it
+// carried no crawlable proof of the dealer claim. Links to two confirmed-live
+// Canon product URLs (verified via curl, not invented).
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Canon Printers in Stock — Sahara UAE",
+  url: "https://www.saharaprinter.com/brands/canon/#in-stock",
+  numberOfItems: 2,
+  itemListElement: [
+    { "@type": "ListItem", position: 1, url: "https://www.saharaprinter.com/products/canon-imagerunner-advance-c5235i/" },
+    { "@type": "ListItem", position: 2, url: "https://www.saharaprinter.com/products/canon-imagerunner-advance-c5535i-rf/" },
+  ],
+};
+
 export const metadata: Metadata = {
   title: "Canon Printers UAE | Authorized Dealer | Sahara Office",
   description,
@@ -69,6 +88,7 @@ export const metadata: Metadata = {
       JSON.stringify(breadcrumbSchema),
       JSON.stringify(faqSchema),
       JSON.stringify(serviceSchema),
+      JSON.stringify(itemListSchema),
     ] as string[],
   },
 };

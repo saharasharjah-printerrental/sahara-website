@@ -35,10 +35,11 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 export async function generateMetadata(): Promise<Metadata> {
   return {
   title: "Printer Rental Dubai | AED 250/mo | Zero Deposit | Sahara",
-  description: "Printer rental Dubai from AED 250/month. Zero deposit, free toner & maintenance. 4-hr emergency response. Business Bay, JLT, DIFC, Marina, Deira & all areas. Call +971503823969",
+  description: "Printer rental Dubai from AED 250/month. Zero deposit, free toner & maintenance, 4-hr response. Business Bay, JLT, DIFC, Marina, Deira & all areas.",
   // Sep 2026: dropped "photocopier rental dubai" and "copier lease dubai"
-  // from keywords — those are /services/photocopier-rental/'s and
-  // /copier-lease-uae/'s meta targets respectively (same surgery as 64a0b1e).
+  // from keywords — those are /photocopier-rental-dubai/'s meta targets
+  // (same surgery as 64a0b1e; /services/photocopier-rental/ and
+  // /copier-lease-uae/ have since been 301'd into that page).
   // This page's own AED 500/1000 tiers in the OfferCatalog below describe
   // its real product lineup, not a competing keyword claim, so left as-is.
   keywords: "printer rental dubai, printer rental business bay, printer rental DIFC, printer rental JLT, canon printer rental dubai, kyocera printer dubai, zero deposit printer rental dubai",
@@ -195,7 +196,7 @@ const blogPosts = [
 
 const relatedServices = [
   { href: "/services/printer-rental/", label: "Printer Rental UAE" },
-  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental" },
   { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
   { href: "/services/repair/", label: "Printer Repair" },
   { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
@@ -209,7 +210,7 @@ const otherLocations = [
   { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
   { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest response in Sharjah & Northern Emirates." },
   { href: "/printer-rental-rak/", label: "Printer Rental RAK", desc: "Ras Al Khaimah businesses & free zones." },
-  { href: "/copier-lease-uae/", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract." },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", desc: "New A3 from AED 500/mo, refurbished from AED 250/mo." },
 ];
 
 const trail = [{ label: "Home", href: "/" }, { label: "Printer Rental Dubai" }];

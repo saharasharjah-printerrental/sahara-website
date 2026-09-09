@@ -68,12 +68,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = await getProduct(slug);
   if (!product) return { title: "Product Not Found | Sahara Office Equipments" };
 
-  const title = product.meta_title || `${product.name} | ${product.brand} ${product.category} | Sahara Office Equipments`;
+  // Sep 2026: these model pages rank 1-11 for "<model> price" queries
+  // ("canon c5535i price" pos 8, "canon c5235i price" pos 10, etc.) with
+  // zero clicks — the old default title pattern
+  // (`${name} | ${brand} ${category} | Sahara Office Equipments`, 70-80
+  // chars) buried the model name in the truncated middle and never said
+  // "price", the exact word in the query. Leads with the model + "Price
+  // UAE" + the real rental figure instead. Only applies when no admin-set
+  // meta_title exists in D1.
+  const priceLabel = product.price_rental > 0 ? `Rent ${formatPrice(product.price_rental, "/mo")}` : "Request Price";
+  const title = product.meta_title || `${product.name} Price UAE | ${priceLabel}`;
   const specs = parseJsonArray(product.specifications);
   const description =
     product.meta_description ||
     product.description ||
-    `${product.name} by ${product.brand} — ${specs.slice(0, 3).join(", ")}. Available for rental from ${formatPrice(product.price_rental, "/mo")} in Dubai, Sharjah & Abu Dhabi. Zero deposit, free toner & maintenance.`;
+    `${product.name} price in UAE — ${specs.slice(0, 2).join(", ")}. Rent from ${formatPrice(product.price_rental, "/mo")} in Dubai, Sharjah & Abu Dhabi.`;
   const images = parseJsonArray(product.image_urls);
   const canonical = `${SITE_URL}/products/${slug}/`;
 
@@ -431,7 +440,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   <h3 className="text-sm font-bold text-white mb-3 uppercase tracking-widest">Related services</h3>
                   <ul className="space-y-2 text-sm">
                     <li><a href="/services/printer-rental/" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">Printer rental UAE</a></li>
-                    <li><a href="/services/photocopier-rental/" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">Photocopier rental</a></li>
+                    <li><a href="/photocopier-rental-dubai/" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">Photocopier rental</a></li>
                     <li><a href="/services/amc/" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">Annual maintenance contracts</a></li>
                     <li><a href="/services/repair/" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">Printer repair &amp; service</a></li>
                     <li><a href="/services/printer-spare-parts/" className="text-[#d3c5b0] hover:text-[#f5be53] transition-colors">Toner &amp; spare parts</a></li>

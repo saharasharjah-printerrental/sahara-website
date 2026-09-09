@@ -439,7 +439,7 @@ export default function ContactPage() {
             <p className="leading-relaxed text-on-surface-variant">
               Looking for something specific? See{" "}
               <a href="/services/printer-rental/" className="text-primary hover:underline">printer rental</a>,{" "}
-              <a href="/services/photocopier-rental/" className="text-primary hover:underline">photocopier rental</a>,{" "}
+              <a href="/photocopier-rental-dubai/" className="text-primary hover:underline">photocopier rental</a>,{" "}
               <a href="/services/repair/" className="text-primary hover:underline">repair and service</a>,{" "}
               <a href="/services/amc/" className="text-primary hover:underline">annual maintenance contracts</a>, or{" "}
               <a href="/services/printer-spare-parts/" className="text-primary hover:underline">toner and spare parts</a>.

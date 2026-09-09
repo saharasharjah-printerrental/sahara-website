@@ -34,7 +34,7 @@ const brands = [
 
 const services = [
   { name: "Printer Rental", href: "/services/printer-rental/", icon: Print },
-  { name: "Photocopier Rental", href: "/services/photocopier-rental/", icon: CopyAll },
+  { name: "Photocopier Rental", href: "/photocopier-rental-dubai/", icon: CopyAll },
   { name: "Paper Shredder Rental", href: "/services/paper-shredder-rental/", icon: Article },
   { name: "Buy a Paper Shredder", href: "/services/paper-shredder-sales/", icon: Article },
   { name: "PaperCut Print Management", href: "/services/papercut-print-management/", icon: SettingsSuggest },

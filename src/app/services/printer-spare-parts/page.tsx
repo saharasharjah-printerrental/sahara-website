@@ -261,7 +261,7 @@ export default async function PrinterSparePartsPage() {
               <p className="leading-relaxed text-on-surface-variant">
                 Toner is included at no extra cost on every Sahara{" "}
                 <a href="/services/printer-rental/" className="text-primary hover:underline">printer rental</a> and{" "}
-                <a href="/services/photocopier-rental/" className="text-primary hover:underline">photocopier rental</a>{" "}
+                <a href="/photocopier-rental-dubai/" className="text-primary hover:underline">photocopier rental</a>{" "}
                 contract, with usage monitored remotely so replacements arrive before you run out. Buying consumables
                 separately makes sense if you own your equipment outright — in which case an{" "}
                 <a href="/services/amc/" className="text-primary hover:underline">annual maintenance contract</a>{" "}

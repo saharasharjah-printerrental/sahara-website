@@ -171,7 +171,7 @@ const rakAreas = [
 
 const relatedServices = [
   { href: "/services/printer-rental/", label: "Printer Rental UAE" },
-  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental" },
   { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
   { href: "/services/repair/", label: "Printer Repair" },
   { href: "/brands/canon/", label: "Canon Printers" },

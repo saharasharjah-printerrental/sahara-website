@@ -136,6 +136,22 @@ export default function CanonBrandPage() {
         </div>
       </Section>
 
+      <Section id="in-stock" title="Canon Printers in Stock — UAE" subtitle="Real models, real specs, available now for sale or rental." align="center">
+        <div className="grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
+          <a href="/products/canon-imagerunner-advance-c5235i/" className="block rounded-card border border-white/[0.08] bg-surface-low p-6 transition-colors hover:border-primary/40">
+            <h3 className="mb-1 text-lg font-bold text-white">Canon imageRUNNER ADVANCE C5235i</h3>
+            <p className="text-sm text-on-surface-variant">35 ppm B&amp;W / 30 ppm colour — rental from AED 250/mo</p>
+          </a>
+          <a href="/products/canon-imagerunner-advance-c5535i-rf/" className="block rounded-card border border-white/[0.08] bg-surface-low p-6 transition-colors hover:border-primary/40">
+            <h3 className="mb-1 text-lg font-bold text-white">Canon imageRUNNER ADVANCE C5535i (RF)</h3>
+            <p className="text-sm text-on-surface-variant">Print, Copy, Scan — rental from AED 325/mo</p>
+          </a>
+        </div>
+        <p className="mt-6 text-center">
+          <a href="/products/" className="font-semibold text-primary hover:underline">See the full printer catalogue →</a>
+        </p>
+      </Section>
+
       <Section title="Technological Superiority" align="center">
         <div className="mx-auto grid max-w-content grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div className="space-y-12">

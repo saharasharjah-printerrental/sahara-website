@@ -258,7 +258,7 @@ export default async function PrinterRentalSharjahPage() {
               { href: "/photocopier-rental-sharjah/", label: "Photocopier Rental Sharjah" },
               { href: "/printer-rental-dubai/", label: "Printer Rental Dubai" },
               { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi" },
-              { href: "/copier-lease-uae/", label: "Copier Lease UAE" },
+              { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai" },
               { href: "/services/amc/", label: "Printer AMC" },
             ].map((l) => (
               <a key={l.href} href={l.href} className="text-caption text-primary bg-primary/10 border border-primary/20 px-4 py-2 rounded-pill hover:bg-primary/20 transition-colors">

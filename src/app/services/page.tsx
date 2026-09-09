@@ -27,7 +27,7 @@ import {
 // sibling service.
 export const metadata: Metadata = {
   title: "Printer & Office Equipment Services UAE | Sahara Office Equipments",
-  description: "All Sahara Office Equipments services in one place — printer & photocopier rental, AMC, repair, PVC card printers, toner & spare parts, paper shredder rental, and PaperCut print management. Dubai, Sharjah & Abu Dhabi.",
+  description: "All Sahara Office Equipments services in one place — printer & photocopier rental, AMC, repair, PVC card printers, toner & spare parts, paper shredder rental & sales, and PaperCut print management. Dubai, Sharjah & Abu Dhabi.",
   keywords: "printer services uae, office equipment services dubai, printer rental amc repair uae",
   openGraph: {
     title: "Printer & Office Equipment Services UAE | Sahara Office Equipments",
@@ -42,12 +42,13 @@ export const metadata: Metadata = {
 
 const services = [
   { icon: TruckIcon, title: "Printer Rental", body: "A4 and A3 printers from AED 250/month — zero deposit, unlimited toner, maintenance included.", href: "/services/printer-rental/" },
-  { icon: TruckIcon, title: "Photocopier Rental", body: "Multifunction photocopiers on flexible monthly terms across the UAE.", href: "/services/photocopier-rental/" },
+  { icon: TruckIcon, title: "Photocopier Rental", body: "Multifunction photocopiers on flexible monthly terms across the UAE.", href: "/photocopier-rental-dubai/" },
   { icon: SettingsIcon, title: "Annual Maintenance (AMC)", body: "Fixed monthly plans from AED 299 covering parts, labour, and preventive servicing.", href: "/services/amc/" },
   { icon: HeadsetIcon, title: "Printer Repair", body: "4-hour emergency response, OEM parts, certified technicians across all emirates.", href: "/services/repair/" },
   { icon: IdCardIcon, title: "PVC Card Printers", body: "Bravo RTAI & DC 3300 — authorised exclusive UAE reseller. Rent, buy, or have cards printed.", href: "/bravo-card-printers-uae/" },
   { icon: LayersIcon, title: "Toner & Spare Parts", body: "Genuine OEM toner, drums, and spare parts in stock for same-day dispatch.", href: "/services/printer-spare-parts/" },
-  { icon: ShieldCheckIcon, title: "Paper Shredder Rental", body: "Secure document destruction equipment on flexible rental terms.", href: "/services/paper-shredder-rental/" },
+  { icon: ShieldCheckIcon, title: "Paper Shredder Rental", body: "Secure document destruction equipment on flexible weekly rental terms.", href: "/services/paper-shredder-rental/" },
+  { icon: AwardIcon, title: "Paper Shredder Sales", body: "Buy a Fellowes cross-cut paper shredder outright from AED 800.", href: "/services/paper-shredder-sales/" },
   { icon: SettingsIcon, title: "PaperCut Print Management", body: "Track, control, and reduce print costs across your organisation.", href: "/services/papercut-print-management/" },
   { icon: ClockIcon, title: "Plotter Maintenance", body: "Servicing and support for wide-format plotters and large-format printers.", href: "/services/plotter-maintenance/" },
 ];

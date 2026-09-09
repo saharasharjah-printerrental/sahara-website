@@ -364,7 +364,7 @@ function LocationsSection() {
           ))}
         </div>
         <div className="text-center mt-10">
-          <Link href="/copier-lease-uae/" className="inline-block rounded-pill border border-primary/25 px-6 py-3 text-[0.9rem] font-medium text-primary transition-colors hover:bg-primary/10">
+          <Link href="/photocopier-rental-dubai/" className="inline-block rounded-pill border border-primary/25 px-6 py-3 text-[0.9rem] font-medium text-primary transition-colors hover:bg-primary/10">
             View Nationwide Copier Lease Plans →
           </Link>
         </div>

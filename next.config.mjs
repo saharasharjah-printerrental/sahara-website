@@ -64,6 +64,18 @@ const nextConfig = {
       // dubai" / "id card printer price uae". One consolidated page.
       { source: '/services/pvc-card-printer-sales', destination: '/bravo-card-printers-uae/', permanent: true },
       { source: '/services/pvc-card-printer-sales/', destination: '/bravo-card-printers-uae/', permanent: true },
+      // Sep 2026: copier consolidation. /services/photocopier-rental/ (UAE
+      // hub) had decayed to position 66 with 759 UAE impressions and 1
+      // click, beaten on its own terms by /photocopier-rental-dubai/ (10.5
+      // vs 32.6 on "photocopier rental dubai"). Its comparison table, device
+      // fleet, and FAQs were migrated into the Dubai page before this
+      // redirect — see the note at the top of that file. /copier-lease-uae/
+      // consolidated for the same reason: 289 UAE impressions, position
+      // 64.7, 0 clicks, losing "copier lease dubai" to the homepage.
+      { source: '/services/photocopier-rental', destination: '/photocopier-rental-dubai/', permanent: true },
+      { source: '/services/photocopier-rental/', destination: '/photocopier-rental-dubai/', permanent: true },
+      { source: '/copier-lease-uae', destination: '/photocopier-rental-dubai/', permanent: true },
+      { source: '/copier-lease-uae/', destination: '/photocopier-rental-dubai/', permanent: true },
     ];
   },
   async headers() {

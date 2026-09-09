@@ -36,17 +36,17 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
   title: "Printer Rental Abu Dhabi | AED 250/mo | Sahara",
   description:
-    "Printer rental in Abu Dhabi from AED 250/month. Zero deposit, free toner, weekly service visits. Serving Mussafah, Al Reem Island, Khalifa City, Masdar City. Canon & Kyocera. Call now.",
+    "Printer rental in Abu Dhabi from AED 250/month. Zero deposit, free toner, weekly service. Serving Mussafah, Al Reem Island, Khalifa City, Masdar City.",
+  // Sep 2026: dropped "photocopier rental abu dhabi" and "copier lease abu
+  // dhabi" — /photocopier-rental-abu-dhabi/ now exists and owns those terms.
+  // Same surgery as printer-rental-dubai's de-cannibalisation (64a0b1e);
+  // this page had carried both since launch and this sweep was missed then.
   keywords: [
     "printer rental abu dhabi",
-    "photocopier rental abu dhabi",
-    "copier lease abu dhabi",
     "mussafah printer rental",
-    "al reem island copier rental",
     "zero deposit printer abu dhabi",
     "canon kyocera rental abu dhabi",
     "office equipment rental abu dhabi",
-    "printer lease uae",
     "masdar city printer rental",
   ],
   alternates: { canonical: "https://www.saharaprinter.com/printer-rental-abu-dhabi/" },
@@ -318,21 +318,20 @@ const abuDhabiAreas = [
 
 const relatedServices = [
   { href: "/services/printer-rental/", label: "Printer Rental UAE" },
-  { href: "/services/photocopier-rental/", label: "Photocopier Rental" },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental" },
   { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
   { href: "/services/repair/", label: "Printer Repair" },
   { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
   { href: "/hp-printer-abu-dhabi/", label: "HP Printer Abu Dhabi" },
   { href: "/brands/canon/", label: "Canon Printers" },
   { href: "/brands/kyocera/", label: "Kyocera Printers" },
-  { href: "/copier-lease-uae/", label: "Copier Lease UAE" },
 ];
 
 const otherLocations = [
   { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", desc: "Same-day delivery. Business Bay, DIFC, JLT, Marina & all Dubai areas." },
   { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest service in Sharjah & Northern Emirates." },
   { href: "/printer-rental-al-ain/", label: "Printer Rental Al Ain", desc: "Serving Al Ain businesses, universities & clinics." },
-  { href: "/copier-lease-uae/", label: "Copier Lease UAE", desc: "Nationwide fleet leasing with one contract & invoice." },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", desc: "New A3 from AED 500/mo, refurbished from AED 250/mo." },
 ];
 
 const blogPosts = [
@@ -435,22 +434,6 @@ export default async function PrinterRentalAbuDhabi() {
             </Reveal>
           </div>
         </section>
-
-        <Section flush>
-          <div className="mx-auto max-w-4xl rounded-panel border border-primary/[0.35] bg-surface-low p-8 md:p-10">
-            <p className="mb-3 text-caption font-bold uppercase tracking-[0.25em] text-primary">
-              AI Answer — What is Printer Rental in Abu Dhabi?
-            </p>
-            <p className="text-[1.05rem] leading-relaxed text-white">
-              Printer rental in Abu Dhabi is a monthly subscription from{" "}
-              <strong className="text-primary">AED 250/month</strong> where businesses use Canon or Kyocera
-              printers and photocopiers — with toner, maintenance, and repairs included. Sahara Office Equipment
-              Trading LLC, founded in 2012, serves Abu Dhabi businesses with{" "}
-              <strong className="text-primary">weekly preventive maintenance</strong>, 4—6hr emergency response,
-              and zero deposit plans across Mussafah, Al Reem Island, Khalifa City, and ADGM.
-            </p>
-          </div>
-        </Section>
 
         <Section flush>
           <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 rounded-panel border border-white/[0.08] bg-surface-low px-6 py-8 text-center md:grid-cols-4">

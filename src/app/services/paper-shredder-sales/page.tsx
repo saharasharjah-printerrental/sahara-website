@@ -10,6 +10,7 @@ import ProductHero from "@/components/ui/ProductHero";
 import Section from "@/components/ui/Section";
 import FeatureCard from "@/components/ui/FeatureCard";
 import ComparisonTable from "@/components/ui/ComparisonTable";
+import SpecTable from "@/components/ui/SpecTable";
 import { ShieldCheckIcon, AwardIcon, SettingsIcon, TruckIcon } from "@/components/icons";
 import type { FaqItem } from "@/lib/faqs";
 
@@ -29,11 +30,11 @@ import type { FaqItem } from "@/lib/faqs";
 // docs/seo/blog-drafts/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide.md
 // ("Dubai Pricing Snapshot 2026" table), not invented for this page.
 export const metadata: Metadata = {
-  title: "Buy Paper Shredders Dubai & UAE | Fellowes Cross-Cut | Sahara",
-  description: "Buy a paper shredder in Dubai, Sharjah & Abu Dhabi — Fellowes Powershred DIN P-4 cross-cut models from AED 800. Free delivery, setup & PDPL-compliant destruction. Request a quote. ☎ +971503823969",
+  title: "Paper Shredder Machine Dubai | Price from AED 800 | Sahara",
+  description: "Paper shredder machine price in Dubai & UAE from AED 800 — Fellowes cross-cut DIN P-4. Free delivery, setup & PDPL-compliant destruction. Request a quote.",
   keywords: "buy paper shredder dubai, paper shredder machine dubai, paper shredder price in uae, paper shredders, paper shredder dubai, fellowes shredders dubai, office paper shredder uae, paper shredder machine, document shredder uae, industrial paper shredder dubai",
   openGraph: {
-    title: "Buy Paper Shredders Dubai & UAE | Sahara Office Equipments",
+    title: "Paper Shredder Machine Dubai | Price from AED 800 | Sahara Office Equipments",
     description: "Fellowes Powershred cross-cut paper shredders for sale in Dubai, Sharjah & Abu Dhabi. DIN P-4, PDPL compliant, free delivery & setup.",
     url: "https://www.saharaprinter.com/services/paper-shredder-sales/",
     siteName: "Sahara Office Equipments",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Buy Paper Shredders Dubai & UAE | Sahara Office Equipments",
+    title: "Paper Shredder Machine Dubai | Price from AED 800 | Sahara",
     description: "Fellowes Powershred cross-cut paper shredders for sale in Dubai, Sharjah & Abu Dhabi. DIN P-4, PDPL compliant, free delivery & setup.",
     images: ["https://www.saharaprinter.com/images/shredder-fellowes-325ci.webp"],
   },
@@ -95,7 +96,7 @@ const complianceFeatures = [
 const rentVsBuyRows: [string, string, string][] = [
   ["Best for", "Occasional or seasonal shredding", "Daily, high-volume shredding"],
   ["Upfront cost", "AED 0", "AED 800 – 3,500+"],
-  ["Ongoing cost", "Monthly rental fee", "None after purchase"],
+  ["Ongoing cost", "Weekly rental fee", "None after purchase"],
   ["Maintenance", "Included in rental", "Own responsibility (or add an AMC)"],
   ["Ownership", "Never own the machine", "Own it outright"],
 ];
@@ -105,9 +106,13 @@ const DEFAULT_FAQS: FaqItem[] = [
   { q: "What paper shredder brand does Sahara sell in the UAE?", a: "Sahara sells Fellowes Powershred cross-cut shredders — the Powershred LX65 for personal and light-office use, and the Powershred 325Ci for departmental and commercial use. Both are DIN P-4 rated, the level recommended for UAE PDPL compliance." },
   { q: "What DIN security level should I buy for UAE compliance?", a: "DIN P-4 cross-cut is the accepted minimum for UAE Personal Data Protection Law (PDPL) compliance for most office documents. Legal, HR, and financial records handling especially sensitive data should step up to micro-cut, DIN P-5 or higher — see our DIN P-4 vs P-5 vs P-6 guide for the full comparison." },
   { q: "Do you deliver and set up the shredder after purchase?", a: "Yes — free delivery and on-site setup is included across Dubai, Sharjah, Abu Dhabi, and UAE free zones including JAFZA, SAIF Zone, DAFZA, and DIFC." },
-  { q: "Is it cheaper to buy or rent a paper shredder in the UAE?", a: "For occasional or seasonal use, renting from AED 150/month is usually cheaper than buying outright. For daily, high-volume shredding, buying is typically the better long-term option since there's no ongoing rental fee. See our Paper Shredder Rental page for rental pricing, or ask us for a side-by-side comparison based on your actual usage." },
+  { q: "Is it cheaper to buy or rent a paper shredder in the UAE?", a: "For occasional or seasonal use, renting from AED 150/week is usually cheaper than buying outright. For daily, high-volume shredding, buying is typically the better long-term option since there's no ongoing rental fee. See our Paper Shredder Rental page for rental pricing, or ask us for a side-by-side comparison based on your actual usage." },
   { q: "Do you also repair paper shredders in the UAE?", a: "Yes — Sahara services and repairs paper shredders across Dubai, Sharjah, and Abu Dhabi, regardless of where the machine was purchased. Call us for a diagnosis and repair quote." },
   { q: "Can I get a warranty or maintenance contract on a purchased shredder?", a: "Yes. Purchased shredders carry the manufacturer's standard warranty, and we offer an optional Annual Maintenance Contract (AMC) for departmental and high-volume machines to cover servicing and blade wear." },
+  { q: "Where can I get a paper shredder machine in Dubai?", a: "Sahara Office Equipments supplies and delivers paper shredder machines throughout Dubai — for outright purchase from AED 800, or for rent from AED 150/week. Free delivery and on-site setup are included across all Dubai districts, with same-day availability in most areas." },
+  { q: "Can I rent a paper shredder instead of buying one?", a: "Yes — Sahara rents paper shredders as well as selling them outright. For offices that shred only occasionally, renting from AED 150/week (with maintenance and repairs included) usually works out cheaper than buying outright at AED 800–3,500+. For daily, high-volume shredding, buying can make sense — ask us for a side-by-side quote and we'll recommend whichever is cheaper for your actual usage." },
+  { q: "What's the difference between the paper shredders Sahara sells in the UAE?", a: "Sahara's UAE shredder range covers the Fellowes Powershred LX65 (10 sheets/pass, personal or light-office use, AED 800–1,500 to buy) and the Fellowes Powershred 325Ci (24 sheets/pass, departmental/commercial use, AED 2,200–3,500+ to buy), both DIN P-4 cross-cut, plus heavy-duty models for high-volume clear-outs on request. Both are also available to rent, with free delivery across Dubai, Sharjah, and Abu Dhabi." },
+  { q: "Does Sahara sell paper shredders across Dubai and the wider UAE?", a: "Yes. Sahara sells and delivers paper shredders across Dubai, Sharjah, Abu Dhabi, Ajman, and Ras Al Khaimah, including free zones like JAFZA, SAIF Zone, and DIFC. Purchase prices start from AED 800; rental is also available from AED 150/week." },
 ];
 
 const relatedServices = [
@@ -124,17 +129,20 @@ const trail = [
   { label: "Buy a Paper Shredder" },
 ];
 
-function productSchemaFor(m: typeof models[number]) {
+function productSchemaFor(m: typeof models[number], withContext = true) {
+  const anchorUrl = `https://www.saharaprinter.com/services/paper-shredder-sales/#${m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
   return {
-    "@context": "https://schema.org",
+    ...(withContext ? { "@context": "https://schema.org" } : {}),
     "@type": "Product",
     "name": m.name,
     "brand": { "@type": "Brand", "name": "Fellowes" },
     "category": "Paper Shredder",
     "description": `${m.name} — ${m.level}, ${m.capacity}, ${m.bin}. Best for ${m.bestFor.toLowerCase()}.`,
     "image": `https://www.saharaprinter.com${m.image}`,
+    "url": anchorUrl,
     "offers": {
       "@type": "AggregateOffer",
+      "url": anchorUrl,
       "priceCurrency": "AED",
       "lowPrice": m.priceLow,
       "highPrice": m.priceHigh,
@@ -143,10 +151,24 @@ function productSchemaFor(m: typeof models[number]) {
       // — not multiple named sub-configs, so offerCount is honestly 1.
       "offerCount": 1,
       "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
       "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" },
     },
   };
 }
+
+const modelListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Fellowes Paper Shredders Available to Buy — Sahara UAE",
+  "url": "https://www.saharaprinter.com/services/paper-shredder-sales/#models",
+  "numberOfItems": models.length,
+  "itemListElement": models.map((m, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": productSchemaFor(m, false),
+  })),
+};
 
 const serviceSchema = {
   "@context": "https://schema.org",
@@ -186,6 +208,7 @@ export default function PaperShredderSalesPage() {
       {models.map((m) => (
         <script key={m.name} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchemaFor(m)) }} />
       ))}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(modelListSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {/* FAQPage JSON-LD is emitted by <FaqSection> alongside the accordion it renders. */}
       <main className="min-h-screen bg-surface">
@@ -196,7 +219,7 @@ export default function PaperShredderSalesPage() {
           eyebrow="Dubai · Sharjah · Abu Dhabi"
           title={
             <>
-              {"Buy a Paper Shredder "}
+              {"Paper Shredder Machine "}
               <br />
               <span className="text-primary">Dubai &amp; UAE</span>
             </>
@@ -218,14 +241,18 @@ export default function PaperShredderSalesPage() {
           secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 
-        <Section title="Dubai Paper Shredder Pricing by Category" subtitle="Indicative pricing for the UAE market. Final price depends on brand, capacity, and current promotions — request a quote for your exact configuration." align="center">
+        <Section title="Paper Shredder Price in UAE by Category" subtitle="Indicative pricing for the UAE market. Final price depends on brand, capacity, and current promotions — request a quote for your exact configuration." align="center">
           <ComparisonTable columns={["Category", "Price Range", "Sheet Capacity"]} rows={priceBands} />
         </Section>
 
         <Section flush title="Fellowes Shredders Available to Buy" subtitle="DIN P-4 cross-cut Fellowes Powershred shredders, sized for personal, office, and departmental use.">
-          <div className="grid gap-6 md:grid-cols-2 max-w-4xl">
+          <div id="models" className="grid gap-6 md:grid-cols-2 max-w-4xl scroll-mt-24">
             {models.map((m) => (
-              <div key={m.name} className="relative rounded-panel border border-white/[0.08] bg-surface-low p-6">
+              <div
+                key={m.name}
+                id={m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+                className="relative rounded-panel border border-white/[0.08] bg-surface-low p-6 scroll-mt-24"
+              >
                 <span className="absolute top-4 right-4 rounded-pill bg-primary px-2 py-0.5 text-[10px] font-bold text-on-primary">{m.badge}</span>
                 <img
                   src={m.image}
@@ -237,13 +264,16 @@ export default function PaperShredderSalesPage() {
                 />
                 <h3 className="mb-1 text-xl font-bold text-white">{m.name}</h3>
                 <p className="mb-3 text-[0.9rem] font-semibold text-primary">{m.priceLabel} — request exact quote</p>
-                <ul className="mb-4 space-y-1 text-[0.9rem] text-on-surface-variant">
-                  <li>Security Level: <span className="font-medium text-white">{m.level}</span></li>
-                  <li>Sheet Capacity: <span className="font-medium text-white">{m.capacity}</span></li>
-                  <li>Bin: <span className="font-medium text-white">{m.bin}</span></li>
-                  <li>Best For: <span className="font-medium text-white">{m.bestFor}</span></li>
-                </ul>
-                <a href="/rental-calculator/" className="block rounded-pill border border-primary/30 bg-primary/10 py-2 text-center text-[0.9rem] font-semibold text-primary transition-colors hover:bg-primary/20">
+                <SpecTable
+                  rows={[
+                    { label: "Security Level", value: m.level },
+                    { label: "Sheet Capacity", value: m.capacity },
+                    { label: "Bin", value: m.bin },
+                    { label: "Best For", value: m.bestFor },
+                    { label: "Condition", value: "New" },
+                  ]}
+                />
+                <a href="/rental-calculator/" className="mt-4 block rounded-pill border border-primary/30 bg-primary/10 py-2 text-center text-[0.9rem] font-semibold text-primary transition-colors hover:bg-primary/20">
                   Request a Quote
                 </a>
               </div>
