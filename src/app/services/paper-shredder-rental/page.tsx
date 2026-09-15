@@ -140,6 +140,8 @@ const relatedServices = [
   { href: "/services/repair/", label: "Printer Repair Dubai" },
   { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
   { href: "/services/papercut-print-management/", label: "PaperCut Print Management" },
+  { href: "/blogs/best-office-paper-shredders-uae-fellowes-compared/", label: "Fellowes Models Compared" },
+  { href: "/blogs/paper-shredder-repair-or-replace-uae-guide/", label: "Repair or Replace Guide" },
 ];
 
 const trail = [

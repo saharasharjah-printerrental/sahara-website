@@ -217,6 +217,8 @@ export default function PvcCardPrinterRentalPage() {
               { href: "/services/pvc-card-printing-services/", label: "PVC Card Printing Services" },
               { href: "/services/printer-rental/", label: "Printer Rental UAE" },
               { href: "/rental-calculator/", label: "Rental Calculator" },
+              { href: "/blogs/how-to-choose-id-card-printer-uae-office/", label: "How to Choose an ID Card Printer" },
+              { href: "/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/", label: "Retransfer vs Direct-to-Card Explained" },
             ].map((l) => (
               <a key={l.href} href={l.href} className="text-caption text-primary bg-primary/10 border border-primary/20 px-4 py-2 rounded-pill hover:bg-primary/20 transition-colors">
                 {l.label}

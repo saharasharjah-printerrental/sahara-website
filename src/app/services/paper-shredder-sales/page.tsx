@@ -122,6 +122,7 @@ const relatedServices = [
   { href: "/services/amc/", label: "Annual Maintenance (AMC)" },
   { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN Security Levels Explained" },
   { href: "/blogs/uae-pdpl-document-destruction-compliance-guide/", label: "UAE PDPL Compliance Guide" },
+  { href: "/blogs/best-office-paper-shredders-uae-fellowes-compared/", label: "Fellowes Models Compared" },
 ];
 
 const trail = [

@@ -255,6 +255,8 @@ const relatedLinks = [
   { href: "/services/repair/", label: "Printer Repair Dubai" },
   { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
   { href: "/pvc-card-printer-quote/", label: "Get a Quote" },
+  { href: "/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/", label: "Retransfer vs Direct-to-Card Explained" },
+  { href: "/blogs/how-to-choose-id-card-printer-uae-office/", label: "How to Choose an ID Card Printer" },
 ];
 
 const trail = [

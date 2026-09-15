@@ -155,6 +155,18 @@ const blogPosts = [
     category: "Trends",
     img: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1751102332/blogs/dqusdi9d0tonfoa0ggx6.jpg",
   },
+  {
+    slug: "how-much-does-printer-rental-cost-dubai-2026",
+    title: "How Much Does Printer Rental Cost in Dubai? 2026 Pricing Guide",
+    category: "Finance",
+    img: "",
+  },
+  {
+    slug: "short-term-event-printer-rental-dubai",
+    title: "Short-Term & Event Printer Rental — Exhibitions & Pop-Up Offices",
+    category: "Guide",
+    img: "",
+  },
 ];
 
 const locationLinks = [
@@ -436,7 +448,9 @@ export default function PrinterRentalPage() {
             {blogPosts.map((post) => (
               <Link key={post.slug} href={`/blogs/${post.slug}/`} className="group">
                 <div className="flex h-full flex-col overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid transition-transform duration-300 hover:-translate-y-1">
-                  <img src={post.img} alt={post.title} className="h-36 w-full object-cover" loading="lazy" />
+                  {post.img && (
+                    <img src={post.img} alt={post.title} className="h-36 w-full object-cover" loading="lazy" />
+                  )}
                   <div className="flex flex-1 flex-col p-4">
                     <span className="mb-2 inline-flex self-start rounded-pill border border-primary/20 bg-surface-max px-2 py-0.5 text-caption font-medium text-primary">
                       {post.category}

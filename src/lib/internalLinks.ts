@@ -354,6 +354,77 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
     ],
   },
+  "zebra-vs-bravo-vs-evolis-id-card-printer-uae": {
+    primaryService: { href: "/bravo-card-printers-uae/", label: "Bravo ID Card Printers UAE", type: "service" },
+    relatedLinks: [
+      { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental UAE", type: "service" },
+      { href: "/services/pvc-card-printing-services/", label: "PVC Card Printing Bureau Service", type: "service" },
+      { href: "/blogs/how-to-choose-id-card-printer-uae-office/", label: "How to Choose an ID Card Printer", type: "blog" },
+    ],
+    relatedSlugs: [
+      "how-to-choose-id-card-printer-uae-office",
+    ],
+  },
+  "how-to-choose-id-card-printer-uae-office": {
+    primaryService: { href: "/services/pvc-card-printing-services/", label: "PVC Card Printing Bureau Service", type: "service" },
+    relatedLinks: [
+      { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental UAE", type: "service" },
+      { href: "/bravo-card-printers-uae/", label: "Bravo RTAI & DC 3300 — Full Specs", type: "service" },
+      { href: "/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/", label: "Retransfer vs Direct-to-Card Explained", type: "blog" },
+    ],
+    relatedSlugs: [
+      "zebra-vs-bravo-vs-evolis-id-card-printer-uae",
+    ],
+  },
+  "best-office-paper-shredders-uae-fellowes-compared": {
+    primaryService: { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder", type: "service" },
+    relatedLinks: [
+      { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
+      { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/", label: "Shredder Sizing & Cost Guide", type: "blog" },
+      { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN Security Levels Explained", type: "blog" },
+    ],
+    relatedSlugs: [
+      "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
+      "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
+      "paper-shredder-repair-or-replace-uae-guide",
+    ],
+  },
+  "paper-shredder-repair-or-replace-uae-guide": {
+    primaryService: { href: "/services/repair/", label: "Printer & Equipment Repair Service", type: "service" },
+    relatedLinks: [
+      { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
+      { href: "/blogs/paper-shredder-rental-uae-when-it-beats-buying/", label: "When Renting Beats Buying", type: "blog" },
+      { href: "/blogs/best-office-paper-shredders-uae-fellowes-compared/", label: "Fellowes Models Compared", type: "blog" },
+    ],
+    relatedSlugs: [
+      "paper-shredder-rental-uae-when-it-beats-buying",
+      "best-office-paper-shredders-uae-fellowes-compared",
+    ],
+  },
+  "short-term-event-printer-rental-dubai": {
+    primaryService: { href: "/services/printer-rental/", label: "Printer Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", type: "location" },
+      { href: "/blogs/how-much-does-printer-rental-cost-dubai-2026/", label: "Printer Rental Cost Guide", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "how-much-does-printer-rental-cost-dubai-2026",
+      "how-to-choose-the-best-printer-rental-dubai-service",
+    ],
+  },
+  "how-much-does-printer-rental-cost-dubai-2026": {
+    primaryService: { href: "/services/printer-rental/", label: "Printer Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", type: "location" },
+      { href: "/blogs/total-cost-of-printer-ownership/", label: "Total Cost of Printer Ownership", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "total-cost-of-printer-ownership",
+      "short-term-event-printer-rental-dubai",
+    ],
+  },
 };
 
 // Service page to blog post mapping — for "From Our Blog" sections
@@ -364,6 +435,8 @@ export const SERVICE_BLOG_MAP: Record<string, string[]> = {
     "why-a-company-chooses-copier-rental-service-over-buying-a-copier",
     "rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business",
     "real-estate-to-clinics-why-every-uae-business-is-renting-printers-in-2025",
+    "short-term-event-printer-rental-dubai",
+    "how-much-does-printer-rental-cost-dubai-2026",
   ],
   "photocopier-rental": [
     "what-a-copier-rental-service-must-deliver-to-a-client",
@@ -391,15 +464,26 @@ export const SERVICE_BLOG_MAP: Record<string, string[]> = {
     "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
     "uae-pdpl-document-destruction-compliance-guide",
     "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
+    "best-office-paper-shredders-uae-fellowes-compared",
+    "paper-shredder-repair-or-replace-uae-guide",
   ],
   "paper-shredder-sales": [
     "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",
     "din-p4-vs-p5-vs-p6-shredder-security-levels-uae",
     "paper-shredder-rental-uae-when-it-beats-buying",
     "uae-pdpl-document-destruction-compliance-guide",
+    "best-office-paper-shredders-uae-fellowes-compared",
   ],
   "papercut-print-management": [
     "papercut-print-management-uae-offices",
+  ],
+  "pvc-card-printer-rental": [
+    "zebra-vs-bravo-vs-evolis-id-card-printer-uae",
+    "how-to-choose-id-card-printer-uae-office",
+  ],
+  "pvc-card-printing-services": [
+    "how-to-choose-id-card-printer-uae-office",
+    "zebra-vs-bravo-vs-evolis-id-card-printer-uae",
   ],
 };
 

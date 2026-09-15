@@ -241,6 +241,8 @@ export default function PvcCardPrintingServicesPage() {
               { href: "/bravo-card-printers-uae/", label: "PVC Card Printers — Model Guide & Sales" },
               { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental" },
               { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
+              { href: "/blogs/how-to-choose-id-card-printer-uae-office/", label: "How to Choose an ID Card Printer" },
+              { href: "/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/", label: "Retransfer vs Direct-to-Card Explained" },
             ].map((l) => (
               <a key={l.href} href={l.href} className="text-caption text-primary bg-primary/10 border border-primary/20 px-4 py-2 rounded-pill hover:bg-primary/20 transition-colors">
                 {l.label}

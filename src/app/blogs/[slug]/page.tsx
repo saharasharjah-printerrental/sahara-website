@@ -132,7 +132,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "@type": "BlogPosting",
     "headline": post.title,
     "description": post.excerpt,
-    "image": post.coverImage,
+    // Google requires `image` for Article rich results — an empty string
+    // (posts awaiting a manually-added cover image) previously shipped as
+    // an invalid BlogPosting node. Fall back to the same generic site image
+    // generateMetadata above already uses for OG tags.
+    "image": post.coverImage || "https://www.saharaprinter.com/images/heroPrntr1.webp",
     "datePublished": isoDate,
     "dateModified": isoDate,
     // @id ties both fragments back to the single canonical Organization node
