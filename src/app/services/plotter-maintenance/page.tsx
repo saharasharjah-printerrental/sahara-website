@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -40,21 +41,8 @@ const plotterServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Plotter Maintenance & Repair Service UAE",
-  "alternateName": "Wide-Format Printer AMC Dubai",
   "description": "Professional maintenance and repair for wide-format plotters across UAE — Canon imagePROGRAF, HP DesignJet, and Epson SureColor. Printhead servicing, media-feed and cutter repair, colour calibration, and encoder-strip cleaning by factory-trained technicians.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "legalName": "Sahara Office Equipment Trading LLC",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Al Arabi Building, Industrial Area 11",
-      "addressLocality": "Sharjah",
-      "addressCountry": "AE"
-    },
-    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 }
-  },
+  "provider": orgRef(),
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain"],
   "serviceType": "Plotter Maintenance and Repair",
   "availableChannel": {
@@ -209,7 +197,7 @@ export default function PlotterMaintenancePage() {
           eyebrow="Wide-Format Specialists"
           title={
             <>
-              Plotter Maintenance
+              {"Plotter Maintenance "}
               <br />
               <span className="text-primary">Dubai &amp; UAE</span>
             </>

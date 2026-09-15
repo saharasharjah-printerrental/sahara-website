@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -46,21 +47,8 @@ const repairServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Printer Repair Service UAE",
-  "alternateName": "On-Site Photocopier Repair UAE",
   "description": "Professional on-site printer and photocopier repair service across UAE. Factory-certified technicians service all major brands including Canon, HP, Kyocera, Ricoh, and Xerox. 4-hour emergency response, OEM parts, 98% first-visit fix rate.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "legalName": "Sahara Office Equipment Trading LLC",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Al Arabi Building, Industrial Area 11",
-      "addressLocality": "Sharjah",
-      "addressCountry": "AE"
-    },
-    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 }
-  },
+  "provider": orgRef(),
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain"],
   "serviceType": "Printer Repair",
   "availableChannel": {

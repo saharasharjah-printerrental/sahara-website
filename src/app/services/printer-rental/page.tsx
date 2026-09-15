@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 
 export const runtime = 'edge';
 import Header from "@/components/Header";
@@ -187,20 +188,7 @@ const schema = {
   // position 48. Copier naming now belongs solely to the photocopier page.
   "alternateName": ["Office Printer Rental UAE", "Printer Leasing Dubai", "Printer Hire Sharjah"],
   "description": "Flexible printer and photocopier rental services in Dubai, Sharjah, Abu Dhabi and across UAE. Zero deposit, unlimited toner, full maintenance included. Plans from AED 250/month.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "legalName": "Sahara Office Equipment Trading LLC",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Al Arabi Building, Industrial Area 11",
-      "addressLocality": "Sharjah",
-      "addressCountry": "AE",
-      "postalCode": "47373"
-    },
-    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
-    "telephone": "+971503823969"
-  },
+  "provider": orgRef(),
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain", "JAFZA", "SAIF Zone", "DAFZA"],
   "serviceType": "Printer Rental",
   "offers": {
@@ -446,7 +434,7 @@ export default function PrinterRentalPage() {
         <Section eyebrow="Resource Hub" title="Learn Before You Rent" subtitle="Expert guides to help UAE businesses make smarter printer decisions." align="center" tone="ink">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {blogPosts.map((post) => (
-              <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
+              <Link key={post.slug} href={`/blogs/${post.slug}/`} className="group">
                 <div className="flex h-full flex-col overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid transition-transform duration-300 hover:-translate-y-1">
                   <img src={post.img} alt={post.title} className="h-36 w-full object-cover" loading="lazy" />
                   <div className="flex flex-1 flex-col p-4">

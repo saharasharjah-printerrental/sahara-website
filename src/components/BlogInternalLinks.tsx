@@ -77,7 +77,7 @@ export default function BlogInternalLinks({ currentSlug, allPosts, linkConfig }:
             <p className="text-slate-400 text-sm mb-8">Articles related to this topic</p>
             <div className="grid md:grid-cols-3 gap-6">
               {relatedPosts.slice(0, 3).map((p) => (
-                <Link key={p.id} href={`/blogs/${p.slug}`}>
+                <Link key={p.id} href={`/blogs/${p.slug}/`}>
                   <div className="rounded-2xl border border-white/8 bg-[#0d1b2e] p-5 group cursor-pointer hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col">
                     {p.coverImage && (
                       <img

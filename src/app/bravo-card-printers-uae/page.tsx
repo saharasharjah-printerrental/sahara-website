@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -262,28 +263,24 @@ const trail = [
   { label: "PVC Card Printers" },
 ];
 
+// Not a LocalBusiness — Sahara has one physical location (Sharjah, see
+// src/lib/brand.ts). The node this replaced asserted a second, phantom
+// Sharjah address ("Sahara Centre, Al Nahda", different from the real one)
+// and put the manufacturer's site in Sahara's own `sameAs` (that field is
+// for Sahara's own profiles, not a brand it resells — Bravo Global already
+// has its own `manufacturer` node below).
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Sahara Office Equipments — Bravo UAE Exclusive Reseller",
+  "@type": "Service",
+  "name": "Bravo UAE Exclusive Reseller",
+  "provider": orgRef(),
   "description": "Authorised exclusive reseller in the UAE for the Bravo RTAI retransfer printer and Bravo DC 3300 direct-to-card printer. Sales, genuine consumables, and on-site service across all UAE emirates.",
   "url": "https://www.saharaprinter.com/bravo-card-printers-uae/",
-  "telephone": "+971503823969",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Sahara Centre, Al Nahda",
-    "addressLocality": "Sharjah",
-    "addressRegion": "Sharjah",
-    "addressCountry": "AE"
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
   "areaServed": [
     { "@type": "City", "name": "Dubai" },
     { "@type": "City", "name": "Sharjah" },
     { "@type": "City", "name": "Abu Dhabi" }
-  ],
-  "openingHours": "Mo-Fr 09:00-18:00",
-  "sameAs": ["https://www.bravoglobal.com"]
+  ]
 };
 
 const rtaiProductSchema = {
@@ -313,7 +310,7 @@ const rtaiProductSchema = {
     "offerCount": 1,
     "priceValidUntil": PRICE_VALID_UNTIL,
     "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
-    "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" }
+    "seller": orgRef()
   }
 };
 
@@ -338,7 +335,7 @@ const dc3300ProductSchema = {
     "offerCount": 1,
     "priceValidUntil": PRICE_VALID_UNTIL,
     "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
-    "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" }
+    "seller": orgRef()
   }
 };
 

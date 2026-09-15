@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 
 const faqs = [
   { q: "Is Sahara an HP Service Center in Dubai?", a: "Sahara Office Equipments is an authorized HP service partner in Dubai, providing HP warranty repairs, genuine HP toner supplies, and enterprise LaserJet support across UAE." },
@@ -34,13 +35,8 @@ const serviceSchema = {
   "@type": "Service",
   name: "HP Printer Sales, Rental & AMC UAE",
   description,
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    telephone: "+971503823969",
-    url: "https://www.saharaprinter.com/",
-    areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  provider: orgRef(),
+  areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   serviceType: "HP Printer Dealer UAE",
 };
 

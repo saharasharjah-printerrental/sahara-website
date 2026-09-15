@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import BlogsClient from "@/components/BlogsClient";
+import { orgRef } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Printer Rental Blog UAE | Office Equipment Insights | Sahara",
@@ -50,10 +51,7 @@ export default async function BlogPage() {
     name: "Sahara Office Equipments Blog",
     description: "Expert insights on printer rental, photocopier leasing, and office printing solutions for UAE businesses.",
     url: "https://www.saharaprinter.com/blogs/",
-    publisher: {
-      "@type": "Organization",
-      name: "Sahara Office Equipments",
-    },
+    publisher: orgRef(),
   };
 
   const breadcrumbSchema = {

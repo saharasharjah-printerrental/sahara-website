@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 
 const faqs = [
   { q: "Where to buy Samsung printers in Dubai?", a: "Sahara Office Equipments stocks Samsung ProXpress and MultiXpress printers in UAE with same-day delivery, installation, and warranty support in Dubai and Sharjah." },
@@ -33,13 +34,8 @@ const serviceSchema = {
   "@type": "Service",
   name: "Samsung Printer Sales, Rental & AMC UAE",
   description,
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    telephone: "+971503823969",
-    url: "https://www.saharaprinter.com/",
-    areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  provider: orgRef(),
+  areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   serviceType: "Samsung Printer Dealer UAE",
 };
 

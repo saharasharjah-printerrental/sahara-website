@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import Link from "next/link";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -97,24 +98,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Not a LocalBusiness — Sahara has one physical location (Sharjah, see
+// src/lib/brand.ts). This models the service Sahara provides in Dubai,
+// referencing that same entity via `provider`.
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments — Dubai Photocopier Rental",
-  legalName: "Sahara Office Equipment Trading LLC",
+  "@type": "Service",
+  name: "Dubai Photocopier Rental",
+  provider: orgRef(),
   description:
     "Photocopier rental in Dubai — refurbished units from AED 250/month, new A3 photocopiers from AED 500/month. Zero deposit, free toner, 4-hour emergency response. Canon, Kyocera, Xerox, HP authorized service.",
   url: "https://www.saharaprinter.com/photocopier-rental-dubai/",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
-  foundingDate: "2012",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Al Arabi Building, Industrial Center Road, Industrial Area 11",
-    addressLocality: "Sharjah",
-    addressRegion: "Sharjah",
-    addressCountry: "AE",
-  },
   areaServed: [
     { "@type": "City", name: "Dubai" },
     { "@type": "Place", name: "Business Bay" },
@@ -137,7 +131,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Photocopier Rental Dubai",
-  provider: { "@type": "LocalBusiness", name: "Sahara Office Equipment Trading LLC" },
+  provider: orgRef(),
   areaServed: { "@type": "City", name: "Dubai" },
   description: "Canon and Kyocera photocopier rental in Dubai with zero deposit, unlimited toner, and 4-hour on-site support.",
   offers: { "@type": "AggregateOffer", lowPrice: "250", highPrice: "2000", priceCurrency: "AED", offerCount: "12" },

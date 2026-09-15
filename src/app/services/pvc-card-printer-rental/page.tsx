@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -90,12 +91,7 @@ const serviceSchema = {
   "serviceType": "PVC / ID Card Printer Rental",
   "name": "PVC Card Printer Rental UAE",
   "description": "Short-term and long-term rental of Bravo RTAI and Bravo DC 3300 PVC/ID card printers in the UAE, including setup, ribbons, and support.",
-  "provider": {
-    "@type": "Organization",
-    "name": "Sahara Office Equipments",
-    "url": "https://www.saharaprinter.com",
-    "telephone": "+971503823969",
-  },
+  "provider": orgRef(),
   "areaServed": [
     { "@type": "City", "name": "Dubai" },
     { "@type": "City", "name": "Sharjah" },

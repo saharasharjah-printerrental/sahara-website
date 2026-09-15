@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 
 const faqs = [
   { q: "Is Sahara an authorized Xerox dealer in UAE?", a: "Yes. Sahara Office Equipments supplies Xerox VersaLink and AltaLink enterprise MFPs to businesses in Dubai, Sharjah, Abu Dhabi, and across UAE." },
@@ -33,13 +34,8 @@ const serviceSchema = {
   "@type": "Service",
   name: "Xerox Printer Sales, Rental & AMC UAE",
   description,
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    telephone: "+971503823969",
-    url: "https://www.saharaprinter.com/",
-    areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  provider: orgRef(),
+  areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   serviceType: "Xerox Printer Dealer UAE",
 };
 

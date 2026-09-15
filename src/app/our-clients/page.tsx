@@ -31,25 +31,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.saharaprinter.com/our-clients/" },
 };
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Sahara Office Equipments",
-  "alternateName": "Sahara Office Equipment Trading LLC",
-  "url": "https://www.saharaprinter.com",
-  "logo": "https://www.saharaprinter.com/favicon.ico",
-  "telephone": "+971503823969",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Al Arabi Building, Industrial Area 11",
-    "addressLocality": "Sharjah",
-    "addressCountry": "AE",
-    "postalCode": "47373"
-  },
-  "areaServed": ["UAE", "Dubai", "Abu Dhabi", "Sharjah", "RAK", "Fujairah", "Al Ain", "Ajman"],
-  "sameAs": [],
-};
-
 const sectors: [string, string][] = [
   ["Real estate and property", "High-volume contract, tenancy and brochure printing, often across several branch offices that need identical devices and one consolidated bill."],
   ["Clinics and healthcare", "Reliable document handling for patient records and insurance paperwork, where a device being down for a day is not an option."],
@@ -64,7 +45,6 @@ const trail = [{ label: "Home", href: "/" }, { label: "Our Clients" }];
 export default function OurClientsPage() {
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <main className="min-h-screen bg-surface">
         <Header />
 

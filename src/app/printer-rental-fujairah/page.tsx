@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import Link from "next/link";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -67,41 +68,23 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Not a LocalBusiness — Sahara has one physical location (Sharjah, see
+// src/lib/brand.ts). This models the service Sahara provides in Fujairah,
+// referencing that same entity via `provider` instead of the Sharjah
+// "address" + Fujairah "geo" mismatch this replaced.
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments — Fujairah Printer Rental",
-  legalName: "Sahara Office Equipment Trading LLC",
+  "@type": "Service",
+  name: "Fujairah Printer Rental",
+  provider: orgRef(),
   description:
     "Printer and photocopier rental in Fujairah from AED 250/month. Zero deposit, free OEM toner, and on-site support across Fujairah City, Dibba, Kalba, and Free Trade Zone.",
   url: "https://www.saharaprinter.com/printer-rental-fujairah",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
-  foundingDate: "2012",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Industrial Area 11",
-    addressLocality: "Sharjah",
-    addressCountry: "AE",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 25.1288,
-    longitude: 56.3265,
-  },
   areaServed: [
     { "@type": "City", name: "Fujairah" },
     { "@type": "Place", name: "Fujairah Free Trade Zone" },
     { "@type": "Place", name: "Dibba Al Fujairah" },
     { "@type": "Place", name: "Kalba" },
-  ],
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "08:00",
-      closes: "20:00",
-    },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",

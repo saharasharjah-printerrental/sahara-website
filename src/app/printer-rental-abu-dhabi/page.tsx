@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import Link from "next/link";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -70,43 +71,25 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Not a LocalBusiness — Sahara has one physical location (Sharjah, see the
+// canonical Organization node in layout.tsx / src/lib/brand.ts). This models
+// the service Sahara provides in Abu Dhabi, referencing that same entity via
+// `provider`. The node this replaced asserted a Sharjah "address" alongside
+// Abu Dhabi "geo" coordinates on the same object — a second, phantom branch.
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments — Abu Dhabi Printer Rental",
-  legalName: "Sahara Office Equipment Trading LLC",
+  "@type": "Service",
+  name: "Abu Dhabi Printer Rental",
+  provider: orgRef(),
   description:
     "Printer and photocopier rental in Abu Dhabi from AED 250/month. Zero deposit, free OEM toner, weekly preventive maintenance, and emergency response.",
   url: "https://www.saharaprinter.com/printer-rental-abu-dhabi",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
-  foundingDate: "2012",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Industrial Area 11",
-    addressLocality: "Sharjah",
-    addressRegion: "Sharjah",
-    addressCountry: "AE",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 24.4539,
-    longitude: 54.3773,
-  },
   areaServed: [
     { "@type": "City", name: "Abu Dhabi" },
     { "@type": "Place", name: "Mussafah Industrial Area" },
     { "@type": "Place", name: "Al Reem Island" },
     { "@type": "Place", name: "Masdar City" },
     { "@type": "Place", name: "Khalifa City" },
-  ],
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "08:00",
-      closes: "20:00",
-    },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -142,7 +125,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Printer Rental Abu Dhabi",
-  provider: { "@type": "LocalBusiness", name: "Sahara Office Equipment Trading LLC" },
+  provider: orgRef(),
   areaServed: { "@type": "City", name: "Abu Dhabi" },
   description:
     "Canon and Kyocera printer and photocopier rental in Abu Dhabi with zero deposit, unlimited toner, and weekly preventive maintenance.",
@@ -611,7 +594,7 @@ export default async function PrinterRentalAbuDhabi() {
         <Section eyebrow="Resource Hub" title="Abu Dhabi Printer Rental Guides" tone="raised">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {blogPosts.map((post) => (
-              <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
+              <Link key={post.slug} href={`/blogs/${post.slug}/`} className="group">
                 <div className="flex h-full flex-col overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid transition-transform duration-300 hover:-translate-y-1">
                   <img src={post.img} alt={post.title} className="h-32 w-full object-cover" loading="lazy" />
                   <div className="flex flex-1 flex-col p-4">

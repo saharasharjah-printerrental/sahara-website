@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -36,23 +37,7 @@ const aboutSchema = {
   "description": "Sahara Office Equipment Trading LLC — UAE's leading printer rental and photocopier leasing company since 2012. Headquartered in Sharjah, serving Dubai, Abu Dhabi, and all UAE emirates.",
   "url": "https://www.saharaprinter.com/about/",
   "dateModified": "2026-04-15",
-  "mainEntity": {
-    "@type": "Organization",
-    "name": "Sahara Office Equipments",
-    "legalName": "Sahara Office Equipment Trading LLC",
-    "foundingDate": "2012",
-    "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 15, "maxValue": 50 },
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Al Arabi Building, Industrial Area 11",
-      "addressLocality": "Sharjah",
-      "addressCountry": "AE",
-      "postalCode": "47373"
-    },
-    "telephone": "+971503823969",
-    "email": "info@saharaedoc.com",
-    "url": "https://www.saharaprinter.com/"
-  }
+  "mainEntity": orgRef()
 };
 
 const breadcrumbSchema = {

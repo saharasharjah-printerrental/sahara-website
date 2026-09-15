@@ -90,7 +90,7 @@ export default function Header() {
       const storedBrands = localStorage.getItem("sahara_brands");
       if (storedBrands) {
         const parsed = JSON.parse(storedBrands).filter((b: any) => b.isActive);
-        setBrands(parsed.map((b: any) => ({ name: b.name, href: `/brands/${b.slug}` })));
+        setBrands(parsed.map((b: any) => ({ name: b.name, href: `/brands/${b.slug}/` })));
       }
     } catch (e) {
       localStorage.removeItem("sahara_brands");

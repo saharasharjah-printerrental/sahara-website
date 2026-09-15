@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 
 const faqs = [
   { q: "Is Sahara an authorized Canon dealer in UAE?", a: "Yes. Sahara Office Equipments is an authorized Canon dealer in UAE, supplying Canon imageRUNNER ADVANCE and imageCLASS printers to businesses in Dubai, Sharjah, and Abu Dhabi." },
@@ -33,13 +34,8 @@ const serviceSchema = {
   "@type": "Service",
   name: "Canon Printer Sales, Rental & AMC UAE",
   description,
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    telephone: "+971503823969",
-    url: "https://www.saharaprinter.com/",
-    areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  provider: orgRef(),
+  areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   serviceType: "Canon Printer Dealer UAE",
 };
 

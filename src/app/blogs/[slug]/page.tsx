@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import BlogPostClient from "@/components/BlogPostClient";
 import type { BlogLinkConfig } from "@/lib/internalLinks";
+import { ORG_ID, ORG_NAME, LOGO } from "@/lib/brand";
 
 interface BlogPost {
   id: string;
@@ -134,8 +135,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "image": post.coverImage,
     "datePublished": isoDate,
     "dateModified": isoDate,
-    "author": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com/" },
-    "publisher": { "@type": "Organization", "name": "Sahara Office Equipments", "logo": { "@type": "ImageObject", "url": "https://www.saharaprinter.com/images/sahara-navbar-logo.webp" } },
+    // @id ties both fragments back to the single canonical Organization node
+    // in layout.tsx (see src/lib/brand.ts) instead of asserting a second,
+    // un-linked entity on every one of the 25 blog posts.
+    "author": { "@type": "Organization", "@id": ORG_ID, "name": ORG_NAME, "url": "https://www.saharaprinter.com/" },
+    "publisher": { "@type": "Organization", "@id": ORG_ID, "name": ORG_NAME, "logo": { "@type": "ImageObject", "url": LOGO } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": `https://www.saharaprinter.com/blogs/${slug}/` },
   };
 

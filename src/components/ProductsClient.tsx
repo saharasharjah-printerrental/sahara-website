@@ -9,6 +9,7 @@ import JumpToTop from "@/components/JumpToTop";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import AnswerBlock from "@/components/AnswerBlock";
+import { PRODUCTS_FAQS } from "@/lib/productsFaqs";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -51,15 +52,6 @@ const defaultProducts = [
 ];
 
 const trail = [{ label: "Home", href: "/" }, { label: "Products" }];
-
-// Exported so page.tsx (server component) can build the matching FAQPage
-// JSON-LD server-side from the same source, rather than duplicating the text.
-export const PRODUCTS_FAQS = [
-  { q: "Can I rent or buy printers and photocopiers from this page?", a: "Both. Every product listed can be rented monthly (zero deposit, free toner and maintenance included) or purchased outright — request a quote for either option." },
-  { q: "What printer brands does Sahara sell in the UAE?", a: "Canon, HP, Kyocera, Xerox, Brother, Ricoh, Samsung, Lexmark, Sharp, and Epson — covering A4 desktop printers, A3 multifunction copiers, and wide-format plotters." },
-  { q: "What is the price range for printers and photocopiers?", a: "Rental starts from AED 300/month for an A4 desktop printer, rising to AED 1,200/month for enterprise A3 colour MFPs and wide-format plotters. Outright purchase pricing is available on request." },
-  { q: "Is there a difference between new and refurbished products?", a: "Yes — refurbished units are fully serviced and tested Sahara stock at a lower price point, while new units carry full manufacturer warranty. Condition is marked on every product." },
-];
 
 export default function ProductsClient({ initialProducts }: { initialProducts?: any[] }) {
   const searchParams = useSearchParams();

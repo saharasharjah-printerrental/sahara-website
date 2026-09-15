@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import Link from "next/link";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -56,22 +57,18 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Not a LocalBusiness — Sahara has one physical location (Sharjah, see the
+// canonical Organization node in layout.tsx / src/lib/brand.ts). This models
+// the service Sahara provides in Dubai, referencing that same entity via
+// `provider` rather than asserting a second, phantom Dubai address/geo.
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  "name": "Sahara Office Equipments — Dubai Printer Rental",
-  "legalName": "Sahara Office Equipment Trading LLC",
+  "@type": "Service",
+  "name": "Dubai Printer Rental",
+  "provider": orgRef(),
   "description": "Printer rental and photocopier lease services in Dubai. Zero deposit, unlimited free toner, 4-hour emergency response. Serving Business Bay, JLT, DIFC, Deira, Marina and all Dubai districts. Plans from AED 250/month.",
   "url": "https://www.saharaprinter.com/printer-rental-dubai/",
-  "telephone": "+971503823969",
-  "email": "info@saharaprinter.com",
   "image": "https://www.saharaprinter.com/images/heroPrntr1.webp",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Dubai",
-    "addressCountry": "AE"
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 25.2048, "longitude": 55.2708 },
   "areaServed": [
     { "@type": "City", "name": "Dubai", "sameAs": "https://www.wikidata.org/wiki/Q612" },
     "Business Bay", "DIFC", "JLT", "Dubai Marina", "Downtown Dubai", "Deira",
@@ -79,9 +76,6 @@ const localBusinessSchema = {
     "Al Barsha", "Bur Dubai"
   ],
   "priceRange": "AED 250—2000",
-  "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "20:00" }
-  ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Dubai Printer Rental Plans",
@@ -435,7 +429,7 @@ export default async function PrinterRentalDubai() {
         <Section eyebrow="Resource Hub" title="Dubai Printer Rental Guides" tone="raised">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {blogPosts.map((post) => (
-              <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
+              <Link key={post.slug} href={`/blogs/${post.slug}/`} className="group">
                 <div className="flex h-full flex-col overflow-hidden rounded-card border border-white/[0.08] bg-surface-mid transition-transform duration-300 hover:-translate-y-1">
                   <img src={post.img} alt={post.title} className="h-32 w-full object-cover" loading="lazy" />
                   <div className="flex flex-1 flex-col p-4">

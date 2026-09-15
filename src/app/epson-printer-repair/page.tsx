@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -60,31 +61,12 @@ const cityResponse = [
   { city: "Sharjah", detail: "Our head office and technician base — the fastest average response time in our coverage area." },
 ];
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Sahara Office Equipments — Epson Repair Specialists",
-  "description": "Epson printer repair across Dubai, Abu Dhabi and Sharjah. EcoTank, WorkForce, SureColor. Genuine OEM parts, 4-hour response.",
-  "url": "https://www.saharaprinter.com/epson-printer-repair/",
-  "telephone": "+971503823969",
-  "email": "info@saharaprinter.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Al Arabi Building, Industrial Center Road, Industrial Area 11",
-    "addressLocality": "Sharjah",
-    "addressCountry": "AE",
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
-  "areaServed": ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain"],
-  "priceRange": "AED 150-2000",
-};
-
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Epson Printer Repair Service",
   "description": "Repair for Epson EcoTank, WorkForce and SureColor printers across the UAE. Genuine OEM parts, 4-hour response.",
-  "provider": { "@type": "LocalBusiness", "name": "Sahara Office Equipments", "telephone": "+971503823969" },
+  "provider": orgRef(),
   "areaServed": ["Dubai", "Abu Dhabi", "Sharjah"],
   "serviceType": "Printer Repair",
   "offers": { "@type": "Offer", "priceCurrency": "AED", "price": "150", "availability": "https://schema.org/InStock" },
@@ -112,7 +94,6 @@ export default async function EpsonPrinterRepair() {
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>

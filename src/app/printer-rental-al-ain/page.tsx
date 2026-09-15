@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import Link from "next/link";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -68,41 +69,23 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Not a LocalBusiness — Sahara has one physical location (Sharjah, see
+// src/lib/brand.ts). This models the service Sahara provides in Al Ain,
+// referencing that same entity via `provider` instead of the Sharjah
+// "address" + Al Ain "geo" mismatch this replaced.
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments — Al Ain Printer Rental",
-  legalName: "Sahara Office Equipment Trading LLC",
+  "@type": "Service",
+  name: "Al Ain Printer Rental",
+  provider: orgRef(),
   description:
     "Printer and photocopier rental in Al Ain from AED 250/month. Zero deposit, free OEM toner, and on-site support across Al Ain's business districts and industrial zones.",
   url: "https://www.saharaprinter.com/printer-rental-al-ain",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
-  foundingDate: "2012",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Industrial Area 11",
-    addressLocality: "Sharjah",
-    addressCountry: "AE",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 24.2075,
-    longitude: 55.7447,
-  },
   areaServed: [
     { "@type": "City", name: "Al Ain" },
     { "@type": "Place", name: "Al Ain Industrial Area" },
     { "@type": "Place", name: "Al Jimi" },
     { "@type": "Place", name: "Al Khubaisi" },
-  ],
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "08:00",
-      closes: "20:00",
-    },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",

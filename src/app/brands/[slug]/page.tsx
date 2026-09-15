@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BrandContentClient from "@/components/BrandContentClient";
+import { orgRef } from "@/lib/brand";
 
 const brandMeta: Record<string, { name: string; description: string; keywords: string; faqs: { q: string; a: string }[] }> = {
   kyocera: {
@@ -150,13 +151,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     "@type": "Service",
     "name": `${brand.name} Printer Sales, Rental & AMC UAE`,
     "description": brand.description,
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Sahara Office Equipments",
-      "telephone": "+971503823969",
-      "url": "https://www.saharaprinter.com/",
-      "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-    },
+    "provider": orgRef(),
+    "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
     "serviceType": `${brand.name} Printer Dealer UAE`,
   };
 

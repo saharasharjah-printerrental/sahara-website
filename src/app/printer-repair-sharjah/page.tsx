@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -74,12 +75,7 @@ const repairServiceSchema = {
   "@type": "Service",
   "name": "Printer Repair Service Sharjah",
   "description": "On-site printer and photocopier repair in Sharjah, from Sahara's own head office in Industrial Area 11. Same-day response typical, genuine OEM parts, certified technicians, 30-day workmanship warranty.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "legalName": "Sahara Office Equipment Trading LLC",
-    "telephone": "+971503823969",
-  },
+  "provider": orgRef(),
   "areaServed": { "@type": "City", "name": "Sharjah" },
   "serviceType": "Printer Repair",
   "offers": {
@@ -103,25 +99,6 @@ const howToSchema = {
     "name": s.title,
     "text": s.desc,
   })),
-};
-
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Sahara Office Equipments — Sharjah Printer Repair (Head Office)",
-  "description": "Printer and photocopier repair in Sharjah from Sahara's UAE head office. Same-day response typical, all brands serviced, genuine OEM parts.",
-  "url": "https://www.saharaprinter.com/printer-repair-sharjah/",
-  "telephone": "+971503823969",
-  "email": "info@saharaprinter.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Al Arabi Building, Industrial Center Road, Industrial Area 11",
-    "addressLocality": "Sharjah",
-    "addressCountry": "AE",
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
-  "areaServed": { "@type": "City", "name": "Sharjah" },
-  "priceRange": "AED 150-2000",
 };
 
 const breadcrumbSchema = {
@@ -148,7 +125,6 @@ export default async function PrinterRepairSharjah() {
     <>
       <script type="application/ld+json">{JSON.stringify(repairServiceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
 

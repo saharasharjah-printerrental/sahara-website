@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 
 const faqs = [
   { q: "Where can I buy Kyocera printers in UAE?", a: "Sahara Office Equipments is an authorized Kyocera dealer in UAE. We supply Kyocera ECOSYS and TASKalfa models across Dubai, Sharjah, and Abu Dhabi with next-day delivery." },
@@ -33,13 +34,8 @@ const serviceSchema = {
   "@type": "Service",
   name: "Kyocera Printer Sales, Rental & AMC UAE",
   description,
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    telephone: "+971503823969",
-    url: "https://www.saharaprinter.com/",
-    areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  provider: orgRef(),
+  areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   serviceType: "Kyocera Printer Dealer UAE",
 };
 

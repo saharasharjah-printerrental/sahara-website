@@ -3,6 +3,7 @@
 export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -57,35 +58,16 @@ export default function HPPrinterAbuDhabi() {
     { name: "HP Neverstop Laser MFP", type: "A4 B&W", speed: "21 ppm", features: "Low running cost" },
   ];
 
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments - HP Abu Dhabi",
-    "description": "HP printer rental in Abu Dhabi. LaserJet, PageWide, OfficeJet series with zero deposit and free toner.",
-    "url": "https://www.saharaprinter.com/hp-printer-abu-dhabi",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Mussafah",
-      "addressLocality": "Abu Dhabi",
-      "addressCountry": "AE"
-    },
-    "areaServed": {
-      "@type": "State",
-      "name": "Abu Dhabi"
-    },
-    "priceRange": "AED 250-2000",
-    "openingHours": "24/7"
-  };
-
   // Sep 2026: added — this page had LocalBusiness + FAQPage + BreadcrumbList
-  // but no Service schema, unlike its siblings.
+  // but no Service schema, unlike its siblings. The LocalBusiness node this
+  // replaced asserted a phantom "Mussafah, Abu Dhabi" address — Sahara has
+  // one physical location (Sharjah, see src/lib/brand.ts).
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "HP Printer Rental Abu Dhabi",
     "description": "HP LaserJet, PageWide and OfficeJet printer rental in Abu Dhabi with zero deposit, free toner, and 4-hour emergency response.",
-    "provider": { "@type": "LocalBusiness", "name": "Sahara Office Equipments", "telephone": "+971503823969" },
+    "provider": orgRef(),
     "areaServed": { "@type": "City", "name": "Abu Dhabi" },
     "serviceType": "Printer Rental",
     "offers": { "@type": "AggregateOffer", "priceCurrency": "AED", "lowPrice": 250, "highPrice": 2000, "offerCount": 1, "availability": "https://schema.org/InStock" },
@@ -116,7 +98,6 @@ export default function HPPrinterAbuDhabi() {
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>

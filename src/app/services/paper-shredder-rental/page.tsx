@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -48,18 +49,8 @@ const serviceSchema = {
   "@type": "Service",
   "name": "Paper Shredder Rental UAE",
   "description": "Paper shredder rental in Dubai, Sharjah, and Abu Dhabi. Fellowes Powershred DIN P-4 cross-cut models. UAE PDPL compliant document destruction for offices, events, and audits.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Al Arabi Building, Industrial Area 11",
-      "addressLocality": "Sharjah",
-      "addressCountry": "AE",
-    },
-    "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  "provider": orgRef(),
+  "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   "offers": {
     "@type": "Offer",
     "priceCurrency": "AED",

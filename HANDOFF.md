@@ -1,5 +1,460 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## ACTIVE PLAN — 2026-09-15, organic + AI visibility recovery
+
+> **P0 and P4 shipped 2026-09-15** (see "P0 + P4 — SHIPPED" note below). **P1–P3 and P5–P7 are
+> still not implemented — resume with `claude-continue-plan`.** The Ubersuggest MCP server
+> (`claude mcp add ubersuggest --transport http https://ubersuggest-mcp.neilpatelapi.com/mcp`) is
+> now connected and was used this session (free tier: 3 reports/day, quota exhausted for
+> 2026-09-15 — `officeequipments.ae` domain overview and the paid-only `site_audit` could not be
+> pulled). Six other MCP servers in this project still fail to connect (`cloudflare`, `MCP_DOCKER`,
+> `mysql`, `reticle`, `semble`, `token-optimizer`, `token-saver`).
+
+### P0 + P4 — SHIPPED 2026-09-15
+
+Full plan and rationale: `~/.claude/plans/wise-conjuring-glade.md`.
+
+**P0 — stop the bleeding:**
+- **P0.1** Fixed the `/products/` 500 (live in prod for at least 6 days, linked from the Header on
+  all 136 pages). Root cause: `src/app/products/page.tsx` imported a data export (`PRODUCTS_FAQS`)
+  from the `"use client"` module `ProductsClient.tsx` and read a property off it in a server
+  component — throws at render in the App Router. Moved the shared FAQ data to
+  `src/lib/productsFaqs.ts` (a plain module) and added a `<Suspense>` boundary around
+  `<ProductsClient>`. Verified with `npm run build` + `tsc --noEmit` clean (local `wrangler`
+  preview skipped — fails on Windows per `feedback_deployment`; verify live post-deploy with
+  `curl -o /dev/null -w "%{http_code}" https://www.saharaprinter.com/products/` → expect 200,
+  was 500).
+- **P0.2** Removed the two retired photocopier URLs (`/copier-lease-uae/`,
+  `/services/photocopier-rental/`) from `public/llms.txt` "Key Pages".
+- **P0.3** Fixed 8 template-literal `href`s missing the trailing slash that `trailingSlash: true`
+  requires (`Header.tsx`, `brands/page.tsx`, 3 blog-card components, 3 geo/service pages linking to
+  `/blogs/${slug}`) — this was splitting GSC impressions across `/url` and `/url/` as two indexed
+  pages.
+
+**P4 — entity consolidation (Knowledge Graph / Gemini / AI Overviews):**
+- Created `src/lib/brand.ts` — single source of truth (`ORG_ID`, `ORG_NAME`, `LEGAL_NAME`,
+  `SAME_AS`, `orgRef()` helper) sourced from the canonical node in `layout.tsx`.
+- Replaced orphan `Organization`/`LocalBusiness`/`ProfessionalService` nodes across **49 files**
+  with `orgRef()` (`{"@id": ".../#organization"}`) or, for the two genuinely-HQ pages
+  (`printer-rental-sharjah`, `photocopier-rental-sharjah`), a merge via matching `@id`.
+- Removed **7 phantom branch addresses/geo** asserting non-Sharjah locations for a single-location
+  business: Business Bay ×2 (`printer-repair-dubai`, `canon-printer-dubai`), Mussafah
+  (`hp-printer-abu-dhabi`), Sahara Centre/Al Nahda (`bravo-card-printers-uae`), plus Dubai/Abu
+  Dhabi/Al Ain/Fujairah/RAK geo-coordinate mismatches on 6 geo rental pages that paired a Sharjah
+  street address with a different city's lat/lng on the same node.
+  Converted those geo pages' `LocalBusiness` nodes to `Service` (`provider: orgRef()`) instead of
+  asserting a second business entity per emirate.
+- Fixed the ~14 suffixed `name` variants (`"— Xerox Repair Specialists"`, `"— Dubai AMC"`, etc.) —
+  gone now that pages reference `@id` instead of re-declaring the org.
+- Removed 3 misused `alternateName` keyword slots (`"Printer AMC Dubai"`,
+  `"Wide-Format Printer AMC Dubai"`, `"On-Site Photocopier Repair UAE"`) from Service nodes.
+- Fixed `name`/`legalName` swap on 4 files (`photocopier-rental-{dubai,sharjah,abu-dhabi}`,
+  `printer-rental-abu-dhabi`).
+- Removed `our-clients/page.tsx`'s explicit `"sameAs": []` and its `favicon.ico`-as-logo (below
+  Google's 112px minimum) — that whole duplicate node is gone, canonical org node already covers
+  every page via `layout.tsx`.
+- Added the Google Business Profile URL to `layout.tsx`'s `sameAs` (CID
+  `11820725793384191512`, already used in `hasMap`) — was missing despite being the strongest
+  single Knowledge-Graph link available.
+- **Left alone / still open**: `LEGAL_NAME` picked the abbreviated trade-licence spelling already
+  in `layout.tsx` ("Sahara Office Equip Tr LLC") as canonical and kept the fuller spelling as an
+  alternate — flag to the user if the actual trade licence says otherwise. The `speakable` selector
+  bug (`layout.tsx:270-272` targets `.aeo-block`, which `AnswerBlock.tsx` never emits) is P5, not
+  touched this session.
+
+Verified: `npm run build` and `npx tsc --noEmit` both clean after every file group. Not yet
+verified live — deploy via `git push` to `main` (Cloudflare Pages builds it), then re-run the
+verification block below.
+
+**Verification after deploy:**
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" https://www.saharaprinter.com/products/   # expect 200
+curl -s -o /dev/null -w "%{http_code}\n" "https://www.saharaprinter.com/products/?brands=Canon"  # expect 200
+curl -s https://www.saharaprinter.com/ | grep -o '"@id":"https://www.saharaprinter.com/#organization"'
+```
+
+### Ubersuggest findings, 2026-09-15 (UAE, locId 2784)
+
+DA 4 vs sosauh.com's DA 15; 52 backlinks/21 referring domains vs 2,678/310 — **and all 27 of our
+indexed backlinks point at the homepage, zero to any internal page.** That's a second, independent
+explanation for why the shredder sales page was never crawled, alongside the `/products/` 500.
+`printer rental dubai` (vol 480, $4.23 CPC): sosauh ranks position 4 on their homepage and
+Ubersuggest attributes ~245 of their 597 monthly visits to that one term; we rank position 9 on
+`/services/printer-rental/`. Closing that gap is worth more than the rest of P2/P3 combined — flag
+for next session's prioritisation. Full detail in the plan file above.
+
+### Context
+
+User reported: organic reach falling, shredder organic reach "dangerously fallen", AI citations poor.
+Target: at least half the traffic of sosauh.com / officeequipments.ae. Inputs were the Ubersuggest
+exports and AI-visibility PDF in `C:\Users\SAHARA\Downloads\SEO refer`, four new Fellowes spec sheets
+in `C:\Users\SAHARA\Downloads\shredders`, live GSC (`sc-domain:saharaprinter.com`), and a full
+codebase audit.
+
+**Three of the four premises turned out to be wrong.** Findings, all verified against live data:
+
+**1. Organic is NOT falling — it is growing, but capped on page 2.**
+
+| Window | Impressions/day | Clicks/day | Avg position |
+|---|---|---|---|
+| Mar 2026 | ~150 | 0–1 | 13–20 |
+| Jun 2026 | ~250 | 1–2 | 20–25 |
+| **Sep 2026** | **~450** | **8–9** | **13–18** |
+
+Impressions tripled; clicks went ~0 → ~9/day. The problem is **CTR of 0.9–2.0%** (healthy 3–5%) at
+**average position ~18**. The site is shown constantly and clicked almost never. ~450 impressions/day
+at a page-1 position and normal CTR is 40–80 clicks/day — that is the missing traffic. It is a
+ranking-ceiling + snippet problem, not a penalty.
+
+**2. Shredder reach did not fall — it is the site's biggest win, with one hole in it.**
+
+`/services/paper-shredder-rental/` went 60 → **1,076** impressions (+1,693%) and 1 → **17** clicks
+(+1,600%) June→September. It is now the site's #2 page. Every *rent/hire* query ranks position 1–6 at
+~100% CTR. (This supersedes the 2026-09-09 note below, which read a rental-page click dip as a
+cluster collapse — over a longer window the cluster grew; only buy intent is broken.)
+
+What collapsed is **buy intent**:
+- `/services/paper-shredder-sales/` — GSC URL Inspection returns **"URL is unknown to Google."**
+  Shipped 2026-09-07 (`a7d3b06`), in the sitemap at priority 0.8, **never crawled** in 8 days.
+- With no sales page indexed, the rental page absorbs buy queries: `buy paper shredder` = 79
+  impressions at position **9.5** with **0 clicks**. A rent CTA on a buy query converts at zero.
+- All zero-click: `paper shredder` (182 imp, pos 19.8), `paper shredder machine` (136, 23.8),
+  `paper shredder machine dubai` (117, 14.9), `paper shredder dubai` (75, 22.3),
+  `paper shredder price in uae` (17, 6.6).
+
+**~640 shredder impressions in 3 months produced 0 clicks**, because the only page Google has is the
+wrong-intent one.
+
+**3. `/products/` returns HTTP 500 in production right now.** Verified by `curl` (renders
+`__next_error__` with `noindex`) and by GSC ("Server error (5xx)"). Linked from the Header on **every
+one of the 136 pages** — this is the mechanism behind Ubersuggest's *"134 pages with broken links"*
+(not a bad href; the target 5xx's). It also burns crawl budget, the likeliest reason the shredder
+sales page was never fetched. sosauh.com's main advantage is a deep product catalogue — and yours is
+down.
+
+**4. AI citations: ChatGPT-only, brand fragmented into 26 entities.**
+AI-visibility export: 25% brand visibility, industry rank 2.64 — but all 14 mentions come from
+**ChatGPT. Zero Gemini. Zero Google AI Overview** under the primary name. "Sahara Printer" and
+"Sahara Printer Rental" appear *separately* in Google AI Overview as different companies.
+
+Root cause in code: **41 pages emit an `Organization`/`LocalBusiness` node with no `@id` and no
+`sameAs`, across 26 distinct `name` strings**. Only `layout.tsx` uses the canonical `#organization`
+node. Two `legalName` spellings are live. Twelve orphan nodes assert *different street addresses and
+GPS coordinates* for the same business — phantom branches. Google cannot consolidate this into one
+Knowledge Graph entity, which is exactly why Gemini and AI Overviews (both KG-grounded) don't cite us
+while ChatGPT (which reads page text) does.
+
+### User decisions recorded this session
+
+- **Keep the rent/buy split** (user reversed an initial merge choice). The sales page stays its own
+  URL and gets forced into the index.
+- **Six shredder models** — four new spec sheets (Powershred LX220, 79Ci, 92Cs, 99Ci) plus the two
+  already on-site (LX65, 325Ci).
+- **Prices fluctuate daily → no fixed prices in code.** Biggest design constraint; drives P1.3.
+- **No customer reviews available** → do **not** emit `aggregateRating` or `review`. Fabricated
+  review markup is a manual-action risk.
+- Off-site actions (GSC indexing, Cloudflare bot settings, GBP) to be driven via browser automation
+  with per-step user approval.
+
+---
+
+### P0 — Setup and stop the bleeding (ship first, same day)
+
+**P0.0 Ubersuggest MCP** — already registered; restart the session, confirm it connects, enumerate
+its tools before relying on it.
+
+**P0.1 Fix the `/products/` 500.** `src/app/products/page.tsx` renders a Next.js error page in
+production. The D1 fetch at `:34-61` is already `try/catch`-wrapped returning `[]`, so the throw is
+downstream — most likely `ProductsClient` or the `PRODUCTS_FAQS` import
+(`src/components/ProductsClient.tsx`). Reproduce locally with the D1 binding absent, then present but
+returning `[]`. Guard the client component against an empty/undefined list and malformed
+`specifications` / `image_urls` JSON. Product *detail* pages return 200, so the fault is hub-specific.
+Verify: `curl -o /dev/null -w "%{http_code}" https://www.saharaprinter.com/products/` → `200`.
+
+Also check the other live 5xx in `saharaprinter.com-audit/findings/status-crawl.txt`: `/brands/hp/`
+(503, now 200 — intermittent), `/blogs/printer-rental-real-estate-offices-dubai-2025/`, and three
+`/services/printer-spare-parts/*` detail pages. All D1-backed edge routes — look for a shared failure
+mode (D1 read timeout / Workers subrequest limit) rather than fixing each.
+
+**P0.2 Purge `/services/photocopier-rental/` from the index.** It 308s to
+`/photocopier-rental-dubai/` yet still holds **1,019 impressions at position 65.7** — the site's
+5th-largest impression source, producing 2 clicks. Remove both dead URLs from `public/llms.txt`
+"Key Pages" (`/copier-lease-uae/`, `/services/photocopier-rental/`); file a GSC removal request (P6).
+
+**P0.3 Kill the trailing-slash URL split.** GSC shows `/services/paper-shredder-rental` **and**
+`/services/paper-shredder-rental/` as two indexed URLs accumulating impressions separately.
+`next.config.mjs:16` sets `trailingSlash: true`, but two emitters omit it:
+- `src/components/Header.tsx:93` — `href: \`/brands/${b.slug}\`` (this localStorage-driven list
+  *overwrites* the correct hardcoded brand array on mount, so it affects every page)
+- `src/components/BlogInternalLinks.tsx:80` — `href={\`/blogs/${p.slug}\`}`
+
+Then grep `src/` for any remaining `` href={`/ `` template literals missing the slash.
+
+---
+
+### P1 — Shredder: rescue the sales page and expand to 6 models
+
+**P1.1 Force the sales page into the index.** Nothing else in P1 matters until Google fetches it.
+1. Ship P0.1 first — the `/products/` 500 competes for the same crawl budget.
+2. Strengthen internal linking: currently linked from nav and the rental page, but not from the
+   homepage or any high-authority blog. Add contextual links from `/`, `/services/`, and the three
+   shredder blog posts.
+3. GSC → Request Indexing (P6.1). The direct lever.
+4. Re-inspect after 48h. If still "unknown to Google", the cause is crawl-budget starvation and P0.1
+   was incomplete — investigate server response times before adding more content.
+
+**P1.2 Rescope the rental page so it stops stealing buy intent.** `buy paper shredder` resolves to
+the *rental* page at position 9.5 with 0% CTR; until that stops, the sales page cannot win the term.
+Strip buy-intent keywords from `paper-shredder-rental/page.tsx:27`; move buy-cost FAQs to the sales
+page; keep the rent-vs-buy ComparisonTable on both with opposite CTA emphasis.
+**Regression test:** the rental page's long-tail (`shredder rental`, `shredder for rent`, `hire paper
+shredder near me` — all position 1–6 at ~100% CTR) are the site's best-converting queries and must
+not move.
+
+**P1.3 Product schema with fluctuating prices — use D1, not hardcoded values.** *Key architectural
+decision.* Prices change daily, so they must not live in `page.tsx` (each change would need a deploy;
+stale prices cause GSC errors and bad UX).
+
+Reuse the existing pattern rather than inventing one: `src/app/products/[slug]/page.tsx:168-223`
+already solves exactly this, and its inline comment documents why — it builds *one* of a single
+`Offer`, a real `AggregateOffer` with computed `lowPrice`/`highPrice`, or **omits `offers` and the
+whole Product node when there is no real price**, because a Product with no offers is precisely the
+GSC critical error `Either "offers", "review", or "aggregateRating" should be specified`.
+
+- Move the six models into the D1 `products` table, editable from `/admin/(dashboard)/products`
+  **without a deploy**.
+- The sales page reads them server-side (as `products/page.tsx:34-61` does) and renders both catalogue
+  and JSON-LD from that single source.
+- A model with no current price still renders (with a "Request today's price" CTA) but its Product
+  node is omitted — never emitted with a fabricated or stale price.
+- Set `priceValidUntil` short (~7 days) to signal volatility honestly.
+- **No `aggregateRating`, no `review`.** This leaves the GSC non-critical warnings open by design.
+- Delete the hardcoded price sources on the sales page (`priceBands` `:54-58`, `models`
+  `priceLow`/`priceHigh` `:60-87`).
+- **Fix while porting:** the page currently emits each Product **twice** — standalone at `:209` *and*
+  nested in an `ItemList` at `:169`. Keep the standalone nodes only.
+
+Secondary win: shredders in the `products` table also gives each model an indexable
+`/products/<slug>/` page, attacking the catalogue-depth gap against sosauh.com (P7).
+
+**P1.4 Add the four new models.** Specs extracted from `C:\Users\SAHARA\Downloads\shredders`:
+
+| Model | Sheets | Cut | Security | Bin | Runtime | Notes |
+|---|---|---|---|---|---|---|
+| Powershred LX220 | 20 | Mini-cut 4×12mm | **P-4** (1300 particles/sheet) | 30L / 750 sheets | 30 on / 15 off | 100% Jam Proof, SafeSense, IntelliBAR; 230mm throat; 15.5kg |
+| Powershred 79Ci | — | Cross-cut 3.9×38mm | DIN 3 | 23L | 12 min | Deskside, 1–3 users; 230mm throat; 13.74kg |
+| Powershred 92Cs | 18 (70gsm) | Cross-cut 4×38mm | **P-4** | 25L / ~250 sheets | 30 min | SilentShred, auto-reverse, sleep mode |
+| Powershred 99Ci | — | Cross-cut | — | — | — | *re-extract specs at implementation* |
+
+Plus existing LX65 and 325Ci. Use the **real product photos** the user supplies, not manufacturer
+stock imagery — a differentiator against Amazon/Noon listings. Each model needs sheet capacity, cut
+type/size, DIN-P level, bin capacity, runtime, throat width, warranty, and a plain-language "best for
+N users / M sheets a day" line. That spec density is what earns AI citations on comparison queries.
+
+**P1.5 Rebuild the sales page around buy intent.**
+- **Title**: lead with the head term and a *range*, not an exact price (prices move). Current title
+  hardcodes `Price from AED 800` — replace with something durable. Mirror what works for SOS
+  (`"Printer Rental in Dubai, Abu Dhabi, Sharjah | 100 / 300 AED Only"`).
+- **H1**: `Paper Shredder Machines Dubai & UAE`.
+- **AEO answer block** must answer the price question in the first 40–60 words —
+  `paper shredder price in uae` already sits at position 6.6 — while staying honest about
+  quote-based pricing.
+- **Comparison table across all 6 models** (security level × capacity × user count). This is the asset
+  that wins `paper shredder machine dubai` (117 imp, pos 14.9) and AI comparison prompts.
+- Reuse `AnswerBlock`, `FaqSection`, `ComparisonTable`, `SpecTable`, `ProductHero`.
+- **Add FAQ admin support** — `src/app/admin/(dashboard)/faqs/page.tsx:40` has no option for
+  `services/paper-shredder-sales`, so admins cannot manage its FAQs.
+
+**P1.6 Fix the live price contradictions.** Three sources disagree and AI engines read all three:
+`database/migrations/018_seed_qa_answers.sql:103` says the 325Ci is "from AED 400" while the page says
+AED 300/week — and **D1 FAQs override in-code fallbacks** (`src/lib/faqs.ts:25`), so the stale D1
+answer is what ships today. `database/migrations/015_seed_blog_cluster.sql:8-10` says AED 2,000–3,000+
+vs the sales page's AED 2,200–3,500+. Since prices fluctuate, the durable fix is to **remove hard
+figures from FAQ and blog copy** and point to the live catalogue.
+
+**P1.7 De-cannibalize the shredder blog cluster.**
+`buying-a-paper-shredder-in-dubai-sizing-and-cost-guide` duplicates the sales page's answer block
+almost verbatim and ranks **position 48 for `paper shredder dubai`** — competing with the money page.
+Rewrite as a genuine sizing/selection guide linking *up*. Same for
+`paper-shredder-rental-uae-when-it-beats-buying` → link up to the rental page.
+
+---
+
+### P2 — Printer/copier cannibalization (biggest untapped volume)
+
+| Page | Impressions | Position | Clicks |
+|---|---|---|---|
+| `/services/printer-rental/` | 2,861 | 17.4 | 12 |
+| `/printer-rental-dubai/` | **1,229** | **59.7** | **0** |
+| `/services/photocopier-rental/` (301'd) | 1,019 | 65.7 | 2 |
+| `/printer-rental-abu-dhabi/` | 1,104 | 34.5 | 3 |
+
+Two pages chase `printer rental dubai`; the geo page is buried at position 60 and dropping (−14
+period-over-period). Over **3,300 impressions/month produce 3 clicks.**
+
+Run `seo:seo-cannibalization-detector` across `/services/printer-rental/`, `/printer-rental-dubai/`,
+`/photocopier-rental-dubai/`. One owner per head term — recommended: `/services/printer-rental/` owns
+generic + `printer rental dubai` (it ranks 17.4 vs 59.7); geo pages narrow to genuinely local intent
+(`printer rental JAFZA`, `printer rental business bay`) and link up. Strip duplicated head-term
+targeting from the geo pages' titles, H1s and keyword arrays.
+
+---
+
+### P3 — CTR rescue (fastest measurable win)
+
+**P3.1 Rewrite titles/descriptions on impression-heavy, click-poor pages.** Priority by wasted
+impressions: `/services/printer-rental/` (2,861 imp, 0.42% CTR), `/printer-rental-abu-dhabi/`
+(1,104, 0.27%), `/printer-rental-dubai/` (1,229, 0%), `/services/repair/` (821, 0.24%), `/about/`
+(191 imp, 0% CTR at position 54).
+
+Copy what already works **on this site**: `/brands/lexmark/` **13.5% CTR**, `/brands/kyocera/`
+**4.9%**, `/services/printer-spare-parts/` **4.0%** — all specific, product-named titles. The failures
+are generic service titles. Use `seo:seo-meta-optimizer` and `seo:seo-snippet-hunter`.
+
+**P3.2 Fix the 57 over-length titles.** One template causes nearly all of them —
+`src/app/services/printer-spare-parts/[slug]/page.tsx:65`:
+```ts
+const title = `${supply.name} | ${supply.brand} ${supply.category} | Sahara Office Equipments`;
+```
+producing up to **120 characters**. Add a `meta_title` escape hatch (pattern exists at
+`products/[slug]/page.tsx:80` and `blogs/[slug]/page.tsx:80`), truncate `supply.name`, shorten the
+suffix to `| Sahara`.
+
+**P3.3 Thin indexable pages.** `/rental-calculator/` (45 lines, body is entirely `<CalculatorClient />`)
+and `/blogs/` are the two Ubersuggest flags for low word count. Both are in the sitemap and
+`/rental-calculator/` is the primary Header CTA. Add server-rendered copy above the client component.
+
+---
+
+### P4 — Entity consolidation (unlocks Gemini + AI Overviews)
+
+**P4.1 Create `src/lib/brand.ts`.** No central brand constants file exists — all 41 org nodes are
+hand-typed, so drift is structural. Export `ORG_ID` (`https://www.saharaprinter.com/#organization`),
+`ORG_NAME`, `LEGAL_NAME`, `ALTERNATE_NAMES`, `NAP`, `GEO`, `TELEPHONE`, `LOGO`, `SAME_AS`. Extend the
+existing `src/lib/siteUrl.ts` pattern.
+
+**P4.2 Replace all 41 orphan nodes with `@id` references** (`{ "@id": ORG_ID }`). Representative files
+(pattern repeats): `printer-rental-dubai/page.tsx:59-73`, `photocopier-rental-dubai/page.tsx:104`,
+`services/repair/page.tsx:54`, `services/amc/page.tsx:49`, `blogs/[slug]/page.tsx:137-138` (affects all
+25 posts), `about/page.tsx:42`, `our-clients/page.tsx:38-50`.
+
+Defects to clear while doing this:
+- **Two `legalName` spellings** — `layout.tsx:79` "Sahara Office Equip Tr LLC" vs 14 files "Sahara
+  Office Equipment Trading LLC". Pick the trade-licence form, use it everywhere.
+- **`name`/`legalName` swapped** in 4 files (`photocopier-rental-{dubai,sharjah,abu-dhabi}`,
+  `printer-rental-abu-dhabi`).
+- **12 phantom branch addresses/geos** — one Sharjah business must not assert Dubai street addresses
+  and GPS. Keep `areaServed`, drop the fake `address`/`geo`.
+- **`our-clients/page.tsx:50` has `"sameAs": []`** — explicitly signals "no external identity". Remove.
+- **`our-clients/page.tsx:40` uses `favicon.ico` as org logo** — below Google's 112px minimum.
+- **`alternateName` misused as a keyword slot** on 5 service pages ("Printer AMC Dubai" etc.) — that
+  field is for brand aliases only and is teaching Google wrong names.
+- **`rental-calculator/page.tsx:13`** is the lone page with `siteName: "Sahara Printer"`.
+
+**P4.3 Strengthen `sameAs`.** Currently 7 entries and **missing the Google Business Profile URL**,
+despite the CID (`11820725793384191512`) already being used in `hasMap` at `layout.tsx:111`. Add
+GBP/Maps plus any UAE directory listings. Strongest single Knowledge-Graph link.
+
+**P4.4 Guard the runtime override.** `src/app/layout.tsx:402-413` lets an admin-editable D1 value
+replace the entire Organization block at runtime. Verify nothing is set there — if it is, all of P4 is
+moot in production.
+
+---
+
+### P5 — AEO / GEO fixes
+
+- **`speakable` targets a class that doesn't exist.** `layout.tsx:270-273` declares
+  `cssSelector: ["h1","h2",".aeo-block"]`, but `AnswerBlock.tsx:30` never emits `aeo-block`. One-line
+  fix; currently zero AEO surface is addressable.
+- **Homepage has no AnswerBlock** — the page AI engines fetch first for "who is Sahara". Also missing
+  on `/about/`, `/contact/`, `/services/` hub, and all 25 blog posts.
+- **No FAQPage schema on any blog post**, despite most cluster posts containing an `<h2>FAQ</h2>`
+  section. Wire `buildFaqSchema()` (`src/lib/faqs.ts:40`) into `blogs/[slug]`.
+- **Four blog posts emit invalid `BlogPosting`** — posts 12–15 (inlined in
+  `src/app/admin/(dashboard)/blog/page.tsx`) have `coverImage: ""`, and `image` is Google-required.
+  These are the site's *best* AEO-shaped posts (they open with "Quick Answer:" blocks) and they're
+  rich-result-ineligible. Titles say "2025" while `createdAt` says 2026-04-27 — a freshness
+  contradiction AI engines read directly.
+- **Migration-drift risk**: those 4 posts exist in no `.sql` migration. A D1 rebuild deletes them.
+  Back them into a migration.
+- **robots.txt is stale** — `OAI-SearchBot` (powers ChatGPT *citations*, distinct from GPTBot) and
+  `PerplexityBot` are unnamed. Add explicit Allow lines.
+- **llms.txt drift** — 2 redirected URLs, 6 real posts omitted, and it states "4.9 out of 5 from 150+
+  reviews" while site metadata says "5.0★ · 1,500+ clients" and the code fallback says 5.0/69. Pick
+  the true figure. Add a `sameAs` / entity-disambiguation block naming Wikidata `Q137021158`.
+
+---
+
+### P6 — Off-site actions (driven via browser automation, per-step approval)
+
+1. **GSC — Request Indexing** for `/services/paper-shredder-sales/` (the P1.1 blocker), `/products/`
+   after the 500 is fixed, and any other "unknown to Google" URL.
+2. **GSC — removal request** for `/services/photocopier-rental/` (1,019 wasted impressions at pos 65).
+3. **Cloudflare → Security → Bots → "AI Scrapers and Crawlers."** If enabled, it blocks
+   Gemini/AI-Overview crawlers at zone level regardless of robots.txt — which would explain
+   ChatGPT-only visibility exactly. **Check before assuming the code is at fault.** The `cloudflare`
+   MCP server fails to connect, so this goes through the dashboard UI.
+4. **Google Business Profile** — verify NAP matches `layout.tsx` byte-for-byte; capture the GBP URL
+   for `sameAs` (P4.3).
+
+---
+
+### P7 — Close the gap to sosauh.com
+
+From their live site: **deep product catalogue** (50+ individual product pages — ours is a 500 error;
+P0.1 + P1.3 both attack this); **price in the title tag** ("100 / 300 AED Only" — ours are generic);
+**10 brand-specific repair pages** (we have 7, and `/brands/*` is already our best CTR segment —
+Lexmark 13.5%, Kyocera 4.9% — so expanding is proven on our own data). **They have zero shredder
+content**, and neither does officeequipments.ae — the category is uncontested, which is why P1 is the
+highest-ROI content work on this list.
+
+---
+
+### Verification
+
+**After P0** (same day):
+```bash
+for u in /products/ /brands/hp/ /services/paper-shredder-sales/ /services/paper-shredder-rental/; do
+  curl -s -o /dev/null -w "$u %{http_code}\n" "https://www.saharaprinter.com$u"; done
+```
+All must be 200. Then `rtk npm run build` clean; confirm no `__next_error__` in `/products/` HTML.
+
+**After P1**: GSC URL Inspection on `/services/paper-shredder-sales/` must move off "unknown to
+Google". Rich Results Test — expect Product nodes only for models with a live price, complete
+`offers`, one FAQPage, one BreadcrumbList, **no duplicate Product nodes**. Regression-test the rental
+page still holds position 1–6 on `shredder rental`, `shredder for rent`, `hire paper shredder near me`.
+
+**After P4**: crawl 10 representative pages; every `Organization`/`LocalBusiness` reference must
+resolve to `#organization`. `grep -r '"@type": \["LocalBusiness"' src/` outside `layout.tsx` and
+`src/lib/brand.ts` should return zero hits.
+
+**Ongoing (2, 4, 8 weeks):**
+
+| Metric | Today | 8-week target |
+|---|---|---|
+| Site CTR | 0.9–2.0% | 3.5%+ |
+| Avg position | ~18 | <12 |
+| Clicks/day | 8–9 | 30+ |
+| Shredder clicks (28d) | 17 (rent-only) | 60+ (rent + buy) |
+| `buy paper shredder` CTR | 0% @ pos 9.5 | 5%+ @ pos <6 |
+| Gemini / AI Overview mentions | 0 | >0 |
+
+AI-citation metrics (P4/P5) lag 4–8 weeks — Knowledge Graph consolidation is not immediate; judge P4
+on schema validity first, citations second.
+
+**Skills to invoke:** `seo:seo-cannibalization-detector` (P2), `seo:seo-meta-optimizer` +
+`seo:seo-snippet-hunter` (P3), `seo:geo-fundamentals` + `seo-geo` agent (P4/P5), `seo-schema` agent
+(P1.3/P4), `seo-technical` agent (P0), `seo:seo-content-writer` (P1.5), `nextjs-developer` (P0.1
+edge-runtime debugging), `claude-in-chrome` (P6).
+
+**Out of scope / blocked on user:** no `aggregateRating`/`review` until real reviews exist; **real
+product photos of the six models** (blocks P1.4); **someone must keep D1 prices current** — P1.3 makes
+it a 30-second admin task instead of a deploy, but it only works if it happens; **backlinks** — nothing
+here fixes off-site authority, which is a real part of the position-18 ceiling
+(`docs/seo/BACKLINK-SUBMISSION-PACK.md` exists but is unexecuted).
+
+---
+
 ## SESSION NOTE — 2026-09-09 (later), intent-mismatch fixes + copier consolidation + Product snippets confirmed stale-not-broken
 
 User reported Product snippets "still critical" and clicks dropping. Both checked against live GSC before touching code — plan at `~/.claude/plans/refer-the-handoff-md-happy-widget.md`. Not yet committed/pushed — local only, per standing practice of building locally first (`npm run build` and `tsc --noEmit` both clean; a local prod-server redirect check confirms both new 308s resolve in one hop).

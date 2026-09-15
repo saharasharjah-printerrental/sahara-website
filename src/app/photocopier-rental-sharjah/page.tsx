@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import Link from "next/link";
+import { ORG_ID, ORG_NAME, orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -84,29 +85,16 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Genuine head-office location, so this merges into the canonical
+// Organization via @id rather than declaring a second entity.
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments — Sharjah Photocopier Rental",
-  legalName: "Sahara Office Equipment Trading LLC",
+  "@id": ORG_ID,
+  name: ORG_NAME,
   description:
     "Photocopier rental in Sharjah — refurbished units from AED 250/month, new A3 photocopiers from AED 500/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
   url: "https://www.saharaprinter.com/photocopier-rental-sharjah",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
-  foundingDate: "2012",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Industrial Area 11",
-    addressLocality: "Sharjah",
-    addressRegion: "Sharjah",
-    addressCountry: "AE",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 25.2942534,
-    longitude: 55.4260483,
-  },
   areaServed: [
     { "@type": "City", name: "Sharjah" },
     { "@type": "Place", name: "SAIF Zone" },
@@ -158,7 +146,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Photocopier Rental Sharjah",
-  provider: { "@type": "LocalBusiness", name: "Sahara Office Equipment Trading LLC" },
+  provider: orgRef(),
   areaServed: { "@type": "City", name: "Sharjah" },
   description:
     "Canon and Kyocera photocopier rental in Sharjah with zero deposit, unlimited toner, and 60-minute on-site support.",

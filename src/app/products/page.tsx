@@ -1,7 +1,9 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getRequestContext } from '@cloudflare/next-on-pages';
-import ProductsClient, { PRODUCTS_FAQS } from "@/components/ProductsClient";
+import ProductsClient from "@/components/ProductsClient";
+import { PRODUCTS_FAQS } from "@/lib/productsFaqs";
 
 export const metadata: Metadata = {
   title: "Printer Products UAE | Canon, HP, Kyocera, Xerox",
@@ -108,7 +110,9 @@ export default async function ProductsPage() {
       )}
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      <ProductsClient initialProducts={initialProducts.length > 0 ? initialProducts : undefined} />
+      <Suspense fallback={null}>
+        <ProductsClient initialProducts={initialProducts.length > 0 ? initialProducts : undefined} />
+      </Suspense>
     </>
   );
 }

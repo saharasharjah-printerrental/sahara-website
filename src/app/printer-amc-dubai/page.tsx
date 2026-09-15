@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -63,7 +64,7 @@ const serviceSchema = {
   "@type": "Service",
   "name": "Printer AMC Dubai",
   "description": "Annual Maintenance Contracts for printers and photocopiers in Dubai. Preventive maintenance, labour, and OEM parts included depending on tier. 4-hour response.",
-  "provider": { "@type": "LocalBusiness", "name": "Sahara Office Equipments", "telephone": "+971503823969" },
+  "provider": orgRef(),
   "areaServed": { "@type": "City", "name": "Dubai" },
   "serviceType": "Printer Maintenance Contract",
   "offers": {
@@ -74,23 +75,6 @@ const serviceSchema = {
     "offerCount": 2,
     "availability": "https://schema.org/InStock",
   },
-};
-
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Sahara Office Equipments — Dubai AMC",
-  "description": "Printer and photocopier Annual Maintenance Contracts in Dubai from AED 299/month.",
-  "url": "https://www.saharaprinter.com/printer-amc-dubai/",
-  "telephone": "+971503823969",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Al Arabi Building, Industrial Center Road, Industrial Area 11",
-    "addressLocality": "Sharjah",
-    "addressCountry": "AE",
-  },
-  "areaServed": { "@type": "City", "name": "Dubai" },
-  "priceRange": "AED 299-499",
 };
 
 const breadcrumbSchema = {
@@ -115,7 +99,6 @@ export default async function PrinterAmcDubai() {
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>

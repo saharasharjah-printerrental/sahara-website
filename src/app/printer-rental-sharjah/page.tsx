@@ -1,6 +1,7 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
+import { ORG_ID, ORG_NAME } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -67,24 +68,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// This is the genuine head-office location, so unlike the other emirate
+// pages this node merges into the canonical Organization via @id rather than
+// declaring a second, separate entity — same real address, so no reason to
+// assert it twice under two different names.
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService"],
-  "name": "Sahara Office Equipments — Sharjah Printer Rental (Head Office)",
-  "legalName": "Sahara Office Equipment Trading LLC",
+  "@id": ORG_ID,
+  "name": ORG_NAME,
   "description": "Printer rental, copier leasing, and sales in Sharjah from Sahara's UAE head office. Zero deposit, unlimited free toner, same-day delivery, and the fastest response times in our coverage area. Plans from AED 250/month.",
   "url": "https://www.saharaprinter.com/printer-rental-sharjah/",
-  "telephone": "+971503823969",
-  "email": "info@saharaprinter.com",
-  "image": "https://www.saharaprinter.com/images/heroPrntr1.webp",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Al Arabi Building, Industrial Center Road, Industrial Area 11",
-    "addressLocality": "Sharjah",
-    "addressRegion": "Sharjah",
-    "addressCountry": "AE",
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 },
   "areaServed": [
     { "@type": "City", "name": "Sharjah", "sameAs": "https://www.wikidata.org/wiki/Q42043" },
     "Al Nahda", "Al Majaz", "Al Qasimia", "Muweilah", "Industrial Area",

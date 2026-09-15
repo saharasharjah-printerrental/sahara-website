@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -115,12 +116,7 @@ const serviceSchema = {
   "serviceType": "PVC / ID Card Printing Bureau Service",
   "name": "PVC Card Printing Services UAE",
   "description": "Bureau card printing service in the UAE — employee ID, security cards, custom hologram cards, wooden and transparent cards, printed and delivered by Sahara Office Equipments.",
-  "provider": {
-    "@type": "Organization",
-    "name": "Sahara Office Equipments",
-    "url": "https://www.saharaprinter.com",
-    "telephone": "+971503823969",
-  },
+  "provider": orgRef(),
   "areaServed": [
     { "@type": "City", "name": "Dubai" },
     { "@type": "City", "name": "Sharjah" },

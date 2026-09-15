@@ -123,7 +123,7 @@ export default function BrandsPage() {
             <Reveal className="mx-auto max-w-3xl text-center">
               <p className="text-caption font-bold uppercase tracking-[0.2em] text-primary">Authorized Dealer · UAE</p>
               <h1 className="mt-4 font-sora text-display-xl font-extrabold leading-tight text-white">
-                Printer Brands<br /><span className="text-primary">We Deal In UAE</span>
+                {"Printer Brands "}<br /><span className="text-primary">We Deal In UAE</span>
               </h1>
 
               <div className="mb-8 mt-6 rounded-panel border border-primary/20 bg-surface-low p-5 text-left">
@@ -154,7 +154,7 @@ export default function BrandsPage() {
                 key={brand.slug}
                 icon={LayersIcon}
                 title={brand.name}
-                href={`/brands/${brand.slug}`}
+                href={`/brands/${brand.slug}/`}
                 body={
                   <>
                     <p className="mb-2 text-xs font-semibold text-primary">{brand.tagline}</p>

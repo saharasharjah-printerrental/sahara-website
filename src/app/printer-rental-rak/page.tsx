@@ -2,6 +2,7 @@ export const runtime = 'edge';
 import type { Metadata } from "next";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import Link from "next/link";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -82,41 +83,23 @@ const DEFAULT_FAQS: FAQItem[] = [
   { q: "What is the cost-per-page for rented printers in RAK?", a: "Black-and-white A4 printing on our rented Canon/Kyocera devices in RAK costs approximately 1–2 fils per page. Desktop inkjet and consumer laser printers cost 8–15 fils per page. For an office printing 3,000 pages/month, that saves AED 180–390/month." },
 ];
 
+// Not a LocalBusiness — Sahara has one physical location (Sharjah, see
+// src/lib/brand.ts). This models the service Sahara provides in RAK,
+// referencing that same entity via `provider` instead of the Sharjah
+// "address" + RAK "geo" mismatch this replaced.
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Sahara Office Equipments — RAK Printer Rental",
-  legalName: "Sahara Office Equipment Trading LLC",
+  "@type": "Service",
+  name: "Ras Al Khaimah Printer Rental",
+  provider: orgRef(),
   description:
     "Printer and photocopier rental in Ras Al Khaimah (RAK) from AED 250/month. Zero deposit, free OEM toner, on-site support.",
   url: "https://www.saharaprinter.com/printer-rental-rak",
-  telephone: "+971503823969",
-  email: "info@saharaprinter.com",
-  foundingDate: "2012",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Industrial Area 11",
-    addressLocality: "Sharjah",
-    addressCountry: "AE",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 25.7895,
-    longitude: 55.9432,
-  },
   areaServed: [
     { "@type": "City", name: "Ras Al Khaimah" },
     { "@type": "Place", name: "RAK Free Trade Zone" },
     { "@type": "Place", name: "Al Hamra" },
     { "@type": "Place", name: "Al Marjan Island" },
-  ],
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "08:00",
-      closes: "20:00",
-    },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",

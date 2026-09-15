@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -41,21 +42,8 @@ const amcServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Annual Maintenance Contract (AMC) for Printers UAE",
-  "alternateName": "Printer AMC Dubai",
   "description": "Comprehensive annual maintenance contracts for office printers and photocopiers in UAE. Plans include quarterly to weekly servicing, all OEM parts, priority technical response, and optional dedicated technician. Serving Dubai, Sharjah, Abu Dhabi, and all UAE emirates.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "legalName": "Sahara Office Equipment Trading LLC",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Al Arabi Building, Industrial Area 11",
-      "addressLocality": "Sharjah",
-      "addressCountry": "AE"
-    },
-    "geo": { "@type": "GeoCoordinates", "latitude": 25.2942534, "longitude": 55.4260483 }
-  },
+  "provider": orgRef(),
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah", "Fujairah", "Al Ain"],
   "serviceType": "Annual Maintenance Contract",
   "offers": [

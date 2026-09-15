@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -41,27 +42,6 @@ const canonModels = [
   { name: "Canon i-SENSYS MF655Cdn", type: "A4 Color", speed: "21 ppm", features: "Compact, Network" },
 ];
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Sahara Office Equipments - Canon Dubai",
-  "description": "Canon printer rental in Dubai. imageRUNNER, i-SENSYS, imageCLASS series with zero deposit and free toner.",
-  "url": "https://www.saharaprinter.com/canon-printer-dubai/",
-  "telephone": "+971503823969",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Business Bay",
-    "addressLocality": "Dubai",
-    "addressCountry": "AE"
-  },
-  "areaServed": {
-    "@type": "State",
-    "name": "Dubai"
-  },
-  "priceRange": "AED 250-2000",
-  "openingHours": "24/7"
-};
-
 // Sep 2026: added — this page had LocalBusiness + FAQPage + BreadcrumbList
 // but no Service schema, unlike its siblings (kyocera-printer-repair,
 // printer-repair-dubai, etc.).
@@ -70,7 +50,7 @@ const serviceSchema = {
   "@type": "Service",
   "name": "Canon Printer Rental Dubai",
   "description": "Canon imageRUNNER, i-SENSYS and imageCLASS printer rental in Dubai with zero deposit, free toner, and 4-hour emergency response.",
-  "provider": { "@type": "LocalBusiness", "name": "Sahara Office Equipments", "telephone": "+971503823969" },
+  "provider": orgRef(),
   "areaServed": { "@type": "City", "name": "Dubai" },
   "serviceType": "Printer Rental",
   "offers": { "@type": "AggregateOffer", "priceCurrency": "AED", "lowPrice": 250, "highPrice": 2000, "offerCount": 1, "availability": "https://schema.org/InStock" },
@@ -92,7 +72,6 @@ export default async function CanonPrinterDubai() {
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>

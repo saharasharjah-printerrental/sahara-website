@@ -93,7 +93,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
         <div className="grid gap-6 md:grid-cols-3">
           {morePosts.map((p) => (
             <Reveal key={p.id} className="h-full">
-              <Link href={`/blogs/${p.slug}`} className="block h-full">
+              <Link href={`/blogs/${p.slug}/`} className="block h-full">
                 <div className="glass-card group flex h-full cursor-pointer flex-col rounded-card p-6 transition-transform duration-300 hover:-translate-y-1">
                   <img src={p.coverImage} alt={p.title} className="mb-4 h-40 w-full rounded-xl object-cover" loading="lazy" />
                   <span className="mb-3 inline-flex self-start rounded-pill border border-primary/20 bg-surface-mid px-2.5 py-0.5 text-xs font-medium text-primary">{p.category}</span>

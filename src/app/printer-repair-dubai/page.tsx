@@ -3,6 +3,7 @@
 export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -87,12 +88,7 @@ export default function PrinterRepairDubai() {
     "@type": "Service",
     "name": "Printer Repair Service Dubai",
     "description": "On-site printer and photocopier repair in Dubai with 2-hour priority response for Business Bay, DIFC and Downtown, and 4-hour standard response citywide. Genuine OEM parts, certified technicians, 30-day workmanship warranty.",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Sahara Office Equipments",
-      "legalName": "Sahara Office Equipment Trading LLC",
-      "telephone": "+971503823969"
-    },
+    "provider": orgRef(),
     "areaServed": { "@type": "City", "name": "Dubai" },
     "serviceType": "Printer Repair",
     "offers": {
@@ -116,27 +112,6 @@ export default function PrinterRepairDubai() {
       "name": s.title,
       "text": s.desc
     }))
-  };
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments - Printer Repair Dubai",
-    "description": "Professional printer repair services in Dubai. On-site repairs, 4-hour response, all brands serviced.",
-    "url": "https://www.saharaprinter.com/printer-repair-dubai",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Business Bay",
-      "addressLocality": "Dubai",
-      "addressCountry": "AE"
-    },
-    "areaServed": {
-      "@type": "State",
-      "name": "Dubai"
-    },
-    "priceRange": "AED 150-1000",
-    "openingHours": "24/7"
   };
 
   const faqSchema = {
@@ -166,7 +141,6 @@ export default function PrinterRepairDubai() {
     <>
       <script type="application/ld+json">{JSON.stringify(repairServiceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
 

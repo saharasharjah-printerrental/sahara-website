@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 
 const faqs = [
   { q: "Where to buy Brother printers in Dubai?", a: "Sahara Office Equipments stocks Brother MFC, DCP, and HL series in Dubai and Sharjah. Same-day delivery available with warranty and installation support." },
@@ -33,13 +34,8 @@ const serviceSchema = {
   "@type": "Service",
   name: "Brother Printer Sales, Rental & AMC UAE",
   description,
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    telephone: "+971503823969",
-    url: "https://www.saharaprinter.com/",
-    areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  provider: orgRef(),
+  areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   serviceType: "Brother Printer Dealer UAE",
 };
 

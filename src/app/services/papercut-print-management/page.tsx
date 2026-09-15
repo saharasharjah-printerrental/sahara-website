@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -35,13 +36,8 @@ const serviceSchema = {
   "@type": "Service",
   "name": "PaperCut Print Management UAE",
   "description": "PaperCut MF and NG implementation, licensing, configuration, and support for UAE offices. Enforce print policies, track usage per department, reduce print costs by up to 30%.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "telephone": "+971503823969",
-    "url": "https://www.saharaprinter.com/",
-    "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  "provider": orgRef(),
+  "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   "serviceType": "Print Management Software UAE",
 };
 
@@ -138,7 +134,7 @@ export default function PaperCutPage() {
           eyebrow="Print Management Software · UAE"
           title={
             <>
-              PaperCut Print
+              {"PaperCut Print "}
               <br />
               <span className="text-primary">Management UAE</span>
             </>

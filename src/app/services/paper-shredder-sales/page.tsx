@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
@@ -152,7 +153,7 @@ function productSchemaFor(m: typeof models[number], withContext = true) {
       "offerCount": 1,
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition",
-      "seller": { "@type": "Organization", "name": "Sahara Office Equipments", "url": "https://www.saharaprinter.com" },
+      "seller": orgRef(),
     },
   };
 }
@@ -176,17 +177,7 @@ const serviceSchema = {
   "serviceType": "Paper Shredder Sales",
   "name": "Paper Shredder Sales UAE",
   "description": "Sale of Fellowes Powershred cross-cut paper shredders in Dubai, Sharjah, and Abu Dhabi. DIN P-4 compliant, free delivery and setup.",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Sahara Office Equipments",
-    "telephone": "+971503823969",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Al Arabi Building, Industrial Area 11",
-      "addressLocality": "Sharjah",
-      "addressCountry": "AE",
-    },
-  },
+  "provider": orgRef(),
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   "url": "https://www.saharaprinter.com/services/paper-shredder-sales/",
 };

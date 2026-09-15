@@ -155,7 +155,7 @@ export default function BlogsClient({ initialPosts }: { initialPosts?: BlogPost[
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {filteredPosts.map((post) => (
                 <Reveal key={post.id} className="h-full">
-                  <Link href={`/blogs/${post.slug}`} className="block h-full">
+                  <Link href={`/blogs/${post.slug}/`} className="block h-full">
                     <article className="glass-card group h-full cursor-pointer rounded-panel p-8 transition-transform duration-500 hover:-translate-y-2">
                       <div className="mb-4 inline-flex items-center gap-2 rounded-pill border border-primary/20 bg-surface-mid px-3 py-1">
                         <span className="text-xs font-medium text-primary">{post.category}</span>

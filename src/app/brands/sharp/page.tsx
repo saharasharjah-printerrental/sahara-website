@@ -1,5 +1,6 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
+import { orgRef } from "@/lib/brand";
 import BrandContentClient from "@/components/BrandContentClient";
 
 const faqs = [
@@ -33,13 +34,8 @@ const serviceSchema = {
   "@type": "Service",
   name: "Sharp Printer Sales, Rental & AMC UAE",
   description: "Authorized Sharp printer and photocopier dealer in UAE. Smart MFPs with Sharp OSA integration. Sales, rental, and AMC. Dubai, Abu Dhabi, Sharjah. ☎ +971503823969",
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sahara Office Equipments",
-    telephone: "+971503823969",
-    url: "https://www.saharaprinter.com/",
-    areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  },
+  provider: orgRef(),
+  areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
   serviceType: "Sharp Printer Dealer UAE",
 };
 

@@ -258,6 +258,7 @@ const organizationSchema = {
   ],
   "sameAs": [
     "https://www.wikidata.org/wiki/Q137021158",
+    "https://maps.google.com/?cid=11820725793384191512",
     "https://www.facebook.com/share/1GM5UxFLTq/",
     "https://www.instagram.com/sahara_office_equipments/",
     "https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/",
