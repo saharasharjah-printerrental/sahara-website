@@ -292,6 +292,7 @@ function ServicesSection() {
     { icon: TruckIcon, title: "Equipment Sales", desc: "The latest fleet of industrial-grade printers and photocopiers from world-leading brands.", href: "/products/" },
     { icon: HeadsetIcon, title: "Expert Repair", desc: "Certified technicians available 24/7. We minimize downtime with swift, precise hardware maintenance.", href: "/services/repair/" },
     { icon: LayersIcon, title: "Toner & Supplies", desc: "Genuine consumables and spare parts logistics to keep your document workflow uninterrupted.", href: "/services/printer-spare-parts/" },
+    { icon: ShieldCheckIcon, title: "Paper Shredders", desc: "Fellowes DIN P-4 cross-cut shredders — buy or rent, PDPL-compliant document destruction for your office.", href: "/services/paper-shredder-sales/" },
   ];
   return (
     <section className="py-section px-4 lg:px-12 bg-surface-low">
