@@ -15,6 +15,13 @@
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=86400, s-maxage=86400
 
+# IndexNow key file — must be served as plain text and reachable at the
+# site root so Bing/Yandex/Naver can verify ownership on each submission.
+# See scripts/seo/indexnow.mjs.
+/886e0bddd875df4696e26c07fbd50a98.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400, s-maxage=86400
+
 # Next.js static assets — long cache, no challenge for crawlers
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable

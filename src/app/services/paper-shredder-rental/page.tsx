@@ -25,7 +25,7 @@ import type { FaqItem } from "@/lib/faqs";
 export const metadata: Metadata = {
   title: "Paper Shredder Rental Dubai & UAE | Fellowes Shredders | Sahara",
   description: "Rent a paper shredder in Dubai, Sharjah & Abu Dhabi from AED 150/week — Fellowes Powershred LX65 & 325Ci cross-cut models. Free delivery, setup & maintenance. ☎ +971503823969",
-  keywords: "paper shredder rental dubai, shredder rental uae, shredder for rent dubai, paper shredder machine rental near me, document shredding services uae, confidential document destruction dubai, fellowes shredder rental dubai, din p-4 shredder uae, paper shredder machine repair near me",
+  keywords: "paper shredder rental dubai, shredder rental uae, shredder for rent dubai, paper shredder machine rental near me, document shredding services uae, confidential document destruction dubai, fellowes shredder rental dubai, din p-4 shredder uae",
   openGraph: {
     title: "Paper Shredder Rental Dubai & UAE | Sahara Office Equipments",
     description: "Fellowes Powershred cross-cut paper shredders for rent in Dubai, Sharjah & Abu Dhabi from AED 150/week. UAE PDPL compliant document destruction. Free delivery & setup. ☎ +971503823969",
@@ -186,6 +186,21 @@ export default function PaperShredderRentalPage() {
           primaryCta={{ label: "Get Shredder Quote", href: "/rental-calculator/" }}
           secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
+
+        {/* Sep 2026: visible buy-intent CTA right under the hero, not buried
+            in body text further down the page. Most "paper shredder" /
+            "paper shredder machine dubai" impressions land here (this page
+            outranks the sales page for now) — this is the highest-visibility
+            hand-off point to /services/paper-shredder-sales/ until that page
+            is indexed on its own buy-intent queries. */}
+        <div className="border-y border-white/[0.08] bg-surface-low">
+          <div className="mx-auto max-w-4xl px-4 py-4 text-center text-sm text-white/80">
+            Prefer to buy? Paper shredder machines from AED 800 —{" "}
+            <a href="/services/paper-shredder-sales/" className="font-semibold text-primary underline">
+              see pricing &amp; specs →
+            </a>
+          </div>
+        </div>
 
         <Section flush title="Fellowes Shredder Models for Rent in UAE" subtitle="DIN P-4 cross-cut Fellowes Powershred shredders, sized for personal, office, and departmental use. Pricing and contract terms are customised to your requirements.">
           <div className="grid gap-6 md:grid-cols-2 max-w-4xl">

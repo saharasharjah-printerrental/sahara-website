@@ -1,0 +1,41 @@
+name: IndexNow submission
+
+# Fires on the GitHub Deployment status Cloudflare Pages' GitHub integration
+# posts for each build (Production or Preview) — this is the actual
+# "deploy finished" signal, not just "push landed on main", which avoids
+# submitting URLs against a site that hasn't rebuilt yet. See
+# scripts/seo/indexnow.mjs for what gets submitted and why.
+on:
+  deployment_status:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    name: Submit changed URLs to IndexNow
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment_status.environment == 'Production')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # GitHub Actions runners are ephemeral — without this, indexnow.mjs's
+      # dedupe state would reset every run and resubmit all ~140 sitemap URLs
+      # on every deploy. Restoring/saving it here lets the script actually
+      # skip unchanged URLs between deploys, same as a local repeat run.
+      - name: Restore IndexNow submission state
+        uses: actions/cache@v4
+        with:
+          path: scripts/seo/indexnow-state.json
+          key: indexnow-state-${{ github.run_id }}
+          restore-keys: indexnow-state-
+
+      - name: Submit to IndexNow
+        run: node scripts/seo/indexnow.mjs --site https://www.saharaprinter.com

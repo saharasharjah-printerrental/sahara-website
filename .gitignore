@@ -86,3 +86,7 @@ __pycache__/
 
 # Auto-generated SEO docs (rebuilt by tooling)
 docs/seo/BACKLINKS-AUTO.md
+
+# IndexNow submission state (runtime dedupe cache, not source — restored via
+# actions/cache in CI, see .github/workflows/indexnow.yml)
+scripts/seo/indexnow-state.json
