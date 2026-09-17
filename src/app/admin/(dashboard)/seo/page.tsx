@@ -5,6 +5,15 @@ export const runtime = 'edge';
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 
+interface IndexNowRun {
+  timestamp: string;
+  source: "sitemap" | "manual";
+  count: number;
+  ok: boolean;
+  status: number | null;
+  message?: string;
+}
+
 interface SEOConfig {
   googleAnalyticsId: string;
   googleAnalytics4Id: string;
@@ -57,6 +66,52 @@ export default function AdminSEO() {
   const [schemaFetchedAt, setSchemaFetchedAt] = useState("");
   const [schemaFetchError, setSchemaFetchError] = useState("");
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+
+  // IndexNow state
+  const [indexNowUrl, setIndexNowUrl] = useState("");
+  const [indexNowSubmitting, setIndexNowSubmitting] = useState(false);
+  const [indexNowLastRun, setIndexNowLastRun] = useState<IndexNowRun | null>(null);
+
+  const loadIndexNowStatus = async () => {
+    try {
+      const res = await fetch("/api/admin/indexnow/");
+      const data = await res.json() as { lastRun?: IndexNowRun | null };
+      setIndexNowLastRun(data.lastRun ?? null);
+    } catch {
+      // ignore — status is informational only
+    }
+  };
+
+  const submitIndexNow = async (urls?: string[]) => {
+    setIndexNowSubmitting(true);
+    try {
+      const res = await fetch("/api/admin/indexnow/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(urls ? { urls } : {}),
+      });
+      const data = await res.json() as { ok?: boolean; count?: number; error?: string; body?: string };
+      if (res.ok && data.ok) {
+        showToast("success", `Submitted ${data.count} URL${data.count === 1 ? "" : "s"} to IndexNow`);
+        if (urls) setIndexNowUrl("");
+      } else {
+        showToast("error", data.error || data.body || "IndexNow submission failed");
+      }
+    } catch (e) {
+      showToast("error", e instanceof Error ? e.message : "IndexNow submission failed");
+    } finally {
+      setIndexNowSubmitting(false);
+      loadIndexNowStatus();
+    }
+  };
+
+  const handleSubmitAllToIndexNow = () => submitIndexNow();
+
+  const handleSubmitUrlToIndexNow = () => {
+    const url = indexNowUrl.trim();
+    if (!url) return;
+    submitIndexNow([url]);
+  };
 
   const handleFetchSchema = async () => {
     setSchemaFetching(true);
@@ -126,6 +181,7 @@ export default function AdminSEO() {
       }
     };
     load();
+    loadIndexNowStatus();
   }, []);
 
   const set = (key: keyof SEOConfig, value: string | boolean) =>
@@ -384,6 +440,109 @@ export default function AdminSEO() {
                   className={`${inputClass} font-mono text-sm resize-y`}
                 />
               </div>
+            </section>
+
+            {/* IndexNow */}
+            <section className="glass-card rounded-2xl p-6 space-y-5">
+              <div>
+                <h2 className="text-lg font-bold text-white">IndexNow (Bing, Yandex, Naver, Seznam)</h2>
+                <p className="text-sm text-slate-400 mt-1">
+                  Pushes changed URLs straight to these search engines instead of waiting for their
+                  own crawl schedule. Every production deploy already does this automatically for
+                  the whole sitemap — use the buttons below to force an immediate submission (e.g.
+                  right after publishing a page). This does <strong className="text-slate-300">not</strong> reach
+                  Google — Google requires GSC &quot;Request Indexing&quot; instead.
+                </p>
+              </div>
+
+              {/* 4-step status, matching Bing's own IndexNow setup flow */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="bg-[#101c2e] rounded-xl border border-white/10 p-3">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-green-400">
+                    <span className="w-4 h-4 rounded-full bg-green-500/20 flex items-center justify-center text-[10px]">✓</span>
+                    Step 1
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">API key generated</p>
+                </div>
+                <div className="bg-[#101c2e] rounded-xl border border-white/10 p-3">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-green-400">
+                    <span className="w-4 h-4 rounded-full bg-green-500/20 flex items-center justify-center text-[10px]">✓</span>
+                    Step 2
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Key hosted at{" "}
+                    <a
+                      href="https://www.saharaprinter.com/886e0bddd875df4696e26c07fbd50a98.txt"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#f5be53] hover:underline"
+                    >
+                      site root
+                    </a>
+                  </p>
+                </div>
+                <div className="bg-[#101c2e] rounded-xl border border-[#f5be53]/40 p-3">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-[#f5be53]">
+                    <span className="w-4 h-4 rounded-full bg-[#f5be53]/20 flex items-center justify-center text-[10px]">3</span>
+                    Step 3
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">Submit URLs (below)</p>
+                </div>
+                <div className="bg-[#101c2e] rounded-xl border border-white/10 p-3">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
+                    <span className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center text-[10px]">4</span>
+                    Step 4
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">
+                    <a
+                      href="https://www.bing.com/webmasters/indexnow"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#f5be53] hover:underline"
+                    >
+                      Verify in Bing Webmaster Tools
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  value={indexNowUrl}
+                  onChange={(e) => setIndexNowUrl(e.target.value)}
+                  placeholder="https://www.saharaprinter.com/services/printer-rental/"
+                  className={`${inputClass} flex-1`}
+                />
+                <button
+                  type="button"
+                  onClick={handleSubmitUrlToIndexNow}
+                  disabled={indexNowSubmitting || !indexNowUrl.trim()}
+                  className="px-4 py-2 bg-[#f5be53] text-[#412d00] font-bold rounded-xl hover:bg-[#c8962e] transition-colors disabled:opacity-50 whitespace-nowrap"
+                >
+                  {indexNowSubmitting ? "Submitting..." : "Submit URL"}
+                </button>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleSubmitAllToIndexNow}
+                disabled={indexNowSubmitting}
+                className="w-full px-4 py-2 bg-white/10 text-white font-medium rounded-xl hover:bg-white/20 transition-colors disabled:opacity-50"
+              >
+                {indexNowSubmitting ? "Submitting..." : "Submit All Sitemap URLs"}
+              </button>
+
+              {indexNowLastRun && (
+                <div className="text-xs text-slate-500 border-t border-white/10 pt-3">
+                  Last run: {new Date(indexNowLastRun.timestamp).toLocaleString()} —{" "}
+                  <span className={indexNowLastRun.ok ? "text-green-400" : "text-red-400"}>
+                    {indexNowLastRun.ok ? "success" : "failed"}
+                  </span>{" "}
+                  ({indexNowLastRun.count} URL{indexNowLastRun.count === 1 ? "" : "s"}, {indexNowLastRun.source === "sitemap" ? "full sitemap" : "manual"})
+                  {!indexNowLastRun.ok && indexNowLastRun.message ? ` — ${indexNowLastRun.message}` : ""}
+                </div>
+              )}
             </section>
 
             {/* Schema Inspector */}
