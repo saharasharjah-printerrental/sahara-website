@@ -1,22 +1,23 @@
 name: IndexNow submission
 
-# Fires on the GitHub Deployment status Cloudflare Pages' GitHub integration
-# posts for each build (Production or Preview) — this is the actual
-# "deploy finished" signal, not just "push landed on main", which avoids
-# submitting URLs against a site that hasn't rebuilt yet. See
+# Originally fired on the GitHub Deployment status Cloudflare Pages' GitHub
+# integration posts for each build — but this repo's Cloudflare Pages
+# project never actually posts deployment_status events (confirmed via
+# `gh api repos/.../deployments` returning zero entries, and zero
+# check-runs on HEAD besides this workflow's own), so that trigger never
+# fired since the automation was built. Switched to `push` on main with a
+# fixed delay to let the Cloudflare build/deploy finish first — Next.js
+# builds on this project take well under 3 minutes. See
 # scripts/seo/indexnow.mjs for what gets submitted and why.
 on:
-  deployment_status:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   submit:
     name: Submit changed URLs to IndexNow
     runs-on: ubuntu-latest
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.deployment_status.state == 'success' &&
-       github.event.deployment_status.environment == 'Production')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,6 +26,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      # Give Cloudflare Pages time to finish building and deploying before
+      # fetching the sitemap, so we don't submit against stale content.
+      - name: Wait for Cloudflare Pages deploy
+        if: github.event_name == 'push'
+        run: sleep 180
 
       # GitHub Actions runners are ephemeral — without this, indexnow.mjs's
       # dedupe state would reset every run and resubmit all ~140 sitemap URLs
