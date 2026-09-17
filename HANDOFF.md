@@ -1,75 +1,59 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
-## START HERE — 2026-09-17, shredder sitemap fix DID NOT DEPLOY, resume mid-task
+## START HERE — 2026-09-17, shredder sitemap fix is LIVE; two items still open
 
-> **The commit is right, the deploy failed. Do not re-diagnose — go straight to the Cloudflare
-> Pages build log, fix whatever it says, and redeploy.** Full context below; do not skip it, the
-> next two items are urgent and unfinished.
+**Shipped and confirmed live** (`b119676`, deployment `8586a236`, Status: Active):
+`/services/paper-shredder-sales/` (shipped Sep 7, see P1 below) was still `URL is unknown to
+Google` in GSC nine days later despite being crawlable, canonical, and in the sitemap. Cause:
+`src/app/sitemap.ts` computed every `lastModified` from `new Date()` **at request time**, so all
+142 sitemap URLs reported a brand-new lastmod on every single fetch — Google discounts lastmod
+once it sees that pattern, so the one genuinely-new URL got no usable freshness signal. Fixed by
+pinning every static route's `lastmod` to its real last-commit date via a `ROUTE_LASTMOD` map.
+Also built IndexNow automation (Bing/Yandex/Naver — not Google) since none existed:
+`public/886e0bddd875df4696e26c07fbd50a98.txt` key file, `scripts/seo/indexnow.mjs`,
+`.github/workflows/indexnow.yml` firing on Cloudflare Pages deploy-success. Added a visible
+"prefer to buy?" CTA to the rental page pointing at the sales page.
 
-**What this session found and shipped** (root-cause was real): `/services/paper-shredder-sales/`
-(shipped Sep 7, see P1 below) was still `URL is unknown to Google` in GSC nine days later despite
-being crawlable, canonical, and in the sitemap. Cause: `src/app/sitemap.ts` computed every
-`lastModified` from `new Date()` **at request time**, so all 142 sitemap URLs reported a
-brand-new lastmod on every single fetch — Google discounts lastmod once it sees that pattern, so
-the one genuinely-new URL got no usable freshness signal. Fixed by pinning every static route's
-`lastmod` to its real last-commit date via a `ROUTE_LASTMOD` map. Also built IndexNow automation
-(Bing/Yandex/Naver — not Google) since none existed: `public/886e0bddd875df4696e26c07fbd50a98.txt`
-key file, `scripts/seo/indexnow.mjs`, `.github/workflows/indexnow.yml` firing on Cloudflare Pages
-deploy-success. Added a visible "prefer to buy?" CTA to the rental page pointing at the sales page.
-Committed as `2aaa097` and pushed to `main`.
+**Verified live** (5× rapid `curl` to `https://www.saharaprinter.com/sitemap.xml` all return the
+identical pinned `lastmod` for every route; `886e0bddd875df4696e26c07fbd50a98.txt` returns 200
+with the key as body; the rental page's CTA text renders in the Googlebot-fetched HTML).
 
-**🔴 THE DEPLOY FAILED — production is still running the old broken code.** Verified two ways:
-1. `npx wrangler pages deployment list --project-name=saharaprinter` shows commit `2aaa097`'s
-   Cloudflare Pages build with **Status: Failure**
-   (`https://dash.cloudflare.com/034ddee1699595a19ee79f688de3b421/pages/view/saharaprinter/34da0a45-f450-480b-9a73-02e7b70c17f6`).
-   The last successful production build is still `14ce292` (22h old at the time of writing).
-2. Live-site confirmation: `curl -s https://www.saharaprinter.com/sitemap.xml | grep -A1
-   paper-shredder-sales` run twice, 3 seconds apart, returns **two different `lastmod` values**
-   — i.e. the site is still computing lastmod from request time, meaning the fix is not live.
-   Also `curl -o /dev/null -w "%{http_code}" https://www.saharaprinter.com/886e0bddd875df4696e26c07fbd50a98.txt`
-   → **404** (the IndexNow key file was never deployed either).
+**A real deploy failure happened and is documented for the record, not because it's still open:**
+the first push (`2aaa097`) failed Cloudflare's `npm ci` because staging `package.json` swept in
+pre-existing *uncommitted* devDependency additions already sitting in the working tree
+(`@browsermcp/mcp`, `@playwright/mcp`, `ws` — unrelated local experimentation, no matching
+`package-lock.json` entries were ever committed for them). Diagnosed by pulling the actual
+Cloudflare Pages build log via `GET /accounts/{id}/pages/projects/{proj}/deployments/{id}/history/logs`
+using the OAuth token wrangler already had cached locally (`~/.wrangler` /
+`AppData/Roaming/xdg.config/.wrangler/config/default.toml` on this Windows box) — the dashboard
+itself needed a browser session and `mcp__claude-in-chrome` stayed disconnected the entire
+session despite multiple reconnect attempts and an account switch. Fixed by reverting
+`package.json` to exactly the last-good version plus the one intended `indexnow` script line
+(`b119676`); the unrelated browsermcp/playwright/ws changes are still sitting uncommitted in the
+working tree (`package.json`/`package-lock.json` show as locally modified) for whoever owns that
+work to commit properly, with a synced lockfile, separately. **Lesson for next time: never stage
+a file with `git add <path>` without diffing its content first when the file was already dirty
+before the session started — `git status --short` alone doesn't show whether a staged file's
+diff is scope-clean.**
 
-**Why I couldn't diagnose the build failure myself this session:**
-- `npm run build` (plain Next.js build) passes clean locally — that's not what Cloudflare runs.
-- `npm run build:cf` (`next build && next-on-pages`, what Cloudflare actually runs) fails locally
-  too, but with a **known, pre-existing Windows-only failure**
-  (`Could not read the '.vercel\output\config.json' file` — the Vercel CLI that `next-on-pages`
-  shells out to doesn't work reliably on Windows; see `feedback_deployment` memory: "local wrangler
-  build fails on Windows, reserved for D1/infra"). That means **local reproduction is not possible
-  on this machine** and does not confirm or rule out anything about the actual Linux-runner failure.
-- The actual Cloudflare build log is only in the dashboard (link above) — needs an authenticated
-  browser session to read, and no `CLOUDFLARE_API_TOKEN`/`CF_API_*` env var exists locally to pull
-  it via API instead.
-- The `mcp__claude-in-chrome` browser extension was **disconnected for the entire second half of
-  this session** (`tabs_context_mcp` returned "Browser extension is not connected" on every retry,
-  even after the user switched Google accounts and asked to retry twice more) — could not drive
-  the dashboard, GSC UI, or click "Request Indexing" via browser automation.
-
-**Next session — do this first, in order:**
-1. Open the dashboard link above (or `npx wrangler pages deployment list --project-name=saharaprinter`
-   for a fresh one — build IDs change) and read the actual build error for commit `2aaa097`.
-2. Nothing in that commit touches dependencies (only `package.json` scripts, not
-   `package-lock.json`) — a lockfile/`npm ci` mismatch is an unlikely cause but check it first,
-   it's the fastest to rule out.
-3. Most likely culprit given what changed: `src/app/sitemap.ts`'s new `ROUTE_LASTMOD` const and
-   `lm()` helper, or the new `public/*.txt` file, or the `_headers` addition — check the log for
-   which. Fix, commit, push, and **re-verify with the same two curl checks above** before
-   declaring it live (a clean `wrangler pages deployment list` "Success" line is necessary but not
-   sufficient — the lastmod-stability and key-file-200 checks are what actually prove it shipped).
-4. Only once the sitemap fix is confirmed live: GSC → URL Inspection →
-   `https://www.saharaprinter.com/services/paper-shredder-sales/` → **Request Indexing**. This is
-   still not done — it's a manual UI action GSC's API doesn't expose, and the browser tool was
-   down all session. (There's also a Bing Webmaster URL Submission for the same URL, lower
-   priority since Bing gets it via IndexNow automatically once the deploy is live.)
-5. **User reported a new indexing issue appearing in GSC this session that was never diagnosed** —
-   the GSC MCP server here only exposes per-URL inspection (`batch_url_inspection`,
-   `check_indexing_issues`) and sitemap status, not the bulk Page Indexing/Coverage report where a
-   new issue *category* would first appear, and the browser was down to view it directly. A
-   `batch_url_inspection` spot-check of 8 key URLs this session found nothing new except two
-   pre-existing non-critical Product-snippet warnings on `/bravo-card-printers-uae/` (missing
-   `review`/`aggregateRating` on two products — not an indexing failure, don't confuse this with
-   the reported issue). **Ask the user what the GSC notification actually said** (issue label +
-   URL) before spending time searching for it blind.
+**Still open — do these next:**
+1. **GSC → URL Inspection → `https://www.saharaprinter.com/services/paper-shredder-sales/` →
+   Request Indexing.** Not done. GSC's API/MCP server here has no programmatic equivalent, and
+   `mcp__claude-in-chrome` was down the entire session — needs either a working browser tool or
+   the user to click it by hand. Also do a Bing Webmaster URL Submission for the same URL
+   (lower priority — Bing gets it via the new IndexNow automation on the next deploy anyway).
+2. **User reported a new indexing issue appearing in GSC this session that was never
+   identified.** The GSC MCP server here only exposes per-URL inspection
+   (`batch_url_inspection`, `check_indexing_issues`) and sitemap status, not the bulk Page
+   Indexing/Coverage report where a new issue *category* first appears, and the browser was down
+   to view it directly. A `batch_url_inspection` spot-check of 8 key URLs this session found
+   nothing new except two pre-existing non-critical Product-snippet warnings on
+   `/bravo-card-printers-uae/` (missing `review`/`aggregateRating` on two products — not an
+   indexing failure, don't confuse this with the reported issue). **Ask the user what the GSC
+   notification actually said** (issue label + URL) before spending time searching for it blind.
+3. If `mcp__claude-in-chrome` is still disconnected next session, ask the user to check
+   `chrome://extensions`, toggle/reload the Claude extension, and confirm they're signed into
+   claude.ai in that same browser — a full Chrome restart may be required.
 
 ## ACTIVE PLAN — 2026-09-15, organic + AI visibility recovery
 
