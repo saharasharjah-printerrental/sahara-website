@@ -20,6 +20,47 @@ const RATE_LIMITS = [
 
 const MAX_BODY_SIZE = 10 * 1024 * 1024; // 10 MB (covers image uploads)
 
+// Sep 2026: old-site URLs that differ from their current route ONLY by the
+// capitalization of "Printer" (e.g. /Printer-rental-dubai vs the real
+// /printer-rental-dubai/). These can't live in next.config.mjs redirects()
+// because that config's source matching is case-INSENSITIVE by default
+// (experimental.caseSensitiveRoutes is off), so a rule mapping the
+// capitalized slug to its lowercase self would also match — and redirect —
+// the real lowercase URL, causing an infinite 308 loop. Matched here with an
+// exact, case-sensitive string comparison against the raw pathname instead.
+const LEGACY_CASE_REDIRECTS: Record<string, string> = {
+  '/Printer-rental-dubai': '/printer-rental-dubai/',
+  '/Printer-rental-dubai/': '/printer-rental-dubai/',
+  '/Printer-rental-abu-dhabi': '/printer-rental-abu-dhabi/',
+  '/Printer-rental-abu-dhabi/': '/printer-rental-abu-dhabi/',
+  '/Printer-rental-fujairah': '/printer-rental-fujairah/',
+  '/Printer-rental-fujairah/': '/printer-rental-fujairah/',
+  '/Printer-repair-dubai': '/printer-repair-dubai/',
+  '/Printer-repair-dubai/': '/printer-repair-dubai/',
+  '/canon-Printer-dubai': '/canon-printer-dubai/',
+  '/canon-Printer-dubai/': '/canon-printer-dubai/',
+  '/services/Printer-spare-parts': '/services/printer-spare-parts/',
+  '/services/Printer-spare-parts/': '/services/printer-spare-parts/',
+  '/blogs/total-cost-of-Printer-ownership': '/blogs/total-cost-of-printer-ownership/',
+  '/blogs/total-cost-of-Printer-ownership/': '/blogs/total-cost-of-printer-ownership/',
+  '/blogs/rent-or-buy-your-office-Printer-lets-talk-smart-choices-for-your-business':
+    '/blogs/rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business/',
+  '/blogs/rent-or-buy-your-office-Printer-lets-talk-smart-choices-for-your-business/':
+    '/blogs/rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business/',
+  '/blogs/video-walkthrough-solving-canon-Printer-problems':
+    '/blogs/video-walkthrough-solving-canon-printer-problems/',
+  '/blogs/video-walkthrough-solving-canon-Printer-problems/':
+    '/blogs/video-walkthrough-solving-canon-printer-problems/',
+  '/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-Printer-rental':
+    '/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/',
+  '/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-Printer-rental/':
+    '/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/',
+  '/blogs/how-to-choose-the-best-Printer-rental-dubai-service':
+    '/blogs/how-to-choose-the-best-printer-rental-dubai-service/',
+  '/blogs/how-to-choose-the-best-Printer-rental-dubai-service/':
+    '/blogs/how-to-choose-the-best-printer-rental-dubai-service/',
+};
+
 // In-memory store — per edge worker instance (acceptable on Cloudflare Workers free tier)
 const store = new Map<string, { windowStart: number; count: number }>();
 
@@ -55,6 +96,16 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
   }
 
   const pathname = request.nextUrl.pathname;
+
+  // Exact, case-sensitive legacy-slug redirects — see LEGACY_CASE_REDIRECTS
+  // comment above for why these can't be next.config.mjs redirects() rules.
+  const legacyDest = LEGACY_CASE_REDIRECTS[pathname];
+  if (legacyDest && legacyDest !== pathname) {
+    const url = new URL(request.url);
+    url.pathname = legacyDest;
+    return NextResponse.redirect(url, 308);
+  }
+
   const isAdmin  = pathname.startsWith('/admin');
 
   // Forward the pathname to Server Components (read via headers() in layout.tsx) —

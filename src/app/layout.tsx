@@ -280,15 +280,11 @@ const websiteSchema = {
   "@id": "https://www.saharaprinter.com/#website",
   "url": "https://www.saharaprinter.com",
   "name": "Sahara Office Equipments",
-  "publisher": { "@id": "https://www.saharaprinter.com/#organization" },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://www.saharaprinter.com/blogs/?search={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "publisher": { "@id": "https://www.saharaprinter.com/#organization" }
+  // Sep 2026: removed the SearchAction/sitelinks-search-box block. Google
+  // retired the sitelinks search box in Nov 2024, and the urlTemplate
+  // (/blogs/?search={search_term_string}) was being crawled and flagged in
+  // GSC as a Soft 404 with no benefit left to justify it.
 };
 
 interface ServerSEOConfig {

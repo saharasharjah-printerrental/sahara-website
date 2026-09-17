@@ -202,6 +202,34 @@ export default async function PrinterSparePartsPage() {
           </div>
         </section>
 
+        {/* Sep 2026: server-rendered crawlable links to every supply detail
+            page. SparePartsCartClient below is a client component, so its
+            <a href> to each /services/printer-spare-parts/{slug}/ page only
+            exists post-hydration (inside the cart drawer) — Googlebot's
+            initial HTML fetch of this hub never saw a link to any slug,
+            which left them "Discovered - currently not indexed" in GSC.
+            This grid gives every active, slugged supply a real inbound link
+            in the server-rendered markup, independent of the cart UI. */}
+        {supplies.some((s: any) => s.slug) && (
+          <Section>
+            <h2 className="font-sora text-h3 font-bold text-white">Shop by Item</h2>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {supplies
+                .filter((s: any) => s.slug)
+                .map((s: any) => (
+                  <li key={s.id}>
+                    <a
+                      href={`/services/printer-spare-parts/${s.slug}/`}
+                      className="block rounded-lg border border-white/10 px-4 py-3 text-body text-white/90 transition-colors hover:border-primary/50 hover:text-primary"
+                    >
+                      {s.name}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </Section>
+        )}
+
         <SparePartsCartClient defaultSupplies={supplies} />
 
         <Section tone="raised">
@@ -266,7 +294,14 @@ export default async function PrinterSparePartsPage() {
                 separately makes sense if you own your equipment outright — in which case an{" "}
                 <a href="/services/amc/" className="text-primary hover:underline">annual maintenance contract</a>{" "}
                 usually works out cheaper than purchasing toner and paying for{" "}
-                <a href="/services/repair/" className="text-primary hover:underline">repairs</a> ad hoc.
+                <a href="/services/repair/" className="text-primary hover:underline">repairs</a> ad hoc — see our{" "}
+                <a href="/printer-amc-dubai/" className="text-primary hover:underline">Dubai AMC plans</a> or{" "}
+                <a href="/printer-repair-sharjah/" className="text-primary hover:underline">Sharjah repair service</a>.
+                Brand-specific support is also available for{" "}
+                <a href="/kyocera-printer-repair/" className="text-primary hover:underline">Kyocera</a> and{" "}
+                <a href="/xerox-printer-repair/" className="text-primary hover:underline">Xerox</a> devices, and if
+                you shred as much as you print, see our{" "}
+                <a href="/services/paper-shredder-sales/" className="text-primary hover:underline">paper shredders</a>.
               </p>
             </div>
 

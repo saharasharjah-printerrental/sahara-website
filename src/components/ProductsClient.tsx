@@ -199,7 +199,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts?: 
   };
 
   const clearFilters = () => {
-    router.push("/products");
+    router.push("/products/");
   };
 
   return (

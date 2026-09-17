@@ -36,7 +36,68 @@ const nextConfig = {
     ],
   },
   async redirects() {
+    // Sep 2026: GSC Page Indexing showed 45 legacy URLs from the old site
+    // (mixed-case "Printer" slugs, old nav paths like /aboutus, /locations/*,
+    // /printer-photocopier-rental-leasing-*) returning 404 or Soft 404 with
+    // no redirect, throwing away whatever link equity they still carried.
+    // Mapped each to its closest live equivalent. Next.js redirect sources
+    // are case-sensitive, so the capitalized legacy slugs need their own
+    // entries distinct from the current lowercase routes.
+    // NOTE: the old capitalized "Printer" slugs (e.g. /Printer-rental-dubai,
+    // /canon-Printer-dubai, several /blogs/...-Printer-... slugs) are NOT
+    // handled here. Next.js's redirects() source matching is case-INSENSITIVE
+    // by default (config.experimental.caseSensitiveRoutes, off project-wide),
+    // so a rule like { source: '/Printer-rental-dubai', destination:
+    // '/printer-rental-dubai/' } also matches the real lowercase URL and
+    // redirects it to itself — an infinite 308 loop. Those 11 slugs are
+    // handled with an exact case-sensitive string match in middleware.ts
+    // instead (see LEGACY_CASE_REDIRECTS there). next.config.js redirects()
+    // run before Middleware in Next's routing order, but since no rule here
+    // matches those paths, Middleware is the first (and only) layer to act
+    // on them, comparing the raw, un-case-folded pathname.
+    const LEGACY_REDIRECTS = {
+      // Old "leasing" location URLs -> current location pages (no Ajman page exists)
+      '/printer-photocopier-rental-leasing-sharjah': '/printer-rental-sharjah/',
+      '/printer-photocopier-rental-leasing-rak': '/printer-rental-rak/',
+      '/printer-photocopier-rental-leasing-abu-dhabi': '/printer-rental-abu-dhabi/',
+      '/printer-photocopier-rental-leasing-ajman': '/printer-rental-sharjah/',
+      // Old /locations hub and sub-paths
+      '/locations': '/contact/',
+      '/locations/rak': '/printer-rental-rak/',
+      '/locations/ajman': '/printer-rental-sharjah/',
+      // Old long-tail and contact variants
+      '/printer-rental-in-dubai-with-free-machines-toners-services-sameday-support': '/printer-rental-dubai/',
+      '/contact-printer-rental-dubai': '/printer-rental-dubai/',
+      '/printer-rental-services-uae': '/services/printer-rental/',
+      // Old photocopier catalog paths
+      '/office-photocopiers': '/photocopier-rental-dubai/',
+      '/copier-rental-catalog': '/photocopier-rental-dubai/',
+      '/copier-rental-catalog/:id': '/photocopier-rental-dubai/',
+      // Misc old nav / page slugs
+      '/toners-cartridges': '/services/printer-spare-parts/',
+      '/repair-amc': '/services/amc/',
+      '/servicemaintance': '/services/amc/',
+      '/aboutus': '/about/',
+      '/green-initiatives': '/about/',
+      '/Sustainability': '/about/',
+      '/UAE': '/',
+      '/privacy': '/privacy-policy/',
+      '/contact-us': '/contact/',
+      '/client': '/our-clients/',
+      '/service': '/services/',
+      '/requestquote': '/request-quote/',
+      '/ProductEnquiry': '/request-quote/',
+    };
+
+    const legacyRedirects = Object.entries(LEGACY_REDIRECTS).flatMap(
+      ([source, destination]) => [
+        { source, destination, permanent: true },
+        { source: `${source}/`, destination, permanent: true },
+      ]
+    );
+
     return [
+      ...legacyRedirects,
       // Destinations always carry the trailing slash, on BOTH the slash and
       // no-slash source variants below. With trailingSlash: true, whichever
       // rule matches first (Next.js redirects() ignores which source has the

@@ -89,7 +89,7 @@ export default function BlogsClient({ initialPosts }: { initialPosts?: BlogPost[
     } else {
       params.delete(key);
     }
-    router.push(`/blogs?${params.toString()}`);
+    router.push(`/blogs/?${params.toString()}`);
   };
 
   const categories = Array.from(new Set(posts.map((p) => p.category)));
