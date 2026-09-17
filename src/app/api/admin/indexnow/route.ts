@@ -140,7 +140,13 @@ export async function POST(request: NextRequest) {
       status: null,
       message,
     });
-    return NextResponse.json({ error: message }, { status: 502, headers: CACHE_CONTROL });
+    // Always 200 here — Cloudflare's edge intercepts 502/504/etc. from
+    // Workers/Pages Functions and replaces the body with its own HTML error
+    // interstitial, which broke res.json() on the client ("Unexpected token
+    // '<'") even though this route's own JSON body was correct. IndexNow
+    // being unreachable is an application-level failure, not an infra one,
+    // so it's encoded in the body instead of the status.
+    return NextResponse.json({ ok: false, error: message }, { status: 200, headers: CACHE_CONTROL });
   }
 
   const ok = indexNowStatus === 200 || indexNowStatus === 202;
@@ -154,8 +160,9 @@ export async function POST(request: NextRequest) {
   };
   await saveLastRun(db, entry);
 
+  // Always 200 — see the comment on the earlier catch block above.
   return NextResponse.json(
     { ok, status: indexNowStatus, count: urlList.length, source, body: ok ? undefined : indexNowBody },
-    { status: ok ? 200 : 502, headers: CACHE_CONTROL }
+    { status: 200, headers: CACHE_CONTROL }
   );
 }
