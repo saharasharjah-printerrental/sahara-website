@@ -15,7 +15,6 @@
     "test:screenshots": "bash tests/scripts/run-screenshot-tests.sh",
     "browser:install": "node node_modules/agent-browser/bin/agent-browser.js install --with-deps",
     "browser:doctor": "node node_modules/agent-browser/bin/agent-browser.js doctor",
-    "browser:debug": "bash scripts/launch-chrome-debug.sh",
     "indexnow": "node --env-file=.env scripts/seo/indexnow.mjs"
   },
   "dependencies": {
@@ -42,10 +41,8 @@
   ],
   "devDependencies": {
     "@agent-browser-io/browser": "^0.3.0",
-    "@browsermcp/mcp": "^0.1.3",
     "@cloudflare/next-on-pages": "^1",
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "@playwright/mcp": "^0.0.80",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -57,7 +54,6 @@
     "tsx": "^4.21.0",
     "typescript": "^5",
     "wrangler": "^4.85.0",
-    "ws": "^8.21.3",
     "zod": "^4.4.3"
   }
 }
