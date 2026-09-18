@@ -1,5 +1,15 @@
 # Sahara Backlink Acquisition Tracker - 30+ Quality Targets
 
+## 2026-09-18 (later) — new submissions this session
+
+| Target | Result |
+|---|---|
+| yellowpages-uae.com — "List Your Business" (`/pages/list-your-business`) | **Submitted, confirmed.** Clean no-login form. Company "Sahara Office Equipments", Business Activity "Printer & Photocopier Rental, Sales, AMC, Repair, Toner & Spare Parts Supply", Brands "Canon, HP, Kyocera, Ricoh, Xerox, Brother", full NAP, email `info@saharaedoc.com`. Page returned "Thank you for your interest in listing your business with Yellow Pages." after submit — this is the site's real free-listing form (distinct from `yp.ae`, which is a different, unreachable domain — see below). Check back in 1-2 weeks for the live listing URL. |
+| tradersfind.com | **Unreachable** — `ERR_CONNECTION_TIMED_OUT` on the homepage itself. Not a login/form issue, the domain doesn't resolve/respond right now. Retry another day before giving up on it. |
+| yp.ae/add-business | **Unreachable** — `ERR_SSL_UNRECOGNIZED_NAME_ALERT`. This is a different domain from `yellowpages-uae.com` (which works fine) — don't confuse the two in future sessions. |
+| connect.ae/en/add-business | **Unreachable** — `DNS_PROBE_FINISHED_NXDOMAIN`, domain doesn't resolve at all. Remove from the active target list unless a new URL is found. |
+| atninfo.com/free-listing | **Inconclusive — do not re-attempt with JS tricks.** Free listing form (`Company Name, Telephone, Fax, Area & Location, Email, Website, Year of Establishment, Business Type, Contact Name 1, Designation 1, Email 1, Business Activity, Submitter Name/Telephone/Email`) filled with real NAP (user supplied Email 1 `saharasharjah@gmail.com` and confirmed Contact Name/Designation as "Sahara Office Equipments" / "Sales Team"). `Business Type` (`#biz_type`) is a hidden **multi-select** (`<select multiple>` styled to look like a single dropdown) — setting `.value` via JS does nothing, needs `option.selected = true` on the specific `<option>`. After finally getting that right and clicking Submit, the tab hard-hung (`CDP command timed out`, `Cannot attach debugger... another debugger session already attached`) and never recovered — closed the tab without confirming success or failure. **Not verified live either way.** If revisited, do it via a real user click through the visible UI, not scripted `.click()` calls on the multi-select or submit button — this site's JS may not tolerate synthetic events well. |
+
 ## 2026-09-09 update — reclaim lane (do this before any new submission)
 
 Three listings you supplied are already live and already crawled — fixing them is
