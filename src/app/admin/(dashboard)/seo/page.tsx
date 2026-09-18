@@ -6,12 +6,12 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/components/admin/Toast";
 
 interface IndexNowRun {
-  timestamp: string;
-  source: "sitemap" | "manual";
-  count: number;
-  ok: boolean;
-  status: number | null;
-  message?: string;
+  id: number;
+  status: string;
+  conclusion: string | null;
+  event: string;
+  createdAt: string;
+  htmlUrl: string;
 }
 
 interface SEOConfig {
@@ -67,16 +67,18 @@ export default function AdminSEO() {
   const [schemaFetchError, setSchemaFetchError] = useState("");
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
 
-  // IndexNow state
+  // IndexNow state — submissions run via the "IndexNow submission" GitHub
+  // Actions workflow (dispatched by /api/admin/indexnow), not called
+  // directly from this page. See that route's file header for why.
   const [indexNowUrl, setIndexNowUrl] = useState("");
   const [indexNowSubmitting, setIndexNowSubmitting] = useState(false);
-  const [indexNowLastRun, setIndexNowLastRun] = useState<IndexNowRun | null>(null);
+  const [indexNowRuns, setIndexNowRuns] = useState<IndexNowRun[]>([]);
 
   const loadIndexNowStatus = async () => {
     try {
       const res = await fetch("/api/admin/indexnow/");
-      const data = await res.json() as { lastRun?: IndexNowRun | null };
-      setIndexNowLastRun(data.lastRun ?? null);
+      const data = await res.json() as { runs?: IndexNowRun[] };
+      setIndexNowRuns(data.runs ?? []);
     } catch {
       // ignore — status is informational only
     }
@@ -90,18 +92,20 @@ export default function AdminSEO() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(urls ? { urls } : {}),
       });
-      const data = await res.json() as { ok?: boolean; count?: number; error?: string; body?: string };
+      const data = await res.json() as { ok?: boolean; dispatched?: boolean; error?: string };
       if (res.ok && data.ok) {
-        showToast("success", `Submitted ${data.count} URL${data.count === 1 ? "" : "s"} to IndexNow`);
+        showToast("success", "Dispatched to GitHub Actions — check status below in a few seconds");
         if (urls) setIndexNowUrl("");
       } else {
-        showToast("error", data.error || data.body || "IndexNow submission failed");
+        showToast("error", data.error || "IndexNow dispatch failed");
       }
     } catch (e) {
-      showToast("error", e instanceof Error ? e.message : "IndexNow submission failed");
+      showToast("error", e instanceof Error ? e.message : "IndexNow dispatch failed");
     } finally {
       setIndexNowSubmitting(false);
-      loadIndexNowStatus();
+      // The dispatched run takes a moment to appear in GitHub's list — a
+      // single immediate refresh would usually show the old run still.
+      setTimeout(loadIndexNowStatus, 5000);
     }
   };
 
@@ -520,7 +524,7 @@ export default function AdminSEO() {
                   disabled={indexNowSubmitting || !indexNowUrl.trim()}
                   className="px-4 py-2 bg-[#f5be53] text-[#412d00] font-bold rounded-xl hover:bg-[#c8962e] transition-colors disabled:opacity-50 whitespace-nowrap"
                 >
-                  {indexNowSubmitting ? "Submitting..." : "Submit URL"}
+                  {indexNowSubmitting ? "Dispatching..." : "Submit URL"}
                 </button>
               </div>
 
@@ -530,17 +534,41 @@ export default function AdminSEO() {
                 disabled={indexNowSubmitting}
                 className="w-full px-4 py-2 bg-white/10 text-white font-medium rounded-xl hover:bg-white/20 transition-colors disabled:opacity-50"
               >
-                {indexNowSubmitting ? "Submitting..." : "Submit All Sitemap URLs"}
+                {indexNowSubmitting ? "Dispatching..." : "Submit All Sitemap URLs"}
               </button>
 
-              {indexNowLastRun && (
-                <div className="text-xs text-slate-500 border-t border-white/10 pt-3">
-                  Last run: {new Date(indexNowLastRun.timestamp).toLocaleString()} —{" "}
-                  <span className={indexNowLastRun.ok ? "text-green-400" : "text-red-400"}>
-                    {indexNowLastRun.ok ? "success" : "failed"}
-                  </span>{" "}
-                  ({indexNowLastRun.count} URL{indexNowLastRun.count === 1 ? "" : "s"}, {indexNowLastRun.source === "sitemap" ? "full sitemap" : "manual"})
-                  {!indexNowLastRun.ok && indexNowLastRun.message ? ` — ${indexNowLastRun.message}` : ""}
+              {indexNowRuns.length > 0 && (
+                <div className="text-xs text-slate-500 border-t border-white/10 pt-3 space-y-1.5">
+                  <p className="text-slate-400 font-medium">Recent IndexNow workflow runs:</p>
+                  {indexNowRuns.map((run) => {
+                    const label =
+                      run.status !== "completed"
+                        ? run.status
+                        : run.conclusion === "success"
+                        ? "success"
+                        : run.conclusion || "unknown";
+                    const color =
+                      run.status !== "completed"
+                        ? "text-[#f5be53]"
+                        : run.conclusion === "success"
+                        ? "text-green-400"
+                        : "text-red-400";
+                    return (
+                      <div key={run.id}>
+                        {new Date(run.createdAt).toLocaleString()} —{" "}
+                        <span className={color}>{label}</span>{" "}
+                        ({run.event === "workflow_dispatch" ? "manual dispatch" : run.event}){" "}
+                        <a
+                          href={run.htmlUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#f5be53] hover:underline"
+                        >
+                          view
+                        </a>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </section>

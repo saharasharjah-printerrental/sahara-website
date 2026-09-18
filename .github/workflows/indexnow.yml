@@ -12,7 +12,24 @@ name: IndexNow submission
 on:
   push:
     branches: [main]
+  # Also dispatched by src/app/api/admin/indexnow/route.ts (the admin SEO
+  # page's IndexNow section) instead of calling api.indexnow.org directly —
+  # Cloudflare Pages Functions share outbound IPs across every Cloudflare
+  # tenant, and IndexNow rate-limits by source IP, so calls made straight
+  # from the edge kept failing with "TooManyRequests" caused by *other*
+  # customers' traffic, not ours. Runs dispatched here go out from GitHub's
+  # own runner IPs instead, which don't have that problem.
   workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Specific URL(s) to submit, comma-separated. Leave empty to submit the sitemap.'
+        required: false
+        type: string
+      force:
+        description: 'Resubmit every sitemap URL, ignoring the dedupe state (used by the "Submit All Sitemap URLs" admin button)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   submit:
@@ -45,4 +62,19 @@ jobs:
           restore-keys: indexnow-state-
 
       - name: Submit to IndexNow
-        run: node scripts/seo/indexnow.mjs --site https://www.saharaprinter.com
+        env:
+          URLS_INPUT: ${{ github.event.inputs.urls }}
+          FORCE_INPUT: ${{ github.event.inputs.force }}
+        run: |
+          ARGS="--site https://www.saharaprinter.com"
+          if [ "$FORCE_INPUT" = "true" ]; then
+            ARGS="$ARGS --force"
+          fi
+          if [ -n "$URLS_INPUT" ]; then
+            IFS=',' read -ra URL_ARR <<< "$URLS_INPUT"
+            for u in "${URL_ARR[@]}"; do
+              trimmed="$(echo "$u" | xargs)"
+              if [ -n "$trimmed" ]; then ARGS="$ARGS $trimmed"; fi
+            done
+          fi
+          node scripts/seo/indexnow.mjs $ARGS

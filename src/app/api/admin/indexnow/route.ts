@@ -5,15 +5,18 @@ import { isAdminRequest } from '@/lib/adminAuth';
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
-// Must match the filename of the key file published at public/<key>.txt
-// (see scripts/seo/indexnow.mjs and public/_headers). IndexNow keys aren't
-// secrets — the whole protocol depends on the key being readable at the
-// site root — so hardcoding it here (edge runtime has no filesystem to read
-// public/ from at request time) carries no security cost.
-const INDEXNOW_KEY = '886e0bddd875df4696e26c07fbd50a98';
-const SITE = 'https://www.saharaprinter.com';
-const API_URL = 'https://api.indexnow.org/indexnow';
-const LAST_RUN_KEY = 'indexnow_last_run';
+// Submissions are dispatched through the "IndexNow submission" GitHub
+// Actions workflow (.github/workflows/indexnow.yml) instead of calling
+// api.indexnow.org directly from this route. Cloudflare Pages Functions
+// share outbound IPs across every Cloudflare tenant, and IndexNow
+// rate-limits by source IP — calls made straight from the edge were
+// failing with "TooManyRequests" caused by *other* customers' Cloudflare
+// traffic, confirmed by the exact same submission succeeding immediately
+// when run from a non-Cloudflare IP (a local machine and a GitHub Actions
+// runner both got HTTP 200 within the same minute this was failing here).
+const GITHUB_REPO = 'saharasharjah-printerrental/sahara-website';
+const WORKFLOW_FILE = 'indexnow.yml';
+const GITHUB_API = 'https://api.github.com';
 
 const CACHE_CONTROL = {
   'Cache-Control': 'private, no-store',
@@ -21,148 +24,136 @@ const CACHE_CONTROL = {
   'X-Robots-Tag': 'noindex, nofollow',
 };
 
-function getDB() {
+function getGithubToken(): string {
   try {
-    return getRequestContext().env.DB as any;
+    return ((getRequestContext().env as any).GITHUB_DISPATCH_TOKEN || '') as string;
   } catch {
-    return null;
+    return '';
   }
 }
 
-async function fetchSitemapUrls(): Promise<string[]> {
-  const res = await fetch(`${SITE}/sitemap.xml`, { signal: AbortSignal.timeout(15000) });
-  if (!res.ok) throw new Error(`Failed to fetch sitemap.xml — HTTP ${res.status}`);
-  const xml = await res.text();
-  const urls: string[] = [];
-  for (const block of xml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
-    const loc = block[1].match(/<loc>([^<]+)<\/loc>/)?.[1];
-    if (loc) urls.push(loc);
-  }
-  return urls;
+function githubHeaders(token: string) {
+  return {
+    Accept: 'application/vnd.github+json',
+    Authorization: `Bearer ${token}`,
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
 }
 
-async function saveLastRun(db: any, entry: Record<string, unknown>) {
-  if (!db) return;
-  try {
-    await db
-      .prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)')
-      .bind(LAST_RUN_KEY, JSON.stringify(entry))
-      .run();
-  } catch {
-    // Non-fatal — the submission itself already happened.
-  }
-}
-
+// GitHub's own runs list — public for a public repo, no token needed.
+// Gives real submission status/history instead of a D1-stored guess, since
+// this route only ever dispatches the workflow and never sees its outcome.
 export async function GET(request: NextRequest) {
-  const db = getDB();
   if (!(await isAdminRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: CACHE_CONTROL });
   }
-  if (!db) {
-    return NextResponse.json({ lastRun: null }, { status: 200, headers: CACHE_CONTROL });
-  }
+
   try {
-    const row = await db.prepare('SELECT value FROM settings WHERE key = ?').bind(LAST_RUN_KEY).first();
-    const lastRun = row?.value ? JSON.parse(row.value) : null;
-    return NextResponse.json({ lastRun }, { status: 200, headers: CACHE_CONTROL });
-  } catch {
-    return NextResponse.json({ lastRun: null }, { status: 200, headers: CACHE_CONTROL });
+    const res = await fetch(
+      `${GITHUB_API}/repos/${GITHUB_REPO}/actions/workflows/${WORKFLOW_FILE}/runs?per_page=5`,
+      {
+        headers: { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' },
+        signal: AbortSignal.timeout(10000),
+      }
+    );
+    if (!res.ok) {
+      return NextResponse.json({ runs: [], error: `GitHub API HTTP ${res.status}` }, { status: 200, headers: CACHE_CONTROL });
+    }
+    const data = await res.json() as { workflow_runs?: any[] };
+    const runs = (data.workflow_runs ?? []).map((r) => ({
+      id: r.id,
+      status: r.status,
+      conclusion: r.conclusion,
+      event: r.event,
+      createdAt: r.created_at,
+      htmlUrl: r.html_url,
+    }));
+    return NextResponse.json({ runs }, { status: 200, headers: CACHE_CONTROL });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Failed to fetch run status';
+    return NextResponse.json({ runs: [], error: message }, { status: 200, headers: CACHE_CONTROL });
   }
 }
 
 export async function POST(request: NextRequest) {
-  const db = getDB();
   if (!(await isAdminRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: CACHE_CONTROL });
+  }
+
+  const token = getGithubToken();
+  if (!token) {
+    return NextResponse.json(
+      { ok: false, error: 'GITHUB_DISPATCH_TOKEN is not configured in Cloudflare Pages environment variables.' },
+      { status: 200, headers: CACHE_CONTROL }
+    );
   }
 
   let body: { urls?: string[] } = {};
   try {
     body = await request.json();
   } catch {
-    // empty body is fine — means "submit the whole sitemap"
+    // empty body means "submit the whole sitemap"
   }
 
-  let urlList: string[];
-  let source: 'sitemap' | 'manual';
-  try {
-    if (Array.isArray(body.urls) && body.urls.length > 0) {
-      urlList = body.urls
-        .filter((u): u is string => typeof u === 'string' && u.trim().length > 0)
-        .map((u) => u.trim());
-      source = 'manual';
-      for (const u of urlList) {
-        const parsed = new URL(u);
-        if (!parsed.hostname.endsWith('saharaprinter.com')) {
-          return NextResponse.json(
-            { error: `Only saharaprinter.com URLs allowed — got "${u}"` },
-            { status: 400, headers: CACHE_CONTROL }
-          );
+  const inputs: Record<string, string> = {};
+  let hasInvalidUrl = false;
+  let invalidUrl = '';
+
+  if (Array.isArray(body.urls) && body.urls.length > 0) {
+    const urls = body.urls
+      .filter((u): u is string => typeof u === 'string' && u.trim().length > 0)
+      .map((u) => u.trim());
+    for (const u of urls) {
+      try {
+        if (!new URL(u).hostname.endsWith('saharaprinter.com')) {
+          hasInvalidUrl = true;
+          invalidUrl = u;
+          break;
         }
+      } catch {
+        hasInvalidUrl = true;
+        invalidUrl = u;
+        break;
       }
-    } else {
-      urlList = await fetchSitemapUrls();
-      source = 'sitemap';
     }
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Failed to resolve URL list';
-    return NextResponse.json({ error: message }, { status: 400, headers: CACHE_CONTROL });
+    if (hasInvalidUrl) {
+      return NextResponse.json(
+        { ok: false, error: `Only saharaprinter.com URLs allowed — got "${invalidUrl}"` },
+        { status: 200, headers: CACHE_CONTROL }
+      );
+    }
+    inputs.urls = urls.join(',');
+  } else {
+    // "Submit All Sitemap URLs" — force a full resubmission, ignoring the
+    // dedupe state, since the admin clicking this expects every URL sent.
+    inputs.force = 'true';
   }
 
-  if (urlList.length === 0) {
-    return NextResponse.json({ error: 'No URLs to submit' }, { status: 400, headers: CACHE_CONTROL });
-  }
-
-  const host = new URL(SITE).host;
-  let indexNowStatus: number;
-  let indexNowBody: string;
   try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        host,
-        key: INDEXNOW_KEY,
-        keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`,
-        urlList,
-      }),
-      signal: AbortSignal.timeout(15000),
-    });
-    indexNowStatus = res.status;
-    indexNowBody = await res.text();
+    const res = await fetch(
+      `${GITHUB_API}/repos/${GITHUB_REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
+      {
+        method: 'POST',
+        headers: { ...githubHeaders(token), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: 'main', inputs }),
+        signal: AbortSignal.timeout(10000),
+      }
+    );
+
+    if (res.status === 204) {
+      return NextResponse.json(
+        { ok: true, dispatched: true, mode: inputs.urls ? 'manual' : 'sitemap' },
+        { status: 200, headers: CACHE_CONTROL }
+      );
+    }
+
+    const text = await res.text();
+    return NextResponse.json(
+      { ok: false, error: `GitHub dispatch failed — HTTP ${res.status}: ${text.slice(0, 300)}` },
+      { status: 200, headers: CACHE_CONTROL }
+    );
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'IndexNow request failed';
-    await saveLastRun(db, {
-      timestamp: new Date().toISOString(),
-      source,
-      count: urlList.length,
-      ok: false,
-      status: null,
-      message,
-    });
-    // Always 200 here — Cloudflare's edge intercepts 502/504/etc. from
-    // Workers/Pages Functions and replaces the body with its own HTML error
-    // interstitial, which broke res.json() on the client ("Unexpected token
-    // '<'") even though this route's own JSON body was correct. IndexNow
-    // being unreachable is an application-level failure, not an infra one,
-    // so it's encoded in the body instead of the status.
+    const message = err instanceof Error ? err.message : 'GitHub dispatch request failed';
     return NextResponse.json({ ok: false, error: message }, { status: 200, headers: CACHE_CONTROL });
   }
-
-  const ok = indexNowStatus === 200 || indexNowStatus === 202;
-  const entry = {
-    timestamp: new Date().toISOString(),
-    source,
-    count: urlList.length,
-    ok,
-    status: indexNowStatus,
-    message: ok ? undefined : indexNowBody.slice(0, 500),
-  };
-  await saveLastRun(db, entry);
-
-  // Always 200 — see the comment on the earlier catch block above.
-  return NextResponse.json(
-    { ok, status: indexNowStatus, count: urlList.length, source, body: ok ? undefined : indexNowBody },
-    { status: 200, headers: CACHE_CONTROL }
-  );
 }
