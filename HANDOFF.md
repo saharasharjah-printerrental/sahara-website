@@ -1,5 +1,54 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## SESSION NOTE — 2026-09-18 (later), shredder click-loss root cause fixed + 10 blog drafts + image pack (local, not yet committed)
+
+User asked why `/services/paper-shredder-rental/` drove clicks at launch (Jul 10) and then lost them
+despite rankings improving. Traced it via GSC + git history — full writeup with the query-level
+evidence and commit trail: `docs/seo/shredder-click-loss-rca-2026-09.md`. Short version: commit
+`5381646` (Aug 7) rewrote the title from `"...AED 150/mo | Sahara"` to `"...Fellowes Shredders |
+Sahara"` — dropped the price, added a brand name, merged rent+buy intent into one title. Clicks went
+to ~0 for 3 weeks (30 clicks Jul10–Aug15 → 1 click Aug16–Sep2) while impressions and rankings both
+*improved* — a pure snippet/CTR failure, not a ranking loss. `paper shredder rental` and `paper
+shredder price in uae` are still sitting at position ~6 with **zero** clicks as of this session.
+
+**Fixed in `src/app/services/paper-shredder-rental/page.tsx`:** title/description/OG/Twitter restored
+to price-led, brand-out (`"...From AED 150/mo | Sahara"`); keywords list dropped
+buy/machine-dubai/fellowes terms, restored the rent/hire long-tail that was ranking 1–4 pre-Aug-7;
+Service schema `priceSpecification.unitCode` fixed from `WEE` to `MON`. Also reverted a **separate**
+Sep 9 regression (`b3bec5e`) that changed the advertised rate from AED 150/**month** to AED
+150/**week** across the whole page (FAQs, model cards, comparison table, AEO block, hero badges) —
+confirmed with the user that monthly is correct. Fixed two dead internal links in `relatedServices`
+that pointed at blog slugs with no matching file in `content/blogs/`.
+
+**10 new blog drafts** in `docs/seo/blog-drafts/` mapped to the highest-value zero-click queries
+(cost guide, service-vs-shredder, mobile/on-site shredding, document checklist, retention periods,
+heavy-duty/bulk rental, one-time/same-day rental, jam prevention — best click-recovery odds, pos 3.7
+on "shredder machine repair near me" — recycling, and passport/ID/hard-drive destruction), sourced
+from `C:\Users\SAHARA\Documents\blog-topics-paper-shredder-rental-dubai.pdf` (HeyTony, 40 topics).
+Remaining 30 PDF topics + 10 bonus ideas tabled in
+`docs/seo/blog-drafts/shredder-topic-backlog-2026-09.md` for a future pass. **Not published** —
+staged as markdown + a ready-to-paste frontmatter block per file for manual entry via the admin
+editor.
+
+**10 images** in `docs/seo/blog-images/shredder-2026-09/` (gitignored — build artefacts, not source),
+1200×630 WebP, one per draft, sourced from Openverse/Wikimedia Commons under commercial-use licences.
+First automated pass picked several bad matches (a Budweiser truck, a competitor "Shred-it"-branded
+truck, off-topic stock photos) — manually reviewed and replaced all of them. Two slots (06, 07) reuse
+a sibling image rather than a fully distinct one after several search passes found nothing suitable —
+flagged in `ATTRIBUTION.md`, which also lists the exact credit line needed per image (most are
+CC BY/BY-SA and need visible attribution on publish) and which creator fields still need manual
+verification from the source page before going live.
+
+Deliberately **not** built this session, flagged instead: a `/brands/fellowes` page (75
+impressions/month at pos 18–32, 0 clicks — the Aug 7 regression tried to capture this by polluting the
+rental page's title, which is what broke it) and a dedicated page for the shredder head terms
+(`paper shredder machine dubai` etc., 400+ impressions at pos 16–24) — `/services/paper-shredder-sales/`
+may already be the right home, worth a follow-up audit once it has more indexing history.
+
+Verified with `npx tsc --noEmit` on the touched page (clean). **Not yet committed** — sitting on top
+of the uncommitted P2/P3.2 work from the earlier session note below, which was left alone per that
+note's own record (local commit `65a9085`, not pushed).
+
 ## SESSION NOTE — 2026-09-18, P2 cannibalization + P3.2 title-length fix shipped (local, not yet pushed)
 
 Picked up "P1–P3 and P5–P7 still not implemented" from the plan below. Checked P1 first: GSC

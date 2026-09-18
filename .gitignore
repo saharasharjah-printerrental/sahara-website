@@ -90,3 +90,6 @@ docs/seo/BACKLINKS-AUTO.md
 # IndexNow submission state (runtime dedupe cache, not source — restored via
 # actions/cache in CI, see .github/workflows/indexnow.yml)
 scripts/seo/indexnow-state.json
+
+# Downloaded stock images staged for manual blog upload via admin — not site assets
+docs/seo/blog-images/
