@@ -9,6 +9,23 @@
 | yp.ae/add-business | **Unreachable** — `ERR_SSL_UNRECOGNIZED_NAME_ALERT`. This is a different domain from `yellowpages-uae.com` (which works fine) — don't confuse the two in future sessions. |
 | connect.ae/en/add-business | **Unreachable** — `DNS_PROBE_FINISHED_NXDOMAIN`, domain doesn't resolve at all. Remove from the active target list unless a new URL is found. |
 | atninfo.com/free-listing | **Inconclusive — do not re-attempt with JS tricks.** Free listing form (`Company Name, Telephone, Fax, Area & Location, Email, Website, Year of Establishment, Business Type, Contact Name 1, Designation 1, Email 1, Business Activity, Submitter Name/Telephone/Email`) filled with real NAP (user supplied Email 1 `saharasharjah@gmail.com` and confirmed Contact Name/Designation as "Sahara Office Equipments" / "Sales Team"). `Business Type` (`#biz_type`) is a hidden **multi-select** (`<select multiple>` styled to look like a single dropdown) — setting `.value` via JS does nothing, needs `option.selected = true` on the specific `<option>`. After finally getting that right and clicking Submit, the tab hard-hung (`CDP command timed out`, `Cannot attach debugger... another debugger session already attached`) and never recovered — closed the tab without confirming success or failure. **Not verified live either way.** If revisited, do it via a real user click through the visible UI, not scripted `.click()` calls on the multi-select or submit button — this site's JS may not tolerate synthetic events well. |
+| business.justdial.com | **Not viable.** This is Justdial's India marketplace seller onboarding — requires Indian GST/PAN registration. Does not apply to a UAE-only company; remove from the target list entirely (was likely miscategorized as a UAE directory originally). |
+| sme.ae/en/business-directory | **Gone — rebranded.** Redirects to `dubaifoundershq.com`, now a Dubai government startup-support portal (licensing, funding, incubators) for Emirati founders, not a general business-citation directory. No listing feature exists anymore. Remove from the target list. |
+
+### Competitor referring-domain sweep (per Bing "Backlinks To Any Site" comparison, `sc-domain:saharaprinter.com` vs sosauh.com/officeequipments.ae)
+
+Checked the specific domains that link to sosauh.com/officeequipments.ae and don't link to us, to see if any are realistic free citations. **All required either an account signup (which Claude cannot do — hard rule) or were off-topic/off-relevance:**
+
+| Referring domain | Backlinks to | Verdict |
+|---|---|---|
+| buildeey.com | sosauh.com | Construction/building-trades directory (landscaping, scaffolding, IT maintenance) — no printer/office-equipment category, weak topical fit even though it's UAE-relevant. Requires account (`/company-register`). |
+| ipauae.com | officeequipments.ae | Redirects to `ipaconnect.org` — a paid entrepreneur networking association ("Join IPA"), not a citation directory. |
+| dreambig.ae | officeequipments.ae | Unreachable — `ERR_SSL_VERSION_OR_CIPHER_MISMATCH`. |
+| golive.ae | officeequipments.ae | UAE classifieds/marketplace (cars, property, services) — posting an ad requires free account registration first. Low citation value even if we could (classified ad, not a business profile). |
+| malayalibusiness.com | officeequipments.ae | Genuine free directory ("List Your Business Free", no credit card) for the UAE Malayali community — good fit for NAP citation, but "List Your Business" and "Login" both route through `/auth` (account creation required). **Best candidate for the user to sign up and list personally** — hand this one to the user directly rather than re-attempting. |
+| reddit-directory.com, advancedseodirectory.com, unitymix.com, neocities.org, x315.cn | sosauh.com / officeequipments.ae | Not investigated further — these read as generic reciprocal-link/SEO directories rather than real UAE business citations (the kind of link competitor gap that isn't worth copying). Skip. |
+
+**Net finding:** the account-creation wall is the actual bottleneck across almost every remaining free-tier UAE directory, not a lack of targets. The highest-value next step is the user personally creating accounts on `malayalibusiness.com` and any Tier-1 items still `Pending` below (Google Business Profile, Bing Places, Apple Business Connect, Foursquare, LinkedIn, Crunchbase) — Claude can prepare the exact paste-ready listing text (see `BACKLINK-SUBMISSION-PACK.md`) for each once the user has an account open.
 
 ## 2026-09-09 update — reclaim lane (do this before any new submission)
 
