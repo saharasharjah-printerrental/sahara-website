@@ -62,7 +62,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!supply) return { title: "Item Not Found | Sahara Office Equipments" };
 
   const resolved = resolveSupplyPrice(supply);
-  const title = `${supply.name} | ${supply.brand} ${supply.category} | Sahara Office Equipments`;
+  // Sep 2026: the old template (`${name} | ${brand} ${category} | Sahara Office
+  // Equipments`) ran up to 120 chars for long spare-part names, truncating mid-word
+  // in the SERP. Cap the name itself and shorten the suffix so the full title stays
+  // under ~65 chars.
+  const shortName = supply.name.length > 50 ? `${supply.name.slice(0, 47).trimEnd()}…` : supply.name;
+  const title = `${shortName} | ${supply.brand} ${supply.category} | Sahara`;
   const description = `Genuine ${supply.brand} ${supply.category.toLowerCase()} — ${supply.name}. Fits ${supply.compatibleModels}. ${resolved.payable ? resolved.display : "Contact for pricing"}. Same-day delivery across the UAE.`;
   const canonical = `${SITE_URL}/services/printer-spare-parts/${slug}/`;
   const image = normalizeR2Url(supply.image || "");

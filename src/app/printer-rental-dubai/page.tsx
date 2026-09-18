@@ -35,18 +35,27 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-  title: "Printer Rental Dubai | AED 250/mo | Zero Deposit | Sahara",
-  description: "Printer rental Dubai from AED 250/month. Zero deposit, free toner & maintenance, 4-hr response. Business Bay, JLT, DIFC, Marina, Deira & all areas.",
+  // Sep 2026: this page and /services/printer-rental/ were both exact-matching
+  // "printer rental dubai" (title, H1, and keywords) — the hub outranks this page
+  // on that term (pos 17.4 vs 59.7, GSC) so both were splitting authority and
+  // losing to each other. The hub now owns the generic head term; this page
+  // narrows to the district/same-day-delivery long tail that's actually unique to
+  // it (see seo:seo-cannibalization-detector run, HANDOFF.md P2).
+  title: "Printer Rental Business Bay, DIFC & JLT | Dubai | Sahara",
+  description: "Same-day printer rental delivery to Business Bay, DIFC, JLT, Marina & Deira, Dubai. Zero deposit, free toner & maintenance, 4-hr response.",
   // Sep 2026: dropped "photocopier rental dubai" and "copier lease dubai"
   // from keywords — those are /photocopier-rental-dubai/'s meta targets
   // (same surgery as 64a0b1e; /services/photocopier-rental/ and
   // /copier-lease-uae/ have since been 301'd into that page).
   // This page's own AED 500/1000 tiers in the OfferCatalog below describe
   // its real product lineup, not a competing keyword claim, so left as-is.
-  keywords: "printer rental dubai, printer rental business bay, printer rental DIFC, printer rental JLT, canon printer rental dubai, kyocera printer dubai, zero deposit printer rental dubai",
+  // Sep 2026 (later): dropped the bare "printer rental dubai" head term —
+  // /services/printer-rental/ owns it. Kept the brand + district compounds,
+  // which target genuinely local/long-tail intent this page actually wins on.
+  keywords: "printer rental business bay, printer rental DIFC, printer rental JLT, printer rental marina dubai, printer rental deira, canon printer rental dubai, kyocera printer dubai, zero deposit printer rental dubai",
   openGraph: {
-    title: "Printer Rental Dubai | Sahara Office Equipments",
-    description: "Canon & Kyocera printer rental in Dubai from AED 250/month. Zero deposit, free toner, 4-hour response. Serving Business Bay, JLT, DIFC, Marina, Deira and all Dubai districts.",
+    title: "Printer Rental Business Bay, DIFC & JLT, Dubai | Sahara",
+    description: "Canon & Kyocera printer rental with same-day delivery to Business Bay, DIFC, JLT, Marina and Deira. Zero deposit, free toner, 4-hour response.",
     images: [{ url: "https://www.saharaprinter.com/images/heroPrntr1.webp", width: 1200, height: 630, alt: "Printer Rental Dubai" }],
     url: "https://www.saharaprinter.com/printer-rental-dubai/",
     siteName: "Sahara Office Equipments",
@@ -252,9 +261,9 @@ export default async function PrinterRentalDubai() {
             <Reveal className="max-w-2xl">
               <p className="mb-4 text-caption font-semibold uppercase tracking-[0.18em] text-primary">Dubai · Zero Deposit · Same-Day Delivery</p>
               <h1 className="font-sora text-display-xl font-extrabold text-white">
-                {"Printer Rental "}
+                {"Printer Rental in "}
                 <br />
-                <span className="text-primary">Dubai</span>
+                <span className="text-primary">Business Bay, DIFC & JLT</span>
               </h1>
               <div className="mt-6">
                 <AnswerBlock
