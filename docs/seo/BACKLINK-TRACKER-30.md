@@ -68,6 +68,19 @@ session. Revisit as a fresh submission candidate later if desired — the form f
 Company Name, Contact Person, Mobile, Category, Brand Name/Description (optional, "Add new
 Brand"), Telephone, Email, Website.
 
+**2026-09-18 — submitted.** Company Name/Contact Person "Sahara Office Equipments", Mobile/
+Telephone `+971503823969`, Category "Printers" (the `categories_id` select is a broken
+select2 widget — clicking it never opened the dropdown; had to set the underlying `<select>`
+value via JS and fire `change` manually), Brand "Canon", Description covering rental/AMC/
+repair/toner, Email `info@saharaedoc.com` (correct — see the correction note above),
+Website `https://www.saharaprinter.com`. Page has an invisible reCAPTCHA v2 (not an
+interactive challenge) — it passed silently on submit. After clicking SUBMIT the page did a
+full reload back to the same URL with every field blank (classic POST→redirect→GET success
+pattern) and no error text — but I could not find an explicit "success" confirmation string
+in the reloaded page, so this is **probably live, not confirmed**. Check
+`reachuae.com/dubai-business-directory` or search "Sahara Office Equipments" on the site in
+1-2 weeks (moderation likely) and update this row.
+
 ## Campaign Rules
 
 - Use ethical manual submissions only: no PBNs, link farms, spam comments, or automated mass posting.

@@ -140,7 +140,7 @@ Kind regards,
 [Job Title]
 Sahara Office Equipments
 Al Arabi Building, Industrial Area 11, Sharjah, UAE
-+971 50 382 3969 · info@saharaprinter.com
++971 50 382 3969 · info@saharaedoc.com
 https://www.saharaprinter.com
 
 ---
