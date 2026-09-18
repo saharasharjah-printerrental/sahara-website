@@ -1,5 +1,84 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## SESSION NOTE — 2026-09-18, P2 cannibalization + P3.2 title-length fix shipped (local, not yet pushed)
+
+Picked up "P1–P3 and P5–P7 still not implemented" from the plan below. Checked P1 first: GSC
+`batch_url_inspection` shows `/services/paper-shredder-sales/` is still "URL is unknown to Google" —
+expected, the Request Indexing submission from the 09-17 session was <24h old, too early to call it
+stuck. Re-check next session (48h+ since submission).
+
+Since P1 is blocked on Google's crawl clock, did the code-only work instead:
+
+**P2 — fixed the `printer-rental-dubai` cannibalization.** Confirmed via `seo:seo-cannibalization-detector`
+(loaded as a skill, analyzed inline): the geo page's title, H1, and keywords array all exact-matched
+"printer rental dubai" while `/services/printer-rental/` already outranks it on that literal term
+(pos 17.4 vs 59.7 per GSC — the two pages were splitting authority against each other). Narrowed
+`/printer-rental-dubai/page.tsx` to the district/same-day-delivery long tail it actually wins on:
+title → "Printer Rental Business Bay, DIFC & JLT | Dubai | Sahara" (56 chars), description leads with
+delivery-by-district instead of the bare head term (138 chars), H1 → "Printer Rental in Business Bay,
+DIFC & JLT", keywords array drops the bare "printer rental dubai" entry, keeps district/brand
+compounds. Left breadcrumb label, alt text, and FAQ heading ("Printer Rental Dubai") alone — those are
+page-identity references, not the ranking-signal fields the plan flagged.
+Checked `/photocopier-rental-dubai/` too — no overlap; it targets "photocopier rental dubai" specifically
+and the old duplicate hub (`/services/photocopier-rental/`) was already 301'd away in the 09-09 session.
+
+**P3.2 — capped the printer-spare-parts title template.** `src/app/services/printer-spare-parts/[slug]/page.tsx`
+built titles as `${name} | ${brand} ${category} | Sahara Office Equipments`, up to 120 chars for long
+part names (e.g. "Long Life OPC Drum for Canon IR ADVANCE C5535 C5540 C5550 C5560"). Truncates `name`
+to 47 chars + ellipsis when over 50, and shortened the suffix to `| Sahara`. Did **not** add the
+`meta_title` D1 escape hatch the plan also suggested — the `supplies` table has no `meta_title` column
+(checked `database/schema.sql` + all migrations) and adding one means a migration plus admin UI work,
+which is a bigger, separate task than the length bug itself; flagging it here rather than doing it
+silently. Description length on this page was left alone — P3.2 only asked about titles, and none of the
+sampled descriptions exceed ~155 chars.
+
+Both changes verified with `npx tsc --noEmit` and a full `npm run build` (clean). Committed locally
+(`65a9085`) — **not pushed to `main` yet**. There is a large amount of unrelated uncommitted work
+already sitting in this repo (email-domain fix, CLAUDE.md rewrite, backlink docs, MCP config, new
+untracked tool-integration folders) that predates this session and was deliberately left alone.
+
+**Still open from the plan**: P3.1 (title/description rewrites on the impression-heavy pages listed
+below), P3.3 (thin `/rental-calculator/` and `/blogs/` pages), P5 (AEO/GEO: `speakable` selector bug,
+missing homepage AnswerBlock, FAQPage schema on blog posts, robots.txt bot allowlist, llms.txt drift),
+P6 (off-site: GSC removal request for the old photocopier URL, Cloudflare AI-Scraper bot check, GBP
+NAP verification), P7 (sosauh.com gap — mostly already attacked by P0.1/P1.3, brand-page expansion is
+the remaining piece). Resume with whichever of these next, or re-check P1 shredder indexing first if
+48h have passed.
+
+## SESSION NOTE — 2026-09-17 (later), resolved both "still open" items from the note below
+
+`claude-in-chrome` connected this session (after selecting the right browser via
+`switch_browser` — two Chrome instances are linked to this account now, worth naming them from
+inside Chrome next time a picker appears so this is a one-step choice).
+
+**Item 1 — Request Indexing for the shredder sales page: done.** GSC → URL Inspection →
+`https://www.saharaprinter.com/services/paper-shredder-sales/` → **Request Indexing** → confirmed
+"Indexing requested — URL was added to a priority crawl queue." Still shows "URL is unknown to
+Google" pending the crawl (expected immediately after submission — re-check in 24-48h). Note: GSC's
+own Discovery panel says "No referring sitemaps detected" even though the URL is live in
+`sitemap.xml` right now — that field lags the sitemap re-fetch, not a real problem.
+
+**Item 2 — identified the new "Server error (5xx)" issue the user saw:** GSC Page Indexing → 2
+affected URLs, `https://www.saharaprinter.com/products/` (last crawled by Google as 5xx on 9/15)
+and `https://www.saharaprinter.com/products/canon-imageclass-mf644cdw/` (last crawled as 5xx on
+9/11). Investigated both:
+- `/products/` — 5 consecutive live `curl`s all return 200; `batch_url_inspection` shows it was
+  successfully re-crawled and indexed on 9/16, the day after the failed crawl. Self-resolved.
+- `/products/canon-imageclass-mf644cdw/` — that SKU is no longer `is_active` in D1, so the route
+  now cleanly 308-redirects to `/products/`; GSC's stored inspection data is just stale from the
+  9/11 failed crawl and hasn't been refreshed since.
+- Checked `src/app/products/page.tsx:36-63` — the D1 query is already `try/catch`-wrapped and
+  returns `[]` on failure rather than throwing, so this isn't an uncaught application error; it
+  matches the "shared failure mode (D1 read timeout / Workers subrequest limit)" already flagged as
+  unsolved in the P0.1 section below. Both examples are transient blips that already cleared on
+  their own, not a live regression — clicked **Validate Fix** in GSC on the "Server error (5xx)"
+  report accordingly (started 9/17/26, takes days to complete).
+- No code change made — there's nothing to fix in the try/catch'd fetch path itself. If this
+  recurs with more than these 2 URLs or on other D1-backed routes, that's the signal to actually
+  chase the underlying Workers/D1 timeout rather than treat each instance as one-off.
+
+---
+
 ## START HERE — 2026-09-17, shredder sitemap fix is LIVE; two items still open
 
 **Shipped and confirmed live** (`b119676`, deployment `8586a236`, Status: Active):
