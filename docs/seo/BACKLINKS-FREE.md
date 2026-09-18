@@ -6,7 +6,7 @@
 > **Address:** Al Arabi Building, Industrial Area 11, Sharjah, UAE  
 > **Phone:** +971 50 382 3969  
 > **Website:** https://www.saharaprinter.com  
-> **Email:** info@saharaprinter.com  
+> **Email:** info@saharaedoc.com  <!-- confirmed correct by user 2026-09-18; do not "fix" to saharaprinter.com -->
 > **Categories to select:** Office Equipment, Printer Rental, Photocopier, Business Services, IT Equipment
 
 ---
@@ -48,7 +48,7 @@
 
 ### 6. hidubai.com
 - **DA:** 41 | **Link type:** Dofollow
-- **URL:** https://hidubai.com/businesses/add
+- **URL:** ~~https://hidubai.com/businesses/add~~ **404 as of 2026-09-09** — find the current submission path in-browser before attempting.
 - **Action:** Free listing. Category: "Office Supplies & Equipment". Add full description + services.
 - **Notes:** Google trusts hidubai.com citations for Dubai local rankings.
 
@@ -121,14 +121,24 @@
 
 ### 17. UAE Business Directory (uae-business.com)
 - **DA:** 35 | **Link type:** Dofollow
-- **URL:** https://uae-business.com/add-listing
+- **URL:** ~~https://uae-business.com/add-listing~~ **404 as of 2026-09-09** — find the current path before attempting.
 - **Action:** Free listing in "Office Equipment" category.
 
 ### 18. Kompass UAE
 - **DA:** 57 | **Link type:** Dofollow
-- **URL:** https://ae.kompass.com/registration/
+- **URL:** https://ae.kompass.com/registration/ — **dead, corrected to https://ae.kompass.com/register**
 - **Action:** Free company registration. Add description, turnover band, product categories.
 - **Notes:** Used heavily by B2B procurement teams. Strong Kompass DA.
+- **Blocked 2026-09-10:** `/registration/` 404s even past the device-verification interstitial
+  (confirmed in-browser, not just plain-fetch). The working `/register` form requires
+  selecting an **existing** company record from Kompass's own database (sourced from UAE
+  trade-license data) via an autocomplete search — there is no free-text "add a new
+  company" path. Searching "Sahara Office Equipment[s]" returns exactly one match,
+  *Sahara Office Equipment Trading Company LLC — Abu Dhabi, founded 2006* — user confirmed
+  this is a **different, unrelated company**, not Sahara Office Equipments (Sharjah). With
+  no matching record to claim, the only route to a listing is Kompass's paid sales/
+  EasyBusiness team via "Contact us" (a static label with no working action in-browser).
+  Not a free-listing target as documented. Not pursued further.
 
 ### 19. D&B Hoovers (Dun & Bradstreet)
 - **DA:** 86 | **Link type:** Nofollow
@@ -178,20 +188,21 @@
 
 ### 25. Aiwa.ae
 - **DA:** ~30 | **Link type:** Dofollow
-- **URL:** https://aiwa.ae/
+- **URL:** https://aiwa.ae/freelisting (multi-step wizard, not the homepage)
 - **Action:** Free listing with full NAP + category selection.
 - **Notes:** UAE-first "smart" directory; free tier includes profile link.
+- **Blocked 2026-09-10:** got through steps 1–2 (contact info, address, website, description) but step 2 requires uploading a **Company Logo image** and a **Trade License document** (with expiry date) — both mandatory, no way to skip. Needs the account owner to supply these files before this can be completed.
 
 ### 26. YallaPages (yallapages.ae)
 - **DA:** ~25 | **Link type:** Dofollow
-- **URL:** https://yallapages.ae/
-- **Action:** Free listing, instant approval.
+- **URL:** ~~https://yallapages.ae/~~ — **DO NOT VISIT. Confirmed 2026-09-10: the domain now redirects to `cfpdl.deliverpopfiletoday.monster`**, a "Please wait..." interstitial matching the classic malicious-redirect / scareware pattern (fake notification-permission prompts, drive-by downloads). The tab was closed immediately without granting any site permission or interacting further. This target has been compromised or repurposed since it was first documented and must be removed from the active list — do not re-add without independently re-verifying the domain is clean.
+- **Action:** ~~Free listing, instant approval~~ — abandoned, unsafe.
 - **Notes:** Low DA but fast, clean UAE citation. Batch with 24/25/27.
 
 ### 27. B2B-UAE (b2b-uae.ae)
 - **DA:** ~22 | **Link type:** Dofollow
-- **URL:** https://b2b-uae.ae/
-- **Action:** Free B2B listing.
+- **URL:** https://b2b-uae.ae/add-new-listing/
+- **Action:** ~~Free B2B listing~~ — **paid-only, 2026-09-10.** The only package on the add-listing form is "1 Year Listing — AED 365 incl. VAT"; no free tier despite the homepage's "You don't have website? No problem" framing. Skipped rather than purchase without asking.
 - **Notes:** Citation value primarily; batch submission.
 
 ### 28. MyMidlist — Middle East Business Directory (mymidlist.com)
@@ -199,6 +210,15 @@
 - **URL:** https://mymidlist.com/
 - **Action:** Free listing; covers UAE, KSA, Qatar, Bahrain.
 - **Notes:** Useful if Sahara ever markets beyond the UAE.
+- **Blocked 2026-09-10:** filled the entire free-listing form at `/submit-listing/`
+  (Manual Coordinates address — Al Arabi Building, Industrial Area 11, Sharjah, lat
+  25.3187/long 55.4196 — City, Category "Professional Services", description, tags,
+  Website, Phone, Whatsapp, Email `info@saharaedoc.com`, Username, "I Agree" checked),
+  but the "Save & Preview" submit button gets stuck in a disabled/loading state with no
+  error or success confirmation after two full attempts (including a full field refill
+  via precise element refs to rule out a mis-click). Possibly a broken client-side
+  validation or reCAPTCHA integration issue. Not pursued further — matches the
+  "stop retrying a broken site" pattern already applied to bizuum.com in this file.
 
 ---
 
@@ -227,13 +247,14 @@
 
 ### 32. PaperCut — authorised reseller/partner directory
 - **Link type:** Dofollow vendor partner directory
+- **URL:** ~~https://www.papercut.com/partners/~~ **404 as of 2026-09-09** — locate the current partner-programme entry point before applying. See `partner-link-requests/papercut.md` for the draft email.
 - **Action:** Apply through the PaperCut partner programme.
 - **Link target:** `/services/papercut-print-management`
 - **Notes:** Direct topical match to an existing dedicated service page, and untapped by all three tracked competitors.
 
 ### 33. Sharjah Chamber of Commerce & Industry — Business Directory
 - **Link type:** `.gov.ae` government business directory citation — highest-trust TLD available to this business
-- **URL:** https://www.sharjah.gov.ae/BusinessDirectory/Index
+- **URL:** ~~https://www.sharjah.gov.ae/BusinessDirectory/Index~~ **404 as of 2026-09-09** — locate the current directory URL on sharjah.gov.ae before assuming a fresh application is needed.
 - **Action:** Sahara is a registered Sharjah trading entity (per `docs/seo/backlink-gap-2026-08.md` B6), so a listing may already exist under trade-license registration and just need claiming/updating with the website URL and current NAP — check before assuming a fresh application is needed. If no listing exists, membership/registration with the Chamber is the prerequisite (not just a form submission), so allow more lead time than the Tier 1-4 directories above.
 - **Notes:** Sharjah is the business's actual headquarters (Industrial Area 11) — a `.gov.ae` citation from the home-emirate chamber is exactly the kind of prominence signal Google's local-pack algorithm weighs, and it's unclaimed by all three tracked competitors, none of which are Sharjah-based. **Not yet screened by `tests/scripts/backlink_guard.py`** — add it to `tests/scripts/backlink-candidates.json` (or re-run the extraction script against this file) before the next screening pass.
 
@@ -250,7 +271,7 @@ Address: Al Arabi Building, Industrial Area 11, Sharjah, UAE
 Phone: +971 50 382 3969
 Phone 2: +971 6 533 5123
 Website: https://www.saharaprinter.com
-Email: info@saharaprinter.com
+Email: info@saharaedoc.com
 Business Hours: Mon–Sat 9:00 AM – 6:00 PM
 Category: Office Equipment / Printer Rental / Photocopier / Managed Print Services
 Founded: 2012
@@ -262,10 +283,23 @@ Annual Maintenance Contracts (AMC), on-site printer repair with 4-hour emergency
 response, and PaperCut print management services. Authorized dealer for Canon, HP, 
 Kyocera, Ricoh, Xerox, Brother, Sharp, Samsung, and Lexmark. 1,500+ clients · 4.9★.
 Social Media:
-- LinkedIn: https://www.linkedin.com/company/sahara-office-equipments
-- Facebook: [your Facebook page URL]
-- Instagram: [your Instagram URL]
+- LinkedIn: https://www.linkedin.com/company/sahara-office-equipment-trading-llc--sharjah/
+- Facebook: https://www.facebook.com/share/1GM5UxFLTq/
+- Instagram: https://www.instagram.com/sahara_office_equipments/
 ```
+
+> **2026-09-09 correction:** the LinkedIn slug above was wrong (this file previously said
+> `/company/sahara-office-equipments`, which does not match the live site's schema) and
+> the Facebook/Instagram lines were unfilled placeholders. Corrected against the live
+> `sameAs` schema. See `BACKLINK-SUBMISSION-PACK.md` for the full paste-ready pack.
+>
+> **2026-09-18 correction — reverses part of the above:** a later session wrongly
+> diagnosed `info@saharaedoc.com` as a "legacy domain" and changed this file's Email
+> line (and live site code) to `info@saharaprinter.com`. The user confirmed
+> **`info@saharaedoc.com` is the correct, active inbox** — reverted here and in code.
+> Do not "fix" `saharaedoc.com` email references again; the website domain
+> (`saharaprinter.com`) and the email domain (`saharaedoc.com`) are legitimately
+> different for this business.
 
 ---
 

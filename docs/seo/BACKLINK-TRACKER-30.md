@@ -1,5 +1,28 @@
 # Sahara Backlink Acquisition Tracker - 30+ Quality Targets
 
+## 2026-09-09 update — reclaim lane (do this before any new submission)
+
+Three listings you supplied are already live and already crawled — fixing them is
+higher-yield than any new submission, and one of them is a completely free unclaimed
+link:
+
+| # | Target | Finding | Fix |
+|---|---|---|---|
+| R1 | atninfo.com/co/sahara-office-equipment-trading-company-llc-sharjah-68639 | Website field is **empty** — no link at all, despite neighbouring listings on the same page rendering their website field as a real link | **Submitted 2026-09-09** via the site's "Update Your Listing" form (no login required) — website set to `https://www.saharaprinter.com`, email to `info@saharaprinter.com`, phone `0503823969`, business type Service Industry. Site confirmed "Email has been sent successfully" — this queues the change for manual moderation, it is **not instant**; the public page still showed "No website" immediately after submission. Re-check in ~1-2 weeks and update this row to Live once the website field appears with a real `<a href>`. |
+| R2 | yellowpages-uae.com/sahara-office-equip-tr-llc-188555 | Website renders as a `<button data-url>`, not an `<a href>` — no link equity regardless of fix. Email on file is `sales@saharaedoc.com` | **Submitted 2026-09-09** via the listing's "Update Listing" request form (no login). Form rejects `@`/`$`/`%` in the free-text field, so the request was phrased without an `@` symbol (e.g. "info at saharaprinter dot com"), asking to correct the website to `www.saharaprinter.com` and remove the `saharaedoc.com` email/domain. Browser session dropped mid-submit; user completed the final submit manually — not independently re-verified as received. This is a moderation-queue request, not an instant edit, and link equity stays zero regardless (button, not `<a href>`) — re-check the live page in 1-2 weeks and update this row. **2026-09-18 correction: the "remove the saharaedoc.com email" half of this request was based on a wrong diagnosis (see below) — `info@saharaedoc.com` is the correct email.** The website-URL correction to `www.saharaprinter.com` is still right (that's the real site domain). If/when this moderation request clears, check whether it wiped the email entirely or replaced it with something wrong, and submit a follow-up correcting it back to `info@saharaedoc.com`. |
+| R3 | anyrentals.ae/other-services/sahara-office-equip-tr-llc-in-uae | Confirmed live in-browser 2026-09-09: the listing's "Website" link resolves to `https://saharaedoc.com/`, not saharaprinter.com. **Correction to the earlier read:** the second phone number (`+971 50 406 7396`) is anyrentals.ae's own site-wide WhatsApp-support widget phone, unrelated to Sahara's listing — the listing's actual click-to-inquire WhatsApp link correctly uses `+971 50 382 3969`. So the only real defect is the website URL. | **Skipped, 2026-09-09 — user decision.** Fix requires claiming the listing (unclaimed), which requires creating an anyrentals.ae account (Facebook login or email+password signup at anyrentals.ae/signup). User chose to skip this target rather than create the account. Revisit only if priorities change; the fix itself (correct the Website link to saharaprinter.com once claimed) is unchanged if picked up later. |
+
+**Also "fixed" this session, then reverted 2026-09-18 (on-site, not a directory):** the
+live site's own footer `mailto:` and a D1-stored setting (`site_settings.companyEmail`)
+were changed from `info@saharaedoc.com` to `info@saharaprinter.com`, on the mistaken
+premise that `saharaedoc.com` was a legacy domain. **The user confirmed
+`info@saharaedoc.com` is the correct, active inbox** — this was never deployed (caught
+as an uncommitted local change) and has been reverted via `git checkout`. Do not repeat
+this "fix." See `BACKLINK-SUBMISSION-PACK.md` for the full correction note. The
+`seo_config.organizationSchema.sameAs` Facebook URL fix mentioned in the original version
+of this note was a genuinely stale URL, unrelated to the email question, and is unaffected
+by this correction.
+
 ## 2026-09 update — new landing pages, and who executes what
 
 **New pages now available as link/citation targets** (built this session, not yet
@@ -36,6 +59,15 @@ approval — that's a hard rule, not a preference. For every row below:
 
 Nothing on this list has been submitted yet — every row is still `Pending`.
 
+## 2026-09-09 note — reachuae.com
+
+No existing Sahara listing found (search returned no results). Reached the "List your
+Company" submission form (`reachuae.com/list-your-company`) — plain form, no login/CAPTCHA
+seen yet. **Skipped on user instruction** before submitting; not attempted further this
+session. Revisit as a fresh submission candidate later if desired — the form fields are
+Company Name, Contact Person, Mobile, Category, Brand Name/Description (optional, "Add new
+Brand"), Telephone, Email, Website.
+
 ## Campaign Rules
 
 - Use ethical manual submissions only: no PBNs, link farms, spam comments, or automated mass posting.
@@ -61,10 +93,82 @@ Description: Sahara Office Equipments provides printer rental, photocopier renta
 
 ## Anchor And Landing Page Mix
 
-- Brand anchors: `Sahara Office Equipments`, `Sahara Printer`, `Sahara Office Equipment Trading LLC`
+### 2026-09-18 — anchor text gap vs. competitors
+
+Bing Webmaster Tools' Backlinks report (Backlinks To Any Site → compare against
+`sosauh.com` and `officeequipments.ae`) shows the real gap plainly: both competitors have
+dozens of service-specific anchors pointing at their own service pages — "Printers for
+Rental in..." (200), "AMC Printer" (39), "Printer Repair & Service" (39), "Printer Rental
+& Lease" (39), "Cartridges & Toners" (42) — while Sahara has exactly **1** inbound link
+total, anchored "Sahara Printer Solutio..." to the homepage. That's not a content
+problem (the equivalent pages already exist and are live — see the URL list below); it's
+that almost nothing built so far links to them by name. Every anchor below points only
+at a page that is actually live today — no invented services, matching the instruction
+to fix this "only for the services and products we provide."
+
+**Important platform constraint:** most directory listings (rows 1–36 above) only accept
+one link, to the homepage — they are not a vector for page-specific anchors. Real anchor
+diversity has to come from citation platforms with a *services/products* field
+(Brownbook, Zumvu, Storeboard already have these — worth revisiting to add per-service
+links, not just re-submitting), and from content placements (guest articles, the
+Apsense/Hashnode/3DPrintBoard rows) where the anchor is chosen freely in body text. When
+submitting a new listing, use the branded anchor for the one allowed link, but use the
+**Preferred Anchor + Landing Page** below whenever a platform offers a services list,
+multiple links, or body-text placement.
+
+| Anchor text (style-matched to what's proven to work for competitors) | Landing page |
+|---|---|
+| Printer Rental UAE | `/services/printer-rental/` |
+| Printer Rental Dubai | `/printer-rental-dubai/` |
+| Printer Rental Abu Dhabi | `/printer-rental-abu-dhabi/` |
+| Printer Rental Sharjah | `/printer-rental-sharjah/` |
+| Printer Rental RAK | `/printer-rental-rak/` |
+| Printer Rental Fujairah | `/printer-rental-fujairah/` |
+| Printer Rental Al Ain | `/printer-rental-al-ain/` |
+| Printer Repair & Service | `/services/repair/` |
+| Printer Repair Dubai | `/printer-repair-dubai/` |
+| Printer Repair Sharjah | `/printer-repair-sharjah/` |
+| Canon Printer Repair | `/canon-printer-repair/` |
+| Canon Printer Dubai | `/canon-printer-dubai/` |
+| Printer AMC UAE / AMC Printer | `/services/amc/` |
+| Plotter Maintenance UAE | `/services/plotter-maintenance/` |
+| Printer Spare Parts UAE | `/services/printer-spare-parts/` |
+| Cartridges & Toners | `/services/printer-spare-parts/` (or a specific SKU page when the platform allows a product-level link) |
+| Paper Shredder Rental | `/services/paper-shredder-rental/` |
+| Paper Shredder Sales | `/services/paper-shredder-sales/` |
+| PaperCut Print Management UAE | `/services/papercut-print-management/` |
+| PVC Card Printer Rental | `/services/pvc-card-printer-rental/` |
+| PVC Card Printing Services | `/services/pvc-card-printing-services/` |
+| Bravo Card Printers UAE | `/bravo-card-printers-uae/` |
+| Photocopier Rental Sharjah | `/printer-rental-sharjah/` |
+
+- Brand anchors (for the single-link, homepage-only listings): `Sahara Office Equipments`, `Sahara Printer`, `Sahara Office Equipment Trading LLC`
 - URL anchors: `https://www.saharaprinter.com`, `www.saharaprinter.com`
-- Partial-match anchors: `printer rental UAE`, `printer rental Dubai`, `photocopier rental Sharjah`, `managed print services UAE`
-- Primary landing pages: `/`, `/services/printer-rental/`, `/printer-rental-dubai/`, `/photocopier-rental-sharjah/`, `/services/papercut-print-management/`
+- Primary landing pages for generic/no-services-field platforms: `/`, `/services/printer-rental/`, `/printer-rental-dubai/`, `/photocopier-rental-sharjah/`, `/services/papercut-print-management/`
+
+**Next actions to close the gap:**
+1. ~~Revisit the three already-live multi-field listings — Storeboard (#29), Brownbook
+   (#36), and Zumvu (#30, still Pending) — and add per-service links/tags using the table
+   above instead of only the branded homepage link.~~ **Brownbook (#36) done 2026-09-18**:
+   logged in as the claimed owner (user authenticated in-browser; Claude never touched
+   credentials), added 9 service tags — Printer AMC UAE, Printer Spare Parts UAE, Paper
+   Shredder Rental, Paper Shredder Sales, PaperCut Print Management UAE, Photocopier
+   Rental Sharjah, PVC Card Printer Rental, PVC Card Printer Sales, PVC Card Printing
+   Services — on top of the 3 already there, saved, and verified live in a fresh tab (12
+   tags total, each rendering as its own `/search/.../?tags=` link — real discovery
+   surface, not just cosmetic). Confirmed the email field stayed `info@saharaedoc.com`
+   (see the correction note above — do not change it). **Storeboard (#29) and Zumvu (#30)
+   still open** — Storeboard has no tags field (categories/description only) so this
+   needs a different approach; Zumvu's old profile URL now 404s/redirects, would need a
+   fresh listing (account creation, not something Claude can do).
+2. When working rows 1, 6–20 (new directory submissions), check for a "services" or
+   "products" field before defaulting to the branded anchor — several of these platforms
+   (Yello, UAEInquiry, UAE++) do have tag/keyword fields that were filled with branded
+   terms only; revisit and add service-specific tags from the table above.
+3. Prioritize the content-placement rows (Apsense #32, Hashnode #31, 3DPrintBoard #34) —
+   these are the only rows where a competitor-style anchor like "AMC Printer" or "Printer
+   Repair & Service" can appear in natural body text pointing at the matching page, which
+   is exactly the pattern driving sosauh.com's and officeequipments.ae's numbers.
 
 ## Submission Tracker
 
@@ -78,16 +182,16 @@ Description: Sahara Office Equipments provides printer rental, photocopier renta
 | 6 | Yellow Pages UAE | UAE directory | 42 | https://www.yp.ae/add-business | Account/CAPTCHA likely | Office Equipment | Homepage | Printer Rental UAE | Pending |  |  | Use exact NAP. |
 | 7 | Connect.ae | UAE directory | 38 | https://connect.ae/en/add-business | Account likely | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Add services and WhatsApp. |
 | 8 | HiDubai | UAE directory | 41 | https://hidubai.com/businesses/add | Account/approval | Office Supplies & Equipment | /printer-rental-dubai/ | Printer Rental Dubai | Pending |  |  | Strong Dubai local relevance. |
-| 9 | Yello UAE | UAE directory | 50 | https://www.yello.ae/ | Account/approval | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Check for existing listing before creating. |
-| 10 | SIO365 | B2B directory | 36 | https://www.sio365.com/ | Account/approval | Printers | /services/printer-rental/ | Printer Rental UAE | Pending |  |  | Relevant printer category. |
-| 11 | HAI UAE | UAE directory | 30 | https://www.haiuae.com/ | Account | Business Services | Homepage | Sahara Office Equipments | Pending |  |  | New UAE directory, use full NAP. |
-| 12 | UAEThrive | UAE directory | 30 | https://uaethrive.com/ | Account | Business Services | Homepage | Sahara Office Equipments | Pending |  |  | Add services/prices where allowed. |
-| 13 | YellowPagesAE | UAE directory | 35 | https://yellowpagesae.com/ | Account | Office Equipment | Homepage | Printer Rental UAE | Pending |  |  | Confirm duplicate listing first. |
-| 14 | Bizuum | UAE directory | 30 | https://www.bizuum.com/ | Account | Business Services | Homepage | Sahara Office Equipments | Pending |  |  | Use concise listing text. |
-| 15 | UAEInquiry | UAE directory | 28 | https://uaeinquiry.com/ | Account | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Add service areas. |
-| 16 | UAE++ | UAE directory | 28 | https://uaeplusplus.com/defaultmain.aspx | Account/form | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Validate listing quality before submission. |
+| 9 | Yello UAE | UAE directory | 50 | https://www.yello.ae/ | Account/approval | Office Equipment | Homepage | Sahara Office Equipments | **Blocked — skipped 2026-09-09** |  |  | **Existing listing found**, verified live: `yello.ae/company/353175/sahara-office-equipments` — a real followed `<a href>` link, but pointing at `www.saharaedoc.com/index.html` (legacy domain). Also carries a second, unseen-elsewhere mobile number (`+971 55 864 2331`). Passed reCAPTCHA and reached the edit form, but the listing is already claimed by a registered account under "Jabir Eriyadan" (matches "Muhammad Jabir," the company-manager name on file) — user does not recognize this person or have access to that email, so a password reset isn't viable. Skipped rather than contact Yello support to reclaim; revisit if that name is identified. This is the **highest-value unresolved reclaim on the whole list** — a real dofollow link, just pointed at the wrong domain. |
+| 10 | SIO365 | B2B directory | 36 | https://www.sio365.com/ | Account/approval | Printers | /services/printer-rental/ | Printer Rental UAE | **Not pursued — 2026-09-09** |  |  | Site now redirects "Register Your Business" to sellitonline.ae, a **paid-only** Monthly/Yearly subscription with no free tier. No longer a free listing target; skipped rather than purchase without asking. |
+| 11 | HAI UAE | UAE directory | 30 | https://www.haiuae.com/add-business | No account, email-verified | Business Services | Homepage | Sahara Office Equipments | **Submitted 2026-09-09** |  |  | Full form submitted (NAP, category, description, service keywords, hours, website, lat/long). Site confirmed "Business listing submitted successfully!" but **could not send the verification email immediately** — listing will not go live until verified. Check `info@saharaprinter.com` inbox for the activation link, or use "Resend it here" / "Request a new one here" at haiuae.com/add-business if it never arrives. No "Office Equipment" category exists; used "Business Services" as closest fit. Manual review also applies (24-48 hrs per site). |
+| 12 | UAEThrive | UAE directory | 30 | https://uaethrive.com/add-listing/diy | No account | Facilities Management | Homepage | Sahara Office Equipments | **Submitted 2026-09-09** |  |  | Free "DIY Listing" tier (declined the AED 50 Premium Trial upsell). No office-equipment category — used "Facilities Management" as closest fit. Full NAP, description, services, hours, socials (LinkedIn/Facebook/Instagram) submitted. Confirmed "Thank You for Submitting Your Business" — pending manual review before publication, no email verification step. Note: selecting "Yes, customers visit this location" makes Full Address + Google Maps Link required — both filled with the canonical Sharjah address/map link. |
+| 13 | YellowPagesAE | UAE directory | 35 | https://yellowpagesae.com/ | Account | Office Equipment | Homepage | Printer Rental UAE | **Not pursued — 2026-09-10** |  |  | No existing listing found (checked first, as planned). Registered a free account (`saharaoffice`) — but "Add Listing" routes straight to `/pricing-tables/`: cheapest plan is $6/month for one listing, no free tier exists despite the site's own "FREE Business Directory" tagline. Same bait-and-switch pattern as sio365.com. Skipped rather than purchase without asking. Account exists if a paid listing is ever wanted later. |
+| 14 | Bizuum | UAE directory | 30 | https://www.bizuum.com/ | Account | Suppliers & Other Companies (free tier) | Homepage | Sahara Office Equipments | **Account created, listing abandoned — 2026-09-09** |  |  | Registered account `saharaoffice` (temp password emailed to info@saharaprinter.com — change it). Free "Suppliers & Other Companies" tier confirmed real (not bait-and-switch like sio365): 365-day listing, includes a required Website field (a real dofollow link opportunity, unlike most free tiers here). Filled the entire form (company info, contact, Sharjah address/coords, Printers & Scanners category, product/service descriptions) but the **Location Map widget is broken** — it repeatedly regenerates duplicate blank map entries on every submit attempt (confirmed reproducible 3+ times, once freezing the tab entirely), blocking submission regardless of data completeness. Abandoned rather than keep fighting it. To finish: log in as `saharaoffice` at bizuum.com, redo the Location/Address section fresh (avoid double-clicking the map or scrolling mid-interaction), and submit before the duplicate-block bug recurs — or try a different browser/session. |
+| 15 | UAEInquiry | UAE directory | 28 | https://uaeinquiry.com/submit-listing/ | Email-only account (no password step) | Computer Company (no Office Equipment option) | Homepage | Sahara Office Equipments | **Submitted 2026-09-10** |  | https://uaeinquiry.com/?post_type=listing&p=3277 | Genuinely generous free tier (365-day, Website + Social Links included, no bait-and-switch). Used "Manual Coordinates" to avoid the map-widget bugs seen on bizuum.com — worked cleanly. Full NAP, description, tags, category submitted. Site confirmed "Your Listing Is Pending For Review" — live page already shows the website as a real clickable link (`https://www.saharaprinter.com`); re-check after moderation clears to confirm it stays that way and note the `<a>`'s `rel` attribute once published. |
+| 16 | UAE++ | UAE directory | 28 | https://ae.uaeplusplus.com/register | No account, direct form | Computers & Internet > Computer Equipment | Homepage | Sahara Office Equipments | **Submitted 2026-09-10** |  | Listing #115340 | Old documented URL redirects to a new `ae.uaeplusplus.com` site. **Quality warning:** the site runs aggressive, repeated Semrush ad interstitials that froze the browser tab twice during submission and at one point would not close via automation — user completed the final submission manually. Full NAP, description, products/services, Instagram/LinkedIn slugs submitted; confirmed "Listing #115340 was submitted successfully." Caveat: the map pin was never manually set, so lat/long defaulted to a generic UAE-center coordinate (23.4241, 53.8478) rather than the real Sharjah location — everything else is correct. Given the ad behavior, treat this as a low-priority citation, not a site to revisit routinely. |
 | 17 | YallaPages | UAE directory | 30 | https://yallapages.ae/ | Account | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Use Sharjah HQ plus UAE service area. |
-| 18 | Listy.ae | UAE directory | 30 | https://listy.ae/ | Account | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Add photos if free listing supports them. |
+| 18 | Listy.ae | UAE directory | 30 | https://listy.ae/add-business.php | No account, simple math anti-spam check | Equipment | Homepage | Sahara Office Equipments | **Submitted 2026-09-10** |  |  | Clean, simple form (a refreshing contrast to bizuum.com/uaeplusplus.com). No account, no aggressive ads. Confirmed "Success! Your business has been submitted and is pending approval." **No Website URL field exists on this form at all** — it's a citation-only listing (name, category, description, location, phone), no link equity possible here regardless of approval. |
 | 19 | UAE Business Directory | UAE directory | 35 | https://uae-business.com/add-listing | Account/form | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Prefer branded anchor. |
 | 20 | UAE Directory | UAE directory | 25 | https://uaedirectory.pages.dev/addbusiness.html | Form | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Submit only if listing appears moderated. |
 | 21 | LinkedIn Company Page | Business profile | 99 | https://www.linkedin.com/company/ | Company admin | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Complete specialties and weekly posts. |
@@ -96,15 +200,16 @@ Description: Sahara Office Equipments provides printer rental, photocopier renta
 | 24 | Crunchbase | Business profile | 91 | https://www.crunchbase.com/organization/add | Account/approval | Office Equipment Rental | Homepage | Sahara Office Equipments | Pending |  |  | Use business profile, not keyword-stuffed text. |
 | 25 | Trustpilot | Review profile | 93 | https://business.trustpilot.com/ | Business verification | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Invite real customers only. |
 | 26 | Glassdoor | Company profile | 92 | https://www.glassdoor.com/employers/claim/ | Company verification | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Legitimacy citation. |
-| 27 | Kompass UAE | B2B directory | 57 | https://ae.kompass.com/registration/ | Account/approval | Office Equipment | Homepage | Sahara Office Equipments | Pending |  |  | Procurement-relevant. |
+| 27 | Kompass UAE | B2B directory | 57 | https://ae.kompass.com/register | Account/approval | Office Equipment | Homepage | Sahara Office Equipments | Blocked |  |  | 2026-09-10: registration is claim-only against Kompass's own trade-license database, no free-text add. Only match for "Sahara Office Equipment[s]" is an unrelated Abu Dhabi company (founded 2006), confirmed not Sahara. No free path to a listing — see BACKLINKS-FREE.md #18. |
 | 28 | D&B / Dun & Bradstreet | Business data | 86 | https://www.dnb.com/ | Business verification | Office Equipment | Homepage | Sahara Office Equipment Trading LLC | Pending |  |  | Submit or claim business data. |
-| 29 | Storeboard | Business profile/content | 70 | https://www.storeboard.com/ | Account | Office Equipment | /services/printer-rental/ | Printer Rental UAE | Pending |  |  | Publish profile plus buying-vs-renting article. |
+| 29 | Storeboard | Business profile/content | 70 | https://www.storeboard.com/saharaofficeequipments | Account | Office Equipment | Homepage | Sahara Office Equipments | Live | 2026-09-10 | https://www.storeboard.com/saharaofficeequipments | Free "General Business" profile submitted and confirmed live 2026-09-10 — NAP, categories (Copiers & Supplies, Rental-Equipment, Copy & Duplicating Service), Directory Category "Printers", and website all set. Verified in-browser: the "Website" button opens `https://www.saharaprinter.com/` in a new tab (real link, confirmed by observing the resulting tab navigate) — Cloudflare blocks plain-fetch verification of this domain (403 challenge), so this was confirmed by driving the click in-browser, not by curl. Contact email is `info@saharaedoc.com` per corrected NAP. Optional follow-up (not done): profile photo/logo upload, buying-vs-renting article. |
 | 30 | Zumvu | Business profile/content | 56 | https://www.zumvu.com/ | Account | Office Equipment | /photocopier-rental-sharjah/ | Photocopier Rental Sharjah | Pending |  |  | Existing screenshots suggest prior registration attempt. |
 | 31 | Hashnode | Content platform | 60 | https://hashnode.com/ | Account | IT / Productivity | /services/papercut-print-management/ | PaperCut Print Management UAE | Pending |  |  | Publish practical print-management article. |
 | 32 | Apsense | Business article | 74 | https://www.apsense.com/ | Account | Business Services | /services/printer-rental/ | Printer Rental UAE | Pending |  |  | Original 1,000+ word article. |
 | 33 | The Dots | Professional network | 61 | https://the-dots.com/ | Account | Business Services | /printer-rental-dubai/ | Printer Rental Dubai | Pending |  |  | Angle for creative agencies and real estate. |
 | 34 | 3DPrintBoard | Forum/profile | 69 | https://www.3dprintboard.com/ | Account | Printing Technology | /blogs/ | Sahara Office Equipments | Pending |  |  | Contribute first; avoid promotional spam. |
 | 35 | Yango Business | Services platform | 52 | https://yango.com/ | Business onboarding | Business Services | Homepage | Sahara Office Equipments | Pending |  |  | Check UAE service-provider eligibility. |
+| 36 | Brownbook | Global business directory | ~55 | https://www.brownbook.net/business/55491805/sahara-office-equipments | Account + email verify | Office Machinery and Equipment Rental and Leasing | Homepage | Sahara Office Equipments | Live | 2026-09-10 | https://www.brownbook.net/business/55491805/sahara-office-equipments | Free listing added + account created + claimed 2026-09-10. Full NAP, both phones, email `info@saharaedoc.com`, website, Facebook/Instagram/LinkedIn all set; tags Printer Rental / printer repair Dubai / office printer lease UAE; location tag Sharjah. **Verified in-browser (Cloudflare blocks plain-fetch, 403):** website renders as a real `<a href="https://www.saharaprinter.com/">` with `rel="noopener noreferrer"` — **no nofollow/sponsored, i.e. a followed link**. Listing shows "Claimed". Email verification may still be pending in the info@saharaedoc.com inbox. |
 
 ## Outreach Template
 
