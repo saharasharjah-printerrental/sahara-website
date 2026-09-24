@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import BlogsClient from "@/components/BlogsClient";
 import { orgRef } from "@/lib/brand";
+import { buildFaqSchema, type FaqItem } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "Printer Rental Blog UAE | Office Equipment Insights | Sahara",
@@ -29,6 +30,25 @@ export const metadata: Metadata = {
   },
 };
 
+const BLOG_FAQS: FaqItem[] = [
+  {
+    q: "What can I learn from the Sahara Printer blog?",
+    a: "The Sahara Printer blog covers UAE printer rental, photocopier rental, paper shredder rental, AMC, repair, toner, compliance, and office equipment buying guides for Dubai, Sharjah, Abu Dhabi, and the wider UAE.",
+  },
+  {
+    q: "Which blog guides should I read before renting or buying office equipment?",
+    a: "Start with the rental cost, rent-versus-buy, AMC, copier rental, and paper shredder buying guides. These explain pricing, maintenance, service response, and when rental is better than buying.",
+  },
+  {
+    q: "Do the articles apply to businesses outside Dubai?",
+    a: "Yes. Many guides cover UAE-wide service decisions, including Dubai, Sharjah, Abu Dhabi, Ajman, free zones, and multi-branch offices that need delivery, support, or maintenance coverage.",
+  },
+  {
+    q: "Can Sahara help me choose equipment after I read a guide?",
+    a: "Yes. You can use the quote form or contact Sahara Office Equipments for help choosing a printer, photocopier, paper shredder, AMC plan, or rental package based on your monthly volume and team size.",
+  },
+];
+
 async function fetchInitialPosts() {
   try {
     const db = getRequestContext().env.DB as any;
@@ -54,6 +74,8 @@ export default async function BlogPage() {
     publisher: orgRef(),
   };
 
+  const faqSchema = buildFaqSchema(BLOG_FAQS, "https://www.saharaprinter.com/blogs/#faq");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -67,6 +89,7 @@ export default async function BlogPage() {
     <>
       <script type="application/ld+json">{JSON.stringify(blogSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <BlogsClient initialPosts={initialPosts.length > 0 ? initialPosts : undefined} />
     </>
   );

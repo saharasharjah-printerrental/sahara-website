@@ -36,6 +36,25 @@ const defaultPosts: BlogPost[] = [
   { id: "11", title: "Stop Wasting Money on Printing", slug: "stop-wasting-money-on-printing-your-guide-to-smarter-office-habits", excerpt: "Learn how to reduce printing waste and save money.", content: "Full content here...", category: "Tips", status: "published", coverImage: "https://res.cloudinary.com/dhmsnelcl/image/upload/v1749638040/blogs/ldevdfienoa4ibffpix0.png", publishedAt: "6/11/2025", createdAt: "2025-06-11" },
 ];
 
+const blogFaqs = [
+  {
+    q: "What can I learn from the Sahara Printer blog?",
+    a: "The Sahara Printer blog covers UAE printer rental, photocopier rental, paper shredder rental, AMC, repair, toner, compliance, and office equipment buying guides for Dubai, Sharjah, Abu Dhabi, and the wider UAE.",
+  },
+  {
+    q: "Which blog guides should I read before renting or buying office equipment?",
+    a: "Start with the rental cost, rent-versus-buy, AMC, copier rental, and paper shredder buying guides. These explain pricing, maintenance, service response, and when rental is better than buying.",
+  },
+  {
+    q: "Do the articles apply to businesses outside Dubai?",
+    a: "Yes. Many guides cover UAE-wide service decisions, including Dubai, Sharjah, Abu Dhabi, Ajman, free zones, and multi-branch offices that need delivery, support, or maintenance coverage.",
+  },
+  {
+    q: "Can Sahara help me choose equipment after I read a guide?",
+    a: "Yes. You can use the quote form or contact Sahara Office Equipments for help choosing a printer, photocopier, paper shredder, AMC plan, or rental package based on your monthly volume and team size.",
+  },
+];
+
 export default function BlogsClient({ initialPosts }: { initialPosts?: BlogPost[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -178,6 +197,31 @@ export default function BlogsClient({ initialPosts }: { initialPosts?: BlogPost[
               <p className="text-muted">Try adjusting your filters or search query.</p>
             </div>
           )}
+        </div>
+      </section>
+
+      <section id="faq" className="bg-surface-low px-6 py-section">
+        <div className="mx-auto max-w-4xl">
+          <Reveal className="mb-10 text-center">
+            <p className="mb-3 text-caption font-bold uppercase tracking-widest text-primary">Blog FAQ</p>
+            <h2 className="font-sora text-display font-bold text-white">Frequently Asked Questions</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-body text-muted">
+              Quick answers to help you choose the right Sahara guide before renting, buying, or maintaining office equipment in the UAE.
+            </p>
+          </Reveal>
+          <div className="space-y-4">
+            {blogFaqs.map((faq, index) => (
+              <Reveal key={faq.q}>
+                <details open={index === 0} className="group rounded-panel border border-white/10 bg-surface-mid p-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-white">
+                    <span>{faq.q}</span>
+                    <span className="text-primary transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-4 leading-relaxed text-on-surface-variant">{faq.a}</p>
+                </details>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
