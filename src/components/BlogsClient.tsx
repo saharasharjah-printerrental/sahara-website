@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
 import JumpToTop from "@/components/JumpToTop";
 import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
 
 interface BlogPost {
   id: string;
@@ -200,30 +201,26 @@ export default function BlogsClient({ initialPosts }: { initialPosts?: BlogPost[
         </div>
       </section>
 
-      <section id="faq" className="bg-surface-low px-6 py-section">
-        <div className="mx-auto max-w-4xl">
-          <Reveal className="mb-10 text-center">
-            <p className="mb-3 text-caption font-bold uppercase tracking-widest text-primary">Blog FAQ</p>
-            <h2 className="font-sora text-display font-bold text-white">Frequently Asked Questions</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-body text-muted">
-              Quick answers to help you choose the right Sahara guide before renting, buying, or maintaining office equipment in the UAE.
-            </p>
-          </Reveal>
-          <div className="space-y-4">
-            {blogFaqs.map((faq, index) => (
-              <Reveal key={faq.q}>
-                <details open={index === 0} className="group rounded-panel border border-white/10 bg-surface-mid p-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-white">
-                    <span>{faq.q}</span>
-                    <span className="text-primary transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <p className="mt-4 leading-relaxed text-on-surface-variant">{faq.a}</p>
-                </details>
-              </Reveal>
-            ))}
-          </div>
+      <Section id="faq" flush className="max-w-4xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="mb-3 text-caption font-bold uppercase tracking-widest text-primary">Blog FAQ</p>
+          <h2 className="font-sora text-title font-bold text-white">Frequently Asked Questions</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-body text-muted">
+            Quick answers to help you choose the right Sahara guide before renting, buying, or maintaining office equipment in the UAE.
+          </p>
         </div>
-      </section>
+        <div className="space-y-4">
+          {blogFaqs.map((faq, index) => (
+            <details key={faq.q} className="glass-card rounded-card p-6 group cursor-pointer" open={index === 0}>
+              <summary className="flex list-none items-center justify-between gap-4 font-bold text-[1.05rem] text-white">
+                {faq.q}
+                <span className="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+              </summary>
+              <p className="mt-4 leading-relaxed text-on-surface-variant">{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </Section>
 
       <Footer />
       <WhatsAppCTA />
