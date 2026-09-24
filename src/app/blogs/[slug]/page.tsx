@@ -5,6 +5,7 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 import BlogPostClient from "@/components/BlogPostClient";
 import type { BlogLinkConfig } from "@/lib/internalLinks";
 import { ORG_ID, ORG_NAME, LOGO } from "@/lib/brand";
+import { buildFaqSchema, type FaqItem } from "@/lib/faqs";
 
 interface BlogPost {
   id: string;
@@ -52,6 +53,55 @@ function mapDbPost(row: any): BlogPost {
     publishedAt: row.publishedAt || '',
     createdAt: row.createdAt || '',
   };
+}
+
+function stripHtml(value: string): string {
+  return value
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractFaqItemsFromHtml(html: string): FaqItem[] {
+  if (!html || !/<h2[^>]*>\s*FAQ/i.test(html)) return [];
+
+  const faqStartMatch = /<h2[^>]*>\s*FAQ(?:s|s\s*&amp;\s*Answers|\s*&amp;\s*Answers)?\s*<\/h2>/i.exec(html);
+  if (!faqStartMatch) return [];
+
+  const faqHtml = html.slice(faqStartMatch.index + faqStartMatch[0].length);
+  const sectionEnd = faqHtml.search(/<h2[^>]*>/i);
+  const sectionHtml = sectionEnd >= 0 ? faqHtml.slice(0, sectionEnd) : faqHtml;
+  const items: FaqItem[] = [];
+  const questionPattern = /<h3[^>]*>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3[^>]*>|$)/gi;
+  let match: RegExpExecArray | null;
+
+  while ((match = questionPattern.exec(sectionHtml)) !== null) {
+    const question = stripHtml(match[1]);
+    const answerMatch = /<p[^>]*>([\s\S]*?)<\/p>/i.exec(match[2]);
+    const answer = answerMatch ? stripHtml(answerMatch[1]) : stripHtml(match[2]);
+
+    if (question && answer) {
+      items.push({ q: question, a: answer });
+    }
+  }
+
+  if (items.length === 0) {
+    const paragraphPattern = /<p[^>]*>\s*<strong>\s*(?:Q:\s*)?([\s\S]*?)<\/strong>\s*([\s\S]*?)<\/p>/gi;
+    while ((match = paragraphPattern.exec(sectionHtml)) !== null) {
+      const question = stripHtml(match[1]);
+      const answer = stripHtml(match[2]).replace(/^A:\s*/i, "");
+
+      if (question && answer) {
+        items.push({ q: question, a: answer });
+      }
+    }
+  }
+
+  return items;
 }
 
 async function fetchPost(slug: string): Promise<{ post: any; allPosts: BlogPost[]; linkConfig: BlogLinkConfig | null } | null> {
@@ -156,11 +206,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://www.saharaprinter.com/blogs/${slug}/` },
     ],
   };
+  const faqItems = extractFaqItemsFromHtml(post.content);
+  const faqSchema = faqItems.length > 0
+    ? buildFaqSchema(faqItems, `https://www.saharaprinter.com/blogs/${slug}/#faq`)
+    : null;
 
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
       <BlogPostClient post={post} allPosts={allPosts} linkConfig={linkConfig} />
     </>
   );

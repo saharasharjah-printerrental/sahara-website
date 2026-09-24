@@ -27,7 +27,7 @@ export default function AnswerBlock({ question, answer, supportingPoints, id }: 
   return (
     <div
       id={id}
-      className="bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8"
+      className="aeo-block bg-[#0d1b2e] border border-[#f5be53]/20 rounded-2xl p-5 mb-8"
     >
       <h2 className="text-lg md:text-xl font-bold text-white mb-2">{question}</h2>
       <p className="text-[#d3c5b0] text-sm leading-relaxed">{answer}</p>
