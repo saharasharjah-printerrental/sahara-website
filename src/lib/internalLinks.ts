@@ -401,6 +401,20 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
       "best-office-paper-shredders-uae-fellowes-compared",
     ],
   },
+  "why-paper-shredders-jam-and-how-to-fix-it-uae": {
+    primaryService: { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
+    relatedLinks: [
+      { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental Dubai & UAE", type: "service" },
+      { href: "/blogs/heavy-duty-shredder-rental-bulk-document-clearout-uae/", label: "Heavy-Duty Shredder Rental", type: "blog" },
+      { href: "/blogs/what-documents-to-shred-uae-office-checklist/", label: "What Documents to Shred", type: "blog" },
+      { href: "/rental-calculator/", label: "Get a Free Quote", type: "tool" },
+    ],
+    relatedSlugs: [
+      "paper-shredder-rental-uae-when-it-beats-buying",
+      "paper-shredder-repair-or-replace-uae-guide",
+      "best-office-paper-shredders-uae-fellowes-compared",
+    ],
+  },
   "short-term-event-printer-rental-dubai": {
     primaryService: { href: "/services/printer-rental/", label: "Printer Rental UAE", type: "service" },
     relatedLinks: [
@@ -466,6 +480,7 @@ export const SERVICE_BLOG_MAP: Record<string, string[]> = {
     "shredder-delivery-jafza-saif-zone-difc-uae-free-zones",
     "best-office-paper-shredders-uae-fellowes-compared",
     "paper-shredder-repair-or-replace-uae-guide",
+    "why-paper-shredders-jam-and-how-to-fix-it-uae",
   ],
   "paper-shredder-sales": [
     "buying-a-paper-shredder-in-dubai-sizing-and-cost-guide",

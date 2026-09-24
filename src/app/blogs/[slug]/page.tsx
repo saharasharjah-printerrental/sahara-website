@@ -67,13 +67,13 @@ function stripHtml(value: string): string {
 }
 
 function extractFaqItemsFromHtml(html: string): FaqItem[] {
-  if (!html || !/<h2[^>]*>\s*FAQ/i.test(html)) return [];
+  if (!html || !/(<h2[^>]*>\s*FAQ|<div>\s*FAQ\s*<\/div>|##\s*FAQ)/i.test(html)) return [];
 
-  const faqStartMatch = /<h2[^>]*>\s*FAQ(?:s|s\s*&amp;\s*Answers|\s*&amp;\s*Answers)?\s*<\/h2>/i.exec(html);
+  const faqStartMatch = /(?:<h2[^>]*>\s*FAQ(?:s|s\s*&amp;\s*Answers|\s*&amp;\s*Answers)?\s*<\/h2>|<div>\s*FAQ\s*<\/div>|##\s*FAQ)/i.exec(html);
   if (!faqStartMatch) return [];
 
   const faqHtml = html.slice(faqStartMatch.index + faqStartMatch[0].length);
-  const sectionEnd = faqHtml.search(/<h2[^>]*>/i);
+  const sectionEnd = faqHtml.search(/<h2[^>]*>|<div>\s*Related Resources\s*<\/div>|##\s*Related Resources/i);
   const sectionHtml = sectionEnd >= 0 ? faqHtml.slice(0, sectionEnd) : faqHtml;
   const items: FaqItem[] = [];
   const questionPattern = /<h3[^>]*>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3[^>]*>|$)/gi;
@@ -90,10 +90,23 @@ function extractFaqItemsFromHtml(html: string): FaqItem[] {
   }
 
   if (items.length === 0) {
-    const paragraphPattern = /<p[^>]*>\s*<strong>\s*(?:Q:\s*)?([\s\S]*?)<\/strong>\s*([\s\S]*?)<\/p>/gi;
+    const paragraphPattern = /<(?:p|div)[^>]*>\s*(?:<strong>)?\s*(?:Q:\s*)?([\s\S]*?)(?:<\/strong>)?\s*<\/(?:p|div)>\s*<(?:p|div)[^>]*>\s*A:\s*([\s\S]*?)<\/(?:p|div)>/gi;
     while ((match = paragraphPattern.exec(sectionHtml)) !== null) {
       const question = stripHtml(match[1]);
       const answer = stripHtml(match[2]).replace(/^A:\s*/i, "");
+
+      if (question && answer) {
+        items.push({ q: question, a: answer });
+      }
+    }
+  }
+
+  if (items.length === 0) {
+    const text = stripHtml(sectionHtml);
+    const textPattern = /Q:\s*([^?]+\?)\s*A:\s*([\s\S]*?)(?=Q:\s*[^?]+\?\s*A:|$)/gi;
+    while ((match = textPattern.exec(text)) !== null) {
+      const question = match[1].trim();
+      const answer = match[2].trim();
 
       if (question && answer) {
         items.push({ q: question, a: answer });

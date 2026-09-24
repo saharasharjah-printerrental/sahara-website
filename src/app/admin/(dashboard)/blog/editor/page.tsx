@@ -38,7 +38,7 @@ export default function BlogEditorPage() {
   const [loaded, setLoaded] = useState(false);
   const { showToast, ToastElement } = useToast();
 
-  const categories = ["Guide", "Buying Guide", "News", "Tips", "Case Study", "Troubleshooting", "Finance", "Trends", "Insights"];
+  const categories = ["Guide", "Buying Guide", "Equipment Rental", "Equipment Buying Guides", "Compliance & Buying Guides", "News", "Tips", "Case Study", "Troubleshooting", "Finance", "Trends", "Insights"];
 
   useEffect(() => {
     const load = async () => {

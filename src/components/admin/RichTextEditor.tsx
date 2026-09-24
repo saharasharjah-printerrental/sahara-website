@@ -11,27 +11,40 @@ interface Props {
 export default function RichTextEditor({ value, onChange, placeholder = "Write your content here..." }: Props) {
   const editorRef = useRef<HTMLDivElement>(null);
   const initialSyncDone = useRef(false);
+  const lastSyncedValue = useRef("");
 
   // Set content once after mount, using latest value
   useEffect(() => {
     if (!initialSyncDone.current && editorRef.current) {
       editorRef.current.innerHTML = value || "";
+      lastSyncedValue.current = value || "";
       initialSyncDone.current = true;
     }
   }, []); // Only run once, but use latest captured value via closure
 
-  // Separate effect to handle value updates after initial sync
+  // Handle external value changes without rewriting the editor after every local keystroke.
   useEffect(() => {
-    if (initialSyncDone.current && editorRef.current && value) {
-      editorRef.current.innerHTML = value;
-    }
+    if (!initialSyncDone.current || !editorRef.current) return;
+    if ((value || "") === lastSyncedValue.current) return;
+    if (document.activeElement === editorRef.current) return;
+
+    editorRef.current.innerHTML = value || "";
+    lastSyncedValue.current = value || "";
   }, [value]);
+
+  const emitChange = useCallback(() => {
+    if (editorRef.current) {
+      const html = editorRef.current.innerHTML;
+      lastSyncedValue.current = html;
+      onChange(html);
+    }
+  }, [onChange]);
 
   const exec = useCallback((command: string, arg?: string) => {
     editorRef.current?.focus();
     document.execCommand(command, false, arg ?? undefined);
-    if (editorRef.current) onChange(editorRef.current.innerHTML);
-  }, [onChange]);
+    emitChange();
+  }, [emitChange]);
 
   const insertLink = useCallback(() => {
     const sel = window.getSelection();
@@ -44,8 +57,8 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write y
   }, [exec]);
 
   const handleInput = useCallback(() => {
-    if (editorRef.current) onChange(editorRef.current.innerHTML);
-  }, [onChange]);
+    emitChange();
+  }, [emitChange]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === "Tab") {

@@ -42,11 +42,109 @@ const serviceLinks = [
   { href: "/photocopier-rental-sharjah/", label: "Photocopier Sharjah" },
 ];
 
+function stripHtml(value: string): string {
+  return value
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeBlogContent(html: string): string {
+  if (!html) return "";
+
+  let normalized = html
+    .replace(/```yaml[\s\S]*?```/gi, "")
+    .replace(/^---[\s\S]*?---/i, "")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\((\/[^)\s]+)\)/g, '<a href="$2">$1</a>');
+
+  normalized = normalized.replace(/((?:<div>\s*\|[\s\S]*?\|\s*<\/div>\s*){2,})/g, (tableBlock) => {
+    const rows = [...tableBlock.matchAll(/<div>\s*\|([\s\S]*?)\|\s*<\/div>/g)]
+      .map((match) => match[1].split("|").map((cell) => cell.trim()))
+      .filter((cells) => cells.some(Boolean))
+      .filter((cells) => !cells.every((cell) => /^:?-{3,}:?$/.test(cell)));
+
+    if (rows.length < 2) return tableBlock;
+
+    const [head, ...body] = rows;
+    return [
+      '<div class="my-6 overflow-x-auto"><table class="w-full border-collapse text-sm">',
+      `<thead><tr>${head.map((cell) => `<th class="border border-white/10 bg-white/5 px-3 py-2 text-left font-semibold text-white">${cell}</th>`).join("")}</tr></thead>`,
+      `<tbody>${body.map((row) => `<tr>${row.map((cell) => `<td class="border border-white/10 px-3 py-2 text-on-surface-variant">${cell}</td>`).join("")}</tr>`).join("")}</tbody>`,
+      "</table></div>",
+    ].join("");
+  });
+
+  const headingPattern = [
+    "AEO Answer Block",
+    "Introduction",
+    "FAQ",
+    "Related Resources",
+    "The Most Common Causes of Shredder Jams",
+    "How to Clear a Jam Safely",
+    "The Biggest Shredding Mistakes to Avoid",
+    "If You're Renting: What's Covered",
+    "Step 1: Match Sheet Capacity to Team Size",
+    "Step 2: Choose the Security Level",
+    "Step 3: Check Bin Capacity and Duty Cycle",
+    "Step 4: Compare Buy vs Rent",
+    "Dubai Pricing Snapshot (2026)",
+    "Buy or Rent First? A Quick Test",
+    "When Buying Makes Sense",
+    "When Renting Makes Sense",
+  ].map((heading) => heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+
+  normalized = normalized.replace(
+    new RegExp(`<div>\\s*(${headingPattern.join("|")})\\s*<\\/div>`, "g"),
+    "<h2>$1</h2>"
+  );
+
+  normalized = normalized.replace(/<div>\s*[-â€“]\s+(.+?)<\/div>/g, "<li>$1</li>");
+
+  return normalized;
+}
+
+function extractFaqs(content: string): { q: string; a: string }[] {
+  if (!content) return [];
+
+  const sectionMatch = /(?:<h2[^>]*>\s*FAQ\s*<\/h2>|<div>\s*FAQ\s*<\/div>|##\s*FAQ)([\s\S]*?)(?:<h2[^>]*>|<div>\s*Related Resources\s*<\/div>|##\s*Related Resources|$)/i.exec(content);
+  if (!sectionMatch) return [];
+
+  const section = sectionMatch[1];
+  const faqs: { q: string; a: string }[] = [];
+  const paragraphPattern = /<(?:p|div)[^>]*>\s*(?:<strong>)?\s*(?:Q:\s*)?([\s\S]*?)(?:<\/strong>)?\s*(?:<\/(?:p|div)>|<br\s*\/?>)\s*<(?:p|div)[^>]*>\s*A:\s*([\s\S]*?)<\/(?:p|div)>/gi;
+  let match: RegExpExecArray | null;
+
+  while ((match = paragraphPattern.exec(section)) !== null) {
+    const q = stripHtml(match[1]).replace(/\*\*/g, "");
+    const a = stripHtml(match[2]).replace(/\*\*/g, "");
+    if (q && a) faqs.push({ q, a });
+  }
+
+  if (faqs.length === 0) {
+    const text = stripHtml(section);
+    const textPattern = /Q:\s*([^?]+\?)\s*A:\s*([\s\S]*?)(?=Q:\s*[^?]+\?\s*A:|$)/gi;
+    while ((match = textPattern.exec(text)) !== null) {
+      const q = match[1].trim();
+      const a = match[2].trim();
+      if (q && a) faqs.push({ q, a });
+    }
+  }
+
+  return faqs;
+}
+
 export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostClientProps) {
   const sameCategoryPosts = allPosts.filter(p => p.slug !== post.slug && p.category === post.category);
   const otherPosts = allPosts.filter(p => p.slug !== post.slug && p.category !== post.category);
   const morePosts = [...sameCategoryPosts, ...otherPosts].slice(0, 3);
   const trail = [{ label: "Home", href: "/" }, { label: "Blog", href: "/blogs/" }, { label: post.title }];
+  const normalizedContent = normalizeBlogContent(post.content);
+  const visibleFaqs = extractFaqs(normalizedContent);
 
   return (
     <main className="min-h-screen bg-surface">
@@ -76,14 +174,30 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
         <div className="mx-auto max-w-3xl">
           <div className="prose prose-invert max-w-none">
             <p className="text-body leading-relaxed text-on-surface-variant">{post.excerpt}</p>
-            {post.content && post.content.trim() !== "" && post.content !== "<p><br></p>" && post.content !== "<p>&nbsp;</p>" && post.content !== "Full content here..." ? (
-              <div className="blog-content mt-6 leading-relaxed text-on-surface-variant" dangerouslySetInnerHTML={{ __html: post.content }} />
+            {normalizedContent && normalizedContent.trim() !== "" && normalizedContent !== "<p><br></p>" && normalizedContent !== "<p>&nbsp;</p>" && normalizedContent !== "Full content here..." ? (
+              <div className="blog-content mt-6 leading-relaxed text-on-surface-variant" dangerouslySetInnerHTML={{ __html: normalizedContent }} />
             ) : (
               <p className="mt-6 italic text-slate-500">No content available for this post.</p>
             )}
           </div>
         </div>
       </section>
+
+      {visibleFaqs.length > 0 && (
+        <section className="px-6 pb-12">
+          <div className="mx-auto max-w-3xl rounded-panel border border-primary/15 bg-surface-mid p-6">
+            <h2 className="mb-5 font-sora text-2xl font-bold text-white">FAQ</h2>
+            <div className="space-y-5">
+              {visibleFaqs.map((faq, index) => (
+                <div key={`${faq.q}-${index}`}>
+                  <h3 className="font-semibold text-white">{faq.q}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="px-6 pb-16">
         <BlogInternalLinks currentSlug={post.slug} allPosts={allPosts} linkConfig={linkConfig} />
