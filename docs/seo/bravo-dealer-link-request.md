@@ -1,138 +1,45 @@
-# Bravo Global — Dealer Listing / Partner Page Link Request
+# Bravo Global - Dealer Listing / Partner Page Request
 
-**Objective:** Have Sahara Office Equipments added to Bravo Global's UAE dealer locator
-or partner page, with a **followed, plain-HTML** link to
-`https://www.saharaprinter.com/bravo-card-printers-uae/`.
+**Objective:** Ask Bravo Global to list Sahara Office Equipments in the appropriate UAE dealer, partner, or where-to-buy resource, linking to:
 
-**Why this matters (SEO):** the Bravo page already declares `sameAs: https://www.bravoglobal.com`
-in its LocalBusiness schema. A reciprocal link from Bravo makes the authorised-partner
-relationship independently verifiable to search engines and AI answer engines, rather
-than a one-sided claim. It is also the highest-authority link realistically available
-to this site — see `docs/seo/backlink-gap-2026-08.md`.
+`https://www.saharaprinter.com/bravo-card-printers-uae/`
 
-**Constraint (updated 2026-09):** the site now states "authorised exclusive reseller in
-the UAE for the Bravo RTAI and DC 3300" — migration `021_bravo_exclusive_reseller.sql`
-restored this from the earlier "authorised UAE retail partner" wording (migration `008`
-had downgraded an unscoped "sole distributor" claim; the exclusive claim is correct once
-scoped to these two specific models, per user confirmation 2026-09-04). Outreach must
-match this exactly: **"authorised exclusive reseller for the RTAI and DC 3300"** — never
-an unscoped "sole distributor" or "exclusive distributor" claim covering the whole Bravo
-range, which Bravo could reasonably dispute if they have other UAE partners for other
-models.
+**Scope:** Sahara may describe itself as the authorised exclusive reseller in the UAE for the Bravo RTAI and Bravo DC 3300 only. Do not use unscoped phrases such as "sole distributor" or "exclusive distributor for Bravo" unless Bravo provides written approval.
 
-## Contact details (from bravoglobal.com, verified Aug 2026)
+## Contact Details
 
-- **Email:** enquiry@bravoglobal.com
-- **Phone:** +971 4 323 7500
-- **Address:** P.O. Box 61232, Dubai, UAE
-- **Relevant page:** https://bravoglobal.com/partnerprogram/ — the Partner Program lists
-  "Marketing Assistance" (marketing materials, catalogs) and "Manufacturer Authorization"
-  as partner benefits, which is the natural hook for this request.
+- Website: https://bravoglobal.com/
+- Email: enquiry@bravoglobal.com
+- Phone: +971 4 323 7500
+- Relevant relationship hook: Bravo partner/dealer support, manufacturer authorization, local UAE buyer routing.
 
-> **Before sending:** confirm the sender's name, job title and the correct Bravo account
-> manager. Do not add order volumes, customer names or dates — none are verifiable from
-> the website content and the draft below deliberately omits them.
+## Ask
 
----
+Request one of these, in priority order:
 
-## What to ask for, in priority order
+1. Sahara Office Equipments listed in Bravo's UAE dealer, partner, distributor, or where-to-buy page.
+2. Company NAP listed exactly: Sahara Office Equipments, Sharjah, UAE, +971 50 382 3969, https://www.saharaprinter.com.
+3. A link to the dedicated Bravo UAE page: https://www.saharaprinter.com/bravo-card-printers-uae/
+4. Official product assets, authorisation wording, and any verification process Bravo wants Sahara to follow.
+5. Optional future collaboration: UAE deployment story, testimonial, or localized UAE copy, only with customer permission.
 
-**1. The one that matters most:** a listing on Bravo's official "Where to Buy" /
-Distributors / Partner Locator page with a **followed** link to exactly
-`https://www.saharaprinter.com/bravo-card-printers-uae/`, anchor text
-**"Sahara Office Equipments — UAE"** (brand + geo, never an exact-match keyword like
-"pvc card printer dubai" — that reads as manipulative to both the manufacturer and to
-Google). This is the single strongest corroboration of the authorised-partner claim on
-our page.
+Do not demand link attributes. Verify and record the final link exactly as Bravo publishes it.
 
-**2. Dealer-locator entry with NAP matching our Google Business Profile
-character-for-character** — name, address, `+971 50 382 3969`, website. Doubles as a
-local-SEO citation independent of the backlink value.
+## Draft Email
 
-**3. A dated partnership announcement / news post** on bravoglobal.com linking to us —
-newsworthy, and often gets picked up by trade press without further effort.
-
-**4. A co-branded case study** of a UAE deployment, hosted on Bravo's domain with a link
-back to our page.
-
-**5. Assets + permission:** high-res product images, official spec PDFs, and the
-authorised-partner badge/logo — and ask for the badge's **official verification URL**,
-so the trust mark is independently checkable rather than just an image we host.
-
-**6. Inclusion in their partner catalogue/PDF** and regional distributor mailings.
-
-**7. A link to our consumables page** (`/services/printer-spare-parts/`) if Bravo
-maintains a "genuine consumables" or "where to buy ribbons" section.
-
-**8. A signed authorisation letter** — useful for UAE government/corporate tenders
-regardless of the SEO angle, and it's what lets us state the partner claim on-site
-without overreaching.
-
-## What to explicitly ask them to avoid
-
-- **`rel="nofollow"` or `rel="sponsored"`** on the link — this is an editorial partner
-  listing, not paid placement, so a nofollow tag defeats the purpose.
-- **Redirect-through-tracker links** (e.g. a click-tracking domain) instead of a direct
-  link to our URL.
-- **JavaScript-only dealer maps** where the link never appears in the page's HTML —
-  crawlers won't see it even if a human clicking the map finds us. Ask for a plain HTML
-  partner/dealer page as the fallback.
-- Any variation of the URL other than `https://www.saharaprinter.com/bravo-card-printers-uae/`
-  with the trailing slash — that's our canonical, and a different URL variant splits the
-  link equity.
-
-## What we offer in return
-
-This is what actually gets the ask accepted — lead with it, don't just ask:
-
-- A reciprocal, followed link from our Bravo page to `bravoglobal.com` (already live).
-- A publishable UAE customer testimonial for their site.
-- Localised EN/AR copy for a UAE section of their site, if useful to them.
-- Installation photography from UAE deployments (with customer permission).
-
----
-
-## Draft email
-
-**Subject:** Sahara Office Equipments (UAE) — dealer listing request for RTAI & DC 3300
+**Subject:** Sahara Office Equipments UAE dealer listing request for RTAI and DC 3300
 
 Dear Bravo Global Partner Team,
 
-I'm writing from **Sahara Office Equipments**, based in Sharjah, UAE — the authorised
-exclusive reseller in the UAE for the **Bravo RTAI** retransfer card printer and the
-**Bravo DC 3300** direct-to-card printer. We supply, install and service both models
-across Dubai, Sharjah, Abu Dhabi and the wider UAE, together with genuine Bravo
-consumables — ribbons, retransfer film and cleaning kits — held in local stock.
+I'm writing from Sahara Office Equipments in Sharjah. We supply, install, and service the Bravo RTAI retransfer card printer and Bravo DC 3300 direct-to-card printer across the UAE, together with genuine Bravo consumables.
 
-We have built a dedicated product page for these two models covering full technical
-specifications, an RTAI vs DC 3300 comparison, indicative UAE pricing, consumables and
-service coverage:
+We have prepared a dedicated UAE resource page for buyers comparing those two models:
 
-**https://www.saharaprinter.com/bravo-card-printers-uae/**
+https://www.saharaprinter.com/bravo-card-printers-uae/
 
-**My request:** could Sahara Office Equipments be added to your UAE dealer locator or
-partner listing, with a direct (non-tracked) link to the page above?
+Could Sahara Office Equipments be added to your UAE dealer, partner, or where-to-buy listing with our company details and website? A listing would help UAE buyers verify the local route for sales, consumables, and support before they enquire.
 
-Three reasons it would help both sides:
-
-1. **Buyer routing.** UAE customers searching for Bravo card printers currently have no
-   listed local point of contact on bravoglobal.com. A dealer entry sends qualified
-   in-country enquiries straight to a stocking partner.
-2. **Verification.** Our page states our partner relationship and references
-   bravoglobal.com. A listing on your side confirms it for customers carrying out
-   due diligence — and for search engines, which increasingly check that dealer claims
-   are corroborated by the manufacturer.
-3. **Reciprocity.** We already link to bravoglobal.com from our page and would be glad
-   to provide a UAE customer testimonial, installation photography, or localised copy
-   for a UAE section of your site if that's useful.
-
-Happy to supply anything you need for the listing — company trade licence details,
-logo, address, service coverage, or a short profile in whatever format your dealer
-directory uses. If a listing isn't currently possible, I'd equally welcome a
-conversation about the Partner Program more generally, including marketing assistance
-and manufacturer authorisation.
-
-Thank you for your time.
+We can provide our trade licence, logo, address, service coverage, authorisation details, and any listing format your team prefers.
 
 Kind regards,
 
@@ -140,41 +47,35 @@ Kind regards,
 [Job Title]
 Sahara Office Equipments
 Al Arabi Building, Industrial Area 11, Sharjah, UAE
-+971 50 382 3969 · info@saharaedoc.com
++971 50 382 3969
+info@saharaedoc.com
 https://www.saharaprinter.com
 
----
+## Short Follow-Up
 
-## Short version (LinkedIn / WhatsApp / phone follow-up)
+Hello, I'm following up on the request below about adding Sahara Office Equipments to the appropriate Bravo UAE dealer or partner listing for the RTAI and DC 3300. If there is a different contact or form for this request, please point me in the right direction and I will follow that process.
 
-> Hello — I'm [Name] from Sahara Office Equipments in Sharjah. We supply and service the
-> Bravo RTAI and DC 3300 across the UAE and stock genuine Bravo consumables locally.
-> We've built a dedicated UAE page for both models at
-> saharaprinter.com/bravo-card-printers-uae — would it be possible to add us to your
-> UAE dealer locator or partner listing with a link to that page? Happy to send whatever
-> company details you need. Thank you.
-
----
-
-## Follow-up cadence
+## Follow-Up Cadence
 
 | Step | Timing | Channel |
 |---|---|---|
-| 1. Initial email | Day 0 | enquiry@bravoglobal.com |
-| 2. Phone follow-up | Day 7 | +971 4 323 7500 — ask for marketing/partnerships |
-| 3. LinkedIn message | Day 14 | Bravo Global company page / marketing contact |
-| 4. Close out | Day 30 | Record outcome in `BACKLINKS-FREE.md` entry #29 |
+| Initial email | Day 0 | enquiry@bravoglobal.com |
+| Phone follow-up | Day 7 | +971 4 323 7500 |
+| LinkedIn/company contact | Day 14 | Bravo Global company page or known account manager |
+| Close out | Day 30 | Record outcome in campaign tracker |
 
-## Verification checklist once a link goes live
+## Verification Checklist Once Live
 
-- [ ] Link points to exactly `https://www.saharaprinter.com/bravo-card-printers-uae/` (www + trailing slash)
-- [ ] Link is a real `<a href>` in the page HTML (view source / `curl`), not JS-injected
-- [ ] No `rel="nofollow"` / `rel="sponsored"` on the link
-- [ ] Not routed through a click-tracking redirect domain
-- [ ] NAP on the Bravo listing matches Google Business Profile exactly
+- [ ] Source page URL recorded.
+- [ ] Destination URL recorded.
+- [ ] Link is visible to users.
+- [ ] HTML anchor, redirect, or JavaScript-only implementation recorded honestly.
+- [ ] `rel` attribute recorded exactly if present.
+- [ ] NAP matches Sahara's canonical details.
+- [ ] Listing scope matches RTAI and DC 3300 authorization.
 
-## Outcome log
+## Outcome Log
 
-| Date | Action | Response | Link live? |
-|---|---|---|---|
-| — | — | — | — |
+| Date | Action | Response | Link live? | Notes |
+|---|---|---|---|---|
+| - | - | - | - | - |

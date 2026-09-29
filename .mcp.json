@@ -1,8 +1,20 @@
 {
   "mcpServers": {
     "agent-browser": {
-      "command": "npx",
-      "args": ["-y", "agent-browser-mcp"]
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "agent-browser-mcp"],
+      "env": {
+        "AGENT_BROWSER_EXECUTABLE_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+      }
+    },
+    "vibe-browser": {
+      "type": "http",
+      "url": "https://relay.api.vibebrowser.app/mcp/4c740f10-3238-40ee-83b8-7a14607268cd",
+      "enabled": false
+    },
+    "browser-mcp": {
+      "command": "cmd",
+      "args": ["/c", "npx", "@agent360/browser-mcp@latest"]
     }
   }
 }

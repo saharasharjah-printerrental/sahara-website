@@ -61,8 +61,12 @@ export async function generateMetadata(): Promise<Metadata> {
     // (originally /services/photocopier-rental/, now consolidated into
     // /photocopier-rental-dubai/, Sep 2026), left stranded at position 48 on
     // 1,863 impressions and 1 click. Copier terms belong to that page, not this one.
-    title: "Printer Rental UAE | A4 & A3 Printers from AED 250/mo",
-    description: "Office printer rental across the UAE from AED 250/month. Zero deposit, unlimited toner, full maintenance, 4-hour response. Canon, Kyocera, HP, Brother.",
+    // Sep 2026: GSC shows this page owns the "printer rental dubai" head term
+    // (416 impr/28d, pos 18.8) but the old UAE-only title matched the query
+    // poorly — CTR 0.3–0.7% at pos 12–19. Dubai added to title + description
+    // lead; the district long-tail stays on /printer-rental-dubai/ (65a9085).
+    title: "Printer Rental Dubai & UAE | A4 & A3 from AED 250/mo",
+    description: "Printer rental in Dubai & across the UAE from AED 250/month. Zero deposit, unlimited toner, full maintenance, 4-hour response. Canon, Kyocera, HP, Brother.",
     keywords: "printer rental uae, office printer rental dubai, printer rental sharjah, printer rental abu dhabi, a4 printer rental uae, laser printer rental dubai, zero deposit printer rental uae, canon printer rental uae, hp printer rental dubai, brother printer rental uae, monthly printer rental uae",
     openGraph: {
       title: "Printer Rental UAE | From AED 250/mo | Sahara Office Equipments",

@@ -123,6 +123,7 @@ const relatedServices = [
   { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN Security Levels Explained" },
   { href: "/blogs/uae-pdpl-document-destruction-compliance-guide/", label: "UAE PDPL Compliance Guide" },
   { href: "/blogs/best-office-paper-shredders-uae-fellowes-compared/", label: "Fellowes Models Compared" },
+  { href: "/brands/fellowes/", label: "Fellowes Shredders UAE" },
 ];
 
 const trail = [

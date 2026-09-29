@@ -141,7 +141,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const db = getRequestContext().env.DB as any;
     const row = await db.prepare('SELECT title, excerpt, image, meta_title, meta_description, meta_keywords FROM blogs WHERE slug = ? AND isActive = 1').bind(slug).first();
     if (row) {
-      const title = row.meta_title || `${row.title} | Sahara`;
+      const cleanTitle = String(row.title || '').replace(/\s*\|\s*Sahara\s*$/, '');
+      const title = row.meta_title || `${cleanTitle} | Sahara`;
       const description = row.meta_description || row.excerpt;
       const keywords = row.meta_keywords || 'printer rental uae, office equipment dubai, photocopier uae';
       const image = row.image || 'https://www.saharaprinter.com/images/heroPrntr1.webp';

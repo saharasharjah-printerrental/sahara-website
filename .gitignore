@@ -36,6 +36,7 @@ next-env.d.ts
 tests/e2e/visual/diffs/
 tests/e2e/screenshots/*.png
 *.agent-browser-state*
+.agent-browser-cf-profile/
 
 # IDE - restore needed for MCP config
 !.vscode/mcp.json

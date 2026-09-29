@@ -52,7 +52,7 @@ https://www.saharaprinter.com
 
 - [ ] Link points to `https://www.saharaprinter.com/services/papercut-print-management/`
 - [ ] Real `<a href>` in page HTML, not JS-injected
-- [ ] No `rel="nofollow"`/`rel="sponsored"`
+- [ ] Record any `rel` attributes exactly as published
 - [ ] Confirm actual partner tier/status before updating the site's own page with any claim
 
 ## Outcome log

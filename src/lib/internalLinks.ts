@@ -379,6 +379,7 @@ export const BLOG_LINK_MAP: Record<string, BlogLinkConfig> = {
   "best-office-paper-shredders-uae-fellowes-compared": {
     primaryService: { href: "/services/paper-shredder-sales/", label: "Buy a Paper Shredder", type: "service" },
     relatedLinks: [
+      { href: "/brands/fellowes/", label: "Fellowes Shredders UAE", type: "brand" },
       { href: "/services/paper-shredder-rental/", label: "Paper Shredder Rental UAE", type: "service" },
       { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/", label: "Shredder Sizing & Cost Guide", type: "blog" },
       { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN Security Levels Explained", type: "blog" },
@@ -582,6 +583,7 @@ export const ANCHOR_TEXT_MAP: Record<string, string> = {
   "/brands/epson/": "Epson printers",
   "/brands/samsung/": "Samsung printers",
   "/brands/lexmark/": "Lexmark printers",
+  "/brands/fellowes/": "Fellowes shredders UAE",
   "/rental-calculator/": "get a free quote",
 };
 

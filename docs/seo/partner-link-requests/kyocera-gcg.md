@@ -53,7 +53,7 @@ https://www.saharaprinter.com
 
 - [ ] Link points to `https://www.saharaprinter.com/brands/kyocera/`
 - [ ] Real `<a href>` in page HTML, not JS-injected
-- [ ] No `rel="nofollow"`/`rel="sponsored"`
+- [ ] Record any `rel` attributes exactly as published
 - [ ] NAP matches Google Business Profile exactly
 
 ## Outcome log

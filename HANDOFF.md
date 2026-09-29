@@ -1,5 +1,72 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## START HERE - 2026-09-24, Apple DNS fixed/submitted; backlink plan mid-run
+
+User's priority today was the Apple Business Connect DNS TXT issue. That is done:
+
+- Correct Apple TXT value: `apple-domain-verification=FiQhDi2nwcwPFaAi`
+- Root/apex TXT now exists at `saharaprinter.com` on Cloudflare authoritative NS (`fred` and `raina` verified).
+- The wrong old hostname record `apple-domain.saharaprinter.com` may still exist, but it is harmless; the required apex/root record is present.
+- User submitted Apple organization verification after the DNS fix.
+- `docs/seo/BACKLINK-TRACKER-30.md` row #3 now says `Submitted / org verification in review` with notes.
+
+Current active plan is the backlink/local citation plan saved at:
+`C:\Users\DK\.kimi-code\sessions\wd_sahara-website_5ce950254ff7\session_943043e5-cacb-42fc-b521-fd88c5331395\agents\main\plans\blue-marvel-pantha-deadpool.md`
+
+Plan status as of stopping:
+
+- Done: connect Vibe/Browser MCP relay.
+- Done: Apple Business Connect DNS fix and org verification submission.
+- Done earlier: duplicated `| Sahara` title work partly done, but see note below.
+- Done: Bing Places marked owner-registered/live in tracker.
+- Done: atninfo/yellowpages-UAE reclaim re-checks.
+- In progress: remaining reclaim/moderation re-checks and account-gated Tier-1 submissions.
+
+Reclaim/moderation findings already logged in `docs/seo/BACKLINK-TRACKER-30.md`:
+
+- atninfo existing listing: website link now exists, but `rel="nofollow"`.
+- yellowpages-uae existing listing: website stored as `saharaprinter.com`, but rendered as button/data-url, not real link.
+- UAEInquiry: old pending URL now 404; search no result. Treat rejected/removed.
+- HAI UAE: `/add-business` returns HTTP 500; no live confirmation.
+- tradersfind.com: still times out.
+- uae-business.com/add-listing: 404.
+- uaedirectory.pages.dev/addbusiness.html: no usable form; only email-pitch candidate.
+- ReachUAE: directory live, but Sahara not found in search/plain HTML; keep submitted/probably moderated, not confirmed live.
+
+Browser state before stopping:
+
+- Browser MCP/Agent360 extension is connected.
+- Foursquare tab was active at `https://business.foursquare.com/`.
+- Searched:
+  - `SAHARA office equipments`
+  - `Sahara Office Equipment Trading LLC`
+- Foursquare returned nearby "Sahara" or generic equipment/trading businesses, but no exact Sahara Office Equipments result. Next action: log Foursquare as "no existing place found; add/claim requires owner login/account flow" unless the user wants to sign in and manually add it.
+- Other open tabs may include Apple Business, Cloudflare DNS, UAE Directory, Foursquare. Close them when done.
+
+Just before the user stopped the turn, direct checks were running/finished:
+
+- `https://uaethrive.com/?s=Sahara%20Office%20Equipments` only returned the SPA shell; need browser/JS search or site-specific route before making a final call.
+- `https://listy.ae/?s=Sahara%20Office%20Equipments` was the wrong query param; the site search form uses `search=...`. Recheck with `https://listy.ae/?search=Sahara%20Office%20Equipments`.
+- `https://ae.uaeplusplus.com/search?keyword=Sahara%20Office%20Equipments` returned only the SPA shell; use browser/JS rendered content to verify.
+
+Important title-fix follow-up:
+
+- `src/app/blogs/[slug]/page.tsx` currently strips trailing `| Sahara` only from `row.title` before appending fallback title. The original plan said duplicate `| Sahara` existed in both code and `meta_title`; verify whether `row.meta_title` also needs cleaning in code or D1.
+- Remote D1 title batch mostly ran, but one slug was missed because the real slug is `rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business`. Its meta title may still be `Rent or Buy Your Office Printer? Smart Choices | Sahara UAE | Sahara`.
+
+Working tree at stop:
+
+- Modified: `.mcp.json`, `docs/seo/BACKLINK-TRACKER-30.md`, `docs/seo/OUTREACH.md`, `src/app/blogs/[slug]/page.tsx`, `HANDOFF.md`
+- Untracked: `.agent-browser-cf-profile/`, `docs/seo/outreach-drafts/`, `scripts/backlinks/fix-meta-titles.sql`, `scripts/backlinks/new-refdomains.json`, `scripts/backlinks/vibe-relay.mjs`
+- Do not revert unrelated dirty work.
+
+Resume recommendation:
+
+1. Recheck Listy with `?search=...`, UAEThrive, UAE++ using Browser MCP rendered content.
+2. Patch `docs/seo/BACKLINK-TRACKER-30.md` with Foursquare + remaining recheck outcomes.
+3. Then continue account-gated Tier-1 items: Waze, Crunchbase, Trustpilot, Glassdoor, LinkedIn/Facebook checks, malayalibusiness.com, anyrentals reclaim.
+4. After citation pass, return to title/D1 cleanup and run `npx.cmd tsc --noEmit`.
+
 ## SESSION NOTE — 2026-09-18 (later), shredder click-loss root cause fixed + 10 blog drafts + image pack (local, not yet committed)
 
 User asked why `/services/paper-shredder-rental/` drove clicks at launch (Jul 10) and then lost them
@@ -1296,3 +1363,21 @@ Committed as `4eae396` on the branch (still not pushed to `origin`, per the stan
 3. PVC page registration checklist — **RESOLVED**, see above.
 4. Resume the SEO engagement (§0–11 above) — nothing from Phase 3–5 there has been started yet; §11 "Next action when work resumes" in that section is the entry point. **Note:** GSC "Request Indexing" is UI-only and cannot be automated by the agent — flag this to the user rather than attempting it.
 5. Still nothing pushed to `origin` or deployed — needs explicit user approval first, per the standing constraint.
+
+## SESSION NOTE — 2026-09-26, GSC click-drop investigation + recovery (live GSC/GBP via browser MCP)
+
+User asked why GSC clicks are dropping. Live GSC (browser MCP, no screenshots) shows clicks are
+NOT below baseline: 110/28d (Aug 10–Sep 6) → 178/28d (Aug 30–Sep 26), 6.4/day avg, 5.6/day last 7d.
+The "drop" is post-spike normalization after the shredder fix recovery. Real leak = commercial-query
+CTR: `/services/printer-rental/` 3,433 impr at pos 12.2 → 12 clicks (0.3% CTR); its title said "UAE"
+only while Google ranks it for "printer rental dubai" (head-term ownership without Dubai in the title —
+exactly the shredder-RCA pattern). Indexing: 137 indexed / 177 not-indexed, ALL large buckets are legacy
+old-site URLs; only actionable group = "Discovered–not indexed": paper-shredder-sales (still never
+crawled) + 4 toner pages. GBP: 5.0★/71 reviews, post cadence stale since Sep 5 (Kyocera post due),
+`printer repair near me` pos 17→8.5. Fixes applied (uncommitted, build passes): hub title →
+"Printer Rental Dubai & UAE | A4 & A3 from AED 250/mo"; homepage title gains brand; NEW /brands/fellowes/
+page (closes the shredder-RCA Fellowes follow-up, 75 impr/mo waiting); toner fallback links hardened.
+Full writeup: docs/seo/click-recovery-2026-09.md + gsc-snapshots/2026-09-26.md. Backlink agent ran
+the BACKLINKS-FREE.md queue (tracker updated separately). Next: user must deploy (nothing pushed,
+standing constraint), then run indexnow --force, do the GSC Request-Indexing list + GBP queue posts
+by hand, re-check ~2026-10-24.

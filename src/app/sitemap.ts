@@ -71,6 +71,7 @@ const ROUTE_LASTMOD: Record<string, string> = {
   '/brands/samsung/': '2026-09-08T09:34:26+04:00',
   // Served by the [slug] catch-all, not a dedicated page.tsx.
   '/brands/konica-minolta/': '2026-09-15T11:28:23+04:00',
+  '/brands/fellowes/': '2026-09-29T07:27:07+04:00',
   '/printer-repair-dubai/': '2026-09-15T11:28:23+04:00',
   '/printer-repair-sharjah/': '2026-09-15T11:28:23+04:00',
   '/kyocera-printer-repair/': '2026-09-15T11:28:23+04:00',
@@ -157,6 +158,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/brands/lexmark/`,               lastModified: lm('/brands/lexmark/', thisMonth), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/brands/samsung/`,               lastModified: lm('/brands/samsung/', thisMonth), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/brands/konica-minolta/`,        lastModified: lm('/brands/konica-minolta/', thisMonth), changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/brands/fellowes/`,              lastModified: lm('/brands/fellowes/', thisMonth), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/printer-repair-dubai/`,          lastModified: lm('/printer-repair-dubai/', requestTime), changeFrequency: 'weekly',  priority: 0.85 },
     { url: `${BASE}/printer-repair-sharjah/`,       lastModified: lm('/printer-repair-sharjah/', requestTime), changeFrequency: 'weekly',  priority: 0.85 },
     { url: `${BASE}/kyocera-printer-repair/`,       lastModified: lm('/kyocera-printer-repair/', requestTime), changeFrequency: 'weekly',  priority: 0.8 },

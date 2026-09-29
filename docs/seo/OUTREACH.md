@@ -5,7 +5,17 @@
 
 ---
 
-## Tier 1 — High-DA, High-Priority Targets
+## 2026-09-25 Active Outreach Standard
+
+Use `docs/seo/backlink-campaign-30-day-2026-09.md` as the active campaign tracker. This file is kept as historical research, but any outreach must follow the newer rules:
+
+- Treat DA values as third-party estimates, not proof of quality.
+- Do not promise DA lift, referral traffic, or followed links.
+- Do not reject otherwise relevant placements only because the link may be nofollow.
+- Do not ask publishers to remove `nofollow` or `sponsored`; record the attribute they choose.
+- Prioritize relationship-backed partner listings, customer/vendor pages, and genuinely useful resources over self-published profiles.
+
+## Tier 1 — Priority Targets
 
 ### 1. hashnode.com (DA 60)
 - **Type:** Tech blogging platform (developer + IT audience)
@@ -33,7 +43,7 @@
 
 ### 4. storeboard.com (DA 70)
 - **Type:** Business directory + blog platform
-- **Why relevant:** B2B product/service listings with dofollow links
+- **Why relevant:** Existing profile plus business-content surface; verify link attributes after publication
 - **Pitch:** Company profile + article: "Printer Rental vs Buying for UAE Offices"
 - **Link target:** `/services/printer-rental`
 - **Contact:** Free registration → create company page → publish blog post
@@ -162,12 +172,9 @@ rather than guest posts and are tracked there, not here.
 
 ---
 
-## Expected Outcome
+## Measurement
 
-- **6–8 quality backlinks** from Tier 1 efforts over 30–60 days
-- **Anchor diversity:** Branded (Sahara Office Equipments), partial-match (printer rental UAE), and URL anchors
-- **Expected DA lift:** +2–4 DA points over 6 months from accumulated links
-- **Traffic:** Hashnode and Apsense articles can drive 50–200 referral visits/month directly
+Measure outcomes by verified referring domains, verified source URLs, referral visits where analytics access exists, and qualified enquiries. Do not forecast DA lift or traffic from these targets before publication and measurement.
 
 ## Tracking Template
 
@@ -179,3 +186,26 @@ rather than guest posts and are tracked there, not here.
 | storeboard.com | 70 | Pending | — | — | — | |
 | americantowns.com | 58 | Pending | — | — | — | |
 | zumvu.com | 56 | Pending | — | — | — | |
+
+## Sep 2026 re-mining — Ubersuggest refDomains (500-row export)
+
+The Sep 2026 Ubersuggest opportunity export (`ubersuggest opportunity refDomains.csv`)
+was re-mined against this file's exclusion list, `BACKLINK-TRACKER-30.md`,
+`BACKLINKS-FREE.md`, and `tests/scripts/backlink-candidates.json`. Of 497 unique
+domains, **469 were not previously tracked, but the overwhelming majority are PBN /
+misspelled-"directory" spam** (wayranks, clicktoselldirectoy, worldwidetopsite.link,
+etc.) matching the exclusion criteria already documented above — not pursued.
+
+A handful of borderline domains were assessed individually:
+
+| Domain | DA | Verdict |
+|---|---|---|
+| medium.com | 95 | Reachable but Medium story links may be nofollow. Not a primary backlink target, but still usable for referral traffic or brand visibility if the content is worth publishing. |
+| zoominfo.com | 80 | Data-aggregator profile — worth claiming/updating for citation-NAP consistency, but profile links are nofollow. Candidate for a citation-only pass, not a link target. |
+| provenexpert.com | 70 | Review-profile platform. A genuine Sahara review profile is brand-safe; link rel must be verified in-browser before counting as a win. Candidate, unverified. |
+| sharjahclassifieds.com | 58 | UAE classifieds site. Classified ads are weak citations and typically nofollow; low priority, revisit only if UAE citation count stalls. |
+
+**Net new priority targets added: none.** The Sep export confirms the earlier finding:
+competitor link gaps in this niche are not closable via directory spam. The better
+pipeline is relationship-backed partner listings, genuine citations, and useful
+content placements tracked in the active campaign pack.

@@ -147,6 +147,7 @@ const relatedServices = [
   { href: "/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/", label: "Shredder Sizing & Cost Guide" },
   { href: "/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/", label: "DIN P4 vs P5 vs P6 Security Levels" },
   { href: "/blogs/shredder-delivery-jafza-saif-zone-difc-uae-free-zones/", label: "Free Zone Delivery (JAFZA, SAIF, DIFC)" },
+  { href: "/brands/fellowes/", label: "Fellowes Shredders UAE" },
 ];
 
 const trail = [

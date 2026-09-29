@@ -24,8 +24,8 @@ export const runtime = 'edge';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.saharaprinter.com"),
-  title: "Printer Rental UAE | AED 250/mo | Free Toner & Maintenance",
-  description: "UAE printer & photocopier rental from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 5.0★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
+  title: "Sahara Office Equipments | Printer Rental Dubai & UAE | AED 250/mo",
+  description: "Printer & photocopier rental in Dubai & across the UAE from AED 250/mo. Zero deposit, free toner. 4-hr emergency response. 5.0★ · 1,500+ clients · Since 2012. Canon, Kyocera, HP. ☎ +971503823969",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },

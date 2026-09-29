@@ -1,0 +1,36 @@
+{
+  "target": "https://www.saharaprinter.com/",
+  "date": "2026-09-25",
+  "scope": "30-day manual backlink campaign planning and outreach artifacts",
+  "cc_data": null,
+  "moz_data": null,
+  "bing_data": null,
+  "dataforseo_data": null,
+  "verify_data": {
+    "data": {
+      "summary": {},
+      "results": []
+    }
+  },
+  "parsed_data": {
+    "schema": [],
+    "h1": [],
+    "h1_suspicious": []
+  },
+  "scoring_factors": {
+    "profile_overview": "Not Assessed",
+    "anchor_distribution": "Not Assessed",
+    "referring_domain_quality": "Not Assessed",
+    "toxic_links": "Not Assessed",
+    "top_pages": "Not Assessed",
+    "link_velocity": "Not Assessed",
+    "geographic_relevance": "Not Assessed"
+  },
+  "findings": [
+    {
+      "source": "not-assessed",
+      "finding": "No numeric backlink health score is included in this campaign pack because no live Moz, Bing, DataForSEO, or Common Crawl dataset was collected for this implementation step.",
+      "recommendation": "Use the tracker verification fields to record acquired links only after public source URLs are checked."
+    }
+  ]
+}
