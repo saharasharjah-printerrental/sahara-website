@@ -86,4 +86,4 @@ A: Renting lets you switch models as your team grows without a new capital purch
 - [Paper Shredder Rental & Sales Dubai & UAE](/services/paper-shredder-rental/)
 - [Paper Shredder Rental vs Buying — When Renting Wins](/blogs/paper-shredder-rental-uae-when-it-beats-buying/)
 - [DIN P-4 vs P-5 vs P-6 Explained](/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/)
-- [Get a Quote](/rental-calculator/)
+- [Get a Quote](/quote/paper-shredder-rental/)

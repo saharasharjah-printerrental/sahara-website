@@ -161,9 +161,9 @@ const breadcrumbSchema = {
 export default function PvcCardPrintingServicesPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -176,7 +176,7 @@ export default function PvcCardPrintingServicesPage() {
             <AnswerBlock
               id="pvc-card-printing-services-uae"
               question="Can I get PVC cards printed in UAE without buying a printer?"
-              answer="Yes — Sahara Office Equipments prints and delivers finished PVC cards as a bureau service: employee ID, security cards, custom hologram cards, wooden and transparent cards, and more, on our own Bravo RTAI and DC 3300 printers, with no hardware purchase required."
+              answer="Sahara Office Equipments prints and delivers finished PVC cards across Dubai, Sharjah, Abu Dhabi and the UAE without requiring a printer purchase or rental. Order employee IDs, membership cards, access cards or custom designs. Standard ID orders start at 10 cards; wooden or transparent cards at 25; custom hologram cards at 50. Pricing depends on quantity, print sides, finish and encoding."
               supportingPoints={[
                 "Full card catalogue: ID, access-control/RFID, membership, custom hologram, security, wooden, and transparent cards.",
                 "Minimum order 10 cards per run — 25 for wooden/transparent, 50 for custom hologram.",
@@ -188,7 +188,7 @@ export default function PvcCardPrintingServicesPage() {
           }
           badges={["Minimum 10 Cards", "2–3 Day Turnaround", "Encoding Included", "UAE-Wide Delivery"]}
           image={{ src: "/brands/bravo/rtai-official.webp", alt: "PVC cards printed by Sahara Office Equipments in UAE", width: 610, height: 610 }}
-          primaryCta={{ label: "Request a Printing Quote", href: "/pvc-card-printer-quote/" }}
+          primaryCta={{ label: "Request a Printing Quote", href: "/quote/pvc-card-printing/" }}
           secondaryCta={{ label: "Call: +971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -218,7 +218,7 @@ export default function PvcCardPrintingServicesPage() {
         <CtaBand
           title="Get Your PVC Cards Printed"
           body="Send your artwork and card requirements — we'll quote turnaround and pricing for your exact order."
-          primary={{ label: "Request a Printing Quote", href: "/pvc-card-printer-quote/" }}
+          primary={{ label: "Request a Printing Quote", href: "/quote/pvc-card-printing/" }}
           secondary={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 

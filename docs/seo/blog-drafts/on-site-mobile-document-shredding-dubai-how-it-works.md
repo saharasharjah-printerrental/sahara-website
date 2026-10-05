@@ -25,7 +25,7 @@ On-site shredding means the destruction happens at your premises rather than doc
 
 ### 1. A Rented Shredder, Kept On-Site
 
-You rent a shredder (from AED 150/month), it's delivered and set up at your office, and your team shreds documents whenever needed for the length of the contract. This is on-site in the truest sense — the machine never leaves your premises, and nothing waits to be collected.
+You rent a shredder (from AED 450/month), it's delivered and set up at your office, and your team shreds documents whenever needed for the length of the contract. This is on-site in the truest sense — the machine never leaves your premises, and nothing waits to be collected.
 
 ### 2. A Mobile Shredding Truck
 
@@ -48,7 +48,7 @@ A shredding company sends a truck with an industrial shredder mounted inside. Yo
 | | Rented Office Shredder | Mobile Shredding Truck |
 |---|---|---|
 | Best for | Ongoing, day-to-day shredding | One-off bulk clear-outs |
-| Cost | From AED 150/month | Quoted per job/volume |
+| Cost | From AED 450/month | Quoted per job/volume |
 | Documents wait before destruction | No | No (destroyed on arrival) |
 | Watch it happen | Yes, it's your own machine | Yes, most providers offer viewing |
 | Ongoing availability | Yes, for the contract term | One visit |
@@ -75,7 +75,7 @@ A: Yes, both options can provide a certificate of destruction on request.
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [Shredder Delivery to JAFZA, SAIF Zone & DIFC](/blogs/shredder-delivery-jafza-saif-zone-difc-uae-free-zones/)
 - [Heavy-Duty Shredder Rental for Bulk Clear-Outs](/blogs/heavy-duty-shredder-rental-bulk-document-clearout-uae/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

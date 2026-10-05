@@ -334,7 +334,7 @@ export default function AMCPage() {
                   ))}
                 </ul>
                 <div className="mt-9 flex flex-wrap gap-4">
-                  <a href="/rental-calculator/" className="btn-primary">Get AMC Quote</a>
+                  <a href="/quote/printer-amc/" className="btn-primary">Get AMC Quote</a>
                   <a href="tel:+971503823969" className="btn-secondary">+971 50 382 3969</a>
                 </div>
               </Reveal>
@@ -392,7 +392,7 @@ export default function AMCPage() {
                   ))}
                 </ul>
                 <a
-                  href="/rental-calculator/"
+                  href="/quote/printer-amc/"
                   className={`block rounded-pill py-4 text-center font-bold transition-all hover:scale-[1.02] ${plan.highlight ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "glass-card text-white"}`}
                 >
                   {plan.cta}
@@ -566,7 +566,7 @@ export default function AMCPage() {
         <CtaBand
           title="Protect Your Entire Fleet"
           body="Get a customized AMC proposal for your organization within 24 hours. Fleet assessments are free and non-obligatory."
-          primary={{ label: "Request AMC Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Request AMC Quote", href: "/quote/printer-amc/" }}
           secondary={{ label: "Call Our Team", href: "tel:+971503823969" }}
         />
 

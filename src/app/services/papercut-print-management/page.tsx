@@ -122,8 +122,8 @@ const trail = [
 export default function PaperCutPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
       {/* FAQPage JSON-LD is emitted by <FaqSection> alongside the accordion it renders,
           so the questions can never drift apart from the schema that declares them. */}
       <main className="min-h-screen bg-surface">
@@ -152,7 +152,7 @@ export default function PaperCutPage() {
             />
           }
           badges={["20–30% Cost Reduction", "Secure Print Release", "Canon, Kyocera, HP, Xerox", "On-Site Setup UAE", "12-Month Support"]}
-          primaryCta={{ label: "Get PaperCut Quote", href: "/rental-calculator/" }}
+          primaryCta={{ label: "Get PaperCut Quote", href: "/quote/print-management/" }}
           secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -184,7 +184,7 @@ export default function PaperCutPage() {
           <ComparisonTable columns={["Feature", "PaperCut MF", "PaperCut NG"]} rows={mfVsNg} />
           <p className="mt-4 text-caption text-muted">
             Sahara supplies and implements both PaperCut MF and NG across Dubai, Sharjah, and Abu Dhabi.{" "}
-            <a href="/rental-calculator/" className="text-primary hover:underline">Contact us</a> for a recommendation based on your printer fleet size.
+            <a href="/quote/print-management/" className="text-primary hover:underline">Contact us</a> for a recommendation based on your printer fleet size.
           </p>
         </Section>
 
@@ -224,7 +224,7 @@ export default function PaperCutPage() {
         <CtaBand
           title="Start Cutting Your Print Costs"
           body="Get a free print audit and PaperCut recommendation for your Dubai, Sharjah, or Abu Dhabi office. Most UAE implementations pay back within 6 months."
-          primary={{ label: "Get Free Print Audit", href: "/rental-calculator/" }}
+          primary={{ label: "Get Free Print Audit", href: "/quote/print-management/" }}
           secondary={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 

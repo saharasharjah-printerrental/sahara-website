@@ -298,17 +298,17 @@ function buildAdminHtml(data: QuoteEmailData): string {
   <div style="margin-top:24px">
     <p style="margin:0 0 10px;color:#9ca3af;font-size:11px;text-transform:uppercase;letter-spacing:0.1em">Calculator Breakdown</p>
     <table style="width:100%;border-collapse:collapse;background:#101c2e;border-radius:8px;overflow:hidden">
-      ${data.printType ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px;width:52%">Print Type</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.printType}</td></tr>` : ''}
-      ${data.paperFormat ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Paper Format</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.paperFormat}</td></tr>` : ''}
-      ${data.bwVolume ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">B&W Volume</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.bwVolume}</td></tr>` : ''}
-      ${data.colorVolume ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Colour Volume</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.colorVolume}</td></tr>` : ''}
-      ${data.baseRent ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Base Rent</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.baseRent}/mo</td></tr>` : ''}
-      ${data.extraBwCost ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Extra B&W Cost</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.extraBwCost}/mo</td></tr>` : ''}
-      ${data.extraColorCost ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Extra Colour Cost</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.extraColorCost}/mo</td></tr>` : ''}
-      ${data.a3Surcharge ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">A3 Surcharge</td><td style="padding:7px 12px;color:#fff;font-size:13px">${data.a3Surcharge}/mo</td></tr>` : ''}
-      ${data.durationDiscount ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Duration Discount</td><td style="padding:7px 12px;color:#d4f8d4;font-size:13px">-${data.durationDiscount}</td></tr>` : ''}
-      <tr style="background:#162236;border-top:1px solid #f5be53/30"><td style="padding:9px 12px;color:#f5be53;font-size:13px;font-weight:700">Monthly Total</td><td style="padding:9px 12px;color:#f5be53;font-size:16px;font-weight:700">${data.estimatedRange}/mo</td></tr>
-      ${data.totalContractValue ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:12px">Total Contract Value</td><td style="padding:7px 12px;color:#d7e3fc;font-size:12px">${data.totalContractValue}</td></tr>` : ''}
+      ${data.printType ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px;width:52%">Print Type</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.printType)}</td></tr>` : ''}
+      ${data.paperFormat ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Paper Format</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.paperFormat)}</td></tr>` : ''}
+      ${data.bwVolume ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">B&W Volume</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.bwVolume)}</td></tr>` : ''}
+      ${data.colorVolume ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Colour Volume</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.colorVolume)}</td></tr>` : ''}
+      ${data.baseRent ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Base Rent</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.baseRent)}/mo</td></tr>` : ''}
+      ${data.extraBwCost ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Extra B&W Cost</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.extraBwCost)}/mo</td></tr>` : ''}
+      ${data.extraColorCost ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Extra Colour Cost</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.extraColorCost)}/mo</td></tr>` : ''}
+      ${data.a3Surcharge ? `<tr style="background:#0d1827"><td style="padding:7px 12px;color:#9ca3af;font-size:13px">A3 Surcharge</td><td style="padding:7px 12px;color:#fff;font-size:13px">${escapeHtml(data.a3Surcharge)}/mo</td></tr>` : ''}
+      ${data.durationDiscount ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:13px">Duration Discount</td><td style="padding:7px 12px;color:#d4f8d4;font-size:13px">-${escapeHtml(data.durationDiscount)}</td></tr>` : ''}
+      <tr style="background:#162236;border-top:1px solid #f5be53/30"><td style="padding:9px 12px;color:#f5be53;font-size:13px;font-weight:700">Monthly Total</td><td style="padding:9px 12px;color:#f5be53;font-size:16px;font-weight:700">${escapeHtml(data.estimatedRange)}/mo</td></tr>
+      ${data.totalContractValue ? `<tr><td style="padding:7px 12px;color:#9ca3af;font-size:12px">Total Contract Value</td><td style="padding:7px 12px;color:#d7e3fc;font-size:12px">${escapeHtml(data.totalContractValue)}</td></tr>` : ''}
     </table>
   </div>` : '';
 
@@ -344,7 +344,7 @@ function buildCustomerHtml(data: QuoteEmailData): string {
   <div style="background:#101c2e;border-radius:8px;padding:20px;margin:24px 0;border:1px solid rgba(245,190,83,0.2)">
     <p style="margin:0 0 8px;color:#9ca3af;font-size:11px;text-transform:uppercase;letter-spacing:0.1em">Your Configuration</p>
     <p style="margin:0 0 8px;color:#fff;font-size:14px">${escapeHtml(data.configuration)}</p>
-    <p style="margin:0;color:#f5be53;font-weight:700;font-size:20px">${escapeHtml(data.estimatedRange)}<span style="font-size:13px;color:#9ca3af;font-weight:400">/month</span></p>
+    ${data.estimatedRange ? `<p style="margin:0;color:#f5be53;font-weight:700;font-size:20px">${escapeHtml(data.estimatedRange)}${data.baseRent ? '<span style="font-size:13px;color:#9ca3af;font-weight:400">/month</span>' : ''}</p>` : '<p style="margin:0;color:#d7e3fc">Pricing and availability will be confirmed by our team.</p>'}
   </div>
   <p style="font-size:14px">Need urgent assistance? Call or WhatsApp us directly:</p>
   <p><a href="tel:+971503823969" style="color:#f5be53;font-size:16px;font-weight:700">+971 50 382 3969</a></p>

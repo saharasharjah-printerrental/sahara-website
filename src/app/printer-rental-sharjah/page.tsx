@@ -156,9 +156,9 @@ export default async function PrinterRentalSharjahPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -190,7 +190,7 @@ export default async function PrinterRentalSharjahPage() {
               />
             </div>
             <div className="mt-9 flex flex-wrap gap-4">
-              <a href="/rental-calculator/" className="btn-primary">Get a Sharjah Quote</a>
+              <a href="/quote/printer-rental/" className="btn-primary">Get a Sharjah Quote</a>
               <a href="tel:+971503823969" className="btn-secondary">Call: +971 50 382 3969</a>
             </div>
           </div>
@@ -226,7 +226,7 @@ export default async function PrinterRentalSharjahPage() {
         <CtaBand
           title="Rent or Buy a Printer in Sharjah Today"
           body="Same-day delivery from our Sharjah head office — zero deposit, unlimited toner, and maintenance included."
-          primary={{ label: "Get a Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Get a Quote", href: "/quote/printer-rental/" }}
           secondary={{ label: "Call: +971 50 382 3969", href: "tel:+971503823969" }}
         />
 

@@ -17,7 +17,7 @@ import type { FaqItem } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "PVC Card Printer Rental UAE | Bravo RTAI & DC 3300 | Sahara",
-  description: "Rent a PVC / ID card printer in UAE — Bravo RTAI or DC 3300, from Sahara Office Equipments, authorised exclusive UAE reseller. Weekly, monthly & annual terms for events, onboarding drives & exhibitions. Dubai, Sharjah & Abu Dhabi. ☎ +971503823969",
+  description: "Rent a PVC ID card printer in Dubai, Sharjah & Abu Dhabi. Event, monthly and annual hire with delivery, setup, starter ribbons and support. Request a quote.",
   keywords: "pvc card printer rental dubai, id card printer rental uae, hire id card printer dubai, card printer for event uae, temporary id card printer rental, bravo card printer rental, plastic card printer rental sharjah",
   openGraph: {
     title: "PVC Card Printer Rental UAE | Sahara Office Equipments",
@@ -113,8 +113,8 @@ const breadcrumbSchema = {
 export default function PvcCardPrinterRentalPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -127,7 +127,7 @@ export default function PvcCardPrinterRentalPage() {
             <AnswerBlock
               id="pvc-card-printer-rental-uae"
               question="Can I rent a PVC card printer in UAE instead of buying one?"
-              answer="Yes — Sahara Office Equipments rents the Bravo RTAI and DC 3300 PVC/ID card printers on weekly, monthly, or annual terms, with delivery, setup, starter ribbons, and support included, across Dubai, Sharjah, Abu Dhabi, and all UAE emirates."
+              answer="Sahara Office Equipments rents PVC and ID card printers in Dubai, Sharjah, Abu Dhabi and across the UAE for events, staff onboarding and in-house badge printing. Bravo RTAI and DC 3300 rental options include delivery, setup, starter ribbons and support on weekly, monthly or annual terms. Quote requirements are rental dates, card quantity, single- or double-sided printing, and any encoding needs."
               supportingPoints={[
                 "Weekly terms for a single event or exhibition; monthly for onboarding drives; annual for ongoing badge programmes.",
                 "Both models available: RTAI (600 DPI retransfer, holographic security) and DC 3300 (up to 280 cards/hour).",
@@ -137,7 +137,7 @@ export default function PvcCardPrinterRentalPage() {
             />
           }
           image={{ src: "/brands/bravo/rtai-official.webp", alt: "Bravo RTAI PVC card printer available for rental in UAE", width: 610, height: 610 }}
-          primaryCta={{ label: "Get a Rental Quote", href: "/pvc-card-printer-quote/" }}
+          primaryCta={{ label: "Get a Rental Quote", href: "/quote/pvc-card-printer-rental/" }}
           secondaryCta={{ label: "Call: +971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -193,7 +193,7 @@ export default function PvcCardPrinterRentalPage() {
         <CtaBand
           title="Rent a PVC Card Printer Today"
           body="Tell us your dates, volume, and card type — we'll recommend the RTAI or DC 3300 and have it delivered and set up on-site."
-          primary={{ label: "Get a Rental Quote", href: "/pvc-card-printer-quote/" }}
+          primary={{ label: "Get a Rental Quote", href: "/quote/pvc-card-printer-rental/" }}
           secondary={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -216,7 +216,7 @@ export default function PvcCardPrinterRentalPage() {
               { href: "/bravo-card-printers-uae/", label: "PVC Card Printers — Model Guide & Sales" },
               { href: "/services/pvc-card-printing-services/", label: "PVC Card Printing Services" },
               { href: "/services/printer-rental/", label: "Printer Rental UAE" },
-              { href: "/rental-calculator/", label: "Rental Calculator" },
+              { href: "/quote/pvc-card-printer-rental/", label: "Card Printer Rental Quote" },
               { href: "/blogs/how-to-choose-id-card-printer-uae-office/", label: "How to Choose an ID Card Printer" },
               { href: "/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/", label: "Retransfer vs Direct-to-Card Explained" },
             ].map((l) => (

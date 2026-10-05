@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import { validateEmail, validateUAEPhone } from '@/lib/emailValidation';
 import { parsePriceAED } from '@/lib/price';
+import { isAdminRequest } from '@/lib/adminAuth';
+import { createOrderAccess, hasOrderAccess, setOrderAccess } from '@/lib/orderAccess';
 import { sendOrderNotification, OrderItemLine } from '../send-email/email-service';
 
 export const runtime = 'edge';
@@ -21,7 +23,7 @@ function getDB() {
 function makeRef(): string {
   const d = new Date();
   const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
-  const rand = Array.from({ length: 4 }, () => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[Math.floor(Math.random() * 32)]).join('');
+  const rand = crypto.randomUUID().replace(/-/g, '').toUpperCase();
   return `ORD-${ymd}-${rand}`;
 }
 
@@ -50,16 +52,20 @@ function rowToOrder(r: any) {
 }
 
 export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const ref = searchParams.get('ref');
+  const admin = await isAdminRequest(request);
+  if (!admin && (!ref || !(await hasOrderAccess(request, ref)))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: HEADERS });
+  }
   const db = getDB();
   if (!db) return NextResponse.json({ error: 'Database not configured', orders: [] }, { headers: HEADERS });
   try {
-    const { searchParams } = new URL(request.url);
-    const ref = searchParams.get('ref');
     if (ref) {
       const row = await db.prepare('SELECT * FROM orders WHERE ref = ?').bind(ref).first();
       return NextResponse.json({ order: row ? rowToOrder(row) : null }, { headers: HEADERS });
     }
-    const limit = parseInt(searchParams.get('limit') || '100', 10);
+    const limit = Math.min(500, Math.max(1, parseInt(searchParams.get('limit') || '100', 10) || 100));
     const result = await db.prepare('SELECT * FROM orders ORDER BY createdAt DESC LIMIT ?').bind(limit).all();
     return NextResponse.json({ orders: (result?.results ?? []).map(rowToOrder) }, { headers: HEADERS });
   } catch (error) {
@@ -119,7 +125,8 @@ export async function POST(request: NextRequest) {
     const subtotal = items.reduce((acc, it) => acc + it.lineTotal, 0);
     const total = subtotal;
     const ref = makeRef();
-    const id = `ord-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    const id = `ord-${crypto.randomUUID()}`;
+    const access = await createOrderAccess(ref);
     const now = new Date().toISOString();
 
     await db.prepare(`
@@ -169,7 +176,7 @@ export async function POST(request: NextRequest) {
       .bind(emailSent ? 1 : 0, emailProvider, id).run()
       .catch((e: unknown) => console.error('[/api/orders] email_sent update failed:', e));
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       order: { id, ref, customerName: String(customer.name).trim(), customerEmail: String(customer.email).trim(),
         customerPhone: String(customer.phone).trim(), customerCompany: String(customer.company || '').trim(),
@@ -177,6 +184,8 @@ export async function POST(request: NextRequest) {
         preferredDate: String(delivery.preferredDate || '').trim(), instructions: String(delivery.instructions || '').trim(),
         items, subtotal, total, status: 'pending', emailSent, createdAt: now },
     }, { headers: HEADERS });
+    setOrderAccess(response, request, ref, access);
+    return response;
   } catch (error) {
     console.error('[/api/orders] POST Error:', error);
     return NextResponse.json({ error: 'Failed to place order', details: String(error) }, { status: 500, headers: HEADERS });

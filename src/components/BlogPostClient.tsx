@@ -11,6 +11,7 @@ import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import CtaBand from "@/components/ui/CtaBand";
 import { BlogLinkConfig } from "@/lib/internalLinks";
+import { sanitizeHtml } from "@/lib/sanitizeHtml";
 
 interface BlogPost {
   id: string;
@@ -143,7 +144,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
   const otherPosts = allPosts.filter(p => p.slug !== post.slug && p.category !== post.category);
   const morePosts = [...sameCategoryPosts, ...otherPosts].slice(0, 3);
   const trail = [{ label: "Home", href: "/" }, { label: "Blog", href: "/blogs/" }, { label: post.title }];
-  const normalizedContent = normalizeBlogContent(post.content);
+  const normalizedContent = sanitizeHtml(normalizeBlogContent(post.content));
   const visibleFaqs = extractFaqs(normalizedContent);
 
   return (
@@ -244,7 +245,7 @@ export default function BlogPostClient({ post, allPosts, linkConfig }: BlogPostC
             <Link href="/services/amc/" className="text-on-primary underline">maintenance</Link> — within 2 hours.
           </>
         }
-        primary={{ label: "Get a Free Quote", href: "/rental-calculator/" }}
+        primary={{ label: "Get a Free Quote", href: "/quote/" }}
         secondary={{ label: "Contact Us", href: "/contact/" }}
       />
 

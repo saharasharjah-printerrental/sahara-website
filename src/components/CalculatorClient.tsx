@@ -378,7 +378,7 @@ export default function CalculatorClient() {
       `Duration: ${duration} months`,
     ].join(" | ");
     try {
-      await fetch("/api/send-email", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -402,6 +402,8 @@ export default function CalculatorClient() {
           colorVolume: colorVolume > 0 ? `${colorVolume.toLocaleString()} pages/mo` : undefined,
         }),
       });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error("Quote request failed");
     } catch {
       setFormError("Something went wrong. Please try again.");
       setSubmitting(false);

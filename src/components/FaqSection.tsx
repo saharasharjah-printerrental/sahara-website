@@ -4,10 +4,13 @@ interface Props {
   pageSlug: string;
   defaultFaqs?: FaqItem[];
   pageId?: string;
+  useDefaultFaqs?: boolean;
+  priorityFaqs?: FaqItem[];
 }
 
-export default async function FaqSection({ pageSlug, defaultFaqs = [], pageId }: Props) {
-  const faqs = await getFaqsForPage(pageSlug, defaultFaqs);
+export default async function FaqSection({ pageSlug, defaultFaqs = [], pageId, useDefaultFaqs = false, priorityFaqs = [] }: Props) {
+  const storedFaqs = useDefaultFaqs ? defaultFaqs : await getFaqsForPage(pageSlug, defaultFaqs);
+  const faqs = [...priorityFaqs, ...storedFaqs.filter((faq) => !priorityFaqs.some((priority) => priority.q === faq.q))];
   if (faqs.length === 0) return null;
 
   const schema = buildFaqSchema(faqs, pageId);
@@ -16,7 +19,7 @@ export default async function FaqSection({ pageSlug, defaultFaqs = [], pageId }:
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
       />
       <div className="space-y-4">
         {faqs.map((faq, i) => (

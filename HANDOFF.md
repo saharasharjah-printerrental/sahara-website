@@ -1,5 +1,107 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+CURRENT CORRECTION after local continuation on 2026-10-05: release work is committed locally on branch `feat/rental-quotes-security-2026-10` as `a9f4847` (`Add service quote flow and harden lead handling`). It has NOT been pushed, merged to `main`, deployed, or applied to remote D1. Additional local worker-preview gates now passed on `http://127.0.0.1:3202`: admin login/list orders, synthetic local order creation, HttpOnly receipt cookie, receipt-gated order lookup, and payment-create access/offline fallback. A synthetic local-only supply row `preview-priced-supply` was inserted into `sahara-printer-test-db --local`; no remote database was touched. `.npmrc` is already force-added in the local commit and must stay included when this is later merged or pushed.
+
+## PROGRESS - 2026-10-05 (resumed after VS Code closed) — CURRENT RESUME POINT
+
+All local verification steps are DONE. The local release commit exists, but no push, merge, deploy, remote D1 update, indexing submission, or production analytics publication has been performed.
+
+- **Dependencies DONE**: postcss override `^8.5.28` + root devDep (via new `overrides` in package.json), sharp `^0.35.5`, `vercel` added as devDependency. `npm.cmd audit --omit=dev` now **0 vulnerabilities**. Production `next build` passes on Next 15.5.27. Fixed one type error in `tests/scripts/quote-a11y-checks.ts:54-56` (`validity` on `Element`) that blocked the build.
+- **Send-email fixture tests**: were already implemented before the crash — `tests/scripts/security-regressions.cjs` is **18/18 pass** (saved-fallback 200 `email_sent:0`, both-fail 503, malformed/oversize/honeypot rejections with zero side effects, recipient override stripped, D1 write awaited via deferred promise). No route bugs found.
+- **Quote browser suite rerun**: `TEST_BASE_URL=http://localhost:3000 npx.cmd tsx tests/scripts/quote-regression.ts` → **31/31 pass**. A11y suite `quote-a11y-checks.ts` → **7/7 pass**. Screenshots reviewed: mobile shredder quote form shows AED 450/900 correctly; the mid-page "floating pill nav overlap" in full-page mobile screenshots is a capture artifact (nav is `fixed bottom-6` site-wide design, not a regression).
+- **Migration 028 validated** against a captured live row (`tests/tmp/validate_028.py`, live row from 10-05): all replacements land, idempotent, scoped, rollback verified. **Bug fixed**: migration + rollback wrote `/get-quote/paper-shredder-rental/` — that path is retired (legacy redirect claims it); changed to `/quote/paper-shredder-rental/` in both files. Validator had a matching double-slash typo, also fixed. Still needs live-D1 verification + remote execution (see BLOCKED).
+- **Blog drafts synced** (`docs/seo/blog-drafts/`): all shredder-rental AED 150/300 figures → 450 (LX65) / 900 (325Ci) across 6 files; all shredder-draft CTAs repointed from `/rental-calculator/` to `/quote/paper-shredder-rental/`; per-visit outsourced-shredding prices (AED 150–400) intentionally kept. Two printer/copier drafts keep the calculator link intentionally.
+- **Security reconciliation DONE**: independent review verified all 6 reported fixes in code (`tests/tmp/security-findings-2026-10-05.json` + `security-reconciliation-2026-10-05.md`; validator `validate-findings.cjs`). New minor items: non-constant-time compare in adminAuth, `String(error)` reflection in public catch blocks, auth-in-middleware-only fragility. Nothing high/critical.
+- **Cloudflare adapter issue found + FIXED**: `npm run build:cf` used `--skip-build`, which repackaged the STALE `.vercel/output/functions` from 2026-09-24 — `/quote/` and `/quote/[service]` were missing → 404 in `wrangler pages dev` preview. Fixed pipeline: `build:cf` now runs `node scripts/vercel-build.cjs` (invokes the local `vercel build` directly, which regenerates `.vercel/output/functions`) then `next-on-pages --skip-build`. Why the wrapper: new project `.npmrc` (`allow-scripts=esbuild,workerd` + `legacy-peer-deps=true`) is required or `vercel build`'s internal `npm install` dies on EALLOWSCRIPTS/ERESOLVE; npm-run children inherit `npm_config_allow_scripts` as an env var (re-injected by npx too) which npm's project-scoped install rejects, so the wrapper strips it and calls vercel's CLI without npx. Orphaned pre-crash `wrangler dev` processes (ports 3200/3201) were locking `.vercel/output/static` and were killed. **Verified**: `npm run build:cf` exit 0, quote functions present. NOTE: `@cloudflare/next-on-pages@1.13.16` declares peer `next <=15.5.2`; we run 15.5.27 via legacy-peer-deps — adapter build and preview pass, but watch the first deploy.
+- **Worker preview verified** (`wrangler pages dev .vercel/output/static`): `/quote/` 200 (12 services), `/quote/paper-shredder-rental/` + `/quote/label-printer-rental/` 200, invalid service 404, `/get-quote/` 308, shredder AED 450/900 + label AED 549 in SSR HTML/schema, anonymous `/api/inquiries|orders` → 401, malformed POST → 400, oversized → 413, valid quote POST persisted (`{"success":true}`).
+- **IMPORTANT for deploy**: `.npmrc` is **gitignored** (`.gitignore:87`) but the new lockfile (built with `--legacy-peer-deps`) requires `legacy-peer-deps=true` for Cloudflare Pages `npm ci`. Force-add on commit: `git add -f .npmrc`, or the Pages build may fail with ERESOLVE.
+- **BLOCKED on user**: (1) `npx wrangler login` re-auth — stored OAuth token fails D1 API calls (code 10000; `whoami` still works). Needed for live D1 blog-row recheck, executing migration 028 remotely, and fixing stale live qa_answers prices (`qa-shr-2` bullets "from AED 400"/"from AED 150"; the shredder page itself is safe — it uses source-controlled FAQs). (2) Deploy authorisation.
+- Housekeeping: dev server must stay stopped while building (it wipes `.next/BUILD_ID`, breaking the adapter). Old `/get-quote-*` screenshots in `tests/e2e/screenshots/quote-update/` are pre-rename artifacts.
+
+### Resume here (deploy sequence, in order)
+
+1. User runs `npx wrangler login`; confirm D1 read works: `npx wrangler d1 execute sahara-printer-db --env production --remote --command "SELECT slug FROM blogs WHERE slug='paper-shredder-rental-uae-when-it-beats-buying'"`.
+2. Recheck the live blog row against migration 028 source strings (captured copy in `tests/tmp/live_row.py` is from 10-05).
+3. Commit everything (including `git add -f .npmrc`; do NOT commit unrelated pre-existing dirty files like `docs/seo/BACKLINK-TRACKER-30.md`); push to `main`; watch the Cloudflare Pages build (`npx wrangler pages deployment list --project-name=saharaprinter`).
+4. Post-deploy verify live: `/quote/` routes 200, shredder/label prices + schema, canonicals, `/get-quote/` 308, anonymous admin APIs 401, quote form submit persists. Watch for next-on-pages/Next 15.5.27 edge issues in the deploy logs.
+5. Apply migration 028 remotely (dry-run the SELECTs first), then update the live `qa-shr-2` answer bullets (450/900). Verify the published article renders new prices and the `/quote/paper-shredder-rental/` CTA.
+6. Bing/GSC/IndexNow baselines + submit changed public service URLs (never the noindex quote forms). Start 14/28-day CTR/position/citation monitoring.
+
+## START HERE - 2026-10-02: rental pricing, service quotes, AI visibility and security; PAUSED
+
+The user explicitly asked to save the current plan/status here and continue tomorrow (2026-10-03). Stop implementation until they resume. Work has progressed beyond planning: substantial local changes exist, but the release is NOT complete.
+
+### Requested outcome and agreed direction
+
+1. Smaller shredder LX65: AED 450/month. Larger 325Ci: AED 900/month. Delivery, installation, transport and maintenance included. Preserve rental intent, established URLs and price-led snippets because an earlier title/intent change coincided with click loss.
+2. Improve useful, crawlable content and service discovery for AI citations across printer rental, shredders, PVC printer rental/sales and finished-card printing. Do not promise rankings, clicks or citations.
+3. Add a customised label printer at AED 549/month for label sheets up to A3 and compatible paper up to 300 gsm, checking media compatibility before setup.
+4. Replace inappropriate quote-to-printer-calculator links with short service-specific lead forms. Keep the existing printer calculator, spare-parts quote form and legacy PVC quote URL working.
+5. Complete browser/API/JavaScript/security verification before release. User supplied Laya at `http://127.0.0.1:8000` and authorised use of existing Cloudflare/search access.
+
+### Implemented locally, not deployed
+
+- Updated shredder metadata, visible model pricing, answer text, comparison and FAQ/schema, plus rental references on Fellowes and shredder sales pages. Both AED 450 and AED 900 monthly offers are in Service schema. Removed unsupported blanket compliance/savings claims from the rental page.
+- Added the A3 label offer and Service schema at `/services/printer-rental/#label-printing`, with a dedicated quote link and FAQ.
+- Added `/get-quote/` and `/get-quote/[service]/`, driven by `src/lib/quote-services.ts` and `src/components/ServiceQuoteForm.tsx`. Twelve services cover printer/label/shredder rentals, PVC rental/sales/printing, shredder sales, repairs, AMC, printer sales, plotter maintenance and PaperCut. Spare parts retains `/request-quote/`.
+- Forms offer service-specific choices, email submission, WhatsApp and phone. Brand/product context travels through the picker to the form. Form event hooks contain service/channel only, not personal details; actual analytics configuration still needs checking.
+- Updated service/global/mobile/brand/product quote buttons. Explicit calculator links remain. `quoteHrefForPath()` chooses the current service for shared navigation.
+- Added PVC rental and printing navigation links, clarified PVC answer text and rental metadata, updated `llms.txt` and relevant sitemap dates. Simplified `robots.txt` into shared rules so named crawlers cannot bypass the existing admin/API exclusions. Public search/AI crawlers remain allowed; robots is not an authorization boundary.
+- `FaqSection` now supports explicit defaults and priority FAQs and safely escapes JSON-LD. Shredder uses source-controlled FAQs to keep published rates consistent; printer rental prepends the new label FAQ even with D1 content.
+- Hardened `/api/send-email/` using new `src/lib/quote-input.ts`: bounded/type-validated JSON, honeypot, ignores visitor-supplied notification recipients, awaits D1 persistence, reports failure if neither delivery nor persistence succeeds. A saved lead counts as received even if email fails. Escaped calculator values in email HTML and removed empty `/month` text from general quote confirmations.
+- Fixed existing calculator logic that previously unlocked its success view even on an HTTP email error.
+
+### Security findings and fixes
+
+The security subagent reproduced three HIGH-impact existing defects locally: unauthenticated admin APIs/private data access, stored HTML/JSON-LD XSS, and payment transaction replay against unrelated orders. Fixes are local only; do not imply production is protected yet.
+
+- `src/lib/apiAuthorization.ts` + middleware: server-side admin checks for private reads and mutations, explicit public-write allowlist.
+- Public inquiries use generated UUIDs and INSERT, eliminating caller-selected overwrite.
+- `src/lib/orderAccess.ts`: signed, expiring, HttpOnly order receipt cookies; anonymous order lists blocked. New orders retain receipt/payment access in their originating browser.
+- Payment creation persists provider/transaction; callbacks verify order reference, transaction, amount, AED currency and success state, with conditional updates protecting cancelled/fulfilled orders.
+- `src/lib/sanitizeHtml.ts` uses `xss@^1.0.15` for blog/editor HTML. Existing raw JSON-LD renderers escape `<`.
+- Detailed notes: `docs/security-remediation-2026-10-02.md`. No database migration is needed for these security changes.
+- IMPORTANT rollout caveats: receipt signing requires existing `ADMIN_PASSWORD`; historical reference-only receipts now need admin access; in-flight gateway sessions created before the fix lack a stored transaction association and need reconciliation. Real gateway returns and Cloudflare middleware/cookies still need deployment validation.
+
+### Verification completed
+
+- Upgraded Next from `15.5.2` to **15.5.27** (latest available 15.5 patch checked in npm); added `xss`. Install used `--legacy-peer-deps`, which removed many peer packages from the lockfile; inspect adapter/deployment compatibility before release.
+- **Production `npm.cmd run build` PASSED on 15.5.27**, including integrated type checking. First sandboxed attempt failed fetching Google Fonts; escalated rerun succeeded. Remaining build warning: `@cloudflare/next-on-pages` uses `process.release` in an edge import via adminAuth. Cloudflare adapter build has NOT been run.
+- **11/11 security regression tests passed after the Next upgrade**: `node --test tests/scripts/security-regressions.cjs`. Actual route/middleware modules, in-memory SQLite and mocked network/mail; includes isolated headless Chrome XSS verification. Requires Node 22.13+; current machine has Node 24.19.0.
+- Browser suite `tests/scripts/quote-regression.ts`: first run had **29 checks pass**, including all 12 quote pages, 1440px/390px layouts, images, prices/schema, legacy routes and malformed API rejection. Two failures were test selectors (footer link selected instead of picker; Next's route-announcer also matched role=alert). Selectors and expected mocked-503 console handling were corrected, and image element typing fixed, but the suite has NOT been rerun since those changes or the Next upgrade.
+- Screenshots/report: `tests/e2e/screenshots/quote-update/` (now gitignored). Mobile shredder form and desktop label offer were visually inspected. Remaining screenshots, mobile menu sizing/overlap, keyboard/a11y and full console/network results need final review.
+- No real enquiry emails, orders or payments were submitted during tests. Production database access was read-only.
+- Dev server was stopped before the dependency upgrade/build; restart tomorrow. Successful Chrome launch: Playwright `chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true })`. Browser suite needed escalation after sandbox Windows `uv_os_get_passwd` failure.
+
+### Dependency audit still open
+
+Latest `npm.cmd audit --omit=dev --json` after Next upgrade: **0 critical, 2 high, 1 moderate** package entries. These are `sharp` (high), `postcss` (high), and transitive `next` (moderate through postcss), not three separate application exploits.
+
+- Next 15.5.27 still pins `postcss` 8.4.31. npm reported patched current PostCSS **8.5.28**; consider a scoped Next/PostCSS override and updated root devDependency, then rebuild/test.
+- `sharp` remains `^0.34.5`; audit recommends **0.35.5**. Installed Next accepts `^0.34.3 || ^0.35.4`. Upgrade and verify image rendering; not done yet.
+- Full dependency audit before those remaining fixes reported 10 total including dev dependencies. Do not run blanket `npm audit fix --force` or jump to Next 16 just to silence transitive advisories.
+
+### Live content and integrations checked
+
+- Wrangler OAuth works. Production project `saharaprinter`; latest observed deployment `f2f80a54-fd88-474f-94fb-85a96449e4ab`, source `9a0cc60`, from three days before this session. No new deployment, commit or push was made.
+- D1 `sahara-printer-db` (`--env production --remote`): four active shredder FAQs differ from local defaults. A live article `paper-shredder-rental-uae-when-it-beats-buying` still advertises AED 150 and obsolete sample costs.
+- Prepared **`database/migrations/028_rental_pricing_october_2026.sql`**, exact scoped replacements for that article's prices, comparison examples, quote link and meta description. **NOT executed locally or remotely**. Test it against a fixture/backup, review residual rent-versus-buy assertions, then coordinate its application with deployment. No migration 027 was needed; the number was reserved while payment work was being assessed.
+- Bing/GSC live baselines are **NOT obtained**. Browser MCP listed an empty session then failed navigation with `Transport closed`; its feedback tool also failed. No Bing/GSC/IndexNow env names or standard `~/.config/claude-seo` config were found. Do not claim current citation counts, GSC results or indexing submissions. Existing old evidence: `docs/seo/shredder-click-loss-rca-2026-09.md`.
+- Laya was reached. Protocol: POST `/v1/systemone` with `state` text and `questions` object; choice questions need `type: "choice"`, `instructions`, and `criteria` label-to-description map. With task context it weakly favoured service-specific forms (0.6192 answer probability, low confidence); advisory only, not a reason to override user intent.
+- Official SEO sources consulted: Google Search Central AI features/optimization guide; Bing Webmaster Guidelines and AI Performance help. Focus is truthful, crawlable content and measurement, not guaranteed AI inclusion or special `llms.txt` ranking claims.
+
+### Resume in this order
+
+1. Inspect working tree and this note; preserve all changes. `docs/seo/BACKLINK-TRACKER-30.md` was ALREADY dirty before this task and is unrelated. Older handoff sections below are historical, not the active task.
+2. Finish the targeted PostCSS/sharp dependency remediation; inspect lockfile/Cloudflare adapter compatibility. Re-run audits and production build after changes.
+3. Add missing send-email fixture tests to `tests/scripts/security-regressions.cjs`: mock `sendQuoteNotification`, allow Zod import, verify saved fallback on delivery failure, both unavailable => 503, malformed payload causes no effects, notification recipient cannot be overridden, and D1 write is awaited. Subagent stopped before implementing these.
+4. Start local dev server on a free port; rerun `npx.cmd tsx tests/scripts/quote-regression.ts` (supports `TEST_BASE_URL`). Review screenshots, mobile navigation, keyboard/a11y, expected versus unexpected network errors and source/SSR content. Run security suite and typecheck as needed.
+5. Validate the content migration, check all remaining price/quote references including live D1 posts, and complete independent security review/report reconciliation. A schema-validated `findings.json` / full skill-format audit bundle has NOT been produced; only the remediation report exists.
+6. Run Cloudflare adapter build and a preview validation, including auth/private routes, quote persistence, admin editing, receipt access and payment transition behaviour. No release should be described as ready until these pass. Review the concrete release before any production publication.
+7. Deploy/apply scoped content update only once verified and authorised; verify live prices, schema, canonicals, forms, crawler access and security. Then use available Bing/GSC/IndexNow access to record baselines/submit changed public service URLs; never submit noindex quote forms as SEO landing pages. Monitor matched query/page CTR, clicks and positions over 14/28 days and Bing page-level citations, accounting for price and seasonal demand changes.
+
+## Historical Handoff Below
+
 ## START HERE - 2026-09-24, Apple DNS fixed/submitted; backlink plan mid-run
 
 User's priority today was the Apple Business Connect DNS TXT issue. That is done:

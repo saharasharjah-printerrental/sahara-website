@@ -72,4 +72,4 @@ A: Same-day delivery is available for Dubai and Sharjah orders placed before 12p
 - [Paper Shredder Rental & Sales Dubai & UAE](/services/paper-shredder-rental/)
 - [UAE PDPL Document Destruction Compliance Guide](/blogs/uae-pdpl-document-destruction-compliance-guide/)
 - [Printer Rental UAE](/services/printer-rental/)
-- [Get a Quote](/rental-calculator/)
+- [Get a Quote](/quote/paper-shredder-rental/)

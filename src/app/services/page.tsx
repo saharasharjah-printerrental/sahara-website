@@ -85,8 +85,8 @@ const itemListSchema = {
 export default function ServicesHubPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, "\\u003c") }} />
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -122,7 +122,7 @@ export default function ServicesHubPage() {
         <CtaBand
           title="Not Sure Which Service You Need?"
           body="Tell us what you're trying to solve and we'll point you to the right plan — no obligation."
-          primary={{ label: "Get a Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Get a Quote", href: "/quote/" }}
           secondary={{ label: "Call: +971 50 382 3969", href: "tel:+971503823969" }}
         />
 

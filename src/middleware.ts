@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { NextFetchEvent } from 'next/server';
+import { isAdminRequest } from '@/lib/adminAuth';
+import { requiresAdmin } from '@/lib/apiAuthorization';
 
 // Per-endpoint rate limit tiers (checked in order, first match wins)
 const RATE_LIMITS = [
@@ -81,7 +83,7 @@ function getClientIp(req: NextRequest): string {
   );
 }
 
-export function middleware(request: NextRequest, _event: NextFetchEvent) {
+export async function middleware(request: NextRequest, _event: NextFetchEvent) {
   // ── Non-WWW → WWW redirect (301) ────────────────────────────────────────
   // Redirect non-www to www at the edge — fires BEFORE any routing
   // Works on Cloudflare Pages (via @cloudflare/next-on-pages) and Vercel
@@ -96,6 +98,13 @@ export function middleware(request: NextRequest, _event: NextFetchEvent) {
   }
 
   const pathname = request.nextUrl.pathname;
+
+  if (requiresAdmin(request) && !(await isAdminRequest(request))) {
+    return NextResponse.json({ error: 'Unauthorized' }, {
+      status: 401,
+      headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' },
+    });
+  }
 
   // Exact, case-sensitive legacy-slug redirects — see LEGACY_CASE_REDIRECTS
   // comment above for why these can't be next.config.mjs redirects() rules.

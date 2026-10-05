@@ -70,7 +70,7 @@ run_a11y_test() {
 run_a11y_test "/" "Homepage"
 run_a11y_test "/contact" "Contact"
 run_a11y_test "/products" "Products"
-run_a11y_test "/get-quote" "Get Quote"
+run_a11y_test "/quote/" "Get Quote"
 
 $AB close --all 2>/dev/null || true
 

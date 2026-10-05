@@ -235,7 +235,7 @@ export default async function PrinterRentalDubai() {
     <>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-      {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />}
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -286,7 +286,7 @@ export default async function PrinterRentalDubai() {
                 ))}
               </ul>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href="/rental-calculator/" className="btn-primary">Get Dubai Quote</a>
+                <a href="/quote/printer-rental/" className="btn-primary">Get Dubai Quote</a>
                 <a href="tel:+971503823969" className="btn-secondary">+971 50 382 3969</a>
               </div>
             </Reveal>
@@ -320,7 +320,7 @@ export default async function PrinterRentalDubai() {
                     </li>
                   ))}
                 </ul>
-                <a href="/rental-calculator/" className={`block rounded-pill py-4 text-center font-bold transition-all hover:scale-[1.02] ${tier.popular ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "glass-card text-white"}`}>
+                <a href="/quote/printer-rental/" className={`block rounded-pill py-4 text-center font-bold transition-all hover:scale-[1.02] ${tier.popular ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "glass-card text-white"}`}>
                   Get Dubai Quote
                 </a>
               </div>
@@ -467,7 +467,7 @@ export default async function PrinterRentalDubai() {
         <CtaBand
           title="Need Printer Rental in Dubai?"
           body="Get a customized Dubai quote within 2 hours. Free consultation and same-day delivery available for most Dubai districts."
-          primary={{ label: "Get Free Dubai Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Get Free Dubai Quote", href: "/quote/printer-rental/" }}
           secondary={{ label: "Call Now", href: "tel:+971503823969" }}
         />
 

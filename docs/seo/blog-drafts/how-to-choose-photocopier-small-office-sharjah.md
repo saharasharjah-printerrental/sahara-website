@@ -124,4 +124,4 @@ A: Yes. All Sahara photocopier rentals in Sharjah include on-site repair, OEM pa
 - [Photocopier Rental Sharjah — Prices & Options](/photocopier-rental-sharjah)
 - [Printer Rental vs Buying in UAE](/blogs/printer-rental-vs-buying-uae-2026-cost-breakdown)
 - [Rental Price Calculator](/rental-calculator)
-- [Get a Free Quote for Sharjah](/get-quote)
+- [Get a Free Quote for Sharjah](/quote/)

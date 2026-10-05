@@ -141,7 +141,7 @@ export default function OurClientsPage() {
                 Tell us your monthly print volume and we will size the right device and quote the current rate.
               </p>
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                <a href="/rental-calculator/" className="btn-primary">Request a Quote</a>
+                <a href="/quote/" className="btn-primary">Request a Quote</a>
                 <a href="/contact/" className="rounded-pill border border-primary/40 px-8 py-3 font-bold text-primary transition-colors hover:bg-primary/10">
                   Contact Us
                 </a>

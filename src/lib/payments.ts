@@ -90,7 +90,7 @@ export function isProviderReady(cfg: PaymentConfig): boolean {
 
 // ── Stripe ──────────────────────────────────────────────────────────────────
 
-async function createStripeSession(cfg: PaymentConfig, order: PaymentOrder, origin: string): Promise<string> {
+async function createStripeSession(cfg: PaymentConfig, order: PaymentOrder, origin: string): Promise<PaymentSessionResult> {
   const params = new URLSearchParams();
   params.set('mode', 'payment');
   params.set('client_reference_id', order.ref);
@@ -113,23 +113,26 @@ async function createStripeSession(cfg: PaymentConfig, order: PaymentOrder, orig
     body: params.toString(),
   });
   const data = await res.json() as any;
-  if (!res.ok || !data.url) {
+  if (!res.ok || !data.url || !data.id) {
     throw new Error(data?.error?.message || 'Stripe session creation failed');
   }
-  return data.url as string;
+  return { redirectUrl: data.url, paymentRef: data.id, online: true };
 }
 
-async function verifyStripePayment(cfg: PaymentConfig, sessionId: string): Promise<boolean> {
+async function verifyStripePayment(cfg: PaymentConfig, sessionId: string, order: ExpectedPayment): Promise<boolean> {
   const res = await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
     headers: { Authorization: `Bearer ${cfg.stripeSecretKey}` },
   });
   const data = await res.json() as any;
-  return res.ok && data?.payment_status === 'paid';
+  return res.ok && data?.id === sessionId && data?.mode === 'payment' &&
+    data?.status === 'complete' && data?.payment_status === 'paid' &&
+    data?.client_reference_id === order.ref && data?.currency === 'aed' &&
+    data?.amount_total === Math.round(order.total * 100);
 }
 
 // ── PayTabs ─────────────────────────────────────────────────────────────────
 
-async function createPayTabsSession(cfg: PaymentConfig, order: PaymentOrder, origin: string): Promise<string> {
+async function createPayTabsSession(cfg: PaymentConfig, order: PaymentOrder, origin: string): Promise<PaymentSessionResult> {
   const base = paytabsBase(cfg.paytabsRegion);
   const callback = `${origin}/api/payments/callback?provider=paytabs&ref=${encodeURIComponent(order.ref)}`;
   const body = {
@@ -160,13 +163,13 @@ async function createPayTabsSession(cfg: PaymentConfig, order: PaymentOrder, ori
     body: JSON.stringify(body),
   });
   const data = await res.json() as any;
-  if (!data?.redirect_url) {
+  if (!res.ok || !data?.redirect_url || !data?.tran_ref) {
     throw new Error(data?.message || 'PayTabs payment request failed');
   }
-  return data.redirect_url as string;
+  return { redirectUrl: data.redirect_url, paymentRef: data.tran_ref, online: true };
 }
 
-async function verifyPayTabsPayment(cfg: PaymentConfig, tranRef: string): Promise<boolean> {
+async function verifyPayTabsPayment(cfg: PaymentConfig, tranRef: string, order: ExpectedPayment): Promise<boolean> {
   const base = paytabsBase(cfg.paytabsRegion);
   const res = await fetch(`${base}/payment/query`, {
     method: 'POST',
@@ -175,12 +178,16 @@ async function verifyPayTabsPayment(cfg: PaymentConfig, tranRef: string): Promis
   });
   const data = await res.json() as any;
   // response_status 'A' = Authorised
-  return res.ok && data?.payment_result?.response_status === 'A';
+  return res.ok && data?.tran_ref === tranRef && data?.payment_result?.response_status === 'A' &&
+    String(data?.tran_type).toLowerCase() === 'sale' && data?.cart_id === order.ref &&
+    data?.cart_currency === 'AED' &&
+    Math.round(Number(data?.cart_amount) * 100) === Math.round(order.total * 100);
 }
 
 // ── Public API ──────────────────────────────────────────────────────────────
 
 export interface PaymentSessionResult {
+  paymentRef?: string;
   /** Where to send the customer next. Empty when the provider is "none". */
   redirectUrl: string;
   /** True when an online gateway will collect payment before the receipt. */
@@ -198,10 +205,10 @@ export async function createPaymentSession(
   if (!isProviderReady(cfg)) return { redirectUrl: '', online: false };
   try {
     if (cfg.provider === 'stripe') {
-      return { redirectUrl: await createStripeSession(cfg, order, origin), online: true };
+      return await createStripeSession(cfg, order, origin);
     }
     if (cfg.provider === 'paytabs') {
-      return { redirectUrl: await createPayTabsSession(cfg, order, origin), online: true };
+      return await createPayTabsSession(cfg, order, origin);
     }
     if (cfg.provider === 'external') {
       return { redirectUrl: cfg.externalUrl, online: true };
@@ -213,15 +220,28 @@ export async function createPaymentSession(
 }
 
 /** Verifies a completed payment on gateway return. */
+export interface ExpectedPayment {
+  ref: string;
+  total: number;
+  provider: string;
+  paymentRef: string;
+}
+
 export async function verifyPayment(
   cfg: PaymentConfig, provider: string, ref: { sessionId?: string; tranRef?: string },
+  order: ExpectedPayment,
 ): Promise<{ paid: boolean; paymentRef: string }> {
+  const suppliedRef = provider === 'stripe' ? ref.sessionId : ref.tranRef;
+  if (!order || !Number.isFinite(order.total) || order.total <= 0 ||
+      provider !== order.provider || !order.paymentRef || suppliedRef !== order.paymentRef) {
+    return { paid: false, paymentRef: '' };
+  }
   try {
     if (provider === 'stripe' && ref.sessionId) {
-      return { paid: await verifyStripePayment(cfg, ref.sessionId), paymentRef: ref.sessionId };
+      return { paid: await verifyStripePayment(cfg, ref.sessionId, order), paymentRef: ref.sessionId };
     }
     if (provider === 'paytabs' && ref.tranRef) {
-      return { paid: await verifyPayTabsPayment(cfg, ref.tranRef), paymentRef: ref.tranRef };
+      return { paid: await verifyPayTabsPayment(cfg, ref.tranRef, order), paymentRef: ref.tranRef };
     }
   } catch (e) {
     console.error('[payments] verifyPayment failed:', e);

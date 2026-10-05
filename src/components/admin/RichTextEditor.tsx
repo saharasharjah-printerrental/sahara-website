@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useCallback } from "react";
+import { sanitizeHtml } from "@/lib/sanitizeHtml";
 
 interface Props {
   value: string;
@@ -16,7 +17,7 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write y
   // Set content once after mount, using latest value
   useEffect(() => {
     if (!initialSyncDone.current && editorRef.current) {
-      editorRef.current.innerHTML = value || "";
+      editorRef.current.innerHTML = sanitizeHtml(value || "");
       lastSyncedValue.current = value || "";
       initialSyncDone.current = true;
     }
@@ -28,7 +29,7 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write y
     if ((value || "") === lastSyncedValue.current) return;
     if (document.activeElement === editorRef.current) return;
 
-    editorRef.current.innerHTML = value || "";
+    editorRef.current.innerHTML = sanitizeHtml(value || "");
     lastSyncedValue.current = value || "";
   }, [value]);
 
@@ -36,7 +37,7 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write y
     if (editorRef.current) {
       const html = editorRef.current.innerHTML;
       lastSyncedValue.current = html;
-      onChange(html);
+      onChange(sanitizeHtml(html));
     }
   }, [onChange]);
 
@@ -53,7 +54,12 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write y
       return;
     }
     const url = prompt("Enter URL (e.g. /services/printer-rental or https://...):", "https://");
-    if (url && url !== "https://") exec("createLink", url);
+    if (url && url !== "https://") {
+      try {
+        const parsed = new URL(url, window.location.origin);
+        if (['https:', 'http:', 'mailto:', 'tel:'].includes(parsed.protocol)) exec("createLink", url);
+      } catch { /* Ignore invalid links. */ }
+    }
   }, [exec]);
 
   const handleInput = useCallback(() => {
@@ -100,6 +106,13 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write y
         suppressContentEditableWarning
         suppressHydrationWarning
         onInput={handleInput}
+        onPaste={(event) => {
+          event.preventDefault();
+          const html = event.clipboardData.getData('text/html');
+          if (html) exec('insertHTML', sanitizeHtml(html));
+          else exec('insertText', event.clipboardData.getData('text/plain'));
+        }}
+        onDrop={(event) => event.preventDefault()}
         onKeyDown={handleKeyDown}
         className="min-h-[500px] p-5 bg-white text-slate-900 focus:outline-none leading-relaxed"
         data-placeholder={placeholder}

@@ -20,7 +20,7 @@ interface Banner {
 }
 
 const initialBanners: Banner[] = [
-  { id: "1", title: "Printer Rental Starting from AED 300/mo", subtitle: "Full maintenance included. No hidden costs.", ctaText: "Get Quote", ctaLink: "/get-quote", imageUrl: "", position: "hero", isActive: true, sortOrder: 1 },
+  { id: "1", title: "Printer Rental Starting from AED 300/mo", subtitle: "Full maintenance included. No hidden costs.", ctaText: "Get Quote", ctaLink: "/quote/", imageUrl: "", position: "hero", isActive: true, sortOrder: 1 },
 ];
 
 export default function AdminBanners() {
@@ -186,7 +186,7 @@ export default function AdminBanners() {
 
 function BannerModal({ banner, onSave, onClose }: { banner: Banner | null; onSave: (b: Banner) => void; onClose: () => void }) {
   const [form, setForm] = useState<Banner>(banner || {
-    id: "", title: "", subtitle: "", ctaText: "Get Quote", ctaLink: "/get-quote", imageUrl: "", position: "hero", isActive: true, sortOrder: 0
+    id: "", title: "", subtitle: "", ctaText: "Get Quote", ctaLink: "/quote/", imageUrl: "", position: "hero", isActive: true, sortOrder: 0
   });
   const [converting, setConverting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");

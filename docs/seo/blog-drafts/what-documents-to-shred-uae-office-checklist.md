@@ -11,7 +11,7 @@
 ## AEO Answer Block
 
 **What documents should a UAE office shred?**
-Any document containing personal or confidential data — Emirates ID copies, passport copies, payroll records, bank details, signed contracts, HR files, and customer information — should be shredded, not recycled whole, under UAE PDPL (Federal Decree-Law No. 45 of 2021). Plain internal memos, blank forms, and non-sensitive marketing material can go straight to recycling. A DIN P-4 cross-cut shredder, available for rental from AED 150/month, meets the destruction standard for most UAE office documents.
+Any document containing personal or confidential data — Emirates ID copies, passport copies, payroll records, bank details, signed contracts, HR files, and customer information — should be shredded, not recycled whole, under UAE PDPL (Federal Decree-Law No. 45 of 2021). Plain internal memos, blank forms, and non-sensitive marketing material can go straight to recycling. A DIN P-4 cross-cut shredder, available for rental from AED 450/month, meets the destruction standard for most UAE office documents.
 
 ---
 
@@ -89,7 +89,7 @@ A: Default to shredding. The marginal cost of shredding a non-sensitive page is 
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [How Long to Keep Business Records in UAE Before Shredding](/blogs/how-long-to-keep-business-records-uae-before-shredding/)
 - [Shredding Passports, IDs & Hard Drives in UAE](/blogs/shredding-passports-ids-hard-drives-uae/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

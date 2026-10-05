@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { sanitizeHtml } from '@/lib/sanitizeHtml';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -87,7 +88,7 @@ export async function POST(request: NextRequest) {
       body.title,
       body.slug || body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       body.excerpt || '',
-      body.content || '',
+      sanitizeHtml(body.content || ''),
       body.image || '',
       body.author || 'Sahara Printer',
       body.category || '',

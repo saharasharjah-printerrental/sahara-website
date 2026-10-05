@@ -83,7 +83,7 @@ export default function SamsungBrandPage() {
                 enterprise security for modern businesses.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href="/rental-calculator/?brand=samsung" className="btn-primary">Enquire for Samsung Models</a>
+                <a href="/quote/?brand=samsung" className="btn-primary">Enquire for Samsung Models</a>
                 <a href="#products" className="btn-secondary">View Products</a>
               </div>
             </Reveal>
@@ -159,7 +159,7 @@ export default function SamsungBrandPage() {
       <CtaBand
         title="Experience Samsung Smart Printing"
         body="Upgrade your office with Samsung's innovative printing solutions."
-        primary={{ label: "Get Samsung Quote", href: "/rental-calculator/?brand=samsung" }}
+        primary={{ label: "Get Samsung Quote", href: "/quote/?brand=samsung" }}
       />
 
       <Footer />

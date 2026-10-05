@@ -3,11 +3,11 @@ import { orgRef } from "@/lib/brand";
 
 const faqs = [
   { q: "Where can I buy Fellowes shredders in Dubai?", a: "Sahara Office Equipments is an authorized Fellowes supplier in Dubai and UAE, stocking Fellowes Powershred cross-cut shredders for personal, office, and departmental use — with free delivery and setup across Dubai, Sharjah, and Abu Dhabi." },
-  { q: "Can I rent a Fellowes shredder in UAE?", a: "Yes. Fellowes Powershred shredders are available on monthly rental from AED 150/month for the LX65 light-office model and from AED 300/month for the 325Ci departmental model — free delivery, setup, and maintenance included." },
+  { q: "Can I rent a Fellowes shredder in UAE?", a: "Yes. Fellowes Powershred shredders are available on monthly rental from AED 450/month for the LX65 light-office model and from AED 900/month for the 325Ci departmental model — free delivery, setup, and maintenance included." },
   { q: "Are Fellowes shredders compliant with UAE data protection law?", a: "Yes. Sahara's Fellowes Powershred cross-cut shredders are DIN P-4 rated — the security level recommended for confidential documents under the UAE Personal Data Protection Law (PDPL Federal Decree-Law No. 45 of 2021)." },
 ];
 
-const description = "Authorized Fellowes supplier in Dubai & UAE. Fellowes Powershred DIN P-4 cross-cut shredders — buy from AED 800 or rent from AED 150/month. Dubai, Sharjah, Abu Dhabi. ☎ +971503823969";
+const description = "Authorized Fellowes supplier in Dubai & UAE. Fellowes Powershred DIN P-4 cross-cut shredders — buy from AED 800 or rent from AED 450/month. Dubai, Sharjah, Abu Dhabi. ☎ +971503823969";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",

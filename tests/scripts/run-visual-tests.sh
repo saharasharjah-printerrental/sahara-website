@@ -64,7 +64,7 @@ run_test() {
 run_test "/" "Homepage"
 run_test "/contact" "Contact"
 run_test "/products" "Products"
-run_test "/get-quote" "Get Quote"
+run_test "/quote/" "Get Quote"
 run_test "/our-clients" "Our Clients"
 run_test "/services/printer-rental" "Printer Rental"
 run_test "/brands/hp" "HP Brand"

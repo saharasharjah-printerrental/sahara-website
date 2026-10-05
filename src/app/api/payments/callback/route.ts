@@ -44,12 +44,25 @@ async function handleCallback(request: NextRequest): Promise<Response> {
   }
 
   try {
+    const row = await db.prepare('SELECT * FROM orders WHERE ref = ?').bind(ref).first();
+    if (!row || !['pending', 'paid', 'processing', 'dispatched', 'delivered'].includes(row.status)) return failed();
     const cfg = await getPaymentConfig(db);
-    const { paid, paymentRef } = await verifyPayment(cfg, provider, { sessionId, tranRef });
+    const { paid, paymentRef } = await verifyPayment(cfg, provider, { sessionId, tranRef }, {
+      ref: row.ref, total: row.total, provider: row.payment_provider, paymentRef: row.payment_ref,
+    });
 
     if (paid) {
-      await db.prepare(`UPDATE orders SET status = 'paid', payment_provider = ?, payment_ref = ?, updatedAt = ? WHERE ref = ?`)
-        .bind(provider, paymentRef, new Date().toISOString(), ref).run();
+      // Conditional update prevents a delayed/replayed callback reverting fulfilment or cancellation.
+      if (row.status === 'pending') {
+        const updated = await db.prepare(`UPDATE orders SET status = 'paid', updatedAt = ?
+          WHERE id = ? AND status = 'pending' AND payment_provider = ? AND payment_ref = ?`)
+          .bind(new Date().toISOString(), row.id, provider, paymentRef).run();
+        if (updated.meta?.changes !== 1) {
+          const current = await db.prepare('SELECT * FROM orders WHERE id = ?').bind(row.id).first();
+          if (!current || current.payment_ref !== paymentRef || current.payment_provider !== provider ||
+              !['paid', 'processing', 'dispatched', 'delivered'].includes(current.status)) return failed();
+        }
+      }
       return redirect(`/checkout/receipt/?ref=${encodeURIComponent(ref)}`);
     }
   } catch (e) {

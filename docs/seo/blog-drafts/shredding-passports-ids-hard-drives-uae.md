@@ -79,7 +79,7 @@ A: For compliance purposes, request a certificate of destruction — this matter
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [What Documents to Shred — UAE Office Checklist](/blogs/what-documents-to-shred-uae-office-checklist/)
 - [DIN P4 vs P5 vs P6 — Shredder Security Levels in UAE](/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

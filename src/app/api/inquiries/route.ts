@@ -46,10 +46,10 @@ export async function POST(request: NextRequest) {
   }
   try {
     const body = await request.json() as any;
-    const id = body.id || `inq-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    const id = `inq-${crypto.randomUUID()}`;
     const now = new Date().toISOString();
     await db.prepare(`
-      INSERT OR REPLACE INTO inquiries (id, name, email, phone, company, service, message, status, createdAt)
+      INSERT INTO inquiries (id, name, email, phone, company, service, message, status, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, 'new', ?)
     `).bind(
       id,

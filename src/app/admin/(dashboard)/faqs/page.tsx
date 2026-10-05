@@ -41,7 +41,6 @@ const pageOptions: PageOption[] = [
   { value: "services/papercut-print-management", label: "PaperCut Print Management" },
   { value: "bravo-card-printers-uae", label: "PVC Card Printers UAE (Bravo)" },
   { value: "services/pvc-card-printer-rental", label: "PVC Card Printer Rental" },
-  { value: "services/pvc-card-printer-sales", label: "PVC Card Printer Sales" },
   { value: "services/pvc-card-printing-services", label: "PVC Card Printing Services" },
   { value: "brands/canon", label: "Canon Brand Page" },
   { value: "brands/hp", label: "HP Brand Page" },

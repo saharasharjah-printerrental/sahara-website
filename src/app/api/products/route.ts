@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import { normalizeR2Url } from '@/lib/r2url';
+import { isAdminRequest } from '@/lib/adminAuth';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -87,7 +88,8 @@ export async function GET(request: NextRequest) {
 
   try {
     if (id) {
-      const result = await db.prepare('SELECT * FROM products WHERE id = ?').bind(id).first();
+      const filter = await isAdminRequest(request) ? '' : ' AND is_active = 1';
+      const result = await db.prepare(`SELECT * FROM products WHERE id = ?${filter}`).bind(id).first();
       return NextResponse.json({ products: result ? [dbRowToProduct(result)] : [] }, { headers: CACHE_CONTROL });
     }
     let sql = 'SELECT * FROM products WHERE is_active = 1';

@@ -226,7 +226,7 @@ export default function RepairPage() {
           }
           badges={["4-hr Response", "OEM Parts Only", "30-Day Warranty", "98% First-Visit Fix", "24/7 Emergency", "13+ Years · 50,000+ Repairs"]}
           image={{ src: "/images/homement.webp", alt: "Sahara certified printer repair technician servicing Canon photocopier in Dubai UAE", width: 800, height: 480 }}
-          primaryCta={{ label: "Book a Technician", href: "/contact/" }}
+          primaryCta={{ label: "Book a Technician", href: "/quote/printer-repair/" }}
           secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -343,7 +343,7 @@ export default function RepairPage() {
           title="Printer Down Right Now?"
           body="Call us immediately. A certified technician will be at your location within 4 hours — or we dispatch a loaner machine."
           primary={{ label: "Call Now — +971 50 382 3969", href: "tel:+971503823969" }}
-          secondary={{ label: "Book Online", href: "/contact/" }}
+          secondary={{ label: "Book Online", href: "/quote/printer-repair/" }}
         />
 
         {/* Related — cross-link to Dubai-specific repair page to signal complementary (not duplicate) intent */}

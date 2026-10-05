@@ -76,7 +76,7 @@ export default async function HomePage() {
     <main className="min-h-screen bg-[#071325]">
       {/* aggregateRating is scoped to the homepage and /about — see OrganizationRating */}
       <OrganizationRating />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />
 
 
       <Header />
