@@ -43,7 +43,6 @@ const services = [
   { name: "Printer Repair", href: "/services/repair/", icon: Build },
   { name: "Toner & Spare Parts", href: "/services/printer-spare-parts/", icon: Inventory },
   { name: "Plotter Maintenance", href: "/services/plotter-maintenance/", icon: ShoppingCart },
-  { name: "PVC Card Printers", href: "/bravo-card-printers-uae/", icon: Badge },
   { name: "PVC Card Printer Rental", href: "/services/pvc-card-printer-rental/", icon: Badge },
   { name: "PVC Card Printing", href: "/services/pvc-card-printing-services/", icon: Badge },
 ];

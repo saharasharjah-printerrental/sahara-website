@@ -27,11 +27,11 @@ import {
 // sibling service.
 export const metadata: Metadata = {
   title: "Printer & Office Equipment Services UAE | Sahara Office Equipments",
-  description: "All Sahara Office Equipments services in one place — printer & photocopier rental, AMC, repair, PVC card printers, toner & spare parts, paper shredder rental & sales, and PaperCut print management. Dubai, Sharjah & Abu Dhabi.",
+  description: "All Sahara Office Equipments services in one place — printer & photocopier rental, AMC, repair, card printer rental, toner & spare parts, paper shredder rental & sales, and PaperCut print management. Dubai, Sharjah & Abu Dhabi.",
   keywords: "printer services uae, office equipment services dubai, printer rental amc repair uae",
   openGraph: {
     title: "Printer & Office Equipment Services UAE | Sahara Office Equipments",
-    description: "All Sahara services in one place — rental, AMC, repair, PVC card printers, toner & spare parts, and more across the UAE.",
+    description: "All Sahara services in one place — rental, AMC, repair, card printer rental, toner & spare parts, and more across the UAE.",
     url: "https://www.saharaprinter.com/services/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
@@ -45,7 +45,6 @@ const services = [
   { icon: TruckIcon, title: "Photocopier Rental", body: "Multifunction photocopiers on flexible monthly terms across the UAE.", href: "/photocopier-rental-dubai/" },
   { icon: SettingsIcon, title: "Annual Maintenance (AMC)", body: "Fixed monthly plans from AED 299 covering parts, labour, and preventive servicing.", href: "/services/amc/" },
   { icon: HeadsetIcon, title: "Printer Repair", body: "4-hour emergency response, OEM parts, certified technicians across all emirates.", href: "/services/repair/" },
-  { icon: IdCardIcon, title: "PVC Card Printers", body: "Bravo RTAI & DC 3300 — authorised exclusive UAE reseller. Rent, buy, or have cards printed.", href: "/bravo-card-printers-uae/" },
   { icon: LayersIcon, title: "Toner & Spare Parts", body: "Genuine OEM toner, drums, and spare parts in stock for same-day dispatch.", href: "/services/printer-spare-parts/" },
   { icon: ShieldCheckIcon, title: "Paper Shredder Rental", body: "Secure document destruction equipment on flexible weekly rental terms.", href: "/services/paper-shredder-rental/" },
   { icon: AwardIcon, title: "Paper Shredder Sales", body: "Buy a Fellowes cross-cut paper shredder outright from AED 800.", href: "/services/paper-shredder-sales/" },
@@ -55,7 +54,6 @@ const services = [
 
 const cardServices = [
   { icon: ClockIcon, title: "PVC Card Printer Rental", body: "Short and long-term rental of the Bravo RTAI and DC 3300.", href: "/services/pvc-card-printer-rental/" },
-  { icon: AwardIcon, title: "PVC Card Printer Sales", body: "Buy the RTAI or DC 3300 with a 3-year warranty.", href: "/bravo-card-printers-uae/" },
   { icon: IdCardIcon, title: "PVC Card Printing Services", body: "ID, security, hologram, wooden and transparent cards — printed and delivered.", href: "/services/pvc-card-printing-services/" },
 ];
 
@@ -97,7 +95,7 @@ export default function ServicesHubPage() {
             <h1 className="font-sora text-display-xl font-extrabold text-white">Services</h1>
             <p className="mt-5 max-w-2xl text-body text-muted">
               Everything Sahara Office Equipments offers, in one place — printer and photocopier
-              rental, maintenance, repair, PVC card printers, and consumables, across Dubai, Sharjah,
+              rental, maintenance, repair, card printer rental, and consumables, across Dubai, Sharjah,
               Abu Dhabi, and all UAE emirates.
             </p>
           </div>
@@ -111,7 +109,7 @@ export default function ServicesHubPage() {
           </div>
         </Section>
 
-        <Section eyebrow="PVC Card Printers" title="Bravo RTAI & DC 3300 — rent, buy, or have cards printed" tone="raised">
+        <Section eyebrow="PVC Card Services" title="Rent a card printer or have cards printed" tone="raised">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {cardServices.map((s, i) => (
               <FeatureCard key={s.href} icon={s.icon} title={s.title} body={s.body} href={s.href} delay={(i % 3) * 0.05} />

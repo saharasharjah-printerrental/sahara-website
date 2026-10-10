@@ -359,7 +359,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cfg = await getSEOConfig();
+  const [cfg, googleReviews] = await Promise.all([getSEOConfig(), getGoogleReviewsData()]);
   const uaId = cfg?.googleAnalyticsId?.startsWith('UA-') ? cfg.googleAnalyticsId : '';
   const ga4Id = cfg?.googleAnalytics4Id || (cfg?.googleAnalyticsId?.startsWith('G-') ? cfg.googleAnalyticsId : '');
   const customHeadScripts = cfg?.customHeadScripts
@@ -370,7 +370,6 @@ export default async function RootLayout({
   // refreshed by /api/google-reviews. Falls back to the seeded 5.0/69 if D1
   // is unreachable. Only applies when no admin-stored organizationSchema
   // override is set (cfg.organizationSchema), same as every other field here.
-  const googleReviews = await getGoogleReviewsData();
 
   // Google treats site-wide review-rating markup (a business rating itself, injected on
   // every page) as self-serving and structured-data-policy-ineligible. The global

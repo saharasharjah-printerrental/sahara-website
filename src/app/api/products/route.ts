@@ -15,6 +15,7 @@ function getDB() {
 }
 
 const CACHE_CONTROL = { 'Cache-Control': 'no-store, max-age=0' };
+const PUBLIC_CACHE_CONTROL = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' };
 
 function makeSlug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -96,7 +97,7 @@ export async function GET(request: NextRequest) {
     if (featured === 'true') sql += ' AND is_featured = 1';
     sql += ' ORDER BY created_at DESC';
     const result = await db.prepare(sql).all();
-    return NextResponse.json({ products: (result?.results ?? []).map(dbRowToProduct) }, { headers: CACHE_CONTROL });
+    return NextResponse.json({ products: (result?.results ?? []).map(dbRowToProduct) }, { headers: PUBLIC_CACHE_CONTROL });
   } catch (error) {
     console.error('Products GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch products', products: [] }, { status: 200 });

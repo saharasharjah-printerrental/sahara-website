@@ -327,3 +327,18 @@ Remaining open items, in priority order (next agent session or manual):
 
 Known-dead (do not retry): Kompass (claim-only), SIO365/YellowPagesAE (paid-only), YallaPages
 (malicious redirect), Yello.ae (claimed by unknown account — needs owner/support reclaim).
+
+## 2026-09-26 (later) — Zumvu account created (tracker #30)
+
+- **Account registered** at zumvu.com/signup.zvx: name "Sahara Office Equipments", email
+  `info@saharaedoc.com`, country UAE, gender "Other". Signup confirmed: "Thank you for joining
+  zumvu.com — check your email to complete registration."
+- **Password on file:** `Sahara@2026uae` — hand to owner, recommend changing after first login.
+- **Pending owner action:** click the confirmation email in info@saharaedoc.com (check spam),
+  then complete the business profile: website `https://www.saharaprinter.com` (anchor "Sahara
+  Office Equipments" or "Photocopier Rental Sharjah" per original row), NAP, categories,
+  description, logo. Zumvu profile links are dofollow per 2026-09-18 anchor-text-gap note.
+- **Also this session:** Foursquare skipped (user: appears paid); HiDubai skipped (Dubai-only
+  listings would conflict with Sharjah NAP); connect.ae dead (DNS NXDOMAIN); uae-business.com
+  no longer a directory (add-listing 404, site is a content blog now).
+- Bravo Global partner email: **owner is sending manually** (draft: bravo-dealer-link-request.md).

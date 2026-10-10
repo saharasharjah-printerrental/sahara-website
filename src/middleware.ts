@@ -229,7 +229,15 @@ export async function middleware(request: NextRequest, _event: NextFetchEvent) {
 
   if (pathname.startsWith('/api/')) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow');
-    response.headers.set('Cache-Control', 'private, no-store');
+    const apiPath = pathname.replace(/\/+$/, '');
+    const publicSettings = request.method === 'GET' && apiPath === '/api/settings' &&
+      request.nextUrl.searchParams.get('public') === '1';
+    const publicCatalog = request.method === 'GET' && (
+      (apiPath === '/api/products' && !request.nextUrl.searchParams.has('id')) ||
+      (apiPath === '/api/blogs' && !request.nextUrl.searchParams.has('id') &&
+        request.nextUrl.searchParams.get('includeDrafts') !== '1')
+    );
+    if (!publicSettings && !publicCatalog) response.headers.set('Cache-Control', 'private, no-store');
   }
 
   return response;

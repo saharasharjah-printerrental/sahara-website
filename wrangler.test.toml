@@ -1,0 +1,19 @@
+name = "sahara-website-worker-test"
+main = ".vercel/output/static/_worker.js/index.js"
+compatibility_date = "2024-12-16"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = ".vercel/output/static"
+exclude = ["_worker.js/*"]
+
+# ISOLATED LOCAL TEST CONFIG — never deploy, never --remote.
+[[d1_databases]]
+binding = "DB"
+database_name = "sahara-printer-test-db"
+database_id = "deadbeef-0000-4000-8000-00000000beef"
+
+[vars]
+NEXT_PUBLIC_SITE_URL = "http://127.0.0.1:3201"
+ADMIN_EMAIL = "admin@test.local"
+ADMIN_PASSWORD = "test-admin-password"

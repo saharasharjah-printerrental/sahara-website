@@ -58,8 +58,7 @@ export async function getSettings(key?: string) {
   return fetchAPI(`/settings${query}`);
 }
 
-// /api/settings is served with Cache-Control: private, no-store (it can carry
-// an admin session's data), so the browser HTTP cache never dedupes it.
+// The explicit public settings response can be shared safely across visitors.
 // Header and Footer both mount on every page and both used to fetch it
 // independently, doubling this request site-wide. This module-scope promise
 // cache collapses concurrent/rapid calls into one network request per tab.
@@ -70,7 +69,7 @@ export function fetchPublicSettings(): Promise<Record<string, unknown>> {
   if (publicSettingsCache && publicSettingsCache.expires > Date.now()) {
     return publicSettingsCache.promise;
   }
-  const promise = fetch('/api/settings/')
+  const promise = fetch('/api/settings/?public=1')
     .then((res) => res.json())
     .then((data) => (data?.settings && typeof data.settings === 'object' ? data.settings : {}))
     .catch(() => ({}));

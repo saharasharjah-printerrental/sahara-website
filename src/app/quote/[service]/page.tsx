@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getQuoteService } from "@/lib/quote-services";
 import ServiceQuoteForm from "@/components/ServiceQuoteForm";
+import CalculatorClient from "@/components/CalculatorClient";
 
 export const runtime = "edge";
 type Props = { params: Promise<{ service: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
@@ -23,6 +24,12 @@ export default async function ServiceQuotePage({ params, searchParams }: Props) 
     <a href="/quote/" className="text-sm text-primary underline">All services</a>
     <h1 className="mt-4 text-3xl font-bold text-white">{service.name} Quote</h1>
     <p className="mt-3 max-w-2xl leading-relaxed text-muted">{service.summary}</p>
-    <ServiceQuoteForm key={service.slug} service={service} initialDetails={context} />
+    {service.slug === "printer-rental" ? (
+      <div className="-mx-5 mt-8">
+        <CalculatorClient embedded />
+      </div>
+    ) : (
+      <ServiceQuoteForm key={service.slug} service={service} initialDetails={context} />
+    )}
   </div></main><Footer /></>;
 }

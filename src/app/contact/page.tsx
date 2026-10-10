@@ -12,6 +12,7 @@ import { CheckCircle, Smartphone, Phone, Headphones, Email, LocationOn, AccessTi
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
+import { fetchPublicSettings } from "@/lib/api";
 
 function FacebookIcon() {
   return (
@@ -67,18 +68,19 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [settings, setSettings] = useState<any>(null);
   const [socialLinks, setSocialLinks] = useState<{ name: string; url: string; icon: string }[]>([]);
 
   useEffect(() => {
     // Load settings from D1 API first (takes precedence)
-    fetch('/api/settings')
-      .then(res => res.json())
-      .then(data => {
-        if (data.settings && Object.keys(data.settings).length > 0) {
-          setSettings(prev => ({ ...prev, ...data.settings }));
+    fetchPublicSettings()
+      .then(publicSettings => {
+        if (Object.keys(publicSettings).length > 0) {
+          setSettings(prev => ({ ...prev, ...publicSettings }));
           // Also cache to localStorage for offline use
-          localStorage.setItem("sahara_settings", JSON.stringify(data.settings));
+          localStorage.setItem("sahara_settings", JSON.stringify(publicSettings));
         }
       })
       .catch(console.error);
@@ -154,7 +156,9 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    if (submitting) return;
+    setSubmitting(true);
+    setSubmitError('');
     const inquiry = {
       id: Date.now().toString(),
       ...formData,
@@ -163,11 +167,8 @@ export default function ContactPage() {
       createdAt: new Date().toLocaleDateString(),
     };
 
-    const existing = JSON.parse(localStorage.getItem("sahara_inquiries") || "[]");
-    localStorage.setItem("sahara_inquiries", JSON.stringify([inquiry, ...existing]));
-
     try {
-      await fetch('/api/send-email', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -181,10 +182,18 @@ export default function ContactPage() {
           notificationEmail: '',
         }),
       });
-    } catch { /* email delivery non-blocking — inquiry already saved locally */ }
-
-    setSubmitted(true);
-    setFormData({ name: "", company: "", email: "", phone: "", service: "", message: "" });
+      if (!response.ok) throw new Error('Submission failed');
+      try {
+        const existing = JSON.parse(localStorage.getItem("sahara_inquiries") || "[]");
+        localStorage.setItem("sahara_inquiries", JSON.stringify([inquiry, ...existing]));
+      } catch { /* Browser storage is optional after server receipt. */ }
+      setSubmitted(true);
+      setFormData({ name: "", company: "", email: "", phone: "", service: "", message: "" });
+    } catch {
+      setSubmitError('Your message could not be sent. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const breadcrumbSchema = {
@@ -291,8 +300,9 @@ export default function ContactPage() {
                     rows={5}
                     className={inputCls}
                   ></textarea>
-                  <button type="submit" className="btn-primary w-full py-5 text-lg">
-                    Send Message
+                  {submitError && <p role="alert" className="text-red-300">{submitError}</p>}
+                  <button type="submit" disabled={submitting} className="btn-primary w-full py-5 text-lg disabled:opacity-60">
+                    {submitting ? 'Sending…' : 'Send Message'}
                   </button>
                 </form>
               )}

@@ -16,6 +16,8 @@ const FALLBACK: GoogleReviewsData = {
 
 const CACHE_KEY = "google_reviews_cache";
 const STALE_AFTER_MS = 12 * 60 * 60 * 1000; // 12h — matches the route's s-maxage
+const MEMORY_TTL_MS = 5 * 60 * 1000;
+let memoryCache: { value: GoogleReviewsData; expires: number } | null = null;
 
 function getDB() {
   try {
@@ -97,10 +99,13 @@ export function getGooglePlaceId(): string {
  * /api/google-reviews is the only thing that refreshes the cache.
  */
 export async function getGoogleReviewsData(): Promise<GoogleReviewsData> {
+  if (memoryCache && memoryCache.expires > Date.now()) return memoryCache.value;
   const db = getDB();
   if (!db) return FALLBACK;
   const cached = await readCache(db);
-  return cached || FALLBACK;
+  const value = cached || FALLBACK;
+  memoryCache = { value, expires: Date.now() + MEMORY_TTL_MS };
+  return value;
 }
 
 /**
@@ -116,6 +121,7 @@ export async function refreshGoogleReviewsData(): Promise<GoogleReviewsData> {
   const live = await fetchFromPlacesAPI();
   if (live) {
     if (db) await writeCache(db, live);
+    memoryCache = { value: live, expires: Date.now() + MEMORY_TTL_MS };
     return live;
   }
 
