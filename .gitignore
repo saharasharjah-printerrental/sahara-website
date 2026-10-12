@@ -34,8 +34,7 @@ next-env.d.ts
 
 # Test artifacts
 tests/e2e/visual/diffs/
-tests/e2e/screenshots/*.png
-tests/e2e/screenshots/quote-update/
+tests/e2e/screenshots/
 *.agent-browser-state*
 .agent-browser-cf-profile/
 
