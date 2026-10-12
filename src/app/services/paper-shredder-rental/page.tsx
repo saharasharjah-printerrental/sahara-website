@@ -23,12 +23,12 @@ import type { FaqItem } from "@/lib/faqs";
 // keeps the rental terms (already ranking 1-4 on "shredder rental",
 // "paper shredder for rent near me" etc.) and stops splitting that intent.
 export const metadata: Metadata = {
-  title: "Paper Shredder Rental Dubai & UAE | From AED 150/mo | Sahara",
-  description: "Rent a paper shredder in Dubai, Sharjah & Abu Dhabi from AED 150/month. DIN P-4 cross-cut, free delivery & maintenance, same-day available. ☎ +971503823969",
+  title: "Paper Shredder Rental Dubai & UAE | From AED 450/mo | Sahara",
+  description: "Paper shredder rental Dubai & UAE: LX65 AED 450/month, 325Ci AED 900/month. Free delivery, installation, transport & maintenance. Get your rental quote.",
   keywords: "paper shredder rental dubai, shredder rental uae, shredder for rent dubai, paper shredder for rent near me, paper shredder machine rental near me, hire paper shredder near me, document shredding services uae, confidential document destruction dubai, din p-4 shredder uae",
   openGraph: {
-    title: "Paper Shredder Rental Dubai & UAE | From AED 150/mo | Sahara",
-    description: "Rent a paper shredder in Dubai, Sharjah & Abu Dhabi from AED 150/month. Cross-cut DIN P-4 models, free delivery & setup. UAE PDPL compliant. ☎ +971503823969",
+    title: "Paper Shredder Rental Dubai & UAE | From AED 450/mo | Sahara",
+    description: "LX65 AED 450/month or 325Ci AED 900/month. Paper shredder rental with free delivery, installation, transport and maintenance in Dubai & UAE.",
     url: "https://www.saharaprinter.com/services/paper-shredder-rental/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paper Shredder Rental Dubai & UAE | From AED 150/mo | Sahara",
-    description: "Rent a paper shredder in Dubai, Sharjah & Abu Dhabi from AED 150/month. Cross-cut DIN P-4 models, free delivery & setup. UAE PDPL compliant.",
+    title: "Paper Shredder Rental Dubai & UAE | From AED 450/mo | Sahara",
+    description: "LX65 AED 450/month or 325Ci AED 900/month. Free delivery, installation, transport and maintenance in Dubai & UAE.",
     images: ["https://www.saharaprinter.com/images/shredder-fellowes-325ci.webp"],
   },
   alternates: { canonical: "https://www.saharaprinter.com/services/paper-shredder-rental/" },
@@ -48,21 +48,25 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Paper Shredder Rental UAE",
-  "description": "Paper shredder rental in Dubai, Sharjah, and Abu Dhabi. Fellowes Powershred DIN P-4 cross-cut models. UAE PDPL compliant document destruction for offices, events, and audits.",
+  "description": "DIN P-4 cross-cut paper shredder rental in Dubai, Sharjah and Abu Dhabi. LX65 AED 450/month; 325Ci AED 900/month. Delivery, installation, transport and maintenance included.",
   "provider": orgRef(),
   "areaServed": ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  "offers": {
+  "offers": [
+    { "@type": "Offer", "name": "Fellowes Powershred 325Ci monthly rental", "priceCurrency": "AED", "price": "900", "description": "Delivery, installation, transport and maintenance included.", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "900", "priceCurrency": "AED", "unitCode": "MON", "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "MON" } } },
+    {
     "@type": "Offer",
+    "name": "Fellowes Powershred LX65 monthly rental",
+    "description": "Delivery, installation, transport and maintenance included.",
     "priceCurrency": "AED",
-    "price": "150",
+    "price": "450",
     "priceSpecification": {
       "@type": "UnitPriceSpecification",
-      "price": "150",
+      "price": "450",
       "priceCurrency": "AED",
       "unitCode": "MON",
       "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "MON" },
     },
-  },
+  }],
 };
 
 const breadcrumbSchema = {
@@ -75,20 +79,16 @@ const breadcrumbSchema = {
   ],
 };
 
-// Default FAQ set for /services/paper-shredder-rental/. These are only the
-// fallback: FaqSection reads pageSlug 'services/paper-shredder-rental' from D1
-// first (migration 018) and emits the FAQPage JSON-LD itself, so the Q&A text
-// lives in exactly one place. The old hand-rolled faqSchema literal + the
-// schema-less ShredderFaqClient duplicate have both been removed.
+// Keep published rental terms and FAQ schema in sync with this page's offers.
 const SHREDDER_FAQS: FaqItem[] = [
-  { q: "How much does paper shredder rental cost in Dubai?", a: "Paper shredder rental in Dubai starts from AED 150/month for the Fellowes Powershred LX65 cross-cut model. Higher-capacity departmental shredders like the Fellowes 325Ci start from AED 300/month. Rental terms are customised to your document volume and contract length — request a quote for exact pricing. All rentals include free delivery, setup, and maintenance." },
+  { q: "How much does paper shredder rental cost in Dubai?", a: "The smaller Fellowes Powershred LX65 costs AED 450 per month and the larger Fellowes Powershred 325Ci costs AED 900 per month. Both monthly rentals include delivery, installation, transport and maintenance at no extra charge. Contact Sahara to confirm availability and rental dates." },
   { q: "Can I rent a paper shredder for a single day or event in UAE?", a: "Yes. Sahara Office Equipments offers short-term paper shredder rental in Dubai, Sharjah, and Abu Dhabi with flexible, customised contract lengths — ideal for office clear-outs, events, and compliance audits. Tell us your dates and we'll confirm availability." },
-  { q: "What types of shredders are available for rent in UAE?", a: "We supply Fellowes Powershred cross-cut shredders (DIN P-4 security level) in both personal/light-office and departmental capacities, plus heavy-duty industrial models for bulk destruction on request. All are compliant with UAE data protection and GDPR standards." },
-  { q: "Is paper shredder rental better than buying in UAE?", a: "For occasional or seasonal use, rental is significantly cheaper than buying. A good office shredder costs AED 800–3,500+ to buy. Renting from AED 150/month gives you the same quality with maintenance included and no capital expenditure. For daily, high-volume shredding, buying can be the better long-term option — see our paper shredder sales page for purchase pricing." },
+  { q: "What types of shredders are available for rent in UAE?", a: "We supply the Fellowes Powershred LX65 for light-office use and the larger 325Ci for departmental use. Both are DIN P-4 cross-cut models. Contact us about availability of higher-security or heavy-duty options." },
+  { q: "Is paper shredder rental better than buying in UAE?", a: "Rental avoids the upfront purchase and includes maintenance, delivery, installation and transport. The LX65 costs AED 450/month and the 325Ci AED 900/month. Compare the total rental cost over your intended duration with the purchase price and servicing costs; buying may suit long-term daily use." },
   { q: "Do you deliver paper shredders to JAFZA, SAIF Zone, and free zones?", a: "Yes. We deliver paper shredders to all UAE free zones including JAFZA (Dubai), SAIF Zone (Sharjah), DAFZA, DIFC, and Abu Dhabi free zones. Same-day delivery available for Dubai and Sharjah." },
-  { q: "Are your shredders compliant with UAE data protection laws?", a: "Yes. All shredders we supply meet the UAE Personal Data Protection Law (PDPL Federal Decree-Law No. 45 of 2021) requirements for secure document destruction. Our Fellowes cross-cut models meet DIN P-4 — the recommended standard for confidential documents — with higher security levels available on request." },
-  { q: "What's the difference between the paper shredders Sahara offers for rent in the UAE?", a: "Sahara's rental range covers the Fellowes Powershred LX65 (10 sheets/pass, personal or light-office use, from AED 150/month) and the Fellowes Powershred 325Ci (24 sheets/pass, departmental/commercial use, from AED 300/month), both DIN P-4 cross-cut, plus heavy-duty models for high-volume clear-outs on request. Free delivery across Dubai, Sharjah, and Abu Dhabi." },
-  { q: "Does Sahara supply paper shredders across Dubai and the wider UAE?", a: "Yes. Sahara delivers and services paper shredders across Dubai, Sharjah, Abu Dhabi, Ajman, and Ras Al Khaimah, including free zones like JAFZA, SAIF Zone, and DIFC. Rental plans start from AED 150/month." },
+  { q: "What security level do the rental shredders offer?", a: "Both the LX65 and 325Ci are DIN P-4 cross-cut shredders. Confirm the security level your organisation requires before selecting a machine. A shredder's DIN rating alone is not a certification of your organisation's data-protection compliance." },
+  { q: "What's the difference between the paper shredders Sahara offers for rent in the UAE?", a: "Sahara's rental range covers the Fellowes Powershred LX65 (10 sheets/pass, personal or light-office use, from AED 450/month) and the Fellowes Powershred 325Ci (24 sheets/pass, departmental/commercial use, from AED 900/month), both DIN P-4 cross-cut, plus heavy-duty models for high-volume clear-outs on request. Free delivery across Dubai, Sharjah, and Abu Dhabi." },
+  { q: "Does Sahara supply paper shredders across Dubai and the wider UAE?", a: "Yes. Sahara delivers and services paper shredders across Dubai, Sharjah, Abu Dhabi, Ajman, and Ras Al Khaimah, including free zones like JAFZA, SAIF Zone, and DIFC. Rental plans start from AED 450/month." },
 ];
 
 const models = [
@@ -100,7 +100,7 @@ const models = [
     capacity: "10 sheets/pass",
     bin: "22.7L bin (300+ sheets)",
     bestFor: "Personal & light office use, general documents, credit cards",
-    price: "From AED 150/month",
+    price: "AED 450/month",
     badge: "Most Popular",
   },
   {
@@ -111,21 +111,21 @@ const models = [
     capacity: "24 sheets/pass",
     bin: "83L bin, 100% Jam Proof",
     bestFor: "Departmental & commercial use, multi-user offices, high-volume clear-outs",
-    price: "From AED 300/month",
+    price: "AED 900/month",
     badge: "High Volume",
   },
 ];
 
 const complianceFeatures = [
-  { icon: ShieldCheckIcon, title: "PDPL Compliant", desc: "All rental shredders meet UAE PDPL requirements for secure physical data destruction." },
-  { icon: AwardIcon, title: "GDPR-Ready", desc: "DIN P-4 cross-cut models suit most confidential document destruction needs; higher security levels available on request for multi-national organisations." },
-  { icon: SettingsIcon, title: "Audit Trail", desc: "We can provide destruction certificates for compliance audit documentation on request." },
-  { icon: TruckIcon, title: "Free Zone Delivery", desc: "Delivery to JAFZA, SAIF Zone, DAFZA, DIFC — free zone compliance included." },
+  { icon: ShieldCheckIcon, title: "DIN P-4 Cross-Cut", desc: "Both rental models use cross-cut shredding for confidential office documents." },
+  { icon: AwardIcon, title: "Model Selection", desc: "Choose light-office or departmental capacity to match your document volume." },
+  { icon: SettingsIcon, title: "Maintenance Included", desc: "Servicing and repairs are covered during your rental." },
+  { icon: TruckIcon, title: "Free Zone Delivery", desc: "Delivery, installation and transport included, with access arrangements confirmed before arrival." },
 ];
 
 const rentVsBuyRows: [string, string, string][] = [
   ["Upfront Cost", "AED 0", "AED 800 – 3,500+"],
-  ["Rental Cost", "From AED 150/month, customised to your term", "Depreciation + maintenance"],
+  ["Rental Cost", "From AED 450/month, customised to your term", "Depreciation + maintenance"],
   ["Maintenance", "Included — no extra cost", "Your responsibility"],
   ["Repairs", "Included", "AED 200–800 per repair"],
   ["Flexibility", "Contract length customised to your needs", "Committed purchase"],
@@ -159,8 +159,8 @@ const trail = [
 export default function PaperShredderRentalPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
       {/* FAQPage JSON-LD is emitted by <FaqSection> alongside the accordion it renders,
           so the questions can never drift apart from the schema that declares them. */}
       <main className="min-h-screen bg-surface">
@@ -179,17 +179,17 @@ export default function PaperShredderRentalPage() {
           answer={
             <AnswerBlock
               question="What is paper shredder rental in the UAE?"
-              answer="Paper shredder rental lets UAE offices destroy confidential documents without buying a machine. Sahara supplies Fellowes Powershred DIN P-4 cross-cut shredders from AED 150/month, with free delivery, on-site setup, and maintenance included across Dubai, Sharjah, and Abu Dhabi. Terms run from a single event to a long-term contract."
+              answer="Sahara rents the smaller Fellowes Powershred LX65 for AED 450/month and the larger Fellowes Powershred 325Ci for AED 900/month. Both are DIN P-4 cross-cut paper shredders. Delivery, installation, transport and maintenance are included at no extra charge across Dubai, Sharjah and Abu Dhabi. Contact us to confirm your rental dates and availability."
               supportingPoints={[
-                "Fellowes Powershred LX65: 10 sheets per pass, 22.7L bin — from AED 150/month",
-                "Fellowes Powershred 325Ci: 24 sheets per pass, 83L bin — from AED 300/month",
-                "DIN P-4 cross-cut meets UAE PDPL (Federal Decree-Law No. 45 of 2021) destruction requirements",
+                "Fellowes Powershred LX65: 10 sheets per pass, 22.7L bin — from AED 450/month",
+                "Fellowes Powershred 325Ci: 24 sheets per pass, 83L bin — from AED 900/month",
+                "Both models offer DIN P-4 cross-cut shredding for confidential office documents",
                 "Free delivery to JAFZA, SAIF Zone, DAFZA and DIFC; repairs and maintenance included",
               ]}
             />
           }
-          badges={["Rental From AED 150/month", "Free Delivery", "Same-Day Available", "Custom Contract Terms", "UAE PDPL Compliant"]}
-          primaryCta={{ label: "Get Shredder Quote", href: "/rental-calculator/" }}
+          badges={["From AED 450/month", "Free Delivery & Transport", "Free Installation", "Maintenance Included"]}
+          primaryCta={{ label: "Get Shredder Quote", href: "/quote/paper-shredder-rental/" }}
           secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -208,7 +208,7 @@ export default function PaperShredderRentalPage() {
           </div>
         </div>
 
-        <Section flush title="Fellowes Shredder Models for Rent in UAE" subtitle="DIN P-4 cross-cut Fellowes Powershred shredders, sized for personal, office, and departmental use. Pricing and contract terms are customised to your requirements.">
+        <Section flush title="Fellowes Shredder Models for Rent in UAE" subtitle="Two monthly plans. Delivery, installation, transport and maintenance are free with either model.">
           <div className="grid gap-6 md:grid-cols-2 max-w-4xl">
             {models.map((m) => (
               <div key={m.name} className="relative rounded-panel border border-white/[0.08] bg-surface-low p-6">
@@ -222,25 +222,26 @@ export default function PaperShredderRentalPage() {
                   className="mb-4 h-48 w-full rounded-card bg-white/5 object-contain"
                 />
                 <h3 className="mb-1 text-xl font-bold text-white">{m.name}</h3>
-                <p className="mb-3 text-[0.9rem] font-semibold text-primary">{m.price} — custom quote for your requirement</p>
+                <p className="mb-3 text-[0.9rem] font-semibold text-primary">{m.price}</p>
+                <p className="mb-3 text-sm text-muted">Free delivery, installation, transport and maintenance.</p>
                 <ul className="mb-4 space-y-1 text-[0.9rem] text-on-surface-variant">
                   <li>Security Level: <span className="font-medium text-white">{m.level}</span></li>
                   <li>Sheet Capacity: <span className="font-medium text-white">{m.capacity}</span></li>
                   <li>Bin: <span className="font-medium text-white">{m.bin}</span></li>
                   <li>Best For: <span className="font-medium text-white">{m.bestFor}</span></li>
                 </ul>
-                <a href="/rental-calculator/" className="block rounded-pill border border-primary/30 bg-primary/10 py-2 text-center text-[0.9rem] font-semibold text-primary transition-colors hover:bg-primary/20">
+                <a href="/quote/paper-shredder-rental/" className="block rounded-pill border border-primary/30 bg-primary/10 py-2 text-center text-[0.9rem] font-semibold text-primary transition-colors hover:bg-primary/20">
                   Enquire Now
                 </a>
               </div>
             ))}
           </div>
           <p className="mt-6 max-w-2xl text-caption text-muted">
-            Need a higher-security or industrial model? DIN 66399 defines 7 security levels (P-1 to P-7) for paper shredding — for UAE PDPL compliance with personally identifiable information, DIN P-4 or higher is recommended. Ask us about micro-cut and heavy-duty options.
+            Need a higher-security or industrial model? Tell us your required security level and document volume so we can check suitable options.
           </p>
         </Section>
 
-        <Section title="UAE Data Protection Compliance — Document Destruction & PDPL" subtitle="The UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021, effective September 2022) requires organisations to securely dispose of personal data in physical form. Failure to comply can result in fines up to AED 5 million. Confidential document destruction via a DIN P-4 cross-cut shredder meets this requirement for most office records." tone="raised">
+        <Section title="Confidential Document Shredding for UAE Offices" subtitle="Keep shredding in your own office with a machine matched to your volume and security requirements. Sahara supplies and maintains the rental equipment; your team controls document handling and disposal." tone="raised">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {complianceFeatures.map((item, i) => (
               <FeatureCard key={item.title} icon={item.icon} title={item.title} body={item.desc} delay={(i % 4) * 0.05} />
@@ -248,7 +249,7 @@ export default function PaperShredderRentalPage() {
           </div>
         </Section>
 
-        <Section eyebrow="Compare" title="Shredder Rental vs Buying — UAE Cost Comparison" subtitle="For most UAE offices that shred occasionally, rental is significantly cheaper with no maintenance headache." align="center">
+        <Section eyebrow="Compare" title="Shredder Rental vs Buying — UAE Cost Comparison" subtitle="Compare the monthly rental cost over your intended duration with buying and maintaining your own machine." align="center">
           <ComparisonTable columns={["Factor", "Rental (Sahara)", "Buying"]} highlightColumn={1} rows={rentVsBuyRows} />
         </Section>
 
@@ -262,6 +263,7 @@ export default function PaperShredderRentalPage() {
           <FaqSection
             pageSlug="services/paper-shredder-rental"
             defaultFaqs={SHREDDER_FAQS}
+            useDefaultFaqs
             pageId="https://www.saharaprinter.com/services/paper-shredder-rental/#faq"
           />
         </Section>

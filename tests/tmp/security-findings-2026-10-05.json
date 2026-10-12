@@ -1,0 +1,139 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-05",
+  "findings": [
+    {
+      "id": "SEC-2026-001",
+      "title": "Unauthenticated access to admin APIs and private data",
+      "severity": "high",
+      "status": "fixed",
+      "category": "broken-access-control",
+      "affectedPaths": [
+        "src/lib/apiAuthorization.ts",
+        "src/middleware.ts",
+        "src/lib/adminAuth.ts"
+      ],
+      "evidence": "requiresAdmin() (src/lib/apiAuthorization.ts:4-28) enumerates public methods explicitly and defaults every non-read API method to admin-only (line 27). /api/admin/*, /api/cms, /api/upload, /api/convert-image, /api/ai-jobs are always admin; GET/HEAD on /api/inquiries, list-style /api/orders, and includeDrafts=1 / all=true params require admin. middleware (src/middleware.ts:102-107) enforces this before routing; matcher (lines 238-243) covers /api/:path* and all non-asset pages. Routes also double-check with isAdminRequest where it matters (orders GET line 57, products GET line 91, settings GET/POST). Settings route additionally filters secret keys (isSecretKey regex, src/app/api/settings/route.ts:39) and sanitizes site_settings to a public key whitelist for anonymous callers.",
+      "verification": "Read all listed files; traced each allowlist branch; confirmed 401 paths are covered for inquiries list, orders list, drafts, storage and diagnostics. Ran tests/scripts/security-regressions.cjs: 18/18 pass on Node v24.19.0, including anonymous/forged/valid admin session cases.",
+      "residualRisk": "Most routes (inquiries GET/PATCH, orders PATCH, blogs/products write) rely solely on middleware for authorization and perform no in-route check. If a route were ever invoked in a context where middleware does not run (e.g. direct Node dev-server import, future deployment target without middleware support), it would be unauthenticated. Low likelihood on the current Cloudflare Pages + next-on-pages stack. In-memory rate limiter keyed by IP is per-isolate and spoofable via x-forwarded-for when not behind Cloudflare (dev only) - pre-existing, documented as acceptable."
+    },
+    {
+      "id": "SEC-2026-002",
+      "title": "Stored HTML / JSON-LD XSS in blog and editor content",
+      "severity": "high",
+      "status": "fixed",
+      "category": "xss",
+      "affectedPaths": [
+        "src/lib/sanitizeHtml.ts",
+        "src/app/api/blogs/route.ts",
+        "src/components/BlogPostClient.tsx",
+        "src/components/admin/RichTextEditor.tsx"
+      ],
+      "evidence": "Single shared FilterXSS instance (src/lib/sanitizeHtml.ts) with js-xss default whitelist plus class, iframe restricted to https youtube.com/youtube-nocookie.com /embed/ URLs via onTagAttr (non-absolute or non-embed iframes stripped), and script/style/svg/math/object/template bodies stripped. Applied at write time (blogs POST line 91) and at every render/insertion point: BlogPostClient.tsx:147 (sanitize after normalizeBlogContent, before dangerouslySetInnerHTML at line 179), RichTextEditor init (lines 20, 32), onChange (line 40) and onPaste (line 112); createLink rejects non http/https/mailto/tel schemes (line 60). All raw JSON-LD renderers under src/app escape '<' as \\u003c (verified by grep across ~30 sites, e.g. src/app/page.tsx:79, src/components/FaqSection.tsx:22); feeds/supplies.xml escapes to &lt;.",
+      "verification": "Code review of sanitizer config and all four call sites; grep confirmed every dangerouslySetInnerHTML JSON-LD site carries the .replace(/</g, '\\\\u003c') guard. Regression suite 18/18 pass includes a real headless-Chrome stored-payload test.",
+      "residualRisk": "The blogs.schema_jsonld column is stored raw (blogs POST line 102) and is not sanitized; no current code path renders it into a page (verified by grep), so it is inert today, but any future renderer must escape it. Defense in depth only."
+    },
+    {
+      "id": "SEC-2026-003",
+      "title": "Payment transaction replay against unrelated orders",
+      "severity": "high",
+      "status": "fixed",
+      "category": "business-logic",
+      "affectedPaths": [
+        "src/lib/payments.ts",
+        "src/lib/orderAccess.ts",
+        "src/app/api/payments/create/route.ts",
+        "src/app/api/payments/callback/route.ts",
+        "src/app/api/orders/route.ts"
+      ],
+      "evidence": "payments/create requires order-scoped receipt cookie or admin (line 25), requires status='pending' (line 31), and persists payment_provider/payment_ref with a conditional UPDATE (status='pending' AND COALESCE(payment_ref,'')=old) before returning the gateway redirect (lines 54-61). payments/callback only accepts orders in pending/paid/processing/dispatched/delivered (cancelled excluded, line 48) and verifies stored provider+transaction reference, merchant ref, exact amount, AED currency, paid/complete state, and PayTabs Sale transaction type (payments.ts:122-131, 172-185). The pending->paid transition is a conditional UPDATE (callback lines 56-65) so replays or races cannot revert dispatched/delivered orders or revive cancelled ones. Anonymous receipt lookup requires an HMAC-signed, 7-day, HttpOnly, Secure-on-HTTPS, SameSite=Lax cookie bound to the specific order ref (orderAccess.ts); refs are generated with crypto.randomUUID; a bare transaction ID grants nothing.",
+      "verification": "Read all four files end to end; traced create->persist->callback->conditional update flow; confirmed create route rate-limited (30/min) and admin/cookie gated in both middleware and route. Regression tests 18/18 pass including Stripe/PayTabs mismatch, callback replay and cancellation-race cases.",
+      "residualRisk": "Pre-fix in-flight gateway sessions have no persisted payment_ref and will fail closed on callback - documented reconciliation item, requires deployment-transition handling. create route's catch-all returns {online:false} on any internal error, silently masking gateway misconfiguration (customer can still check out; order stays pending). Stripe success callback is a GET with parameters in the URL, so the session_id appears in access logs of whatever proxies handle the return - mitigated because replay of the URL alone cannot flip a non-pending order and grants no receipt access without the cookie."
+    },
+    {
+      "id": "SEC-2026-004",
+      "title": "Caller-controlled inquiry IDs enabling lead overwrite/replacement",
+      "severity": "high",
+      "status": "fixed",
+      "category": "broken-access-control",
+      "affectedPaths": [
+        "src/app/api/inquiries/route.ts",
+        "src/app/api/send-email/route.ts"
+      ],
+      "evidence": "Both creation paths generate ids server-side with crypto.randomUUID() and use plain INSERT (inquiries/route.ts:49-63, send-email/route.ts:59-77). No caller-supplied id is accepted anywhere; PATCH (admin-only per middleware) is the only mutation path.",
+      "verification": "Read both routes; confirmed no UPSERT/REPLACE on inquiries.",
+      "residualRisk": "Inquiry POST performs no field validation (empty name/email accepted). Spam-only impact; mitigated by the 10/min/IP middleware tier."
+    },
+    {
+      "id": "SEC-2026-005",
+      "title": "Quote/email endpoint: recipient injection, unbounded input, fire-and-forget persistence",
+      "severity": "high",
+      "status": "fixed",
+      "category": "input-validation",
+      "affectedPaths": [
+        "src/app/api/send-email/route.ts",
+        "src/lib/quote-input.ts",
+        "src/app/api/send-email/email-service.ts"
+      ],
+      "evidence": "Zod schema strips unknown fields including any visitor-supplied recipient (quote-input.ts); route requires application/json, caps body at 16 KiB, enforces honeypot (website field), pins notificationEmail='' so the server resolves smtp_to_email/notification_email from D1 settings (email-service.ts:369, 124-130). D1 persistence is awaited before responding; 503 only when both delivery and persistence fail. All interpolated HTML fields pass through escapeHtml.",
+      "verification": "Read all three files; confirmed recipient pinning path and that no visitor field reaches a mail 'to'. The 7 dedicated send-email regression tests (delivery, fallback, 503, awaited persistence, malformed/oversized/honeypot, recipient override) all pass.",
+      "residualRisk": "None identified beyond the shared rate-limiter caveats."
+    },
+    {
+      "id": "SEC-2026-006",
+      "title": "Draft/inactive products and blogs visible to anonymous callers",
+      "severity": "medium",
+      "status": "fixed",
+      "category": "information-disclosure",
+      "affectedPaths": [
+        "src/app/api/products/route.ts",
+        "src/app/api/blogs/route.ts"
+      ],
+      "evidence": "products GET appends AND is_active=1 for non-admins on both id and list lookups (route.ts:91-98). blogs GET filters isActive=1 for slug and list, and includeDrafts/id-with-drafts paths are admin-gated both in-route and by middleware's includeDrafts=1 rule (apiAuthorization.ts:25).",
+      "verification": "Read both routes; traced both lookup branches; middleware param gate confirmed.",
+      "residualRisk": "None."
+    },
+    {
+      "id": "SEC-2026-007",
+      "title": "Non-constant-time signature comparison in admin session verification",
+      "severity": "low",
+      "status": "accepted-risk",
+      "category": "crypto",
+      "affectedPaths": ["src/lib/adminAuth.ts"],
+      "evidence": "isAdminRequest compares the client-supplied signature to the expected SHA-256 hex with plain string equality (adminAuth.ts:49) rather than a constant-time comparison, unlike the login route which deliberately compares both credentials before failing.",
+      "verification": "Code review.",
+      "residualRisk": "Theoretical timing side-channel on hex-digit prefix matching across a network to a Cloudflare edge worker; exploiting it to forge a session is impractical. Worth fixing with a constant-time compare when touching the file."
+    },
+    {
+      "id": "SEC-2026-008",
+      "title": "Internal error details reflected in public API responses",
+      "severity": "low",
+      "status": "accepted-risk",
+      "category": "information-disclosure",
+      "affectedPaths": [
+        "src/app/api/orders/route.ts",
+        "src/app/api/inquiries/route.ts",
+        "src/app/api/blogs/route.ts",
+        "src/app/api/products/route.ts"
+      ],
+      "evidence": "Catch blocks return details: String(error) to the caller (e.g. orders POST line 191, PATCH line 212). The public order-creation path can therefore reflect raw D1/driver exception text.",
+      "verification": "Code review.",
+      "residualRisk": "Low-sensitivity schema/driver error text only; no credentials are interpolated. Remove 'details' from public routes for hygiene."
+    },
+    {
+      "id": "SEC-2026-009",
+      "title": "Deployment-transition and environment validation still open",
+      "severity": "info",
+      "status": "accepted-risk",
+      "category": "deployment",
+      "affectedPaths": [
+        "src/middleware.ts",
+        "src/lib/orderAccess.ts",
+        "src/app/api/payments/callback/route.ts"
+      ],
+      "evidence": "Fixes are validated locally (regression suite 18/18 on Node v24.19.0, re-run during this review) but not against production Cloudflare middleware execution, real hosted-payment cookie persistence, real gateway responses, or the pre-fix in-flight session reconciliation. Production D1 read-only checks were not possible (OAuth token fails D1 API calls, code 10000).",
+      "verification": "Re-ran node --test tests/scripts/security-regressions.cjs: 18 pass / 0 fail. No live traffic exercised.",
+      "residualRisk": "All three HIGH fixes depend on middleware running at the edge and ADMIN_PASSWORD being set; validate on a preview deployment before enabling production payment traffic, as the original report states."
+    }
+  ]
+}

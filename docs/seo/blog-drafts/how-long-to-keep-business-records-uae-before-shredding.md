@@ -50,7 +50,7 @@ Keeping documents forever isn't compliance — it's clutter, and it's actually a
 1. **Categorise** your document types against the table above
 2. **Tag** files with a "shred after" date when they're created or filed
 3. **Schedule** a recurring shredding session — monthly or quarterly — rather than waiting for an annual clear-out
-4. **Rent, don't buy**, if the volume is manageable in short sessions — a shredder on-site from AED 150/month handles scheduled shredding without a large capital purchase
+4. **Rent, don't buy**, if the volume is manageable in short sessions — a shredder on-site from AED 450/month handles scheduled shredding without a large capital purchase
 
 For businesses with irregular but large volumes (e.g. an annual clear-out of everything past its retention date), a short-term heavy-duty rental may suit better — see [heavy-duty shredder rental for bulk clear-outs](/blogs/heavy-duty-shredder-rental-bulk-document-clearout-uae/).
 
@@ -76,7 +76,7 @@ A: It's usually more convenient and lowers ongoing compliance risk, even if the 
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [What Documents to Shred — UAE Office Checklist](/blogs/what-documents-to-shred-uae-office-checklist/)
 - [Heavy-Duty Shredder Rental for Bulk Clear-Outs](/blogs/heavy-duty-shredder-rental-bulk-document-clearout-uae/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

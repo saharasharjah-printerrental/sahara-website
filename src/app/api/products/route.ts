@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import { normalizeR2Url } from '@/lib/r2url';
+import { isAdminRequest } from '@/lib/adminAuth';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -14,6 +15,7 @@ function getDB() {
 }
 
 const CACHE_CONTROL = { 'Cache-Control': 'no-store, max-age=0' };
+const PUBLIC_CACHE_CONTROL = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' };
 
 function makeSlug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -87,14 +89,15 @@ export async function GET(request: NextRequest) {
 
   try {
     if (id) {
-      const result = await db.prepare('SELECT * FROM products WHERE id = ?').bind(id).first();
+      const filter = await isAdminRequest(request) ? '' : ' AND is_active = 1';
+      const result = await db.prepare(`SELECT * FROM products WHERE id = ?${filter}`).bind(id).first();
       return NextResponse.json({ products: result ? [dbRowToProduct(result)] : [] }, { headers: CACHE_CONTROL });
     }
     let sql = 'SELECT * FROM products WHERE is_active = 1';
     if (featured === 'true') sql += ' AND is_featured = 1';
     sql += ' ORDER BY created_at DESC';
     const result = await db.prepare(sql).all();
-    return NextResponse.json({ products: (result?.results ?? []).map(dbRowToProduct) }, { headers: CACHE_CONTROL });
+    return NextResponse.json({ products: (result?.results ?? []).map(dbRowToProduct) }, { headers: PUBLIC_CACHE_CONTROL });
   } catch (error) {
     console.error('Products GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch products', products: [] }, { status: 200 });

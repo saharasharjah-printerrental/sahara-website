@@ -83,7 +83,7 @@ export default function BrotherBrandPage() {
                 solutions with industry-leading support.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href="/rental-calculator/?brand=brother" className="btn-primary">Enquire for Brother Models</a>
+                <a href="/quote/?brand=brother" className="btn-primary">Enquire for Brother Models</a>
                 <a href="#products" className="btn-secondary">View Products</a>
               </div>
             </Reveal>
@@ -159,7 +159,7 @@ export default function BrotherBrandPage() {
       <CtaBand
         title="Choose Brother"
         body="Get the reliability and support your business deserves. Contact us for a Brother solution."
-        primary={{ label: "Get Brother Quote", href: "/rental-calculator/?brand=brother" }}
+        primary={{ label: "Get Brother Quote", href: "/quote/?brand=brother" }}
       />
 
       <Footer />

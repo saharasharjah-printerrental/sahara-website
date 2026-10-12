@@ -58,7 +58,7 @@ echo "  ✓ PASSED: Products page loaded"
 
 echo ""
 echo "[5/10] Testing: Get Quote page"
-$AB --session "$SESSION" open "$BASE_URL/get-quote" > /dev/null 2>&1
+$AB --session "$SESSION" open "$BASE_URL/quote/" > /dev/null 2>&1
 $AB --session "$SESSION" wait --load networkidle > /dev/null 2>&1
 echo "  ✓ PASSED: Get Quote page loaded"
 

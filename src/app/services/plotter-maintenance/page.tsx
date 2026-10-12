@@ -184,10 +184,10 @@ const trail = [
 export default function PlotterMaintenancePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(plotterServiceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(plotterServiceSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -216,7 +216,7 @@ export default function PlotterMaintenancePage() {
           }
           badges={["Canon · HP · Epson", "OEM Parts Only", "30-Day Warranty", "Colour Calibration", "AMC Plans Available"]}
           image={{ src: "/images/service-maintanence.webp", alt: "Sahara technician servicing a wide-format plotter printer in Dubai UAE", width: 800, height: 480 }}
-          primaryCta={{ label: "Book a Technician", href: "/contact/" }}
+          primaryCta={{ label: "Book a Technician", href: "/quote/plotter-maintenance/" }}
           secondaryCta={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -328,7 +328,7 @@ export default function PlotterMaintenancePage() {
           title="Plotter Down Mid-Deadline?"
           body="Call us immediately. A wide-format certified technician will diagnose printhead, feed, and calibration faults on-site."
           primary={{ label: "Call Now — +971 50 382 3969", href: "tel:+971503823969" }}
-          secondary={{ label: "Book Online", href: "/contact/" }}
+          secondary={{ label: "Book Online", href: "/quote/plotter-maintenance/" }}
         />
 
         {/* Related — cross-link to neighbouring service pages to signal complementary (not duplicate) intent */}

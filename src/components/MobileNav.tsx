@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, SettingsSuggest, Inventory2, RequestQuote, MoreHoriz, Close, LocationOn, Article, Call, Print, ShoppingCart, Build, Handyman, Groups, Badge } from "@mui/icons-material";
 import CartIndicator from "@/components/CartIndicator";
+import { quoteHrefForPath } from "@/lib/quote-services";
 
 export default function MobileNav() {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ export default function MobileNav() {
     { name: "Home", href: "/", icon: Home },
     { name: "Services", href: "/services/", icon: SettingsSuggest },
     { name: "Products", href: "/products/", icon: Inventory2 },
-    { name: "Get Quote", href: "/rental-calculator/", icon: RequestQuote },
+    { name: "Get Quote", href: quoteHrefForPath(pathname), icon: RequestQuote },
   ];
 
   const services = [
@@ -26,7 +27,8 @@ export default function MobileNav() {
     { name: "Toner & Parts", href: "/services/printer-spare-parts/", icon: ShoppingCart },
     { name: "Printer Repair", href: "/services/repair/", icon: Build },
     { name: "AMC Services", href: "/services/amc/", icon: Handyman },
-    { name: "PVC Card Printers", href: "/bravo-card-printers-uae/", icon: Badge },
+    { name: "PVC Card Printer Rental", href: "/services/pvc-card-printer-rental/", icon: Badge },
+    { name: "PVC Card Printing", href: "/services/pvc-card-printing-services/", icon: Badge },
   ];
 
   const morePages = [
@@ -166,7 +168,7 @@ export default function MobileNav() {
 
               <div className="px-3 pb-3">
                 <Link
-                  href="/rental-calculator/"
+                  href={quoteHrefForPath(pathname)}
                   onClick={() => setIsMoreOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] font-bold text-sm active:scale-[0.98] transition-transform"
                 >

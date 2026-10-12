@@ -85,7 +85,7 @@ A: It's collected and recycled — see [where shredded paper goes](/blogs/where-
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [On-Site & Mobile Document Shredding — How It Works](/blogs/on-site-mobile-document-shredding-dubai-how-it-works/)
 - [One-Time Shredding Projects — Same-Day Delivery](/blogs/one-time-shredding-project-same-day-shredder-delivery-uae/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

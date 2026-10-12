@@ -84,7 +84,7 @@ export default function KyoceraBrandPage() {
                 delivers exceptional reliability and eco-friendly printing solutions.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href="/rental-calculator/?brand=kyocera" className="btn-primary">Enquire for Kyocera Models</a>
+                <a href="/quote/?brand=kyocera" className="btn-primary">Enquire for Kyocera Models</a>
                 <a href="#products" className="btn-secondary">View Products</a>
               </div>
             </Reveal>
@@ -160,7 +160,7 @@ export default function KyoceraBrandPage() {
       <CtaBand
         title="Save More with Kyocera"
         body="Get a custom TCO analysis for your office and see how much Kyocera can save you."
-        primary={{ label: "Get Kyocera Quote", href: "/rental-calculator/?brand=kyocera" }}
+        primary={{ label: "Get Kyocera Quote", href: "/quote/?brand=kyocera" }}
       />
 
       <Footer />

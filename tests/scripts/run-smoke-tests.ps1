@@ -53,7 +53,7 @@ if ($ERRORS -match "error") {
 $routes = @(
     @{route="$BaseUrl/contact"; label="[3/10] Contact page"},
     @{route="$BaseUrl/products"; label="[4/10] Products page"},
-    @{route="$BaseUrl/get-quote"; label="[5/10] Get Quote page"},
+    @{route="$BaseUrl/quote/"; label="[5/10] Get Quote page"},
     @{route="$BaseUrl/our-clients"; label="[6/10] Our Clients page"},
     @{route="$BaseUrl/rental-calculator"; label="[7/10] Rental Calculator page"}
 )

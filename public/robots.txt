@@ -1,51 +1,4 @@
-# robots.txt - saharaprinter.com
-# Updated: June 2026
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: googlebot-mobile
-Allow: /
-
-User-agent: MSNBot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: baiduspider
-Allow: /
-
-User-agent: yahoo-mmcrawler
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
+# Shared rules apply to search crawlers, including AI search crawlers.
 User-agent: *
 Allow: /
 Disallow: /api/
@@ -56,6 +9,3 @@ Disallow: /cart/
 Disallow: /my-account/
 
 Sitemap: https://www.saharaprinter.com/sitemap.xml
-
-# LLM-friendly index
-# llms.txt: https://www.saharaprinter.com/llms.txt

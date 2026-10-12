@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:cf": "next build && npx @cloudflare/next-on-pages --skip-build",
+    "build:cf": "node scripts/vercel-build.cjs && npx @cloudflare/next-on-pages --skip-build",
     "start": "next start",
     "deploy": "npm run build:cf && npx wrangler pages deploy .vercel/output/static --project-name=saharaprinter",
     "test:e2e": "node tests/scripts/run-all-tests.js",
@@ -25,12 +25,14 @@
     "@reduxjs/toolkit": "^2.11.2",
     "framer-motion": "^11.18.2",
     "lottie-react": "^3.1.1",
-    "next": "15.5.2",
+    "next": "15.5.27",
     "react": "^19",
     "react-dom": "^19",
     "react-redux": "^9.2.0",
-    "sharp": "^0.34.5",
-    "worker-mailer": "^1.2.1"
+    "sharp": "^0.35.5",
+    "worker-mailer": "^1.2.1",
+    "xss": "^1.0.15",
+    "zod": "^4.4.3"
   },
   "browserslist": [
     "chrome 64",
@@ -49,11 +51,14 @@
     "agent-browser": "^0.27.0",
     "autoprefixer": "^10.4.19",
     "playwright": "^1.59.1",
-    "postcss": "^8",
+    "postcss": "^8.5.28",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "wrangler": "^4.85.0",
-    "zod": "^4.4.3"
+    "vercel": "^62.2.0",
+    "wrangler": "^4.85.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.28"
   }
 }

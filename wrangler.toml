@@ -1,76 +1,20 @@
-name = "sahara-website"
-pages_build_output_dir = ".vercel/output/static"
+name = "sahara-website-worker-test"
+main = ".vercel/output/static/_worker.js/index.js"
 compatibility_date = "2024-12-16"
 compatibility_flags = ["nodejs_compat"]
 
-# ─────────────────────────────────────────────
-# SITE CONFIGURATION
-# ─────────────────────────────────────────────
-[env.production]
-name = "saharaprinter"
+[assets]
+directory = ".vercel/output/static"
+binding = "ASSETS"
+exclude = ["_worker.js/*"]
 
-# ─────────────────────────────────────────────
-# D1 DATABASE
-# ─────────────────────────────────────────────
-[[env.production.d1_databases]]
+# ISOLATED LOCAL TEST CONFIG — never deploy, never --remote.
+[[d1_databases]]
 binding = "DB"
-database_name = "sahara-printer-db"
-database_id = "2c278d16-64fe-42a6-8ea1-aabdf75c2ce9"
+database_name = "sahara-printer-test-db"
+database_id = "deadbeef-0000-4000-8000-00000000beef"
 
-# ─────────────────────────────────────────────
-# R2 STORAGE (for image uploads)
-# Create bucket in Cloudflare Dashboard → R2 → Create bucket
-# Name: sahara-printer-files
-# Add binding below after creating bucket
-# ─────────────────────────────────────────────
-[[env.production.r2_buckets]]
-binding = "SAHARA_ASSETS"
-bucket_name = "sahara-printer-files"
-
-# ─────────────────────────────────────────────
-# CLOUDINARY CONFIGURATION
-# Set these in Cloudflare Dashboard → Pages → sahara-website → Settings → Environment variables:
-#   - CLOUDINARY_CLOUD_NAME
-#   - CLOUDINARY_API_KEY
-#   - CLOUDINARY_API_SECRET
-# Get credentials from: https://console.cloudinary.com → Settings → API Keys
-# ─────────────────────────────────────────────
-
-# ─────────────────────────────────────────────
-# GOOGLE REVIEWS (live rating badge + schema, src/lib/google-reviews.ts)
-# Set these in Cloudflare Dashboard → Pages → sahara-website → Settings → Environment variables:
-#   - GOOGLE_PLACES_API_KEY  (Google Cloud Console → enable "Places API (New)")
-#   - GOOGLE_PLACE_ID        (Place ID for the Sahara Office Equipments GBP listing)
-# Without these, /api/google-reviews falls back to the last D1-cached value.
-# ─────────────────────────────────────────────
-# Vars set in Cloudflare Dashboard - do not add here to avoid override
-[env.production.vars]
-
-# R2 PUBLIC URL - Get from Cloudflare Dashboard → R2 → Your bucket → Settings → Public Access
-# Copy the public URL and paste it below (e.g., https://sahara-printer-files.your-account.r2.cloud)
-R2_PUBLIC_URL = "https://pub-b6b36705ad184591a1c89e16ce91b8b3.r2.dev"
-
-# Site URL for RSC and API route fetching - Required for server-side API calls
-NEXT_PUBLIC_SITE_URL = "https://www.saharaprinter.com"
-
-# ─────────────────────────────────────────────
-# CLOUDFLARE DASHBOARD CONFIGURATION REQUIRED
-# ─────────────────────────────────────────────
-# 1. WAF BYPASS (Cloudflare Dashboard → Security → WAF → Custom Rules)
-#    Create bypass rule:
-#    (http.user_agent contains "Googlebot" and
-#     http.request.uri.path in {"/api/logos" "/api/settings" "/api/testimonials"})
-#    → Action: Skip → WAF Managed Rules
-#
-# 2. CACHE RULES (Cloudflare Dashboard → Caching → Cache Rules)
-#    Rule 1: Path matches "/api/*"
-#    → Cache mode: Bypass
-#    Rule 2: Path matches "/api/logos" OR "/api/settings" OR "/api/testimonials"
-#    → Cache status: Cache
-#    → TTL: 1 hour
-#
-# 3. PAGE RULES (Cloudflare Dashboard → Rules → Page Rules)
-#    Rule: URL matches "*/api/*"
-#    → Cache Level: Bypass
-#    → Security Level: Medium (allows Googlebot)
-# ─────────────────────────────────────────────
+[vars]
+NEXT_PUBLIC_SITE_URL = "http://127.0.0.1:3201"
+ADMIN_EMAIL = "admin@test.local"
+ADMIN_PASSWORD = "test-admin-password"

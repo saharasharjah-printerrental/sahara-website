@@ -77,7 +77,7 @@ A: Not usually — most jams clear with a reverse cycle or a quick manual check.
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [What Documents to Shred — UAE Office Checklist](/blogs/what-documents-to-shred-uae-office-checklist/)
 - [Heavy-Duty Shredder Rental for Bulk Clear-Outs](/blogs/heavy-duty-shredder-rental-bulk-document-clearout-uae/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

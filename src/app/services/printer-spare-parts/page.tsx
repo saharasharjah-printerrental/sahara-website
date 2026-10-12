@@ -321,7 +321,7 @@ export default async function PrinterSparePartsPage() {
         <CtaBand
           title="Need Supplies?"
           body="Same-day delivery across the UAE"
-          primary={{ label: "Request Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Request Quote", href: "/request-quote/" }}
           secondary={{ label: "Contact Support", href: "/contact/" }}
         />
 

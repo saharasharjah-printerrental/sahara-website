@@ -41,14 +41,14 @@ function rowDate(value: unknown, fallback: Date): Date {
 const ROUTE_LASTMOD: Record<string, string> = {
   '/': '2026-08-13T13:05:57+04:00',
   '/services/': '2026-09-09T10:22:04+04:00',
-  '/services/printer-rental/': '2026-09-15T12:10:55+04:00',
+  '/services/printer-rental/': '2026-10-02T12:00:00+04:00',
   '/services/repair/': '2026-09-15T11:28:23+04:00',
   '/services/amc/': '2026-09-15T11:28:23+04:00',
   '/printer-amc-dubai/': '2026-09-15T11:28:23+04:00',
   '/services/plotter-maintenance/': '2026-09-15T11:28:23+04:00',
   '/services/printer-spare-parts/': '2026-09-09T10:22:04+04:00',
-  '/services/paper-shredder-rental/': '2026-09-15T12:10:55+04:00',
-  '/services/paper-shredder-sales/': '2026-09-15T12:10:55+04:00',
+  '/services/paper-shredder-rental/': '2026-10-02T12:00:00+04:00',
+  '/services/paper-shredder-sales/': '2026-10-02T12:00:00+04:00',
   '/services/papercut-print-management/': '2026-09-15T11:28:23+04:00',
   '/printer-rental-dubai/': '2026-09-15T11:28:23+04:00',
   '/printer-rental-abu-dhabi/': '2026-09-15T11:28:23+04:00',
@@ -71,7 +71,7 @@ const ROUTE_LASTMOD: Record<string, string> = {
   '/brands/samsung/': '2026-09-08T09:34:26+04:00',
   // Served by the [slug] catch-all, not a dedicated page.tsx.
   '/brands/konica-minolta/': '2026-09-15T11:28:23+04:00',
-  '/brands/fellowes/': '2026-09-29T07:27:07+04:00',
+  '/brands/fellowes/': '2026-10-02T12:00:00+04:00',
   '/printer-repair-dubai/': '2026-09-15T11:28:23+04:00',
   '/printer-repair-sharjah/': '2026-09-15T11:28:23+04:00',
   '/kyocera-printer-repair/': '2026-09-15T11:28:23+04:00',
@@ -82,9 +82,8 @@ const ROUTE_LASTMOD: Record<string, string> = {
   '/xerox-printer-repair/': '2026-09-15T11:28:23+04:00',
   '/ricoh-printer-repair/': '2026-09-15T11:28:23+04:00',
   '/canon-printer-dubai/': '2026-09-15T11:28:23+04:00',
-  '/bravo-card-printers-uae/': '2026-09-15T12:10:55+04:00',
-  '/services/pvc-card-printer-rental/': '2026-09-15T12:10:55+04:00',
-  '/services/pvc-card-printing-services/': '2026-09-15T12:10:55+04:00',
+  '/services/pvc-card-printer-rental/': '2026-10-02T12:00:00+04:00',
+  '/services/pvc-card-printing-services/': '2026-10-02T12:00:00+04:00',
   '/hp-printer-abu-dhabi/': '2026-09-15T11:28:23+04:00',
   '/products/': '2026-09-15T11:28:23+04:00',
   '/blogs/': '2026-09-15T11:28:23+04:00',
@@ -169,7 +168,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/xerox-printer-repair/`,         lastModified: lm('/xerox-printer-repair/', thisMonth), changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/ricoh-printer-repair/`,         lastModified: lm('/ricoh-printer-repair/', thisMonth), changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/canon-printer-dubai/`,          lastModified: lm('/canon-printer-dubai/', thisMonth), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/bravo-card-printers-uae/`,      lastModified: lm('/bravo-card-printers-uae/', requestTime), changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/services/pvc-card-printer-rental/`, lastModified: lm('/services/pvc-card-printer-rental/', requestTime), changeFrequency: 'weekly', priority: 0.8 },
     // /services/pvc-card-printer-sales/ is intentionally absent — Sep 2026,
     // folded into /bravo-card-printers-uae/ via a 301 (same pattern as
@@ -180,7 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/services/pvc-card-printing-services/`, lastModified: lm('/services/pvc-card-printing-services/', requestTime), changeFrequency: 'weekly', priority: 0.8 },
     // /pvc-card-printer-quote/ is intentionally absent — noindexed Sep 2026,
     // see that page's own file comment. A lead-capture form doesn't need to
-    // rank; it needs traffic sent to it from /bravo-card-printers-uae/.
+    // rank; it receives form traffic from the PVC card service pages.
     { url: `${BASE}/hp-printer-abu-dhabi/`,         lastModified: lm('/hp-printer-abu-dhabi/', thisMonth), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/products/`,                     lastModified: lm('/products/', requestTime), changeFrequency: 'weekly',  priority: 0.75 },
     { url: `${BASE}/blogs/`,                        lastModified: lm('/blogs/', requestTime), changeFrequency: 'weekly',  priority: 0.7 },

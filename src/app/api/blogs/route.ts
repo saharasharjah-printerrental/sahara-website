@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
+import { sanitizeHtml } from '@/lib/sanitizeHtml';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -31,6 +32,7 @@ function getDB() {
 }
 
 const CACHE_CONTROL = { 'Cache-Control': 'no-store, max-age=0' };
+const PUBLIC_CACHE_CONTROL = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' };
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -51,14 +53,14 @@ export async function GET(request: NextRequest) {
     }
     if (slug) {
       const result = await db.prepare('SELECT * FROM blogs WHERE slug = ? AND isActive = 1').bind(slug).first();
-      return NextResponse.json({ blog: result }, { headers: CACHE_CONTROL });
+      return NextResponse.json({ blog: result }, { headers: PUBLIC_CACHE_CONTROL });
     }
     if (includeDrafts) {
       const result = await db.prepare('SELECT * FROM blogs ORDER BY createdAt DESC').all();
       return NextResponse.json({ blogs: result?.results ?? [] }, { headers: CACHE_CONTROL });
     }
     const result = await db.prepare('SELECT * FROM blogs WHERE isActive = 1 ORDER BY publishedAt DESC').all();
-    return NextResponse.json({ blogs: result?.results ?? [] }, { headers: CACHE_CONTROL });
+    return NextResponse.json({ blogs: result?.results ?? [] }, { headers: PUBLIC_CACHE_CONTROL });
   } catch (error) {
     console.error('Blogs GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch blogs', blogs: [] }, { status: 200 });
@@ -87,7 +89,7 @@ export async function POST(request: NextRequest) {
       body.title,
       body.slug || body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       body.excerpt || '',
-      body.content || '',
+      sanitizeHtml(body.content || ''),
       body.image || '',
       body.author || 'Sahara Printer',
       body.category || '',

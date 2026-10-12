@@ -88,7 +88,7 @@ export default function HPBrandPage() {
                 Enterprise-grade solutions tailored for the most demanding executive environments.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href="/rental-calculator/?brand=hp" className="btn-primary">Enquire for HP Models</a>
+                <a href="/quote/?brand=hp" className="btn-primary">Enquire for HP Models</a>
                 <a href="#products" className="btn-secondary">View Products</a>
               </div>
             </Reveal>
@@ -143,7 +143,7 @@ export default function HPBrandPage() {
       <CtaBand
         title="Ready to Upgrade Your Infrastructure?"
         body="Schedule a private consultation with our HP product specialists to tailor the perfect solution for your corporate environment."
-        primary={{ label: "Enquire for HP Models", href: "/rental-calculator/?brand=hp" }}
+        primary={{ label: "Enquire for HP Models", href: "/quote/?brand=hp" }}
       />
 
       <Footer />

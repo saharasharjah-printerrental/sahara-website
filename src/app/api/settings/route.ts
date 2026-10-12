@@ -15,6 +15,10 @@ const CACHE_CONTROL = {
   'Content-Type': 'application/json',
   'X-Robots-Tag': 'noindex, nofollow',
 };
+const PUBLIC_CACHE_CONTROL = {
+  ...CACHE_CONTROL,
+  'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+};
 
 function getDB() {
   try {
@@ -97,6 +101,7 @@ function toPublicSettings(rows: any[]): Record<string, unknown> {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const key = searchParams.get('key');
+  const publicOnly = searchParams.get('public') === '1';
 
   const db = getDB();
 
@@ -114,6 +119,17 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    // A separate response shape prevents an admin cookie from changing a
+    // cacheable public response into one containing private settings.
+    if (publicOnly) {
+      const result = await db.prepare(
+        "SELECT key, value FROM settings WHERE key IN ('site_settings', 'calculator_prices')"
+      ).all();
+      return NextResponse.json(
+        { settings: toPublicSettings(result?.results ?? []) },
+        { status: 200, headers: PUBLIC_CACHE_CONTROL }
+      );
+    }
     const isAdmin = await isAdminRequest(request);
 
     if (key) {

@@ -88,7 +88,7 @@ export default function CanonBrandPage() {
               precision engineering for the modern executive landscape.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <a href="/rental-calculator/?brand=canon" className="btn-primary">Enquire about Canon Solutions</a>
+              <a href="/quote/?brand=canon" className="btn-primary">Enquire about Canon Solutions</a>
               <a href="#products" className="btn-secondary">View Product Guide</a>
             </div>
           </Reveal>
@@ -189,7 +189,7 @@ export default function CanonBrandPage() {
         <Reveal className="relative z-10 mx-auto max-w-3xl">
           <h2 className="font-sora text-display font-bold text-white">Ready for the <span className="italic text-primary">next</span> standard?</h2>
           <p className="mt-6 text-body text-on-surface-variant">Consult with our executive imaging specialists to design a Canon solution tailored to your operational demands.</p>
-          <a href="/rental-calculator/?brand=canon" className="btn-primary mt-9 inline-block">Send Inquiry</a>
+          <a href="/quote/?brand=canon" className="btn-primary mt-9 inline-block">Send Inquiry</a>
         </Reveal>
       </section>
 

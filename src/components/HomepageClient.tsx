@@ -148,7 +148,7 @@ function HeroSection() {
           Premium office equipment solutions for the modern executive. From high-speed printing to expert technical support, we power your productivity with precision.
         </p>
         <div className="flex flex-wrap gap-4 pt-2">
-          <a href="/rental-calculator/" className="btn-primary">
+          <a href="/quote/" className="btn-primary">
             Get a Quote
           </a>
           <a
@@ -573,7 +573,7 @@ function CTASection() {
     <CtaBand
       title="Ready to Upgrade?"
       body="Get a customized proposal for your office equipment within 24 hours."
-      primary={{ label: "Get Your Quote", href: "/rental-calculator/" }}
+      primary={{ label: "Get Your Quote", href: "/quote/" }}
       secondary={{ label: "Contact Support", href: "/contact/" }}
     />
   );

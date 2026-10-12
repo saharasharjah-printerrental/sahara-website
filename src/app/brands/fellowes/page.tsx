@@ -21,7 +21,7 @@ const models = [
     name: "Fellowes Powershred LX65",
     image: "/images/shredder-fellowes-lx65.webp",
     alt: "Fellowes Powershred LX65 cross-cut paper shredder supplied by Sahara in Dubai and UAE",
-    desc: "10 sheets per pass, 22.7L bin — personal and light-office use. Buy AED 800–1,500, or rent from AED 150/month.",
+    desc: "10 sheets per pass, 22.7L bin — personal and light-office use. Buy AED 800–1,500, or rent from AED 450/month.",
     href: "/services/paper-shredder-sales/",
     cta: "Buy — pricing & specs",
   },
@@ -29,7 +29,7 @@ const models = [
     name: "Fellowes Powershred 325Ci",
     image: "/images/shredder-fellowes-325ci.webp",
     alt: "Fellowes Powershred 325Ci commercial cross-cut paper shredder supplied by Sahara in Dubai and UAE",
-    desc: "24 sheets per pass, 83L bin — departmental and commercial use. Buy AED 2,200–3,500+, or rent from AED 300/month.",
+    desc: "24 sheets per pass, 83L bin — departmental and commercial use. Buy AED 2,200–3,500+, or rent from AED 900/month.",
     href: "/services/paper-shredder-sales/",
     cta: "Buy — pricing & specs",
   },
@@ -39,7 +39,7 @@ const features = [
   { icon: ShieldCheckIcon, title: "DIN P-4 Cross-Cut", desc: "Powershred cross-cut models meet DIN P-4 — the security level recommended for confidential documents under UAE PDPL." },
   { icon: TruckIcon, title: "Free UAE Delivery", desc: "Free delivery and on-site setup across Dubai, Sharjah, and Abu Dhabi on every shredder sale or rental." },
   { icon: AwardIcon, title: "Genuine Units & Warranty", desc: "Genuine Fellowes units with full manufacturer warranty — extended cover and AMC available for high-volume machines." },
-  { icon: SettingsIcon, title: "Rent or Buy", desc: "Own outright from AED 800, or rent from AED 150/month with maintenance included — whichever fits your document volume." },
+  { icon: SettingsIcon, title: "Rent or Buy", desc: "Own outright from AED 800, or rent from AED 450/month with maintenance included — whichever fits your document volume." },
 ];
 
 export default function FellowesBrandPage() {
@@ -74,7 +74,7 @@ export default function FellowesBrandPage() {
                 Sahara Office Equipments is an authorized Fellowes supplier in Dubai and UAE, stocking
                 Fellowes Powershred DIN P-4 cross-cut shredders for personal, office, and departmental use.
                 Buy from <strong className="text-white">AED 800</strong> or rent from{" "}
-                <strong className="text-white">AED 150/month</strong> — free delivery and setup across
+                <strong className="text-white">AED 450/month</strong> — free delivery and setup across
                 Dubai, Sharjah, and Abu Dhabi. Call +971503823969.
               </p>
             </div>
@@ -82,11 +82,11 @@ export default function FellowesBrandPage() {
             <div className="mt-6 max-w-2xl">
               <AnswerBlock
                 question="Where can I buy Fellowes shredders in Dubai?"
-                answer="Sahara Office Equipments is an authorized Fellowes supplier in Dubai, stocking Fellowes Powershred cross-cut shredders for personal, office, and departmental use. Models are available to buy from AED 800 or rent from AED 150/month, with free delivery and setup across Dubai, Sharjah, and Abu Dhabi."
+                answer="Sahara Office Equipments is an authorized Fellowes supplier in Dubai, stocking Fellowes Powershred cross-cut shredders for personal, office, and departmental use. Models are available to buy from AED 800 or rent from AED 450/month, with free delivery and setup across Dubai, Sharjah, and Abu Dhabi."
                 supportingPoints={[
                   "Authorized Fellowes supplier — genuine Powershred units with manufacturer warranty",
                   "DIN P-4 cross-cut, the level recommended for UAE PDPL-compliant destruction",
-                  "Buy from AED 800 or rent from AED 150/month, free UAE delivery",
+                  "Buy from AED 800 or rent from AED 450/month, free UAE delivery",
                 ]}
               />
             </div>
@@ -166,7 +166,7 @@ export default function FellowesBrandPage() {
       <CtaBand
         title="Need a Fellowes Shredder?"
         body="Free delivery and setup across Dubai, Sharjah & Abu Dhabi"
-        primary={{ label: "Request a Quote", href: "/rental-calculator/" }}
+        primary={{ label: "Request a Quote", href: "/quote/paper-shredder-sales/" }}
         secondary={{ label: "Contact Us", href: "/contact/" }}
       />
 

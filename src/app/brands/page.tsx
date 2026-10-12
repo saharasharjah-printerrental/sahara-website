@@ -182,7 +182,7 @@ export default function BrandsPage() {
         <CtaBand
           title="Need Help Choosing a Printer Brand?"
           body="Our experts will recommend the right brand and model for your office volume, budget, and workflow."
-          primary={{ label: "Get a Free Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Get a Free Quote", href: "/quote/" }}
           secondary={{ label: "Talk to an Expert", href: "/contact/" }}
         />
 

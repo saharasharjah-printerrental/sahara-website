@@ -68,7 +68,7 @@ A: No — finer particle sizes from higher security levels are still recyclable 
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [DIN P4 vs P5 vs P6 — Shredder Security Levels in UAE](/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/)
 - [Paper Shredder Rental in UAE — When It Beats Buying](/blogs/paper-shredder-rental-uae-when-it-beats-buying/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

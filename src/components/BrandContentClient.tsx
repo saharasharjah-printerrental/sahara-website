@@ -136,7 +136,7 @@ export default function BrandContentClient({ slug, brandFaqs }: { slug: string; 
                 />
               </div>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href={`/rental-calculator/?brand=${slug}`} className="btn-primary">Enquire for {data.name} Models</a>
+                <a href={`/quote/?brand=${slug}`} className="btn-primary">Enquire for {data.name} Models</a>
                 <a href="#products" className="btn-secondary">View Products</a>
               </div>
             </Reveal>
@@ -208,7 +208,7 @@ export default function BrandContentClient({ slug, brandFaqs }: { slug: string; 
       <CtaBand
         title={`Explore ${data.name} Solutions?`}
         body={`Contact our ${data.name} specialists for a customized quote and demonstration.`}
-        primary={{ label: `Get ${data.name} Quote`, href: `/rental-calculator/?brand=${slug}` }}
+        primary={{ label: `Get ${data.name} Quote`, href: `/quote/?brand=${slug}` }}
       />
 
       <Footer />

@@ -254,7 +254,7 @@ const relatedLinks = [
   { href: "/services/amc/", label: "Printer AMC Dubai" },
   { href: "/services/repair/", label: "Printer Repair Dubai" },
   { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
-  { href: "/pvc-card-printer-quote/", label: "Get a Quote" },
+  { href: "/quote/pvc-card-printer-sales/", label: "Get a Quote" },
   { href: "/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/", label: "Retransfer vs Direct-to-Card Explained" },
   { href: "/blogs/how-to-choose-id-card-printer-uae-office/", label: "How to Choose an ID Card Printer" },
 ];
@@ -423,12 +423,12 @@ const breadcrumbSchema = {
 export default function BravoCardPrintersUAE() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rtaiProductSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dc3300ProductSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonItemListSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToPrintCardSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rtaiProductSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dc3300ProductSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonItemListSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToPrintCardSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -458,7 +458,7 @@ export default function BravoCardPrintersUAE() {
             />
           }
           image={{ src: "/brands/bravo/rtai-official.webp", alt: "Bravo RTAI PVC card printer — Sahara UAE", width: 610, height: 610 }}
-          primaryCta={{ label: "Get a Quote", href: "/pvc-card-printer-quote/" }}
+          primaryCta={{ label: "Get a Quote", href: "/quote/pvc-card-printer-sales/" }}
           secondaryCta={{ label: "Call: +971 50 382 3969", href: "tel:+971503823969" }}
         />
 
@@ -670,7 +670,7 @@ export default function BravoCardPrintersUAE() {
         <CtaBand
           title="Get a Bravo Printer Demo"
           body="As the authorised exclusive reseller in the UAE for the Bravo RTAI and DC 3300, we offer on-site demonstrations, live card printing samples, and tailored pricing for your organisation."
-          primary={{ label: "Request a Demo", href: "/pvc-card-printer-quote/" }}
+          primary={{ label: "Request a Demo", href: "/quote/pvc-card-printer-sales/" }}
           secondary={{ label: "+971 50 382 3969", href: "tel:+971503823969" }}
         />
 

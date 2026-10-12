@@ -358,7 +358,7 @@ export default async function PrinterRentalAbuDhabi() {
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />}
 
       <main className="min-h-screen bg-surface">
         <Header />
@@ -411,7 +411,7 @@ export default async function PrinterRentalAbuDhabi() {
                 ))}
               </ul>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href="/rental-calculator/" className="btn-primary">Get Free Quote</a>
+                <a href="/quote/printer-rental/" className="btn-primary">Get Free Quote</a>
                 <a href="tel:+971503823969" className="btn-secondary">Call: +971 50 382 3969</a>
               </div>
             </Reveal>
@@ -498,7 +498,7 @@ export default async function PrinterRentalAbuDhabi() {
                   ))}
                 </ul>
                 <a
-                  href="/rental-calculator/"
+                  href="/quote/printer-rental/"
                   className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   Get Quote
@@ -546,7 +546,7 @@ export default async function PrinterRentalAbuDhabi() {
         <CtaBand
           title="Need a Printer in Abu Dhabi?"
           body="Quote within 2 hours. Free site visit. Same-week delivery across Abu Dhabi."
-          primary={{ label: "Get Free Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Get Free Quote", href: "/quote/printer-rental/" }}
           secondary={{ label: "Call +971 50 382 3969", href: "tel:+971503823969" }}
         />
 

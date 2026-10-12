@@ -29,6 +29,7 @@ import {
 interface FAQItem { q: string; a: string; }
 
 const DEFAULT_FAQS: FAQItem[] = [
+  { q: "Can I rent a printer for A3 labels and 300 gsm paper?", a: "Yes. Sahara offers a customised label-printing printer for AED 549/month, supporting label sheets up to A3 and compatible paper up to 300 gsm. Tell us your label material, size, paper weight and monthly volume so we can confirm the correct media and feed settings before installation." },
   { q: "What is the minimum rental duration?", a: "We offer flexible rental periods starting from 3 months to 36 months. Short-term rentals are available for events and temporary needs." },
   { q: "Is maintenance included in the rental?", a: "Yes, all our rental plans include comprehensive maintenance coverage. Our technicians perform regular servicing and emergency repairs at no additional cost." },
   { q: "Can I upgrade my rented printer?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your equipment anytime during the contract based on your business needs." },
@@ -277,7 +278,7 @@ export default function PrinterRentalPage() {
           }
           badges={["AED 250/mo Starting", "Zero Deposit", "Unlimited Toner", "Same-Day Delivery", "Cancel Anytime", "COP28 Proud Supplier"]}
           image={{ src: "/images/service-maintanence.webp", alt: "Sahara printer technician servicing photocopier in Dubai UAE", width: 800, height: 440 }}
-          primaryCta={{ label: "Get a Quote", href: "/rental-calculator/" }}
+          primaryCta={{ label: "Get a Quote", href: "/quote/printer-rental/" }}
           secondaryCta={{ label: "Calculate Price", href: "/rental-calculator/" }}
         />
 
@@ -345,6 +346,17 @@ export default function PrinterRentalPage() {
           <p className="mt-8 text-center text-caption text-muted">*Prices may vary based on specific requirements. Contact us for a customized quote.</p>
         </Section>
 
+        <section id="label-printing" className="scroll-mt-28 border-y border-white/10 bg-surface-low px-6 py-12">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="text-2xl font-bold text-white">Custom A3 Label Printer Rental</h2>
+            <p className="mt-3 text-xl font-bold text-primary">AED 549/month</p>
+            <p className="mt-4 max-w-3xl leading-relaxed text-muted">Print your own product labels, packaging labels and custom designs on label sheets up to A3. Our customised printer also handles compatible higher-weight paper up to 300 gsm.</p>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">Share your label material, sheet size, paper weight and monthly volume. We will confirm media compatibility and the correct feed settings before installation.</p>
+            <a href="/quote/label-printer-rental/" className="btn-primary mt-6 inline-flex">Get a Label Printer Quote</a>
+          </div>
+        </section>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "Service", name: "Custom A3 Label Printer Rental UAE", url: "https://www.saharaprinter.com/services/printer-rental/#label-printing", provider: orgRef(), description: "Custom label printing on sheets up to A3 and compatible paper up to 300 gsm. Media compatibility confirmed before installation.", offers: { "@type": "Offer", price: "549", priceCurrency: "AED", priceSpecification: { "@type": "UnitPriceSpecification", price: "549", priceCurrency: "AED", unitCode: "MON", referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" } } } }).replace(/</g, "\\u003c") }} />
+
         <Section eyebrow="Getting Started" title="How It Works" subtitle="Get started in 4 simple steps" align="center" tone="raised">
           <div className="grid gap-6 md:grid-cols-4">
             {process.map((p) => (
@@ -379,7 +391,7 @@ export default function PrinterRentalPage() {
         <Section eyebrow="Decision Guide" title="Rent vs. Buy — The True Cost Breakdown" subtitle="Most businesses underestimate the total cost of owning printers. This table shows the real comparison." align="center" tone="ink">
           <ComparisonTable columns={["Cost Factor", "Rent with Sahara", "Buy Your Own"]} highlightColumn={1} rows={rentVsBuyRows} />
           <div className="mt-8 flex justify-center">
-            <a href="/rental-calculator/" className="btn-primary">Get a Rental Quote — No Commitment</a>
+            <a href="/quote/printer-rental/" className="btn-primary">Get a Rental Quote — No Commitment</a>
           </div>
         </Section>
 
@@ -410,7 +422,7 @@ export default function PrinterRentalPage() {
                     </div>
                   ))}
                 </div>
-                <a href="/rental-calculator/" className="inline-block rounded-pill border border-emerald-400/30 bg-emerald-500/20 px-6 py-3 text-[0.9rem] font-bold text-emerald-400 transition-colors hover:bg-emerald-500/30">
+                <a href="/quote/printer-rental/" className="inline-block rounded-pill border border-emerald-400/30 bg-emerald-500/20 px-6 py-3 text-[0.9rem] font-bold text-emerald-400 transition-colors hover:bg-emerald-500/30">
                   Learn About Our Green Plan →
                 </a>
               </div>
@@ -444,7 +456,7 @@ export default function PrinterRentalPage() {
             <h2 className="font-sora text-title font-bold text-white mb-3">Frequently Asked Questions</h2>
             <p className="text-muted">Common questions about printer rental in the UAE.</p>
           </div>
-          <FaqSection pageSlug="services/printer-rental" defaultFaqs={DEFAULT_FAQS} />
+          <FaqSection pageSlug="services/printer-rental" defaultFaqs={DEFAULT_FAQS} priorityFaqs={[DEFAULT_FAQS[0]]} />
         </Section>
 
         <Section eyebrow="Resource Hub" title="Learn Before You Rent" subtitle="Expert guides to help UAE businesses make smarter printer decisions." align="center" tone="ink">
@@ -505,7 +517,7 @@ export default function PrinterRentalPage() {
         <CtaBand
           title="Ready to Rent?"
           body="Get a customized quote within 2 hours"
-          primary={{ label: "Get Your Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Get Your Quote", href: "/quote/printer-rental/" }}
         />
 
         <Footer />

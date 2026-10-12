@@ -295,10 +295,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 </div>
 
                 <div className="flex flex-wrap gap-4">
-                  <a href={`/rental-calculator/?product=${slug}`} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+                  <a href={`/quote/?product=${slug}`} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
                     Get a Quote
                   </a>
-                  <a href="/rental-calculator/" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
+                  <a href="/quote/" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
                     Rental Calculator
                   </a>
                   <a href="tel:+971503823969" className="glass-card px-8 py-4 rounded-full font-bold text-white hover:bg-[#2a3548] transition-colors">
@@ -431,7 +431,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   <p className="text-[#d3c5b0] text-sm leading-relaxed mb-5">
                     Tell us your monthly volume and we will confirm the current rate, usually the same working day.
                   </p>
-                  <a href={`/rental-calculator/?product=${slug}`} className="block text-center bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-3 rounded-full font-bold mb-3 hover:scale-105 transition-transform">
+                  <a href={`/quote/?product=${slug}`} className="block text-center bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-3 rounded-full font-bold mb-3 hover:scale-105 transition-transform">
                     Request a Quote
                   </a>
                   <a href="tel:+971503823969" className="block text-center border border-[#f5be53]/40 text-[#f5be53] px-6 py-3 rounded-full font-bold mb-6 hover:bg-[#f5be53]/10 transition-colors">

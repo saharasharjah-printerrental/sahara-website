@@ -75,7 +75,7 @@ export default function RicohBrandPage() {
                 Ricoh&apos;s authorized partner delivering production-ready printers and smart MFPs for
                 high-volume UAE enterprises. Experience Japanese precision engineered for demanding workflows.
               </p>
-              <a href="/rental-calculator/?brand=ricoh" className="btn-primary mt-9 inline-block">Enquire Now</a>
+              <a href="/quote/?brand=ricoh" className="btn-primary mt-9 inline-block">Enquire Now</a>
             </Reveal>
             <Reveal delay={0.1} className="relative">
               <div className="absolute -inset-10 rounded-full bg-primary/10 blur-[120px]" />
@@ -130,7 +130,7 @@ export default function RicohBrandPage() {
       <CtaBand
         title="Ready to Boost Productivity?"
         body="Get a customized quote for Ricoh printers tailored to your business needs."
-        primary={{ label: "Enquire for Ricoh Models", href: "/rental-calculator/?brand=ricoh" }}
+        primary={{ label: "Enquire for Ricoh Models", href: "/quote/?brand=ricoh" }}
       />
 
       <Footer />

@@ -183,7 +183,7 @@ export default function AboutPage() {
       <CtaBand
         title="Ready to Transform Your Office?"
         body="Contact us today for a free consultation and quote"
-        primary={{ label: "Get a Quote", href: "/rental-calculator/" }}
+        primary={{ label: "Get a Quote", href: "/quote/" }}
         secondary={{ label: "Contact Us", href: "/contact/" }}
       />
 

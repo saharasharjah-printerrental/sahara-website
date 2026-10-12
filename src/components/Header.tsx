@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchPublicSettings } from "@/lib/api";
 import CartIndicator from "@/components/CartIndicator";
+import { quoteHrefForPath } from "@/lib/quote-services";
 import { Print, CopyAll, Handyman, Build, Inventory, ShoppingCart, Home, SettingsSuggest, Inventory2, RequestQuote, LocationOn, Article, Call, ExpandMore, ExpandLess, MoreHoriz, InfoOutlined, Close, Groups, Badge } from "@mui/icons-material";
 
 const navItems = [
@@ -42,7 +43,8 @@ const services = [
   { name: "Printer Repair", href: "/services/repair/", icon: Build },
   { name: "Toner & Spare Parts", href: "/services/printer-spare-parts/", icon: Inventory },
   { name: "Plotter Maintenance", href: "/services/plotter-maintenance/", icon: ShoppingCart },
-  { name: "PVC Card Printers", href: "/bravo-card-printers-uae/", icon: Badge },
+  { name: "PVC Card Printer Rental", href: "/services/pvc-card-printer-rental/", icon: Badge },
+  { name: "PVC Card Printing", href: "/services/pvc-card-printing-services/", icon: Badge },
 ];
 
 // Mobile bottom nav - direct link items (3 icons keeps bar uncluttered)
@@ -292,7 +294,7 @@ export default function Header() {
           {/* CTA Button - Desktop */}
           <div className="hidden lg:flex items-center gap-3">
             <CartIndicator variant="desktop" />
-            <Link href="/rental-calculator/" className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
+            <Link href={quoteHrefForPath(pathname)} className="bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform">
               Get a Quote
             </Link>
           </div>
@@ -410,7 +412,7 @@ export default function Header() {
                   {/* ── Pages ── */}
                   <p className="text-[9px] font-bold text-slate-600 uppercase tracking-[0.2em] px-2 pb-1">Pages</p>
                   {[
-                    { name: "Get Quote", href: "/rental-calculator/",    icon: RequestQuote },
+                    { name: "Get Quote", href: quoteHrefForPath(pathname),    icon: RequestQuote },
                     { name: "About Us",  href: "/about/",                icon: InfoOutlined },
                     { name: "Blogs",     href: "/blogs/",                icon: Article      },
                     { name: "Locations", href: "/printer-rental-dubai/", icon: LocationOn   },
@@ -441,7 +443,7 @@ export default function Header() {
                 {/* ── CTA footer ── */}
                 <div className="px-3 pb-3">
                   <Link
-                    href="/rental-calculator/"
+                    href={quoteHrefForPath(pathname)}
                     onClick={() => setIsMoreOpen(false)}
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-[#f5be53] to-[#c8962e] text-[#412d00] font-bold text-sm active:scale-[0.98] transition-transform"
                   >

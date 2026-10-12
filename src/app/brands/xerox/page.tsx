@@ -75,7 +75,7 @@ export default function XeroxBrandPage() {
                 Xerox authorized partner offering VersaLink and Altalink series with revolutionary ConnectKey
                 technology. Transform your workplace with intelligent document solutions.
               </p>
-              <a href="/rental-calculator/?brand=xerox" className="btn-primary mt-9 inline-block">Enquire Now</a>
+              <a href="/quote/?brand=xerox" className="btn-primary mt-9 inline-block">Enquire Now</a>
             </Reveal>
             <Reveal delay={0.1} className="relative">
               <div className="absolute -inset-10 rounded-full bg-primary/10 blur-[120px]" />
@@ -130,7 +130,7 @@ export default function XeroxBrandPage() {
       <CtaBand
         title="Transform Your Workplace"
         body="Get a customized quote for Xerox printers tailored to your business needs."
-        primary={{ label: "Enquire for Xerox Models", href: "/rental-calculator/?brand=xerox" }}
+        primary={{ label: "Enquire for Xerox Models", href: "/quote/?brand=xerox" }}
       />
 
       <Footer />

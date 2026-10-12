@@ -77,7 +77,7 @@ A: See [heavy-duty shredder rental for bulk clear-outs](/blogs/heavy-duty-shredd
 - [Paper Shredder Rental Dubai & UAE](/services/paper-shredder-rental/)
 - [Heavy-Duty Shredder Rental for Bulk Clear-Outs](/blogs/heavy-duty-shredder-rental-bulk-document-clearout-uae/)
 - [Shredder Delivery to JAFZA, SAIF Zone & DIFC](/blogs/shredder-delivery-jafza-saif-zone-difc-uae-free-zones/)
-- [Get a Free Quote](/rental-calculator/)
+- [Get a Shredder Rental Quote](/quote/paper-shredder-rental/)
 
 ---
 

@@ -102,7 +102,7 @@ export default async function CanonPrinterDubai() {
                   series with zero deposit and free toner.
                 </p>
                 <div className="mt-9 flex flex-wrap gap-4">
-                  <a href="/rental-calculator/" className="btn-primary">Get Free Quote</a>
+                  <a href="/quote/" className="btn-primary">Get Free Quote</a>
                   <a href="tel:+971503823969" className="btn-secondary">Call: +971503823969</a>
                 </div>
               </Reveal>
@@ -157,7 +157,7 @@ export default async function CanonPrinterDubai() {
         <CtaBand
           title="Need Canon Printer in Dubai?"
           body="Get a customized quote within 2 hours. Free consultation and site visit."
-          primary={{ label: "Get Free Quote", href: "/rental-calculator/" }}
+          primary={{ label: "Get Free Quote", href: "/quote/" }}
           secondary={{ label: "Call Now", href: "tel:+971503823969" }}
         />
 

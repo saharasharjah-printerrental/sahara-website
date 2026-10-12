@@ -125,5 +125,5 @@ A: Yes. AMC contracts are subject to 5% VAT in UAE. Sahara provides VAT-complian
 ## Related Resources
 - [Printer Repair Dubai — On-Site Service](/services/repair)
 - [Printer Rental UAE — AED 250/month](/services/printer-rental)
-- [Get an AMC Quote](/get-quote)
+- [Get an AMC Quote](/quote/)
 - [Annual Maintenance Contract Service](/services/amc)

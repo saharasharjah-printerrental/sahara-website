@@ -78,4 +78,4 @@ A: Both are common in the UAE. On-site shredding (a rented machine at your offic
 - [Paper Shredder Rental & Sales Dubai & UAE](/services/paper-shredder-rental/)
 - [DIN P-4 vs P-5 vs P-6 Explained](/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/)
 - [Shredder Delivery Across UAE Free Zones](/blogs/shredder-delivery-jafza-saif-zone-difc-uae-free-zones/)
-- [Get a Quote](/rental-calculator/)
+- [Get a Quote](/quote/paper-shredder-rental/)

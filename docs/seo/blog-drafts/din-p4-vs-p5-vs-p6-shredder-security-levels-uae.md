@@ -75,4 +75,4 @@ A: Sahara's standard rental and sale range is Fellowes Powershred DIN P-4 cross-
 - [UAE PDPL Document Destruction — What Compliance Requires](/blogs/uae-pdpl-document-destruction-compliance-guide/)
 - [Paper Shredder Rental & Sales Dubai & UAE](/services/paper-shredder-rental/)
 - [Buying a Paper Shredder in Dubai — Sizing Guide](/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/)
-- [Get a Quote](/rental-calculator/)
+- [Get a Quote](/quote/paper-shredder-rental/)

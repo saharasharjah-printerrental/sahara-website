@@ -29,7 +29,7 @@ function ab(cmd, session = 'ts-smoke') {
 async function testQuoteForm(baseUrl) {
   console.log('\n[Test] Quote form submission');
   try {
-    ab(`open ${baseUrl}/get-quote`);
+    ab(`open ${baseUrl}/quote/`);
     ab('wait --load networkidle');
     const snapshot = ab('snapshot -i');
     const hasFields = snapshot.includes('textbox') || snapshot.includes('input');
@@ -117,7 +117,7 @@ async function main() {
     ['/', 'Homepage'],
     ['/contact', 'Contact'],
     ['/products', 'Products'],
-    ['/get-quote', 'Get Quote'],
+    ['/quote/', 'Get Quote'],
   ]) {
     results.push(await testVisualDiff(baseUrl, route, label));
   }

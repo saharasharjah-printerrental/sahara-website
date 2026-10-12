@@ -182,7 +182,7 @@ export default function PrinterRepairDubai() {
                   />
                 </div>
                 <div className="mt-9 flex flex-wrap gap-4">
-                  <a href="/rental-calculator/" className="btn-primary">Request Repair</a>
+                  <a href="/quote/printer-repair/" className="btn-primary">Request Repair</a>
                   <a href="tel:+971503823969" className="btn-secondary">Call: +971503823969</a>
                 </div>
               </Reveal>
@@ -271,7 +271,7 @@ export default function PrinterRepairDubai() {
         <CtaBand
           title="Need Printer Repair in Dubai?"
           body="Get a technician dispatched within 4 hours — 2 hours for Business Bay, DIFC and Downtown. Free diagnosis for AMC clients."
-          primary={{ label: "Request Repair", href: "/rental-calculator/" }}
+          primary={{ label: "Request Repair", href: "/quote/printer-repair/" }}
           secondary={{ label: "Call Now", href: "tel:+971503823969" }}
         />
 

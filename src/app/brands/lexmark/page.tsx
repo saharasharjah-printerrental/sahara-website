@@ -83,7 +83,7 @@ export default function LexmarkBrandPage() {
                 cutting-edge technology for enterprise-grade performance.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <a href="/rental-calculator/?brand=lexmark" className="btn-primary">Enquire for Lexmark Models</a>
+                <a href="/quote/?brand=lexmark" className="btn-primary">Enquire for Lexmark Models</a>
                 <a href="#products" className="btn-secondary">View Products</a>
               </div>
             </Reveal>
@@ -159,7 +159,7 @@ export default function LexmarkBrandPage() {
       <CtaBand
         title="Choose Lexmark Quality"
         body="Get enterprise-grade printing with American innovation. Contact us for a Lexmark solution."
-        primary={{ label: "Get Lexmark Quote", href: "/rental-calculator/?brand=lexmark" }}
+        primary={{ label: "Get Lexmark Quote", href: "/quote/?brand=lexmark" }}
       />
 
       <Footer />

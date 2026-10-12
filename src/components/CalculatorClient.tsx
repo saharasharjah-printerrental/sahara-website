@@ -290,7 +290,7 @@ function DurationSlider({
 const trail = [{ label: "Home", href: "/" }, { label: "Rental Calculator" }];
 
 // ── Main component ─────────────────────────────────────────────────────────────
-export default function CalculatorClient() {
+export default function CalculatorClient({ embedded = false }: { embedded?: boolean }) {
   const [printType, setPrintType] = useState<"bw" | "color" | "both">("both");
   const [paperFormat, setPaperFormat] = useState<"a4" | "a3" | "both">("a4");
 
@@ -378,7 +378,7 @@ export default function CalculatorClient() {
       `Duration: ${duration} months`,
     ].join(" | ");
     try {
-      await fetch("/api/send-email", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -402,6 +402,8 @@ export default function CalculatorClient() {
           colorVolume: colorVolume > 0 ? `${colorVolume.toLocaleString()} pages/mo` : undefined,
         }),
       });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error("Quote request failed");
     } catch {
       setFormError("Something went wrong. Please try again.");
       setSubmitting(false);
@@ -417,12 +419,11 @@ export default function CalculatorClient() {
   const arcFill = Math.min(0.85, 0.15 + ((monthlyPrice - BASE_RENT) / 1500) * 0.7);
   const arcDash = arcFill * arcCircumference;
 
-  return (
-    <main className="min-h-screen bg-ink">
-      <Header />
+  const content = (
+    <>
 
       {/* Hero */}
-      <section className="relative pt-32 pb-10 px-6 lg:px-20 overflow-hidden">
+      <section className={`relative px-6 pb-10 lg:px-20 overflow-hidden ${embedded ? "pt-10" : "pt-32"}`}>
         <div className="absolute inset-0 bg-gradient-to-b from-ink via-surface to-ink" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/[0.06] rounded-full blur-[140px] pointer-events-none" />
         <div className="max-w-content mx-auto relative z-10">
@@ -842,6 +843,17 @@ export default function CalculatorClient() {
         </div>
       </section>
 
+    </>
+  );
+
+  if (embedded) {
+    return <div className="bg-ink">{content}</div>;
+  }
+
+  return (
+    <main className="min-h-screen bg-ink">
+      <Header />
+      {content}
       <Footer />
       <WhatsAppCTA />
       <JumpToTop />
