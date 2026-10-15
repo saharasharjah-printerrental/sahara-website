@@ -43,10 +43,17 @@ async function main() {
       const response = await page.goto(`${base}/quote/${service.slug}/`, { waitUntil: "networkidle", timeout: 90_000 });
       assert.equal(response?.status(), 200);
       await page.getByRole("heading", { name: `${service.name} Quote`, exact: true }).waitFor();
-      assert.equal(await page.locator("select#quote-option option").count(), service.options.length);
       assert.ok((await page.locator('meta[name="robots"]').getAttribute("content"))?.includes("noindex"));
-      const link = await page.getByRole("link", { name: "Ask on WhatsApp" }).getAttribute("href");
-      assert.ok(decodeURIComponent(link || "").includes(service.name));
+      if (service.slug === "printer-rental") {
+        // Since 5cbd15e (2026-10-10) this route embeds the rental calculator instead of ServiceQuoteForm.
+        await page.getByRole("heading", { name: "Printer Rental Calculator", exact: true }).waitFor();
+        assert.equal(await page.locator("select#quote-option").count(), 0);
+        assert.ok(await page.locator('input[placeholder="Full Name *"]').count() >= 1);
+      } else {
+        assert.equal(await page.locator("select#quote-option option").count(), service.options.length);
+        const link = await page.getByRole("link", { name: "Ask on WhatsApp" }).getAttribute("href");
+        assert.ok(decodeURIComponent(link || "").includes(service.name));
+      }
     });
 
     for (const width of [1440, 390]) {
@@ -78,7 +85,9 @@ async function main() {
 
     await check("brand context survives service selection", async () => {
       await page.goto(`${base}/quote/?brand=canon`, { waitUntil: "networkidle" });
-      await page.locator('main a[href^="/quote/printer-rental/"]').filter({ visible: true }).first().click();
+      // printer-rental now renders the calculator (context dropped there by design since 5cbd15e);
+      // verify the context hand-off on a ServiceQuoteForm route.
+      await page.locator('main a[href^="/quote/paper-shredder-rental/"]').filter({ visible: true }).first().click();
       await page.locator("#quote-details").waitFor();
       assert.equal(await page.locator("#quote-details").inputValue(), "Brand: canon");
     });
