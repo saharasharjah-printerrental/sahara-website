@@ -1,0 +1,237 @@
+- generic
+  - generic
+    - banner
+      - generic
+        - button "Main menu" [expanded=false, ref=e1]
+          - image
+        - link "Google Search Console" [ref=e14]
+        - search
+          - generic
+            - generic
+              - combobox "Inspect any URL in saharaprinter.com" [expanded=false, ref=e18]
+          - button "Search" [ref=e3]
+            - image
+        - button "Help" [ref=e4]
+        - button "User settings" [ref=e5]
+        - generic
+          - button "Messages" [ref=e15]
+        - generic
+          - button "Google apps" [expanded=false, ref=e19]
+            - StaticText "  "
+          - button "Google Account: Sahara Printer Rental (projects@saharaedoc.com)" [expanded=false, ref=e20]
+            - StaticText "  "
+    - dialog "navigational drawer"
+      - generic
+        - navigation "Primary" [ref=e16]
+          - generic [ref=e23] clickable [cursor:pointer]
+            - button "Search property" [expanded=false, ref=e29]
+              - image "favicon"
+              - generic [disabled]
+              - generic
+                - combobox "saharaprinter.com" [expanded=false, ref=e91]
+          - generic
+            - generic
+              - link "Overview" [ref=e30]
+                - StaticText "Overview"
+              - link "Insights" [ref=e31]
+                - StaticText "Insights"
+              - link "Performance" [ref=e50]
+                - StaticText "Performance"
+              - button "Performance report section" [expanded=false, ref=e51]
+              - button "URL inspection" [ref=e32]
+                - StaticText "URL inspection"
+            - StaticText "Indexing"
+            - button "Indexing report section" [expanded=true, ref=e33]
+            - generic
+              - link "Pages" [ref=e52]
+                - StaticText "Pages"
+              - link "Sitemaps" [ref=e53]
+                - StaticText "Sitemaps"
+              - link "Removals" [ref=e54]
+                - StaticText "Removals"
+            - StaticText "Experience"
+            - button "Experience report section" [expanded=true, ref=e34]
+            - generic
+              - link "Core Web Vitals" [ref=e55]
+                - StaticText "Core Web Vitals"
+              - link "HTTPS" [ref=e56]
+                - StaticText "HTTPS"
+            - StaticText "Shopping"
+            - button "Shopping report section" [expanded=true, ref=e35]
+            - generic
+              - link "Product snippets" [ref=e57]
+                - StaticText "Product snippets"
+              - link "Merchant listings" [ref=e58]
+                - StaticText "Merchant listings"
+              - link "Merchant opportunities" [ref=e59]
+                - StaticText "Merchant opportunities"
+            - StaticText "Enhancements"
+            - button "Enhancements report section" [expanded=true, ref=e36]
+            - generic
+              - link "Breadcrumbs" [ref=e60]
+                - StaticText "Breadcrumbs"
+              - link "Review snippets" [ref=e61]
+                - StaticText "Review snippets"
+            - StaticText "Security & Manual Actions"
+            - button "Security & Manual Actions report section" [expanded=false, ref=e37]
+            - generic
+              - link "Links report" [ref=e38]
+                - StaticText "Links"
+              - link "Achievements" [ref=e39]
+                - StaticText "Achievements"
+              - link "Settings" [ref=e40]
+                - StaticText "Settings"
+            - generic
+              - button "Submit feedback" [ref=e41]
+                - StaticText "Submit feedback"
+              - button "About Search Console" [ref=e42]
+                - StaticText "About Search Console"
+            - generic
+              - link "Privacy" [ref=e43]
+              - link "Terms" [ref=e44]
+    - generic
+      - navigation "Breadcrumbs" [ref=e2]
+        - heading "Performance" [level=1, ref=e6]
+      - button "EXPORT" [expanded=false, ref=e7]
+        - StaticText "EXPORT"
+    - radiogroup "Select time range"
+      - radio "24 hours" [checked=false, ref=e8]
+        - StaticText "24 hours"
+      - radio "7 days" [checked=false, ref=e9]
+        - StaticText "7 days"
+      - radio "28 days" [checked=false, ref=e10]
+        - StaticText "28 days"
+      - radio "3 months" [checked=true, ref=e11]
+        - StaticText "3 months"
+    - button "More time ranges" [ref=e12]
+    - list
+      - button "Search type: Web" [ref=e13]
+        - StaticText "Search type: Web"
+      - generic
+        - StaticText "New! Check your site’s performance on multimodal web searches"
+        - button "Close" [ref=e21]
+      - generic
+        - generic
+          - button "Add filter" [expanded=true, ref=e22]
+            - StaticText "Add filter"
+        - generic
+          - menu "Choose a filter from the menu"
+            - menuitem "Query" [ref=e24]
+              - StaticText "Query"
+            - menuitem "Page" [ref=e25]
+              - StaticText "Page"
+            - menuitem "Country" [ref=e26]
+              - StaticText "Country"
+            - menuitem "Device" [ref=e27]
+              - StaticText "Device"
+            - menuitem "Search appearance" [ref=e28]
+              - StaticText "Search appearance"
+      - button "Customize your Performance report using AI" [ref=e17]
+    - StaticText "Last update: 9 hours ago"
+    - generic
+      - main
+        - generic
+          - generic
+            - generic [ref=e45] clickable [cursor:pointer]
+              - button "Total clicks 441" [ref=e62]
+                - StaticText "Total clicks"
+                - StaticText "441"
+              - button "null" [expanded=false, ref=e74]
+            - generic [ref=e46] clickable [cursor:pointer]
+              - button "Total impressions 37.4K" [ref=e63]
+                - StaticText "Total impressions"
+                - StaticText "37.4K"
+              - button "null" [expanded=false, ref=e75]
+            - generic [ref=e47] clickable [cursor:pointer]
+              - button "Average CTR 1.2%" [ref=e64]
+                - StaticText "Average CTR"
+                - StaticText "1.2%"
+              - button "null" [expanded=false, ref=e76]
+            - generic [ref=e48] clickable [cursor:pointer]
+              - button "Average position 18.2" [ref=e65]
+                - StaticText "Average position"
+                - StaticText "18.2"
+              - button "null" [expanded=false, ref=e77]
+            - generic
+              - button "Selected Time Granularity: Daily" [expanded=false, ref=e78]
+                - image
+            - application "chart" [ref=e66] focusable [tabindex]
+              - StaticText "Chart, containing counts of Total clicks, Total impressions, Average CTR, and Average position from July 12, 2026 to October 11, 2026"
+          - StaticText "Get more details on your site’s performance in generative AI features on Google Search"
+          - generic [ref=e49] clickable [cursor:pointer]
+            - link "Open the Google Search generative AI features performance report." [ref=e67]
+        - tablist
+          - tab "QUERIES" [selected, ref=e68]
+            - StaticText "QUERIES"
+          - tab "PAGES" [ref=e69]
+            - StaticText "PAGES"
+          - tab "COUNTRIES" [ref=e70]
+            - StaticText "COUNTRIES"
+          - tab "DEVICES" [ref=e71]
+            - StaticText "DEVICES"
+          - tab "SEARCH APPEARANCE" [ref=e72]
+            - StaticText "SEARCH APPEARANCE"
+          - tab "DAYS" [ref=e73]
+            - StaticText "DAYS"
+        - tabpanel
+          - button "Filter table rows" [expanded=false, ref=e82]
+          - table
+            - rowgroup
+              - row
+                - columnheader "Top queries Sort Top queries" [ref=e122]
+                  - button "Sort Top queries" [ref=e125]
+                - columnheader "Sort Clicks Clicks" [ref=e123]
+                  - button "Sort Clicks" [ref=e126]
+                - columnheader "Sort Impressions Impressions" [ref=e124]
+                  - button "Sort Impressions" [ref=e127]
+            - row [ref=e83] focusable [tabindex]
+              - cell "sahara office equipments" [ref=e92]
+              - cell "17" [ref=e93]
+              - cell "103" [ref=e94]
+            - row
+              - cell "sahara printer" [ref=e95]
+              - cell "6" [ref=e96]
+              - cell "11" [ref=e97]
+            - row
+              - cell "printer rental in dubai" [ref=e98]
+              - cell "5" [ref=e99]
+              - cell "1,073" [ref=e100]
+            - row
+              - cell "printer rental dubai" [ref=e101]
+              - cell "4" [ref=e102]
+              - cell "707" [ref=e103]
+            - row
+              - cell "printer rental" [ref=e104]
+              - cell "3" [ref=e105]
+              - cell "727" [ref=e106]
+            - row
+              - cell "photocopier rental in dubai" [ref=e107]
+              - cell "2" [ref=e108]
+              - cell "367" [ref=e109]
+            - row
+              - cell "printer rental near me" [ref=e110]
+              - cell "2" [ref=e111]
+              - cell "206" [ref=e112]
+            - row
+              - cell "photocopier rental dubai" [ref=e113]
+              - cell "2" [ref=e114]
+              - cell "61" [ref=e115]
+            - row
+              - cell "rental printer" [ref=e116]
+              - cell "2" [ref=e117]
+              - cell "17" [ref=e118]
+            - row
+              - cell "shredder rental" [ref=e119]
+              - cell "2" [ref=e120]
+              - cell "10" [ref=e121]
+          - StaticText "Rows per page:"
+          - listbox "Number of rows per page" [ref=e79]
+            - option "5" [ref=e84]
+            - option "10" [selected, ref=e85]
+            - option "25" [ref=e86]
+            - option "50" [ref=e87]
+            - option "100" [ref=e88]
+            - option "250" [ref=e89]
+            - option "500" [ref=e90]
+          - button "Previous page" [disabled, ref=e80]
+          - button "Next page" [ref=e81]

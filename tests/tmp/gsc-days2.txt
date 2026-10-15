@@ -1,0 +1,219 @@
+- generic
+  - generic
+    - banner
+      - generic
+        - button "Main menu" [expanded=false, ref=e1]
+          - image
+        - link "Google Search Console" [ref=e14]
+        - search
+          - generic
+            - generic
+              - combobox "Inspect any URL in saharaprinter.com" [expanded=false, ref=e18]
+          - button "Search" [ref=e3]
+            - image
+        - button "Help" [ref=e4]
+        - button "User settings" [ref=e5]
+        - generic
+          - button "Messages" [ref=e15]
+        - generic
+          - button "Google apps" [expanded=false, ref=e19]
+            - StaticText "  "
+          - button "Google Account: Sahara Printer Rental (projects@saharaedoc.com)" [expanded=false, ref=e20]
+            - StaticText "  "
+    - dialog "navigational drawer"
+      - generic
+        - navigation "Primary" [ref=e16]
+          - generic [ref=e23] clickable [cursor:pointer]
+            - button "Search property" [expanded=false, ref=e24]
+              - image "favicon"
+              - generic [disabled]
+              - generic
+                - combobox "saharaprinter.com" [expanded=false, ref=e86]
+          - generic
+            - generic
+              - link "Overview" [ref=e25]
+                - StaticText "Overview"
+              - link "Insights" [ref=e26]
+                - StaticText "Insights"
+              - link "Performance" [ref=e40]
+                - StaticText "Performance"
+              - button "Performance report section" [expanded=false, ref=e41]
+              - button "URL inspection" [ref=e27]
+                - StaticText "URL inspection"
+            - generic
+              - StaticText "Indexing"
+              - button "Indexing report section" [expanded=true, ref=e42]
+              - generic
+                - link "Pages" [ref=e59]
+                - link "Sitemaps" [ref=e60]
+                - link "Removals" [ref=e61]
+            - generic
+              - StaticText "Experience"
+              - button "Experience report section" [expanded=true, ref=e43]
+              - generic
+                - link "Core Web Vitals" [ref=e62]
+                - link "HTTPS" [ref=e63]
+            - generic
+              - StaticText "Shopping"
+              - button "Shopping report section" [expanded=true, ref=e44]
+              - generic
+                - link "Product snippets" [ref=e64]
+                - link "Merchant listings" [ref=e65]
+                - link "Merchant opportunities" [ref=e66]
+            - generic
+              - StaticText "Enhancements"
+              - button "Enhancements report section" [expanded=true, ref=e45]
+              - generic
+                - link "Breadcrumbs" [ref=e67]
+                - link "Review snippets" [ref=e68]
+            - StaticText "Security & Manual Actions"
+            - button "Security & Manual Actions report section" [expanded=false, ref=e46]
+            - generic
+              - link "Links report" [ref=e28]
+                - StaticText "Links"
+              - link "Achievements" [ref=e29]
+                - StaticText "Achievements"
+              - link "Settings" [ref=e30]
+                - StaticText "Settings"
+            - generic
+              - button "Submit feedback" [ref=e31]
+                - StaticText "Submit feedback"
+              - button "About Search Console" [ref=e32]
+                - StaticText "About Search Console"
+            - generic
+              - link "Privacy" [ref=e33]
+              - link "Terms" [ref=e34]
+    - generic
+      - navigation "Breadcrumbs" [ref=e2]
+        - heading "Performance" [level=1, ref=e6]
+      - button "EXPORT" [expanded=false, ref=e7]
+        - StaticText "EXPORT"
+    - radiogroup "Select time range"
+      - radio "24 hours" [checked=false, ref=e8]
+        - StaticText "24 hours"
+      - radio "7 days" [checked=false, ref=e9]
+        - StaticText "7 days"
+      - radio "28 days" [checked=false, ref=e10]
+        - StaticText "28 days"
+      - radio "3 months" [checked=true, ref=e11]
+        - StaticText "3 months"
+    - button "More time ranges" [ref=e12]
+    - list
+      - button "Search type: Web" [ref=e13]
+        - StaticText "Search type: Web"
+      - generic
+        - StaticText "New! Check your site’s performance on multimodal web searches"
+        - button "Close" [ref=e21]
+      - generic
+        - generic
+          - button "Add filter" [expanded=false, ref=e22]
+            - StaticText "Add filter"
+      - button "Customize your Performance report using AI" [ref=e17]
+    - StaticText "Last update: 9 hours ago"
+    - generic
+      - main
+        - generic
+          - generic
+            - generic [ref=e35] clickable [cursor:pointer]
+              - button "Total clicks 441" [ref=e47]
+                - StaticText "Total clicks"
+                - StaticText "441"
+              - button "null" [expanded=false, ref=e69]
+            - generic [ref=e36] clickable [cursor:pointer]
+              - button "Total impressions 37.4K" [ref=e48]
+                - StaticText "Total impressions"
+                - StaticText "37.4K"
+              - button "null" [expanded=false, ref=e70]
+            - generic [ref=e37] clickable [cursor:pointer]
+              - button "Average CTR 1.2%" [ref=e49]
+                - StaticText "Average CTR"
+                - StaticText "1.2%"
+              - button "null" [expanded=false, ref=e71]
+            - generic [ref=e38] clickable [cursor:pointer]
+              - button "Average position 18.2" [ref=e50]
+                - StaticText "Average position"
+                - StaticText "18.2"
+              - button "null" [expanded=false, ref=e72]
+            - generic
+              - button "Selected Time Granularity: Daily" [expanded=false, ref=e73]
+                - image
+            - application "chart" [ref=e51] focusable [tabindex]
+              - StaticText "Chart, containing counts of Total clicks, Total impressions, Average CTR, and Average position from July 12, 2026 to October 11, 2026"
+          - StaticText "Get more details on your site’s performance in generative AI features on Google Search"
+          - generic [ref=e39] clickable [cursor:pointer]
+            - link "Open the Google Search generative AI features performance report." [ref=e52]
+        - tablist
+          - tab "QUERIES" [ref=e53]
+            - StaticText "QUERIES"
+          - tab "PAGES" [ref=e54]
+            - StaticText "PAGES"
+          - tab "COUNTRIES" [ref=e55]
+            - StaticText "COUNTRIES"
+          - tab "DEVICES" [ref=e56]
+            - StaticText "DEVICES"
+          - tab "SEARCH APPEARANCE" [ref=e57]
+            - StaticText "SEARCH APPEARANCE"
+          - tab "DAYS" [selected, ref=e58]
+            - StaticText "DAYS"
+        - tabpanel
+          - button "Filter table rows" [expanded=false, ref=e77]
+          - table
+            - rowgroup
+              - row
+                - columnheader "Day Sort Day" [ref=e117]
+                  - button "Sort Day" [ref=e120]
+                - columnheader "Sort Clicks Clicks" [ref=e118]
+                  - button "Sort Clicks" [ref=e121]
+                - columnheader "Sort Impressions Impressions" [ref=e119]
+                  - button "Sort Impressions" [ref=e122]
+            - row [ref=e78] focusable [tabindex]
+              - cell "Aug 16, 2026" [ref=e87]
+              - cell "0" [ref=e88]
+              - cell "364" [ref=e89]
+            - row
+              - cell "Jul 23, 2026" [ref=e90]
+              - cell "0" [ref=e91]
+              - cell "283" [ref=e92]
+            - row
+              - cell "Sep 5, 2026" [ref=e93]
+              - cell "1" [ref=e94]
+              - cell "379" [ref=e95]
+            - row
+              - cell "Aug 29, 2026" [ref=e96]
+              - cell "1" [ref=e97]
+              - cell "493" [ref=e98]
+            - row
+              - cell "Aug 2, 2026" [ref=e99]
+              - cell "1" [ref=e100]
+              - cell "207" [ref=e101]
+            - row
+              - cell "Aug 1, 2026" [ref=e102]
+              - cell "1" [ref=e103]
+              - cell "376" [ref=e104]
+            - row
+              - cell "Jul 27, 2026" [ref=e105]
+              - cell "1" [ref=e106]
+              - cell "286" [ref=e107]
+            - row
+              - cell "Jul 26, 2026" [ref=e108]
+              - cell "1" [ref=e109]
+              - cell "200" [ref=e110]
+            - row
+              - cell "Jul 25, 2026" [ref=e111]
+              - cell "1" [ref=e112]
+              - cell "213" [ref=e113]
+            - row
+              - cell "Jul 19, 2026" [ref=e114]
+              - cell "1" [ref=e115]
+              - cell "198" [ref=e116]
+          - StaticText "Rows per page:"
+          - listbox "Number of rows per page" [ref=e74]
+            - option "5" [ref=e79]
+            - option "10" [selected, ref=e80]
+            - option "25" [ref=e81]
+            - option "50" [ref=e82]
+            - option "100" [ref=e83]
+            - option "250" [ref=e84]
+            - option "500" [ref=e85]
+          - button "Previous page" [disabled, ref=e75]
+          - button "Next page" [ref=e76]

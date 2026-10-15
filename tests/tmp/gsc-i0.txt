@@ -1,0 +1,160 @@
+- generic
+  - banner
+    - generic
+      - button "Main menu" [expanded=false, ref=e2]
+        - image
+      - link "Google Search Console" [ref=e27]
+      - search
+        - generic
+          - generic
+            - combobox "Inspect any URL in saharaprinter.com" [expanded=false, ref=e48]
+        - button "Search" [ref=e5]
+          - image
+      - button "Help" [ref=e6]
+      - button "User settings" [ref=e7]
+      - generic
+        - button "Messages" [ref=e28]
+      - generic
+        - button "Google apps" [expanded=false, ref=e49]
+          - StaticText "  "
+        - button "Google Account: Sahara Printer Rental (projects@saharaedoc.com)" [expanded=false, ref=e50]
+          - StaticText "  "
+  - dialog "navigational drawer"
+    - generic
+      - navigation "Primary" [ref=e29]
+        - generic [ref=e51] clickable [cursor:pointer]
+          - button "Search property" [expanded=false, ref=e62]
+            - image "favicon"
+            - generic [disabled]
+            - generic
+              - combobox "saharaprinter.com" [expanded=false, ref=e90]
+        - generic
+          - generic
+            - link "Overview" [ref=e63]
+            - link "Insights" [ref=e64]
+            - link "Performance" [ref=e65]
+            - button "Performance report section" [expanded=false, ref=e66]
+            - button "URL inspection" [ref=e67]
+          - StaticText "Indexing"
+          - button "Indexing report section" [expanded=true, ref=e68]
+          - generic
+            - link "Pages" [ref=e80]
+            - link "Sitemaps" [ref=e81]
+            - link "Removals" [ref=e82]
+          - StaticText "Experience"
+          - button "Experience report section" [expanded=true, ref=e69]
+          - generic
+            - link "Core Web Vitals" [ref=e83]
+            - link "HTTPS" [ref=e84]
+          - StaticText "Shopping"
+          - button "Shopping report section" [expanded=true, ref=e70]
+          - generic
+            - link "Product snippets" [ref=e85]
+            - link "Merchant listings" [ref=e86]
+            - link "Merchant opportunities" [ref=e87]
+          - StaticText "Enhancements"
+          - button "Enhancements report section" [expanded=true, ref=e71]
+          - generic
+            - link "Breadcrumbs" [ref=e88]
+            - link "Review snippets" [ref=e89]
+          - StaticText "Security & Manual Actions"
+          - button "Security & Manual Actions report section" [expanded=false, ref=e72]
+          - generic
+            - link "Links report" [ref=e73]
+            - link "Achievements" [ref=e74]
+            - link "Settings" [ref=e75]
+          - generic
+            - button "Submit feedback" [ref=e76]
+            - button "About Search Console" [ref=e77]
+          - generic
+            - link "Privacy" [ref=e78]
+            - link "Terms" [ref=e79]
+  - generic
+    - navigation "Breadcrumbs" [ref=e1]
+      - heading "Insights" [level=1, ref=e3]
+  - generic
+    - button "Last 28 days More time ranges" [expanded=false, ref=e4]
+      - image
+  - main
+    - generic
+      - StaticText "Clicks"
+      - button "More information about Clicks" [expanded=false, ref=e8]
+      - StaticText "189"
+      - StaticText "29%"
+      - image
+      - StaticText "Impressions"
+      - button "More information about Impressions" [expanded=false, ref=e9]
+      - StaticText "14.4K"
+      - StaticText "12%"
+      - image
+    - generic
+      - heading "Your content" [level=2, ref=e10]
+      - button "More information about your content" [expanded=false, ref=e11]
+      - generic [ref=e12] clickable [cursor:pointer]
+        - link "View more" [ref=e30]
+      - tablist
+        - tab "Top" [selected, ref=e31]
+          - StaticText "Top"
+        - tab "Trending up" [ref=e32]
+          - StaticText "Trending up"
+        - tab "Trending down" [ref=e33]
+          - StaticText "Trending down"
+      - StaticText "Clicks"
+      - tabpanel "Top"
+        - button "Printer Rental UAE from AED 250/mo | Free Toner & Service https://www.saharaprinter.com/ Copy URL to clipboard Open URL in a new tab up by 3% 35 clicks" [ref=e34]
+          - generic
+            - button "Copy URL to clipboard" [ref=e52]
+            - button "Open URL in a new tab" [ref=e53]
+          - StaticText "3%"
+          - StaticText "35"
+        - button "Printer Rental Dubai & UAE | A4 & A3 from AED 250/mo https://www.saharaprinter.com/services/printer-rental/ Copy URL to clipboard Open URL in a new tab up by 17% 14 clicks" [ref=e35]
+          - generic
+            - button "Copy URL to clipboard" [ref=e54]
+            - button "Open URL in a new tab" [ref=e55]
+          - StaticText "17%"
+          - StaticText "14"
+        - button "Paper Shredder Rental Dubai & UAE | From AED 450/mo | Sahara https://www.saharaprinter.com/services/paper-shredder-rental/ Copy URL to clipboard Open URL in a new tab down by 35% 11 clicks" [ref=e36]
+          - generic
+            - button "Copy URL to clipboard" [ref=e56]
+            - button "Open URL in a new tab" [ref=e57]
+          - StaticText "35%"
+          - StaticText "11"
+        - button "Lexmark Printers UAE | Authorized Dealer | Sahara Office https://www.saharaprinter.com/brands/lexmark/ Copy URL to clipboard Open URL in a new tab up by 43% 10 clicks" [ref=e37]
+          - generic
+            - button "Copy URL to clipboard" [ref=e58]
+            - button "Open URL in a new tab" [ref=e59]
+          - StaticText "43%"
+          - StaticText "10"
+        - button "Printer Rental Sharjah | AED 250/mo | Zero Deposit | Sahara https://www.saharaprinter.com/printer-rental-sharjah/ Copy URL to clipboard Open URL in a new tab up by 300% 8 clicks" [ref=e38]
+          - generic
+            - button "Copy URL to clipboard" [ref=e60]
+            - button "Open URL in a new tab" [ref=e61]
+    - generic
+      - heading "Queries leading to your site" [level=2, ref=e13]
+      - button "More information about queries leading to your site" [expanded=false, ref=e14]
+      - generic [ref=e15] clickable [cursor:pointer]
+        - link "View more" [ref=e39]
+      - tablist
+        - tab "Top" [selected, ref=e40]
+        - tab "Trending up" [ref=e41]
+        - tab "Trending down" [ref=e42]
+      - StaticText "Clicks"
+      - tabpanel "Top"
+        - link "sahara office equipments up by 33% 8 clicks" [ref=e43]
+        - link "sahara printer up by 400% 5 clicks" [ref=e44]
+        - link "hp color laserjet pro mfp m479fdw Previously 0 2 clicks" [ref=e45]
+        - link "printer rental up by 100% 2 clicks" [ref=e46]
+        - link "printer rental in dubai 2 clicks" [ref=e47]
+    - generic
+      - heading "Top countries" [level=2, ref=e16]
+      - button "More information about top countries" [expanded=false, ref=e17]
+      - link "United Arab Emirates 78% clicks" [ref=e18]
+      - link "India 6% clicks" [ref=e19]
+      - link "Pakistan 2% clicks" [ref=e20]
+      - link "Afghanistan 1% clicks" [ref=e21]
+      - link "United Kingdom 1% clicks" [ref=e22]
+    - generic
+      - heading "Additional traffic sources" [level=2, ref=e23]
+      - button "More information about additional traffic sources" [expanded=false, ref=e24]
+      - link "Image search 2 clicks" [ref=e25]
+      - link "Multimodal 1 click" [ref=e26]

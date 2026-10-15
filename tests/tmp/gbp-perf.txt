@@ -1,0 +1,103 @@
+- generic
+  - generic
+  - Iframe [ref=e1]
+    - dialog "Performance"
+      - banner "Performance"
+        - button "Back" [ref=e3]
+        - heading "Performance" [level=1, ref=e2]
+        - generic
+          - button "Menu" [expanded=false, ref=e5]
+        - button "Close" [ref=e4]
+      - generic
+        - generic
+          - button "Time period May 2026 to October 2026" [expanded=false, ref=e6]
+            - StaticText "Time period"
+            - StaticText "May 2026–Oct 2026"
+          - tablist
+            - tab "Overview" [selected, ref=e7]
+              - StaticText "Overview"
+            - tab "Calls" [ref=e8]
+              - StaticText "Calls"
+            - tab "Chat clicks" [ref=e9]
+              - StaticText "Chat clicks"
+            - tab "Bookings" [ref=e10]
+              - StaticText "Bookings"
+            - tab "Directions" [ref=e11]
+              - StaticText "Directions"
+            - tab "Website clicks" [ref=e12]
+              - StaticText "Website clicks"
+        - main
+          - StaticText "496"
+          - StaticText "Business Profile interactions"
+          - generic
+            - button "What are interactions?" [expanded=false, ref=e16]
+          - generic
+            - table
+              - rowgroup
+                - row
+                  - columnheader "Month" [ref=e43]
+                  - columnheader "Interactions" [ref=e44]
+              - row
+                - cell "May 2026" [ref=e30]
+                - cell "89" [ref=e31]
+              - row
+                - cell "June 2026" [ref=e32]
+                - cell "90" [ref=e33]
+              - row
+                - cell "July 2026" [ref=e34]
+                - cell "90" [ref=e35]
+              - row
+                - cell "August 2026" [ref=e36]
+                - cell "90" [ref=e37]
+              - row
+                - cell "September 2026" [ref=e38]
+                - cell "103" [ref=e39]
+              - row
+                - cell "October 2026" [ref=e40]
+                - cell "34" [ref=e41]
+          - generic
+            - heading "How to grow your business with Google" [level=2, ref=e14]
+            - generic
+              - StaticText "AED1,600"
+              - StaticText "Ad credit"
+            - generic
+              - StaticText "Office equipment rental service"
+            - generic
+              - StaticText "Ad"
+              - StaticText "https://www.saharaprinter.com/"
+              - StaticText "SAHARA office equipments - Best Rental Rates"
+              - StaticText "Short and long term rentals available. Get the equipment you need"
+            - StaticText "Example ad made for your business using Google AI"
+            - generic
+              - heading "Claim your AED1,600 advertising credit" [level=3, ref=e19]
+              - StaticText "Show up whenever customers are looking for you online – on their computers or mobile devices. Set up your first campaign in minutes. Offer for new advertisers only."
+              - paragraph
+                - link "Terms and Conditions apply (opens in new window)" [ref=e42]
+              - generic
+                - link "Claim your credit" [ref=e45]
+          - heading "How people discovered you" [level=2, ref=e13]
+          - generic
+            - button "What are views and searches?" [expanded=false, ref=e15]
+          - group
+            - StaticText "2,308"
+            - StaticText "People viewed your Business Profile"
+            - heading "Platform and device breakdown" [level=3, ref=e17]
+            - paragraph
+            - list "Platform and device breakdown"
+              - listitem "893 people (39%) used Google Maps on mobile" [level=1, ref=e20]
+              - listitem "732 people (32%) used Google Search on desktop" [level=1, ref=e21]
+              - listitem "534 people (23%) used Google Search on mobile" [level=1, ref=e22]
+              - listitem "149 people (6%) used Google Maps on desktop" [level=1, ref=e23]
+          - group
+            - StaticText "20"
+            - StaticText "Searches showed your Business Profile in the search results"
+            - heading "Searches breakdown" [level=3, ref=e18]
+            - paragraph
+            - list "Searches breakdown"
+              - listitem "sahara 20" [level=1, ref=e24]
+              - listitem "25.294000, 55.426200, less than 15" [level=1, ref=e25]
+              - listitem "ahara easy lease, less than 15" [level=1, ref=e26]
+              - listitem "best copier rental services sharjah, less than 15" [level=1, ref=e27]
+              - listitem "canon printer rental, less than 15" [level=1, ref=e28]
+            - generic
+              - link "See more searches breakdown" [ref=e29]

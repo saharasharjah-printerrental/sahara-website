@@ -1,0 +1,392 @@
+- generic
+  - link "Skip to main content" [ref=e1]
+  - link "Accessibility help" [ref=e2]
+  - search
+    - generic
+      - link "Go to Google Home" [ref=e8]
+      - generic
+        - combobox "Search" [expanded=false, ref=e9]: SAHARA office equipments
+          - StaticText "SAHARA office equipments"
+        - generic [ref=e10] clickable [cursor:pointer]
+          - button "Clear" [ref=e13]
+        - button "Search by voice" [ref=e11]
+        - button "Search by image" [ref=e12]
+  - button "Share" [ref=e3]
+  - button "Google apps" [expanded=false, ref=e7]
+  - button "Google Account: Sahara Printer Rental (projects@saharaedoc.com)" [expanded=false, ref=e5]
+  - generic
+    - generic
+      - navigation
+        - generic
+          - generic
+            - list
+              - listitem [level=1]
+                - link "AI Mode" [ref=e39]
+                  - StaticText "AI Mode"
+              - listitem [level=1]
+                - link "All" [disabled, ref=e40]
+                  - StaticText "All"
+              - listitem [level=1]
+                - link "Images" [ref=e41]
+                  - StaticText "Images"
+              - listitem [level=1]
+                - link "Maps" [ref=e42]
+                  - StaticText "Maps"
+              - listitem [level=1]
+                - link "Shopping" [ref=e43]
+                  - StaticText "Shopping"
+              - listitem [level=1]
+                - link "Videos" [ref=e44]
+                  - StaticText "Videos"
+              - listitem [level=1]
+                - link "Forums" [ref=e45]
+                  - StaticText "Forums"
+              - listitem [level=1]
+                - button "More filters" [expanded=false, ref=e46]
+                  - StaticText "More"
+            - button "Tools" [expanded=false, ref=e38]
+              - StaticText "Tools"
+    - heading "Search Results" [level=1, ref=e4]
+    - generic
+      - main
+        - generic
+          - generic
+            - region "Your business on Google" [ref=e14]
+              - sectionheader
+                - heading "Your business on Google" [level=2, ref=e32]
+                - StaticText "Profile strength"
+                - StaticText "Looks good!"
+                - generic
+                  - button " See Business Profile settings and support " [expanded=false, ref=e47]
+              - region "Business Profile actions" [ref=e26]
+                - list "Business Profile actions"
+                  - listitem [level=1]
+                    - button "Edit profile" [ref=e48]
+                  - listitem [level=1]
+                    - button "Read reviews" [ref=e49]
+                  - listitem [level=1]
+                    - button "Photos" [ref=e50]
+                  - listitem [level=1]
+                    - button "Posts" [ref=e51]
+                  - listitem [level=1]
+                    - button "Performance" [ref=e52]
+                  - listitem [level=1]
+                    - link "Advertise (opens in new window)" [ref=e53]
+                  - listitem [level=1]
+                    - button "Edit products" [ref=e54]
+                  - listitem [level=1]
+                    - button "Edit services" [ref=e55]
+                  - listitem [level=1]
+                    - button "Bookings" [ref=e56]
+                  - listitem [level=1]
+                    - button "Ask for reviews" [ref=e57]
+              - generic
+                - list
+                  - generic
+                    - button "Finish your ad" [ref=e58]
+                    - generic
+                      - button " More actions for Finish your ad " [expanded=false, ref=e65]
+                  - generic
+                    - button "Turn more views to customers" [ref=e62]
+                    - generic
+                      - button " More actions for Turn more views to customers " [expanded=false, ref=e66]
+                  - generic
+                    - button "Add interior photo" [ref=e59]
+                    - generic
+                      - button " More actions for Add interior photo " [expanded=false, ref=e67]
+                  - generic
+                    - button "Create an offer" [ref=e60]
+                    - generic
+                      - button " More actions for Create an offer " [expanded=false, ref=e68]
+                  - generic
+                    - button "Add a map to your website" [ref=e63]
+                    - generic
+                      - button " More actions for Add a map to your website " [expanded=false, ref=e69]
+                  - generic
+                    - button "View your 2026 record" [ref=e64]
+                    - generic
+                      - button " More actions for View your 2026 record " [expanded=false, ref=e70]
+                  - generic
+                    - button "Get more reviews" [ref=e61]
+                    - generic
+                      - button " More actions for Get more reviews " [expanded=false, ref=e71]
+              - sectionfooter
+                - link "Only managers of this profile can see this" [ref=e33]
+              - generic
+                - button [ref=e34]
+          - generic
+        - generic
+          - tabpanel
+            - generic
+              - generic
+                - generic
+                  - button [ref=e168]
+                    - generic
+                  - link "Add photos" [ref=e169]
+                    - StaticText "Add photos"
+                  - link "Add photos" [ref=e170]
+                    - StaticText "Add photos"
+                - generic
+                  - link "Map of SAHARA office equipments" [ref=e171]
+                    - image "Map of SAHARA office equipments"
+                  - link "Map of SAHARA office equipments" [ref=e175]
+                    - image "Map of SAHARA office equipments"
+                - link "See outside" [ref=e176]
+                  - generic
+                  - StaticText "See outside"
+              - heading "SAHARA office equipments" [level=2, ref=e87]
+              - generic
+                - image "Rated 5.0 out of 5,"
+                - button "71 Google reviews" [ref=e115]
+                - LineBreak "\n"
+                - StaticText "Office equipment rental service in Sharjah"
+              - generic "You manage this Business Profile"
+                - generic
+              - generic
+                - button "More options for SAHARA office equipments" [expanded=false, ref=e157]
+                  - image "More options for SAHARA office equipments"
+              - link "Website" [ref=e116]
+                - StaticText "Website"
+              - link "Directions" [ref=e117]
+                - StaticText "Directions"
+              - button "+3" [ref=e118]
+                - StaticText "+3"
+              - LineBreak "\n"
+              - separator
+              - generic
+                - StaticText "Located in: "
+                - link "Basmat al Hayat Bakery" [ref=e119]
+              - generic
+                - link "Address" [ref=e88]
+                - StaticText ": Industrial center Road Al Arabi Building - Industrial Area 11 - Industrial Area - Sharjah"
+              - generic
+                - StaticText "Phone: "
+                - link "Call phone number 050 382 3969" [ref=e89]
+                  - StaticText "050 382 3969"
+              - generic
+                - link "Hours" [ref=e90]
+                - StaticText ": "
+                - button "Open · Closes 7 PM · More hours" [expanded=false, ref=e91]
+                  - StaticText "Open"
+                  - StaticText " · Closes 7 PM"
+                  - StaticText " · More hours"
+              - link "Edit your business information" [ref=e120]
+              - generic
+                - heading "Your ad is not set up" [level=3, ref=e92]
+                - StaticText "Complete a few more steps to start reaching new customers"
+                - generic
+                  - link "Finish ad set-up" [ref=e131]
+                - link [ref=e121]
+                  - image
+              - separator
+              - generic
+                - image "SAHARA office equipments"
+                - image
+              - StaticText "SAHARA office equipments"
+              - StaticText "on Google"
+              - button "Add update" [ref=e93]
+                - StaticText "Add update"
+              - generic
+                - list
+                  - list "Latest from the owner"
+                    - listitem [level=2, ref=e182] clickable [cursor:pointer]
+                      - button "Kyocera printer or copier acting up? Our factory-certified technicians repair the full… Sep 29, 2026" [ref=e187]
+                      - link "Learn more" [ref=e190]
+                    - listitem [level=2, ref=e183] clickable [cursor:pointer]
+                      - button "PVC & ID card printer sales, rental and printing across the UAE — Sahara is the authorised exclusive UAE… Sep 5, 2026" [ref=e188]
+                    - listitem [level=2, ref=e184] clickable [cursor:pointer]
+                      - button "Rent start for per week 13 Aug - 13 Aug Heavy-Duty Paper Shredder… Aug 13, 2026" [ref=e189]
+                      - button "View Offer" [ref=e191]
+                    - button "Add a post Tell customers about a special event, deal, or product Visible only to you" [ref=e185]
+                    - listitem [level=2]
+                      - button "View All" [ref=e186]
+              - separator
+              - generic
+                - heading "From SAHARA office equipments" [level=3, ref=e94]
+                - button "Report description" [ref=e122]
+                  - image
+                - generic
+                  - StaticText "\"Sahara Office Equipments provides printer and photocopier repair across Dubai, Sharjah, and Abu Dhabi — 4-hour emergency response, OEM parts, and certified technicians for Canon, HP, Kyocera, Ricoh, Xerox, Brother, and Epson. Since 2012 we have also... "
+                  - button "show more" [ref=e123]
+                    - StaticText "More"
+              - separator
+              - heading "Reviews" [level=3, ref=e95]
+              - generic
+                - heading "Google reviews" [level=3, ref=e124]
+                - generic
+                  - button "More info" [ref=e158]
+                - generic
+                  - generic
+                    - button "Get more reviews" [ref=e172]
+                  - link "Add a photo" [ref=e132]
+                - generic
+                  - image "Rated 5.0 out of 5,"
+                  - button "71 Google reviews" [ref=e159]
+              - separator
+              - heading "Profiles" [level=3, ref=e74]
+              - generic
+                - link "LinkedIn" [ref=e133]
+                  - StaticText "LinkedIn"
+                - link "Facebook" [ref=e134]
+                  - StaticText "Facebook"
+                - link "YouTube" [ref=e135]
+                  - StaticText "YouTube"
+              - separator
+              - heading "Products" [level=3, ref=e96]
+              - generic
+                - list
+                  - generic
+                    - button "Add" [ref=e173]
+                    - listitem [level=1]
+                      - button "Canon imageRUNNER ADVANCE 4245i From Product Posts" [ref=e177]
+                    - listitem [level=1]
+                      - button "Canon ImageRunner 5540i Printer Rental" [ref=e178]
+                    - listitem [level=1]
+                      - button "Bravo DC 3300 AED6,000.00" [ref=e179]
+                    - listitem [level=1]
+                      - button "Canon imageRUNNER ADVANCE C5550i From Product Posts" [ref=e180]
+                    - listitem [level=1]
+                      - button "Canon imageRUNNER ADVANCE C356i From Product Posts" [ref=e181]
+              - button "View all" [ref=e97]
+                - StaticText "View all"
+              - separator
+              - heading "Contact" [level=3, ref=e98]
+              - generic
+                - StaticText "Appointments:"
+                - link "saharaprinter.com" [ref=e125]
+                - StaticText ", "
+                - link "Reserve with Google" [ref=e126]
+              - generic
+                - button "About these providers" [ref=e127]
+                  - generic
+              - separator
+              - heading "Popular times" [level=3, ref=e99]
+              - generic
+                - radiogroup
+                  - radio "Monday" [checked=false, ref=e136]
+                  - radio "Tuesday" [checked=false, ref=e137]
+                  - radio "Wednesday" [checked=true, ref=e138]
+                  - radio "Thursday" [checked=false, ref=e139]
+                  - radio "Friday" [checked=false, ref=e140]
+                  - radio "Saturday" [checked=false, ref=e141]
+                  - radio "Sunday" [checked=false, ref=e142]
+                - generic
+                  - generic
+                  - radiogroup
+                    - radio "8 AM" [checked=false, ref=e143]
+                    - radio "9 AM" [checked=false, ref=e144]
+                    - radio "10 AM" [checked=false, ref=e145]
+                    - radio "11 AM" [checked=true, ref=e146]
+                    - radio "12 PM" [checked=false, ref=e147]
+                    - radio "1 PM" [checked=false, ref=e148]
+                    - radio "2 PM" [checked=false, ref=e149]
+                    - radio "3 PM" [checked=false, ref=e150]
+                    - radio "4 PM" [checked=false, ref=e151]
+                    - radio "5 PM" [checked=false, ref=e152]
+                    - radio "6 PM" [checked=false, ref=e153]
+                - image
+                - StaticText "People typically spend "
+                - StaticText "45 min to 4 hr"
+                - StaticText " here"
+              - generic
+                - heading "Web result with site links" [level=2, ref=e72]
+                - generic
+                  - link "Sahara Office Equipments Sahara Office Equipments https://www.saharaprinter.com" [ref=e100]
+                    - heading "Sahara Office Equipments" [level=3, ref=e128]
+                  - button "About this result" [ref=e174]
+                  - generic
+                - group "Personalised recommendations based on your history"
+                  - heading "Services" [level=3, ref=e129]
+                    - link "Services" [ref=e154]
+                  - generic
+                  - heading "Contact Us" [level=3, ref=e130]
+                    - link "Contact Us" [ref=e155]
+                  - link "More results from saharaprinter.com»" [ref=e101]
+              - generic
+                - link "‏SAHARA OFFICE EQUIPMENT TRADING LLC‏ LinkedIn·SAHARA OFFICE EQUIPMENT TRADING LLC 50+ followers" [ref=e75]
+                  - heading "‏SAHARA OFFICE EQUIPMENT TRADING LLC‏" [level=3, ref=e102]
+                - button "About this result" [ref=e160]
+                - generic
+                  - link "Read more" [ref=e103]
+              - generic
+                - link "UAE's #1 printer rental - copier rental - printer lease - copier ... www.saharaedoc.com https://www.saharaedoc.com" [ref=e76]
+                  - heading "UAE's #1 printer rental - copier rental - printer lease - copier ..." [level=3, ref=e104]
+                - button "About this result" [ref=e161]
+                - generic
+                  - link "Read more" [ref=e105]
+              - generic
+                - link "Sahara Office Equipments (@saharaedoc) Facebook·Sahara Office Equipments 360+ followers" [ref=e77]
+                  - heading "Sahara Office Equipments (@saharaedoc)" [level=3, ref=e106]
+                - button "About this result" [ref=e162]
+                - generic
+                  - link "Read more" [ref=e107]
+              - generic
+                - link "Sahara Office Equipment Trading Company LLC - Dubai Atninfo https://www.atninfo.com › sahara-office-equipment-trad..." [ref=e78]
+                  - heading "Sahara Office Equipment Trading Company LLC - Dubai" [level=3, ref=e108]
+                - button "About this result" [ref=e163]
+                - generic
+              - generic
+                - link "Sahara office equip. tr. llc Anyrentals https://anyrentals.ae › other-services › sahara-office-equ..." [ref=e79]
+                  - heading "Sahara office equip. tr. llc" [level=3, ref=e109]
+                - button "About this result" [ref=e164]
+                - generic
+                  - link "Read more" [ref=e110]
+              - generic
+                - link "Contact - Sahara Equipment Trading & Rentals LLC UAE Sahara Equipment Trading & Rentals LLC. https://saharaequipments.com › contact-us" [ref=e80]
+                  - heading "Contact - Sahara Equipment Trading & Rentals LLC UAE" [level=3, ref=e111]
+                - button "About this result" [ref=e165]
+                - generic
+                  - link "Read more" [ref=e112]
+              - generic
+                - link "Sahara Office Equipment Trading Co LLC In Abu Dhabi yellowpages.ae https://www.yellowpages.ae › sellers › sahara-office-equi..." [ref=e81]
+                  - heading "Sahara Office Equipment Trading Co LLC In Abu Dhabi" [level=3, ref=e113]
+                - button "About this result" [ref=e166]
+                - generic
+              - generic
+                - link "Sahara Office Equipment Trading Company - Abu Dhabi - 2GIS 2gis.ae https://2gis.ae › dubai › firm" [ref=e82]
+                  - heading "Sahara Office Equipment Trading Company - Abu Dhabi - 2GIS" [level=3, ref=e114]
+                - button "About this result" [ref=e167]
+                - generic
+                  - StaticText ": addresses with entrances on the map, reviews, photos, phone numbers, opening hours and directions to these places."
+              - heading "People also ask" [level=2, ref=e73]
+              - generic
+                - button "Where can I rent a printer in Dubai?" [expanded=false, ref=e156]
+              - generic
+                - heading "People also search for" [level=2, ref=e83]
+              - link "Sahara office equipments list" [ref=e84]
+              - link "Sahara office equipments reviews" [ref=e85]
+              - link "Sahara office equipments contact number" [ref=e86]
+        - generic
+          - navigation
+            - heading "Page navigation" [level=1, ref=e15]
+            - StaticText "1"
+            - link "Page 2" [ref=e16]
+            - link "Page 3" [ref=e17]
+            - link "Page 4" [ref=e18]
+            - link "Page 5" [ref=e19]
+            - link "Page 6" [ref=e20]
+            - link "Page 7" [ref=e21]
+            - link "Page 8" [ref=e22]
+            - link "Page 9" [ref=e23]
+            - link "Page 10" [ref=e24]
+            - heading "Next" [level=2, ref=e25]
+              - link "Next" [ref=e27]
+        - navigation
+      - generic
+    - generic
+    - contentinfo
+      - heading "Footer links" [level=1, ref=e6]
+      - StaticText "Results are not personalised"
+      - generic
+        - StaticText "United Arab Emirates"
+        - generic
+          - generic
+            - button "Industrial Area, Sharjah -From your IP address" [ref=e36]
+          - StaticText "-"
+          - generic [ref=e35] clickable [cursor:pointer]
+            - button "Update location" [ref=e37]
+      - generic
+        - link "Help" [ref=e28]
+        - link "Send feedback" [ref=e29]
+        - link "Privacy" [ref=e30]
+        - link "Terms" [ref=e31]

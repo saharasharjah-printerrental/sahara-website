@@ -1,0 +1,39 @@
+﻿PASS quote page: printer-rental
+PASS quote page: label-printer-rental
+PASS quote page: paper-shredder-rental
+PASS quote page: pvc-card-printer-rental
+PASS quote page: pvc-card-printer-sales
+PASS quote page: pvc-card-printing
+PASS quote page: paper-shredder-sales
+PASS quote page: printer-repair
+PASS quote page: printer-amc
+PASS quote page: printer-sales
+PASS quote page: plotter-maintenance
+PASS quote page: print-management
+PASS layout 1440: /quote/
+PASS layout 1440: /quote/paper-shredder-rental/
+PASS layout 1440: /quote/label-printer-rental/
+PASS layout 1440: /services/paper-shredder-rental/
+PASS layout 1440: /services/printer-rental/
+PASS layout 1440: /services/pvc-card-printer-rental/
+PASS layout 1440: /services/pvc-card-printing-services/
+PASS layout 390: /quote/
+PASS layout 390: /quote/paper-shredder-rental/
+PASS layout 390: /quote/label-printer-rental/
+PASS layout 390: /services/paper-shredder-rental/
+PASS layout 390: /services/printer-rental/
+PASS layout 390: /services/pvc-card-printer-rental/
+PASS layout 390: /services/pvc-card-printing-services/
+PASS brand context survives service selection
+PASS quote validation, error, retry and success (mocked delivery)
+PASS legacy calculator and spare-parts form remain reachable
+PASS invalid service returns 404
+PASS quote API rejects malformed input without sending
+{
+  "passed": 31,
+  "failures": [],
+  "errors": [],
+  "network": [
+    "503 http://localhost:3000/api/send-email/"
+  ]
+}

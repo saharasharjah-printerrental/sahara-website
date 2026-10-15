@@ -1,0 +1,56 @@
+- generic
+  - generic
+  - Iframe [ref=e1]
+    - dialog "Performance"
+      - banner "Performance"
+        - button "Back" [ref=e3]
+        - heading "Performance" [level=1, ref=e2]
+        - generic
+          - button "Menu" [expanded=false, ref=e5]
+        - button "Close" [ref=e4]
+      - generic
+        - generic
+          - button "Time period May 2026 to October 2026" [expanded=false, ref=e6]
+            - StaticText "Time period"
+            - StaticText "May 2026–Oct 2026"
+          - tablist
+            - tab "Overview" [ref=e7]
+              - StaticText "Overview"
+            - tab "Calls" [ref=e8]
+              - StaticText "Calls"
+            - tab "Chat clicks" [ref=e9]
+              - StaticText "Chat clicks"
+            - tab "Bookings" [ref=e10]
+              - StaticText "Bookings"
+            - tab "Directions" [ref=e11]
+              - StaticText "Directions"
+            - tab "Website clicks" [selected, ref=e12]
+              - StaticText "Website clicks"
+        - main
+          - generic "Website clicks"
+            - StaticText "42"
+            - StaticText "Website clicks made from your Business Profile"
+            - generic
+              - table
+                - rowgroup
+                  - row
+                    - columnheader "Month" [ref=e25]
+                    - columnheader "Interactions" [ref=e26]
+                - row
+                  - cell "May 2026" [ref=e13]
+                  - cell "8" [ref=e14]
+                - row
+                  - cell "June 2026" [ref=e15]
+                  - cell "1" [ref=e16]
+                - row
+                  - cell "July 2026" [ref=e17]
+                  - cell "3" [ref=e18]
+                - row
+                  - cell "August 2026" [ref=e19]
+                  - cell "7" [ref=e20]
+                - row
+                  - cell "September 2026" [ref=e21]
+                  - cell "15" [ref=e22]
+                - row
+                  - cell "October 2026" [ref=e23]
+                  - cell "8" [ref=e24]

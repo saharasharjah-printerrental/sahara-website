@@ -1,0 +1,227 @@
+- generic
+  - generic
+    - banner
+      - generic
+        - button "Main menu" [expanded=false, ref=e1]
+          - image
+        - link "Google Search Console" [ref=e16]
+        - search
+          - generic
+            - generic
+              - combobox "Inspect any URL in saharaprinter.com" [expanded=false, ref=e21]
+          - button "Search" [ref=e3]
+            - image
+        - button "Help" [ref=e4]
+        - button "User settings" [ref=e5]
+        - generic
+          - button "Messages" [ref=e17]
+        - generic
+          - button "Google apps" [expanded=false, ref=e22]
+            - StaticText "  "
+          - button "Google Account: Sahara Printer Rental (projects@saharaedoc.com)" [expanded=false, ref=e23]
+            - StaticText "  "
+    - dialog "navigational drawer"
+      - generic
+        - navigation "Primary" [ref=e18]
+          - generic [ref=e26] clickable [cursor:pointer]
+            - button "Search property" [expanded=false, ref=e27]
+              - image "favicon"
+              - generic [disabled]
+              - generic
+                - combobox "saharaprinter.com" [expanded=false, ref=e90]
+          - generic
+            - generic
+              - link "Overview" [ref=e28]
+                - StaticText "Overview"
+              - link "Insights" [ref=e29]
+                - StaticText "Insights"
+              - link "Performance" [ref=e44]
+                - StaticText "Performance"
+              - button "Performance report section" [expanded=false, ref=e45]
+              - button "URL inspection" [ref=e30]
+                - StaticText "URL inspection"
+            - generic
+              - StaticText "Indexing"
+              - button "Indexing report section" [expanded=true, ref=e46]
+              - generic
+                - link "Pages" [ref=e63]
+                - link "Sitemaps" [ref=e64]
+                - link "Removals" [ref=e65]
+            - generic
+              - StaticText "Experience"
+              - button "Experience report section" [expanded=true, ref=e47]
+              - generic
+                - link "Core Web Vitals" [ref=e66]
+                - link "HTTPS" [ref=e67]
+            - generic
+              - StaticText "Shopping"
+              - button "Shopping report section" [expanded=true, ref=e48]
+              - generic
+                - link "Product snippets" [ref=e68]
+                - link "Merchant listings" [ref=e69]
+                - link "Merchant opportunities" [ref=e70]
+            - generic
+              - StaticText "Enhancements"
+              - button "Enhancements report section" [expanded=true, ref=e49]
+              - generic
+                - link "Breadcrumbs" [ref=e71]
+                - link "Review snippets" [ref=e72]
+            - StaticText "Security & Manual Actions"
+            - button "Security & Manual Actions report section" [expanded=false, ref=e50]
+            - generic
+              - link "Links report" [ref=e31]
+                - StaticText "Links"
+              - link "Achievements" [ref=e32]
+                - StaticText "Achievements"
+              - link "Settings" [ref=e33]
+                - StaticText "Settings"
+            - generic
+              - button "Submit feedback" [ref=e34]
+                - StaticText "Submit feedback"
+              - button "About Search Console" [ref=e35]
+                - StaticText "About Search Console"
+            - generic
+              - link "Privacy" [ref=e36]
+              - link "Terms" [ref=e37]
+    - generic
+      - navigation "Breadcrumbs" [ref=e2]
+        - heading "Performance" [level=1, ref=e6]
+      - button "EXPORT" [expanded=false, ref=e7]
+        - StaticText "EXPORT"
+    - radiogroup "Select time range"
+      - radio "24 hours" [checked=false, ref=e8]
+        - StaticText "24 hours"
+      - radio "7 days" [checked=false, ref=e9]
+        - StaticText "7 days"
+      - radio "28 days" [checked=false, ref=e10]
+        - StaticText "28 days"
+      - radio "3 months" [checked=true, ref=e11]
+        - StaticText "3 months"
+    - button "More time ranges" [ref=e12]
+    - list
+      - button "Search type: Web" [ref=e13]
+        - StaticText "Search type: Web"
+      - generic
+        - StaticText "New! Check your site’s performance on multimodal web searches"
+        - button "Close" [ref=e24]
+      - button "Page: +brands/kyocera" [ref=e14]
+        - StaticText "Page: +brands/kyocera"
+      - button "Remove Page: +brands/kyocera" [ref=e15]
+      - generic
+        - generic
+          - button "Add filter" [expanded=false, ref=e25]
+            - StaticText "Add filter"
+      - button "Customize your Performance report using AI" [ref=e19]
+      - generic
+        - button "Reset filters" [ref=e20]
+          - StaticText "Reset filters"
+    - StaticText "Last update: 9 hours ago"
+    - generic
+      - main
+        - generic
+          - generic
+            - generic [ref=e38] clickable [cursor:pointer]
+              - button "Total clicks 25" [ref=e51]
+                - StaticText "Total clicks"
+                - StaticText "25"
+              - button "null" [expanded=false, ref=e73]
+            - generic [ref=e39] clickable [cursor:pointer]
+              - button "Total impressions 798" [ref=e52]
+                - StaticText "Total impressions"
+                - StaticText "798"
+              - button "null" [expanded=false, ref=e74]
+            - generic [ref=e40] clickable [cursor:pointer]
+              - button "Average CTR 3.1%" [ref=e53]
+                - StaticText "Average CTR"
+                - StaticText "3.1%"
+              - button "null" [expanded=false, ref=e75]
+            - generic [ref=e41] clickable [cursor:pointer]
+              - button "Average position 12.6" [ref=e54]
+                - StaticText "Average position"
+                - StaticText "12.6"
+              - button "null" [expanded=false, ref=e76]
+            - generic
+              - button "Selected Time Granularity: Daily" [expanded=false, ref=e77]
+                - image
+            - StaticText "Chart totals and table results might be partial when filters are applied."
+            - link "Learn more" [ref=e42]
+            - application "chart" [ref=e55] focusable [tabindex]
+              - StaticText "Chart, containing counts of Total clicks, Total impressions, Average CTR, and Average position from July 12, 2026 to October 11, 2026"
+          - StaticText "Get more details on your site’s performance in generative AI features on Google Search"
+          - generic [ref=e43] clickable [cursor:pointer]
+            - link "Open the Google Search generative AI features performance report." [ref=e56]
+        - tablist
+          - tab "QUERIES" [selected, ref=e57]
+            - StaticText "QUERIES"
+          - tab "PAGES" [ref=e58]
+            - StaticText "PAGES"
+          - tab "COUNTRIES" [ref=e59]
+            - StaticText "COUNTRIES"
+          - tab "DEVICES" [ref=e60]
+            - StaticText "DEVICES"
+          - tab "SEARCH APPEARANCE" [ref=e61]
+            - StaticText "SEARCH APPEARANCE"
+          - tab "DAYS" [ref=e62]
+            - StaticText "DAYS"
+        - tabpanel
+          - button "Filter table rows" [expanded=false, ref=e81]
+          - table
+            - rowgroup
+              - row
+                - columnheader "Top queries Sort Top queries" [ref=e121]
+                  - button "Sort Top queries" [ref=e124]
+                - columnheader "Sort Clicks Clicks" [ref=e122]
+                  - button "Sort Clicks" [ref=e125]
+                - columnheader "Sort Impressions Impressions" [ref=e123]
+                  - button "Sort Impressions" [ref=e126]
+            - row [ref=e82] focusable [tabindex]
+              - cell "kyocera uae" [ref=e91]
+              - cell "1" [ref=e92]
+              - cell "18" [ref=e93]
+            - row
+              - cell "kyocera printers" [ref=e94]
+              - cell "1" [ref=e95]
+              - cell "12" [ref=e96]
+            - row
+              - cell "kyocera" [ref=e97]
+              - cell "1" [ref=e98]
+              - cell "11" [ref=e99]
+            - row
+              - cell "kyocera distributor in uae" [ref=e100]
+              - cell "1" [ref=e101]
+              - cell "8" [ref=e102]
+            - row
+              - cell "kyocera resellers" [ref=e103]
+              - cell "1" [ref=e104]
+              - cell "3" [ref=e105]
+            - row
+              - cell "kyocera supplier in dubai" [ref=e106]
+              - cell "0" [ref=e107]
+              - cell "17" [ref=e108]
+            - row
+              - cell "kyocera printers services in dubai" [ref=e109]
+              - cell "0" [ref=e110]
+              - cell "13" [ref=e111]
+            - row
+              - cell "kyocera printer" [ref=e112]
+              - cell "0" [ref=e113]
+              - cell "10" [ref=e114]
+            - row
+              - cell "kyocera printer distributor in uae" [ref=e115]
+              - cell "0" [ref=e116]
+              - cell "9" [ref=e117]
+            - row
+              - cell "kyocera dubai" [ref=e118]
+              - cell "0" [ref=e119]
+              - cell "9" [ref=e120]
+          - StaticText "Rows per page:"
+          - listbox "Number of rows per page" [ref=e78]
+            - option "5" [ref=e83]
+            - option "10" [selected, ref=e84]
+            - option "25" [ref=e85]
+            - option "50" [ref=e86]
+            - option "100" [ref=e87]
+            - option "250" [ref=e88]
+            - option "500" [ref=e89]
+          - button "Previous page" [disabled, ref=e79]
+          - button "Next page" [ref=e80]

@@ -1,0 +1,16 @@
+- generic
+  - generic
+    - generic
+      - dialog "Page"
+        - heading "Page" [level=2, ref=e1]
+          - StaticText "Page"
+        - tablist
+          - tab "Filter" [selected, ref=e2]
+          - tab "Compare" [ref=e3]
+        - tabpanel "Filter"
+          - combobox "String matching options dropdown menu" [expanded=false, ref=e6]: URLs containing
+          - generic
+            - textbox "URL or text" [ref=e7]
+        - generic
+          - button "Cancel" [ref=e4]
+          - button "Apply" [disabled, ref=e5]
