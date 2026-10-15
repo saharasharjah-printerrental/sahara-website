@@ -61,7 +61,7 @@ const ROUTE_LASTMOD: Record<string, string> = {
   '/printer-rental-al-ain/': '2026-09-15T11:28:23+04:00',
   '/brands/canon/': '2026-09-09T10:22:04+04:00',
   '/brands/hp/': '2026-09-08T09:34:26+04:00',
-  '/brands/kyocera/': '2026-09-08T09:34:26+04:00',
+  '/brands/kyocera/': '2026-10-15T15:39:45+04:00',
   '/brands/xerox/': '2026-09-08T09:34:26+04:00',
   '/brands/ricoh/': '2026-09-08T09:34:26+04:00',
   '/brands/brother/': '2026-09-08T09:34:26+04:00',

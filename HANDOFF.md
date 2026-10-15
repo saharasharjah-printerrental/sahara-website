@@ -1,6 +1,85 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
-CURRENT STATUS 2026-10-15: Kyocera SEO work and quote regression drift are committed locally on `main` as `46533c0` and `d80ea74`. Nothing from these commits has been pushed, deployed, or submitted for indexing.
+## ACTIVE INVESTIGATION — 2026-10-15: GSC, GBP and Bing AI decline
+
+User approved the diagnosis-first meta prompt and Browser MCP investigation. Scope: read-only diagnosis and concrete proposed fixes, then user review before implementation. User additionally requested that findings be saved here before context exhaustion. No code, database, GBP, crawler configuration, indexing submissions, or production changes are authorized by this investigation.
+
+### Verified live evidence (refreshed 2026-10-15 afternoon via Agent360 Browser MCP, session `Claude 2`)
+
+**GSC (live):** domain property `sc-domain:saharaprinter.com`, Search type Web, UI last update 4 hours ago, extraction 2026-10-15. Explicit comparison “last 28 days vs previous 28 days” shows **194 vs 161 clicks (+20.5%)**, **14.4K vs 13.2K impressions (+9.1%)**, **1.3% vs 1.2% CTR**, **13.2 vs 18.9 position** (position improved). Property is NOT in decline overall; page-mix shift. Do NOT reuse the older 10-14 snapshot's inferred ~266 previous-period clicks or claim a property-wide collapse. Exact comparison dates still unvalidated (chart accessibility date bug: “Invalid Date / January 1, 1970”).
+
+Live page comparison rows (current clicks / previous clicks; current impressions / previous impressions):
+
+| Page | Clicks | Impressions |
+|---|---|---|
+| `/` | 34 / 36 | 2,041 / 2,144 |
+| `/services/printer-rental/` | 13 / 14 | 3,297 / 3,116 |
+| `/services/paper-shredder-rental/` | 10 / 18 | 651 / 1,079 |
+| `/brands/kyocera/` | 5 / 19 | 261 / 383 |
+| `/services/amc/` | 2 / 6 | 199 / 153 |
+| `/services/printer-spare-parts/` | 2 / 6 | 152 / 164 |
+| `/printer-repair-sharjah/` | 6 / 0 | 643 / 0 |
+| `/photocopier-rental-sharjah/` | 6 / 0 | 337 / 486 |
+| `/brands/canon/` | 6 / 1 | 268 / 462 |
+| `/products/canon-imagerunner-advance-c5535i-rf/` | 7 / 2 | 130 / 72 |
+| `/printer-rental-dubai/` | (low clicks) | 578 / 1,310 (−732 impressions) |
+| `/services/plotter-maintenance/` | (low clicks) | 78 / 390 (−312 impressions) |
+
+Largest click losers: `/brands/kyocera/` (−14), `/services/paper-shredder-rental/` (−8), `/services/amc/` (−4), `/services/printer-spare-parts/` (−4). Gainers: `/printer-repair-sharjah/` +6, `/photocopier-rental-sharjah/` +6, `/brands/canon/` +5, canon product +5. Shredder CTR approximately 1.54% vs 1.67%; most click loss accompanies fewer impressions. Kyocera CTR approximately 1.53% vs 4.96% — earlier blanket claim that its CTR held is NOT valid.
+
+**GSC devices/countries (live):** Desktop 130 vs 115 clicks (+15), Mobile 63 vs 45 (+18), Tablet flat. UAE 149 vs 116 clicks (+33), impressions 12,036 vs 10,682. India +1, Pakistan +5. US −3 clicks / −239 impressions; UK −99 impressions. Core UAE market healthy.
+
+**GSC indexing (live):** 143 indexed / 240 not indexed (last update 10/12/26). Buckets: Page with redirect 84; Excluded by noindex 68; Alternate page with proper canonical 28; Not found (404) 35 (validation Started); Soft 404 12 (Started); Crawled - currently not indexed 11 (validation **Failed**); Redirect error 1; Server error (5xx) 1; Discovered - currently not indexed 0. Sitemap: `https://www.saharaprinter.com/sitemap.xml`, submitted Sep 17 2026, last read **Oct 15 2026**, status Success, 142 discovered pages. Manual actions: **No issues detected**. Security issues: **No issues detected**.
+
+**GSC CWV (live, CrUX last updated 10/14/26):** Desktop 0 poor / 49 need improvement / 0 good. Mobile: not enough usage data in last 90 days. Not a crisis; monitor.
+
+**Bing Webmaster Tools:** authenticated property `https://www.saharaprinter.com/`. Prior session (Claude 1) default daily series Aug 13–Oct 12: **107 total citations**; sharp fall after Sep 24. Dominant citation pages: rental-vs-buying cost guide 42; shredder buying/sizing guide 26; printer-rental service 10; PDPL guide 6; homepage 6. This session Bing WMT rendered blank (“Skip to main content” only) — JS/auth stall; equal-period compare not re-verified. Sep 24 deploy `914198c` only touched `BlogsClient.tsx` (blog FAQ styling) — unlikely citation cause.
+
+**GBP (live):** profile shows **496 customer interactions** (overview window), **603 profile views last month**, profile strength “Looks good!”, category “Office equipment rental service”, 5.0 / 71 reviews, phone 050 382 3969, Sharjah Industrial Area 11. Latest posts: Sep 29 Kyocera repair, Sep 5 PVC, Aug 13 shredder. Brand SERP query `sahara office equipments`: 19 clicks (+1800%), 102 impressions (+1357%), avg position 1.3. GBP healthy; not the click-loss cause. Full monthly performance comparison panel not extracted (iframe navigation flaky this session).
+
+**Deploy status (verified):** local HEAD `cf59d78` is live on Cloud Pages production (deployment `b22ce195`, ~30 min before check). Commits `c84c435`, `46533c0`, `d80ea74` all reached production. Live URLs checked: all key pages 200, self-canonical, `index, follow`, correct titles including new Kyocera title `Kyocera Printers UAE | Authorized Dealer | From AED 250/mo`. `llms.txt` exists (updated Oct 2026, lists prices/facts).
+
+**Known fix candidate found:** `src/app/sitemap.ts` `ROUTE_LASTMOD` for `/brands/kyocera/` is stale (`2026-09-08`) despite today's deploy. Not changed in this investigation.
+
+### Current browser / resume instructions (updated)
+
+- Agent360 Browser MCP (global npm `@agent360/browser-mcp`, entry `index.js`), driven via `C:\Users\DK\AppData\Local\Temp\opencode\bmcp-batch.js` (persistent one-server runner; spawning per call kills tabs to `about:blank`). Command files: `cmds-*.txt`; outputs: `out-*.json`; args via `@path` syntax. One-shot variant: `bmcp-run.js`.
+- Session `Claude 2` (same Chrome profile as `Claude 1` → shared auth cookies). Tabs often backgrounded → CDP mouse events blocked; `browser_click` falls back to script click (`scripting-fallback`). `browser_switch_tab` may show empty tab list in new session; re-navigate instead.
+- Browser MCP tool schemas: `browser_execute_script` param is `code` (IIFE, explicit return); `browser_select_frame` takes `frame_index`; `browser_click` takes `selector` (supports `text=...`); `browser_get_page_content` takes `{format:"text", max_chars:N}`.
+- GSC query/page URL filters (`&page=`, `&query=`) are IGNORED by the SPA — always show unfiltered property data. “Filter table rows” is a `role=button` (`aria-label="Filter table rows"`, class `U26fgb JRtysb WzwrXb`) but dialog interaction failed this session (background tab). Rows-per-page select (class `MocG8c`/`span.vRMGwf.oJeWuf`) click does not stick; use `[aria-label="Next page"]` pagination. Full query table is 1,230 rows.
+- GSC generative-AI deep link `search-analytics?...&search_type=ai` and `ai-overview-performance` both failed (no data / 404). Prior “Open report” link exists in UI.
+- Bing WMT root and AI Performance both render empty this session — likely JS/auth stall; re-authenticate or retry with longer wait if Bing equal-period compare is needed.
+- GBP manager panel opens via script-click on “496 customer interactions”; full performance iframe (frame index 3 pattern from earlier session) not re-extracted.
+
+### Remaining work / decision status
+
+1. ~~GSC indexing buckets, sitemaps, manual/security~~ — DONE (above).
+2. ~~GBP headline health~~ — DONE (496 interactions, 603 views, healthy). Full period-over-period interaction/call/direction breakdown still open if user wants forensic depth.
+3. ~~Bing AI equal-period compare~~ — NOT re-verified this session (WMT blank); prior 107-citation / Sep-24 fall stands as last good data.
+4. ~~Live HTML/status/canonical/deploy~~ — DONE (all healthy, `cf59d78` live).
+5. **Recovery proposal** — produced below for user review. No website fix made in this investigation.
+
+### Recovery proposal (for user review — not yet implemented)
+
+**Assessment:** No property-wide penalty, no manual/security action, no CWV crisis. GSC clicks up +20.5%, position improved, UAE up. Loss is concentrated on 4 pages (Kyocera, shredder, AMC, spare-parts) offset by gains on repair/rental-geo pages. Root cause not proven; most likely organic volatility + page-mix shift + stale sitemap lastmod on Kyocera, not a site-wide algorithm hit. GBP healthy. Bing AI citation fall unconfirmed this session.
+
+| Priority | Fix | Target | Validation / rollback | Measure (14/28-day) |
+|---|---|---|---|---|
+| P1 | Refresh `ROUTE_LASTMOD` for `/brands/kyocera/` (and any other recently deployed routes) in `src/app/sitemap.ts` | `src/app/sitemap.ts` | Deploy → fetch `/sitemap.xml` → confirm new date; git revert lastmod-only commit if wrong | Kyocera clicks/impressions vs baseline 5/19, 261/383 |
+| P1 | Submit updated `/sitemap.xml` to GSC + IndexNow (after user approval) | GSC Sitemaps, IndexNow | GSC sitemap “Last read” updates; no new errors | Indexed count 143 → target ≥ sitemap 142 |
+| P2 | Investigate 11 “Crawled - currently not indexed” pages (validation Failed) via URL inspection | GSC Page Indexing | Inspect samples; fix or noindex intentionally | Bucket 11 → 0 |
+| P2 | Review 35×404 + 12×Soft-404 (validation Started) for real 404s vs soft redirects | GSC Page Indexing | 301 real 404s to closest live URL; fix soft-404 content | 404/soft-404 buckets drop |
+| P2 | Internal-link / content depth pass on shredder, AMC, spare-parts (match repair-sharjah gain pattern) | Those service pages | On-page diff + internal links; noindex quotes stay noindex | Clicks return toward prior 18/6/6 |
+| P3 | Re-check Bing WMT AI Performance with equal complete windows around Sep 24 | Bing WMT | Screenshot/table export | Citation count trend |
+| P3 | CWV: desktop 49 “need improvement” — profile LCP/CSS on shared templates | CWV report | PSI before/after on homepage + top service | Need-improvement count drops |
+
+**Do not do:** blanket re-deploy, GBP field edits, crawler config changes, URL inspection “Request Indexing” on noindex quote pages, or commit/push without explicit user approval (read-only investigation boundary).
+
+Skills read: seo, seo-local, seo-geo, seo-bing. Verify platform claims against primary sources. User explicitly requested Browser MCP instead of CLI browsing.
+
+---
+
+HISTORICAL STATUS 2026-10-15 before the user's GitHub Desktop push: Kyocera SEO work and quote regression drift were committed locally as `46533c0` and `d80ea74`; push/deployment status must now be rechecked.
 
 ## PROGRESS - 2026-10-14 — CURRENT RESUME POINT
 
