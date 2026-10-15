@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { orgRef } from "@/lib/brand";
 
 const faqs = [
-  { q: "Where can I buy Kyocera printers in UAE?", a: "Sahara Office Equipments is an authorized Kyocera dealer in UAE. We supply Kyocera ECOSYS and TASKalfa models across Dubai, Sharjah, and Abu Dhabi with next-day delivery." },
+  { q: "Where can I buy Kyocera printers in UAE?", a: "Sahara Office Equipments is an authorized Kyocera dealer, supplier and distributor in UAE. We supply Kyocera ECOSYS and TASKalfa models across Dubai, Sharjah, and Abu Dhabi with next-day delivery." },
   { q: "Does Sahara offer Kyocera printer rental in Dubai?", a: "Yes. Kyocera ECOSYS and TASKalfa printers are available on monthly rental from AED 250/month — zero deposit, free toner, and full AMC included." },
   { q: "Is Kyocera ECOSYS good for high-volume printing in UAE?", a: "Absolutely. Kyocera ECOSYS printers deliver the lowest cost-per-page of any brand in UAE — ideal for offices printing 5,000+ pages/month in Dubai and Sharjah." },
 ];
 
-const description = "Authorized Kyocera printer and photocopier dealer in UAE. ECOSYS technology for low TCO. Sales, rental, and AMC. Dubai, Abu Dhabi, Sharjah. ☎ +971503823969";
+const description = "Authorized Kyocera dealer, supplier and distributor in UAE. ECOSYS & TASKalfa printers from AED 250/month with sales, rental and AMC. Dubai, Abu Dhabi, Sharjah.";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -36,16 +36,16 @@ const serviceSchema = {
   description,
   provider: orgRef(),
   areaServed: ["Dubai", "Sharjah", "Abu Dhabi", "Ajman", "Ras Al Khaimah"],
-  serviceType: "Kyocera Printer Dealer UAE",
+  serviceType: "Kyocera Printer Dealer, Supplier & Distributor UAE",
 };
 
 export const metadata: Metadata = {
-  title: "Kyocera Printers UAE | Authorized Dealer | Sahara Office",
+  title: "Kyocera Printers UAE | Authorized Dealer | From AED 250/mo",
   description,
-  keywords: "kyocera printer uae, kyocera photocopier dubai, ecosys printer uae, kyocera dealer uae, kyocera copier sharjah",
+  keywords: "kyocera printer uae, kyocera photocopier dubai, ecosys printer uae, kyocera dealer uae, kyocera supplier dubai, kyocera distributor uae, kyocera printer price, kyocera copier sharjah",
   alternates: { canonical: "https://www.saharaprinter.com/brands/kyocera/" },
   openGraph: {
-    title: "Kyocera Printers UAE | Authorized Dealer | Sahara",
+    title: "Kyocera Printers UAE | Authorized Dealer | From AED 250/mo",
     description,
     url: "https://www.saharaprinter.com/brands/kyocera/",
     siteName: "Sahara Office Equipments",

@@ -53,11 +53,11 @@ export default function KyoceraBrandPage() {
                 <span className="text-caption font-medium uppercase tracking-widest text-primary">ECOSYS Technology</span>
               </div>
               <h1 className="font-sora text-display-xl font-extrabold tracking-tight text-white">
-                Kyocera Authorized <span className="text-primary">Partner</span>
+                Kyocera Printers — Authorized <span className="text-primary">Partner</span>
               </h1>
 
               <div className="mt-6 rounded-panel border border-primary/20 bg-surface-low p-5">
-                <p className="mb-1 text-caption font-bold uppercase tracking-widest text-primary">Authorized Kyocera Dealer in UAE</p>
+                <p className="mb-1 text-caption font-bold uppercase tracking-widest text-primary">Authorized Kyocera Dealer, Supplier &amp; Distributor in UAE</p>
                 <p className="text-sm leading-relaxed text-on-surface-variant">
                   Sahara Office Equipments is an authorized Kyocera dealer in UAE, supplying TASKalfa ECOSYS models
                   with the industry&apos;s lowest cost per page. Sales, rental from{" "}
@@ -70,9 +70,9 @@ export default function KyoceraBrandPage() {
               <div className="mt-6">
                 <AnswerBlock
                   question="Where can I buy or rent Kyocera printers in UAE?"
-                  answer="Sahara Office Equipments is an authorized Kyocera dealer in UAE, supplying TASKalfa ECOSYS models with the industry's lowest cost per page. Sales, rental from AED 250/month, AMC contracts, and on-site repair are available across Dubai, Sharjah, and Abu Dhabi."
+                  answer="Sahara Office Equipments is an authorized Kyocera dealer, supplier and distributor in UAE, supplying TASKalfa ECOSYS models with the industry's lowest cost per page. Sales, rental from AED 250/month, AMC contracts, and on-site repair are available across Dubai, Sharjah, and Abu Dhabi."
                   supportingPoints={[
-                    "Authorized Kyocera dealer for TASKalfa ECOSYS models",
+                    "Authorized Kyocera dealer, supplier and distributor for UAE businesses",
                     "Rental plans from AED 250/month with zero deposit",
                     "AMC and on-site repair across Dubai, Sharjah, and Abu Dhabi",
                   ]}
