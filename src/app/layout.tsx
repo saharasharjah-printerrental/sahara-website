@@ -426,10 +426,11 @@ export default async function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         {/* Sora & Manrope are now self-hosted via next/font/google — no external request */}
-        {/* Material Symbols — stylesheet required for icon ligature rendering; no display=swap to avoid raw-text flash */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        {/* Material Symbols — self-hosted 39-icon subset (about 6 KB), see the @font-face in globals.css.
+            Oct 2026: this replaced a render-blocking Google Fonts stylesheet that delayed first paint
+            (FCP ~2.4 s on every page). font-display: block keeps the old behaviour of never showing the
+            raw ligature text. If you use a new icon, regenerate public/fonts/material-symbols-outlined-subset.woff2. */}
+        <link rel="preload" href="/fonts/material-symbols-outlined-subset.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <script type="application/ld+json">{organizationSchemaOutput}</script>
         <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
 

@@ -551,7 +551,7 @@ export default function CalculatorClient({
                 </p>
 
                 {/* Free pool redistribution — only shown in "both" mode */}
-                {printType === "both" && (
+                {printType === "both" && totalFreeValue > 0 && (
                   <PoolRebalancer
                     split={freePoolSplit}
                     onChange={setFreePoolSplit}

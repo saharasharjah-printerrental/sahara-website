@@ -23,3 +23,8 @@ Desktop `/services/printer-rental/` (PSI): 67, LCP 2.3 s, TBT 440 ms, CLS 0. Ins
 
 ## Verify after deploy
 Re-run Lighthouse on the same three URLs (mobile and desktop) and compare with the table; GSC Core Web Vitals needs 28 days of field data (checkpoint Nov 12).
+
+## Update 2026-10-23 (evening): icon font and post-deploy measurements
+Post-deploy Lighthouse (mobile, simulated): Kyocera 43 -> 64 (LCP 11.0 -> 6.8 s), printer-rental 45 -> 54 (LCP 9.3 -> 5.9 s), homepage 57 -> 49 / 60 / 54 / 61 over four runs (TBT 930 -> 370-690 ms; LCP 4.5 -> 5.1-6.7 s). First paint stayed ~2.4 s on every page; the homepage LCP element is plain hero text, so the blocking Google Fonts stylesheet (Material Symbols) was the likely cause.
+Fix (uncommitted, not yet deployed): the stylesheet and its two preconnects are gone from `layout.tsx`. A 39-icon static subset (5.7 KB woff2) is self-hosted at `public/fonts/material-symbols-outlined-subset.woff2`, preloaded, with `@font-face` (`font-display: block`) and the icon class rule in `globals.css`, and a 30-day cache header in `public/_headers`. Only one icon style (FILL 0, wght 400, opsz 24) is used in `src`, so a static subset is enough. Verified locally on /products/ (grid/list/search icons) and /canon-printer-repair/ (FAQ chevrons); 0 Google Font references on /, /canon-printer-repair/, /rental-calculator/, /products/. Adding a new icon requires regenerating the subset (instructions in the globals.css comment); a missing icon renders blank.
+Next: after deploy, three Lighthouse runs per page and compare medians with the table above.

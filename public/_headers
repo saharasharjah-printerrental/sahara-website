@@ -38,3 +38,8 @@
 # Animation assets
 /animations/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+# Self-hosted icon font subset (filename is not content-hashed, so 30 days, not immutable)
+/fonts/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
