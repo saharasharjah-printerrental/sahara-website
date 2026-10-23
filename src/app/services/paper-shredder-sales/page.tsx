@@ -114,6 +114,7 @@ const DEFAULT_FAQS: FaqItem[] = [
   { q: "Can I rent a paper shredder instead of buying one?", a: "Yes — Sahara rents paper shredders as well as selling them outright. For offices that shred only occasionally, renting from AED 450/month (with maintenance and repairs included) usually works out cheaper than buying outright at AED 800–3,500+. For daily, high-volume shredding, buying can make sense — ask us for a side-by-side quote and we'll recommend whichever is cheaper for your actual usage." },
   { q: "What's the difference between the paper shredders Sahara sells in the UAE?", a: "Sahara's UAE shredder range covers the Fellowes Powershred LX65 (10 sheets/pass, personal or light-office use, AED 800–1,500 to buy) and the Fellowes Powershred 325Ci (24 sheets/pass, departmental/commercial use, AED 2,200–3,500+ to buy), both DIN P-4 cross-cut, plus heavy-duty models for high-volume clear-outs on request. Both are also available to rent, with free delivery across Dubai, Sharjah, and Abu Dhabi." },
   { q: "Does Sahara sell paper shredders across Dubai and the wider UAE?", a: "Yes. Sahara sells and delivers paper shredders across Dubai, Sharjah, Abu Dhabi, Ajman, and Ras Al Khaimah, including free zones like JAFZA, SAIF Zone, and DIFC. Purchase prices start from AED 800; rental is also available from AED 450/month." },
+  { q: "What is a paper shredder and which type should I buy in the UAE?", a: "A paper shredder destroys documents so the information cannot be read. Strip-cut machines are cheapest but least secure, cross-cut machines (DIN P-4) cut paper into small particles and suit most offices that handle personal data, and micro-cut machines (P-5 and above) are for highly confidential records. Sahara sells Fellowes Powershred cross-cut paper shredders in Dubai, Sharjah and Abu Dhabi with free delivery and setup, from AED 800." },
 ];
 
 const relatedServices = [
@@ -273,7 +274,7 @@ export default function PaperShredderSalesPage() {
             ))}
           </div>
           <p className="mt-6 max-w-2xl text-caption text-muted">
-            Need higher security or an industrial model? DIN 66399 defines 7 security levels (P-1 to P-7) — for PDPL compliance with personally identifiable information, DIN P-4 or higher is recommended. Ask us about micro-cut and heavy-duty industrial options.
+            Need higher security or an industrial paper shredder machine? DIN 66399 defines 7 security levels (P-1 to P-7) — for PDPL compliance with personally identifiable information, DIN P-4 or higher is recommended. Ask us about micro-cut and heavy-duty industrial options.
           </p>
         </Section>
 

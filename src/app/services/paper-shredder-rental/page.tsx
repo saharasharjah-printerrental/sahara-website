@@ -89,6 +89,7 @@ const SHREDDER_FAQS: FaqItem[] = [
   { q: "What security level do the rental shredders offer?", a: "Both the LX65 and 325Ci are DIN P-4 cross-cut shredders. Confirm the security level your organisation requires before selecting a machine. A shredder's DIN rating alone is not a certification of your organisation's data-protection compliance." },
   { q: "What's the difference between the paper shredders Sahara offers for rent in the UAE?", a: "Sahara's rental range covers the Fellowes Powershred LX65 (10 sheets/pass, personal or light-office use, from AED 450/month) and the Fellowes Powershred 325Ci (24 sheets/pass, departmental/commercial use, from AED 900/month), both DIN P-4 cross-cut, plus heavy-duty models for high-volume clear-outs on request. Free delivery across Dubai, Sharjah, and Abu Dhabi." },
   { q: "Does Sahara supply paper shredders across Dubai and the wider UAE?", a: "Yes. Sahara delivers and services paper shredders across Dubai, Sharjah, Abu Dhabi, Ajman, and Ras Al Khaimah, including free zones like JAFZA, SAIF Zone, and DIFC. Rental plans start from AED 450/month." },
+  { q: "Can I rent an industrial paper shredder machine in Dubai?", a: "Sahara's rental range is the Fellowes Powershred LX65 (AED 450/month) and the larger 325Ci (AED 900/month), both DIN P-4 cross-cut machines that cover light-office to heavy departmental shredding. If you need an industrial paper shredder machine or a higher DIN security level, tell us your document volume and security requirement and we will check suitable options for your office in Dubai or elsewhere in the UAE." },
 ];
 
 const models = [
@@ -237,7 +238,7 @@ export default function PaperShredderRentalPage() {
             ))}
           </div>
           <p className="mt-6 max-w-2xl text-caption text-muted">
-            Need a higher-security or industrial model? Tell us your required security level and document volume so we can check suitable options.
+            Looking for an industrial paper shredder machine or a higher-security model? Tell us your required security level and document volume so we can check suitable options.
           </p>
         </Section>
 

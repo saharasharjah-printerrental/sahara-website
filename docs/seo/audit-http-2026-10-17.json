@@ -1,0 +1,701 @@
+[
+  {
+    "url": "https://saharaprinter.com/about",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/about/",
+    "chain": [
+      {
+        "status": 301,
+        "url": "https://saharaprinter.com/about",
+        "location": "https://www.saharaprinter.com/about"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/about",
+        "location": "/about/"
+      }
+    ],
+    "title": "About Sahara | UAE Printer Rental Experts Since 2012",
+    "canonical": "https://www.saharaprinter.com/about/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 93053
+  },
+  {
+    "url": "https://www.saharaprinter.com/printer-rental-dubai",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/printer-rental-dubai/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/printer-rental-dubai",
+        "location": "/printer-rental-dubai/"
+      }
+    ],
+    "title": "Printer Rental Business Bay, DIFC &amp; JLT | Dubai | Sahara",
+    "canonical": "https://www.saharaprinter.com/printer-rental-dubai/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 168301
+  },
+  {
+    "url": "https://www.saharaprinter.com/printer-rental-rak",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/printer-rental-rak/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/printer-rental-rak",
+        "location": "/printer-rental-rak/"
+      }
+    ],
+    "title": "Printer Rental RAK | Ras Al Khaimah | Sahara",
+    "canonical": "https://www.saharaprinter.com/printer-rental-rak/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 116209
+  },
+  {
+    "url": "https://www.saharaprinter.com/brands/samsung",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/brands/samsung/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/brands/samsung",
+        "location": "/brands/samsung/"
+      }
+    ],
+    "title": "Samsung Printers UAE | Authorized Dealer | Sahara Office",
+    "canonical": "https://www.saharaprinter.com/brands/samsung/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 80330
+  },
+  {
+    "url": "https://www.saharaprinter.com/blogs/how-to-choose-the-best-Printer-rental-dubai-service/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/blogs/how-to-choose-the-best-printer-rental-dubai-service/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/blogs/how-to-choose-the-best-Printer-rental-dubai-service/",
+        "location": "https://www.saharaprinter.com/blogs/how-to-choose-the-best-printer-rental-dubai-service/"
+      }
+    ],
+    "title": "How to Choose the Best Printer Rental Dubai Service? | Sahara",
+    "canonical": "https://www.saharaprinter.com/blogs/how-to-choose-the-best-printer-rental-dubai-service/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 106638
+  },
+  {
+    "url": "https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental",
+        "location": "/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/"
+      }
+    ],
+    "title": "How Dubai Companies Save with Printer Rental",
+    "canonical": "https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 104331
+  },
+  {
+    "url": "https://www.saharaprinter.com/products/canon-imageclass-mf644cdw/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/products/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/products/canon-imageclass-mf644cdw/",
+        "location": "/products/"
+      }
+    ],
+    "title": "Printer Products UAE | Canon, HP, Kyocera, Xerox",
+    "canonical": "https://www.saharaprinter.com/products/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 100962
+  },
+  {
+    "url": "https://www.saharaprinter.com/blogs/?search={search_term_string}",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/blogs/?search=%7Bsearch_term_string%7D",
+    "chain": [],
+    "title": "Printer Rental Blog UAE | Office Equipment Insights | Sahara",
+    "canonical": "https://www.saharaprinter.com/blogs/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 87298
+  },
+  {
+    "url": "https://www.saharaprinter.com/aboutus",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/about/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/aboutus",
+        "location": "/aboutus/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/aboutus/",
+        "location": "/about/"
+      }
+    ],
+    "title": "About Sahara | UAE Printer Rental Experts Since 2012",
+    "canonical": "https://www.saharaprinter.com/about/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 93053
+  },
+  {
+    "url": "https://www.saharaprinter.com/servicemaintance",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/services/amc/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/servicemaintance",
+        "location": "/servicemaintance/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/servicemaintance/",
+        "location": "/services/amc/"
+      }
+    ],
+    "title": "Printer AMC Dubai &amp; UAE | From AED 299/mo, Parts Included",
+    "canonical": "https://www.saharaprinter.com/services/amc/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 170709
+  },
+  {
+    "url": "https://www.saharaprinter.com/UAE",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/UAE",
+        "location": "/UAE/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/UAE/",
+        "location": "/"
+      }
+    ],
+    "title": "Printer Rental UAE from AED 250/mo | Free Toner &amp; Service",
+    "canonical": "https://www.saharaprinter.com/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 197902
+  },
+  {
+    "url": "https://www.saharaprinter.com/copier-rental-catalog/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/photocopier-rental-dubai/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/copier-rental-catalog/",
+        "location": "/photocopier-rental-dubai/"
+      }
+    ],
+    "title": "Photocopier Rental Dubai | New A3 from AED 500/mo",
+    "canonical": "https://www.saharaprinter.com/photocopier-rental-dubai/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 169562
+  },
+  {
+    "url": "https://www.saharaprinter.com/contact-us",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/contact/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/contact-us",
+        "location": "/contact-us/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/contact-us/",
+        "location": "/contact/"
+      }
+    ],
+    "title": "Contact Sahara | Printer Rental Dubai | +971503823969",
+    "canonical": "https://www.saharaprinter.com/contact/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 69531
+  },
+  {
+    "url": "https://www.saharaprinter.com/copier-rental-catalog/682440734db93eaba83c4eb2",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/photocopier-rental-dubai/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/copier-rental-catalog/682440734db93eaba83c4eb2",
+        "location": "/copier-rental-catalog/682440734db93eaba83c4eb2/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/copier-rental-catalog/682440734db93eaba83c4eb2/",
+        "location": "/photocopier-rental-dubai/"
+      }
+    ],
+    "title": "Photocopier Rental Dubai | New A3 from AED 500/mo",
+    "canonical": "https://www.saharaprinter.com/photocopier-rental-dubai/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 169562
+  },
+  {
+    "url": "https://www.saharaprinter.com/client",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/our-clients/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/client",
+        "location": "/client/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/client/",
+        "location": "/our-clients/"
+      }
+    ],
+    "title": "Our Clients | Trusted by 1500+ UAE Businesses | Sahara Office",
+    "canonical": "https://www.saharaprinter.com/our-clients/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 82975
+  },
+  {
+    "url": "https://www.saharaprinter.com/ProductEnquiry",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/request-quote/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/ProductEnquiry",
+        "location": "/ProductEnquiry/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/ProductEnquiry/",
+        "location": "/request-quote/"
+      }
+    ],
+    "title": "Request a Quote | Spare Parts &amp; Toner | Sahara Office Equipments",
+    "canonical": "https://www.saharaprinter.com/request-quote/",
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "x_robots": null,
+    "bytes": 55940
+  },
+  {
+    "url": "https://www.saharaprinter.com/service/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/services/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/service/",
+        "location": "/services/"
+      }
+    ],
+    "title": "Printer &amp; Office Equipment Services UAE | Sahara Office Equipments",
+    "canonical": "https://www.saharaprinter.com/services/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 99475
+  },
+  {
+    "url": "https://www.saharaprinter.com/copier-rental-catalog",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/photocopier-rental-dubai/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/copier-rental-catalog",
+        "location": "/copier-rental-catalog/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/copier-rental-catalog/",
+        "location": "/photocopier-rental-dubai/"
+      }
+    ],
+    "title": "Photocopier Rental Dubai | New A3 from AED 500/mo",
+    "canonical": "https://www.saharaprinter.com/photocopier-rental-dubai/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 169562
+  },
+  {
+    "url": "https://www.saharaprinter.com/service",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/services/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/service",
+        "location": "/service/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/service/",
+        "location": "/services/"
+      }
+    ],
+    "title": "Printer &amp; Office Equipment Services UAE | Sahara Office Equipments",
+    "canonical": "https://www.saharaprinter.com/services/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 99475
+  },
+  {
+    "url": "https://www.saharaprinter.com/printer-photocopier-rental-leasing-rak",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/printer-rental-rak/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/printer-photocopier-rental-leasing-rak",
+        "location": "/printer-photocopier-rental-leasing-rak/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/printer-photocopier-rental-leasing-rak/",
+        "location": "/printer-rental-rak/"
+      }
+    ],
+    "title": "Printer Rental RAK | Ras Al Khaimah | Sahara",
+    "canonical": "https://www.saharaprinter.com/printer-rental-rak/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 116209
+  },
+  {
+    "url": "https://www.saharaprinter.com/repair-amc",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/services/amc/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/repair-amc",
+        "location": "/repair-amc/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/repair-amc/",
+        "location": "/services/amc/"
+      }
+    ],
+    "title": "Printer AMC Dubai &amp; UAE | From AED 299/mo, Parts Included",
+    "canonical": "https://www.saharaprinter.com/services/amc/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 170709
+  },
+  {
+    "url": "https://www.saharaprinter.com/green-initiatives",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/about/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/green-initiatives",
+        "location": "/green-initiatives/"
+      },
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/green-initiatives/",
+        "location": "/about/"
+      }
+    ],
+    "title": "About Sahara | UAE Printer Rental Experts Since 2012",
+    "canonical": "https://www.saharaprinter.com/about/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 93053
+  },
+  {
+    "url": "https://www.saharaprinter.com/services/Printer-spare-parts/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/services/printer-spare-parts/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/services/Printer-spare-parts/",
+        "location": "https://www.saharaprinter.com/services/printer-spare-parts/"
+      }
+    ],
+    "title": "Printer Toner &amp; Spare Parts UAE | Toner Cartridges Dubai | Sahara",
+    "canonical": "https://www.saharaprinter.com/services/printer-spare-parts/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 147216
+  },
+  {
+    "url": "https://www.saharaprinter.com/7",
+    "status": 404,
+    "final": "https://www.saharaprinter.com/7/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/7",
+        "location": "/7/"
+      }
+    ],
+    "title": "Sahara Office Equipments | Printer Rental Dubai &amp; UAE | AED 250/mo",
+    "canonical": null,
+    "robots": [
+      "noindex",
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 34472
+  },
+  {
+    "url": "https://www.saharaprinter.com/&",
+    "status": 404,
+    "final": "https://www.saharaprinter.com/&/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/&",
+        "location": "/&/"
+      }
+    ],
+    "title": "Sahara Office Equipments | Printer Rental Dubai &amp; UAE | AED 250/mo",
+    "canonical": null,
+    "robots": [
+      "noindex",
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 34472
+  },
+  {
+    "url": "https://www.saharaprinter.com/$",
+    "status": 404,
+    "final": "https://www.saharaprinter.com/$/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/$",
+        "location": "/$/"
+      }
+    ],
+    "title": "Sahara Office Equipments | Printer Rental Dubai &amp; UAE | AED 250/mo",
+    "canonical": null,
+    "robots": [
+      "noindex",
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 34472
+  },
+  {
+    "url": "https://www.saharaprinter.com/mo",
+    "status": 404,
+    "final": "https://www.saharaprinter.com/mo/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/mo",
+        "location": "/mo/"
+      }
+    ],
+    "title": "Sahara Office Equipments | Printer Rental Dubai &amp; UAE | AED 250/mo",
+    "canonical": null,
+    "robots": [
+      "noindex",
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 34472
+  },
+  {
+    "url": "https://www.saharaprinter.com/month",
+    "status": 404,
+    "final": "https://www.saharaprinter.com/month/",
+    "chain": [
+      {
+        "status": 308,
+        "url": "https://www.saharaprinter.com/month",
+        "location": "/month/"
+      }
+    ],
+    "title": "Sahara Office Equipments | Printer Rental Dubai &amp; UAE | AED 250/mo",
+    "canonical": null,
+    "robots": [
+      "noindex",
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 34472
+  },
+  {
+    "url": "https://www.saharaprinter.com/services/printer-rental/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/services/printer-rental/",
+    "chain": [],
+    "title": "Printer Rental Dubai &amp; UAE | A4 &amp; A3 from AED 250/mo",
+    "canonical": "https://www.saharaprinter.com/services/printer-rental/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 215282
+  },
+  {
+    "url": "https://www.saharaprinter.com/products/canon-imagerunner-advance-c5535i-rf/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/products/canon-imagerunner-advance-c5535i-rf/",
+    "chain": [],
+    "title": "Canon imageRUNNER ADVANCE C5535i (RF) Price UAE | Rent AED 325/mo",
+    "canonical": "https://www.saharaprinter.com/products/canon-imagerunner-advance-c5535i-rf/",
+    "robots": [
+      "index, follow",
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "x_robots": null,
+    "bytes": 105379
+  },
+  {
+    "url": "https://www.saharaprinter.com/request-quote/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/request-quote/",
+    "chain": [],
+    "title": "Request a Quote | Spare Parts &amp; Toner | Sahara Office Equipments",
+    "canonical": "https://www.saharaprinter.com/request-quote/",
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "x_robots": null,
+    "bytes": 55940
+  },
+  {
+    "url": "https://www.saharaprinter.com/quote/printer-rental/",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/quote/printer-rental/",
+    "chain": [],
+    "title": "Printer Rental Quote | Sahara",
+    "canonical": "https://www.saharaprinter.com/quote/printer-rental/",
+    "robots": [
+      "noindex, follow"
+    ],
+    "x_robots": null,
+    "bytes": 78626
+  },
+  {
+    "url": "https://www.saharaprinter.com/robots.txt",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/robots.txt",
+    "chain": [],
+    "title": null,
+    "canonical": null,
+    "robots": [],
+    "x_robots": null,
+    "bytes": 262
+  },
+  {
+    "url": "https://www.saharaprinter.com/sitemap.xml",
+    "status": 200,
+    "final": "https://www.saharaprinter.com/sitemap.xml",
+    "chain": [],
+    "title": null,
+    "canonical": null,
+    "robots": [],
+    "x_robots": null,
+    "bytes": 28643
+  }
+]

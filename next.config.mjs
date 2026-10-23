@@ -78,6 +78,7 @@ const nextConfig = {
       '/repair-amc': '/services/amc/',
       '/servicemaintance': '/services/amc/',
       '/aboutus': '/about/',
+      '/about-sahara-printer': '/about/', // Oct 2026: still 404 in GSC (crawled Oct 17)
       '/green-initiatives': '/about/',
       '/Sustainability': '/about/',
       '/UAE': '/',

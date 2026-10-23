@@ -71,6 +71,7 @@ const DEFAULT_FAQS: FaqItem[] = [
     q: "Can you encode access-control or RFID data during printing?",
     a: "Yes — magnetic stripe (ISO 7811), contact smartcard, and contactless/RFID encoding are all available as part of the printing service, so your cards arrive ready to activate in your access-control system.",
   },
+  { q: "Where can I buy or rent a PVC card printer in the UAE?", a: "If you would rather print cards in-house, Sahara sells PVC and ID card printers including the Bravo RTAI and Bravo DC 3300, and also offers PVC card printer rental. Our printing service is for businesses that prefer to order finished cards without owning a printer. See the PVC card printer model guide or the card printer rental page for prices and availability." },
 ];
 
 const cardCatalogue = [
@@ -238,8 +239,8 @@ export default function PvcCardPrintingServicesPage() {
           <h2 className="text-headline font-bold text-white mb-6">Related</h2>
           <div className="flex flex-wrap gap-3">
             {[
-              { href: "/bravo-card-printers-uae/", label: "PVC Card Printers — Model Guide & Sales" },
-              { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental" },
+              { href: "/bravo-card-printers-uae/", label: "PVC Card Printer for Sale UAE — Bravo Model Guide" },
+              { href: "/services/pvc-card-printer-rental/", label: "PVC Card Printer Rental UAE" },
               { href: "/services/printer-spare-parts/", label: "Toner & Spare Parts" },
               { href: "/blogs/how-to-choose-id-card-printer-uae-office/", label: "How to Choose an ID Card Printer" },
               { href: "/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/", label: "Retransfer vs Direct-to-Card Explained" },

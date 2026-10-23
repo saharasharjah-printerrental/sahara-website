@@ -9,7 +9,7 @@ Source: `docs/seo/gsc-snapshots/api-2026-10-23/current-queries.json` (web, 2026-
 | printer rental dubai / printer rental in dubai | 282 / 307 | 11.4 / 15.6 | `/printer-rental-dubai/` |
 | printer rental (uae) | 325 / 84 | 10.0 / 10.5 | `/services/printer-rental/` |
 | printer rental in abu dhabi / abu dhabi | 191 / 96 | 11.1 / 10.2 | `/printer-rental-abu-dhabi/` |
-| photocopier rental in dubai | 134 | 13.0 | `/services/photocopier-rental/` |
+| photocopier rental in dubai | 134 | 13.0 | `/photocopier-rental-dubai/` |
 | printer leasing dubai / printer lease in dubai | 83 / 82 | 19.2 / 15.5 | `/printer-rental-dubai/` |
 | printer rental in sharjah | 82 | 19.1 | `/printer-rental-sharjah/` |
 | printer repair dubai | 115 | 25.5 | `/printer-repair-dubai/` |
@@ -25,7 +25,7 @@ Notes: "printer rental near me" (91 impr., pos 19.5) is a GBP/local-citation ter
 | printer rental dubai | `/printer-rental-dubai/` | TV |
 | printer rental uae / office printer rental | `/services/printer-rental/` | TV |
 | photocopier rental sharjah | `/photocopier-rental-sharjah/` | TV |
-| photocopier rental dubai / abu dhabi | `/services/photocopier-rental/` | TV |
+| photocopier rental dubai / abu dhabi | `/photocopier-rental-dubai/` | TV |
 | printer amc dubai / printer maintenance contract uae | `/services/amc/` | TV |
 | printer repair dubai / sharjah | `/printer-repair-dubai/`, `/printer-repair-sharjah/` | TV |
 | copier lease uae, office equipment rental uae | services pages | TV |
@@ -53,7 +53,7 @@ Notes: "printer rental near me" (91 impr., pos 19.5) is a GBP/local-citation ter
 | printer repair | 140 | 12 | 0 |
 | color laser printer all in one | 390 | 24 | 0.50 |
 | xerox machine | 210 | 32 | 1.02 |
-Map toner terms to `/services/printer-spare-parts/` and `/services/toner/`, HP/Ricoh/Xerox terms to the matching `/brands/*` pages.
+Map toner terms to `/services/printer-spare-parts/` and `/services/printer-spare-parts/`, HP/Ricoh/Xerox terms to the matching `/brands/*` pages.
 
 ## Tier 4 — branded (NAP citations)
 "Sahara Printer", "Sahara Printers & Photocopiers" and the exact business name on the website. Name, address, phone (+971) and categories identical to the site schema and GBP.

@@ -1597,3 +1597,8 @@ by hand, re-check ~2026-10-24.
 - JSON-LD: removed dateEstablished/dateModified/speakable from Organization node in `src/app/layout.tsx` (also stripped from admin override); added `address` to the rating fragment in `src/components/OrganizationRating.tsx`.
 - Speed: `ProductHero` now server component with CSS entrance; analytics deferred (`deferUntilIdle`); homepage hero image preload. Details and remaining items: `docs/seo/speed-audit-2026-10-23.md`.
 - `npm run build` passes. Pending: user approval to commit + push (push triggers Cloudflare deploy), then IndexNow + GSC UI validation.
+
+### 2026-10-23 (late): indexing audit + keyword edits + redirects (uncommitted)
+- GSC Page indexing reviewed URL by URL: `docs/seo/indexing-audit-2026-10-23.md`. Fixes: `/about-sahara-printer` redirect (next.config.mjs), `{search_term_string}` redirect (middleware.ts).
+- Semrush keyword edits on 5 pages + sitemap lastmod (see git diff). Fax-machine service intentionally NOT added (no evidence Sahara offers it).
+- Product snippets "Missing aggregateRating/review" are non-critical and intentionally not fixed (no real product reviews).

@@ -94,3 +94,13 @@ scripts/seo/indexnow-state.json
 
 # Downloaded stock images staged for manual blog upload via admin — not site assets
 docs/seo/blog-images/
+
+# Credentials and tokens (Google OAuth client secrets, GSC refresh token, service-account keys).
+# These belong in C:UsersDKsecrets, never in the repo.
+client_secret*.json
+gsc-token.json
+*service-account*.json
+*credentials*.json
+
+# Local scratch output (Lighthouse runs, crawl dumps, ad-hoc audits)
+tmp/

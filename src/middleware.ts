@@ -115,6 +115,17 @@ export async function middleware(request: NextRequest, _event: NextFetchEvent) {
     return NextResponse.redirect(url, 308);
   }
 
+  // Oct 2026: the retired sitelinks-search-box template URL
+  // (/blogs/?search={search_term_string}) is still in GSC as a Soft 404 because
+  // the placeholder is searched literally and returns an empty list. Send it
+  // to the blog index instead.
+  if (pathname.startsWith('/blogs') && request.nextUrl.searchParams.get('search') === '{search_term_string}') {
+    const url = new URL(request.url);
+    url.pathname = '/blogs/';
+    url.search = '';
+    return NextResponse.redirect(url, 308);
+  }
+
   const isAdmin  = pathname.startsWith('/admin');
 
   // Forward the pathname to Server Components (read via headers() in layout.tsx) —

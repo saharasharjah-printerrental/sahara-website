@@ -25,11 +25,11 @@ import { SettingsIcon, LayersIcon, HeadsetIcon, ClockIcon } from "@/components/i
 // with no dedicated destination. /canon-printer-dubai/ exists but is a
 // rental/sales page, not repair-led.
 export const metadata: Metadata = {
-  title: "Canon Printer Repair UAE | Dubai, Abu Dhabi & Sharjah | Sahara",
-  description: "Canon printer & photocopier repair across Dubai, Abu Dhabi and Sharjah from AED 150. imageRUNNER, PIXMA, i-SENSYS. Certified technicians, genuine OEM parts, 4-hr response. ☎ +971503823969",
+  title: "Canon Service Center Dubai | Printer Repair UAE | Sahara",
+  description: "Canon service center in Dubai, Abu Dhabi & Sharjah: printer & photocopier repair from AED 150. imageRUNNER, PIXMA, i-SENSYS. Certified technicians, genuine OEM parts, 4-hr response. ☎ +971503823969",
   keywords: "canon printer repair dubai, canon printer repair near me, canon printer repair, canon laser printer repair, canon pixma repair near me, canon photocopier repairs, canon service center near me, canon imagerunner repair uae",
   openGraph: {
-    title: "Canon Printer Repair UAE | Sahara Office Equipments",
+    title: "Canon Service Center Dubai | Canon Printer Repair UAE | Sahara",
     description: "Certified Canon repair across the UAE. imageRUNNER, PIXMA, i-SENSYS. Genuine OEM parts, 4-hour response, 30-day warranty.",
     images: [{ url: "https://www.saharaprinter.com/images/printer-canon-1.webp", width: 1200, height: 630, alt: "Canon Printer Repair UAE" }],
     url: "https://www.saharaprinter.com/canon-printer-repair/",
@@ -48,6 +48,7 @@ const DEFAULT_FAQS: FaqItem[] = [
   { q: "Do you use genuine Canon parts?", a: "Yes, exclusively. We install genuine OEM Canon drums, fusers and transfer belts — never third-party compatibles — which protects your warranty and long-term print quality." },
   { q: "Can you repair a Canon machine we didn't buy or rent from Sahara?", a: "Yes. We service Canon equipment regardless of where it was purchased or leased, including machines inherited from a previous tenant or under another vendor's expired contract." },
   { q: "Do you offer an AMC for Canon printers?", a: "Yes — our Annual Maintenance Contract covers unlimited Canon repairs, preventive maintenance visits, and priority dispatch, from AED 299/month per machine." },
+  { q: "Where is the nearest Canon service center in Dubai?", a: "Sahara sends certified Canon technicians to your office in Dubai, Abu Dhabi and Sharjah, so you do not need to carry a printer or photocopier to a service center. We repair imageRUNNER, PIXMA and i-SENSYS models with genuine OEM parts, with callouts from AED 150 and a 4-hour emergency response target." },
 ];
 
 const canonFaults = [
@@ -123,7 +124,7 @@ export default async function CanonPrinterRepair() {
                 </h1>
                 <p className="mt-6 max-w-xl text-body text-muted">
                   Dubai, Abu Dhabi &amp; Sharjah. imageRUNNER, PIXMA and i-SENSYS serviced by certified technicians with
-                  genuine OEM parts — repairs from AED 150.
+                  genuine OEM parts — repairs from AED 150. Looking for a Canon service center in Dubai? We come to you.
                 </p>
                 <div className="mt-6">
                   <AnswerBlock

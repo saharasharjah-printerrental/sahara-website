@@ -29,7 +29,7 @@ import {
 // Dubai geo intent and was strengthened to match (see its own file).
 export const metadata: Metadata = {
   title: "Printer & Photocopier Repair UAE | All Major Brands | Sahara",
-  description: "On-site printer & photocopier repair across Dubai, Sharjah & Abu Dhabi — 4-hr emergency response, OEM parts only. Canon, HP, Kyocera, Xerox, Ricoh. HP Service Center Dubai. ☎ +971503823969",
+  description: "On-site printer & photocopier repair across Dubai, Sharjah & Abu Dhabi — 4-hr emergency response, OEM parts only. Canon printer repair near me, HP service center Dubai, Kyocera, Xerox, Ricoh. ☎ +971503823969",
   keywords: "printer repair uae, printer repair service, printer services near me, fix printer near me, printer repairing near me, hp service center dubai, hp service center in dubai, printer fixing near me, printer fix services, photocopier repair sharjah, canon printer repair uae, kyocera service uae, printer technician dubai, printer service and repair",
   openGraph: {
     title: "Printer & Photocopier Repair Service UAE | Sahara Office Equipments",
