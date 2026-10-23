@@ -1,0 +1,1350 @@
+{
+ "site": "sc-domain:saharaprinter.com",
+ "searchType": "web",
+ "dataState": "final",
+ "windows": {
+  "current": {
+   "start": "2026-09-23",
+   "end": "2026-10-20"
+  },
+  "previous": {
+   "start": "2026-08-26",
+   "end": "2026-09-22"
+  }
+ },
+ "extractedAt": "2026-10-23T06:14:33.617Z",
+ "rows": [
+  {
+   "keys": [
+    "https://www.saharaprinter.com/"
+   ],
+   "clicks": 35,
+   "impressions": 2170,
+   "ctr": 0.016129032258064516,
+   "position": 16.450230414746542
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/paper-shredder-rental/"
+   ],
+   "clicks": 20,
+   "impressions": 1054,
+   "ctr": 0.018975332068311195,
+   "position": 15.758064516129032
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/kyocera/"
+   ],
+   "clicks": 17,
+   "impressions": 401,
+   "ctr": 0.04239401496259352,
+   "position": 9.493765586034913
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-rental/"
+   ],
+   "clicks": 12,
+   "impressions": 3396,
+   "ctr": 0.0035335689045936395,
+   "position": 12.867196702002357
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/lexmark/"
+   ],
+   "clicks": 8,
+   "impressions": 70,
+   "ctr": 0.11428571428571428,
+   "position": 9.057142857142857
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/sharp/"
+   ],
+   "clicks": 7,
+   "impressions": 292,
+   "ctr": 0.023972602739726026,
+   "position": 9.842465753424657
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-rental-abu-dhabi/"
+   ],
+   "clicks": 7,
+   "impressions": 1383,
+   "ctr": 0.005061460592913955,
+   "position": 31.919739696312366
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/canon/"
+   ],
+   "clicks": 5,
+   "impressions": 434,
+   "ctr": 0.01152073732718894,
+   "position": 25.953917050691246
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-rental-sharjah/"
+   ],
+   "clicks": 5,
+   "impressions": 193,
+   "ctr": 0.025906735751295335,
+   "position": 29.626943005181346
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/canon-imagerunner-advance-c5535i-rf/"
+   ],
+   "clicks": 5,
+   "impressions": 98,
+   "ctr": 0.05102040816326531,
+   "position": 8.46938775510204
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/amc/"
+   ],
+   "clicks": 5,
+   "impressions": 178,
+   "ctr": 0.028089887640449437,
+   "position": 11.730337078651685
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-repair-dubai/"
+   ],
+   "clicks": 4,
+   "impressions": 473,
+   "ctr": 0.008456659619450317,
+   "position": 31.25369978858351
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/epson-printer-repair/"
+   ],
+   "clicks": 3,
+   "impressions": 51,
+   "ctr": 0.058823529411764705,
+   "position": 12.313725490196079
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/canon-imagerunner-advance-c5235i/"
+   ],
+   "clicks": 3,
+   "impressions": 141,
+   "ctr": 0.02127659574468085,
+   "position": 9.00709219858156
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-laser-unit-assembly-imagerunner-advance-refurbished-black-cyan-magenta-yellow/"
+   ],
+   "clicks": 3,
+   "impressions": 20,
+   "ctr": 0.15,
+   "position": 9.8
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brother-printer-repair/"
+   ],
+   "clicks": 2,
+   "impressions": 61,
+   "ctr": 0.03278688524590164,
+   "position": 11.770491803278688
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/canon-printer-repair/"
+   ],
+   "clicks": 2,
+   "impressions": 82,
+   "ctr": 0.024390243902439025,
+   "position": 16.646341463414636
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/photocopier-rental-sharjah/"
+   ],
+   "clicks": 2,
+   "impressions": 514,
+   "ctr": 0.0038910505836575876,
+   "position": 16.182879377431906
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/"
+   ],
+   "clicks": 2,
+   "impressions": 128,
+   "ctr": 0.015625,
+   "position": 39.3828125
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/ms431dn-laser/"
+   ],
+   "clicks": 2,
+   "impressions": 12,
+   "ctr": 0.16666666666666666,
+   "position": 14.75
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/photocopier-rental/"
+   ],
+   "clicks": 2,
+   "impressions": 640,
+   "ctr": 0.003125,
+   "position": 68.73125
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/"
+   ],
+   "clicks": 2,
+   "impressions": 159,
+   "ctr": 0.012578616352201259,
+   "position": 17.528301886792452
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-transfer-belt-unit-c5235-5250/"
+   ],
+   "clicks": 2,
+   "impressions": 22,
+   "ctr": 0.09090909090909091,
+   "position": 21.681818181818183
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/drum-unit-maintenance-kit-fit-for-canon-ir-advance-c5030-c5035-c5045-c5051-c5250-c5255-c5235-c5240-opc-cleaning-blade-pcroem-opc-n-blade-b/"
+   ],
+   "clicks": 2,
+   "impressions": 11,
+   "ctr": 0.18181818181818182,
+   "position": 28.818181818181817
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/how-to-choose-the-best-printer-rental-dubai-service/"
+   ],
+   "clicks": 1,
+   "impressions": 62,
+   "ctr": 0.016129032258064516,
+   "position": 75.1774193548387
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/uae-pdpl-document-destruction-compliance-guide/"
+   ],
+   "clicks": 1,
+   "impressions": 21,
+   "ctr": 0.047619047619047616,
+   "position": 6
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/video-walkthrough-solving-canon-printer-problems/"
+   ],
+   "clicks": 1,
+   "impressions": 4,
+   "ctr": 0.25,
+   "position": 6
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/bravo-card-printers-uae/"
+   ],
+   "clicks": 1,
+   "impressions": 148,
+   "ctr": 0.006756756756756757,
+   "position": 19.97972972972973
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/canon-printer-dubai/"
+   ],
+   "clicks": 1,
+   "impressions": 198,
+   "ctr": 0.005050505050505051,
+   "position": 42.13636363636363
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/hp-printer-abu-dhabi/"
+   ],
+   "clicks": 1,
+   "impressions": 274,
+   "ctr": 0.0036496350364963502,
+   "position": 48.07299270072993
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/our-clients/"
+   ],
+   "clicks": 1,
+   "impressions": 272,
+   "ctr": 0.003676470588235294,
+   "position": 65.57720588235294
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-rental-dubai/"
+   ],
+   "clicks": 1,
+   "impressions": 1200,
+   "ctr": 0.0008333333333333334,
+   "position": 62.76
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-rental-fujairah/"
+   ],
+   "clicks": 1,
+   "impressions": 37,
+   "ctr": 0.02702702702702703,
+   "position": 15.35135135135135
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-repair-sharjah/"
+   ],
+   "clicks": 1,
+   "impressions": 110,
+   "ctr": 0.00909090909090909,
+   "position": 12.936363636363636
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/color-laserjet-pro-m479fdw/"
+   ],
+   "clicks": 1,
+   "impressions": 20,
+   "ctr": 0.05,
+   "position": 16.8
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/rental-calculator/"
+   ],
+   "clicks": 1,
+   "impressions": 430,
+   "ctr": 0.002325581395348837,
+   "position": 78.04883720930232
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/papercut-print-management/"
+   ],
+   "clicks": 1,
+   "impressions": 78,
+   "ctr": 0.01282051282051282,
+   "position": 7.987179487179487
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5550-refurbished-yellow-developer-unit/"
+   ],
+   "clicks": 1,
+   "impressions": 8,
+   "ctr": 0.125,
+   "position": 24.875
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/pvc-card-printer-rental/"
+   ],
+   "clicks": 1,
+   "impressions": 104,
+   "ctr": 0.009615384615384616,
+   "position": 23.692307692307693
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/repair/"
+   ],
+   "clicks": 1,
+   "impressions": 809,
+   "ctr": 0.0012360939431396785,
+   "position": 21.60692212608158
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/xerox-printer-repair/"
+   ],
+   "clicks": 1,
+   "impressions": 8,
+   "ctr": 0.125,
+   "position": 7.5
+  },
+  {
+   "keys": [
+    "https://saharaprinter.com/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/about/"
+   ],
+   "clicks": 0,
+   "impressions": 182,
+   "ctr": 0,
+   "position": 47.24175824175824
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/"
+   ],
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 13.583333333333334
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/best-office-paper-shredders-uae-fellowes-compared/"
+   ],
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 6.666666666666667
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/buying-a-paper-shredder-in-dubai-sizing-and-cost-guide/"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/din-p4-vs-p5-vs-p6-shredder-security-levels-uae/"
+   ],
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 7.2
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/how-dubai-companies-save-budget-by-choosing-value-driven-printer-rental/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 89
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/how-much-does-printer-rental-cost-dubai-2026/"
+   ],
+   "clicks": 0,
+   "impressions": 14,
+   "ctr": 0,
+   "position": 7.214285714285714
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/how-to-choose-id-card-printer-uae-office/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 4.2
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/how-to-choose-photocopier-small-office-sharjah/"
+   ],
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 22.625
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/kyocera-vs-canon-vs-ricoh-best-copier-uae-2025/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/paper-shredder-rental-uae-when-it-beats-buying/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 5.888888888888889
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/paper-shredder-repair-or-replace-uae-guide/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 16.666666666666664
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/papercut-print-management-uae-offices/"
+   ],
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 13.857142857142858
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/printer-amc-dubai-whats-included/"
+   ],
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/printer-rental-real-estate-offices-dubai-2025/"
+   ],
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 7.333333333333333
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/printer-rental-vs-buying-uae-2026-cost-breakdown/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 20.666666666666668
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/printer-repair-vs-replacement-dubai-guide-2025/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 7.4
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/rent-or-buy-your-office-printer-lets-talk-smart-choices-for-your-business/"
+   ],
+   "clicks": 0,
+   "impressions": 23,
+   "ctr": 0,
+   "position": 34.21739130434783
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/short-term-event-printer-rental-dubai/"
+   ],
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 28.7
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/shredder-delivery-jafza-saif-zone-difc-uae-free-zones/"
+   ],
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 8.04
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/stop-wasting-money-on-printing-your-guide-to-smarter-office-habits/"
+   ],
+   "clicks": 0,
+   "impressions": 84,
+   "ctr": 0,
+   "position": 9.273809523809524
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/the-hidden-cost-of-your-office-copier/"
+   ],
+   "clicks": 0,
+   "impressions": 87,
+   "ctr": 0,
+   "position": 23.471264367816094
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/toner-vs-ink-cartridge-uae-buyers-guide/"
+   ],
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 18.970588235294116
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/total-cost-of-printer-ownership/"
+   ],
+   "clicks": 0,
+   "impressions": 171,
+   "ctr": 0,
+   "position": 17.830409356725145
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/what-is-printer-amc-uae-guide-2025/"
+   ],
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 6.6
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/why-a-company-chooses-copier-rental-service-over-buying-a-copier/"
+   ],
+   "clicks": 0,
+   "impressions": 132,
+   "ctr": 0,
+   "position": 45.43939393939394
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/blogs/zebra-vs-bravo-vs-evolis-id-card-printer-uae/"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 15.25
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/brother/"
+   ],
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 6.333333333333333
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/epson/"
+   ],
+   "clicks": 0,
+   "impressions": 14,
+   "ctr": 0,
+   "position": 15.571428571428571
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/hp/"
+   ],
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 55.666666666666664
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/konica-minolta/"
+   ],
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 6.230769230769231
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/kyocera"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 3.25
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/kyocera/etal"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 1
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/ricoh/"
+   ],
+   "clicks": 0,
+   "impressions": 35,
+   "ctr": 0,
+   "position": 13.114285714285714
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/samsung/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 3.111111111111111
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/brands/xerox/"
+   ],
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 26.333333333333332
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/contact/"
+   ],
+   "clicks": 0,
+   "impressions": 124,
+   "ctr": 0,
+   "position": 23.282258064516128
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/copier-lease-uae/"
+   ],
+   "clicks": 0,
+   "impressions": 430,
+   "ctr": 0,
+   "position": 66.72325581395349
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/get-quote"
+   ],
+   "clicks": 0,
+   "impressions": 163,
+   "ctr": 0,
+   "position": 14.45398773006135
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/hp-printer-repair"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 1
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/hp-printer-repair/"
+   ],
+   "clicks": 0,
+   "impressions": 178,
+   "ctr": 0,
+   "position": 36.29775280898876
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/kyocera-printer-repair/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 10.2
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/our-clients"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 57.25
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/photocopier-rental-abu-dhabi/"
+   ],
+   "clicks": 0,
+   "impressions": 113,
+   "ctr": 0,
+   "position": 55.47787610619469
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/photocopier-rental-dubai/"
+   ],
+   "clicks": 0,
+   "impressions": 215,
+   "ctr": 0,
+   "position": 49.86046511627907
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-amc-dubai/"
+   ],
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-rental-al-ain/"
+   ],
+   "clicks": 0,
+   "impressions": 36,
+   "ctr": 0,
+   "position": 26.61111111111111
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-rental-dubai"
+   ],
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 2
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/printer-rental-rak/"
+   ],
+   "clicks": 0,
+   "impressions": 75,
+   "ctr": 0,
+   "position": 35.986666666666665
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/privacy-policy/"
+   ],
+   "clicks": 0,
+   "impressions": 46,
+   "ctr": 0,
+   "position": 11.130434782608695
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/?page=2"
+   ],
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 5.5
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/altalink-c8170/"
+   ],
+   "clicks": 0,
+   "impressions": 32,
+   "ctr": 0,
+   "position": 16.40625
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/bp-70c31-color-mfp/"
+   ],
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 23.692307692307693
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/designjet-z9-postscript/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 20.88888888888889
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/ecotank-l15150-wide-format/"
+   ],
+   "clicks": 0,
+   "impressions": 29,
+   "ctr": 0,
+   "position": 14.655172413793103
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/hl-l6400dw-enterprise/"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 15.5
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/imageprograf-pro-4100/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 32.4
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/imagerunner-advance-c5235i/"
+   ],
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/imagerunner-advance-c5500/"
+   ],
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 16.27777777777778
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/imagerunner-advance-c5535i-rf/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 1
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/laserjet-managed-e82560/"
+   ],
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 10.2
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/m6635cidn-color-mfp/"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 33.75
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/mp-2555sp/"
+   ],
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 34.09090909090909
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/proxpress-m4580fx/"
+   ],
+   "clicks": 0,
+   "impressions": 56,
+   "ctr": 0,
+   "position": 10.964285714285714
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/products/taskalfa-6003i-series/"
+   ],
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 17.76
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/pvc-card-printer-quote/"
+   ],
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 41.3
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/returns-refunds/"
+   ],
+   "clicks": 0,
+   "impressions": 17,
+   "ctr": 0,
+   "position": 28.235294117647058
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/ricoh-printer-repair/"
+   ],
+   "clicks": 0,
+   "impressions": 14,
+   "ctr": 0,
+   "position": 7.571428571428571
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/"
+   ],
+   "clicks": 0,
+   "impressions": 42,
+   "ctr": 0,
+   "position": 17
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/amc"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/plotter-maintenance/"
+   ],
+   "clicks": 0,
+   "impressions": 390,
+   "ctr": 0,
+   "position": 4.153846153846153
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-rental"
+   ],
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 1
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5250-refurbished-black-developer-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 21.444444444444443
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5250-refurbished-cyan-developer-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 25.8
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5250-refurbished-magenta-developer-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 45
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5250-refurbished-yellow-developer-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 39.25
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5535-stapler-pin-y1/"
+   ],
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 15.166666666666666
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5550-refurbished-black-developer-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 17.846153846153847
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5550-refurbished-cyan-developer-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 17.23076923076923
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-5550-refurbished-magenta-developer-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 76
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-c5035-5040-5235-5240-toner-premium-black/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 33
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-c5035-5040-5235-5240-toner-premium-cyan/"
+   ],
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 118.33333333333333
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-c5035-5040-5235-5240-toner-premium-yellow/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 96
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-c5045-5051-5250-5255-toner-premium-black/"
+   ],
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 20.857142857142858
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-c5045-5051-5250-5255-toner-premium-cyan/"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 31.75
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-c5045-c5250-c5550-paper-pickup-rollers/"
+   ],
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 41.69230769230769
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-c5540-c5550-pickup-rollers/"
+   ],
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 47.333333333333336
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-fuser-unit-5250-5235/"
+   ],
+   "clicks": 0,
+   "impressions": 33,
+   "ctr": 0,
+   "position": 14.121212121212121
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-fuser-unit-5535-5550/"
+   ],
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 15.833333333333334
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-transfer-belt-unit-c5535-5560/"
+   ],
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 11.785714285714286
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/canon-wt-202-waste-toner-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 14.75
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/compatible-c-exv51-toner-cartridge/"
+   ],
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 29.1
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/compatible-toner-canon-c-exv-51-cyan-premium/"
+   ],
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 26.75
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/compatible-toner-canon-c-exv-51-yellow-premium/"
+   ],
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 22
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/hp-toner-black-207a-premium-compatible-toners/"
+   ],
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 47.57142857142857
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/hp-toner-cyan-207a-premium-compatible-toners/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 87
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/hp-toner-magenta-207a-premium-compatible-toners/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 88
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/hp-toner-yellow-207a-premium-compatible-toners/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 84
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/long-life-opc-drum-for-canon-ir-advance-c5235-c5240-c5250-c5255/"
+   ],
+   "clicks": 0,
+   "impressions": 29,
+   "ctr": 0,
+   "position": 6.0344827586206895
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/long-life-opc-drum-for-canon-ir-advance-c5535-c5540-c5550-c5560/"
+   ],
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 9.833333333333334
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/transfer-cleaning-assembly-blade-unit/"
+   ],
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 17.666666666666668
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/printer-spare-parts/waste-toner-container-for-canon-ir-adv-c5255-c5240-c5235-c5250/"
+   ],
+   "clicks": 0,
+   "impressions": 47,
+   "ctr": 0,
+   "position": 15.659574468085106
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/pvc-card-printer-sales/"
+   ],
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 15.636363636363637
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/services/pvc-card-printing-services/"
+   ],
+   "clicks": 0,
+   "impressions": 105,
+   "ctr": 0,
+   "position": 36.84761904761905
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/shipping-delivery/"
+   ],
+   "clicks": 0,
+   "impressions": 17,
+   "ctr": 0,
+   "position": 8.647058823529413
+  },
+  {
+   "keys": [
+    "https://www.saharaprinter.com/terms/"
+   ],
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 24.2
+  }
+ ]
+}

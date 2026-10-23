@@ -1,0 +1,45 @@
+{
+ "site": "sc-domain:saharaprinter.com",
+ "searchType": "web",
+ "dataState": "final",
+ "windows": {
+  "current": {
+   "start": "2026-09-23",
+   "end": "2026-10-20"
+  },
+  "previous": {
+   "start": "2026-08-26",
+   "end": "2026-09-22"
+  }
+ },
+ "extractedAt": "2026-10-23T06:14:33.617Z",
+ "rows": [
+  {
+   "keys": [
+    "DESKTOP"
+   ],
+   "clicks": 121,
+   "impressions": 11364,
+   "ctr": 0.010647659274903203,
+   "position": 19.13797958465329
+  },
+  {
+   "keys": [
+    "MOBILE"
+   ],
+   "clicks": 51,
+   "impressions": 2564,
+   "ctr": 0.019890795631825272,
+   "position": 9.469188767550701
+  },
+  {
+   "keys": [
+    "TABLET"
+   ],
+   "clicks": 2,
+   "impressions": 22,
+   "ctr": 0.09090909090909091,
+   "position": 6.2272727272727275
+  }
+ ]
+}

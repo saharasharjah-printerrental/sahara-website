@@ -67,6 +67,9 @@ npm run browser:doctor --fix    # Auto-repair
 - **Diffs:** `tests/e2e/visual/diffs/` (gitignored)
 - **Screenshots:** `tests/e2e/screenshots/` (gitignored)
 
+## SEO Work
+Before any SEO/AEO/GEO/SXO task, read `.claude/rules/seo-operating-law.md` (standing rules) and use `META_PROMPT.md` as the task-start template.
+
 ## Environment
 - Node.js 20+ (from @types/node version)
 - TypeScript 5+

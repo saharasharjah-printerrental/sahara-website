@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # Sahara Printer Website
 
+**SEO work:** read `.claude/rules/seo-operating-law.md` first (standing rules: read-only by default, equal date windows, no credential exposure). Use `META_PROMPT.md` as the task-start template.
+
 ## Development Commands
 
 ### Core Commands

@@ -57,9 +57,17 @@ Largest click losers: `/brands/kyocera/` (−14), `/services/paper-shredder-rent
 2. ~~GBP headline health~~ — DONE (496 interactions, 603 views, healthy). Full period-over-period interaction/call/direction breakdown still open if user wants forensic depth.
 3. ~~Bing AI equal-period compare~~ — NOT re-verified this session (WMT blank); prior 107-citation / Sep-24 fall stands as last good data.
 4. ~~Live HTML/status/canonical/deploy~~ — DONE (all healthy, `cf59d78` live).
-5. **Recovery proposal** — produced below for user review. No website fix made in this investigation.
+5. **Recovery proposal** — produced below for user review.
 
-### Recovery proposal (for user review — not yet implemented)
+### P1 IMPLEMENTED 2026-10-15 afternoon (user approved “proceed”)
+
+- Commit `5c11f12` (`fix(seo): refresh Kyocera sitemap lastmod to Oct 15 content commit`): `/brands/kyocera/` in `ROUTE_LASTMOD` → `2026-10-15T15:39:45+04:00` (from `git log` on `src/app/brands/`). `tsc` + `npm run build` green. Pushed via GitHub Desktop after CLI 403.
+- Live verified: `https://www.saharaprinter.com/sitemap.xml` now shows `<lastmod>2026-10-15T11:39:45.000Z</lastmod>` for Kyocera.
+- **IndexNow submitted** for `https://www.saharaprinter.com/brands/kyocera/` → HTTP 200 (key `886e0bddd875df4696e26c07fbd50a98`).
+- GSC sitemap already listed (`Sep 17` submitted, `Oct 15` last read, Success, 142 pages). Browser re-submit blocked by Material shadow-DOM input; Google will re-read on schedule. Optional manual re-submit later.
+- **14/28-day watch starts now.** Baseline: Kyocera 5/19 clicks, 261/383 impressions. Property 194/161 clicks.
+
+### Recovery proposal (remaining — P2/P3)
 
 **Assessment:** No property-wide penalty, no manual/security action, no CWV crisis. GSC clicks up +20.5%, position improved, UAE up. Loss is concentrated on 4 pages (Kyocera, shredder, AMC, spare-parts) offset by gains on repair/rental-geo pages. Root cause not proven; most likely organic volatility + page-mix shift + stale sitemap lastmod on Kyocera, not a site-wide algorithm hit. GBP healthy. Bing AI citation fall unconfirmed this session.
 
@@ -1584,3 +1592,8 @@ Full writeup: docs/seo/click-recovery-2026-09.md + gsc-snapshots/2026-09-26.md. 
 the BACKLINKS-FREE.md queue (tracker updated separately). Next: user must deploy (nothing pushed,
 standing constraint), then run indexnow --force, do the GSC Request-Indexing list + GBP queue posts
 by hand, re-check ~2026-10-24.
+
+### 2026-10-23 (later): fixes made locally, NOT committed/deployed
+- JSON-LD: removed dateEstablished/dateModified/speakable from Organization node in `src/app/layout.tsx` (also stripped from admin override); added `address` to the rating fragment in `src/components/OrganizationRating.tsx`.
+- Speed: `ProductHero` now server component with CSS entrance; analytics deferred (`deferUntilIdle`); homepage hero image preload. Details and remaining items: `docs/seo/speed-audit-2026-10-23.md`.
+- `npm run build` passes. Pending: user approval to commit + push (push triggers Cloudflare deploy), then IndexNow + GSC UI validation.
