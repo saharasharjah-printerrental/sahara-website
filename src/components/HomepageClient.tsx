@@ -1,4 +1,5 @@
 "use client";
+import { preload } from "react-dom";
 
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
@@ -108,6 +109,9 @@ export default function HomepageClient({
 }
 
 function HeroSection() {
+  // The hero background is a CSS background-image, which the browser only finds
+  // after parsing styles. Preload it at high priority so LCP isn't waiting on it.
+  preload("/images/hero-bg.webp", { as: "image", fetchPriority: "high" });
   return (
     <section
       className="relative min-h-screen flex items-center pt-20 px-8 lg:px-24 overflow-hidden"
@@ -116,7 +120,6 @@ function HeroSection() {
         backgroundSize: "cover",
         backgroundPosition: "center right",
         backgroundRepeat: "no-repeat",
-        contentVisibility: "auto",
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-surface/95 via-surface/75 to-surface/30 z-0" />

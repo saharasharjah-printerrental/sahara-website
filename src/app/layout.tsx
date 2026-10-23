@@ -265,13 +265,11 @@ const organizationSchema = {
     "https://www.youtube.com/@saharaprinter",
     "https://www.reddit.com/user/Weekly_Drawing_8562/",
     "https://www.quora.com/profile/Sahara-Printer-Printer-Rental-Expert-for-Businesses-UAE"
-  ],
-  "dateEstablished": "2012-01-01",
-  "dateModified": "2026-05-07",
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": ["h1", "h2", ".aeo-block"]
-  }
+  ]
+  // Oct 2026: removed dateEstablished, dateModified and speakable. Semrush and
+  // the Schema Markup Validator flag them as unrecognized on Organization /
+  // LocalBusiness (74/74 LocalBusiness and 70/102 Organization nodes invalid).
+  // foundingDate above already carries the establishment year.
 };
 
 const websiteSchema = {
@@ -300,6 +298,15 @@ interface ServerSEOConfig {
   schemaMarkup?: string;
   organizationSchema?: string;
 }
+
+// Third-party tags (GTM, Meta Pixel, Clarity, Hotjar) are loaded after the page's
+// load event (+2.5s) or on first user interaction, whichever comes first. Loading
+// them in <head> competed with first paint: Lighthouse mobile Oct 2026 showed the
+// GTM container alone (207KB) adding ~0.5s of scripting plus gtag/gtm downloads.
+// Trade-off: a visitor who bounces within ~2.5s of load without interacting is not
+// counted by these tools.
+const deferUntilIdle = (code: string) =>
+  `(function(){var d=0;function r(){if(d)return;d=1;${code}}["pointerdown","keydown","scroll","touchstart"].forEach(function(e){addEventListener(e,r,{once:true,passive:true})});addEventListener("load",function(){setTimeout(r,2500)});})();`;
 
 type ParsedScript = { src: string; isAsync: boolean } | { inline: string };
 
@@ -390,7 +397,9 @@ export default async function RootLayout({
   // @cloudflare/next-on-pages rejects — it broke every Pages build from 2026-08-07
   // (commit 5381646) until 2026-08-13.
   function stripRatingFromOrgSchema(schema: Record<string, unknown>): Record<string, unknown> {
-    const { aggregateRating: _r, review: _rev, ...rest } = schema as Record<string, unknown> & { aggregateRating?: unknown; review?: unknown };
+    // Also drops properties Semrush/Schema Markup Validator flag as unrecognized on
+    // Organization/LocalBusiness (Oct 2026), in case an admin-stored override still has them.
+    const { aggregateRating: _r, review: _rev, dateEstablished: _de, dateModified: _dm, speakable: _sp, ...rest } = schema as Record<string, unknown>;
     return rest;
   }
 
@@ -426,7 +435,7 @@ export default async function RootLayout({
 
         {/* Google Tag Manager */}
         {cfg?.googleTagManagerId && (
-          <script>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId.trim()}');`}</script>
+          <script>{deferUntilIdle(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${cfg.googleTagManagerId.trim()}');`)}</script>
         )}
 
         {/* Google Analytics (UA + GA4) — skipped whenever GTM is configured.
@@ -457,17 +466,17 @@ export default async function RootLayout({
 
         {/* Meta Pixel */}
         {cfg?.metaPixelId && (
-          <script>{`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${cfg.metaPixelId}'${cfg.metaPixelAdvancedMatching ? ",{'advanced_matching':true}" : ""});fbq('track','PageView');`}</script>
+          <script>{deferUntilIdle(`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${cfg.metaPixelId}'${cfg.metaPixelAdvancedMatching ? ",{'advanced_matching':true}" : ""});fbq('track','PageView');`)}</script>
         )}
 
         {/* Microsoft Clarity */}
         {cfg?.microsoftClarityId && (
-          <script>{`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${cfg.microsoftClarityId}");`}</script>
+          <script>{deferUntilIdle(`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${cfg.microsoftClarityId}");`)}</script>
         )}
 
         {/* Hotjar */}
         {cfg?.hotjarId && (
-          <script>{`(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${cfg.hotjarId},hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}</script>
+          <script>{deferUntilIdle(`(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${cfg.hotjarId},hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`)}</script>
         )}
 
         {/* Custom schema markup */}

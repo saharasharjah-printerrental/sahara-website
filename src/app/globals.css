@@ -346,3 +346,15 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.5rem;
 }
+
+/* Hero entrance: transform-only, opacity is never 0, so the hero text and image
+   are painted (and counted as LCP) at first paint instead of waiting for
+   framer-motion to hydrate. Reduced motion is handled by the [data-reveal]
+   rule above. */
+@keyframes hero-rise {
+  from { transform: translateY(16px); }
+  to { transform: translateY(0); }
+}
+.hero-rise {
+  animation: hero-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}

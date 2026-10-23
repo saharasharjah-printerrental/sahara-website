@@ -1,4 +1,5 @@
 import { getGoogleReviewsData } from "@/lib/google-reviews";
+import { NAP } from "@/lib/brand";
 
 /**
  * Emits the live Google aggregateRating as a separate JSON-LD node that
@@ -39,6 +40,8 @@ export default async function OrganizationRating() {
     "@id": "https://www.saharaprinter.com/#organization",
     name: "Sahara Office Equipments",
     url: "https://www.saharaprinter.com/",
+    // LocalBusiness requires address; without it Semrush flagged this fragment.
+    address: { "@type": "PostalAddress", ...NAP },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: rating,

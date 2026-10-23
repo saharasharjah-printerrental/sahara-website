@@ -1,10 +1,6 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { fadeUp, fadeIn } from "@/lib/motion";
 import type { Crumb } from "./Breadcrumbs";
 import Breadcrumbs from "./Breadcrumbs";
 
@@ -27,9 +23,10 @@ interface Props {
 
 /**
  * Apple-style product hero: oversized type on the left, product on a soft
- * radial glow on the right, no boxed card around either half. This is a client
- * component only for the entrance animation — all content is passed in from
- * the server page, so there's no data fetching or interactivity to hydrate.
+ * radial glow on the right, no boxed card around either half. Server component:
+ * the entrance is a CSS animation (.hero-rise), not framer-motion, so the h1 and
+ * hero image are visible at first paint rather than after hydration (Oct 2026:
+ * mobile LCP was 9-11s with ~1.7s element render delay on these pages).
  */
 export default function ProductHero({
   trail,
@@ -41,13 +38,7 @@ export default function ProductHero({
   primaryCta,
   secondaryCta,
 }: Props) {
-  // initial/animate are fixed, not derived from useReducedMotion() — that hook
-  // reads the media query synchronously on the client but has nothing to read
-  // on the server, so branching on it here produced a hydration mismatch
-  // (server and client disagreeing on the inline style framer-motion renders
-  // for `initial`). Both wrappers below carry data-reveal instead, so the same
-  // CSS rule that neutralises Reveal.tsx under prefers-reduced-motion applies
-  // here too — see globals.css.
+  // data-reveal lets the prefers-reduced-motion rule in globals.css neutralise the rise.
   return (
     <section className="relative overflow-hidden px-6 pb-20 pt-14 md:pt-20">
       {/* Radial glow — pure CSS, no image weight. */}
@@ -59,13 +50,7 @@ export default function ProductHero({
       <div className="relative mx-auto max-w-content">
         <Breadcrumbs trail={trail} />
         <div className={`grid items-center gap-14 ${image ? "md:grid-cols-2" : ""}`}>
-          <motion.div
-            data-reveal
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            className={image ? undefined : "max-w-3xl"}
-          >
+          <div data-reveal className={`hero-rise ${image ? "" : "max-w-3xl"}`}>
             {eyebrow && (
               <p className="mb-5 inline-flex items-center gap-2 rounded-pill border border-primary/30 bg-primary/10 px-4 py-1.5 text-caption font-semibold uppercase tracking-[0.14em] text-primary">
                 {eyebrow}
@@ -93,26 +78,21 @@ export default function ProductHero({
                 </Link>
               )}
             </div>
-          </motion.div>
+          </div>
 
           {image && (
-            <motion.div
-              data-reveal
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              transition={{ delay: 0.15 }}
-              className="relative mx-auto w-full max-w-sm md:max-w-none"
-            >
+            <div data-reveal className="hero-rise relative mx-auto w-full max-w-sm md:max-w-none">
               <Image
                 src={image.src}
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
                 priority
+                fetchPriority="high"
+                sizes="(min-width: 768px) 560px, 384px"
                 className="mx-auto h-auto w-full drop-shadow-2xl"
               />
-            </motion.div>
+            </div>
           )}
         </div>
       </div>
