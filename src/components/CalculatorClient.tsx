@@ -10,17 +10,17 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Reveal from "@/components/ui/Reveal";
 import AnswerBlock from "@/components/AnswerBlock";
 import { ShieldCheckIcon, HeadsetIcon, AwardIcon } from "@/components/icons";
+import {
+  computeQuote,
+  freeValue,
+  tierFor,
+  DEFAULT_CALCULATOR_PRICING,
+  type CalculatorPricing,
+  type PaperFormat,
+} from "@/lib/calculator-pricing";
 
-// ── Pricing constants ──────────────────────────────────────────────────────────
-const BASE_RENT = 350;
-const BW_PRICE = 0.06;   // AED per page
-const COLOR_PRICE = 0.20; // AED per page
-const FREE_BW_DEFAULT = 3000;
-const FREE_COLOR_DEFAULT = 1000;
-// Total included free print value in AED: 3000×0.06 + 1000×0.20 = 180 + 200 = 380
-const TOTAL_FREE_VALUE = FREE_BW_DEFAULT * BW_PRICE + FREE_COLOR_DEFAULT * COLOR_PRICE;
-// freePoolSplit: BW's share of TOTAL_FREE_VALUE in AED (slider 0‒TOTAL_FREE_VALUE)
-const FREE_POOL_SPLIT_DEFAULT = FREE_BW_DEFAULT * BW_PRICE; // 180
+// Tariff values (base rent, included pages, per-page rates, surcharges, discounts) come from
+// the `pricing` prop, which the server pages read from Admin → Settings → Rental Calculator Pricing.
 
 // ── TabGroup ───────────────────────────────────────────────────────────────────
 function TabGroup({
@@ -142,17 +142,23 @@ function PremiumSlider({
 }
 
 // ── Pool Rebalancer ────────────────────────────────────────────────────────────
-// A single slider that redistributes the AED 380 free print value between BW and Color
+// A single slider that redistributes the tier's free print value between BW and Color
 function PoolRebalancer({
   split,
   onChange,
+  bwPrice,
+  colourPrice,
+  totalValue,
 }: {
-  split: number; // BW's share in AED (0 – TOTAL_FREE_VALUE)
+  split: number; // BW's share in AED (0 – totalValue)
   onChange: (v: number) => void;
+  bwPrice: number;
+  colourPrice: number;
+  totalValue: number;
 }) {
-  const freeBw = Math.round(split / BW_PRICE);
-  const freeColor = Math.round((TOTAL_FREE_VALUE - split) / COLOR_PRICE);
-  const pct = (split / TOTAL_FREE_VALUE) * 100;
+  const freeBw = Math.round(split / bwPrice);
+  const freeColor = Math.round((totalValue - split) / colourPrice);
+  const pct = (split / totalValue) * 100;
 
   return (
     <div className="bg-ink/60 border border-primary/[0.08] rounded-xl p-4">
@@ -160,7 +166,7 @@ function PoolRebalancer({
         <span className="text-[11px] font-bold tracking-[0.15em] text-primary uppercase">
           Redistribute Free Print Pool
         </span>
-        <span className="text-[10px] text-muted">AED {TOTAL_FREE_VALUE} included value</span>
+        <span className="text-[10px] text-muted">AED {totalValue} included value</span>
       </div>
 
       {/* Balance indicators */}
@@ -195,7 +201,7 @@ function PoolRebalancer({
         <input
           type="range"
           min={0}
-          max={Math.round(TOTAL_FREE_VALUE * 100)}
+          max={Math.round(totalValue * 100)}
           step={1}
           value={Math.round(split * 100)}
           onChange={(e) => onChange(Number(e.target.value) / 100)}
@@ -208,8 +214,8 @@ function PoolRebalancer({
       </div>
 
       <div className="flex justify-between text-[10px] text-muted">
-        <span>← More B&W (6 fils/pg)</span>
-        <span>More Colour (20 fils/pg) →</span>
+        <span>← More B&W ({Math.round(bwPrice * 100)} fils/pg)</span>
+        <span>More Colour ({Math.round(colourPrice * 100)} fils/pg) →</span>
       </div>
     </div>
   );
@@ -219,15 +225,19 @@ function PoolRebalancer({
 function DurationSlider({
   value,
   onChange,
+  discount24,
+  discount36,
 }: {
   value: number;
   onChange: (v: number) => void;
+  discount24: number;
+  discount36: number;
 }) {
   const stops = [12, 24, 36];
   const idx = stops.indexOf(value);
   const pct = (idx / (stops.length - 1)) * 100;
 
-  const discountLabel = value === 24 ? "5% loyalty discount" : value === 36 ? "10% loyalty discount" : "";
+  const discountLabel = value === 24 && discount24 > 0 ? `${discount24}% loyalty discount` : value === 36 && discount36 > 0 ? `${discount36}% loyalty discount` : "";
 
   return (
     <div>
@@ -290,17 +300,23 @@ function DurationSlider({
 const trail = [{ label: "Home", href: "/" }, { label: "Rental Calculator" }];
 
 // ── Main component ─────────────────────────────────────────────────────────────
-export default function CalculatorClient({ embedded = false }: { embedded?: boolean }) {
+export default function CalculatorClient({
+  embedded = false,
+  pricing = DEFAULT_CALCULATOR_PRICING,
+}: {
+  embedded?: boolean;
+  pricing?: CalculatorPricing;
+}) {
   const [printType, setPrintType] = useState<"bw" | "color" | "both">("both");
-  const [paperFormat, setPaperFormat] = useState<"a4" | "a3" | "both">("a4");
+  const [paperFormat, setPaperFormat] = useState<PaperFormat>("a4");
 
-  // Free print pool: split is BW's AED share of TOTAL_FREE_VALUE (0–380).
-  // Default: 180 AED → 3000 BW free; remaining 200 AED → 1000 Color free.
-  const [freePoolSplit, setFreePoolSplit] = useState(FREE_POOL_SPLIT_DEFAULT);
+  // Free print pool: split is BW's AED share of the tier's included value. Defaults to the
+  // tier's own allowance (A4: 2,000 B&W + 750 colour; A3 / A4+A3: 3,000 B&W + 1,000 colour).
+  const [freePoolSplit, setFreePoolSplit] = useState(pricing.a4.freeBw * pricing.bwPrice);
 
   // Monthly volume sliders — INDEPENDENT from free allowances (the key fix)
-  const [bwVolume, setBwVolume] = useState(FREE_BW_DEFAULT);
-  const [colorVolume, setColorVolume] = useState(FREE_COLOR_DEFAULT);
+  const [bwVolume, setBwVolume] = useState(pricing.a4.freeBw);
+  const [colorVolume, setColorVolume] = useState(pricing.a4.freeColour);
 
   const [duration, setDuration] = useState(12);
   const [unlocked, setUnlocked] = useState(false);
@@ -313,47 +329,59 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
     phone: "",
   });
 
-  // ── Derived free allowances (value-balanced) ──────────────────────────────
-  const freeBwAllowance: number = (() => {
-    if (printType === "color") return 0;
-    if (printType === "bw") return Math.round(TOTAL_FREE_VALUE / BW_PRICE);  // 6333
-    return Math.round(freePoolSplit / BW_PRICE);
-  })();
+  const tier = tierFor(pricing, paperFormat);
+  const totalFreeValue = freeValue(pricing, tier);
 
-  const freeColorAllowance: number = (() => {
-    if (printType === "bw") return 0;
-    if (printType === "color") return Math.round(TOTAL_FREE_VALUE / COLOR_PRICE); // 1900
-    return Math.round((TOTAL_FREE_VALUE - freePoolSplit) / COLOR_PRICE);
-  })();
+  // ── Pricing: one shared implementation (src/lib/calculator-pricing.ts) ─────
+  const quote = computeQuote(pricing, {
+    printType,
+    paperFormat,
+    freePoolSplit,
+    bwVolume,
+    colourVolume: colorVolume,
+    duration,
+  });
+  const freeBwAllowance = quote.freeBw;
+  const freeColorAllowance = quote.freeColour;
+  const extraBw = quote.extraBw;
+  const extraColor = quote.extraColour;
+  const extraBwCost = quote.extraBwCost;
+  const extraColorCost = quote.extraColourCost;
+  const a3Surcharge = quote.surcharge;
+  const baseRent = quote.baseRent;
+  const durationDiscount = 1 - quote.discountPercent / 100;
+  const monthlyPrice = quote.monthlyPrice;
+  const totalCost = quote.totalCost;
+  const savingAmount = quote.saving;
 
-  // ── Print type change resets volumes and pool to sensible defaults ─────────
-  const handlePrintTypeChange = (v: string) => {
-    const t = v as "bw" | "color" | "both";
-    setPrintType(t);
-    if (t === "bw") {
-      setBwVolume(Math.round(TOTAL_FREE_VALUE / BW_PRICE));
+  // Reset the free pool and volumes to the defaults of a tier / print type.
+  const applyDefaults = (type: "bw" | "color" | "both", format: PaperFormat) => {
+    const t = tierFor(pricing, format);
+    const total = freeValue(pricing, t);
+    if (type === "bw") {
+      setBwVolume(Math.round(total / pricing.bwPrice));
       setColorVolume(0);
-    } else if (t === "color") {
+    } else if (type === "color") {
       setBwVolume(0);
-      setColorVolume(Math.round(TOTAL_FREE_VALUE / COLOR_PRICE));
+      setColorVolume(Math.round(total / pricing.colourPrice));
     } else {
-      setFreePoolSplit(FREE_POOL_SPLIT_DEFAULT);
-      setBwVolume(FREE_BW_DEFAULT);
-      setColorVolume(FREE_COLOR_DEFAULT);
+      setFreePoolSplit(t.freeBw * pricing.bwPrice);
+      setBwVolume(t.freeBw);
+      setColorVolume(t.freeColour);
     }
   };
 
-  // ── Pricing calculation (volumes and allowances are now separate) ──────────
-  const extraBw = Math.max(0, bwVolume - freeBwAllowance);
-  const extraColor = Math.max(0, colorVolume - freeColorAllowance);
-  const extraBwCost = extraBw * BW_PRICE;
-  const extraColorCost = extraColor * COLOR_PRICE;
-  const a3Surcharge = paperFormat === "a3" ? 80 : paperFormat === "both" ? 50 : 0;
-  const durationDiscount = duration === 36 ? 0.90 : duration === 24 ? 0.95 : 1.0;
-  const subtotal = BASE_RENT + extraBwCost + extraColorCost + a3Surcharge;
-  const monthlyPrice = Math.max(BASE_RENT, Math.round(subtotal * durationDiscount));
-  const totalCost = monthlyPrice * duration;
-  const savingAmount = Math.round(subtotal * (1 - durationDiscount));
+  const handlePrintTypeChange = (v: string) => {
+    const type = v as "bw" | "color" | "both";
+    setPrintType(type);
+    applyDefaults(type, paperFormat);
+  };
+
+  const handlePaperFormatChange = (v: string) => {
+    const format = v as PaperFormat;
+    setPaperFormat(format);
+    applyDefaults(printType, format);
+  };
 
   // ── Form submission ────────────────────────────────────────────────────────
   const handleUnlock = async (e: React.FormEvent) => {
@@ -390,11 +418,11 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
           message: "",
           estimatedRange: `AED ${monthlyPrice.toLocaleString()}`,
           notificationEmail: "",
-          baseRent: `AED ${BASE_RENT.toLocaleString()}`,
+          baseRent: `AED ${baseRent.toLocaleString()}`,
           extraBwCost: extraBwCost > 0 ? `AED ${extraBwCost.toLocaleString()}` : undefined,
           extraColorCost: extraColorCost > 0 ? `AED ${extraColorCost.toLocaleString()}` : undefined,
           a3Surcharge: a3Surcharge > 0 ? `AED ${a3Surcharge}` : undefined,
-          durationDiscount: duration === 36 ? '10%' : duration === 24 ? '5%' : undefined,
+          durationDiscount: quote.discountPercent > 0 ? `${quote.discountPercent}%` : undefined,
           totalContractValue: `AED ${totalCost.toLocaleString()}`,
           printType: printType.toUpperCase(),
           paperFormat: paperFormat.toUpperCase(),
@@ -416,7 +444,7 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
   // ── Circular arc (pricing panel) ───────────────────────────────────────────
   const arcRadius = 44;
   const arcCircumference = 2 * Math.PI * arcRadius;
-  const arcFill = Math.min(0.85, 0.15 + ((monthlyPrice - BASE_RENT) / 1500) * 0.7);
+  const arcFill = Math.min(0.85, 0.15 + ((monthlyPrice - baseRent) / 1500) * 0.7);
   const arcDash = arcFill * arcCircumference;
 
   const content = (
@@ -446,9 +474,10 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                 question="How much does printer rental cost in UAE?"
                 answer="Printer and photocopier rental in UAE starts from AED 250/month for an A4 desktop device, rising to AED 2,000/month for high-volume A3 colour machines. Every plan includes zero deposit, free toner, delivery, installation, and maintenance."
                 supportingPoints={[
-                  "A4 desktop printers from AED 250/month",
-                  "A3 multifunction copiers from AED 500-900/month",
-                  "Enterprise A3 colour devices from AED 1,000-2,000/month",
+                  `A4 desktop printers from AED ${pricing.a4.baseRent}/month (${pricing.a4.freeBw.toLocaleString()} B&W + ${pricing.a4.freeColour.toLocaleString()} colour pages included)`,
+                  `Standard package AED ${pricing.standard.baseRent}/month includes ${pricing.standard.freeBw.toLocaleString()} B&W and ${pricing.standard.freeColour.toLocaleString()} colour pages; extra pages AED ${pricing.bwPrice.toFixed(2)} (B&W) and AED ${pricing.colourPrice.toFixed(2)} (colour)`,
+                  "A3 multifunction copiers from AED 350-900/month",
+                  `Enterprise A3 colour devices from AED 1,000-2,000/month (from ${pricing.enterpriseBw.toLocaleString()} B&W + ${pricing.enterpriseColour.toLocaleString()} colour pages; quoted by phone or visit)`,
                   "Zero deposit, free toner, and maintenance included on every plan",
                 ]}
               />
@@ -488,7 +517,7 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                       <span className="text-primary font-semibold">{freeColorAllowance.toLocaleString()} colour</span>
                     </>
                   )}{" "}
-                  free prints · AED {TOTAL_FREE_VALUE} value included
+                  free prints · AED {totalFreeValue} value included
                 </p>
               </div>
 
@@ -504,13 +533,13 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                     { value: "both", label: "A4 + A3" },
                   ]}
                   value={paperFormat}
-                  onChange={(v) => setPaperFormat(v as "a4" | "a3" | "both")}
+                  onChange={handlePaperFormatChange}
                 />
                 {paperFormat !== "a4" && (
                   <p className="text-[11px] text-amber-300/70 mt-3">
                     {paperFormat === "a3"
-                      ? "+AED 80/mo surcharge for A3 format"
-                      : "+AED 50/mo surcharge for A4 + A3 combined"}
+                      ? `+AED ${pricing.a3Surcharge}/mo surcharge for A3 format`
+                      : `+AED ${pricing.bothSurcharge}/mo surcharge for A4 + A3 combined`}
                   </p>
                 )}
               </div>
@@ -526,6 +555,9 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                   <PoolRebalancer
                     split={freePoolSplit}
                     onChange={setFreePoolSplit}
+                    bwPrice={pricing.bwPrice}
+                    colourPrice={pricing.colourPrice}
+                    totalValue={totalFreeValue}
                   />
                 )}
 
@@ -533,10 +565,10 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                   label="Black & White Prints"
                   value={bwVolume}
                   min={0}
-                  max={30000}
+                  max={pricing.enterpriseBw}
                   step={500}
                   freeAllowance={freeBwAllowance}
-                  pricePerPage={BW_PRICE}
+                  pricePerPage={pricing.bwPrice}
                   unit="pages/mo"
                   onChange={setBwVolume}
                   disabled={printType === "color"}
@@ -546,10 +578,10 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                   label="Colour Prints"
                   value={colorVolume}
                   min={0}
-                  max={10000}
+                  max={pricing.enterpriseColour}
                   step={100}
                   freeAllowance={freeColorAllowance}
-                  pricePerPage={COLOR_PRICE}
+                  pricePerPage={pricing.colourPrice}
                   unit="pages/mo"
                   onChange={setColorVolume}
                   disabled={printType === "bw"}
@@ -558,13 +590,16 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                 <div className="flex gap-5 pt-3 border-t border-white/5">
                   <div className="flex items-center gap-2 text-[11px] text-muted">
                     <span className="w-2 h-2 rounded-full bg-[#4a90d9]/60 inline-block" />
-                    B&W: 6 fils/page
+                    B&W: {Math.round(pricing.bwPrice * 100)} fils/page
                   </div>
                   <div className="flex items-center gap-2 text-[11px] text-muted">
                     <span className="w-2 h-2 rounded-full bg-primary inline-block" />
-                    Colour: 20 fils/page
+                    Colour: {Math.round(pricing.colourPrice * 100)} fils/page
                   </div>
                 </div>
+                <p className="text-[11px] text-amber-300/70">
+                  Need {pricing.enterpriseBw.toLocaleString()}+ B&W or {pricing.enterpriseColour.toLocaleString()}+ colour pages a month? Enterprise plans are quoted by phone or visit, not here.
+                </p>
               </div>
 
               {/* 04 — Lease Duration */}
@@ -572,7 +607,12 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                 <p className="text-[11px] font-bold tracking-[0.2em] text-primary uppercase mb-5">
                   04 — Lease Duration
                 </p>
-                <DurationSlider value={duration} onChange={setDuration} />
+                <DurationSlider
+                  value={duration}
+                  onChange={setDuration}
+                  discount24={pricing.discount24}
+                  discount36={pricing.discount36}
+                />
               </div>
 
               {/* Inclusions */}
@@ -611,11 +651,22 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                     Your Quote Summary
                   </p>
                   <p className="text-white font-bold text-lg mt-1">
-                    {unlocked ? "Your Monthly Rental" : "Custom Proposal Ready"}
+                    {quote.enterprise ? "Enterprise Volume" : unlocked ? "Your Monthly Rental" : "Custom Proposal Ready"}
                   </p>
                 </div>
 
-                <div className="relative">
+                {quote.enterprise && (
+                  <div className="px-6 py-8 text-center space-y-4">
+                    <p className="text-white font-bold text-lg">Enterprise volumes are quoted directly</p>
+                    <p className="text-sm text-muted">
+                      From {pricing.enterpriseBw.toLocaleString()} B&W or {pricing.enterpriseColour.toLocaleString()} colour pages a month, we agree pricing by phone or in person instead of through this calculator.
+                    </p>
+                    <a href="tel:+971503823969" className="btn-primary w-full inline-flex justify-center">Call +971 50 382 3969</a>
+                    <p className="text-xs text-muted">Or visit us: Al Arabi Building, Industrial Area 11, Sharjah · Sat–Thu 8:00 AM – 8:00 PM</p>
+                  </div>
+                )}
+
+                <div className={quote.enterprise ? "hidden" : "relative"}>
 
                   {/* REVEALED — shown after form submission */}
                   <div
@@ -657,7 +708,7 @@ export default function CalculatorClient({ embedded = false }: { embedded?: bool
                     <div className="px-6 pb-2 space-y-2.5 mt-2">
                       <div className="flex justify-between text-sm">
                         <span className="text-muted">Base Rental</span>
-                        <span className="text-white font-semibold">AED {BASE_RENT}</span>
+                        <span className="text-white font-semibold">AED {baseRent}</span>
                       </div>
                       {extraBwCost > 0 && (
                         <div className="flex justify-between text-sm">

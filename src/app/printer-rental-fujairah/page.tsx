@@ -91,7 +91,7 @@ const localBusinessSchema = {
     name: "Fujairah Printer Rental Plans",
     itemListElement: [
       { "@type": "Offer", name: "A4 Printer Rental Fujairah", price: "250", priceCurrency: "AED" },
-      { "@type": "Offer", name: "A3 Copier Rental Fujairah", price: "500", priceCurrency: "AED" },
+      { "@type": "Offer", name: "A3 Copier Rental Fujairah", price: "350", priceCurrency: "AED" },
       { "@type": "Offer", name: "Enterprise Copier Fujairah", price: "1000", priceCurrency: "AED" },
     ],
   },
@@ -101,7 +101,7 @@ const localBusinessSchema = {
 const DEFAULT_FAQS: FAQItem[] = [
   {
     q: "How much does printer rental cost in Fujairah?",
-    a: "Printer rental in Fujairah starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 500—900/month. Enterprise high-volume devices start at AED 1,000/month. All Fujairah plans include zero deposit, free toner, free delivery, and on-site support.",
+    a: "Printer rental in Fujairah starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers range from AED 350—900/month. Enterprise high-volume devices start at AED 1,000/month. All Fujairah plans include zero deposit, free toner, free delivery, and on-site support.",
   },
   {
     q: "What is your response time for Fujairah clients?",
@@ -168,17 +168,17 @@ const pricingTiers = [
   },
   {
     name: "A3 Mid-Range",
-    price: "AED 500—900",
+    price: "AED 350—900",
     tag: "Most Popular",
     ideal: "Shared offices & FFTZ companies",
     features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35—55 ppm A3 & A4 mono", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder", "Free network setup", "Same-day replacement guarantee"],
   },
   {
-    name: "A3 Enterprise",
+    name: "A3 Enterprise", direct: true,
     price: "AED 1,000—2,000",
     tag: null,
     ideal: "Port logistics, large organisations",
-    features: ["Canon imageRUNNER C5560i", "60—100 ppm A3 colour", "Staple, booklet finishers", "Secure print, user auth", "50,000+ pages/month capacity", "Dedicated account manager"],
+    features: ["From 10,000 B&W + 5,000 colour pages a month", "Canon imageRUNNER C5560i", "60—100 ppm A3 colour", "Staple, booklet finishers", "Secure print, user auth", "50,000+ pages/month capacity", "Dedicated account manager"],
   },
 ];
 
@@ -363,12 +363,24 @@ export default async function PrinterRentalFujairah() {
                     </li>
                   ))}
                 </ul>
-                <a
+                {tier.direct ? (
+<>
+<a
+                  href="tel:+971503823969"
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
+                >
+                  Call for an Enterprise Quote
+                </a>
+<p className="mt-3 text-center text-xs text-muted">Quoted directly by phone or at our Sharjah office, not in the online calculator.</p>
+</>
+) : (
+<a
                   href="/quote/printer-rental/"
                   className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   Get Quote
                 </a>
+)}
               </div>
             ))}
           </div>

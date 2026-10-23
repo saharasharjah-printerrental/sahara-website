@@ -5,6 +5,7 @@ export const runtime = 'edge';
 import { useState, useEffect, useCallback } from "react";
 import { useToast } from "@/components/admin/Toast";
 import { CheckCircle, Error as ErrorIcon, HelpOutlined, Refresh } from "@mui/icons-material";
+import { DEFAULT_CALCULATOR_PRICING, normalizeCalculatorPricing, type CalculatorPricing } from "@/lib/calculator-pricing";
 
 interface SmtpSettings {
   smtpHost: string;
@@ -14,6 +15,8 @@ interface SmtpSettings {
   smtpFromName: string;
   smtpFromEmail: string;
   smtpToEmail: string;
+  /** Master switch for Gmail SMTP sending (D1 smtp_enabled). */
+  smtpEnabled: boolean;
 }
 
 interface CloudinarySettings {
@@ -57,20 +60,7 @@ interface Settings {
   paymentGatewayUrl: string;
   paymentGatewayLabel: string;
   paymentProvider: string;
-  calculatorPrices: {
-    a4BasePrice: number;
-    a3BasePrice: number;
-    plotterBasePrice: number;
-    colorMultiplier: number;
-    volumeThreshold1: number;
-    volumeThreshold2: number;
-    volumeMultiplier1: number;
-    volumeMultiplier2: number;
-    volumeMultiplier3: number;
-    discount36Months: number;
-    discount24Months: number;
-    discount12Months: number;
-  };
+  calculatorPrices: CalculatorPricing;
 }
 
 const defaultSmtp: SmtpSettings = {
@@ -81,6 +71,7 @@ const defaultSmtp: SmtpSettings = {
   smtpFromName: "Sahara Printers",
   smtpFromEmail: "",
   smtpToEmail: "",
+  smtpEnabled: true,
 };
 
 const defaultResend: ResendSettings = {
@@ -88,6 +79,24 @@ const defaultResend: ResendSettings = {
   apiKey: "",
   fromEmail: "",
 };
+
+function ToggleSwitch({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      className="flex items-center gap-3 cursor-pointer"
+    >
+      <span className={`relative inline-flex h-6 w-11 shrink-0 rounded-full border transition-colors ${checked ? "bg-[#f5be53] border-[#f5be53]" : "bg-[#101c2e] border-white/20"}`}>
+        <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${checked ? "left-[22px]" : "left-0.5"}`} />
+      </span>
+      <span className="text-sm font-medium text-white">{label}: <span className={checked ? "text-[#f5be53]" : "text-slate-400"}>{checked ? "ON" : "OFF"}</span></span>
+    </button>
+  );
+}
 
 const defaultSettings: Settings = {
   companyName: "Sahara Office Equipments",
@@ -118,20 +127,7 @@ const defaultSettings: Settings = {
   paymentGatewayUrl: "",
   paymentGatewayLabel: "Buy Now",
   paymentProvider: "none",
-  calculatorPrices: {
-    a4BasePrice: 600,
-    a3BasePrice: 1200,
-    plotterBasePrice: 2500,
-    colorMultiplier: 1.4,
-    volumeThreshold1: 5000,
-    volumeThreshold2: 10000,
-    volumeMultiplier1: 1,
-    volumeMultiplier2: 1.1,
-    volumeMultiplier3: 1.25,
-    discount36Months: 0.8,
-    discount24Months: 0.85,
-    discount12Months: 0.9,
-  },
+  calculatorPrices: DEFAULT_CALCULATOR_PRICING,
 };
 
 interface StorageProviderStatus {
@@ -165,6 +161,7 @@ export default function AdminSettings() {
   const [cloudinarySettings, setCloudinarySettings] = useState<CloudinarySettings>(defaultCloudinary);
   const [cloudinaryTesting, setCloudinaryTesting] = useState(false);
   const [smtpTesting, setSmtpTesting] = useState(false);
+  const [smtpStatus, setSmtpStatus] = useState<{ lastError: string; lastErrorAt: number; lastOkAt: number }>({ lastError: '', lastErrorAt: 0, lastOkAt: 0 });
   const [paymentCreds, setPaymentCreds] = useState<PaymentCreds>(defaultPaymentCreds);
   const [resendSettings, setResendSettings] = useState<ResendSettings>(defaultResend);
   const [resendTesting, setResendTesting] = useState(false);
@@ -182,10 +179,8 @@ export default function AdminSettings() {
         ...defaultSmtp,
         ...(stored.smtp || {}),
       },
-      calculatorPrices: {
-        ...defaultSettings.calculatorPrices,
-        ...(stored.calculatorPrices || {}),
-      },
+      // Legacy (pre-v2) shapes normalise to the defaults; v2 values are validated.
+      calculatorPrices: normalizeCalculatorPricing(stored.calculatorPrices),
     };
   };
 
@@ -273,9 +268,15 @@ export default function AdminSettings() {
             smtpFromName: map.smtp_from_name || defaultSmtp.smtpFromName,
             smtpFromEmail: map.smtp_from_email || '',
             smtpToEmail: map.smtp_to_email || '',
+            smtpEnabled: map.smtp_enabled !== 'false',
           },
         }));
       }
+      setSmtpStatus({
+        lastError: map.smtp_last_error || '',
+        lastErrorAt: Number(map.smtp_last_error_at) || 0,
+        lastOkAt: Number(map.smtp_last_ok_at) || 0,
+      });
 
       // resend_enabled / resend_from_email are not secrets and can be
       // populated whenever either is present, independent of whether a key
@@ -321,6 +322,7 @@ export default function AdminSettings() {
         { key: "smtp_from_name", value: settings.smtp.smtpFromName },
         { key: "smtp_from_email", value: settings.smtp.smtpFromEmail },
         { key: "smtp_to_email", value: settings.smtp.smtpToEmail },
+        { key: "smtp_enabled", value: String(settings.smtp.smtpEnabled) },
         { key: "notification_email", value: settings.smtp.smtpToEmail },
       ] : []),
       // resend_enabled / resend_from_email aren't secrets, so they save
@@ -334,7 +336,7 @@ export default function AdminSettings() {
       ...(resendSettings.apiKey.trim() ? [
         { key: "resend_api_key", value: resendSettings.apiKey.trim() },
       ] : []),
-      { key: "calculator_prices", value: JSON.stringify(settings.calculatorPrices) },
+      { key: "calculator_prices", value: JSON.stringify(normalizeCalculatorPricing(settings.calculatorPrices)) },
       // Only save cloudinary creds if they have actual values — prevents wiping stored
       // credentials if the D1 fetch silently failed on page load
       ...(cloudinarySettings.cloudName ? [
@@ -445,6 +447,37 @@ export default function AdminSettings() {
             <div className="border-t border-white/10 pt-6">
               <h2 className="text-lg font-bold text-white mb-1">Gmail SMTP — Email Notifications</h2>
               <p className="text-sm text-slate-400 mb-4">When a visitor submits the quote form, two emails are sent: one to your sales inbox and one confirmation to the customer.</p>
+
+              <div className="mb-5 space-y-3">
+                <ToggleSwitch
+                  checked={settings.smtp.smtpEnabled}
+                  onChange={(v) => setSettings({ ...settings, smtp: { ...settings.smtp, smtpEnabled: v } })}
+                  label="Send via Gmail SMTP"
+                />
+                <p className="text-xs text-slate-400">
+                  Sending now:{" "}
+                  <strong className="text-white">
+                    {settings.smtp.smtpEnabled && resendSettings.enabled
+                      ? "Gmail first, Resend as backup if Gmail fails"
+                      : settings.smtp.smtpEnabled
+                        ? "Gmail only"
+                        : resendSettings.enabled
+                          ? "Resend only"
+                          : "Nothing — both Gmail and Resend are OFF, no emails will be sent"}
+                  </strong>
+                  . Save settings to apply.
+                </p>
+                {smtpStatus.lastError && (
+                  <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-xs text-red-200">
+                    Last Gmail failure{smtpStatus.lastErrorAt ? ` (${new Date(smtpStatus.lastErrorAt).toLocaleString()})` : ""}: {smtpStatus.lastError}
+                    <br />
+                    <span className="text-red-300/70">No alert emails are sent for this. Fix the Gmail app password, or switch Gmail OFF and use Resend.</span>
+                  </div>
+                )}
+                {!smtpStatus.lastError && smtpStatus.lastOkAt > 0 && (
+                  <p className="text-xs text-green-400/80">Last successful Gmail send: {new Date(smtpStatus.lastOkAt).toLocaleString()}</p>
+                )}
+              </div>
 
               <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-5">
                 <div className="flex items-start gap-3">
@@ -590,23 +623,18 @@ export default function AdminSettings() {
             </div>
 
             <div className="border-t border-white/10 pt-6">
-              <h2 className="text-lg font-bold text-white mb-1">Resend — Email Fallback</h2>
+              <h2 className="text-lg font-bold text-white mb-1">Resend — Email (API)</h2>
               <p className="text-sm text-slate-400 mb-4">
-                If Gmail SMTP fails to send (throttled, app password rotated, etc.), quotes and order emails
-                automatically retry through Resend instead of being lost — and you get an alert email the first
-                time that happens.
+                Sends quote and order emails through the Resend API. Turn Gmail OFF to use Resend only. If both are ON,
+                Resend is used as a backup when Gmail fails. No alert emails are sent when Gmail fails.
               </p>
 
               <div className="space-y-4">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={resendSettings.enabled}
-                    onChange={(e) => setResendSettings({ ...resendSettings, enabled: e.target.checked })}
-                    className="w-4 h-4 accent-[#f5be53]"
-                  />
-                  <span className="text-sm text-slate-300">Enable Resend fallback</span>
-                </label>
+                <ToggleSwitch
+                  checked={resendSettings.enabled}
+                  onChange={(v) => setResendSettings({ ...resendSettings, enabled: v })}
+                  label="Send via Resend"
+                />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -892,72 +920,151 @@ export default function AdminSettings() {
 
             <div className="border-t border-white/10 pt-6">
               <h2 className="text-lg font-bold text-white mb-1">Rental Calculator Pricing</h2>
-              <p className="text-sm text-slate-400 mb-4">New model: AED 350 base includes free print pool. Overage charged per page.</p>
+              <p className="text-sm text-slate-400 mb-4">
+                Controls the public calculator and the printer-rental quote page. Pages above the included allowance are billed at the per-page rates below.
+                The calculator picks the A4 tier when the customer chooses A4 only, and the Standard tier for A3 or A4 + A3.
+              </p>
               <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="rounded-xl border border-white/10 bg-[#0c1829] p-4">
+                  <h3 className="text-sm font-bold text-white">A4 tier — compact A4 printers</h3>
+                  <p className="text-xs text-slate-500 mb-3">Default: AED 250/mo with 2,000 B&W + 750 colour pages included</p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-2">Base Rent (AED/mo)</label>
-                    <input type="number" value={settings.calculatorPrices.a4BasePrice}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a4BasePrice: Number(e.target.value) } })}
+                    <input type="number" min="0" step="10" value={settings.calculatorPrices.a4.baseRent}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a4: { ...settings.calculatorPrices.a4, baseRent: Number(e.target.value) } } })}
                       className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Minimum monthly rental (default 350)</p>
+                    <p className="text-xs text-slate-500 mt-1">Also the minimum monthly price</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">B&W Price (AED/page)</label>
-                    <input type="number" step="0.01" value={settings.calculatorPrices.colorMultiplier}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, colorMultiplier: Number(e.target.value) } })}
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Free B&W Pages / mo</label>
+                    <input type="number" min="0" step="100" value={settings.calculatorPrices.a4.freeBw}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a4: { ...settings.calculatorPrices.a4, freeBw: Number(e.target.value) } } })}
                       className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Per-page overage rate (default 0.06)</p>
+                    <p className="text-xs text-slate-500 mt-1">Included in the base rent</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Free Colour Pages / mo</label>
+                    <input type="number" min="0" step="50" value={settings.calculatorPrices.a4.freeColour}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a4: { ...settings.calculatorPrices.a4, freeColour: Number(e.target.value) } } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Included in the base rent</p>
+                  </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-[#0c1829] p-4">
+                  <h3 className="text-sm font-bold text-white">Standard tier — A3 and A4 + A3</h3>
+                  <p className="text-xs text-slate-500 mb-3">Default: AED 350/mo with 3,000 B&W + 1,000 colour pages included</p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Base Rent (AED/mo)</label>
+                    <input type="number" min="0" step="10" value={settings.calculatorPrices.standard.baseRent}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, standard: { ...settings.calculatorPrices.standard, baseRent: Number(e.target.value) } } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Also the minimum monthly price</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Free B&W Pages / mo</label>
+                    <input type="number" min="0" step="100" value={settings.calculatorPrices.standard.freeBw}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, standard: { ...settings.calculatorPrices.standard, freeBw: Number(e.target.value) } } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Included in the base rent</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Free Colour Pages / mo</label>
+                    <input type="number" min="0" step="50" value={settings.calculatorPrices.standard.freeColour}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, standard: { ...settings.calculatorPrices.standard, freeColour: Number(e.target.value) } } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Included in the base rent</p>
+                  </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">A3-Only Surcharge (AED/mo)</label>
+                    <input type="number" min="0" step="5" value={settings.calculatorPrices.a3Surcharge}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a3Surcharge: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Added when the customer picks A3 only (default 80)</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">A4 + A3 Surcharge (AED/mo)</label>
+                    <input type="number" min="0" step="5" value={settings.calculatorPrices.bothSurcharge}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, bothSurcharge: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Added when the customer picks A4 + A3 (default 50)</p>
+                  </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-[#0c1829] p-4">
+                  <h3 className="text-sm font-bold text-white">Extra pages and contract discounts</h3>
+                  <p className="text-xs text-slate-500 mb-3">Apply to both tiers</p>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">B&W Price (AED/page)</label>
+                    <input type="number" min="0" step="0.01" value={settings.calculatorPrices.bwPrice}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, bwPrice: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Per extra page (default 0.06)</p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-2">Colour Price (AED/page)</label>
-                    <input type="number" step="0.01" value={settings.calculatorPrices.volumeMultiplier1}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeMultiplier1: Number(e.target.value) } })}
+                    <input type="number" min="0" step="0.01" value={settings.calculatorPrices.colourPrice}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, colourPrice: Number(e.target.value) } })}
                       className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Per-page overage rate (default 0.20)</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Free B&W Prints Included</label>
-                    <input type="number" step="100" value={settings.calculatorPrices.volumeThreshold1}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeThreshold1: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Default 3,000 pages free</p>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Free Colour Prints Included</label>
-                    <input type="number" step="100" value={settings.calculatorPrices.volumeThreshold2}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeThreshold2: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Default 1,000 pages free</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">A3-Only Surcharge (AED)</label>
-                    <input type="number" value={settings.calculatorPrices.volumeMultiplier2}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, volumeMultiplier2: Number(e.target.value) } })}
-                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Default 80</p>
+                    <p className="text-xs text-slate-500 mt-1">Per extra page (default 0.20)</p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-2">24-Month Discount (%)</label>
-                    <input type="number" step="1"
-                      value={Math.round((1 - settings.calculatorPrices.discount24Months) * 100)}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, discount24Months: 1 - Number(e.target.value) / 100 } })}
+                    <input type="number" min="0" step="1" value={settings.calculatorPrices.discount24}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, discount24: Number(e.target.value) } })}
                       className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Default 5%</p>
+                    <p className="text-xs text-slate-500 mt-1">Default 5</p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-2">36-Month Discount (%)</label>
-                    <input type="number" step="1"
-                      value={Math.round((1 - settings.calculatorPrices.discount36Months) * 100)}
-                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, discount36Months: 1 - Number(e.target.value) / 100 } })}
+                    <input type="number" min="0" step="1" value={settings.calculatorPrices.discount36}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, discount36: Number(e.target.value) } })}
                       className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
-                    <p className="text-xs text-slate-500 mt-1">Default 10%</p>
+                    <p className="text-xs text-slate-500 mt-1">Default 10</p>
+                  </div>
                   </div>
                 </div>
+                <div className="rounded-xl border border-white/10 bg-[#0c1829] p-4">
+                  <h3 className="text-sm font-bold text-white">Enterprise — quoted directly</h3>
+                  <p className="text-xs text-slate-500 mb-3">From these monthly volumes the calculator shows a "call or visit" panel instead of a price.</p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Enterprise from B&W Pages / mo</label>
+                    <input type="number" min="1000" step="500" value={settings.calculatorPrices.enterpriseBw}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, enterpriseBw: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 10,000</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Enterprise from Colour Pages / mo</label>
+                    <input type="number" min="500" step="100" value={settings.calculatorPrices.enterpriseColour}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, enterpriseColour: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 5,000</p>
+                  </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-[#0c1829] p-4">
+                  <h3 className="text-sm font-bold text-white">Custom A3 Label Printer Rental</h3>
+                  <p className="text-xs text-slate-500 mb-3">A separate service with its own quote form. It is not part of the calculator tiers above. This price appears on the printer-rental page, its structured data and the label-printer quote page.</p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">Monthly Rent (AED/mo)</label>
+                    <input type="number" min="1" step="10" value={settings.calculatorPrices.a3LabelRent}
+                      onChange={(e) => setSettings({ ...settings, calculatorPrices: { ...settings.calculatorPrices, a3LabelRent: Number(e.target.value) } })}
+                      className="w-full bg-[#101c2e] border border-white/10 rounded-xl py-3 px-4 text-white" />
+                    <p className="text-xs text-slate-500 mt-1">Default 549</p>
+                  </div>
+                  </div>
+                </div>
+                <p className="text-xs text-slate-500">
+                  Save settings to publish. Invalid or negative values are ignored and the default is used instead.
+                </p>
               </div>
             </div>
 

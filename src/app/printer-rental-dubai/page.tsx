@@ -47,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
   // from keywords — those are /photocopier-rental-dubai/'s meta targets
   // (same surgery as 64a0b1e; /services/photocopier-rental/ and
   // /copier-lease-uae/ have since been 301'd into that page).
-  // This page's own AED 500/1000 tiers in the OfferCatalog below describe
+  // This page's own AED 350/1000 tiers in the OfferCatalog below describe
   // its real product lineup, not a competing keyword claim, so left as-is.
   // Sep 2026 (later): dropped the bare "printer rental dubai" head term —
   // /services/printer-rental/ owns it. Kept the brand + district compounds,
@@ -100,9 +100,9 @@ const localBusinessSchema = {
       {
         "@type": "Offer",
         "name": "A3 Multifunction Photocopier Rental Dubai",
-        "price": "500",
+        "price": "350",
         "priceCurrency": "AED",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "unitText": "MONTH", "minPrice": "500", "maxPrice": "900" },
+        "priceSpecification": { "@type": "UnitPriceSpecification", "unitText": "MONTH", "minPrice": "350", "maxPrice": "900" },
         "description": "A3 and A4 print, copy, and scan with unlimited toner, monthly maintenance, and network setup."
       },
       {
@@ -118,7 +118,7 @@ const localBusinessSchema = {
 };
 
 const DEFAULT_FAQS: FAQItem[] = [
-  { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for an A4 desktop printer. A3 multifunction photocopiers (print, copy, scan) start from AED 500/month. High-speed enterprise copiers for large offices range from AED 1,000—2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and free delivery across Dubai." },
+  { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for an A4 desktop printer. A3 multifunction photocopiers (print, copy, scan) start from AED 350/month. High-speed enterprise copiers for large offices range from AED 1,000—2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and free delivery across Dubai." },
   { q: "Do you offer zero deposit printer rental in Dubai?", a: "Yes. Sahara offers zero deposit printer rental for qualified Dubai businesses. There is no upfront security deposit — you pay only the monthly rental. This applies to standard 12—36 month contracts for established businesses." },
   { q: "How fast can you deliver a rented printer to my Dubai office?", a: "We offer same-day delivery to most Dubai districts including Business Bay, DIFC, JLT, Marina, Sheikh Zayed Road, and Deira. Next-day delivery is standard for all other Dubai locations. Our engineers handle the full network setup on delivery day at no extra charge." },
   { q: "What printer brands do you rent in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, Kyocera TASKalfa, HP LaserJet Enterprise, Ricoh MP series, and Xerox AltaLink in Dubai. Canon and Kyocera are our most popular brands due to their proven reliability in UAE climate conditions." },
@@ -158,9 +158,9 @@ const dubaiAreas = [
 ];
 
 const pricingTiers = [
-  { name: "A4 Desktop", price: "AED 250—400", period: "/month", users: "1—5 users", volume: "Up to 2,000 pages", includes: ["A4 print only", "Unlimited toner", "Quarterly maintenance", "4-hr emergency response"], popular: false },
-  { name: "A3 Mid-Range", price: "AED 500—900", period: "/month", users: "10—30 users", volume: "Up to 15,000 pages", includes: ["A3 + A4 print, copy, scan", "Unlimited toner", "Monthly maintenance", "4-hr emergency response", "Network setup included"], popular: true },
-  { name: "A3 Enterprise", price: "AED 1,000—2,000", period: "/month", users: "30—80 users", volume: "Unlimited pages", includes: ["High-speed A3 color MFP", "Unlimited toner", "Weekly maintenance", "2-hr priority response", "Loaner machine guarantee", "Multi-site billing"], popular: false },
+  { name: "A4 Desktop", price: "AED 250—400", period: "/month", users: "1—5 users", volume: "2,000 B&W + 750 colour pages included", includes: ["A4 print only", "Unlimited toner", "Quarterly maintenance", "4-hr emergency response"], popular: false },
+  { name: "A3 Mid-Range", price: "AED 350—900", period: "/month", users: "10—30 users", volume: "3,000 B&W + 1,000 colour pages included", includes: ["A3 + A4 print, copy, scan", "Unlimited toner", "Monthly maintenance", "4-hr emergency response", "Network setup included"], popular: true },
+  { name: "A3 Enterprise", price: "AED 1,000—2,000", period: "/month", users: "30—80 users", volume: "From 10,000 B&W + 5,000 colour pages", includes: ["High-speed A3 color MFP", "Unlimited toner", "Weekly maintenance", "2-hr priority response", "Loaner machine guarantee", "Multi-site billing"], popular: false, direct: true },
 ];
 
 const dubaiIndustries = [
@@ -213,7 +213,7 @@ const otherLocations = [
   { href: "/printer-rental-abu-dhabi/", label: "Printer Rental Abu Dhabi", desc: "Weekly maintenance. Mussafah, Al Reem, Khalifa City." },
   { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest response in Sharjah & Northern Emirates." },
   { href: "/printer-rental-rak/", label: "Printer Rental RAK", desc: "Ras Al Khaimah businesses & free zones." },
-  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", desc: "New A3 from AED 500/mo, refurbished from AED 250/mo." },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", desc: "New A3 from AED 350/mo, refurbished from AED 250/mo." },
 ];
 
 const trail = [{ label: "Home", href: "/" }, { label: "Printer Rental Dubai" }];
@@ -320,9 +320,18 @@ export default async function PrinterRentalDubai() {
                     </li>
                   ))}
                 </ul>
+                {tier.direct ? (
+                  <>
+                    <a href="tel:+971503823969" className="block rounded-pill py-4 text-center font-bold transition-all hover:scale-[1.02] glass-card text-white">
+                      Call for an Enterprise Quote
+                    </a>
+                    <p className="mt-3 text-center text-caption text-muted">Quoted directly by phone or at our Sharjah office, not in the online calculator.</p>
+                  </>
+                ) : (
                 <a href="/quote/printer-rental/" className={`block rounded-pill py-4 text-center font-bold transition-all hover:scale-[1.02] ${tier.popular ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "glass-card text-white"}`}>
                   Get Dubai Quote
                 </a>
+                )}
               </div>
             ))}
           </div>
@@ -353,7 +362,7 @@ export default async function PrinterRentalDubai() {
               <p>
                 Unlike buying — where toner, maintenance contracts, spare parts, and technician callouts add 40—60%
                 to the total cost of ownership — our rental model bundles everything into one monthly invoice with
-                no hidden fees and no exit penalties.
+                no hidden fees and no exit penalties; pages above your plan's allowance are billed at the published excess rates.
               </p>
             </div>
           </div>

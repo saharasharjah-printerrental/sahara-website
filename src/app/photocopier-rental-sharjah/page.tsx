@@ -42,9 +42,9 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-  title: "Photocopier Rental Sharjah | New A3 from AED 500/mo",
+  title: "Photocopier Rental Sharjah | New A3 from AED 350/mo",
   description:
-    "Photocopier rental Sharjah — refurbished from AED 250/mo, new A3 from AED 500/mo. Same-day delivery to SAIF Zone, Hamriyah, Al Majaz & all Industrial Areas.",
+    "Photocopier rental Sharjah — refurbished from AED 250/mo, new A3 from AED 350/mo. Same-day delivery to SAIF Zone, Hamriyah, Al Majaz & all Industrial Areas.",
   // Sep 2026: printer-rental terms moved to /printer-rental-sharjah/, the
   // dedicated page for that intent (see its file comment) — this page now
   // targets photocopier/copier rental only, to stop the two Sharjah pages
@@ -66,9 +66,9 @@ export async function generateMetadata(): Promise<Metadata> {
   ],
   alternates: { canonical: "https://www.saharaprinter.com/photocopier-rental-sharjah/" },
   openGraph: {
-    title: "Photocopier Rental Sharjah | New A3 from AED 500/mo — Sahara Office Equipments",
+    title: "Photocopier Rental Sharjah | New A3 from AED 350/mo — Sahara Office Equipments",
     description:
-      "Rent a Canon or Kyocera photocopier in Sharjah — refurbished from AED 250/month, new A3 from AED 500/month. Zero deposit, free toner, 60-min response.",
+      "Rent a Canon or Kyocera photocopier in Sharjah — refurbished from AED 250/month, new A3 from AED 350/month. Zero deposit, free toner, 60-min response.",
     url: "https://www.saharaprinter.com/photocopier-rental-sharjah/",
     siteName: "Sahara Office Equipments",
     locale: "en_AE",
@@ -93,7 +93,7 @@ const localBusinessSchema = {
   "@id": ORG_ID,
   name: ORG_NAME,
   description:
-    "Photocopier rental in Sharjah — refurbished units from AED 250/month, new A3 photocopiers from AED 500/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
+    "Photocopier rental in Sharjah — refurbished units from AED 250/month, new A3 photocopiers from AED 350/month. Zero deposit, free toner, 60-minute emergency response. Canon, Kyocera, Xerox, HP authorized service.",
   url: "https://www.saharaprinter.com/photocopier-rental-sharjah",
   areaServed: [
     { "@type": "City", name: "Sharjah" },
@@ -124,7 +124,7 @@ const localBusinessSchema = {
       {
         "@type": "Offer",
         name: "New A3 Mid-Range Copier Rental Sharjah",
-        price: "500",
+        price: "350",
         priceCurrency: "AED",
         itemCondition: "https://schema.org/NewCondition",
         description: "New A3 multifunction — print, scan, copy, fax — for shared offices",
@@ -176,7 +176,7 @@ const breadcrumbSchema = {
 const DEFAULT_FAQS: FAQItem[] = [
   {
     q: "How much does photocopier rental cost in Sharjah?",
-    a: "A refurbished or short-term A4 desktop copier in Sharjah rents from AED 250/month. A new A3 multifunction device for shared offices ranges from AED 500—900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support.",
+    a: "A refurbished or short-term A4 desktop copier in Sharjah rents from AED 250/month. A new A3 multifunction device for shared offices ranges from AED 350—900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support.",
   },
   {
     q: "What is your emergency response time in Sharjah?",
@@ -235,18 +235,18 @@ const pricingTiers = [
   },
   {
     name: "A3 Mid-Range (New)",
-    price: "AED 500—900",
+    price: "AED 350—900",
     tag: "Most Popular",
     ideal: "Shared offices, SAIF Zone companies",
     features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35—55 ppm A3 & A4", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder / cloud", "Free network setup", "Same-day replacement guarantee"],
     cta: "Get Quote",
   },
   {
-    name: "A3 Enterprise",
+    name: "A3 Enterprise", direct: true,
     price: "AED 1,000—2,000",
     tag: null,
     ideal: "High-volume industries, large free zones",
-    features: ["Canon imageRUNNER C5560i / Kyocera 5053ci", "60—100 ppm A3 colour", "Staple, booklet, hole-punch finishers", "Secure print, user authentication", "Monthly 50,000+ page capacity", "Dedicated account manager", "Multi-site billing available"],
+    features: ["From 10,000 B&W + 5,000 colour pages a month", "Canon imageRUNNER C5560i / Kyocera 5053ci", "60—100 ppm A3 colour", "Staple, booklet, hole-punch finishers", "Secure print, user authentication", "Monthly 50,000+ page capacity", "Dedicated account manager", "Multi-site billing available"],
     cta: "Get Quote",
   },
 ];
@@ -350,7 +350,7 @@ export default async function PhotocopierRentalSharjah() {
               <div className="mt-6">
                 <AnswerBlock
                   question="How fast can a technician reach a Sharjah office?"
-                  answer="Sahara targets a 60-minute on-site response anywhere in Sharjah. The company is headquartered at Al Arabi Building, Industrial Area 11, Sharjah, so engineers reach SAIF Zone, the Industrial Areas, Al Majaz, Al Nahda, and Muwaileh faster than Dubai-based providers. Photocopier rental starts from AED 250/month refurbished, or AED 500/month for a new A3 machine."
+                  answer="Sahara targets a 60-minute on-site response anywhere in Sharjah. The company is headquartered at Al Arabi Building, Industrial Area 11, Sharjah, so engineers reach SAIF Zone, the Industrial Areas, Al Majaz, Al Nahda, and Muwaileh faster than Dubai-based providers. Photocopier rental starts from AED 250/month refurbished, or AED 350/month for a new A3 machine."
                   supportingPoints={[
                     "HQ at Al Arabi Building, Industrial Area 11, Sharjah — no cross-emirate travel time",
                     "Covers SAIF Zone, Industrial Areas 1–18, Al Majaz, Al Nahda, Muwaileh and Al Khan",
@@ -360,7 +360,7 @@ export default async function PhotocopierRentalSharjah() {
                 />
               </div>
               <p className="mt-6 max-w-xl text-body text-muted">
-                Canon &amp; Kyocera photocopiers — refurbished from AED 250/month, new A3 from AED 500/month. Zero
+                Canon &amp; Kyocera photocopiers — refurbished from AED 250/month, new A3 from AED 350/month. Zero
                 deposit, free toner, and 60-minute on-site emergency response across all Sharjah areas.
               </p>
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
@@ -451,12 +451,24 @@ export default async function PhotocopierRentalSharjah() {
                     </li>
                   ))}
                 </ul>
-                <a
+                {tier.direct ? (
+<>
+<a
+                  href="tel:+971503823969"
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
+                >
+                  Call for an Enterprise Quote
+                </a>
+<p className="mt-3 text-center text-xs text-muted">Quoted directly by phone or at our Sharjah office, not in the online calculator.</p>
+</>
+) : (
+<a
                   href="/quote/printer-rental/"
                   className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   {tier.cta}
                 </a>
+)}
               </div>
             ))}
           </div>

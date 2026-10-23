@@ -68,7 +68,7 @@ Dubai printer rental prices vary significantly based on machine type, volume, an
 | Machine Type | Monthly Price | Best For |
 |-------------|-------------|---------|
 | A4 Desktop Mono | AED 250–400 | 1–5 users, low volume |
-| A3 Mid-Range MFP | AED 500–900 | 10–30 users, shared office |
+| A3 Mid-Range MFP | AED 350–900 | 10–30 users, shared office |
 | A3 Enterprise Colour | AED 1,000–2,000 | 30–80 users, high volume |
 
 If a quote comes in significantly below these ranges, ask what's excluded. Low headline prices almost always hide toner charges, callout fees, or inadequate maintenance coverage.

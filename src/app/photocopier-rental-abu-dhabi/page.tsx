@@ -48,9 +48,9 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Photocopier Rental Abu Dhabi | New A3 from AED 500/mo",
+    title: "Photocopier Rental Abu Dhabi | New A3 from AED 350/mo",
     description:
-      "Photocopier rental Abu Dhabi — refurbished from AED 250/mo, new A3 copiers from AED 500/mo. Mussafah, Khalifa City, Al Reem Island & Yas Island.",
+      "Photocopier rental Abu Dhabi — refurbished from AED 250/mo, new A3 copiers from AED 350/mo. Mussafah, Khalifa City, Al Reem Island & Yas Island.",
     keywords: [
       "photocopier rental abu dhabi",
       "photocopier rental in abu dhabi",
@@ -62,9 +62,9 @@ export async function generateMetadata(): Promise<Metadata> {
     ],
     alternates: { canonical: "https://www.saharaprinter.com/photocopier-rental-abu-dhabi/" },
     openGraph: {
-      title: "Photocopier Rental Abu Dhabi | New A3 from AED 500/mo — Sahara Office Equipments",
+      title: "Photocopier Rental Abu Dhabi | New A3 from AED 350/mo — Sahara Office Equipments",
       description:
-        "Rent a Canon or Kyocera photocopier in Abu Dhabi — refurbished from AED 250/month, new A3 from AED 500/month. Zero deposit, free toner, weekly maintenance.",
+        "Rent a Canon or Kyocera photocopier in Abu Dhabi — refurbished from AED 250/month, new A3 from AED 350/month. Zero deposit, free toner, weekly maintenance.",
       url: "https://www.saharaprinter.com/photocopier-rental-abu-dhabi/",
       siteName: "Sahara Office Equipments",
       locale: "en_AE",
@@ -90,7 +90,7 @@ const localBusinessSchema = {
   name: "Abu Dhabi Photocopier Rental",
   provider: orgRef(),
   description:
-    "Photocopier rental in Abu Dhabi — refurbished units from AED 250/month, new A3 photocopiers from AED 500/month. Zero deposit, free toner, weekly maintenance. Canon, Kyocera, Xerox, HP authorized service.",
+    "Photocopier rental in Abu Dhabi — refurbished units from AED 250/month, new A3 photocopiers from AED 350/month. Zero deposit, free toner, weekly maintenance. Canon, Kyocera, Xerox, HP authorized service.",
   url: "https://www.saharaprinter.com/photocopier-rental-abu-dhabi/",
   areaServed: [
     { "@type": "City", name: "Abu Dhabi" },
@@ -103,7 +103,7 @@ const localBusinessSchema = {
     name: "Abu Dhabi Photocopier Rental Plans",
     itemListElement: [
       { "@type": "Offer", name: "Refurbished A4 Copier Rental Abu Dhabi", price: "250", priceCurrency: "AED", itemCondition: "https://schema.org/RefurbishedCondition", description: "Refurbished/short-term Canon/Kyocera A4 copier — includes toner, delivery, installation" },
-      { "@type": "Offer", name: "New A3 Mid-Range Copier Rental Abu Dhabi", price: "500", priceCurrency: "AED", itemCondition: "https://schema.org/NewCondition", description: "New A3 multifunction — print, scan, copy, fax — for shared offices" },
+      { "@type": "Offer", name: "New A3 Mid-Range Copier Rental Abu Dhabi", price: "350", priceCurrency: "AED", itemCondition: "https://schema.org/NewCondition", description: "New A3 multifunction — print, scan, copy, fax — for shared offices" },
       { "@type": "Offer", name: "New A3 Enterprise Copier Rental Abu Dhabi", price: "1000", priceCurrency: "AED", itemCondition: "https://schema.org/NewCondition", description: "High-volume enterprise copier for large organisations" },
     ],
   },
@@ -130,7 +130,7 @@ const breadcrumbSchema = {
 };
 
 const DEFAULT_FAQS: FAQItem[] = [
-  { q: "How much does photocopier rental cost in Abu Dhabi?", a: "A refurbished or short-term A4 desktop copier in Abu Dhabi rents from AED 250/month. A new A3 multifunction device for shared offices ranges from AED 500–900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support." },
+  { q: "How much does photocopier rental cost in Abu Dhabi?", a: "A refurbished or short-term A4 desktop copier in Abu Dhabi rents from AED 250/month. A new A3 multifunction device for shared offices ranges from AED 350–900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support." },
   { q: "What is your emergency response time in Abu Dhabi?", a: "We dispatch a technician within 4–6 hours to anywhere in Abu Dhabi, including Mussafah, Khalifa City, Al Reem Island and Yas Island. Same-day replacement units are available if a repair takes longer." },
   { q: "Do I need to pay a deposit for photocopier rental in Abu Dhabi?", a: "No deposit required. Sahara offers zero-deposit photocopier rental across all Abu Dhabi plans — you only pay your first month's rental to start." },
   { q: "Which photocopier brands do you rent in Abu Dhabi?", a: "We rent Canon imageRUNNER ADVANCE, Kyocera TASKalfa, HP LaserJet Enterprise, Xerox WorkCentre, and Ricoh MP series in Abu Dhabi." },
@@ -144,8 +144,8 @@ const DEFAULT_FAQS: FAQItem[] = [
 
 const pricingTiers = [
   { name: "A4 Desktop (Refurbished)", price: "AED 250–450", tag: null, ideal: "Small offices, reception desks — refurbished or short-term", features: ["Canon LBP / Kyocera ECOSYS", "Up to 45 ppm A4 mono", "Print, copy, scan", "Free genuine toner", "Next-day delivery", "Weekly maintenance visits"], cta: "Get Quote" },
-  { name: "A3 Mid-Range (New)", price: "AED 500–900", tag: "Most Popular", ideal: "Shared offices, Mussafah businesses", features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35–55 ppm A3 & A4", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder / cloud", "Free network setup"], cta: "Get Quote" },
-  { name: "A3 Enterprise", price: "AED 1,000–2,000", tag: null, ideal: "High-volume industries, government & large offices", features: ["Canon imageRUNNER C5560i / Kyocera 5053ci", "60–100 ppm A3 colour", "Staple, booklet, hole-punch finishers", "Secure print, user authentication", "Dedicated account manager", "Multi-site billing available"], cta: "Get Quote" },
+  { name: "A3 Mid-Range (New)", price: "AED 350–900", tag: "Most Popular", ideal: "Shared offices, Mussafah businesses", features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35–55 ppm A3 & A4", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder / cloud", "Free network setup"], cta: "Get Quote" },
+  { name: "A3 Enterprise", direct: true, price: "AED 1,000–2,000", tag: null, ideal: "High-volume industries, government & large offices", features: ["From 10,000 B&W + 5,000 colour pages a month", "Canon imageRUNNER C5560i / Kyocera 5053ci", "60–100 ppm A3 colour", "Staple, booklet, hole-punch finishers", "Secure print, user authentication", "Dedicated account manager", "Multi-site billing available"], cta: "Get Quote" },
 ];
 
 const abuDhabiAreas = [
@@ -213,9 +213,9 @@ export default async function PhotocopierRentalAbuDhabi() {
               <div className="mt-6">
                 <AnswerBlock
                   question="How much does photocopier rental cost in Abu Dhabi?"
-                  answer="A refurbished or short-term A4 copier in Abu Dhabi rents from AED 250/month; a new A3 multifunction photocopier starts from AED 500/month, up to AED 2,000/month for enterprise colour devices. Sahara covers Mussafah, Khalifa City, Al Reem Island and Yas Island with zero deposit, free toner, weekly preventive maintenance, and 4–6 hour emergency dispatch."
+                  answer="A refurbished or short-term A4 copier in Abu Dhabi rents from AED 250/month; a new A3 multifunction photocopier starts from AED 350/month, up to AED 2,000/month for enterprise colour devices. Sahara covers Mussafah, Khalifa City, Al Reem Island and Yas Island with zero deposit, free toner, weekly preventive maintenance, and 4–6 hour emergency dispatch."
                   supportingPoints={[
-                    "Refurbished/short-term A4 from AED 250/month; new A3 Mid-Range AED 500–900; new A3 Enterprise AED 1,000–2,000",
+                    "Refurbished/short-term A4 from AED 250/month; new A3 Mid-Range AED 350–900; new A3 Enterprise AED 1,000–2,000",
                     "Covers Mussafah, Khalifa City, Al Reem Island, Yas Island, Saadiyat Island and KEZAD",
                     "Weekly scheduled maintenance plus 4–6 hour emergency response",
                     "Zero deposit, unlimited genuine toner and free network setup on every plan",
@@ -223,7 +223,7 @@ export default async function PhotocopierRentalAbuDhabi() {
                 />
               </div>
               <p className="mt-6 max-w-xl text-body text-muted">
-                Canon &amp; Kyocera photocopiers — refurbished from AED 250/month, new A3 from AED 500/month. Zero
+                Canon &amp; Kyocera photocopiers — refurbished from AED 250/month, new A3 from AED 350/month. Zero
                 deposit, free toner, and weekly maintenance across all Abu Dhabi districts.
               </p>
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
@@ -308,12 +308,24 @@ export default async function PhotocopierRentalAbuDhabi() {
                     </li>
                   ))}
                 </ul>
-                <a
+                {tier.direct ? (
+<>
+<a
+                  href="tel:+971503823969"
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
+                >
+                  Call for an Enterprise Quote
+                </a>
+<p className="mt-3 text-center text-xs text-muted">Quoted directly by phone or at our Sharjah office, not in the online calculator.</p>
+</>
+) : (
+<a
                   href="/quote/printer-rental/"
                   className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   {tier.cta}
                 </a>
+)}
               </div>
             ))}
           </div>

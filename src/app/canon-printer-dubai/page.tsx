@@ -27,7 +27,7 @@ const trail = [{ label: "Home", href: "/" }, { label: "Brands", href: "/brands/c
 const DEFAULT_FAQS: FaqItem[] = [
   { q: "Do you rent Canon printers in Dubai?", a: "Yes! We offer a wide range of Canon printers and photocopiers for rent in Dubai, including imageRUNNER, i-SENSYS, and imageCLASS series." },
   { q: "What Canon models are available for rental in Dubai?", a: "We rent Canon imageRUNNER ADVANCE, i-SENSYS MF, imageCLASS, and MAXIFY series. From compact A4 printers to heavy-duty A3 copiers." },
-  { q: "How much does Canon printer rental cost in Dubai?", a: "Canon printer rental in Dubai starts from AED 250/month for A4 models, with A3 enterprise copiers from AED 500-2000/month. All include free toner." },
+  { q: "How much does Canon printer rental cost in Dubai?", a: "Canon printer rental in Dubai starts from AED 250/month for A4 models, with A3 enterprise copiers from AED 350-2000/month. All include free toner." },
   { q: "Do you provide Canon printer repair in Dubai?", a: "Yes, our certified technicians provide on-site Canon printer repair in Dubai with 4-hour emergency response time." },
   { q: "Is Canon toner included in the rental price?", a: "Yes! All our Canon printer rentals in Dubai include unlimited genuine Canon toner at no extra cost." },
   { q: "Can I upgrade my Canon printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your Canon printer anytime during the contract." },

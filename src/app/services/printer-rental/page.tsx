@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { orgRef } from "@/lib/brand";
+import { getCalculatorPricing } from "@/lib/calculator-pricing.server";
 
 export const runtime = 'edge';
 import Header from "@/components/Header";
@@ -43,12 +44,12 @@ const DEFAULT_FAQS: FAQItem[] = [
   { q: "Is a printer rental the same as a copier lease?", a: "Yes — in the UAE market, \"printer rental,\" \"copier rental,\" and \"copier lease\" all describe the same service from Sahara. Most of our fleet are multifunction devices that print, copy, scan, and fax, so whether you search for copier leasing, copier on rent, or printer rental, you'll get the same all-inclusive monthly plan: zero deposit, unlimited toner, and full maintenance." },
   { q: "Why rent a printer instead of buying one in the UAE?", a: "Buying ties up capital in hardware that depreciates and becomes obsolete within 3-4 years, and toner, maintenance contracts, spare parts, and repair callouts typically add 40-60% to the total cost of ownership. Renting from Sahara bundles all of that into one predictable AED 250/month starting fee — zero deposit, unlimited OEM toner, and maintenance included — so there's no capital outlay and no surprise repair bills." },
   { q: "Is it cheaper to lease or buy a photocopier in the UAE?", a: "For most UAE offices, leasing is cheaper over a typical 2-4 year cycle once toner, maintenance, and repair costs are factored in. Buying only becomes cost-competitive for businesses with very high, stable print volumes over 5+ years who can self-manage servicing. Sahara's rental plans include toner and maintenance in the monthly fee, removing that variable entirely." },
-  { q: "What is printer leasing and how does it work?", a: "Printer leasing is a fixed monthly service: you pay one predictable fee that covers the printer or photocopier hardware, unlimited OEM toner, scheduled maintenance, and repairs — without ever owning the machine. Sahara's leasing plans start from AED 250/month with zero deposit, and the contract can run from 3 to 36 months depending on your needs." },
+  { q: "What is printer leasing and how does it work?", a: "Printer leasing is a fixed monthly service: you pay one predictable fee that covers the printer or photocopier hardware, unlimited OEM toner, scheduled maintenance, and repairs — without ever owning the machine. Sahara's leasing plans start from AED 250/month with zero deposit, and the contract can run from 3 to 36 months depending on your needs. Pages above your plan's monthly allowance are billed at the published excess rates shown in the rental calculator." },
   { q: "What are the main benefits of leasing a copier over buying one?", a: "Leasing eliminates upfront capital cost, bundles maintenance and toner into one predictable invoice, includes free upgrades as your office grows (our 'Growth Guard' policy), and removes any resale or disposal hassle at end of contract — Sahara collects the machine at no charge when you're done." },
   { q: "Is printer leasing tied to a specific brand like HP?", a: "No — leasing is a service model, not a brand. Sahara leases Canon, Kyocera, HP, Ricoh, Xerox, Brother, Sharp, and Epson equipment under the exact same zero-deposit, all-inclusive terms, so you choose the brand that fits your office, not the other way around." },
   { q: "What happens when a printer lease ends in the UAE?", a: "At the end of your Sahara rental contract, we collect the equipment at no charge. You can renew the same plan, upgrade to newer equipment, or simply return the machine — there are no exit fees and no disposal costs. We handle the full lifecycle of every device we lease." },
   { q: "How do I get out of a printer lease early?", a: "Our 'Growth Guard' policy lets you upgrade to different equipment at any point in the contract with no termination penalty. If you need to end a lease early rather than upgrade, contact your account manager — Sahara's contracts are built around flexible terms and transparent exit conditions, not lock-in fees." },
-  { q: "What's included in the monthly printer leasing payment?", a: "One fixed AED fee covers the machine, unlimited genuine OEM toner, scheduled preventive maintenance, all repairs and parts, and free delivery — there are no metered per-page charges or hidden add-ons on Sahara's standard plans." },
+  { q: "What's included in the monthly printer leasing payment?", a: "One fixed AED fee covers the machine, unlimited genuine OEM toner, scheduled preventive maintenance, all repairs and parts, and free delivery — with no hidden add-ons. A compact A4 plan includes 2,000 B&W and 750 colour pages a month and the standard A3 package includes 3,000 B&W and 1,000 colour pages; extra pages are billed at AED 0.06 (B&W) and AED 0.20 (colour)." },
   { q: "Do I need to negotiate my printer lease rate in the UAE?", a: "No — Sahara publishes transparent tiered pricing from AED 250 to AED 2,000/month based on device class and volume, with automatic discounts for multi-machine fleet contracts (3+ units). Every business at the same tier gets the same rate, so there's nothing to haggle over." },
   { q: "Does printer or copier leasing work the same way as computer/IT leasing?", a: "The underlying principle is similar — a fixed monthly fee instead of a capital purchase — but Sahara specializes specifically in printers, photocopiers, and multifunction devices rather than general IT hardware, so our plans bundle toner and print-specific maintenance that a generic computer lease wouldn't include." },
   { q: "What is a managed print program and does Sahara offer one?", a: "A managed print program (sometimes called a 'printing enterprise' setup) consolidates multiple devices across an office or multiple sites under one contract, with unified billing, proactive toner monitoring, and quarterly usage reporting. Sahara offers this for corporate clients with 3+ machines or multi-location fleets — see our Dubai-specific coverage at /printer-rental-dubai for district-by-district delivery detail." },
@@ -107,8 +108,8 @@ const benefits = [
 
 const pricingTiers = [
   { tier: "A4 Desktop", range: "AED 250-400/mo", desc: "Ideal for small offices, 1-10 users" },
-  { tier: "A3 Mid-Range", range: "AED 500-800/mo", desc: "Perfect for medium offices, 10-30 users" },
-  { tier: "A3 Enterprise", range: "AED 1000-2000/mo", desc: "High-volume for large organizations" },
+  { tier: "A3 Mid-Range", range: "AED 350-800/mo", desc: "Perfect for medium offices, 10-30 users" },
+  { tier: "A3 Enterprise", range: "AED 1000-2000/mo", desc: "From 10,000 B&W + 5,000 colour pages a month. Quoted by phone or visit" },
 ];
 
 const process = [
@@ -245,7 +246,11 @@ const trail = [
   { label: "Printer Rental UAE" },
 ];
 
-export default function PrinterRentalPage() {
+export default async function PrinterRentalPage() {
+  // The A3 label printer rent is edited in Admin → Settings → Rental Calculator Pricing.
+  const labelRent = (await getCalculatorPricing()).a3LabelRent;
+  const labelRentText = labelRent.toLocaleString("en-US");
+  const faqs = DEFAULT_FAQS.map((f) => ({ ...f, a: f.a.replace("AED 549/month", `AED ${labelRentText}/month`) }));
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
@@ -267,9 +272,9 @@ export default function PrinterRentalPage() {
           answer={
             <AnswerBlock
               question="What is included in a printer rental plan in the UAE?"
-              answer="Every Sahara rental plan includes the machine, toner, maintenance, and repairs. One fixed monthly fee from AED 250 covers unlimited genuine OEM toner, scheduled preventive servicing, all parts and labour, and free delivery with network setup. There is no deposit, no metered page charge, and no exit fee."
+              answer="Every Sahara rental plan includes the machine, toner, maintenance, and repairs. A fixed monthly fee covers the machine, unlimited genuine OEM toner, scheduled preventive servicing, all parts and labour, and free delivery with network setup — from AED 250/month for a compact A4 desktop (2,000 B&W and 750 colour pages included) and AED 350/month for the standard A3 package (3,000 B&W and 1,000 colour pages included). Extra pages are billed at AED 0.06 (B&W) and AED 0.20 (colour). There is no deposit and no exit fee."
               supportingPoints={[
-                "A4 desktop from AED 250/month; A3 mid-range AED 500–800; A3 enterprise AED 1,000–2,000",
+                "A4 desktop from AED 250/month; A3 mid-range AED 350–800; A3 enterprise AED 1,000–2,000",
                 "Canon, Kyocera, HP, Ricoh, Xerox, Brother, Sharp and Epson available under identical terms",
                 "Contracts run 3 to 36 months, with upgrades permitted mid-contract at no penalty",
                 "4-hour emergency response target across Dubai, Sharjah, Abu Dhabi, Ajman, RAK, Fujairah and Al Ain",
@@ -349,13 +354,13 @@ export default function PrinterRentalPage() {
         <section id="label-printing" className="scroll-mt-28 border-y border-white/10 bg-surface-low px-6 py-12">
           <div className="mx-auto max-w-4xl">
             <h2 className="text-2xl font-bold text-white">Custom A3 Label Printer Rental</h2>
-            <p className="mt-3 text-xl font-bold text-primary">AED 549/month</p>
+            <p className="mt-3 text-xl font-bold text-primary">AED {labelRentText}/month</p>
             <p className="mt-4 max-w-3xl leading-relaxed text-muted">Print your own product labels, packaging labels and custom designs on label sheets up to A3. Our customised printer also handles compatible higher-weight paper up to 300 gsm.</p>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">Share your label material, sheet size, paper weight and monthly volume. We will confirm media compatibility and the correct feed settings before installation.</p>
             <a href="/quote/label-printer-rental/" className="btn-primary mt-6 inline-flex">Get a Label Printer Quote</a>
           </div>
         </section>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "Service", name: "Custom A3 Label Printer Rental UAE", url: "https://www.saharaprinter.com/services/printer-rental/#label-printing", provider: orgRef(), description: "Custom label printing on sheets up to A3 and compatible paper up to 300 gsm. Media compatibility confirmed before installation.", offers: { "@type": "Offer", price: "549", priceCurrency: "AED", priceSpecification: { "@type": "UnitPriceSpecification", price: "549", priceCurrency: "AED", unitCode: "MON", referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" } } } }).replace(/</g, "\\u003c") }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "Service", name: "Custom A3 Label Printer Rental UAE", url: "https://www.saharaprinter.com/services/printer-rental/#label-printing", provider: orgRef(), description: "Custom label printing on sheets up to A3 and compatible paper up to 300 gsm. Media compatibility confirmed before installation.", offers: { "@type": "Offer", price: String(labelRent), priceCurrency: "AED", priceSpecification: { "@type": "UnitPriceSpecification", price: String(labelRent), priceCurrency: "AED", unitCode: "MON", referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" } } } }).replace(/</g, "\\u003c") }} />
 
         <Section eyebrow="Getting Started" title="How It Works" subtitle="Get started in 4 simple steps" align="center" tone="raised">
           <div className="grid gap-6 md:grid-cols-4">
@@ -456,7 +461,7 @@ export default function PrinterRentalPage() {
             <h2 className="font-sora text-title font-bold text-white mb-3">Frequently Asked Questions</h2>
             <p className="text-muted">Common questions about printer rental in the UAE.</p>
           </div>
-          <FaqSection pageSlug="services/printer-rental" defaultFaqs={DEFAULT_FAQS} priorityFaqs={[DEFAULT_FAQS[0]]} />
+          <FaqSection pageSlug="services/printer-rental" defaultFaqs={faqs} priorityFaqs={[faqs[0]]} />
         </Section>
 
         <Section eyebrow="Resource Hub" title="Learn Before You Rent" subtitle="Expert guides to help UAE businesses make smarter printer decisions." align="center" tone="ink">

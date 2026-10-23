@@ -5,7 +5,7 @@ export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 export async function GET(_request: NextRequest) {
-  const config = await getSmtpConfig();
+  const config = await getSmtpConfig({ ignoreEnabled: true });
 
   if (!config) {
     return NextResponse.json({

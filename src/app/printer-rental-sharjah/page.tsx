@@ -26,7 +26,7 @@ interface FAQItem { q: string; a: string; }
 // Ain, Fujairah, RAK) already has a dedicated page — Sharjah, where the
 // company is actually headquartered, did not.
 const DEFAULT_FAQS: FAQItem[] = [
-  { q: "How much does printer rental cost in Sharjah?", a: "Printer rental in Sharjah starts from AED 250/month for an A4 desktop printer. A3 multifunction photocopiers start from AED 500/month, and enterprise-grade colour MFPs range AED 1,000–2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and free delivery." },
+  { q: "How much does printer rental cost in Sharjah?", a: "Printer rental in Sharjah starts from AED 250/month for an A4 desktop printer. A3 multifunction photocopiers start from AED 350/month, and enterprise-grade colour MFPs range AED 1,000–2,000/month. All plans include zero deposit, unlimited OEM toner, maintenance, and free delivery." },
   { q: "Is printer lease and printer rental the same thing in Sharjah?", a: "Yes — \"printer lease,\" \"printer rental,\" and \"copier rental\" describe the same all-inclusive monthly service from Sahara: the machine, unlimited toner, maintenance, and repairs bundled into one predictable fee, with no ownership transfer." },
   { q: "Do you offer same-day printer delivery in Sharjah?", a: "Yes — as our head office is based in Sharjah Industrial Area, same-day delivery and setup is available across Sharjah city, including Al Nahda, Al Majaz, Al Qasimia, Muweilah, and the industrial areas, subject to stock and order time." },
   { q: "Can I rent printers for a SAIF Zone or Hamriyah Free Zone business?", a: "Yes. We regularly supply and service printers and photocopiers for businesses in SAIF Zone, Hamriyah Free Zone, and Sharjah Publishing City, with the same zero-deposit, all-inclusive rental terms as mainland Sharjah." },
@@ -103,9 +103,9 @@ const localBusinessSchema = {
       {
         "@type": "Offer",
         "name": "A3 Multifunction Photocopier Rental Sharjah",
-        "price": "500",
+        "price": "350",
         "priceCurrency": "AED",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "unitText": "MONTH", "minPrice": "500", "maxPrice": "900" },
+        "priceSpecification": { "@type": "UnitPriceSpecification", "unitText": "MONTH", "minPrice": "350", "maxPrice": "900" },
         "description": "A3 and A4 print, copy, and scan with unlimited toner, monthly maintenance, and network setup.",
       },
       {
@@ -182,7 +182,7 @@ export default async function PrinterRentalSharjahPage() {
                 question="How much does printer rental cost in Sharjah, and how fast is delivery?"
                 answer="Printer and copier rental in Sharjah starts from AED 250/month with zero deposit, unlimited OEM toner, and maintenance included. As our head office is based in Sharjah Industrial Area, same-day delivery and the fastest response times in our coverage area are available across the city and its free zones."
                 supportingPoints={[
-                  "Zero deposit, unlimited toner, and maintenance bundled into one monthly fee — from AED 250 for A4, AED 500 for A3 MFPs.",
+                  "Zero deposit, unlimited toner, and maintenance bundled into one monthly fee — from AED 250 for A4, AED 350 for A3 MFPs.",
                   "Same-day delivery and setup across Al Nahda, Al Majaz, Muweilah, and the Industrial Areas — we're based here.",
                   "Full coverage for SAIF Zone, Hamriyah Free Zone, and Sharjah Publishing City businesses.",
                   "Outright purchase also available for Canon, Kyocera, HP, and Ricoh — not rental-only.",

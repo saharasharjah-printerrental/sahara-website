@@ -105,7 +105,7 @@ const localBusinessSchema = {
       {
         "@type": "Offer",
         name: "A3 Mid-Range Copier Rental Abu Dhabi",
-        price: "500",
+        price: "350",
         priceCurrency: "AED",
         description: "A3 multifunction — print, copy, scan — for shared Abu Dhabi offices",
       },
@@ -155,7 +155,7 @@ const breadcrumbSchema = {
 const DEFAULT_FAQS: FAQItem[] = [
   {
     q: "How much does printer rental cost in Abu Dhabi?",
-    a: "Printer rental in Abu Dhabi starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers for shared offices range from AED 500—900/month. High-volume enterprise devices start at AED 1,000/month. All plans include zero deposit, free OEM toner, free delivery, and weekly preventive maintenance.",
+    a: "Printer rental in Abu Dhabi starts from AED 250/month for an A4 desktop model. A3 multifunction photocopiers for shared offices range from AED 350—900/month. High-volume enterprise devices start at AED 1,000/month. All plans include zero deposit, free OEM toner, free delivery, and weekly preventive maintenance.",
   },
   {
     q: "What is the response time for Abu Dhabi printer repair?",
@@ -220,7 +220,7 @@ const pricingTiers = [
   },
   {
     name: "A3 Mid-Range",
-    price: "AED 500—900",
+    price: "AED 350—900",
     tag: "Most Popular",
     ideal: "Shared offices, Mussafah businesses",
     features: [
@@ -234,11 +234,11 @@ const pricingTiers = [
     ],
   },
   {
-    name: "A3 Enterprise",
+    name: "A3 Enterprise", direct: true,
     price: "AED 1,000—2,000",
     tag: null,
     ideal: "Large organisations, government, ADGM",
-    features: [
+    features: ["From 10,000 B&W + 5,000 colour pages a month", 
       "Canon imageRUNNER C5560i / Kyocera 5053ci",
       "60—100 ppm A3 colour",
       "Staple, booklet, hole-punch finishing",
@@ -314,7 +314,7 @@ const otherLocations = [
   { href: "/printer-rental-dubai/", label: "Printer Rental Dubai", desc: "Same-day delivery. Business Bay, DIFC, JLT, Marina & all Dubai areas." },
   { href: "/printer-rental-sharjah/", label: "Printer Rental Sharjah", desc: "Our HQ. Fastest service in Sharjah & Northern Emirates." },
   { href: "/printer-rental-al-ain/", label: "Printer Rental Al Ain", desc: "Serving Al Ain businesses, universities & clinics." },
-  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", desc: "New A3 from AED 500/mo, refurbished from AED 250/mo." },
+  { href: "/photocopier-rental-dubai/", label: "Photocopier Rental Dubai", desc: "New A3 from AED 350/mo, refurbished from AED 250/mo." },
 ];
 
 const blogPosts = [
@@ -497,12 +497,24 @@ export default async function PrinterRentalAbuDhabi() {
                     </li>
                   ))}
                 </ul>
-                <a
+                {tier.direct ? (
+<>
+<a
+                  href="tel:+971503823969"
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
+                >
+                  Call for an Enterprise Quote
+                </a>
+<p className="mt-3 text-center text-xs text-muted">Quoted directly by phone or at our Sharjah office, not in the online calculator.</p>
+</>
+) : (
+<a
                   href="/quote/printer-rental/"
                   className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   Get Quote
                 </a>
+)}
               </div>
             ))}
           </div>

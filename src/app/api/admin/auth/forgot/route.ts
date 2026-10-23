@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRequestContext } from '@cloudflare/next-on-pages';
-import { getSmtpConfig, sendSimpleEmail } from '@/app/api/send-email/email-service';
+import { sendEmail } from '@/app/api/send-email/email-service';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -23,8 +23,7 @@ export async function POST(request: NextRequest) {
 
     // Always return success — do not reveal whether the email matched
     if (adminEmail && email.toLowerCase() === adminEmail.toLowerCase()) {
-      const config = await getSmtpConfig();
-      if (config) {
+      {
         const html = `<!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,sans-serif">
@@ -47,7 +46,7 @@ export async function POST(request: NextRequest) {
 </div>
 </body>
 </html>`;
-        await sendSimpleEmail(config, adminEmail, 'Admin Password Recovery — Sahara Printers', html);
+        await sendEmail(adminEmail, 'Admin Password Recovery — Sahara Printers', html);
       }
     }
 

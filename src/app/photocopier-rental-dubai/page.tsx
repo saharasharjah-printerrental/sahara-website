@@ -43,7 +43,7 @@ interface FAQItem { q: string; a: string; }
 // who land here from the old hub's inbound links.
 //
 // Pricing reconciled per business confirmation: refurbished/short-term units
-// start at AED 250/month; new A3 photocopiers start at AED 500/month. Every
+// start at AED 250/month; new A3 photocopiers start at AED 350/month. Every
 // price on this page states which applies — do not collapse back to a single
 // "from AED 250" claim, that is refurb/short-term pricing only.
 async function getFaqsFromD1(): Promise<FAQItem[]> {
@@ -64,9 +64,9 @@ async function getFaqsFromD1(): Promise<FAQItem[]> {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Photocopier Rental Dubai | New A3 from AED 500/mo",
+    title: "Photocopier Rental Dubai | New A3 from AED 350/mo",
     description:
-      "Photocopier rental Dubai — refurbished from AED 250/mo, new A3 copiers from AED 500/mo. Zero deposit, free toner, 4-hour response. Canon & Kyocera.",
+      "Photocopier rental Dubai — refurbished from AED 250/mo, new A3 copiers from AED 350/mo. Zero deposit, free toner, 4-hour response. Canon & Kyocera.",
     keywords: [
       "photocopier rental dubai",
       "photocopier rental in dubai",
@@ -79,9 +79,9 @@ export async function generateMetadata(): Promise<Metadata> {
     ],
     alternates: { canonical: "https://www.saharaprinter.com/photocopier-rental-dubai/" },
     openGraph: {
-      title: "Photocopier Rental Dubai | New A3 from AED 500/mo — Sahara Office Equipments",
+      title: "Photocopier Rental Dubai | New A3 from AED 350/mo — Sahara Office Equipments",
       description:
-        "Rent a Canon or Kyocera photocopier in Dubai — refurbished from AED 250/month, new A3 from AED 500/month. Zero deposit, free toner, 4-hour response.",
+        "Rent a Canon or Kyocera photocopier in Dubai — refurbished from AED 250/month, new A3 from AED 350/month. Zero deposit, free toner, 4-hour response.",
       url: "https://www.saharaprinter.com/photocopier-rental-dubai/",
       siteName: "Sahara Office Equipments",
       locale: "en_AE",
@@ -107,7 +107,7 @@ const localBusinessSchema = {
   name: "Dubai Photocopier Rental",
   provider: orgRef(),
   description:
-    "Photocopier rental in Dubai — refurbished units from AED 250/month, new A3 photocopiers from AED 500/month. Zero deposit, free toner, 4-hour emergency response. Canon, Kyocera, Xerox, HP authorized service.",
+    "Photocopier rental in Dubai — refurbished units from AED 250/month, new A3 photocopiers from AED 350/month. Zero deposit, free toner, 4-hour emergency response. Canon, Kyocera, Xerox, HP authorized service.",
   url: "https://www.saharaprinter.com/photocopier-rental-dubai/",
   areaServed: [
     { "@type": "City", name: "Dubai" },
@@ -120,7 +120,7 @@ const localBusinessSchema = {
     name: "Dubai Photocopier Rental Plans",
     itemListElement: [
       { "@type": "Offer", name: "Refurbished A4 Copier Rental Dubai", price: "250", priceCurrency: "AED", itemCondition: "https://schema.org/RefurbishedCondition", description: "Refurbished/short-term Canon/Kyocera A4 copier — includes toner, delivery, installation" },
-      { "@type": "Offer", name: "New A3 Mid-Range Copier Rental Dubai", price: "500", priceCurrency: "AED", itemCondition: "https://schema.org/NewCondition", description: "New A3 multifunction — print, scan, copy, fax — for shared offices" },
+      { "@type": "Offer", name: "New A3 Mid-Range Copier Rental Dubai", price: "350", priceCurrency: "AED", itemCondition: "https://schema.org/NewCondition", description: "New A3 multifunction — print, scan, copy, fax — for shared offices" },
       { "@type": "Offer", name: "New A3 Enterprise Copier Rental Dubai", price: "1000", priceCurrency: "AED", itemCondition: "https://schema.org/NewCondition", description: "High-volume enterprise copier for large organisations" },
     ],
   },
@@ -151,12 +151,12 @@ const breadcrumbSchema = {
 // UAE-wide questions (brands roster, CPP, multi-site, upgrades) folded in
 // so the page still answers non-Dubai-specific queries.
 const DEFAULT_FAQS: FAQItem[] = [
-  { q: "How much does photocopier rental cost in Dubai?", a: "A refurbished or short-term A4 desktop copier in Dubai rents from AED 250/month. A new A3 multifunction device for shared offices ranges from AED 500–900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support." },
+  { q: "How much does photocopier rental cost in Dubai?", a: "A refurbished or short-term A4 desktop copier in Dubai rents from AED 250/month. A new A3 multifunction device for shared offices ranges from AED 350–900/month. Enterprise high-volume copiers start at AED 1,000/month. All plans include zero deposit, free toner, free delivery, and on-site support." },
   { q: "What is the difference between photocopier rental and printer rental?", a: "A photocopier (multifunction device / MFP) combines high-volume copying, printing, scanning, and faxing in a single A3-capable device — designed for shared office use by 10–50+ people. A desktop printer is typically A4-only and serves 1–5 users. Photocopiers process thousands of pages daily at a lower cost-per-page (CPP) than desktop printers, making them more cost-effective for document-intensive offices." },
   { q: "What is your emergency response time in Dubai?", a: "We target a 4-hour on-site response anywhere in Dubai, with a 2-hour priority queue for Business Bay, DIFC and Downtown Dubai. If a repair exceeds 24 hours, we deliver a loaner machine at no charge." },
   { q: "Do I need to pay a deposit for photocopier rental in Dubai?", a: "No deposit required. Sahara offers zero-deposit photocopier rental across all Dubai plans — you only pay your first month's rental to start." },
   { q: "Which photocopier brands do you rent in Dubai?", a: "We rent Canon imageRUNNER ADVANCE (C5540i, C5250, 4551i) and Kyocera TASKalfa (2553ci, 3553ci, 5053ci) as primary lines, plus Xerox WorkCentre, HP LaserJet, and Ricoh MP series in Dubai and across the UAE. Canon and Kyocera are our most popular because of their reliability in UAE heat and humidity conditions." },
-  { q: "Is toner included in the Dubai rental plan?", a: "Yes. All Dubai photocopier rental plans include genuine OEM toner at no extra charge, delivered proactively before you run out — no monthly copy caps or surprise consumable invoices." },
+  { q: "Is toner included in the Dubai rental plan?", a: "Yes. All Dubai photocopier rental plans include genuine OEM toner at no extra charge, delivered proactively before you run out — with no surprise consumable invoices. Each plan has a monthly page allowance; extra pages are billed at AED 0.06 (B&W) and AED 0.20 (colour)." },
   { q: "How long are your Dubai photocopier rental contracts?", a: "Standard contracts run 12, 24, or 36 months. Shorter-term rentals (1–6 months) are available for exhibitions, project offices, and seasonal peaks." },
   { q: "What happens if the photocopier breaks down in Dubai?", a: "Call us and a technician is dispatched within our response target. If the machine cannot be repaired same day, we provide a replacement unit at no extra cost under the full service agreement." },
   { q: "Do you provide network and Wi-Fi setup for rented copiers in Dubai?", a: "Yes — free network configuration is included with every Dubai rental installation, including LAN/Wi-Fi, scan-to-email, scan-to-folder, cloud integration (Google Drive, OneDrive, SharePoint), and user authentication." },
@@ -168,8 +168,8 @@ const DEFAULT_FAQS: FAQItem[] = [
 
 const pricingTiers = [
   { name: "A4 Desktop (Refurbished)", price: "AED 250–450", tag: null, ideal: "Small offices, reception desks — refurbished or short-term", features: ["Canon LBP / Kyocera ECOSYS", "Up to 45 ppm A4 mono", "Print, copy, scan", "Free genuine toner", "Next-day delivery", "4-hour emergency support"], cta: "Get Quote" },
-  { name: "A3 Mid-Range (New)", price: "AED 500–900", tag: "Most Popular", ideal: "Shared offices, DIFC & Business Bay companies", features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35–55 ppm A3 & A4", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder / cloud", "Free network setup"], cta: "Get Quote" },
-  { name: "A3 Enterprise (New)", price: "AED 1,000–2,000", tag: null, ideal: "High-volume industries, large offices", features: ["Canon imageRUNNER C5560i / Kyocera 5053ci", "60–100 ppm A3 colour", "Staple, booklet, hole-punch finishers", "Secure print, user authentication", "Dedicated account manager", "Multi-site billing available"], cta: "Get Quote" },
+  { name: "A3 Mid-Range (New)", price: "AED 350–900", tag: "Most Popular", ideal: "Shared offices, DIFC & Business Bay companies", features: ["Canon iR ADVANCE / Kyocera TASKalfa", "35–55 ppm A3 & A4", "Print, copy, scan, fax", "Colour option available", "Scan to email / folder / cloud", "Free network setup"], cta: "Get Quote" },
+  { name: "A3 Enterprise (New)", direct: true, price: "AED 1,000–2,000", tag: null, ideal: "High-volume industries, large offices", features: ["From 10,000 B&W + 5,000 colour pages a month", "Canon imageRUNNER C5560i / Kyocera 5053ci", "60–100 ppm A3 colour", "Staple, booklet, hole-punch finishers", "Secure print, user authentication", "Dedicated account manager", "Multi-site billing available"], cta: "Get Quote" },
 ];
 
 // Migrated from /services/photocopier-rental/ before it was 301'd here — see
@@ -180,7 +180,7 @@ const printerVsCopier: [string, string, string][] = [
   ["Concurrent Users", "10–80 users", "1–5 users"],
   ["Functions", "Print + Copy + Scan + Fax + Cloud", "Print (+ basic scan)"],
   ["Cost-Per-Page", "AED 0.02–0.05 (mono)", "AED 0.08–0.15 (mono)"],
-  ["Monthly Rental", "AED 500–2,000 (new)", "AED 250–400"],
+  ["Monthly Rental", "AED 350–2,000 (new)", "AED 250–400"],
   ["Best For", "Shared office, legal, real estate, HR, accounts", "Individual workstation, reception desk"],
 ];
 
@@ -256,9 +256,9 @@ export default async function PhotocopierRentalDubai() {
               <div className="mt-6">
                 <AnswerBlock
                   question="How much does photocopier rental cost in Dubai?"
-                  answer="A refurbished or short-term A4 copier in Dubai rents from AED 250/month; a new A3 multifunction photocopier starts from AED 500/month, up to AED 2,000/month for enterprise colour devices. Sahara delivers same-day to most Dubai districts, with zero deposit, free toner, and a 4-hour emergency response target — 2 hours priority for Business Bay, DIFC and Downtown."
+                  answer="A refurbished or short-term A4 copier in Dubai rents from AED 250/month; a new A3 multifunction photocopier starts from AED 350/month, up to AED 2,000/month for enterprise colour devices. Sahara delivers same-day to most Dubai districts, with zero deposit, free toner, and a 4-hour emergency response target — 2 hours priority for Business Bay, DIFC and Downtown."
                   supportingPoints={[
-                    "Refurbished/short-term A4 from AED 250/month; new A3 Mid-Range AED 500–900; new A3 Enterprise AED 1,000–2,000",
+                    "Refurbished/short-term A4 from AED 250/month; new A3 Mid-Range AED 350–900; new A3 Enterprise AED 1,000–2,000",
                     "Covers Business Bay, DIFC, JLT, Dubai Marina, Downtown Dubai, Deira and all districts",
                     "4-hour emergency response target, 2-hour priority for Business Bay, DIFC and Downtown",
                     "Zero deposit, unlimited genuine toner and free network setup on every plan",
@@ -266,7 +266,7 @@ export default async function PhotocopierRentalDubai() {
                 />
               </div>
               <p className="mt-6 max-w-xl text-body text-muted">
-                Canon &amp; Kyocera photocopiers — refurbished from AED 250/month, new A3 from AED 500/month. Zero
+                Canon &amp; Kyocera photocopiers — refurbished from AED 250/month, new A3 from AED 350/month. Zero
                 deposit, free toner, and 4-hour emergency response across all Dubai districts.
               </p>
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
@@ -352,12 +352,24 @@ export default async function PhotocopierRentalDubai() {
                     </li>
                   ))}
                 </ul>
-                <a
+                {tier.direct ? (
+<>
+<a
+                  href="tel:+971503823969"
+                  className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
+                >
+                  Call for an Enterprise Quote
+                </a>
+<p className="mt-3 text-center text-xs text-muted">Quoted directly by phone or at our Sharjah office, not in the online calculator.</p>
+</>
+) : (
+<a
                   href="/quote/printer-rental/"
                   className={`mt-8 block rounded-pill py-3 text-center text-sm font-bold transition-all ${tier.tag ? "bg-gradient-to-r from-primary to-primary-deep text-on-primary" : "border border-primary/30 bg-primary/10 text-primary"}`}
                 >
                   {tier.cta}
                 </a>
+)}
               </div>
             ))}
           </div>

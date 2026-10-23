@@ -1,10 +1,11 @@
 export const runtime = 'edge';
 import type { Metadata } from "next";
 import CalculatorClient from "@/components/CalculatorClient";
+import { getCalculatorPricing } from "@/lib/calculator-pricing.server";
 
 export const metadata: Metadata = {
   title: "Printer Rental Calculator | Instant Quote | Sahara Printer Dubai",
-  description: "Configure your exact printer rental requirements and get an instant personalized quote. Free maintenance, toner & support included. Starting at AED 350/month.",
+  description: "Configure your exact printer rental requirements and get an instant personalized quote. Free maintenance, toner & support included. Starting at AED 250/month.",
   keywords: ["printer rental calculator", "printer lease calculator", "rental pricing tool", "printer cost calculator UAE", "printer rental quote Dubai"],
   openGraph: {
     title: "Printer Rental Calculator | Instant Quote | Sahara Printer",
@@ -36,11 +37,12 @@ const breadcrumbSchema = {
   ],
 };
 
-export default function RentalCalculatorPage() {
+export default async function RentalCalculatorPage() {
+  const pricing = await getCalculatorPricing();
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-      <CalculatorClient />
+      <CalculatorClient pricing={pricing} />
     </>
   );
 }

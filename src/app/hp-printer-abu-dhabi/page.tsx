@@ -16,7 +16,7 @@ import CtaBand from "@/components/ui/CtaBand";
 const defaultFaqs = [
   { q: "Do you rent HP printers in Abu Dhabi?", a: "Yes! We offer a wide range of HP printers and photocopiers for rent in Abu Dhabi, including LaserJet Enterprise, PageWide, and OfficeJet series." },
   { q: "What HP models are available for rental in Abu Dhabi?", a: "We rent HP LaserJet Enterprise, PageWide Pro, OfficeJet Pro, and Neverstop series. From desktop printers to heavy-duty enterprise copiers." },
-  { q: "How much does HP printer rental cost in Abu Dhabi?", a: "HP printer rental in Abu Dhabi starts from AED 250/month for A4 models, with enterprise copiers from AED 500-2000/month. All include free toner." },
+  { q: "How much does HP printer rental cost in Abu Dhabi?", a: "HP printer rental in Abu Dhabi starts from AED 250/month for A4 models, with enterprise copiers from AED 350-2000/month. All include free toner." },
   { q: "Do you provide HP printer repair in Abu Dhabi?", a: "Yes, our certified technicians provide on-site HP printer repair in Abu Dhabi with fast response time." },
   { q: "Is HP toner included in the rental price?", a: "Yes! All our HP printer rentals in Abu Dhabi include unlimited genuine HP toner at no extra cost." },
   { q: "Can I upgrade my HP printer during the rental period?", a: "Absolutely! Our 'Growth Guard' policy allows you to upgrade your HP printer anytime during the contract." },

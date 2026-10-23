@@ -1602,3 +1602,11 @@ by hand, re-check ~2026-10-24.
 - GSC Page indexing reviewed URL by URL: `docs/seo/indexing-audit-2026-10-23.md`. Fixes: `/about-sahara-printer` redirect (next.config.mjs), `{search_term_string}` redirect (middleware.ts).
 - Semrush keyword edits on 5 pages + sitemap lastmod (see git diff). Fax-machine service intentionally NOT added (no evidence Sahara offers it).
 - Product snippets "Missing aggregateRating/review" are non-critical and intentionally not fixed (no real product reviews).
+
+### 2026-10-23 (night): calculator tariff wired to admin + email provider toggles (uncommitted)
+- Calculator: A4 tier (AED 250, 2,000 B&W + 750 colour) and standard tier (AED 350, 3,000 + 1,000); tariff read from D1 `calculator_prices` v2 via `src/lib/calculator-pricing*.ts`. After deploy: open Admin → Settings → Rental Calculator Pricing, check the values, Save (publishes v2).
+- Email: Gmail SMTP and Resend each have an ON/OFF toggle (`smtp_enabled`, `resend_enabled`); Gmail-failure alert emails removed (status shown in admin: `smtp_last_error*`). Gmail OFF + Resend ON = Resend only.
+- Quote page "old style" regression: live and the c3235430 preview are text-identical on 18 routes; difference not found, awaiting the user's pointer.
+- 2026-10-23 (night): A3 starting price AED 500 -> 350 sitewide (copy + JSON-LD); Dubai plan volumes = calculator pools; A3 label rent (AED 549) editable in admin. Quote-page "old style" report withdrawn by owner. Open: A3-only calculator minimum is 430 because of the AED 80 surcharge.
+- 2026-10-23 (late night): Enterprise = direct sale (10,000 B&W / 5,000 colour; admin-editable thresholds); calculator shows call/visit panel; Dubai Enterprise card uses a call button.
+- 2026-10-23 (late night): Enterprise call-or-visit cards on 7 more location pages (fixed 10,000/5,000 text; admin thresholds drive the calculator only).

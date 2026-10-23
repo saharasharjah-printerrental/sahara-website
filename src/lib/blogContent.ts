@@ -55,7 +55,7 @@ export const BLOG_CONTENT: Record<string, string> = {
   <thead><tr><th>Machine Type</th><th>Monthly Price</th><th>Best For</th></tr></thead>
   <tbody>
     <tr><td>A4 Desktop Mono</td><td>AED 250–400</td><td>1–5 users, low volume</td></tr>
-    <tr><td>A3 Mid-Range MFP</td><td>AED 500–900</td><td>10–30 users, shared office</td></tr>
+    <tr><td>A3 Mid-Range MFP</td><td>AED 350–900</td><td>10–30 users, shared office</td></tr>
     <tr><td>A3 Enterprise Colour</td><td>AED 1,000–2,000</td><td>30–80 users, high volume</td></tr>
   </tbody>
 </table>
@@ -567,7 +567,7 @@ export const BLOG_CONTENT: Record<string, string> = {
 <ul>
   <li><strong>High-volume offices</strong> — anything above 3,000 pages per month justifies a managed rental on cost grounds alone</li>
   <li><strong>Shared machines (3+ users)</strong> — multi-user equipment fails faster and needs professional maintenance; the rental model provides this as standard</li>
-  <li><strong>Businesses that value cash flow</strong> — converting AED 15,000–25,000 of capital expenditure into AED 500–900/month of operational expense preserves working capital</li>
+  <li><strong>Businesses that value cash flow</strong> — converting AED 15,000–25,000 of capital expenditure into AED 350–900/month of operational expense preserves working capital</li>
   <li><strong>Growing businesses</strong> — if your headcount may double in the next two years, the flexibility to upgrade machines without capital outlays is invaluable</li>
   <li><strong>Free zone businesses</strong> — OPEX treatment of printing infrastructure aligns with how most free zone companies structure their P&L</li>
   <li><strong>Businesses in Dubai and Abu Dhabi that need fast support</strong> — our <a href="/printer-rental-dubai/">Dubai printer rental</a> and <a href="/printer-rental-abu-dhabi/">Abu Dhabi printer rental</a> services include 4-hour emergency response that no ownership model can match without expensive AMC commitments</li>

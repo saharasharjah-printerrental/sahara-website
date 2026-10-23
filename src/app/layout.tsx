@@ -224,7 +224,7 @@ const organizationSchema = {
           "name": "A3 Multifunction Photocopier Rental",
           "description": "Monthly rental of A3 multifunction printers for medium to large offices."
         },
-        "price": "500",
+        "price": "350",
         "priceCurrency": "AED"
       },
       {

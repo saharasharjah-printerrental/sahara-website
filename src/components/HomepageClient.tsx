@@ -72,7 +72,7 @@ const defaultTestimonials = [
 ];
 
 const defaultHomeFaqs = [
-  { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 500–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." },
+  { q: "How much does printer rental cost in Dubai?", a: "Printer rental in Dubai starts from AED 250/month for A4 color printers. A3 photocopiers range from AED 350–1,000/month. All plans include zero deposit, unlimited toner, maintenance, and free delivery." },
   { q: "What are the benefits of printer rental in UAE?", a: "Printer rental in UAE offers zero upfront costs, predictable monthly payments, included maintenance and toner, latest technology access, and flexible upgrade options." },
   { q: "Do you offer printer rental in Abu Dhabi?", a: "Yes, we provide comprehensive printer rental services across Abu Dhabi, including Al Ain, Mussafah, and ICAD. Our Abu Dhabi fleet includes Canon, HP, and Kyocera equipment with same-day delivery." },
   { q: "What printer brands do you rent?", a: "We rent premium brands including Canon imageRUNNER, HP LaserJet Enterprise, Kyocera TASKalfa, Ricoh MP series, Xerox AltaLink, and Brother. All equipment is brand new with full manufacturer warranty." },

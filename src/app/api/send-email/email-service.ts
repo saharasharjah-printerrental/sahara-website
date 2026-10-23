@@ -76,12 +76,17 @@ function getDB() {
   }
 }
 
-export async function getSmtpConfig(): Promise<SmtpConfig | null> {
+/**
+ * Returns the Gmail SMTP config, or null when it is not configured OR switched off
+ * in Admin → Settings (smtp_enabled = 'false'). Pass `ignoreEnabled` for the admin
+ * connection test, which must work while the toggle is off.
+ */
+export async function getSmtpConfig(opts: { ignoreEnabled?: boolean } = {}): Promise<SmtpConfig | null> {
   const db = getDB();
   if (!db) return null;
 
   try {
-    const keys = ['smtp_host', 'smtp_port', 'smtp_user', 'smtp_pass', 'smtp_from_name', 'smtp_from_email', 'smtp_to_email'];
+    const keys = ['smtp_host', 'smtp_port', 'smtp_user', 'smtp_pass', 'smtp_from_name', 'smtp_from_email', 'smtp_to_email', 'smtp_enabled'];
     const placeholders = keys.map(() => '?').join(',');
     const result = await db
       .prepare(`SELECT key, value FROM settings WHERE key IN (${placeholders})`)
@@ -93,6 +98,7 @@ export async function getSmtpConfig(): Promise<SmtpConfig | null> {
     rows.forEach((r: any) => { map[r.key] = r.value; });
 
     if (!map.smtp_user || !map.smtp_pass) return null;
+    if (map.smtp_enabled === 'false' && !opts.ignoreEnabled) return null;
 
     return {
       host: map.smtp_host || 'smtp.gmail.com',
@@ -169,55 +175,40 @@ async function getResendConfig(): Promise<ResendConfig | null> {
   return { apiKey, fromName, fromEmail: fromEmail || 'onboarding@resend.dev' };
 }
 
-/** Throttle the "Gmail SMTP is failing" admin alert to once per 6 hours. */
-async function shouldSendSmtpAlert(): Promise<boolean> {
+/**
+ * Records the last Gmail SMTP outcome in D1 so Admin → Settings can show it. This replaces the old
+ * "Gmail SMTP is failing" alert email: it fired from every failed send (a quote sends two emails at
+ * once, and both raced past the 6-hour throttle), so a broken Gmail flooded the inbox. Nothing is
+ * emailed about SMTP failures any more.
+ */
+async function recordSmtpStatus(ok: boolean, error?: unknown): Promise<void> {
   const db = getDB();
-  if (!db) return true;
+  if (!db) return;
   try {
-    const row = await db.prepare(`SELECT value FROM settings WHERE key = 'smtp_alert_last_sent'`).first();
-    const last = row?.value ? Number(row.value) : 0;
-    if (Date.now() - last < 1000 * 60 * 60 * 6) return false;
-    await db.prepare(`INSERT OR REPLACE INTO settings (key, value) VALUES ('smtp_alert_last_sent', ?)`).bind(String(Date.now())).run();
-    return true;
+    const now = String(Date.now());
+    if (ok) {
+      await db.batch([
+        db.prepare(`INSERT OR REPLACE INTO settings (key, value) VALUES ('smtp_last_ok_at', ?)`).bind(now),
+        db.prepare(`DELETE FROM settings WHERE key IN ('smtp_last_error', 'smtp_last_error_at')`),
+      ]);
+    } else {
+      await db.batch([
+        db.prepare(`INSERT OR REPLACE INTO settings (key, value) VALUES ('smtp_last_error', ?)`).bind(String(error).slice(0, 300)),
+        db.prepare(`INSERT OR REPLACE INTO settings (key, value) VALUES ('smtp_last_error_at', ?)`).bind(now),
+      ]);
+    }
   } catch {
-    return true;
-  }
-}
-
-async function alertAdminSmtpDown(config: SmtpConfig | null, smtpError: unknown): Promise<void> {
-  try {
-    if (!(await shouldSendSmtpAlert())) return;
-    const resendConfig = await getResendConfig();
-    if (!resendConfig) return; // No way to alert without a working fallback provider.
-
-    const to = config?.toEmail || (await (async () => {
-      try { return (getRequestContext().env as any).ADMIN_EMAIL || ''; } catch { return ''; }
-    })());
-    if (!to) return;
-
-    const html = `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,sans-serif">
-<div style="max-width:600px;margin:24px auto;background:#071325;color:#d7e3fc;padding:32px;border-radius:12px">
-  <h2 style="color:#ef4444;margin-top:0;font-size:20px">⚠️ Gmail SMTP is failing</h2>
-  <p>Sahara Printers just failed to send an email via Gmail SMTP and fell back to Resend to deliver it. Emails are still going out, but Gmail needs attention.</p>
-  <div style="background:#101c2e;border-radius:8px;padding:16px;margin:16px 0;font-size:13px;color:#9ca3af">
-    <p style="margin:0 0 6px">Host: <span style="color:#fff">${escapeHtml(config?.host)}</span></p>
-    <p style="margin:0 0 6px">Port: <span style="color:#fff">${config?.port ?? '—'}</span></p>
-    <p style="margin:0 0 6px">User: <span style="color:#fff">${escapeHtml(config?.user)}</span></p>
-    <p style="margin:0">Error: <span style="color:#fca5a5">${escapeHtml(String(smtpError).slice(0, 400))}</span></p>
-  </div>
-  <p style="font-size:13px">Check the Gmail app password and connection in <strong>Admin → Settings</strong>.</p>
-</div></body></html>`;
-
-    await sendViaResend(resendConfig, to, '⚠️ Gmail SMTP is failing — Sahara Printers', html);
-  } catch (err) {
-    console.error('[email-service] Failed to send SMTP-down alert:', err);
+    // Status is best-effort and must never break email delivery.
   }
 }
 
 /**
- * Sends one email via Gmail SMTP, falling back to Resend if SMTP throws
- * (missing config, connection failure, auth failure, etc). Alerts the admin
- * (throttled to once per 6h) the first time a message fails over.
+ * Sends one email through the providers switched on in Admin → Settings:
+ *   Gmail only        → Gmail SMTP, no fallback
+ *   Resend only       → Resend (smtpConfig is null when Gmail is off)
+ *   Both on           → Gmail first, Resend as backup if Gmail throws
+ *   Both off          → nothing is sent (logged)
+ * No alert email is sent when Gmail fails; the error is recorded for the admin page instead.
  */
 async function deliver(
   smtpConfig: SmtpConfig | null,
@@ -228,14 +219,15 @@ async function deliver(
   if (smtpConfig) {
     try {
       await sendViaSmtp(smtpConfig, to, subject, html);
+      await recordSmtpStatus(true);
       return { ok: true, provider: 'smtp' };
     } catch (err) {
-      console.error('[email-service] SMTP send failed, trying Resend fallback:', err);
+      await recordSmtpStatus(false, err);
       const resendConfig = await getResendConfig();
+      console.error(resendConfig ? '[email-service] Gmail SMTP failed, using Resend backup:' : '[email-service] Gmail SMTP failed (Resend is off, no backup):', err);
       if (resendConfig) {
         try {
           await sendViaResend(resendConfig, to, subject, html);
-          await alertAdminSmtpDown(smtpConfig, err);
           return { ok: true, provider: 'resend' };
         } catch (resendErr) {
           console.error('[email-service] Resend fallback also failed:', resendErr);
@@ -245,14 +237,17 @@ async function deliver(
     }
   }
 
-  // No SMTP configured at all — go straight to Resend if available.
+  // Gmail is off or not configured — use Resend if it is on.
   const resendConfig = await getResendConfig();
+  if (!resendConfig) {
+    console.error('[email-service] No email provider is enabled — turn on Gmail SMTP or Resend in Admin → Settings.');
+  }
   if (resendConfig) {
     try {
       await sendViaResend(resendConfig, to, subject, html);
       return { ok: true, provider: 'resend' };
     } catch (err) {
-      console.error('[email-service] Resend send failed (no SMTP configured):', err);
+      console.error('[email-service] Resend send failed:', err);
     }
   }
   return { ok: false, provider: 'none' };
@@ -369,7 +364,7 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<Deliv
   const toEmail = data.notificationEmail || (await getNotificationEmail());
 
   if (!config) {
-    console.error('[email-service] SMTP not configured — set smtp_user and smtp_pass in Admin → Settings. Trying Resend only.');
+    console.error('[email-service] Gmail SMTP is off or not configured — sending through Resend only.');
   }
 
   const [adminResult, customerResult] = await Promise.all([
@@ -456,7 +451,7 @@ function buildOrderCustomerHtml(data: OrderEmailData): string {
 export async function sendOrderNotification(data: OrderEmailData): Promise<DeliveryResult> {
   const config = await getSmtpConfig();
   if (!config) {
-    console.error('[email-service] SMTP not configured — trying Resend only for order emails.');
+    console.error('[email-service] Gmail SMTP is off or not configured — sending order emails through Resend only.');
   }
 
   const adminTo = await getNotificationEmail();
@@ -472,8 +467,14 @@ export async function sendOrderNotification(data: OrderEmailData): Promise<Deliv
   return { sent: adminResult.ok, customerNotified: customerResult.ok, provider };
 }
 
+/** Sends one email through whichever providers are switched on (see deliver()). */
+export async function sendEmail(to: string, subject: string, html: string): Promise<boolean> {
+  const result = await deliver(await getSmtpConfig(), to, subject, html);
+  return result.ok;
+}
+
 export async function sendSimpleEmail(
-  config: SmtpConfig,
+  config: SmtpConfig | null,
   to: string,
   subject: string,
   html: string,
