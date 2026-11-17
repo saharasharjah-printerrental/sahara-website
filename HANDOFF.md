@@ -1,5 +1,11 @@
 # HANDOFF — saharaprinter.com SEO/AEO/GEO/SXO Engagement
 
+## 2026-11-17: Search visibility audit checkpoint
+
+Read-only audit and remediation prompt: `docs/seo/shredder-search-visibility-2026-11-17.md` and `docs/seo/meta-prompt-remediation-2026-11-17.md`. Google UI matched windows Oct 19-Nov 15 / Sep 21-Oct 18: property clicks 223/199; shredder rental 9/10 clicks, 941/584 impressions; sales 5/1 clicks, 739/172 impressions. Rental indexed, impressions on all 28 days, 20 zero-click days. Do not describe this as a zero-impression or site-wide collapse. Exact user-observed zero filter remains unknown. Bing search clicks 8/5, impressions 238/180; AI citations 49/71 from matched daily sums. Bing is signed in. GBP verified; Clarity accessible. GSC API refresh expired (`invalid_grant`).
+
+Jev 60-page sample and JSON/digest saved under `docs/seo/jev-2026-11-17/`; partial rules score 97, page cap reached, TypeSafe key unavailable, PSI 429, PDF native dependency missing. Intentional quote noindex is a false positive. Confirmed Bravo hub sitemap omission and missing homepage/services OG images. GSC manual actions/security issues both report no issues. Desktop CWV: LCP over 2.5s, 53 URLs in one group, example printer-rental route group LCP 2.9s; validation started Oct 12. Mobile has insufficient 90-day data. Bing URL Inspection confirms both shredder rental and sales are indexed with no SEO/GEO issue; Bing sitemap 1, zero errors/warnings, 141 URLs. The user’s exact reported zero view remains unidentified: unfiltered rental and sales show visibility in matched windows. No implementation authorized or performed. GSC Page indexing table, exact GBP comparison and Clarity source segment remain outstanding; report records blockers and findings. Preserve prior notes.
+
 ## ACTIVE INVESTIGATION — 2026-10-15: GSC, GBP and Bing AI decline
 
 User approved the diagnosis-first meta prompt and Browser MCP investigation. Scope: read-only diagnosis and concrete proposed fixes, then user review before implementation. User additionally requested that findings be saved here before context exhaustion. No code, database, GBP, crawler configuration, indexing submissions, or production changes are authorized by this investigation.
@@ -1622,3 +1628,11 @@ by hand, re-check ~2026-10-24.
 - 2026-10-23 (Phase 3): HTML caching options note written (docs/seo/caching-options-2026-10-23.md): recommends a Cloudflare Cache Rule (5 min edge TTL, marketing pages first) because next-on-pages has no ISR; no Cloudflare/code change made, awaiting owner decision.
 - 2026-10-23 (Phase 4): after icon-font deploy, medians of 3 Lighthouse runs: printer-rental 45->65 (LCP 9.3->3.3 s), Kyocera 43->47 (LCP 11->8.7 s), homepage 57->51 (no gain within noise). FCP unchanged ~2.4 s everywhere: remaining cause is main-thread JS before first paint, not network. Laya G3 inconclusive (wrong on homepage). Decision pending from owner on caching option.
 - 2026-10-23 (Option A applied): Cloudflare Cache Rule 'HTML edge cache - marketing pages (5 min)' deployed and verified (HIT ~0.4 s vs MISS 0.7-1.6 s; excluded paths DYNAMIC; no-store removed by switching Browser TTL to Respect origin). See caching-options doc 'APPLIED'. Trace done: observed FCP 0.9-1.6 s, remaining cost = main-thread JS (GTM container /rf2d/, second gtag, Next/React chunks). Docs uncommitted.
+
+### 2026-11-17: SEO remediation implementation (local only)
+
+- Added the missing indexable `/bravo-card-printers-uae/` route to `src/app/sitemap.ts`, with its actual content-commit timestamp.
+- Added explicit Open Graph image metadata to `/services/`; it overrides Open Graph fields and was the only confirmed route-level preview gap. Homepage already inherits the root social image, so no duplicate change made.
+- Investigated the CrUX LCP group (53 desktop URLs; representative `/services/printer-rental/`, 2.9s): its shared `ProductHero` already has dimensions, `priority`, `fetchPriority`, responsive `sizes`, and no lazy loading. No speculative performance patch applied.
+- Shredder pages unchanged: the audited rental date window contained impressions every day; the reported zero-impression view remains unverified without exact GSC URL/date/filter.
+- Details: `docs/seo/remediation-implementation-2026-11-17.md`. No commit, push, deploy, indexing submission, GBP, or Cloudflare change.

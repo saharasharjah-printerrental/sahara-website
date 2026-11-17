@@ -84,6 +84,7 @@ const ROUTE_LASTMOD: Record<string, string> = {
   '/canon-printer-dubai/': '2026-10-23T22:00:00+04:00',
   '/services/pvc-card-printer-rental/': '2026-10-02T12:00:00+04:00',
   '/services/pvc-card-printing-services/': '2026-10-23T12:00:00+04:00',
+  '/bravo-card-printers-uae/': '2026-10-05T16:46:27+04:00',
   '/hp-printer-abu-dhabi/': '2026-10-23T22:00:00+04:00',
   '/products/': '2026-09-15T11:28:23+04:00',
   '/blogs/': '2026-09-15T11:28:23+04:00',
@@ -175,6 +176,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // and buy-intent AEO question at 2.8x the sales page's word count; two
     // competing pages for "buy pvc card printer dubai" converts worse than
     // one, per the Sharjah-consolidation lesson.
+    { url: `${BASE}/bravo-card-printers-uae/`,       lastModified: lm('/bravo-card-printers-uae/', requestTime), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE}/services/pvc-card-printing-services/`, lastModified: lm('/services/pvc-card-printing-services/', requestTime), changeFrequency: 'weekly', priority: 0.8 },
     // /pvc-card-printer-quote/ is intentionally absent — noindexed Sep 2026,
     // see that page's own file comment. A lead-capture form doesn't need to
